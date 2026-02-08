@@ -1,0 +1,147 @@
+/* Topbar component styles */
+
+.logoDark {
+  display: none;
+}
+
+/* 다크 테마면 다크 로고로 */
+body.vscode-dark .logoLight {
+  display: none;
+}
+
+body.vscode-dark .logoDark {
+  display: block;
+}
+
+/* 고대비도 다크 로고로 쓰고 싶으면 */
+body.vscode-high-contrast .logoLight {
+  display: none;
+}
+
+body.vscode-high-contrast .logoDark {
+  display: block;
+}
+
+/* 공통 크기 */
+.brandLogoWide {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+.topbar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  gap: 12px;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+.topbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+}
+
+.brandTitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  color: var(--vscode-foreground);
+}
+
+
+.projectPicker {
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: var(--inputBg);
+  color: var(--inputFg);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  min-width: 0;
+  max-width: 360px;
+}
+
+.projectPicker:hover {
+  filter: brightness(1.05);
+}
+
+.projectName {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.95;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 260px;
+}
+
+.searchWrap {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 160px;
+  max-width: 520px;
+}
+
+.searchBox {
+  height: 32px;
+  border-radius: 6px;
+  background: var(--inputBg);
+  color: var(--inputFg);
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.searchIcon {
+  padding-left: 10px;
+  color: var(--muted);
+}
+
+.searchInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--inputFg);
+  font-size: 12px;
+  padding: 0 10px;
+  min-width: 0;
+}
+
+.searchInput::placeholder {
+  color: var(--placeholder);
+}
+
+.topbarRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.divider {
+  width: 1px;
+  height: 14px;
+  background: var(--border);
+  margin: 0 6px;
+}

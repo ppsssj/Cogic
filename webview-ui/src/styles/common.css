@@ -1,0 +1,75 @@
+/* Shared utility styles used across multiple components */
+
+/* Common icon sizing */
+.icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.9;
+  user-select: none;
+  flex: 0 0 auto;
+}
+
+.brandIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.primaryBtnIcon {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.mutedText {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.iconBtn {
+  height: 32px;
+  width: 32px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: var(--inputBg);
+  color: var(--fg);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.iconBtn:hover {
+  background: rgba(19, 91, 236, 0.18);
+}
+
+.iconBtn.subtle {
+  background: transparent;
+  border-color: transparent;
+}
+
+.iconBtn.subtle:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.primaryBtn {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: none;
+  background: var(--primary);
+  color: var(--primaryFg);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.primaryBtn:hover {
+  filter: brightness(1.05);
+  background: var(--primaryHover);
+}

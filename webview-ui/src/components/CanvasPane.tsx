@@ -1,6 +1,6 @@
-import "./../App.css";
+// import "./../App.css";
 import "reactflow/dist/style.css";
-
+import "./CanvasPane.css";
 import { useMemo, useRef } from "react";
 import ReactFlow, {
   Background,

@@ -1,6 +1,6 @@
-import "./../App.css";
+// import "./../App.css";
 import { FileText, RefreshCw } from "lucide-react";
-
+import "./ActiveFileSnapshot.css";
 type Props = {
   title?: string;
   fileName?: string;

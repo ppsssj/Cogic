@@ -1,9 +1,9 @@
-import "./../App.css";
+// import "./../App.css";
 import { Settings } from "lucide-react";
 import type { ExtToWebviewMessage, GraphNode } from "../lib/vscode";
 import { ActiveFileSnapshot } from "./ActiveFileSnapshot";
 import { AnalysisPanel } from "./AnalysisPanel";
-
+import "./Inspector.css";
 type ActiveFilePayload = Extract<
   ExtToWebviewMessage,
   { type: "activeFile" }

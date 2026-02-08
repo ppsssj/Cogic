@@ -1,7 +1,7 @@
-import "./../App.css";
+// import "./../App.css";
 import { ArrowDownLeft, ArrowUpRight, Sigma, Network } from "lucide-react";
 import type { ExtToWebviewMessage } from "../lib/vscode";
-
+import "./AnalysisPanel.css";
 type AnalysisPayload = Extract<
   ExtToWebviewMessage,
   { type: "analysisResult" }

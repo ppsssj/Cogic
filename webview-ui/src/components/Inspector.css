@@ -1,0 +1,59 @@
+/* Inspector component styles */
+
+.inspector {
+  width: 320px;
+  min-width: 260px;
+  max-width: 420px;
+
+  height: 100%;
+  /* 추가 */
+  align-self: stretch;
+  /* 추가 */
+  flex: 0 0 auto;
+  /* 추가(폭 고정 성격 명확히) */
+
+  border-left: 1px solid var(--border);
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.inspectorHeader {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.inspectorHeader h1 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.inspectorHeader p {
+  margin: 4px 0 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.inspectorBody {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+.inspectorPad {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

@@ -1,0 +1,54 @@
+/*
+  CodeGraph Webview UI (VS Code Extension)
+  - Responsive: desktop split view → compact stacked layout
+  - Theme-safe: uses VS Code CSS variables with fallbacks
+*/
+
+:root {
+  /* VS Code theme tokens -> our tokens */
+  --bg: var(--vscode-editor-background, #101622);
+  --fg: var(--vscode-foreground, #e6eefc);
+
+  --panel: var(--vscode-sideBar-background, #0f172a);
+  --panel2: var(--vscode-editorWidget-background, #192233);
+
+  --border: var(--vscode-panel-border, rgba(255, 255, 255, 0.12));
+  --muted: var(--vscode-descriptionForeground, rgba(230, 238, 252, 0.7));
+
+  --primary: var(--vscode-button-background, #135bec);
+  --primaryHover: var(--vscode-button-hoverBackground, #0f4cd5);
+  --primaryFg: var(--vscode-button-foreground, #ffffff);
+
+  --inputBg: var(--vscode-input-background, rgba(255, 255, 255, 0.06));
+  --inputFg: var(--vscode-input-foreground, #ffffff);
+  --placeholder: var(--vscode-input-placeholderForeground,
+      rgba(230, 238, 252, 0.55));
+
+  --canvasBg: var(--vscode-editor-background, #0b0f18);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial;
+  overflow: hidden;
+  /* webview: keep scroll inside panels */
+}

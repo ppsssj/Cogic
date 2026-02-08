@@ -1,4 +1,4 @@
-import "./../App.css";
+// import "./../App.css";
 import {
   ChevronDown,
   Download,
@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import logoLightUrl from "../../../assets/logo.svg";
 import logoDarkUrl from "../../../assets/logo2.svg";
+import "./Topbar.css";
 type Props = {
   projectName: string;
   onRefresh: () => void;

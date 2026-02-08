@@ -1,6 +1,6 @@
-import "./../App.css";
+// import "./../App.css";
 import { Check } from "lucide-react";
-
+import "./FiltersBar.css";
 export type ChipKey =
   | "functions"
   | "classes"

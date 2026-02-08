@@ -1,0 +1,173 @@
+/* Responsive / container-query rules spanning multiple components */
+
+/* ---------- Responsive ---------- */
+
+/* Medium: reduce right panel width & tighten topbar */
+@media (max-width: 960px) {
+  .searchWrap {
+    max-width: 360px;
+    min-width: 140px;
+  }
+
+  .inspector {
+    width: 280px;
+    min-width: 220px;
+  }
+
+  .projectName {
+    max-width: 200px;
+  }
+}
+
+/* Small: stack panels (canvas top, inspector bottom) */
+@media (max-width: 720px) {
+  .topbar {
+    padding: 0 10px;
+  }
+
+  .searchWrap {
+    display: none;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .primaryBtn {
+    padding: 0 10px;
+  }
+
+  .filtersBar {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .filtersBar::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .main {
+    flex-direction: column;
+  }
+
+  .inspector {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    /* VS Code extension panel feel */
+    flex: 0 0 44vh;
+  }
+
+  .canvas {
+    flex: 1 1 auto;
+  }
+}
+
+/* Extra small: hide brand title, tighten buttons */
+@media (max-width: 420px) {
+  .brandTitle {
+    display: none;
+  }
+
+  .projectName {
+    max-width: 140px;
+  }
+
+  .iconBtn {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Fully fluid responsive rules (VS Code webview resizable panel)
+   - Container Query 기반: 실제 webview 크기에 즉시 반응
+   ------------------------------------------------------------------ */
+
+/* 중간 폭: 검색/우측 패널 폭만 타이트하게 */
+@container app (max-width: 980px) {
+  .searchWrap {
+    min-width: 180px;
+    max-width: 360px;
+  }
+
+  .inspector {
+    width: 280px;
+    min-width: 220px;
+  }
+}
+
+/* 좁은 폭: 캔버스 위 + 인스펙터 아래 (세로 스택) */
+@container app (max-width: 760px) {
+  .main {
+    flex-direction: column;
+    /* 핵심 */
+  }
+
+  .searchWrap {
+    display: none;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .filtersBar {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .filtersBar::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .inspector {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    border-left: none;
+    border-top: 1px solid var(--border);
+
+    /* vh 고정 대신: webview 높이에 비례 (진짜 유동) */
+    flex: 0 0 clamp(220px, 40cqh, 420px);
+  }
+
+  .canvas {
+    flex: 1 1 auto;
+    min-height: 200px;
+    /* 너무 눌렸을 때 캔버스가 0 되는 것 방지 */
+  }
+}
+
+/* 낮은 높이: 패널이 위아래로 눌릴 때 */
+@container app (max-height: 520px) {
+  .filtersBar {
+    display: none;
+  }
+
+  .topbar {
+    height: 40px;
+  }
+
+  .inspector {
+    flex-basis: clamp(180px, 45cqh, 320px);
+  }
+}
+
+/* 초소형 폭: 타이틀/버튼 압축 */
+@container app (max-width: 420px) {
+  .brandTitle {
+    display: none;
+  }
+
+  .projectPicker {
+    max-width: 70cqw;
+  }
+
+  .iconBtn {
+    width: 30px;
+    height: 30px;
+  }
+}

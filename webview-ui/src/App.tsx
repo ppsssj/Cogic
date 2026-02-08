@@ -10,6 +10,7 @@ import {
   type GraphNode,
   type GraphPayload,
 } from "./lib/vscode";
+import "./styles/index.css";
 
 const vscode = getVSCodeApi();
 
