@@ -1,9 +1,9 @@
 export type WebviewToExtMessage =
   | { type: "requestActiveFile" }
   | { type: "requestSelection" }
-  | { type: "analyzeActiveFile" } // backward-compatible (workspace-aware when possible)
-  | { type: "analyzeWorkspace" } // explicit workspace-aware analysis
-  | { type: "expandNode"; payload: { filePath: string } }; // analyze centered on another file
+  | { type: "analyzeActiveFile" }
+  | { type: "analyzeWorkspace" }
+  | { type: "expandNode"; payload: { filePath: string } };
 
 export type AnalysisCallV1 = { name: string; count: number };
 
@@ -24,6 +24,7 @@ export type GraphNodeKind =
   | "method"
   | "class"
   | "external";
+
 export type GraphNode = {
   id: string;
   kind: GraphNodeKind;
@@ -37,6 +38,7 @@ export type GraphNode = {
 };
 
 export type GraphEdgeKind = "calls" | "constructs" | "dataflow";
+
 export type GraphEdge = {
   id: string;
   kind: GraphEdgeKind;
@@ -49,6 +51,17 @@ export type GraphPayload = {
   nodes: GraphNode[];
   edges: GraphEdge[];
 };
+
+export type AnalyzerMeta =
+  | {
+      mode: "single";
+    }
+  | {
+      mode: "workspace";
+      rootFiles: number;
+      usedTsconfig: boolean;
+      projectRoot?: string;
+    };
 
 export type ExtToWebviewMessage =
   | {
@@ -92,15 +105,11 @@ export type ExtToWebviewMessage =
             | "const"
             | "unknown";
         }>;
-        // ✅ V1/V2 모두 수용 (Webview 쪽에서 구버전 호환 처리)
+        // V1/V2 both accepted (webview keeps backwards compatibility)
         calls: Array<AnalysisCallV1 | AnalysisCallV2>;
-        // ✅ Graph payload (optional)
+
         graph?: GraphPayload;
-        meta?: {
-          mode: "single-file" | "workspace";
-          rootFiles?: number;
-          usedTsconfig?: boolean;
-          projectRoot?: string;
-        };
+
+        meta?: AnalyzerMeta;
       } | null;
     };

@@ -1,0 +1,5 @@
+export const answer = 42;
+
+export function greet(name: string) {
+  return `Hello, ${name}`;
+}

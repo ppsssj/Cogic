@@ -999,3 +999,15 @@ function isExternalFile(fileName: string): boolean {
   const norm = fileName.replace(/\\/g, "/");
   return norm.includes("/node_modules/") || norm.includes("/typescript/lib/");
 }
+export function analyzeWorkspaceWithTypes(args: {
+  code: string; // active editor text
+  fileName: string; // active file absolute path
+  languageId: string;
+  workspaceRoot: string; // vscode.workspace.workspaceFolders[0].uri.fsPath
+  tsconfigPath?: string; // workspaceRoot/tsconfig.json (있으면)
+}) {
+  // 1) tsconfig가 있으면 읽어서 rootNames + options 생성
+  // 2) CompilerHost는 기본 host 사용 + active file만 in-memory로 override
+  // 3) createProgram(rootNames, options, host)
+  // 4) checker로 calls/graph 생성 (지금 로직 재사용)
+}
