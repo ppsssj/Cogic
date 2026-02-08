@@ -61,6 +61,37 @@ body {
   container-name: app; */
 }
 
+/* 기본: 라이트 로고 보이기 */
+.logoDark {
+  display: none;
+}
+
+/* 다크 테마면 다크 로고로 */
+body.vscode-dark .logoLight {
+  display: none;
+}
+
+body.vscode-dark .logoDark {
+  display: block;
+}
+
+/* 고대비도 다크 로고로 쓰고 싶으면 */
+body.vscode-high-contrast .logoLight {
+  display: none;
+}
+
+body.vscode-high-contrast .logoDark {
+  display: block;
+}
+
+/* 공통 크기 */
+.brandLogoWide {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+
 /* Common icon sizing */
 .icon {
   width: 16px;
@@ -126,8 +157,9 @@ body {
   font-size: 14px;
   font-weight: 800;
   letter-spacing: -0.2px;
-  color: #fff;
+  color: var(--vscode-foreground);
 }
+
 
 .projectPicker {
   height: 32px;

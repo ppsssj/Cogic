@@ -118,9 +118,29 @@ function DataflowEdge({
   const label = typeof data?.label === "string" ? data.label : "";
 
   // ✅ 라벨 겹침 방지: extension에서 id에 넣은 "@@arg#i"를 파싱해 y-offset 적용
+  // ✅ arg index 파싱
   const m = String(id).match(/@@arg#(\d+)/);
   const argIndex = m ? Number(m[1]) : 0;
-  const yOffset = argIndex * 26; // 14px 간격 (필요시 10~18로 조정)
+
+  // ✅ 라벨을 "간선 방향의 법선"으로 옆으로 이동시켜 노드와 겹침 최소화
+  const dx = targetX - sourceX;
+  const dy = targetY - sourceY;
+  const len = Math.hypot(dx, dy) || 1;
+
+  // 법선 단위벡터 (edge에 수직)
+  const nx = -dy / len;
+  const ny = dx / len;
+
+  // 0,1,2,3... -> +,-,+,- 형태로 퍼지게 (라벨이 한쪽으로만 몰리지 않게)
+  const side = argIndex % 2 === 0 ? 1 : -1;
+  const tier = Math.floor(argIndex / 2) + 1;
+
+  // ✅ 간격(픽셀): 라벨/노드 겹침 방지용. 필요 시 16~28 사이로 조정
+  const sep = 20;
+
+  // 최종 오프셋
+  const ox = nx * sep * tier * side;
+  const oy = ny * sep * tier * side;
 
   return (
     <>
@@ -130,9 +150,7 @@ function DataflowEdge({
           <div
             className="cgEdgeLabel cgEdgeLabel--dataflow"
             style={{
-              transform: `translate(-50%, -50%) translate(${labelX}px, ${
-                labelY + yOffset
-              }px)`,
+              transform: `translate(-50%, -50%) translate(${labelX + ox}px, ${labelY + oy}px)`,
             }}
           >
             {label}

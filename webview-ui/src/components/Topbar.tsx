@@ -7,9 +7,10 @@ import {
   Play,
   RefreshCw,
   Search,
-  GitBranch,
+  // GitBranch,
 } from "lucide-react";
-
+import logoLightUrl from "../../../assets/logo.svg";
+import logoDarkUrl from "../../../assets/logo2.svg";
 type Props = {
   projectName: string;
   onRefresh: () => void;
@@ -21,7 +22,16 @@ export function Topbar({ projectName, onRefresh, onGenerate }: Props) {
     <header className="topbar">
       <div className="topbarLeft">
         <div className="brand">
-          <GitBranch className="icon brandIcon" />
+          <img
+            className="brandLogoWide logoLight"
+            src={logoLightUrl}
+            alt="CodeGraph"
+          />
+          <img
+            className="brandLogoWide logoDark"
+            src={logoDarkUrl}
+            alt="CodeGraph"
+          />
           <h1 className="brandTitle">CodeGraph</h1>
         </div>
 
