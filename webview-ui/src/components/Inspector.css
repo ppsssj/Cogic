@@ -57,3 +57,16 @@
   flex-direction: column;
   gap: 14px;
 }
+.smallBtn {
+  background: #111827;        /* 거의 블랙 */
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  transition: all 0.15s ease;
+}
+
+.smallBtn:hover {
+  background: #1d4ed8;        /* deep blue */
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 2px rgba(29,78,216,0.3);
+  color: white;
+}

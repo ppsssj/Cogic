@@ -102,6 +102,7 @@ npm install
 
 ```bash
 cd webview-ui
+npm run build
 npm run dev
 ```
 
