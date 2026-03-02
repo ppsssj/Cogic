@@ -534,21 +534,88 @@ function buildActiveFileGraph(
 
   // collect nodes (top-level + class members)
   const visitDecls = (node: ts.Node) => {
+    // 1) top-level function declarations
     if (ts.isFunctionDeclaration(node) && node.name && node.body) {
       pushNode(node, "function", node.name.text);
-    } else if (ts.isClassDeclaration(node) && node.name) {
-      pushNode(node, "class", node.name.text);
+    }
+
+    // 2) top-level const foo = () => {} / function() {}
+    if (ts.isVariableStatement(node)) {
+      for (const d of node.declarationList.declarations) {
+        if (!d.initializer) continue;
+
+        const init = d.initializer;
+        const isFnInit =
+          ts.isArrowFunction(init) || ts.isFunctionExpression(init);
+        if (!isFnInit) continue;
+
+        // Only model named identifiers for now (avoid destructuring)
+        if (!ts.isIdentifier(d.name)) continue;
+        const varName = d.name.text;
+
+        // Only include implementations (body)
+        const hasBody =
+          ts.isArrowFunction(init)
+            ? !!init.body
+            : ts.isFunctionExpression(init)
+              ? !!init.body
+              : false;
+        if (!hasBody) continue;
+
+        // NOTE: Use initializer node for stable body-owner switching during walk()
+        pushNode(init as unknown as ts.Declaration, "function", varName);
+      }
+    }
+
+    // 3) classes + members
+    if (ts.isClassDeclaration(node) && node.name) {
+      const className = node.name.text;
+      pushNode(node, "class", className);
+
       for (const m of node.members) {
+        // method declarations
         if (
           ts.isMethodDeclaration(m) &&
           m.name &&
           ts.isIdentifier(m.name) &&
           m.body
         ) {
-          pushNode(m, "method", `${node.name!.text}.${m.name.text}`);
+          pushNode(m, "method", `${className}.${m.name.text}`);
+          continue;
+        }
+
+        // class field initializer: foo = () => {} / foo = function() {}
+        if (ts.isPropertyDeclaration(m) && m.initializer && m.name) {
+          const init = m.initializer;
+          const isFnInit =
+            ts.isArrowFunction(init) || ts.isFunctionExpression(init);
+          if (!isFnInit) continue;
+
+          const memberName = ts.isIdentifier(m.name)
+            ? m.name.text
+            : ts.isStringLiteral(m.name)
+              ? m.name.text
+              : null;
+          if (!memberName) continue;
+
+          const hasBody =
+            ts.isArrowFunction(init)
+              ? !!init.body
+              : ts.isFunctionExpression(init)
+                ? !!init.body
+                : false;
+          if (!hasBody) continue;
+
+          // Model as a "method" since it behaves like one (this-bound field)
+          pushNode(
+            init as unknown as ts.Declaration,
+            "method",
+            `${className}.${memberName}`,
+          );
         }
       }
     }
+
     ts.forEachChild(node, visitDecls);
   };
   visitDecls(sf);
@@ -764,6 +831,21 @@ function buildActiveFileGraph(
       const id = idByDeclPos.get(pos);
       const nextOwner = id ?? ownerId;
       walk(node.body, nextOwner);
+      return;
+    }
+
+    // owner switches for const foo = () => {} / function() {} and class field initializers
+    if ((ts.isArrowFunction(node) || ts.isFunctionExpression(node)) && node.body) {
+      const pos = node.getStart(sf, false);
+      const id = idByDeclPos.get(pos);
+      const nextOwner = id ?? ownerId;
+
+      // ArrowFunction body can be an expression or a block
+      if (ts.isBlock(node.body)) {
+        walk(node.body, nextOwner);
+      } else {
+        walk(node.body, nextOwner);
+      }
       return;
     }
 
