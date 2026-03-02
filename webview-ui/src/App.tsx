@@ -1,4 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 import { Topbar } from "./components/Topbar";
 import { FiltersBar, type ChipKey } from "./components/FiltersBar";
 import { CanvasPane } from "./components/CanvasPane";
@@ -98,31 +104,90 @@ function pickRootNodeFromSelection(
   return best?.id ?? null;
 }
 
+function downloadJson(filename: string, data: unknown) {
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.rel = "noopener";
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+}
+
+type ToastKind = "info" | "success" | "error";
+type ToastState = { open: boolean; kind: ToastKind; message: string };
+
 export default function App() {
   const [activeFile, setActiveFile] = useState<ActiveFilePayload>(null);
   const [selection, setSelection] = useState<SelectionPayload>(null);
   const [analysis, setAnalysis] = useState<AnalysisPayload>(null);
 
-  // Graph is merged over time (external expansions)
   const [graphState, setGraphState] = useState<GraphPayload | undefined>(
     undefined,
   );
 
-  // Avoid re-expanding the same external file repeatedly (cache-only; no re-render needed)
   const expandedFilesRef = useRef<Set<string>>(new Set());
 
   const [activeChip, setActiveChip] = useState<ChipKey>("functions");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Selected graph node id (Inspector binding)
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
 
-  // Rooting
   const [pendingUseSelectionAsRoot, setPendingUseSelectionAsRoot] =
     useState(false);
   const [rootNodeId, setRootNodeId] = useState<string | null>(null);
 
-  // Keep latest values for the message handler without re-registering listeners
+  // Inspector UI
+  const LS_INSPECTOR_OPEN = "cg.inspector.open";
+  const LS_INSPECTOR_WIDTH = "cg.inspector.width";
+  const [inspectorOpen, setInspectorOpen] = useState<boolean>(() => {
+    try {
+      const v = localStorage.getItem(LS_INSPECTOR_OPEN);
+      return v === null ? true : v === "1";
+    } catch {
+      return true;
+    }
+  });
+  const [inspectorWidth, setInspectorWidth] = useState<number>(() => {
+    try {
+      const v = localStorage.getItem(LS_INSPECTOR_WIDTH);
+      const n = v ? Number(v) : 360;
+      return Number.isFinite(n) ? Math.min(720, Math.max(260, n)) : 360;
+    } catch {
+      return 360;
+    }
+  });
+  const [isResizingInspector, setIsResizingInspector] = useState(false);
+
+  // Toast + download status
+  const [toast, setToast] = useState<ToastState>({
+    open: false,
+    kind: "info",
+    message: "",
+  });
+  const toastTimerRef = useRef<number | null>(null);
+
+  const [downloadStatus, setDownloadStatus] = useState<
+    "idle" | "downloading" | "done"
+  >("idle");
+
+  const showToast = (kind: ToastKind, message: string, ms = 1800) => {
+    if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current);
+    setToast({ open: true, kind, message });
+    toastTimerRef.current = window.setTimeout(() => {
+      setToast((t) => ({ ...t, open: false }));
+      toastTimerRef.current = null;
+    }, ms);
+  };
+
+  // Keep latest values for selection-root logic
   const pendingRootRef = useRef(false);
   const graphRef = useRef<GraphPayload | undefined>(undefined);
 
@@ -148,7 +213,6 @@ export default function App() {
       if (msg.type === "selection") {
         setSelection(msg.payload);
 
-        // Handle "Use Selection as Root" using refs (no listener re-registering)
         const pending = pendingRootRef.current;
         const g = graphRef.current;
 
@@ -186,8 +250,73 @@ export default function App() {
     return () => window.removeEventListener("message", onMessage);
   }, []);
 
+  // ✅ ESLint no-empty 해결: 빈 catch 제거
+  useEffect(() => {
+    try {
+      localStorage.setItem(LS_INSPECTOR_OPEN, inspectorOpen ? "1" : "0");
+    } catch (e) {
+      void e;
+    }
+  }, [inspectorOpen]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(LS_INSPECTOR_WIDTH, String(inspectorWidth));
+    } catch (e) {
+      void e;
+    }
+  }, [inspectorWidth]);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      const el = e.target as HTMLElement | null;
+      const tag = el?.tagName?.toLowerCase();
+      // ✅ no-explicit-any 해결: any 제거
+      const isTyping =
+        tag === "input" || tag === "textarea" || Boolean(el?.isContentEditable);
+
+      if (!isTyping && (e.key === "i" || e.key === "I")) {
+        e.preventDefault();
+        setInspectorOpen((v) => !v);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  const clampInspectorWidth = (w: number) => Math.min(720, Math.max(260, w));
+
+  const beginResizeInspector = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!inspectorOpen) return;
+
+    e.preventDefault();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setIsResizingInspector(true);
+
+    const startX = e.clientX;
+    const startWidth = inspectorWidth;
+
+    const onMove = (ev: PointerEvent) => {
+      const dx = startX - ev.clientX;
+      setInspectorWidth(clampInspectorWidth(startWidth + dx));
+    };
+
+    const onUp = () => {
+      setIsResizingInspector(false);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+    };
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+  };
+
   const graph = graphState;
   const hasGraphData = Boolean(graph && graph.nodes.length > 0);
+  const downloadEnabled = hasGraphData && downloadStatus !== "downloading";
 
   const selectedNode: GraphNode | null = useMemo(() => {
     return findNodeById(graph, selectedNodeId);
@@ -204,10 +333,61 @@ export default function App() {
 
   const expandExternalFile = (filePath: string) => {
     if (!filePath) return;
-
     if (expandedFilesRef.current.has(filePath)) return;
     expandedFilesRef.current.add(filePath);
     vscode.postMessage({ type: "expandNode", payload: { filePath } });
+  };
+
+  const downloadFlow = async () => {
+    if (!hasGraphData || !graph) {
+      showToast("info", "No graph to download");
+      return;
+    }
+    if (downloadStatus === "downloading") return;
+
+    try {
+      setDownloadStatus("downloading");
+      showToast("info", "Downloading…", 1200);
+
+      await new Promise((r) => setTimeout(r, 0));
+
+      const exportedAt = new Date().toISOString().replace(/[:.]/g, "-");
+      const base =
+        activeFile?.fileName?.replace(/[^\w.-]+/g, "_")?.slice(0, 64) ||
+        "codegraph";
+
+      const payload = {
+        schema: "codegraph.flow.v1",
+        exportedAt: new Date().toISOString(),
+        ui: {
+          activeFilter: activeChip,
+          searchQuery,
+          rootNodeId,
+          selectedNodeId,
+          inspector: { open: inspectorOpen, width: inspectorWidth },
+        },
+        activeFile: activeFile
+          ? {
+              uri: activeFile.uri,
+              fileName: activeFile.fileName,
+              languageId: activeFile.languageId,
+            }
+          : null,
+        analysisMeta: analysis?.meta ?? null,
+        graph,
+      };
+
+      downloadJson(`${base}.flow.${exportedAt}.json`, payload);
+
+      setDownloadStatus("done");
+      showToast("success", "Download complete", 1500);
+
+      window.setTimeout(() => setDownloadStatus("idle"), 900);
+    } catch (e) {
+      console.error("[codegraph] downloadFlow error:", e);
+      setDownloadStatus("idle");
+      showToast("error", "Download failed");
+    }
   };
 
   return (
@@ -222,6 +402,9 @@ export default function App() {
           resetGraph();
           vscode.postMessage({ type: "analyzeActiveFile" });
         }}
+        onDownloadFlow={downloadFlow}
+        downloadEnabled={downloadEnabled}
+        downloadStatus={downloadStatus}
         searchQuery={searchQuery}
         onSearchQueryChange={setSearchQuery}
       />
@@ -238,6 +421,7 @@ export default function App() {
           selectedNodeId={selectedNodeId}
           onSelectNode={setSelectedNodeId}
           onClearSelection={() => setSelectedNodeId(null)}
+          // ✅ 노드 클릭 → 코드 위치 이동 복구
           onOpenNode={(n) => {
             vscode.postMessage({
               type: "openLocation",
@@ -259,18 +443,41 @@ export default function App() {
           onExpandExternal={expandExternalFile}
         />
 
+        {inspectorOpen ? (
+          <div
+            className={
+              isResizingInspector
+                ? "inspectorResizer isDragging"
+                : "inspectorResizer"
+            }
+            onPointerDown={beginResizeInspector}
+            role="separator"
+            aria-orientation="vertical"
+            aria-label="Resize Inspector"
+          />
+        ) : null}
+
         <Inspector
+          collapsed={!inspectorOpen}
+          width={inspectorWidth}
+          onToggleCollapsed={() => setInspectorOpen((v) => !v)}
           activeFile={activeFile}
           selection={selection}
           analysis={analysis}
           selectedNode={selectedNode}
-          onRefreshActive={() => vscode.postMessage({ type: "requestActiveFile" })}
+          onRefreshActive={() =>
+            vscode.postMessage({ type: "requestActiveFile" })
+          }
           onResetGraph={resetGraph}
           onExpandExternal={expandExternalFile}
           rootNode={findNodeById(graph, rootNodeId)}
           onClearRoot={() => setRootNodeId(null)}
         />
       </div>
+
+      {toast.open ? (
+        <div className={`cgToast cgToast--${toast.kind}`}>{toast.message}</div>
+      ) : null}
     </div>
   );
 }

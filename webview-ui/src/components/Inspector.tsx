@@ -1,9 +1,9 @@
-// import "./../App.css";
-import { Settings } from "lucide-react";
+import { ChevronLeft, ChevronRight, Settings } from "lucide-react";
 import type { ExtToWebviewMessage, GraphNode } from "../lib/vscode";
 import { ActiveFileSnapshot } from "./ActiveFileSnapshot";
 import { AnalysisPanel } from "./AnalysisPanel";
 import "./Inspector.css";
+
 type ActiveFilePayload = Extract<
   ExtToWebviewMessage,
   { type: "activeFile" }
@@ -27,6 +27,13 @@ type Props = {
   onExpandExternal: (filePath: string) => void;
   rootNode?: GraphNode | null;
   onClearRoot?: () => void;
+
+  /** Inspector collapsed state is owned by App. */
+  collapsed?: boolean;
+  /** Width in px when expanded (App controls persistence). */
+  width?: number;
+  /** Toggle collapse/expand. */
+  onToggleCollapsed?: () => void;
 };
 
 function shortFile(p: string) {
@@ -73,17 +80,52 @@ export function Inspector({
   onExpandExternal,
   rootNode = null,
   onClearRoot,
+
+  collapsed = false,
+  width,
+  onToggleCollapsed,
 }: Props) {
+  if (collapsed) {
+    return (
+      <aside
+        className="inspector inspector--collapsed"
+        style={{ width: 28, minWidth: 28, maxWidth: 28 }}
+        aria-label="Inspector (collapsed)"
+      >
+        <button
+          className="inspectorCollapsedBtn"
+          type="button"
+          onClick={onToggleCollapsed}
+          title="Show Inspector (I)"
+          aria-label="Show Inspector"
+        >
+          <ChevronLeft className="icon" />
+        </button>
+      </aside>
+    );
+  }
+
   return (
-    <aside className="inspector">
+    <aside className="inspector" style={width ? { width } : undefined}>
       <div className="inspectorHeader">
         <div>
           <h1>Inspector</h1>
           <p>COMPONENT ANALYSIS</p>
         </div>
-        <button className="iconBtn subtle" type="button" title="Settings">
-          <Settings className="icon" />
-        </button>
+
+        <div className="inspectorHeaderActions">
+          <button
+            className="iconBtn subtle"
+            type="button"
+            title="Hide Inspector (I)"
+            onClick={onToggleCollapsed}
+          >
+            <ChevronRight className="icon" />
+          </button>
+          <button className="iconBtn subtle" type="button" title="Settings">
+            <Settings className="icon" />
+          </button>
+        </div>
       </div>
 
       <div className="inspectorActions">
@@ -153,7 +195,7 @@ export function Inspector({
             </div>
           </div>
 
-          {/* ✅ Selected node details (P0) */}
+          {/* ✅ Selected node details */}
           <div className="panel">
             <div className="panelHeader">
               <span>SELECTED NODE</span>
@@ -164,34 +206,32 @@ export function Inspector({
                   No node selected. Click a node in the graph.
                 </div>
               ) : (
-                <>
-                  <div className="kvList">
-                    <div className="kvRow">
-                      <div className="kvKey mono">kind</div>
-                      <div className="kvVal mono">{selectedNode.kind}</div>
-                    </div>
-                    <div className="kvRow">
-                      <div className="kvKey mono">name</div>
-                      <div className="kvVal mono">{selectedNode.name}</div>
-                    </div>
-                    <div className="kvRow">
-                      <div className="kvKey mono">file</div>
-                      <div className="kvVal mono">
-                        {shortFile(selectedNode.file)}
-                      </div>
-                    </div>
-                    <div className="kvRow">
-                      <div className="kvKey mono">range</div>
-                      <div className="kvVal mono">{fmtRange(selectedNode)}</div>
-                    </div>
-                    <div className="kvRow">
-                      <div className="kvKey mono">signature</div>
-                      <div className="kvVal mono">
-                        {fmtSig(selectedNode as GraphNodeWithSig)}
-                      </div>
+                <div className="kvList">
+                  <div className="kvRow">
+                    <div className="kvKey mono">kind</div>
+                    <div className="kvVal mono">{selectedNode.kind}</div>
+                  </div>
+                  <div className="kvRow">
+                    <div className="kvKey mono">name</div>
+                    <div className="kvVal mono">{selectedNode.name}</div>
+                  </div>
+                  <div className="kvRow">
+                    <div className="kvKey mono">file</div>
+                    <div className="kvVal mono">
+                      {shortFile(selectedNode.file)}
                     </div>
                   </div>
-                </>
+                  <div className="kvRow">
+                    <div className="kvKey mono">range</div>
+                    <div className="kvVal mono">{fmtRange(selectedNode)}</div>
+                  </div>
+                  <div className="kvRow">
+                    <div className="kvKey mono">signature</div>
+                    <div className="kvVal mono">
+                      {fmtSig(selectedNode as GraphNodeWithSig)}
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           </div>
@@ -203,9 +243,9 @@ export function Inspector({
             <div className="panelBody">
               <div className="mono" style={{ fontSize: 11, opacity: 0.85 }}>
                 {selection
-                  ? `${selection.start.line + 1}:${selection.start.character} → ${selection.end.line + 1}:${
-                      selection.end.character
-                    }`
+                  ? `${selection.start.line + 1}:${selection.start.character} → ${
+                      selection.end.line + 1
+                    }:${selection.end.character}`
                   : "No selection"}
               </div>
 

@@ -145,3 +145,22 @@ body.vscode-high-contrast .logoDark {
   background: var(--border);
   margin: 0 6px;
 }
+
+/* Topbar.css에 추가 */
+.iconBtn--disabled {
+  opacity: 0.45;
+}
+
+.iconBtn--busy {
+  opacity: 0.85;
+}
+
+.spin {
+  animation: cgSpin 0.9s linear infinite;
+}
+
+@keyframes cgSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

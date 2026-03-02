@@ -3,14 +3,11 @@
 .inspector {
   width: 320px;
   min-width: 260px;
-  max-width: 420px;
+  max-width: 720px;
 
   height: 100%;
-  /* 추가 */
   align-self: stretch;
-  /* 추가 */
   flex: 0 0 auto;
-  /* 추가(폭 고정 성격 명확히) */
 
   border-left: 1px solid var(--border);
   background: var(--panel);
@@ -45,6 +42,12 @@
   color: var(--muted);
 }
 
+.inspectorHeaderActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .inspectorBody {
   flex: 1;
   overflow: auto;
@@ -57,16 +60,69 @@
   flex-direction: column;
   gap: 14px;
 }
+
 .smallBtn {
-  background: #111827;        /* 거의 블랙 */
+  background: #111827; /* 거의 블랙 */
   color: #cbd5e1;
   border: 1px solid #334155;
   transition: all 0.15s ease;
 }
 
 .smallBtn:hover {
-  background: #1d4ed8;        /* deep blue */
+  background: #1d4ed8; /* deep blue */
   border-color: #1d4ed8;
-  box-shadow: 0 0 0 2px rgba(29,78,216,0.3);
+  box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.3);
   color: white;
+}
+
+/* collapsed */
+.inspector--collapsed {
+  min-width: 28px;
+  max-width: 28px;
+  width: 28px;
+  border-left: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.inspectorCollapsedBtn {
+  width: 28px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.inspectorCollapsedBtn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Drag handle placed between canvas and inspector (App renders this div) */
+.inspectorResizer {
+  width: 6px;
+  cursor: col-resize;
+  background: transparent;
+  position: relative;
+}
+
+.inspectorResizer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.inspectorResizer:hover::after,
+.inspectorResizer.isDragging::after {
+  opacity: 1;
 }
