@@ -3,7 +3,20 @@ export type WebviewToExtMessage =
   | { type: "requestSelection" }
   | { type: "analyzeActiveFile" }
   | { type: "analyzeWorkspace" }
-  | { type: "expandNode"; payload: { filePath: string } };
+  | { type: "expandNode"; payload: { filePath: string } }
+  | {
+      type: "openLocation";
+      payload: {
+        /** Absolute file system path (preferred). */
+        filePath: string;
+        /** Optional range to reveal/select. */
+        range?: {
+          start: { line: number; character: number };
+          end: { line: number; character: number };
+        };
+        preserveFocus?: boolean;
+      };
+    };
 
 export type AnalysisCallV1 = { name: string; count: number };
 

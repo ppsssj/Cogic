@@ -49,13 +49,16 @@ type Props = {
   // UI state forwarded from App
   activeFilter: ChipKey;
   searchQuery: string;
-  rootNodeId: string | null;     // ✅ 추가
-  onClearRoot: () => void;  
+  rootNodeId: string | null; // ✅ 추가
+  onClearRoot: () => void;
 
   // selection bridge to Inspector
   selectedNodeId: string | null;
   onSelectNode: (nodeId: string) => void;
   onClearSelection: () => void;
+
+  /** When a node is clicked, open its source location in VS Code. */
+  onOpenNode?: (node: GraphNode) => void;
 
   onGenerateFromActive: () => void;
   onUseSelectionAsRoot: () => void;
@@ -110,7 +113,11 @@ function CodeNode({
 
       <div className="cgNodeTop">
         <span className={`cgBadge cgBadge--${data.kind}`}>
-          {String((String(data.kind) === "interface" && data.subkind) ? data.subkind : data.kind).toUpperCase()}
+          {String(
+            String(data.kind) === "interface" && data.subkind
+              ? data.subkind
+              : data.kind,
+          ).toUpperCase()}
         </span>
       </div>
 
@@ -179,7 +186,9 @@ function DataflowEdge({
           <div
             className="cgEdgeLabel cgEdgeLabel--dataflow"
             style={{
-              transform: `translate(-50%, -50%) translate(${labelX + ox}px, ${labelY + oy}px)`,
+              transform: `translate(-50%, -50%) translate(${labelX + ox}px, ${
+                labelY + oy
+              }px)`,
             }}
           >
             {label}
@@ -189,7 +198,6 @@ function DataflowEdge({
     </>
   );
 }
-
 
 const edgeTypes = { dataflow: DataflowEdge };
 
@@ -201,8 +209,10 @@ function toReactFlowNodes(graph?: GraphPayload): Array<Node<CodeNodeData>> {
   return graph.nodes.map((n: GraphNode) => {
     const pos = posById.get(n.id) ?? { x: 0, y: 0 };
     const sk = getInterfaceSubkind(n);
-    const kindLabel = (String(n.kind) === "interface" && sk) ? sk : n.kind;
-    const subtitle = `${kindLabel} · ${shortFile(n.file)}:${n.range.start.line + 1}`;
+    const kindLabel = String(n.kind) === "interface" && sk ? sk : n.kind;
+    const subtitle = `${kindLabel} · ${shortFile(n.file)}:${
+      n.range.start.line + 1
+    }`;
 
     const data: CodeNodeData = {
       title: nodeTitle(n),
@@ -236,8 +246,8 @@ function toReactFlowEdges(graph?: GraphPayload): Array<Edge<DataflowEdgeData>> {
         e.kind === "constructs"
           ? "cgEdge cgEdge--constructs"
           : isDataflow
-            ? "cgEdge cgEdge--dataflow"
-            : "cgEdge cgEdge--calls",
+          ? "cgEdge cgEdge--dataflow"
+          : "cgEdge cgEdge--calls",
 
       markerEnd: { type: MarkerType.ArrowClosed, width: 16, height: 16 },
 
@@ -258,6 +268,7 @@ function CanvasFlow({
   onGenerateFromActive,
   onUseSelectionAsRoot,
   onExpandExternal,
+  onOpenNode,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
 
@@ -276,6 +287,10 @@ function CanvasFlow({
     node: Node<CodeNodeData>,
   ) => {
     onSelectNode(node.id);
+
+    // Open source location for the clicked graph node (if available)
+    const gnode = graph?.nodes.find((n) => n.id === node.id);
+    if (gnode) onOpenNode?.(gnode);
 
     if (node.data.kind === "external") {
       onExpandExternal?.(node.data.file);

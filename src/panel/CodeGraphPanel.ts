@@ -53,6 +53,8 @@ export class CodeGraphPanel {
           if (msg.type === "analyzeWorkspace") return this.postAnalysis(); // explicit
           if (msg.type === "expandNode")
             return this.postAnalysisForFile(msg.payload.filePath);
+          if (msg.type === "openLocation")
+            return this.openLocation(msg.payload);
         } catch (e) {
           console.error("[codegraph] onDidReceiveMessage error:", e);
         }
@@ -311,6 +313,60 @@ export class CodeGraphPanel {
       type: "analysisResult",
       payload,
     } satisfies ExtToWebviewMessage);
+  }
+
+  private async openLocation(payload: {
+    filePath: string;
+    range?: {
+      start: { line: number; character: number };
+      end: { line: number; character: number };
+    };
+    preserveFocus?: boolean;
+  }) {
+    const { filePath, range, preserveFocus } = payload;
+    if (!filePath) return;
+
+    try {
+      const uri = vscode.Uri.file(filePath);
+
+      // 1) 이미 화면에 떠 있는(visible) editor가 있으면 그 editor를 재사용
+      const existingEditor = vscode.window.visibleTextEditors.find(
+        (ed) => ed.document.uri.fsPath === uri.fsPath,
+      );
+
+      let editor: vscode.TextEditor;
+
+      if (existingEditor) {
+        // 해당 탭으로 포커스 이동(열려있는 탭을 "가리키는" 느낌)
+        editor = await vscode.window.showTextDocument(existingEditor.document, {
+          viewColumn: existingEditor.viewColumn,
+          preserveFocus: Boolean(preserveFocus),
+          preview: true,
+        });
+      } else {
+        // 2) 없으면 새로 열기
+        editor = await vscode.window.showTextDocument(uri, {
+          viewColumn: vscode.ViewColumn.Active,
+          preserveFocus: Boolean(preserveFocus),
+          preview: true,
+        });
+      }
+
+      // 3) range reveal/selection
+      if (range) {
+        const r = new vscode.Range(
+          new vscode.Position(range.start.line, range.start.character),
+          new vscode.Position(range.end.line, range.end.character),
+        );
+        editor.selection = new vscode.Selection(r.start, r.end);
+        editor.revealRange(r, vscode.TextEditorRevealType.InCenter);
+      }
+    } catch (e) {
+      console.error("[codegraph] openLocation error:", e);
+      void vscode.window.showErrorMessage(
+        `CodeGraph: Failed to open location: ${filePath}`,
+      );
+    }
   }
 }
 

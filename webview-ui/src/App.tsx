@@ -104,7 +104,9 @@ export default function App() {
   const [analysis, setAnalysis] = useState<AnalysisPayload>(null);
 
   // Graph is merged over time (external expansions)
-  const [graphState, setGraphState] = useState<GraphPayload | undefined>(undefined);
+  const [graphState, setGraphState] = useState<GraphPayload | undefined>(
+    undefined,
+  );
 
   // Avoid re-expanding the same external file repeatedly (cache-only; no re-render needed)
   const expandedFilesRef = useRef<Set<string>>(new Set());
@@ -116,7 +118,8 @@ export default function App() {
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
 
   // Rooting
-  const [pendingUseSelectionAsRoot, setPendingUseSelectionAsRoot] = useState(false);
+  const [pendingUseSelectionAsRoot, setPendingUseSelectionAsRoot] =
+    useState(false);
   const [rootNodeId, setRootNodeId] = useState<string | null>(null);
 
   // Keep latest values for the message handler without re-registering listeners
@@ -235,7 +238,19 @@ export default function App() {
           selectedNodeId={selectedNodeId}
           onSelectNode={setSelectedNodeId}
           onClearSelection={() => setSelectedNodeId(null)}
-          onGenerateFromActive={() => vscode.postMessage({ type: "analyzeActiveFile" })}
+          onOpenNode={(n) => {
+            vscode.postMessage({
+              type: "openLocation",
+              payload: {
+                filePath: n.file,
+                range: n.range,
+                preserveFocus: false,
+              },
+            });
+          }}
+          onGenerateFromActive={() =>
+            vscode.postMessage({ type: "analyzeActiveFile" })
+          }
           onUseSelectionAsRoot={() => {
             setPendingUseSelectionAsRoot(true);
             vscode.postMessage({ type: "requestSelection" });

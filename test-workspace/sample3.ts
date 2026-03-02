@@ -1,11 +1,14 @@
-interface IFoo { a: number }
-type TBar = { x: string; y: number }
-enum EBaz { A, B }
+interface B {}
+interface A extends B {}
 
-const foo = () => { bar(); };
-const baz = function () { qux(); };
+interface IFoo {}
+class Base {}
+class C extends Base implements IFoo {}
 
-class C { m = () => { foo(); }; }
+type Foo = { x: number }
+type Bar = { y: number }
 
-function bar() {}
-function qux() {}
+type T1 = Foo | Bar
+type T2 = Foo & Bar
+type T3 = { a: IFoo }
+type T4 = Array<Foo>
