@@ -154,6 +154,12 @@ export function analyzeWithWorkspace(args: {
     },
   );
 
+  // Ensure the active file is part of the Program roots.
+  // In strict tsconfig setups, the active file may be excluded and `program.getSourceFile(activeFile)` would be null.
+  if (!rootNames.some((p) => samePath(p, activeFile))) {
+    rootNames.push(activeFile);
+  }
+
   const scriptKind = pickScriptKind(active.fileName, active.languageId);
 
   const defaultHost = ts.createCompilerHost(options, true);
@@ -465,8 +471,10 @@ function buildActiveFileGraph(
   // declStartPos -> nodeId (only for active file decls)
   const idByDeclPos = new Map<number, string>();
 
-  const mkId = (kind: GraphNodeKind, name: string, file: string, pos: number) =>
-    `${kind}:${name}@${file}:${pos}`;
+  // IMPORTANT: Node IDs must be stable. Never derive IDs from display names.
+  // Use only kind + filePath + position (or range) so merges/expansions don't create duplicates.
+  const mkId = (kind: GraphNodeKind, file: string, pos: number) =>
+    `${kind}:${file}:${pos}`;
 
   const sourceFileRange = () => {
     const endPos = sf.getEnd();
@@ -480,7 +488,7 @@ function buildActiveFileGraph(
   // file root node (top-level owner)
   const filePos = 0;
   const fileNameBase = path.basename(sf.fileName);
-  const fileNodeId = mkId("file", fileNameBase, sf.fileName, filePos);
+  const fileNodeId = mkId("file", sf.fileName, filePos);
   nodes.push({
     id: fileNodeId,
     kind: "file",
@@ -495,7 +503,7 @@ function buildActiveFileGraph(
     name: string,
   ) => {
     const loc = declLocation(decl);
-    const id = mkId(kind, name, loc.fileName, loc.pos);
+    const id = mkId(kind, loc.fileName, loc.pos);
     idByDeclPos.set(loc.pos, id);
 
     let signature: string | undefined = undefined;
@@ -518,7 +526,7 @@ function buildActiveFileGraph(
       id,
       kind,
       name,
-      file: sf.fileName,
+      file: loc.fileName,
       range: loc.range,
       signature,
     });
@@ -561,7 +569,8 @@ function buildActiveFileGraph(
     const tag = isExternalFile(loc.fileName) ? " [lib]" : "";
     const displayName = `${name} (${base})${tag}`;
 
-    const id = mkId("external", displayName, loc.fileName, loc.pos);
+    // Stable ID: do not include displayName.
+    const id = mkId("external", loc.fileName, loc.pos);
     externalIdByDecl.set(key, id);
     nodes.push({
       id,

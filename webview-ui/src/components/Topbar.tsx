@@ -7,18 +7,26 @@ import {
   Play,
   RefreshCw,
   Search,
-  // GitBranch,
 } from "lucide-react";
 import logoLightUrl from "../../../assets/logo.svg";
 import logoDarkUrl from "../../../assets/logo2.svg";
 import "./Topbar.css";
+
 type Props = {
   projectName: string;
   onRefresh: () => void;
   onGenerate: () => void;
+  searchQuery: string;
+  onSearchQueryChange: (v: string) => void;
 };
 
-export function Topbar({ projectName, onRefresh, onGenerate }: Props) {
+export function Topbar({
+  projectName,
+  onRefresh,
+  onGenerate,
+  searchQuery,
+  onSearchQueryChange,
+}: Props) {
   return (
     <header className="topbar">
       <div className="topbarLeft">
@@ -49,6 +57,8 @@ export function Topbar({ projectName, onRefresh, onGenerate }: Props) {
             <input
               className="searchInput"
               placeholder="Search nodes, files, symbols..."
+              value={searchQuery}
+              onChange={(e) => onSearchQueryChange(e.target.value)}
             />
           </div>
         </div>
