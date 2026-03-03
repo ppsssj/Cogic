@@ -27,234 +27,286 @@
 .cgNode {
   position: relative;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(16, 24, 40, 0.72);
-  padding: 10px 12px 12px;
-  min-width: 180px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(2, 6, 23, 0.55);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  padding: 10px 12px;
+  min-width: 190px;
+  max-width: 260px;
+  color: rgba(226, 232, 240, 0.92);
 }
 
 .cgNode--selected {
   border-color: rgba(56, 189, 248, 0.55);
   box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.25),
-    0 20px 50px rgba(56, 189, 248, 0.10);
+    0 0 0 1px rgba(56, 189, 248, 0.22),
+    0 16px 48px rgba(56, 189, 248, 0.10);
+}
+
+.cgHandle {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  background: rgba(30, 41, 59, 0.9);
 }
 
 .cgNodeTop {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.cgNodeTitle {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.1px;
+  color: rgba(226, 232, 240, 0.95);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cgBadge {
   font-size: 10px;
   font-weight: 900;
-  letter-spacing: 0.10em;
-  padding: 3px 8px;
+  padding: 3px 7px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.cgBadge--file {
-  border-color: rgba(148, 163, 184, 0.35);
-}
-
-.cgBadge--class {
-  border-color: rgba(56, 189, 248, 0.55);
-}
-
-.cgBadge--function {
-  border-color: rgba(34, 197, 94, 0.45);
-}
-
-.cgBadge--method {
-  border-color: rgba(251, 191, 36, 0.45);
-}
-
-.cgBadge--external {
-  border-color: rgba(244, 114, 182, 0.45);
-}
-
-.cgNodeTitle {
-  font-size: 13px;
-  font-weight: 900;
-  color: #fff;
-}
-
-.cgNodeSub {
-  margin-top: 6px;
-  font-size: 11px;
-  color: rgba(226, 232, 240, 0.70);
-}
-
-.cgHandle {
-  opacity: 0;
-  width: 8px;
-  height: 8px;
-}
-
-.react-flow__edge-path {
-  stroke-width: 2;
-}
-
-.cgEdge--calls .react-flow__edge-path {
-  stroke: rgba(226, 232, 240, 0.35);
-}
-
-.cgEdge--constructs .react-flow__edge-path {
-  stroke: rgba(167, 139, 250, 0.75);
-}
-
-/* --- Dataflow edge (dashed + blue) --- */
-.cgEdge--dataflow .react-flow__edge-path {
-  stroke: rgba(59, 130, 246, 0.85);
-  /* blue */
-  stroke-dasharray: 6 4;
-}
-
-/* --- Dataflow label (pill) --- */
-.cgEdgeLabel {
-  position: absolute;
-  pointer-events: none;
-  user-select: none;
-}
-
-.cgEdgeLabel--dataflow {
-  font-size: 11px;
-  font-weight: 800;
-  color: rgba(226, 232, 240, 0.95);
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(59, 130, 246, 0.55);
-  border-radius: 999px;
-  padding: 4px 8px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(226, 232, 240, 0.14);
+  background: rgba(15, 23, 42, 0.65);
+  color: rgba(226, 232, 240, 0.85);
   white-space: nowrap;
 }
 
-
-.react-flow__handle {
-  opacity: 0;
+.cgNodeSub {
+  font-size: 11px;
+  color: rgba(226, 232, 240, 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.react-flow__edge.selected .react-flow__edge-path {
-  stroke: rgba(19, 91, 236, 0.85);
-}
-
-
-.canvasGrid {
+/* Edge label */
+.cgEdgeLabel {
   position: absolute;
-  inset: 0;
-  opacity: 0.14;
   pointer-events: none;
-  z-index: 0;
-  background-image: radial-gradient(var(--primary) 0.6px, transparent 0.6px);
-  background-size: 20px 20px;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(226, 232, 240, 0.14);
+  background: rgba(2, 6, 23, 0.72);
+  color: rgba(226, 232, 240, 0.85);
 }
 
-.emptyState {
-  position: relative;
-  z-index: 1;
+/* Controls */
+.canvasControls {
+  position: absolute;
+  right: 14px;
+  top: 14px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  align-items: center;
-  text-align: center;
-  padding: 24px;
+  gap: 8px;
+  z-index: 5;
 }
 
-.emptyBadge {
-  width: 180px;
-  height: 180px;
-  border-radius: 999px;
-  background: rgba(19, 91, 236, 0.06);
-  border: 1px solid rgba(19, 91, 236, 0.12);
+.iconBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.14);
+  background: rgba(2, 6, 23, 0.55);
+  color: rgba(226, 232, 240, 0.85);
   display: grid;
   place-items: center;
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
 }
 
-.emptyBadgeIcon {
-  width: 72px;
-  height: 72px;
-  color: rgba(19, 91, 236, 0.55);
+.iconBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(2, 6, 23, 0.68);
 }
 
-.emptyText h3 {
-  margin: 0;
-  font-size: 20px;
+/* Empty state */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.12);
+  background: rgba(2, 6, 23, 0.45);
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.emptyIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(226, 232, 240, 0.14);
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.emptyTitle {
   font-weight: 900;
-  color: #fff;
+  font-size: 14px;
 }
 
-.emptyText p {
-  margin: 8px 0 0;
-  font-size: 13px;
-  color: var(--muted);
-  max-width: 520px;
+.emptySub {
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.65);
+  text-align: center;
 }
 
-.ctaBtn {
-  margin-top: 6px;
-  height: 40px;
-  padding: 0 18px;
-  border-radius: 10px;
-  border: none;
-  background: var(--primary);
-  color: var(--primaryFg);
-  font-size: 13px;
+.emptyActions {
+  margin-top: 4px;
+  display: flex;
+  gap: 10px;
+}
+
+.btnPrimary {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(56, 189, 248, 0.14);
+  color: rgba(226, 232, 240, 0.95);
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(19, 91, 236, 0.25);
-  display: inline-flex;
+}
+
+.btnPrimary:hover {
+  background: rgba(56, 189, 248, 0.18);
+}
+
+/* Root / selection banners */
+.rootBanner {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(226, 232, 240, 0.14);
+  background: rgba(2, 6, 23, 0.60);
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.rootText {
+  font-size: 12px;
+}
+
+.selectionBanner {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 5;
+  display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.ctaBtn:hover {
-  transform: translateY(-1px);
-  background: var(--primaryHover);
-}
-
-.ctaIcon {
-  width: 14px;
-  height: 14px;
-}
-
-.canvasControls {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  z-index: 2;
-}
-
-.controlsCard {
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
-.controlBtn {
-  width: 44px;
-  height: 44px;
-  border: none;
-  background: transparent;
-  color: #fff;
+.btnGhost {
+  padding: 9px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.14);
+  background: rgba(2, 6, 23, 0.45);
+  color: rgba(226, 232, 240, 0.85);
+  font-weight: 900;
   cursor: pointer;
 }
 
-.controlBtn:hover {
-  background: rgba(255, 255, 255, 0.06);
+.btnGhost:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(2, 6, 23, 0.58);
 }
 
-.controlSep {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  margin: 0 10px;
+/* File group (container) node */
+.cgGroup {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+
+  /* ✅ 핵심: 채움 제거(투명) */
+  background: transparent;
+
+  /* ✅ edge가 뒤에 있어도 보이도록 blur 제거 */
+  backdrop-filter: none;
+
+  /* 프레임 느낌만 */
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+  padding: 12px;
+  box-sizing: border-box;
 }
 
-/* ---------- Inspector (Right Panel) ---------- */
+.cgGroup--selected {
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.18),
+    0 22px 60px rgba(56, 189, 248, 0.08);
+}
+
+.cgGroupHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 6px 10px;
+
+  /* 헤더만 살짝 배경 */
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(226, 232, 240, 0.10);
+  border-radius: 12px;
+}
+
+.cgGroupTitle {
+  font-size: 13px;
+  font-weight: 900;
+  color: rgba(226, 232, 240, 0.95);
+}
+
+.cgGroupMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  color: rgba(226, 232, 240, 0.55);
+}
+
+.cgGroupPath {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cgGroupCount {
+  font-weight: 800;
+  color: rgba(226, 232, 240, 0.70);
+}
+
+/* edge 선 굵기/명도 강화 */
+.react-flow__edge-path {
+  stroke-width: 2.2;
+  stroke: rgba(226, 232, 240, 0.65);
+}
+
+/* 선택된 edge는 더 강조 */
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-width: 3;
+  stroke: rgba(56, 189, 248, 0.9);
+}
+
+/* 화살표도 같이 */
+.react-flow__edge-marker path {
+  fill: rgba(226, 232, 240, 0.75);
+}

@@ -22,7 +22,11 @@ import { Crosshair, Network, Sigma, ZoomIn, ZoomOut } from "lucide-react";
 import type { GraphNode, GraphPayload } from "../lib/vscode";
 import type { ChipKey } from "./FiltersBar";
 
-type GraphEdge = GraphPayload["edges"][number];
+type InterfaceSubkind = "interface" | "type" | "enum";
+function getInterfaceSubkind(n: GraphNode): InterfaceSubkind | undefined {
+  const v = (n as unknown as { subkind?: unknown }).subkind;
+  return v === "interface" || v === "type" || v === "enum" ? v : undefined;
+}
 
 type CodeNodeData = {
   title: string;
@@ -33,43 +37,26 @@ type CodeNodeData = {
   file: string;
 };
 
-type InterfaceSubkind = "interface" | "type" | "enum";
-
-function getInterfaceSubkind(n: GraphNode): InterfaceSubkind | undefined {
-  const v = (n as unknown as { subkind?: unknown }).subkind;
-  return v === "interface" || v === "type" || v === "enum" ? v : undefined;
-}
-
-type Props = {
-  hasData: boolean;
-
-  // analysisResult.payload.graph
-  graph?: GraphPayload;
-
-  // UI state forwarded from App
-  activeFilter: ChipKey;
-  searchQuery: string;
-  rootNodeId: string | null; // ✅ 추가
-  onClearRoot: () => void;
-
-  // selection bridge to Inspector
-  selectedNodeId: string | null;
-  onSelectNode: (nodeId: string) => void;
-  onClearSelection: () => void;
-
-  /** When a node is clicked, open its source location in VS Code. */
-  onOpenNode?: (node: GraphNode) => void;
-
-  onGenerateFromActive: () => void;
-  onUseSelectionAsRoot: () => void;
-
-  /** When an external node is clicked, request expansion by file path. */
-  onExpandExternal?: (filePath: string) => void;
+type FileGroupData = {
+  title: string;
+  subtitle: string;
+  kind: "file";
+  file: string;
+  count: number;
 };
 
 function shortFile(p: string) {
   const parts = p.split(/[/\\]/);
   return parts[parts.length - 1] || p;
+}
+
+function baseName(p: string) {
+  return shortFile(p);
+}
+function dirName(p: string) {
+  const norm = p.replace(/\\/g, "/");
+  const i = norm.lastIndexOf("/");
+  return i >= 0 ? norm.slice(0, i) : "";
 }
 
 function nodeTitle(n: GraphNode) {
@@ -79,20 +66,6 @@ function nodeTitle(n: GraphNode) {
   return n.name;
 }
 
-// Minimal deterministic layout (no deps)
-function buildLayout(nodes: GraphNode[]) {
-  const colW = 260;
-  const rowH = 140;
-  const cols = Math.max(1, Math.floor(Math.sqrt(nodes.length)));
-
-  return nodes.map((n, i) => {
-    const col = i % cols;
-    const row = Math.floor(i / cols);
-    return { id: n.id, position: { x: col * colW, y: row * rowH } };
-  });
-}
-
-/** Custom node so we always render title/subtitle (default node expects data.label). */
 function CodeNode({
   data,
   selected,
@@ -100,34 +73,49 @@ function CodeNode({
   data: CodeNodeData;
   selected?: boolean;
 }) {
+  const badge =
+    data.kind === "interface"
+      ? data.subkind
+      : data.kind === "external"
+        ? "external"
+        : undefined;
+
   return (
-    <div
-      className={[
-        "cgNode",
-        `cgNode--${data.kind}`,
-        selected ? "cgNode--selected" : "",
-      ].join(" ")}
-    >
+    <div className={["cgNode", selected ? "cgNode--selected" : ""].join(" ")}>
+      {/* Handles */}
       <Handle type="target" position={Position.Left} className="cgHandle" />
       <Handle type="source" position={Position.Right} className="cgHandle" />
 
       <div className="cgNodeTop">
-        <span className={`cgBadge cgBadge--${data.kind}`}>
-          {String(
-            String(data.kind) === "interface" && data.subkind
-              ? data.subkind
-              : data.kind,
-          ).toUpperCase()}
-        </span>
+        <div className="cgNodeTitle">{data.title}</div>
+        {badge ? <div className="cgBadge">{badge.toUpperCase()}</div> : null}
       </div>
-
-      <div className="cgNodeTitle">{data.title}</div>
       <div className="cgNodeSub">{data.subtitle}</div>
     </div>
   );
 }
 
-const nodeTypes = { code: CodeNode };
+function FileGroupNode({
+  data,
+  selected,
+}: {
+  data: FileGroupData;
+  selected?: boolean;
+}) {
+  return (
+    <div className={["cgGroup", selected ? "cgGroup--selected" : ""].join(" ")}>
+      <div className="cgGroupHeader">
+        <div className="cgGroupTitle">{data.title}</div>
+        <div className="cgGroupMeta">
+          <span className="cgGroupPath">{data.subtitle}</span>
+          <span className="cgGroupCount">{data.count} nodes</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const nodeTypes = { code: CodeNode, fileGroup: FileGroupNode };
 type DataflowEdgeData = { label?: string };
 
 function DataflowEdge({
@@ -140,7 +128,6 @@ function DataflowEdge({
   targetPosition,
   markerEnd,
   data,
-  style,
 }: EdgeProps<DataflowEdgeData>) {
   const [edgePath, labelX, labelY] = getSmoothStepPath({
     sourceX,
@@ -151,47 +138,18 @@ function DataflowEdge({
     targetPosition,
   });
 
-  const label = typeof data?.label === "string" ? data.label : "";
-
-  // ✅ 라벨 겹침 방지: extension에서 id에 넣은 "@@arg#i"를 파싱해 y-offset 적용
-  // ✅ arg index 파싱
-  const m = String(id).match(/@@arg#(\d+)/);
-  const argIndex = m ? Number(m[1]) : 0;
-
-  // ✅ 라벨을 "간선 방향의 법선"으로 옆으로 이동시켜 노드와 겹침 최소화
-  const dx = targetX - sourceX;
-  const dy = targetY - sourceY;
-  const len = Math.hypot(dx, dy) || 1;
-
-  // 법선 단위벡터 (edge에 수직)
-  const nx = -dy / len;
-  const ny = dx / len;
-
-  // 0,1,2,3... -> +,-,+,- 형태로 퍼지게 (라벨이 한쪽으로만 몰리지 않게)
-  const side = argIndex % 2 === 0 ? 1 : -1;
-  const tier = Math.floor(argIndex / 2) + 1;
-
-  // ✅ 간격(픽셀): 라벨/노드 겹침 방지용. 필요 시 16~28 사이로 조정
-  const sep = 20;
-
-  // 최종 오프셋
-  const ox = nx * sep * tier * side;
-  const oy = ny * sep * tier * side;
-
   return (
     <>
-      <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} style={style} />
-      {label ? (
+      <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} />
+      {data?.label ? (
         <EdgeLabelRenderer>
           <div
-            className="cgEdgeLabel cgEdgeLabel--dataflow"
+            className="cgEdgeLabel"
             style={{
-              transform: `translate(-50%, -50%) translate(${labelX + ox}px, ${
-                labelY + oy
-              }px)`,
+              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
             }}
           >
-            {label}
+            {data.label}
           </div>
         </EdgeLabelRenderer>
       ) : null}
@@ -201,92 +159,170 @@ function DataflowEdge({
 
 const edgeTypes = { dataflow: DataflowEdge };
 
-function toReactFlowNodes(graph?: GraphPayload): Array<Node<CodeNodeData>> {
-  if (!graph) return [];
-  const layout = buildLayout(graph.nodes);
-  const posById = new Map(layout.map((p) => [p.id, p.position]));
-
-  return graph.nodes.map((n: GraphNode) => {
-    const pos = posById.get(n.id) ?? { x: 0, y: 0 };
-    const sk = getInterfaceSubkind(n);
-    const kindLabel = String(n.kind) === "interface" && sk ? sk : n.kind;
-    const subtitle = `${kindLabel} · ${shortFile(n.file)}:${
-      n.range.start.line + 1
-    }`;
-
-    const data: CodeNodeData = {
-      title: nodeTitle(n),
-      subtitle,
-      kind: n.kind,
-      subkind: getInterfaceSubkind(n),
-      file: n.file,
-    };
-
-    return {
-      id: n.id,
-      position: pos,
-      type: "code",
-      data,
-    };
-  });
-}
-
 function toReactFlowEdges(graph?: GraphPayload): Array<Edge<DataflowEdgeData>> {
   if (!graph) return [];
 
-  return graph.edges.map((e: GraphEdge) => {
+  return graph.edges.map((e) => {
+    const label = e.label ?? e.kind;
     const isDataflow = e.kind === "dataflow";
 
-    const edge: Edge<DataflowEdgeData> = {
+    return {
       id: e.id,
       source: e.source,
       target: e.target,
-      type: isDataflow ? "dataflow" : "smoothstep",
-      className:
-        e.kind === "constructs"
-          ? "cgEdge cgEdge--constructs"
-          : isDataflow
-          ? "cgEdge cgEdge--dataflow"
-          : "cgEdge cgEdge--calls",
-
-      markerEnd: { type: MarkerType.ArrowClosed, width: 16, height: 16 },
-
-      // ✅ Dataflow 라벨
-      data: isDataflow ? { label: e.label ?? "" } : undefined,
+      type: isDataflow ? "dataflow" : undefined,
+      markerEnd: { type: MarkerType.ArrowClosed, width: 18, height: 18 },
+      // Custom edge renderer reads label from `data.label`.
+      // For non-dataflow edges we still set `label` so the default edge can render it.
+      data: isDataflow ? { label } : undefined,
+      label: isDataflow ? undefined : label,
     };
-
-    return edge;
   });
 }
+/**
+ * Core change:
+ * - file nodes are NOT rendered as normal nodes.
+ * - we synthesize a fileGroup parent per file path, then place all nodes under it
+ *   via parentNode + extent:"parent".
+ */
+function toReactFlowNodes(
+  graph?: GraphPayload,
+): Array<Node<CodeNodeData | FileGroupData>> {
+  if (!graph) return [];
 
-function CanvasFlow({
+  // Reuse existing file-node ids if analyzer already created them.
+  const fileNodeByPath = new Map<string, GraphNode>();
+  for (const n of graph.nodes) {
+    if (n.kind === "file") fileNodeByPath.set(n.file, n);
+  }
+
+  // Group child (non-file) nodes by their owning file path.
+  const byFile = new Map<string, GraphNode[]>();
+  for (const n of graph.nodes) {
+    if (n.kind === "file") continue; // file is rendered as a container only
+    const key = n.file;
+    if (!byFile.has(key)) byFile.set(key, []);
+    byFile.get(key)!.push(n);
+  }
+
+  // Layout parameters
+  const childColW = 260;
+  const childRowH = 140;
+  const pad = 18;
+  const headerH = 52;
+
+  // Compute per-file group bounds
+  const groups = [...byFile.entries()].map(([file, children]) => {
+    const cols = Math.max(
+      1,
+      Math.min(3, Math.ceil(Math.sqrt(children.length))),
+    );
+    const rows = Math.max(1, Math.ceil(children.length / cols));
+    const width = pad * 2 + cols * childColW;
+    const height = headerH + pad * 2 + rows * childRowH;
+    return { file, children, cols, rows, width, height };
+  });
+
+  // Place file groups on a coarse grid
+  const groupGap = 70;
+  const groupCols = Math.max(1, Math.floor(Math.sqrt(groups.length)));
+
+  const rfNodes: Array<Node<CodeNodeData | FileGroupData>> = [];
+
+  for (let gi = 0; gi < groups.length; gi++) {
+    const g = groups[gi];
+
+    const existingFileNode = fileNodeByPath.get(g.file);
+    const parentId = existingFileNode?.id ?? `file:${g.file}`;
+
+    const gx = (gi % groupCols) * (520 + groupGap);
+    const gy = Math.floor(gi / groupCols) * (320 + groupGap);
+
+    // Parent (file container) node
+    rfNodes.push({
+      id: parentId,
+      type: "fileGroup",
+      position: { x: gx, y: gy },
+      data: {
+        title: baseName(g.file),
+        subtitle: dirName(g.file),
+        kind: "file",
+        file: g.file,
+        count: g.children.length,
+      },
+      style: { width: g.width, height: g.height },
+    });
+
+    // Child nodes inside the parent
+    for (let i = 0; i < g.children.length; i++) {
+      const n = g.children[i];
+      const col = i % g.cols;
+      const row = Math.floor(i / g.cols);
+
+      const sk = getInterfaceSubkind(n);
+      const kindLabel = String(n.kind) === "interface" && sk ? sk : n.kind;
+      const subtitle = `${kindLabel} · ${shortFile(n.file)}:${n.range.start.line + 1}`;
+
+      const data: CodeNodeData = {
+        title: nodeTitle(n),
+        subtitle,
+        kind: n.kind,
+        subkind: sk,
+        file: n.file,
+      };
+
+      rfNodes.push({
+        id: n.id,
+        position: {
+          x: pad + col * childColW,
+          y: headerH + pad + row * childRowH,
+        },
+        type: "code",
+        data,
+        parentNode: parentId,
+        extent: "parent",
+      });
+    }
+  }
+
+  return rfNodes;
+}
+
+export function CanvasPane({
   hasData,
   graph,
+  activeFilter,
+  searchQuery,
+  rootNodeId,
+  onClearRoot,
   selectedNodeId,
   onSelectNode,
   onClearSelection,
+  onOpenNode,
   onGenerateFromActive,
   onUseSelectionAsRoot,
   onExpandExternal,
-  onOpenNode,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
 
-  const rfNodes = useMemo<Array<Node<CodeNodeData>>>(
+  const nodes = useMemo<Array<Node<CodeNodeData | FileGroupData>>>(
     () => toReactFlowNodes(graph),
     [graph],
   );
 
-  const rfEdges = useMemo<Array<Edge<DataflowEdgeData>>>(
+  const edges = useMemo<Array<Edge<DataflowEdgeData>>>(
     () => toReactFlowEdges(graph),
     [graph],
   );
 
   const handleNodeClick = (
     _event: ReactMouseEvent,
-    node: Node<CodeNodeData>,
+    node: Node<CodeNodeData | FileGroupData>,
   ) => {
     onSelectNode(node.id);
+
+    // File containers do not map to a code location.
+    if (node.data?.kind === "file") return;
 
     // Open source location for the clicked graph node (if available)
     const gnode = graph?.nodes.find((n) => n.id === node.id);
@@ -306,118 +342,127 @@ function CanvasFlow({
     if (selectedNodeId) {
       const n = inst.getNode(selectedNodeId);
       if (n) {
-        inst.setCenter(n.position.x + 80, n.position.y + 40, {
-          zoom: 1.1,
-          duration: 200,
-        });
+        inst.setCenter(n.position.x, n.position.y, { zoom: 1.2 });
         return;
       }
     }
-
-    inst.fitView({ padding: 0.2, duration: 250 });
+    inst.fitView({ padding: 0.12, duration: 400 });
   };
 
   return (
     <section className="canvas">
-      <div className="canvasGrid" />
-
       {!hasData ? (
         <div className="emptyState">
-          <div className="emptyBadge">
-            <Network className="icon emptyBadgeIcon" />
+          <div className="emptyIcon">
+            <Sigma size={20} />
           </div>
-
-          <div className="emptyText">
-            <h3>No graph data generated</h3>
-            <p>
-              Click Generate to analyze the active file and build initial graph
-              data.
-            </p>
+          <div className="emptyTitle">No graph yet</div>
+          <div className="emptySub">
+            Open a TypeScript/JavaScript file, then click <b>Generate</b>.
           </div>
-
           <div className="emptyActions">
-            <button
-              className="ctaBtn"
-              type="button"
-              onClick={onGenerateFromActive}
-            >
-              <Network className="icon ctaIcon" />
-              <span>Generate from Active File</span>
-            </button>
-
-            <button
-              className="ctaBtn"
-              type="button"
-              onClick={onUseSelectionAsRoot}
-            >
-              <Sigma className="icon ctaIcon" />
-              <span>Use Selection as Root</span>
+            <button className="btnPrimary" onClick={onGenerateFromActive}>
+              Generate from active file
             </button>
           </div>
         </div>
-      ) : null}
-
-      {hasData ? (
+      ) : (
         <div className="canvasFlow">
-          <ReactFlow
-            nodeTypes={nodeTypes}
-            edgeTypes={edgeTypes}
-            nodes={rfNodes}
-            edges={rfEdges}
-            onInit={(inst) => {
-              rfRef.current = inst;
-              inst.fitView({ padding: 0.25, duration: 0 });
-            }}
-            onPaneClick={() => onClearSelection()}
-            onNodeClick={handleNodeClick}
-            fitView
-          >
-            <Background />
-          </ReactFlow>
-        </div>
-      ) : null}
+          <ReactFlowProvider>
+            <ReactFlow
+              nodes={nodes}
+              edges={edges}
+              nodeTypes={nodeTypes}
+              edgeTypes={edgeTypes}
+              onNodeClick={handleNodeClick}
+              onPaneClick={onClearSelection}
+              fitView
+              minZoom={0.1}
+              maxZoom={2.2}
+              proOptions={{ hideAttribution: true }}
+              onInit={(inst) => {
+                rfRef.current = inst;
+                // initial fit for better overview
+                inst.fitView({ padding: 0.12, duration: 250 });
+              }}
+            >
+              <Background gap={24} size={1} />
 
-      <div className="canvasControls">
-        <div className="controlsCard">
-          <button
-            className="controlBtn"
-            type="button"
-            title="Zoom in"
-            onClick={onZoomIn}
-            disabled={!hasData}
-          >
-            <ZoomIn className="icon" />
-          </button>
-          <div className="controlSep" />
-          <button
-            className="controlBtn"
-            type="button"
-            title="Zoom out"
-            onClick={onZoomOut}
-            disabled={!hasData}
-          >
-            <ZoomOut className="icon" />
-          </button>
-          <div className="controlSep" />
-          <button
-            className="controlBtn"
-            type="button"
-            title="Center"
-            onClick={onCenter}
-            disabled={!hasData}
-          >
-            <Crosshair className="icon" />
-          </button>
+              <div className="canvasControls">
+                <button className="iconBtn" onClick={onZoomIn} title="Zoom in">
+                  <ZoomIn size={16} />
+                </button>
+                <button
+                  className="iconBtn"
+                  onClick={onZoomOut}
+                  title="Zoom out"
+                >
+                  <ZoomOut size={16} />
+                </button>
+                <button className="iconBtn" onClick={onCenter} title="Center">
+                  <Crosshair size={16} />
+                </button>
+                <button
+                  className="iconBtn"
+                  onClick={() =>
+                    rfRef.current?.fitView({ padding: 0.12, duration: 400 })
+                  }
+                  title="Fit view"
+                >
+                  <Network size={16} />
+                </button>
+              </div>
+
+              {/* Root bar (kept; currently not applied to layout in this file) */}
+              {rootNodeId ? (
+                <div className="rootBanner">
+                  <div className="rootText">
+                    Root mode: <b>{rootNodeId}</b>
+                  </div>
+                  <button className="btnGhost" onClick={onClearRoot}>
+                    Clear root
+                  </button>
+                </div>
+              ) : null}
+
+              {/* Filter/search props are currently handled upstream or will be applied later */}
+              <div style={{ display: "none" }}>
+                {activeFilter} {searchQuery}
+              </div>
+
+              {/* Selection actions */}
+              {selectedNodeId ? (
+                <div className="selectionBanner">
+                  <button className="btnGhost" onClick={onUseSelectionAsRoot}>
+                    Use selection as root
+                  </button>
+                </div>
+              ) : null}
+            </ReactFlow>
+          </ReactFlowProvider>
         </div>
-      </div>
+      )}
     </section>
   );
 }
 
-export function CanvasPane(props: Props) {
-  return (
-    <ReactFlowProvider>
-      <CanvasFlow {...props} />
-    </ReactFlowProvider>
-  );
-}
+type Props = {
+  hasData: boolean;
+  graph?: GraphPayload;
+
+  activeFilter: ChipKey;
+  searchQuery: string;
+  rootNodeId: string | null;
+  onClearRoot: () => void;
+
+  selectedNodeId: string | null;
+  onSelectNode: (nodeId: string) => void;
+  onClearSelection: () => void;
+
+  onOpenNode?: (node: GraphNode) => void;
+
+  onGenerateFromActive: () => void;
+  onUseSelectionAsRoot: () => void;
+
+  onExpandExternal?: (filePath: string) => void;
+};

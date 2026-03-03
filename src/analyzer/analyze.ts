@@ -502,20 +502,24 @@ function buildActiveFileGraph(
     returnType?: string;
   };
 
-  const getSigParts = (decl: ts.SignatureDeclarationBase): SigParts | undefined => {
+  const getSigParts = (
+    decl: ts.SignatureDeclarationBase,
+  ): SigParts | undefined => {
     try {
-      const sig = checker.getSignatureFromDeclaration(decl as ts.SignatureDeclaration);
+      const sig = checker.getSignatureFromDeclaration(
+        decl as ts.SignatureDeclaration,
+      );
       if (!sig) return undefined;
       const params = sig.getParameters().map((sym) => {
         const name = sym.getName();
         const t = checker.getTypeOfSymbolAtLocation(sym, decl);
         const optional = Boolean(
           (sym.flags & ts.SymbolFlags.Optional) !== 0 ||
-            decl.parameters.some((p) =>
-              ts.isIdentifier(p.name)
-                ? p.name.text === name && (!!p.questionToken || !!p.initializer)
-                : false,
-            ),
+          decl.parameters.some((p) =>
+            ts.isIdentifier(p.name)
+              ? p.name.text === name && (!!p.questionToken || !!p.initializer)
+              : false,
+          ),
         );
         return {
           name,
@@ -589,12 +593,11 @@ function buildActiveFileGraph(
         const varName = d.name.text;
 
         // Only include implementations (body)
-        const hasBody =
-          ts.isArrowFunction(init)
+        const hasBody = ts.isArrowFunction(init)
+          ? !!init.body
+          : ts.isFunctionExpression(init)
             ? !!init.body
-            : ts.isFunctionExpression(init)
-              ? !!init.body
-              : false;
+            : false;
         if (!hasBody) continue;
 
         // NOTE: Use initializer node for stable body-owner switching during walk()
@@ -633,12 +636,11 @@ function buildActiveFileGraph(
               : null;
           if (!memberName) continue;
 
-          const hasBody =
-            ts.isArrowFunction(init)
+          const hasBody = ts.isArrowFunction(init)
+            ? !!init.body
+            : ts.isFunctionExpression(init)
               ? !!init.body
-              : ts.isFunctionExpression(init)
-                ? !!init.body
-                : false;
+              : false;
           if (!hasBody) continue;
 
           // Model as a "method" since it behaves like one (this-bound field)
@@ -652,35 +654,35 @@ function buildActiveFileGraph(
     }
 
     // 4) interfaces / type aliases / enums (modeled under kind="interface" for the Interfaces filter)
-if (ts.isInterfaceDeclaration(node) && node.name) {
-  pushNode(node, "interface" as GraphNodeKind, node.name.text, {
-    subkind: "interface",
-    signature: `interface ${node.name.text}`,
-  });
-}
+    if (ts.isInterfaceDeclaration(node) && node.name) {
+      pushNode(node, "interface" as GraphNodeKind, node.name.text, {
+        subkind: "interface",
+        signature: `interface ${node.name.text}`,
+      });
+    }
 
-if (ts.isTypeAliasDeclaration(node) && node.name) {
-  const name = node.name.text;
-  let rhs = "";
-  try {
-    rhs = node.type.getText(sf);
-  } catch {
-    rhs = "";
-  }
-  const short = rhs && rhs.length > 120 ? rhs.slice(0, 117) + "..." : rhs;
-  pushNode(node, "interface" as GraphNodeKind, name, {
-    subkind: "type",
-    signature: short ? `type ${name} = ${short}` : `type ${name}`,
-  });
-}
+    if (ts.isTypeAliasDeclaration(node) && node.name) {
+      const name = node.name.text;
+      let rhs = "";
+      try {
+        rhs = node.type.getText(sf);
+      } catch {
+        rhs = "";
+      }
+      const short = rhs && rhs.length > 120 ? rhs.slice(0, 117) + "..." : rhs;
+      pushNode(node, "interface" as GraphNodeKind, name, {
+        subkind: "type",
+        signature: short ? `type ${name} = ${short}` : `type ${name}`,
+      });
+    }
 
-if (ts.isEnumDeclaration(node) && node.name) {
-  const name = node.name.text;
-  pushNode(node, "interface" as GraphNodeKind, name, {
-    subkind: "enum",
-    signature: `enum ${name}`,
-  });
-}
+    if (ts.isEnumDeclaration(node) && node.name) {
+      const name = node.name.text;
+      pushNode(node, "interface" as GraphNodeKind, name, {
+        subkind: "enum",
+        signature: `enum ${name}`,
+      });
+    }
 
     ts.forEachChild(node, visitDecls);
   };
@@ -744,33 +746,21 @@ if (ts.isEnumDeclaration(node) && node.name) {
     p: ts.ParameterDeclaration,
     arg: ts.Expression,
   ) => {
-    const paramName = clampText(p.name.getText(sf).replace(/\s+/g, " "), 60);
-    const argText = clampText(arg.getText(sf).replace(/\s+/g, " "), 80);
+    const rawName = p.name.getText(sf).replace(/\s+/g, " ").trim();
+    const paramName = clampText(
+      p.dotDotDotToken ? `...${rawName}` : rawName,
+      60,
+    );
 
-    let paramTypeStr = "";
-    try {
-      if (p.type) {
-        paramTypeStr = checker.typeToString(
-          checker.getTypeFromTypeNode(p.type),
-        );
-      } else {
-        paramTypeStr = checker.typeToString(checker.getTypeAtLocation(p));
-      }
-    } catch {
-      paramTypeStr = "";
-    }
+    // Keep the argument preview short and readable.
+    const argText = clampText(arg.getText(sf).replace(/\s+/g, " ").trim(), 80);
 
-    let argTypeStr = "";
-    try {
-      argTypeStr = checker.typeToString(checker.getTypeAtLocation(arg));
-    } catch {
-      argTypeStr = "";
-    }
-
-    const left = paramTypeStr ? `${paramName}: ${paramTypeStr}` : paramName;
-    const right = argTypeStr ? `${argText}: ${argTypeStr}` : argText;
-
-    return `${left} ← ${right}`;
+    // Desired format examples:
+    //   a ← 2
+    //   pad ← 4
+    //   xs ← ...nums
+    //   { id, name } ← u
+    return `${paramName} ← ${argText}`;
   };
 
   const addDataflowEdgesFromSignature = (
@@ -901,7 +891,10 @@ if (ts.isEnumDeclaration(node) && node.name) {
     }
 
     // owner switches for const foo = () => {} / function() {} and class field initializers
-    if ((ts.isArrowFunction(node) || ts.isFunctionExpression(node)) && node.body) {
+    if (
+      (ts.isArrowFunction(node) || ts.isFunctionExpression(node)) &&
+      node.body
+    ) {
       const pos = node.getStart(sf, false);
       const id = idByDeclPos.get(pos);
       const nextOwner = id ?? ownerId;
