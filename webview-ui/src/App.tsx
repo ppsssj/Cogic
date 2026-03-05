@@ -15,6 +15,7 @@ import {
   type ExtToWebviewMessage,
   type GraphNode,
   type GraphPayload,
+  type GraphTraceEvent,
 } from "./lib/vscode";
 import "./styles/index.css";
 
@@ -52,6 +53,24 @@ function mergeGraph(
   for (const e of next.edges) edgeById.set(e.id, e);
 
   return { nodes: [...nodeById.values()], edges: [...edgeById.values()] };
+}
+
+function graphFromTraceEvent(e: GraphTraceEvent): GraphPayload {
+  if (e.type === "node") return { nodes: [e.node], edges: [] };
+  return { nodes: [], edges: [e.edge] };
+}
+
+function buildGraphFromTrace(
+  events: GraphTraceEvent[],
+  steps: number,
+): GraphPayload | undefined {
+  if (!events.length || steps <= 0) return undefined;
+  const clamped = Math.min(events.length, Math.max(0, steps));
+  let g: GraphPayload | undefined = undefined;
+  for (let i = 0; i < clamped; i++) {
+    g = mergeGraph(g, graphFromTraceEvent(events[i]));
+  }
+  return g;
 }
 
 type Pos = { line: number; character: number };
@@ -137,6 +156,9 @@ export default function App() {
 
   const [activeChip, setActiveChip] = useState<ChipKey>("functions");
   const [searchQuery, setSearchQuery] = useState("");
+  const [traceMode, setTraceMode] = useState(false);
+  const [traceEvents, setTraceEvents] = useState<GraphTraceEvent[] | null>(null);
+  const [traceCursor, setTraceCursor] = useState(0);
 
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
 
@@ -231,9 +253,25 @@ export default function App() {
         setAnalysis(msg.payload);
 
         const g = msg.payload?.graph;
-        if (g) setGraphState((prev) => mergeGraph(prev, g));
+        const trace = msg.payload?.trace;
+        if (trace && trace.length > 0) {
+          const maxEvents = 800;
+          const events = trace.slice(0, maxEvents);
+          setTraceEvents(events);
+          setTraceCursor(0);
+          setGraphState(undefined);
+          setSelectedNodeId(null);
+          setRootNodeId(null);
+          showToast("info", `Trace ready: 0 / ${events.length}`, 1500);
+        } else if (g) {
+          setTraceEvents(null);
+          setTraceCursor(0);
+          setGraphState((prev) => mergeGraph(prev, g));
+        }
 
         if (!msg.payload) {
+          setTraceEvents(null);
+          setTraceCursor(0);
           setGraphState(undefined);
           expandedFilesRef.current.clear();
           setSelectedNodeId(null);
@@ -325,10 +363,38 @@ export default function App() {
   const projectName = activeFile?.fileName ? activeFile.fileName : "Active File";
 
   const resetGraph = () => {
+    setTraceEvents(null);
+    setTraceCursor(0);
     setGraphState(undefined);
     expandedFilesRef.current.clear();
     setSelectedNodeId(null);
     setRootNodeId(null);
+  };
+
+  const stepTraceTo = (nextCursor: number) => {
+    if (!traceEvents || traceEvents.length === 0) return;
+    const c = Math.max(0, Math.min(traceEvents.length, nextCursor));
+    setTraceCursor(c);
+    setGraphState(buildGraphFromTrace(traceEvents, c));
+  };
+
+  const stepTracePrev = () => stepTraceTo(traceCursor - 1);
+  const stepTraceNext = () => stepTraceTo(traceCursor + 1);
+  const toggleTraceMode = () => {
+    setTraceMode((prev) => {
+      const next = !prev;
+      if (next) {
+        resetGraph();
+        vscode.postMessage({
+          type: "analyzeActiveFile",
+          payload: { traceMode: true },
+        });
+      } else {
+        setTraceEvents(null);
+        setTraceCursor(0);
+      }
+      return next;
+    });
   };
 
   const expandExternalFile = (filePath: string) => {
@@ -400,8 +466,13 @@ export default function App() {
         }}
         onGenerate={() => {
           resetGraph();
-          vscode.postMessage({ type: "analyzeActiveFile" });
+          vscode.postMessage({
+            type: "analyzeActiveFile",
+            payload: { traceMode },
+          });
         }}
+        traceMode={traceMode}
+        onToggleTraceMode={toggleTraceMode}
         onDownloadFlow={downloadFlow}
         downloadEnabled={downloadEnabled}
         downloadStatus={downloadStatus}
@@ -433,7 +504,10 @@ export default function App() {
             });
           }}
           onGenerateFromActive={() =>
-            vscode.postMessage({ type: "analyzeActiveFile" })
+            vscode.postMessage({
+              type: "analyzeActiveFile",
+              payload: { traceMode },
+            })
           }
           onUseSelectionAsRoot={() => {
             setPendingUseSelectionAsRoot(true);
@@ -441,6 +515,11 @@ export default function App() {
           }}
           onClearRoot={() => setRootNodeId(null)}
           onExpandExternal={expandExternalFile}
+          traceVisible={Boolean(traceEvents && traceEvents.length > 0)}
+          traceCursor={traceCursor}
+          traceTotal={traceEvents?.length ?? 0}
+          onTracePrev={stepTracePrev}
+          onTraceNext={stepTraceNext}
         />
 
         {inspectorOpen ? (

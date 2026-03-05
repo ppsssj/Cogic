@@ -8,6 +8,7 @@ import type {
   GraphNode,
   GraphNodeKind,
   GraphPayload,
+  GraphTraceEvent,
 } from "../shared/protocol";
 
 /**
@@ -30,6 +31,7 @@ export function analyzeTypeScriptWithTypes(args: {
   }>;
   calls: Array<AnalysisCallV2>;
   graph: GraphPayload;
+  trace: GraphTraceEvent[];
   meta: { mode: "single-file" };
 } {
   const { code, fileName, languageId } = args;
@@ -88,6 +90,7 @@ export function analyzeTypeScriptWithTypes(args: {
       exports: [],
       calls: [],
       graph: { nodes: [], edges: [] },
+      trace: [],
       meta: { mode: "single-file" },
     };
   }
@@ -97,9 +100,9 @@ export function analyzeTypeScriptWithTypes(args: {
   const calls = extractCallsResolved(sf, checker);
 
   // single-file graph: external nodes still possible (but likely null since program has one file)
-  const graph = buildActiveFileGraph(sf, checker);
+  const { graph, trace } = buildActiveFileGraph(sf, checker);
 
-  return { imports, exports, calls, graph, meta: { mode: "single-file" } };
+  return { imports, exports, calls, graph, trace, meta: { mode: "single-file" } };
 }
 
 /**
@@ -124,6 +127,7 @@ export function analyzeWithWorkspace(args: {
   }>;
   calls: Array<AnalysisCallV2>;
   graph: GraphPayload;
+  trace: GraphTraceEvent[];
   meta: {
     mode: "workspace";
     rootFiles: number;
@@ -143,6 +147,7 @@ export function analyzeWithWorkspace(args: {
     });
     return {
       ...r,
+      trace: r.trace,
       meta: { mode: "workspace", rootFiles: 1, usedTsconfig: false },
     };
   }
@@ -224,13 +229,14 @@ export function analyzeWithWorkspace(args: {
   const calls = extractCallsResolved(sf, checker);
 
   // workspace graph (external nodes enabled)
-  const graph = buildActiveFileGraph(sf, checker);
+  const { graph, trace } = buildActiveFileGraph(sf, checker);
 
   return {
     imports,
     exports,
     calls,
     graph,
+    trace,
     meta: {
       mode: "workspace",
       rootFiles: rootNames.length,
@@ -464,9 +470,10 @@ function extractExports(sf: ts.SourceFile): Array<{
 function buildActiveFileGraph(
   sf: ts.SourceFile,
   checker: ts.TypeChecker,
-): GraphPayload {
+): { graph: GraphPayload; trace: GraphTraceEvent[] } {
   const nodes: GraphNode[] = [];
   const edges: GraphEdge[] = [];
+  const trace: GraphTraceEvent[] = [];
 
   // declStartPos -> nodeId (only for active file decls)
   const idByDeclPos = new Map<number, string>();
@@ -496,6 +503,16 @@ function buildActiveFileGraph(
     name: fileNameBase,
     file: sf.fileName,
     range: sourceFileRange(),
+  });
+  trace.push({
+    type: "node",
+    node: {
+      id: fileNodeId,
+      kind: "file",
+      name: fileNameBase,
+      file: sf.fileName,
+      range: sourceFileRange(),
+    },
   });
 
   type SigParts = {
@@ -570,6 +587,19 @@ function buildActiveFileGraph(
       signature,
       sig: sigParts,
       ...(extra ?? {}),
+    });
+    trace.push({
+      type: "node",
+      node: {
+        id,
+        kind,
+        name,
+        file: loc.fileName,
+        range: loc.range,
+        signature,
+        sig: sigParts,
+        ...(extra ?? {}),
+      },
     });
   };
 
@@ -717,6 +747,17 @@ function buildActiveFileGraph(
       range: loc.range,
       signature,
     });
+    trace.push({
+      type: "node",
+      node: {
+        id,
+        kind: "external",
+        name: displayName,
+        file: loc.fileName,
+        range: loc.range,
+        signature,
+      },
+    });
     return id;
   };
 
@@ -738,6 +779,16 @@ function buildActiveFileGraph(
       source: srcId,
       target: tgtId,
       label,
+    });
+    trace.push({
+      type: "edge",
+      edge: {
+        id: key,
+        kind: edgeKind,
+        source: srcId,
+        target: tgtId,
+        label,
+      },
     });
   };
 
@@ -1045,7 +1096,7 @@ function buildActiveFileGraph(
 
   walk(sf, fileNodeId);
 
-  return { nodes, edges };
+  return { graph: { nodes, edges }, trace };
 }
 
 /** calls: normalize + resolve declaration location (cross-file enabled by Program) */

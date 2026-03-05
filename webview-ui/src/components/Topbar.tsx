@@ -16,6 +16,8 @@ type Props = {
   projectName: string;
   onRefresh: () => void;
   onGenerate: () => void;
+  traceMode: boolean;
+  onToggleTraceMode: () => void;
 
   /** Flow 다운로드 */
   onDownloadFlow: () => void;
@@ -34,6 +36,8 @@ export function Topbar({
   projectName,
   onRefresh,
   onGenerate,
+  traceMode,
+  onToggleTraceMode,
   onDownloadFlow,
   downloadEnabled,
   downloadStatus,
@@ -126,6 +130,15 @@ export function Topbar({
         </button>
 
         <div className="divider" />
+
+        <button
+          className={["iconBtn", traceMode ? "iconBtn--traceOn" : ""].join(" ")}
+          title="Trace Mode (generate step replay)"
+          type="button"
+          onClick={onToggleTraceMode}
+        >
+          Trace
+        </button>
 
         <button className="primaryBtn" type="button" onClick={onGenerate}>
           <Play className="icon primaryBtnIcon" />

@@ -1,7 +1,7 @@
 export type WebviewToExtMessage =
   | { type: "requestActiveFile" }
   | { type: "requestSelection" }
-  | { type: "analyzeActiveFile" }
+  | { type: "analyzeActiveFile"; payload?: { traceMode?: boolean } }
   | { type: "analyzeWorkspace" }
   | { type: "expandNode"; payload: { filePath: string } }
   | {
@@ -75,6 +75,10 @@ export type GraphPayload = {
   edges: GraphEdge[];
 };
 
+export type GraphTraceEvent =
+  | { type: "node"; node: GraphNode }
+  | { type: "edge"; edge: GraphEdge };
+
 export type AnalyzerMeta =
   | {
       mode: "single";
@@ -132,6 +136,7 @@ export type ExtToWebviewMessage =
         calls: Array<AnalysisCallV1 | AnalysisCallV2>;
 
         graph?: GraphPayload;
+        trace?: GraphTraceEvent[];
 
         meta?: AnalyzerMeta;
       } | null;

@@ -155,6 +155,13 @@ body.vscode-high-contrast .logoDark {
   opacity: 0.85;
 }
 
+.iconBtn--traceOn {
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(56, 189, 248, 0.15);
+  color: rgba(186, 230, 253, 0.95);
+  font-weight: 800;
+}
+
 .spin {
   animation: cgSpin 0.9s linear infinite;
 }

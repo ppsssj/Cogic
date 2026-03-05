@@ -49,7 +49,8 @@ export class CodeGraphPanel {
         try {
           if (msg.type === "requestActiveFile") return this.postActiveFile();
           if (msg.type === "requestSelection") return this.postSelection();
-          if (msg.type === "analyzeActiveFile") return this.postAnalysis(); // workspace-aware
+          if (msg.type === "analyzeActiveFile")
+            return this.postAnalysis(Boolean(msg.payload?.traceMode)); // workspace-aware
           if (msg.type === "analyzeWorkspace") return this.postAnalysis(); // explicit
           if (msg.type === "expandNode")
             return this.postAnalysisForFile(msg.payload.filePath);
@@ -216,7 +217,7 @@ export class CodeGraphPanel {
     this.panel.webview.postMessage(message);
   }
 
-  private async postAnalysis() {
+  private async postAnalysis(traceMode = false) {
     const editor = this.getEditor();
     if (!editor) {
       this.panel.webview.postMessage({
@@ -257,6 +258,7 @@ export class CodeGraphPanel {
       exports: result.exports,
       calls: result.calls,
       graph: result.graph,
+      trace: traceMode ? result.trace : undefined,
       meta: result.meta,
     };
 

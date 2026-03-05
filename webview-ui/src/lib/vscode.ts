@@ -11,6 +11,7 @@ export type {
   ExtToWebviewMessage,
   GraphNode,
   GraphPayload,
+  GraphTraceEvent,
 } from "../../../src/shared/protocol";
 
 import type {

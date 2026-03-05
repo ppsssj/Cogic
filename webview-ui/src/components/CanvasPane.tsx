@@ -621,6 +621,11 @@ export function CanvasPane({
   onGenerateFromActive,
   onUseSelectionAsRoot,
   onExpandExternal,
+  traceVisible,
+  traceCursor,
+  traceTotal,
+  onTracePrev,
+  onTraceNext,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
 
@@ -758,6 +763,48 @@ export function CanvasPane({
                 </div>
               ) : null}
 
+              {traceVisible ? (
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    bottom: 14,
+                    transform: "translateX(-50%)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "8px 10px",
+                    borderRadius: 12,
+                    border: "1px solid rgba(56,189,248,0.35)",
+                    background: "rgba(8,18,38,0.82)",
+                    zIndex: 7,
+                  }}
+                >
+                  <button
+                    className="btnGhost"
+                    onClick={onTracePrev}
+                    disabled={traceCursor <= 0}
+                    style={{ padding: "6px 10px", opacity: traceCursor <= 0 ? 0.45 : 1 }}
+                  >
+                    {"<-"}
+                  </button>
+                  <div className="mono" style={{ fontSize: 12, minWidth: 90, textAlign: "center" }}>
+                    {traceCursor} / {traceTotal}
+                  </div>
+                  <button
+                    className="btnGhost"
+                    onClick={onTraceNext}
+                    disabled={traceCursor >= traceTotal}
+                    style={{
+                      padding: "6px 10px",
+                      opacity: traceCursor >= traceTotal ? 0.45 : 1,
+                    }}
+                  >
+                    {"->"}
+                  </button>
+                </div>
+              ) : null}
+
               <div
                 style={{
                   position: "absolute",
@@ -801,4 +848,9 @@ type Props = {
   onUseSelectionAsRoot: () => void;
 
   onExpandExternal?: (filePath: string) => void;
+  traceVisible: boolean;
+  traceCursor: number;
+  traceTotal: number;
+  onTracePrev: () => void;
+  onTraceNext: () => void;
 };
