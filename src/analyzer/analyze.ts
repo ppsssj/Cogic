@@ -470,6 +470,7 @@ function buildActiveFileGraph(
 
   // declStartPos -> nodeId (only for active file decls)
   const idByDeclPos = new Map<number, string>();
+  const ownerDeclById = new Map<string, ts.Node>();
 
   // IMPORTANT: Node IDs must be stable. Never derive IDs from display names.
   // Use only kind + filePath + position (or range) so merges/expansions don't create duplicates.
@@ -543,6 +544,7 @@ function buildActiveFileGraph(
     const loc = declLocation(decl);
     const id = mkId(kind, loc.fileName, loc.pos);
     idByDeclPos.set(loc.pos, id);
+    ownerDeclById.set(id, decl as ts.Node);
 
     let signature: string | undefined = undefined;
     let sigParts: SigParts | undefined = undefined;
@@ -739,6 +741,105 @@ function buildActiveFileGraph(
     });
   };
 
+  const isDeclarationName = (n: ts.Identifier): boolean => {
+    const p = n.parent;
+    if (!p) return false;
+    if (
+      (ts.isFunctionDeclaration(p) ||
+        ts.isClassDeclaration(p) ||
+        ts.isInterfaceDeclaration(p) ||
+        ts.isTypeAliasDeclaration(p) ||
+        ts.isEnumDeclaration(p) ||
+        ts.isMethodDeclaration(p) ||
+        ts.isPropertyDeclaration(p) ||
+        ts.isParameter(p) ||
+        ts.isVariableDeclaration(p)) &&
+      p.name === n
+    ) {
+      return true;
+    }
+    if (
+      (ts.isImportSpecifier(p) ||
+        ts.isImportClause(p) ||
+        ts.isNamespaceImport(p) ||
+        ts.isBindingElement(p)) &&
+      p.name === n
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const isNodeBoundaryForOwner = (node: ts.Node, ownerRoot: ts.Node): boolean =>
+    node !== ownerRoot &&
+    (ts.isFunctionDeclaration(node) ||
+      ts.isMethodDeclaration(node) ||
+      ts.isClassDeclaration(node) ||
+      ts.isInterfaceDeclaration(node) ||
+      ts.isTypeAliasDeclaration(node) ||
+      ts.isEnumDeclaration(node) ||
+      ts.isArrowFunction(node) ||
+      ts.isFunctionExpression(node));
+
+  const addReferenceEdgesForOwner = (ownerId: string) => {
+    const ownerRoot = ownerDeclById.get(ownerId);
+    if (!ownerRoot) return;
+
+    const visit = (node: ts.Node) => {
+      if (isNodeBoundaryForOwner(node, ownerRoot)) return;
+
+      if (ts.isIdentifier(node)) {
+        if (isDeclarationName(node)) {
+          ts.forEachChild(node, visit);
+          return;
+        }
+
+        // property access right side (obj.foo) tends to be noisy for "reference" edges
+        if (ts.isPropertyAccessExpression(node.parent) && node.parent.name === node) {
+          ts.forEachChild(node, visit);
+          return;
+        }
+        if (ts.isCallExpression(node.parent) && node.parent.expression === node) {
+          ts.forEachChild(node, visit);
+          return;
+        }
+        if (ts.isNewExpression(node.parent) && node.parent.expression === node) {
+          ts.forEachChild(node, visit);
+          return;
+        }
+
+        try {
+          const sym = checker.getSymbolAtLocation(node);
+          const decl = sym ? pickBestDeclaration(sym, checker) : undefined;
+          if (!decl) {
+            ts.forEachChild(node, visit);
+            return;
+          }
+
+          const loc = declLocation(decl);
+          if (loc.fileName !== sf.fileName || isTypeScriptLibFile(loc.fileName)) {
+            ts.forEachChild(node, visit);
+            return;
+          }
+
+          const targetId = idByDeclPos.get(loc.pos);
+          if (!targetId || targetId === ownerId) {
+            ts.forEachChild(node, visit);
+            return;
+          }
+
+          addEdge("references", ownerId, targetId);
+        } catch {
+          // ignore lookup failures
+        }
+      }
+
+      ts.forEachChild(node, visit);
+    };
+
+    visit(ownerRoot);
+  };
+
   const clampText = (s: string, max = 80) =>
     s.length <= max ? s : `${s.slice(0, max - 1)}…`;
 
@@ -794,6 +895,7 @@ function buildActiveFileGraph(
       if (!decl) return null;
 
       const loc = declLocation(decl);
+      if (isTypeScriptLibFile(loc.fileName)) return null;
 
       let signature: string | undefined = undefined;
       try {
@@ -843,6 +945,7 @@ function buildActiveFileGraph(
       if (!decl) return null;
 
       const loc = declLocation(decl);
+      if (isTypeScriptLibFile(loc.fileName)) return null;
 
       let sigDecl: ts.SignatureDeclaration | undefined = undefined;
       try {
@@ -862,6 +965,11 @@ function buildActiveFileGraph(
       return null;
     }
   };
+
+  // same-file declaration references: class<->class, class->interface, function->function, etc.
+  for (const ownerId of ownerDeclById.keys()) {
+    addReferenceEdgesForOwner(ownerId);
+  }
 
   // walk bodies with owner tracking
   const walk = (node: ts.Node, ownerId: string) => {
@@ -967,9 +1075,11 @@ function extractCallsResolved(
 
   const visit = (node: ts.Node) => {
     if (ts.isCallExpression(node)) {
-      bump(resolveCallToDeclaration(node, sf, checker));
+      const resolved = resolveCallToDeclaration(node, sf, checker);
+      if (resolved) bump(resolved);
     } else if (ts.isNewExpression(node)) {
-      bump(resolveNewToDeclaration(node, sf, checker));
+      const resolved = resolveNewToDeclaration(node, sf, checker);
+      if (resolved) bump(resolved);
     }
     ts.forEachChild(node, visit);
   };
@@ -986,7 +1096,7 @@ function resolveCallToDeclaration(
   call: ts.CallExpression,
   sf: ts.SourceFile,
   checker: ts.TypeChecker,
-): AnalysisCallV2 & { declPos: number | null } {
+): (AnalysisCallV2 & { declPos: number | null }) | null {
   const calleeName = normalizeCalleeName(call.expression, sf, checker);
 
   const sig = checker.getResolvedSignature(call);
@@ -997,6 +1107,7 @@ function resolveCallToDeclaration(
 
   const decl = declFromSig ?? declFromSym ?? null;
   const loc = decl ? declLocation(decl) : null;
+  if (loc && isTypeScriptLibFile(loc.fileName)) return null;
 
   const isExternal = loc ? isExternalFile(loc.fileName) : false;
 
@@ -1014,7 +1125,7 @@ function resolveNewToDeclaration(
   node: ts.NewExpression,
   sf: ts.SourceFile,
   checker: ts.TypeChecker,
-): AnalysisCallV2 & { declPos: number | null } {
+): (AnalysisCallV2 & { declPos: number | null }) | null {
   const ctorExpr = node.expression;
   const calleeName = `new ${normalizeCtorName(ctorExpr, sf, checker)}`;
 
@@ -1027,6 +1138,7 @@ function resolveNewToDeclaration(
 
   const decl = declFromSig ?? declFromSym ?? null;
   const loc = decl ? declLocation(decl) : null;
+  if (loc && isTypeScriptLibFile(loc.fileName)) return null;
 
   const isExternal = loc ? isExternalFile(loc.fileName) : false;
 
@@ -1145,6 +1257,11 @@ function declLocation(decl: ts.Declaration): {
 function isExternalFile(fileName: string): boolean {
   const norm = fileName.replace(/\\/g, "/");
   return norm.includes("/node_modules/") || norm.includes("/typescript/lib/");
+}
+
+function isTypeScriptLibFile(fileName: string): boolean {
+  const norm = fileName.replace(/\\/g, "/");
+  return norm.includes("/typescript/lib/");
 }
 export function analyzeWorkspaceWithTypes(args: {
   code: string; // active editor text

@@ -82,9 +82,32 @@ function CodeNode({
 
   return (
     <div className={["cgNode", selected ? "cgNode--selected" : ""].join(" ")}>
-      {/* Handles */}
-      <Handle type="target" position={Position.Left} className="cgHandle" />
-      <Handle type="source" position={Position.Right} className="cgHandle" />
+      {/* Structural edges (calls/constructs/references) */}
+      <Handle
+        id="in-control"
+        type="target"
+        position={Position.Left}
+        className="cgHandle"
+      />
+      <Handle
+        id="out-control"
+        type="source"
+        position={Position.Right}
+        className="cgHandle"
+      />
+      {/* Dataflow edges use separate lanes to reduce overlap */}
+      <Handle
+        id="in-dataflow"
+        type="target"
+        position={Position.Top}
+        className="cgHandle"
+      />
+      <Handle
+        id="out-dataflow"
+        type="source"
+        position={Position.Bottom}
+        className="cgHandle"
+      />
 
       <div className="cgNodeTop">
         <div className="cgNodeTitle">{data.title}</div>
@@ -104,10 +127,6 @@ function FileGroupNode({
 }) {
   return (
     <div className={["cgGroup", selected ? "cgGroup--selected" : ""].join(" ")}>
-      {/* ✅ Add handles so edges from/to file-group (top-level owner) can render */}
-      <Handle type="target" position={Position.Left} className="cgHandle" />
-      <Handle type="source" position={Position.Right} className="cgHandle" />
-
       <div className="cgGroupHeader">
         <div className="cgGroupTitle">{data.title}</div>
         <div className="cgGroupMeta">
@@ -119,7 +138,12 @@ function FileGroupNode({
   );
 }
 const nodeTypes = { code: CodeNode, fileGroup: FileGroupNode };
-type DataflowEdgeData = { label?: string };
+type DataflowEdgeData = {
+  label?: string;
+  highlighted?: boolean;
+  muted?: boolean;
+  lane?: number;
+};
 
 function DataflowEdge({
   id,
@@ -130,26 +154,38 @@ function DataflowEdge({
   sourcePosition,
   targetPosition,
   markerEnd,
+  style,
   data,
 }: EdgeProps<DataflowEdgeData>) {
+  const lane = data?.lane ?? 0;
+  const laneOffset = 30 + Math.abs(lane) * 22;
+  const laneShiftY = lane * 18;
+  const labelShiftY = lane * 28;
+  const sourceYLaned = sourceY + laneShiftY;
+  const targetYLaned = targetY + laneShiftY;
+
   const [edgePath, labelX, labelY] = getSmoothStepPath({
     sourceX,
-    sourceY,
+    sourceY: sourceYLaned,
     targetX,
-    targetY,
+    targetY: targetYLaned,
     sourcePosition,
     targetPosition,
+    borderRadius: 18,
+    offset: laneOffset,
   });
 
   return (
     <>
-      <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} />
+      <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} style={style} />
       {data?.label ? (
         <EdgeLabelRenderer>
           <div
             className="cgEdgeLabel"
             style={{
-              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
+              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY + labelShiftY}px)`,
+              opacity: data.muted ? 0.35 : 1,
+              borderColor: data.highlighted ? "rgba(56,189,248,0.75)" : undefined,
             }}
           >
             {data.label}
@@ -162,24 +198,291 @@ function DataflowEdge({
 
 const edgeTypes = { dataflow: DataflowEdge };
 
-function toReactFlowEdges(graph?: GraphPayload): Array<Edge<DataflowEdgeData>> {
+function toReactFlowEdges(
+  graph?: GraphPayload,
+  selectedNodeId?: string | null,
+): Array<Edge<DataflowEdgeData>> {
   if (!graph) return [];
 
-  return graph.edges.map((e) => {
+  const nodeById = new Map(graph.nodes.map((n) => [n.id, n]));
+  const visibleEdges = graph.edges.filter((e) => {
+    const src = nodeById.get(e.source);
+    const tgt = nodeById.get(e.target);
+    if (!src || !tgt) return true;
+
+    // File container edges are noisy and often visually occluded by the group frame.
+    // Keep file node as a visual header only.
+    if (src.kind === "file" || tgt.kind === "file") return false;
+    return true;
+  });
+
+  const dataflowCountByPair = new Map<string, number>();
+  for (const e of visibleEdges) {
+    if (e.kind !== "dataflow") continue;
+    const key = `${e.source}=>${e.target}`;
+    dataflowCountByPair.set(key, (dataflowCountByPair.get(key) ?? 0) + 1);
+  }
+  const dataflowSeenByPair = new Map<string, number>();
+
+  return visibleEdges.map((e) => {
     const label = e.label ?? e.kind;
     const isDataflow = e.kind === "dataflow";
+
+    const isSelectedFlow = Boolean(
+      selectedNodeId &&
+        (e.source === selectedNodeId || e.target === selectedNodeId),
+    );
+    const muted = Boolean(selectedNodeId && !isSelectedFlow && isDataflow);
+    const showDataflowLabel = Boolean(selectedNodeId && isSelectedFlow);
+
+    let lane = 0;
+    if (isDataflow) {
+      const key = `${e.source}=>${e.target}`;
+      const seen = dataflowSeenByPair.get(key) ?? 0;
+      const total = dataflowCountByPair.get(key) ?? 1;
+      dataflowSeenByPair.set(key, seen + 1);
+      if (total % 2 === 1) {
+        lane = seen - Math.floor(total / 2);
+      } else {
+        // even count: avoid lane 0 so parallel edges don't sit on top of each other
+        const half = total / 2;
+        lane = seen < half ? seen - half : seen - half + 1;
+      }
+    }
 
     return {
       id: e.id,
       source: e.source,
       target: e.target,
       type: isDataflow ? "dataflow" : undefined, // ✅ dataflow만 커스텀 엣지 사용
-      markerEnd: { type: MarkerType.ArrowClosed, width: 18, height: 18 },
-      data: isDataflow ? { label } : undefined, // ✅ dataflow 라벨은 data.label로
-      label: isDataflow ? undefined : label, // ✅ 그 외 엣지는 기본 label로
+      sourceHandle: isDataflow ? "out-dataflow" : "out-control",
+      targetHandle: isDataflow ? "in-dataflow" : "in-control",
+      markerEnd: isDataflow
+        ? {
+            type: MarkerType.ArrowClosed,
+            width: 18,
+            height: 18,
+            color: isSelectedFlow ? "#38bdf8" : "#60a5fa",
+          }
+        : { type: MarkerType.ArrowClosed, width: 18, height: 18 },
+      style: isDataflow
+        ? {
+            stroke: isSelectedFlow ? "#38bdf8" : "#60a5fa",
+            strokeWidth: isSelectedFlow ? 2.8 : 1.8,
+            strokeDasharray: "8 6",
+            opacity: muted ? 0.2 : 0.92,
+          }
+        : undefined,
+      animated: isDataflow && !muted,
+      data: isDataflow
+        ? {
+            label: showDataflowLabel ? label : undefined,
+            highlighted: isSelectedFlow,
+            muted,
+            lane,
+          }
+        : undefined, // ✅ dataflow 라벨은 data.label로
+      label: undefined, // keep non-dataflow labels hidden to prevent clutter
     };
   });
 }
+
+type Positioned = { x: number; y: number };
+
+function layoutChildrenByFlow(
+  children: GraphNode[],
+  graph: GraphPayload,
+  opts: { pad: number; headerH: number; colW: number; rowH: number },
+): { positions: Map<string, Positioned>; width: number; height: number } {
+  const { pad, headerH, colW, rowH } = opts;
+  const positions = new Map<string, Positioned>();
+  const nodeW = 210;
+  const nodeH = 72;
+
+  if (children.length === 0) {
+    return { positions, width: pad * 2 + colW, height: headerH + pad * 2 + rowH };
+  }
+
+  const childIds = new Set(children.map((n) => n.id));
+  const childOrder = [...children].sort((a, b) => {
+    if (a.range.start.line !== b.range.start.line) {
+      return a.range.start.line - b.range.start.line;
+    }
+    return a.name.localeCompare(b.name);
+  });
+  const orderIndex = new Map(childOrder.map((n, i) => [n.id, i]));
+
+  // Structural edges only: calls/constructs shape the placement.
+  const structural = graph.edges.filter(
+    (e) =>
+      e.kind !== "dataflow" && childIds.has(e.source) && childIds.has(e.target),
+  );
+
+  if (structural.length === 0) {
+    const cols = Math.max(1, Math.min(3, Math.ceil(Math.sqrt(children.length))));
+    for (let i = 0; i < childOrder.length; i++) {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      positions.set(childOrder[i].id, {
+        x: pad + col * colW,
+        y: headerH + pad + row * rowH,
+      });
+    }
+    const rows = Math.max(1, Math.ceil(children.length / cols));
+    return {
+      positions,
+      width: pad * 2 + cols * colW,
+      height: headerH + pad * 2 + rows * rowH,
+    };
+  }
+
+  const out = new Map<string, Set<string>>();
+  const indeg = new Map<string, number>();
+  const preds = new Map<string, string[]>();
+  for (const n of childOrder) {
+    out.set(n.id, new Set());
+    indeg.set(n.id, 0);
+    preds.set(n.id, []);
+  }
+
+  for (const e of structural) {
+    if (e.source === e.target) continue;
+    const set = out.get(e.source);
+    if (!set || set.has(e.target)) continue;
+    set.add(e.target);
+    indeg.set(e.target, (indeg.get(e.target) ?? 0) + 1);
+    preds.get(e.target)?.push(e.source);
+  }
+
+  const level = new Map<string, number>();
+  const ready = childOrder
+    .filter((n) => (indeg.get(n.id) ?? 0) === 0)
+    .map((n) => n.id);
+  const seen = new Set<string>();
+
+  while (ready.length) {
+    ready.sort((a, b) => (orderIndex.get(a) ?? 0) - (orderIndex.get(b) ?? 0));
+    const id = ready.shift()!;
+    if (seen.has(id)) continue;
+    seen.add(id);
+
+    const srcLevel = level.get(id) ?? 0;
+    const next = out.get(id);
+    if (!next) continue;
+    for (const t of next) {
+      const prev = level.get(t) ?? 0;
+      if (srcLevel + 1 > prev) level.set(t, srcLevel + 1);
+      indeg.set(t, (indeg.get(t) ?? 0) - 1);
+      if ((indeg.get(t) ?? 0) === 0) ready.push(t);
+    }
+  }
+
+  // Cycle fallback: keep unresolved nodes in level 0.
+  for (const n of childOrder) {
+    if (!level.has(n.id)) level.set(n.id, 0);
+  }
+
+  const byLevel = new Map<number, string[]>();
+  for (const n of childOrder) {
+    const lv = level.get(n.id) ?? 0;
+    if (!byLevel.has(lv)) byLevel.set(lv, []);
+    byLevel.get(lv)!.push(n.id);
+  }
+
+  const maxLevel = Math.max(...byLevel.keys());
+  const rankInLevel = new Map<string, number>();
+  for (let lv = 0; lv <= maxLevel; lv++) {
+    const ids = byLevel.get(lv) ?? [];
+    ids.sort((a, b) => {
+      const pa = preds.get(a) ?? [];
+      const pb = preds.get(b) ?? [];
+      const ac =
+        pa.length === 0
+          ? orderIndex.get(a) ?? 0
+          : pa.reduce((s, p) => s + (rankInLevel.get(p) ?? 0), 0) / pa.length;
+      const bc =
+        pb.length === 0
+          ? orderIndex.get(b) ?? 0
+          : pb.reduce((s, p) => s + (rankInLevel.get(p) ?? 0), 0) / pb.length;
+      return ac - bc;
+    });
+    ids.forEach((id, i) => rankInLevel.set(id, i));
+  }
+
+  let maxRows = 1;
+  for (let lv = 0; lv <= maxLevel; lv++) {
+    const ids = byLevel.get(lv) ?? [];
+    maxRows = Math.max(maxRows, ids.length);
+  }
+
+  for (let lv = 0; lv <= maxLevel; lv++) {
+    const ids = byLevel.get(lv) ?? [];
+    const yStart = ((maxRows - ids.length) * rowH) / 2;
+    ids.forEach((id, row) => {
+      positions.set(id, {
+        x: pad + lv * colW,
+        y: headerH + pad + yStart + row * rowH,
+      });
+    });
+  }
+
+  return {
+    positions: centerPositionsInGroup(
+      positions,
+      pad,
+      headerH,
+      pad * 2 + (maxLevel + 1) * colW,
+      headerH + pad * 2 + maxRows * rowH,
+      nodeW,
+      nodeH,
+    ),
+    width: pad * 2 + (maxLevel + 1) * colW,
+    height: headerH + pad * 2 + maxRows * rowH,
+  };
+}
+
+function centerPositionsInGroup(
+  positions: Map<string, Positioned>,
+  pad: number,
+  headerH: number,
+  width: number,
+  height: number,
+  nodeW: number,
+  nodeH: number,
+): Map<string, Positioned> {
+  if (positions.size === 0) return positions;
+
+  let minX = Number.POSITIVE_INFINITY;
+  let minY = Number.POSITIVE_INFINITY;
+  let maxX = Number.NEGATIVE_INFINITY;
+  let maxY = Number.NEGATIVE_INFINITY;
+
+  for (const p of positions.values()) {
+    minX = Math.min(minX, p.x);
+    minY = Math.min(minY, p.y);
+    maxX = Math.max(maxX, p.x + nodeW);
+    maxY = Math.max(maxY, p.y + nodeH);
+  }
+
+  const contentW = Math.max(0, maxX - minX);
+  const contentH = Math.max(0, maxY - minY);
+
+  const innerW = Math.max(0, width - pad * 2);
+  const innerH = Math.max(0, height - headerH - pad * 2);
+
+  const targetMinX = pad + Math.max(0, (innerW - contentW) / 2);
+  const targetMinY = headerH + pad + Math.max(0, (innerH - contentH) / 2);
+
+  const dx = targetMinX - minX;
+  const dy = targetMinY - minY;
+
+  const shifted = new Map<string, Positioned>();
+  for (const [id, p] of positions.entries()) {
+    shifted.set(id, { x: p.x + dx, y: p.y + dy });
+  }
+  return shifted;
+}
+
 /**
  * Core change:
  * - file nodes are NOT rendered as normal nodes.
@@ -207,26 +510,34 @@ function toReactFlowNodes(
   }
 
   // Layout parameters
-  const childColW = 260;
-  const childRowH = 140;
+  const childColW = 340;
+  const childRowH = 190;
   const pad = 18;
   const headerH = 52;
 
-  // Compute per-file group bounds
   const groups = [...byFile.entries()].map(([file, children]) => {
-    const cols = Math.max(
-      1,
-      Math.min(3, Math.ceil(Math.sqrt(children.length))),
-    );
-    const rows = Math.max(1, Math.ceil(children.length / cols));
-    const width = pad * 2 + cols * childColW;
-    const height = headerH + pad * 2 + rows * childRowH;
-    return { file, children, cols, rows, width, height };
+    const layout = layoutChildrenByFlow(children, graph, {
+      pad,
+      headerH,
+      colW: childColW,
+      rowH: childRowH,
+    });
+    return {
+      file,
+      children,
+      positions: layout.positions,
+      width: layout.width,
+      height: layout.height,
+    };
   });
 
-  // Place file groups on a coarse grid
-  const groupGap = 70;
-  const groupCols = Math.max(1, Math.floor(Math.sqrt(groups.length)));
+  // Dynamic shelf layout for file groups to avoid overlaps on varying group sizes.
+  const groupGapX = 130;
+  const groupGapY = 130;
+  const maxRowWidth = 1800;
+  let cursorX = 0;
+  let cursorY = 0;
+  let rowH = 0;
 
   const rfNodes: Array<Node<CodeNodeData | FileGroupData>> = [];
 
@@ -236,8 +547,15 @@ function toReactFlowNodes(
     const existingFileNode = fileNodeByPath.get(g.file);
     const parentId = existingFileNode?.id ?? `file:${g.file}`;
 
-    const gx = (gi % groupCols) * (520 + groupGap);
-    const gy = Math.floor(gi / groupCols) * (320 + groupGap);
+    if (cursorX > 0 && cursorX + g.width > maxRowWidth) {
+      cursorX = 0;
+      cursorY += rowH + groupGapY;
+      rowH = 0;
+    }
+    const gx = cursorX;
+    const gy = cursorY;
+    cursorX += g.width + groupGapX;
+    rowH = Math.max(rowH, g.height);
 
     // Parent (file container) node
     rfNodes.push({
@@ -251,18 +569,20 @@ function toReactFlowNodes(
         file: g.file,
         count: g.children.length,
       },
-      style: { width: g.width, height: g.height },
+      style: { width: g.width, height: g.height, zIndex: 0 },
     });
 
     // Child nodes inside the parent
     for (let i = 0; i < g.children.length; i++) {
       const n = g.children[i];
-      const col = i % g.cols;
-      const row = Math.floor(i / g.cols);
 
       const sk = getInterfaceSubkind(n);
       const kindLabel = String(n.kind) === "interface" && sk ? sk : n.kind;
       const subtitle = `${kindLabel} · ${shortFile(n.file)}:${n.range.start.line + 1}`;
+      const pos = g.positions.get(n.id) ?? {
+        x: pad,
+        y: headerH + pad + i * childRowH,
+      };
 
       const data: CodeNodeData = {
         title: nodeTitle(n),
@@ -274,14 +594,12 @@ function toReactFlowNodes(
 
       rfNodes.push({
         id: n.id,
-        position: {
-          x: pad + col * childColW,
-          y: headerH + pad + row * childRowH,
-        },
+        position: pos,
         type: "code",
         data,
         parentNode: parentId,
         extent: "parent",
+        style: { zIndex: 2 },
       });
     }
   }
@@ -312,8 +630,8 @@ export function CanvasPane({
   );
 
   const edges = useMemo<Array<Edge<DataflowEdgeData>>>(
-    () => toReactFlowEdges(graph),
-    [graph],
+    () => toReactFlowEdges(graph, selectedNodeId),
+    [graph, selectedNodeId],
   );
 
   const handleNodeClick = (
@@ -439,6 +757,23 @@ export function CanvasPane({
                   </button>
                 </div>
               ) : null}
+
+              <div
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  bottom: 12,
+                  padding: "6px 10px",
+                  borderRadius: 8,
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  background: "rgba(10,14,28,0.68)",
+                  fontSize: 11,
+                  lineHeight: 1.3,
+                  pointerEvents: "none",
+                }}
+              >
+                <span style={{ color: "#60a5fa" }}>dashed blue</span> = parameter flow
+              </div>
             </ReactFlow>
           </ReactFlowProvider>
         </div>

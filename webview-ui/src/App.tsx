@@ -464,6 +464,7 @@ export default function App() {
           activeFile={activeFile}
           selection={selection}
           analysis={analysis}
+          graph={graph}
           selectedNode={selectedNode}
           onRefreshActive={() =>
             vscode.postMessage({ type: "requestActiveFile" })

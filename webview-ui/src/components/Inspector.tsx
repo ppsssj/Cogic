@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Settings } from "lucide-react";
-import type { ExtToWebviewMessage, GraphNode } from "../lib/vscode";
+import type { ExtToWebviewMessage, GraphNode, GraphPayload } from "../lib/vscode";
 import { ActiveFileSnapshot } from "./ActiveFileSnapshot";
 import { AnalysisPanel } from "./AnalysisPanel";
 import "./Inspector.css";
@@ -21,6 +21,7 @@ type Props = {
   activeFile: ActiveFilePayload;
   selection: SelectionPayload;
   analysis: AnalysisPayload;
+  graph?: GraphPayload;
   selectedNode: GraphNode | null;
   onRefreshActive: () => void;
   onResetGraph: () => void;
@@ -74,6 +75,7 @@ export function Inspector({
   activeFile,
   selection,
   analysis,
+  graph,
   selectedNode,
   onRefreshActive,
   onResetGraph,
@@ -85,6 +87,20 @@ export function Inspector({
   width,
   onToggleCollapsed,
 }: Props) {
+  const nodeById = new Map((graph?.nodes ?? []).map((n) => [n.id, n]));
+  const paramFlows = (graph?.edges ?? [])
+    .filter((e) => e.kind === "dataflow")
+    .filter((e) =>
+      selectedNode ? e.source === selectedNode.id || e.target === selectedNode.id : true,
+    )
+    .slice(0, selectedNode ? 40 : 20)
+    .map((e) => ({
+      id: e.id,
+      from: nodeById.get(e.source)?.name ?? e.source,
+      to: nodeById.get(e.target)?.name ?? e.target,
+      label: e.label ?? "(param flow)",
+    }));
+
   if (collapsed) {
     return (
       <aside
@@ -266,6 +282,34 @@ export function Inspector({
               >
                 {selection?.selectionText || ""}
               </pre>
+            </div>
+          </div>
+
+          <div className="panel">
+            <div className="panelHeader">
+              <span>PARAM FLOW</span>
+            </div>
+            <div className="panelBody">
+              {paramFlows.length === 0 ? (
+                <div className="mutedText">
+                  {selectedNode
+                    ? "No parameter flow for selected node."
+                    : "No parameter flow detected."}
+                </div>
+              ) : (
+                <div className="kvList">
+                  {paramFlows.map((f) => (
+                    <div className="kvRow" key={f.id} style={{ display: "block" }}>
+                      <div className="mono" style={{ fontSize: 12 }}>
+                        {f.from} → {f.to}
+                      </div>
+                      <div className="mutedText mono" title={f.label}>
+                        {f.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

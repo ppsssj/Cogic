@@ -56,7 +56,11 @@ export type GraphNode = {
   subkind?: "interface" | "type" | "enum";
 };
 
-export type GraphEdgeKind = "calls" | "constructs" | "dataflow";
+export type GraphEdgeKind =
+  | "calls"
+  | "constructs"
+  | "dataflow"
+  | "references";
 
 export type GraphEdge = {
   id: string;

@@ -233,54 +233,54 @@
 
 /* File group (container) node */
 .cgGroup {
+  position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 14px;
-
-  /* ✅ 핵심: 채움 제거(투명) */
+  border-radius: 12px;
   background: transparent;
-
-  /* ✅ edge가 뒤에 있어도 보이도록 blur 제거 */
-  backdrop-filter: none;
-
-  /* 프레임 느낌만 */
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
-  padding: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  box-shadow: none;
+  padding: 10px;
   box-sizing: border-box;
+  pointer-events: none;
 }
 
 .cgGroup--selected {
   border-color: rgba(56, 189, 248, 0.45);
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.18),
-    0 22px 60px rgba(56, 189, 248, 0.08);
 }
 
 .cgGroupHeader {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -52%);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 6px 6px 10px;
-
-  /* 헤더만 살짝 배경 */
-  background: rgba(2, 6, 23, 0.55);
-  border: 1px solid rgba(226, 232, 240, 0.10);
-  border-radius: 12px;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 10px;
+  min-width: 180px;
+  max-width: min(65%, 420px);
+  width: max-content;
+  background: rgba(8, 18, 38, 0.82);
+  border: 1px solid rgba(56, 189, 248, 0.42);
+  border-radius: 10px;
+  pointer-events: auto;
 }
 
 .cgGroupTitle {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
-  color: rgba(226, 232, 240, 0.95);
+  color: rgba(186, 230, 253, 0.96);
 }
 
 .cgGroupMeta {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 10px;
-  font-size: 11px;
-  color: rgba(226, 232, 240, 0.55);
+  font-size: 10px;
+  color: rgba(186, 230, 253, 0.72);
+  max-width: 100%;
 }
 
 .cgGroupPath {
@@ -291,7 +291,7 @@
 
 .cgGroupCount {
   font-weight: 800;
-  color: rgba(226, 232, 240, 0.70);
+  color: rgba(186, 230, 253, 0.9);
 }
 
 /* edge 선 굵기/명도 강화 */
