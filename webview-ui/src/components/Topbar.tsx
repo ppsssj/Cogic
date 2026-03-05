@@ -1,6 +1,7 @@
 import {
   ChevronDown,
   Download,
+  GitBranch,
   LayoutGrid,
   Loader2,
   Maximize2,
@@ -16,6 +17,8 @@ type Props = {
   projectName: string;
   onRefresh: () => void;
   onGenerate: () => void;
+  onAutoLayout: () => void;
+  onFitToScreen: () => void;
   traceMode: boolean;
   onToggleTraceMode: () => void;
 
@@ -36,6 +39,8 @@ export function Topbar({
   projectName,
   onRefresh,
   onGenerate,
+  onAutoLayout,
+  onFitToScreen,
   traceMode,
   onToggleTraceMode,
   onDownloadFlow,
@@ -48,7 +53,7 @@ export function Topbar({
   const isDone = downloadStatus === "done";
 
   return (
-    <header className="topbar">
+    <header className={["topbar", traceMode ? "topbar--traceOn" : ""].join(" ")}>
       <div className="topbarLeft">
         <div className="brand">
           <img
@@ -94,11 +99,21 @@ export function Topbar({
           <RefreshCw className="icon" />
         </button>
 
-        <button className="iconBtn" title="Auto Layout" type="button">
+        <button
+          className="iconBtn"
+          title="Auto Layout"
+          type="button"
+          onClick={onAutoLayout}
+        >
           <LayoutGrid className="icon" />
         </button>
 
-        <button className="iconBtn" title="Fit to Screen" type="button">
+        <button
+          className="iconBtn"
+          title="Fit to Screen"
+          type="button"
+          onClick={onFitToScreen}
+        >
           <Maximize2 className="icon" />
         </button>
 
@@ -133,16 +148,20 @@ export function Topbar({
 
         <button
           className={["iconBtn", traceMode ? "iconBtn--traceOn" : ""].join(" ")}
-          title="Trace Mode (generate step replay)"
+          title={traceMode ? "Trace mode ON" : "Trace mode OFF"}
           type="button"
           onClick={onToggleTraceMode}
+          aria-pressed={traceMode}
         >
-          Trace
+          <GitBranch className="icon" />
+          {traceMode ? <span className="traceDot" /> : null}
         </button>
+
+        {traceMode ? <span className="tracePill">TRACE MODE</span> : null}
 
         <button className="primaryBtn" type="button" onClick={onGenerate}>
           <Play className="icon primaryBtnIcon" />
-          Generate
+          {traceMode ? "Load Trace" : "Generate"}
         </button>
       </div>
     </header>

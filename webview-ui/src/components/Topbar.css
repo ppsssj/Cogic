@@ -155,11 +155,47 @@ body.vscode-high-contrast .logoDark {
   opacity: 0.85;
 }
 
+.topbar--traceOn {
+  border-bottom-color: rgba(56, 189, 248, 0.35);
+  box-shadow: inset 0 -1px 0 rgba(56, 189, 248, 0.2);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(56, 189, 248, 0.08),
+      rgba(2, 6, 23, 0) 32%,
+      rgba(2, 6, 23, 0)
+    ),
+    var(--bg);
+}
+
 .iconBtn--traceOn {
+  position: relative;
   border-color: rgba(56, 189, 248, 0.55);
   background: rgba(56, 189, 248, 0.15);
   color: rgba(186, 230, 253, 0.95);
+}
+
+.traceDot {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(125, 211, 252, 1);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+  animation: tracePulse 1.1s ease-in-out infinite;
+}
+
+.tracePill {
+  font-size: 11px;
   font-weight: 800;
+  letter-spacing: 0.3px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: rgba(186, 230, 253, 0.95);
+  background: rgba(56, 189, 248, 0.14);
 }
 
 .spin {
@@ -169,5 +205,17 @@ body.vscode-high-contrast .logoDark {
 @keyframes cgSpin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes tracePulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 0 7px rgba(56, 189, 248, 0.08);
   }
 }

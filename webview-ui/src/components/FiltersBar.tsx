@@ -2,6 +2,7 @@
 import { Check } from "lucide-react";
 import "./FiltersBar.css";
 export type ChipKey =
+  | "all"
   | "functions"
   | "classes"
   | "files"
@@ -14,6 +15,7 @@ type Props = {
 };
 
 const chips: Array<{ key: ChipKey; label: string }> = [
+  { key: "all", label: "All" },
   { key: "functions", label: "Functions" },
   { key: "classes", label: "Classes" },
   { key: "files", label: "Files" },

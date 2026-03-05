@@ -1,7 +1,12 @@
 // import "./../App.css";
 import "reactflow/dist/style.css";
 import "./CanvasPane.css";
-import { useMemo, useRef, type MouseEvent as ReactMouseEvent } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import ReactFlow, {
   Background,
   ReactFlowProvider,
@@ -33,6 +38,7 @@ type CodeNodeData = {
   subtitle: string;
   kind: GraphNode["kind"];
   subkind?: InterfaceSubkind;
+  searchHit?: boolean;
   /** Absolute/relative file path used to expand external nodes. */
   file: string;
 };
@@ -81,7 +87,12 @@ function CodeNode({
         : undefined;
 
   return (
-    <div className={["cgNode", selected ? "cgNode--selected" : ""].join(" ")}>
+    <div
+      className={[
+        "cgNode",
+        selected || data.searchHit ? "cgNode--selected" : "",
+      ].join(" ")}
+    >
       {/* Structural edges (calls/constructs/references) */}
       <Handle
         id="in-control"
@@ -285,6 +296,61 @@ function toReactFlowEdges(
       label: undefined, // keep non-dataflow labels hidden to prevent clutter
     };
   });
+}
+
+function matchesChipFilter(node: GraphNode, chip: ChipKey): boolean {
+  if (chip === "all") return true;
+  if (node.kind === "file") return true;
+  if (chip === "files") return true;
+  if (chip === "functions") return node.kind === "function" || node.kind === "method";
+  if (chip === "classes") return node.kind === "class";
+  if (chip === "interfaces") return node.kind === "interface";
+  if (chip === "variables") return node.kind === "external";
+  return true;
+}
+
+function filterGraph(
+  graph: GraphPayload | undefined,
+  chip: ChipKey,
+): GraphPayload | undefined {
+  if (!graph) return undefined;
+
+  const nodes = graph.nodes.filter((n) => {
+    if (!matchesChipFilter(n, chip)) return false;
+    return true;
+  });
+
+  const idSet = new Set(nodes.map((n) => n.id));
+  const edges = graph.edges.filter(
+    (e) => idSet.has(e.source) && idSet.has(e.target),
+  );
+
+  return { nodes, edges };
+}
+
+function getSearchHitIds(
+  graph: GraphPayload | undefined,
+  searchQuery: string,
+): Set<string> {
+  const ids = new Set<string>();
+  if (!graph) return ids;
+
+  const q = searchQuery.trim().toLowerCase();
+  if (!q) return ids;
+
+  const matchedFiles = new Set<string>();
+  for (const n of graph.nodes) {
+    const fileText = `${n.file} ${shortFile(n.file)}`.toLowerCase();
+    if (fileText.includes(q)) matchedFiles.add(n.file);
+  }
+
+  for (const n of graph.nodes) {
+    if (n.kind === "file") continue;
+    const text = `${n.name} ${n.kind} ${n.file} ${n.signature ?? ""}`.toLowerCase();
+    if (text.includes(q) || matchedFiles.has(n.file)) ids.add(n.id);
+  }
+
+  return ids;
 }
 
 type Positioned = { x: number; y: number };
@@ -491,6 +557,7 @@ function centerPositionsInGroup(
  */
 function toReactFlowNodes(
   graph?: GraphPayload,
+  searchHitIds?: Set<string>,
 ): Array<Node<CodeNodeData | FileGroupData>> {
   if (!graph) return [];
 
@@ -589,6 +656,7 @@ function toReactFlowNodes(
         subtitle,
         kind: n.kind,
         subkind: sk,
+        searchHit: Boolean(searchHitIds?.has(n.id)),
         file: n.file,
       };
 
@@ -626,18 +694,30 @@ export function CanvasPane({
   traceTotal,
   onTracePrev,
   onTraceNext,
+  autoLayoutTick,
+  fitViewTick,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
+  const filteredGraph = useMemo(
+    () => filterGraph(graph, activeFilter),
+    [graph, activeFilter],
+  );
+  const searchHitIds = useMemo(
+    () => getSearchHitIds(filteredGraph, searchQuery),
+    [filteredGraph, searchQuery],
+  );
 
   const nodes = useMemo<Array<Node<CodeNodeData | FileGroupData>>>(
-    () => toReactFlowNodes(graph),
-    [graph],
+    () => toReactFlowNodes(filteredGraph, searchHitIds),
+    [filteredGraph, searchHitIds],
   );
 
   const edges = useMemo<Array<Edge<DataflowEdgeData>>>(
-    () => toReactFlowEdges(graph, selectedNodeId),
-    [graph, selectedNodeId],
+    () => toReactFlowEdges(filteredGraph, selectedNodeId),
+    [filteredGraph, selectedNodeId],
   );
+
+  const visibleHasData = nodes.length > 0;
 
   const handleNodeClick = (
     _event: ReactMouseEvent,
@@ -673,22 +753,76 @@ export function CanvasPane({
     inst.fitView({ padding: 0.12, duration: 400 });
   };
 
+  useEffect(() => {
+    const inst = rfRef.current;
+    if (!inst) return;
+    inst.fitView({ padding: 0.12, duration: 350 });
+  }, [fitViewTick]);
+
+  useEffect(() => {
+    const inst = rfRef.current;
+    if (!inst) return;
+    // Current layout is deterministic; auto-layout trigger re-runs framing.
+    inst.fitView({ padding: 0.12, duration: 500 });
+  }, [autoLayoutTick]);
+
   return (
     <section className="canvas">
-      {!hasData ? (
+      {!hasData || !visibleHasData ? (
         <div className="emptyState">
           <div className="emptyIcon">
             <Sigma size={20} />
           </div>
-          <div className="emptyTitle">No graph yet</div>
+          <div className="emptyTitle">
+            {hasData ? "No visible nodes" : "No graph yet"}
+          </div>
           <div className="emptySub">
-            Open a TypeScript/JavaScript file, then click <b>Generate</b>.
+            {hasData
+              ? "Try a different filter."
+              : "Open a TypeScript/JavaScript file, then click Generate."}
           </div>
           <div className="emptyActions">
             <button className="btnPrimary" onClick={onGenerateFromActive}>
               Generate from active file
             </button>
           </div>
+          {traceVisible ? (
+            <div
+              style={{
+                marginTop: 8,
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "8px 10px",
+                borderRadius: 12,
+                border: "1px solid rgba(56,189,248,0.35)",
+                background: "rgba(8,18,38,0.82)",
+              }}
+            >
+              <button
+                className="btnGhost"
+                onClick={onTracePrev}
+                disabled={traceCursor <= 0}
+                style={{ padding: "6px 10px", opacity: traceCursor <= 0 ? 0.45 : 1 }}
+              >
+                {"<-"}
+              </button>
+              <div className="mono" style={{ fontSize: 12, minWidth: 90, textAlign: "center" }}>
+                {traceCursor} / {traceTotal}
+              </div>
+              <button
+                className="btnGhost"
+                onClick={onTraceNext}
+                disabled={traceCursor >= traceTotal}
+                style={{
+                  padding: "6px 10px",
+                  opacity: traceCursor >= traceTotal ? 0.45 : 1,
+                }}
+              >
+                {"->"}
+              </button>
+            </div>
+          ) : null}
         </div>
       ) : (
         <div className="canvasFlow">
@@ -853,4 +987,6 @@ type Props = {
   traceTotal: number;
   onTracePrev: () => void;
   onTraceNext: () => void;
+  autoLayoutTick: number;
+  fitViewTick: number;
 };

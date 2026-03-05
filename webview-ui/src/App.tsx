@@ -154,11 +154,13 @@ export default function App() {
 
   const expandedFilesRef = useRef<Set<string>>(new Set());
 
-  const [activeChip, setActiveChip] = useState<ChipKey>("functions");
+  const [activeChip, setActiveChip] = useState<ChipKey>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [traceMode, setTraceMode] = useState(false);
   const [traceEvents, setTraceEvents] = useState<GraphTraceEvent[] | null>(null);
   const [traceCursor, setTraceCursor] = useState(0);
+  const [autoLayoutTick, setAutoLayoutTick] = useState(0);
+  const [fitViewTick, setFitViewTick] = useState(0);
 
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
 
@@ -471,6 +473,8 @@ export default function App() {
             payload: { traceMode },
           });
         }}
+        onAutoLayout={() => setAutoLayoutTick((v) => v + 1)}
+        onFitToScreen={() => setFitViewTick((v) => v + 1)}
         traceMode={traceMode}
         onToggleTraceMode={toggleTraceMode}
         onDownloadFlow={downloadFlow}
@@ -520,6 +524,8 @@ export default function App() {
           traceTotal={traceEvents?.length ?? 0}
           onTracePrev={stepTracePrev}
           onTraceNext={stepTraceNext}
+          autoLayoutTick={autoLayoutTick}
+          fitViewTick={fitViewTick}
         />
 
         {inspectorOpen ? (
