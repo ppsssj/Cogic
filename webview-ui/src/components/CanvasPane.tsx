@@ -24,7 +24,7 @@ import ReactFlow, {
 } from "reactflow";
 
 import { Crosshair, Network, Sigma, ZoomIn, ZoomOut } from "lucide-react";
-import type { GraphNode, GraphPayload } from "../lib/vscode";
+import type { GraphNode, GraphPayload, GraphTraceEvent } from "../lib/vscode";
 import type { ChipKey } from "./FiltersBar";
 
 type InterfaceSubkind = "interface" | "type" | "enum";
@@ -692,8 +692,10 @@ export function CanvasPane({
   traceVisible,
   traceCursor,
   traceTotal,
+  traceFocusEvent,
   onTracePrev,
   onTraceNext,
+  onTraceFinish,
   autoLayoutTick,
   fitViewTick,
 }: Props) {
@@ -766,6 +768,96 @@ export function CanvasPane({
     inst.fitView({ padding: 0.12, duration: 500 });
   }, [autoLayoutTick]);
 
+  useEffect(() => {
+    const inst = rfRef.current;
+    if (!inst || !traceVisible || !traceFocusEvent || traceCursor <= 0) return;
+
+    if (traceFocusEvent.type === "node") {
+      const rfNode = inst.getNode(traceFocusEvent.node.id);
+      if (!rfNode) return;
+
+      const width = rfNode.width ?? 210;
+      const height = rfNode.height ?? 72;
+      inst.setCenter(rfNode.position.x + width / 2, rfNode.position.y + height / 2, {
+        zoom: 1.15,
+        duration: 350,
+      });
+      return;
+    }
+
+    const sourceNode = inst.getNode(traceFocusEvent.edge.source);
+    const targetNode = inst.getNode(traceFocusEvent.edge.target);
+    if (!sourceNode || !targetNode) return;
+
+    const sourceWidth = sourceNode.width ?? 210;
+    const sourceHeight = sourceNode.height ?? 72;
+    const targetWidth = targetNode.width ?? 210;
+    const targetHeight = targetNode.height ?? 72;
+
+    const centerX =
+      (sourceNode.position.x +
+        sourceWidth / 2 +
+        targetNode.position.x +
+        targetWidth / 2) /
+      2;
+    const centerY =
+      (sourceNode.position.y +
+        sourceHeight / 2 +
+        targetNode.position.y +
+        targetHeight / 2) /
+      2;
+
+    inst.setCenter(centerX, centerY, { zoom: 0.9, duration: 350 });
+  }, [nodes, traceCursor, traceFocusEvent, traceVisible]);
+
+  const isTraceAtEnd = traceCursor >= traceTotal;
+  const renderTraceControls = () => (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        padding: "8px 10px",
+        borderRadius: 12,
+        border: "1px solid rgba(56,189,248,0.35)",
+        background: "rgba(8,18,38,0.82)",
+      }}
+    >
+      <button
+        className="btnGhost"
+        onClick={onTracePrev}
+        disabled={traceCursor <= 0}
+        style={{ padding: "6px 10px", opacity: traceCursor <= 0 ? 0.45 : 1 }}
+      >
+        {"<-"}
+      </button>
+      <div className="mono" style={{ fontSize: 12, minWidth: 90, textAlign: "center" }}>
+        {traceCursor} / {traceTotal}
+      </div>
+      {isTraceAtEnd ? (
+        <button
+          className="btnGhost"
+          onClick={onTraceFinish}
+          style={{ padding: "6px 10px" }}
+        >
+          끝
+        </button>
+      ) : (
+        <button
+          className="btnGhost"
+          onClick={onTraceNext}
+          disabled={traceCursor >= traceTotal}
+          style={{
+            padding: "6px 10px",
+            opacity: traceCursor >= traceTotal ? 0.45 : 1,
+          }}
+        >
+          {"->"}
+        </button>
+      )}
+    </div>
+  );
+
   return (
     <section className="canvas">
       {!hasData || !visibleHasData ? (
@@ -787,41 +879,7 @@ export function CanvasPane({
             </button>
           </div>
           {traceVisible ? (
-            <div
-              style={{
-                marginTop: 8,
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "8px 10px",
-                borderRadius: 12,
-                border: "1px solid rgba(56,189,248,0.35)",
-                background: "rgba(8,18,38,0.82)",
-              }}
-            >
-              <button
-                className="btnGhost"
-                onClick={onTracePrev}
-                disabled={traceCursor <= 0}
-                style={{ padding: "6px 10px", opacity: traceCursor <= 0 ? 0.45 : 1 }}
-              >
-                {"<-"}
-              </button>
-              <div className="mono" style={{ fontSize: 12, minWidth: 90, textAlign: "center" }}>
-                {traceCursor} / {traceTotal}
-              </div>
-              <button
-                className="btnGhost"
-                onClick={onTraceNext}
-                disabled={traceCursor >= traceTotal}
-                style={{
-                  padding: "6px 10px",
-                  opacity: traceCursor >= traceTotal ? 0.45 : 1,
-                }}
-              >
-                {"->"}
-              </button>
-            </div>
+            <div style={{ marginTop: 8 }}>{renderTraceControls()}</div>
           ) : null}
         </div>
       ) : (
@@ -914,28 +972,7 @@ export function CanvasPane({
                     zIndex: 7,
                   }}
                 >
-                  <button
-                    className="btnGhost"
-                    onClick={onTracePrev}
-                    disabled={traceCursor <= 0}
-                    style={{ padding: "6px 10px", opacity: traceCursor <= 0 ? 0.45 : 1 }}
-                  >
-                    {"<-"}
-                  </button>
-                  <div className="mono" style={{ fontSize: 12, minWidth: 90, textAlign: "center" }}>
-                    {traceCursor} / {traceTotal}
-                  </div>
-                  <button
-                    className="btnGhost"
-                    onClick={onTraceNext}
-                    disabled={traceCursor >= traceTotal}
-                    style={{
-                      padding: "6px 10px",
-                      opacity: traceCursor >= traceTotal ? 0.45 : 1,
-                    }}
-                  >
-                    {"->"}
-                  </button>
+                  {renderTraceControls()}
                 </div>
               ) : null}
 
@@ -985,8 +1022,10 @@ type Props = {
   traceVisible: boolean;
   traceCursor: number;
   traceTotal: number;
+  traceFocusEvent: GraphTraceEvent | null;
   onTracePrev: () => void;
   onTraceNext: () => void;
+  onTraceFinish: () => void;
   autoLayoutTick: number;
   fitViewTick: number;
 };

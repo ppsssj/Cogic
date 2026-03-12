@@ -382,6 +382,11 @@ export default function App() {
 
   const stepTracePrev = () => stepTraceTo(traceCursor - 1);
   const stepTraceNext = () => stepTraceTo(traceCursor + 1);
+  const finishTraceMode = () => {
+    setTraceMode(false);
+    setTraceEvents(null);
+    setTraceCursor(0);
+  };
   const toggleTraceMode = () => {
     setTraceMode((prev) => {
       const next = !prev;
@@ -522,8 +527,14 @@ export default function App() {
           traceVisible={Boolean(traceEvents && traceEvents.length > 0)}
           traceCursor={traceCursor}
           traceTotal={traceEvents?.length ?? 0}
+          traceFocusEvent={
+            traceEvents && traceCursor > 0
+              ? traceEvents[traceCursor - 1]
+              : null
+          }
           onTracePrev={stepTracePrev}
           onTraceNext={stepTraceNext}
+          onTraceFinish={finishTraceMode}
           autoLayoutTick={autoLayoutTick}
           fitViewTick={fitViewTick}
         />
