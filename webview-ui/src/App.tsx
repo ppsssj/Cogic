@@ -29,6 +29,10 @@ type SelectionPayload = Extract<
   ExtToWebviewMessage,
   { type: "selection" }
 >["payload"];
+type WorkspaceFilesPayload = Extract<
+  ExtToWebviewMessage,
+  { type: "workspaceFiles" }
+>["payload"];
 type AnalysisPayload = Extract<
   ExtToWebviewMessage,
   { type: "analysisResult" }
@@ -145,6 +149,8 @@ type ToastState = { open: boolean; kind: ToastKind; message: string };
 
 export default function App() {
   const [activeFile, setActiveFile] = useState<ActiveFilePayload>(null);
+  const [workspaceFiles, setWorkspaceFiles] =
+    useState<WorkspaceFilesPayload | null>(null);
   const [selection, setSelection] = useState<SelectionPayload>(null);
   const [analysis, setAnalysis] = useState<AnalysisPayload>(null);
 
@@ -234,6 +240,11 @@ export default function App() {
         return;
       }
 
+      if (msg.type === "workspaceFiles") {
+        setWorkspaceFiles(msg.payload);
+        return;
+      }
+
       if (msg.type === "selection") {
         setSelection(msg.payload);
 
@@ -285,6 +296,7 @@ export default function App() {
     window.addEventListener("message", onMessage);
 
     vscode.postMessage({ type: "requestActiveFile" });
+    vscode.postMessage({ type: "requestWorkspaceFiles" });
     vscode.postMessage({ type: "requestSelection" });
 
     return () => window.removeEventListener("message", onMessage);
@@ -362,7 +374,7 @@ export default function App() {
     return findNodeById(graph, selectedNodeId);
   }, [graph, selectedNodeId]);
 
-  const projectName = activeFile?.fileName ? activeFile.fileName : "Active File";
+  const projectName = activeFile?.fileName ? activeFile.fileName : "Select file";
 
   const resetGraph = () => {
     setTraceEvents(null);
@@ -467,8 +479,19 @@ export default function App() {
     <div className="appRoot">
       <Topbar
         projectName={projectName}
+        workspaceRootName={workspaceFiles?.rootName ?? null}
+        workspaceFiles={workspaceFiles?.files ?? []}
+        activeFilePath={activeFile ? uriToFsPath(activeFile.uri) : null}
+        onPickFile={(filePath) => {
+          resetGraph();
+          vscode.postMessage({
+            type: "selectWorkspaceFile",
+            payload: { filePath },
+          });
+        }}
         onRefresh={() => {
           vscode.postMessage({ type: "requestActiveFile" });
+          vscode.postMessage({ type: "requestWorkspaceFiles" });
           vscode.postMessage({ type: "requestSelection" });
         }}
         onGenerate={() => {

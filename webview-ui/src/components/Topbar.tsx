@@ -1,4 +1,5 @@
 import {
+  Check,
   ChevronDown,
   Download,
   GitBranch,
@@ -9,12 +10,22 @@ import {
   RefreshCw,
   Search,
 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import logoLightUrl from "../../../assets/logo.svg";
 import logoDarkUrl from "../../../assets/logo2.svg";
 import "./Topbar.css";
 
+type WorkspaceFileItem = {
+  path: string;
+  label: string;
+};
+
 type Props = {
   projectName: string;
+  workspaceRootName: string | null;
+  workspaceFiles: WorkspaceFileItem[];
+  activeFilePath: string | null;
+  onPickFile: (filePath: string) => void;
   onRefresh: () => void;
   onGenerate: () => void;
   onAutoLayout: () => void;
@@ -37,6 +48,10 @@ type Props = {
 
 export function Topbar({
   projectName,
+  workspaceRootName,
+  workspaceFiles,
+  activeFilePath,
+  onPickFile,
   onRefresh,
   onGenerate,
   onAutoLayout,
@@ -51,6 +66,34 @@ export function Topbar({
 }: Props) {
   const isDownloading = downloadStatus === "downloading";
   const isDone = downloadStatus === "done";
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const pickerRef = useRef<HTMLDivElement | null>(null);
+
+  const activeWorkspaceFile = useMemo(
+    () => workspaceFiles.find((file) => file.path === activeFilePath) ?? null,
+    [activeFilePath, workspaceFiles],
+  );
+
+  useEffect(() => {
+    if (!pickerOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (!pickerRef.current?.contains(event.target as Node)) {
+        setPickerOpen(false);
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPickerOpen(false);
+    };
+
+    window.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [pickerOpen]);
 
   return (
     <header className={["topbar", traceMode ? "topbar--traceOn" : ""].join(" ")}>
@@ -69,10 +112,60 @@ export function Topbar({
           <h1 className="brandTitle">CodeGraph</h1>
         </div>
 
-        <button className="projectPicker" type="button" onClick={onRefresh}>
-          <span className="projectName">{projectName}</span>
-          <ChevronDown className="icon" />
-        </button>
+        <div className="projectPickerWrap" ref={pickerRef}>
+          <button
+            className={[
+              "projectPicker",
+              pickerOpen ? "projectPicker--open" : "",
+            ].join(" ")}
+            type="button"
+            onClick={() => setPickerOpen((prev) => !prev)}
+            aria-expanded={pickerOpen}
+          >
+            <span className="projectName">
+              {activeWorkspaceFile?.label ?? projectName}
+            </span>
+            <ChevronDown className="icon" />
+          </button>
+
+          {pickerOpen ? (
+            <div className="projectMenu">
+              <div className="projectMenuHeader">
+                <span className="projectMenuTitle">Workspace</span>
+                <span className="projectMenuRoot">
+                  {workspaceRootName ?? "No root"}
+                </span>
+              </div>
+
+              <div className="projectMenuList" role="listbox">
+                {workspaceFiles.length > 0 ? (
+                  workspaceFiles.map((file) => {
+                    const active = file.path === activeFilePath;
+                    return (
+                      <button
+                        key={file.path}
+                        className={[
+                          "projectMenuItem",
+                          active ? "projectMenuItem--active" : "",
+                        ].join(" ")}
+                        type="button"
+                        onClick={() => {
+                          setPickerOpen(false);
+                          onPickFile(file.path);
+                        }}
+                      >
+                        <span className="projectMenuItemLabel">{file.label}</span>
+                        {active ? <Check className="icon" /> : null}
+                      </button>
+                    );
+                  })
+                ) : (
+                  <div className="projectMenuEmpty">No workspace files</div>
+                )}
+              </div>
+            </div>
+          ) : null}
+        </div>
 
         <div className="searchWrap">
           <div className="searchBox">

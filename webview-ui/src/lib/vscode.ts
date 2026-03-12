@@ -61,5 +61,10 @@ export function getVSCodeApi(): VSCodeApi {
 export function isExtToWebviewMessage(x: unknown): x is ExtToWebviewMessage {
   if (!x || typeof x !== "object") return false;
   const t = (x as { type?: unknown }).type;
-  return t === "activeFile" || t === "selection" || t === "analysisResult";
+  return (
+    t === "activeFile" ||
+    t === "workspaceFiles" ||
+    t === "selection" ||
+    t === "analysisResult"
+  );
 }

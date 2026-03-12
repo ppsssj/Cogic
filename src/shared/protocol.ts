@@ -1,8 +1,10 @@
 export type WebviewToExtMessage =
   | { type: "requestActiveFile" }
+  | { type: "requestWorkspaceFiles" }
   | { type: "requestSelection" }
   | { type: "analyzeActiveFile"; payload?: { traceMode?: boolean } }
   | { type: "analyzeWorkspace" }
+  | { type: "selectWorkspaceFile"; payload: { filePath: string } }
   | { type: "expandNode"; payload: { filePath: string } }
   | {
       type: "openLocation";
@@ -100,6 +102,17 @@ export type ExtToWebviewMessage =
         text: string;
         isUntitled: boolean;
       } | null;
+    }
+  | {
+      type: "workspaceFiles";
+      payload: {
+        rootPath: string | null;
+        rootName: string | null;
+        files: Array<{
+          path: string;
+          label: string;
+        }>;
+      };
     }
   | {
       type: "selection";

@@ -48,10 +48,14 @@ export class CodeGraphPanel {
       async (msg: WebviewToExtMessage) => {
         try {
           if (msg.type === "requestActiveFile") return this.postActiveFile();
+          if (msg.type === "requestWorkspaceFiles")
+            return this.postWorkspaceFiles();
           if (msg.type === "requestSelection") return this.postSelection();
           if (msg.type === "analyzeActiveFile")
             return this.postAnalysis(Boolean(msg.payload?.traceMode)); // workspace-aware
           if (msg.type === "analyzeWorkspace") return this.postAnalysis(); // explicit
+          if (msg.type === "selectWorkspaceFile")
+            return this.selectWorkspaceFile(msg.payload.filePath);
           if (msg.type === "expandNode")
             return this.postAnalysisForFile(msg.payload.filePath);
           if (msg.type === "openLocation")
@@ -66,6 +70,7 @@ export class CodeGraphPanel {
 
     // initial push
     this.postActiveFile();
+    void this.postWorkspaceFiles();
     this.postSelection();
 
     // ---- auto-analysis for active file changes (debounced) ----
@@ -89,6 +94,7 @@ export class CodeGraphPanel {
         this.lastSelection = editor.selection;
       }
       this.postActiveFile();
+      void this.postWorkspaceFiles();
       scheduleAnalysis(0);
     });
 
@@ -121,13 +127,13 @@ export class CodeGraphPanel {
 
     // invalidate cache when files change (coarse)
     const subFs = vscode.workspace.onDidCreateFiles(() =>
-      this.invalidateWorkspaceCache(),
+      this.invalidateAndPostWorkspaceFiles(),
     );
     const subFs2 = vscode.workspace.onDidDeleteFiles(() =>
-      this.invalidateWorkspaceCache(),
+      this.invalidateAndPostWorkspaceFiles(),
     );
     const subFs3 = vscode.workspace.onDidRenameFiles(() =>
-      this.invalidateWorkspaceCache(),
+      this.invalidateAndPostWorkspaceFiles(),
     );
 
     this.panel.onDidDispose(() => {
@@ -145,6 +151,11 @@ export class CodeGraphPanel {
   private invalidateWorkspaceCache() {
     this.cachedAt = 0;
     this.cachedFilePaths = [];
+  }
+
+  private invalidateAndPostWorkspaceFiles() {
+    this.invalidateWorkspaceCache();
+    void this.postWorkspaceFiles();
   }
 
   private getEditor(): vscode.TextEditor | undefined {
@@ -171,6 +182,28 @@ export class CodeGraphPanel {
     this.cachedFilePaths = files.map((u) => u.fsPath);
     this.cachedAt = now;
     return this.cachedFilePaths;
+  }
+
+  private async postWorkspaceFiles() {
+    const rootPath = this.getWorkspaceRoot();
+    const files = await this.getWorkspaceFilePaths();
+
+    const payload: Extract<
+      ExtToWebviewMessage,
+      { type: "workspaceFiles" }
+    >["payload"] = {
+      rootPath,
+      rootName: rootPath ? path.basename(rootPath) : null,
+      files: files.map((filePath) => ({
+        path: filePath,
+        label: vscode.workspace.asRelativePath(filePath, false),
+      })),
+    };
+
+    this.panel.webview.postMessage({
+      type: "workspaceFiles",
+      payload,
+    } satisfies ExtToWebviewMessage);
   }
 
   private postActiveFile() {
@@ -315,6 +348,25 @@ export class CodeGraphPanel {
       type: "analysisResult",
       payload,
     } satisfies ExtToWebviewMessage);
+  }
+
+  private async selectWorkspaceFile(filePath: string) {
+    if (!filePath) return;
+
+    const uri = vscode.Uri.file(filePath);
+    const doc = await vscode.workspace.openTextDocument(uri);
+    const editor = await vscode.window.showTextDocument(doc, {
+      viewColumn: vscode.ViewColumn.Active,
+      preserveFocus: false,
+      preview: true,
+    });
+
+    this.lastTextEditor = editor;
+    this.lastSelection = editor.selection;
+
+    this.postActiveFile();
+    this.postSelection();
+    await this.postAnalysis();
   }
 
   private async openLocation(payload: {
