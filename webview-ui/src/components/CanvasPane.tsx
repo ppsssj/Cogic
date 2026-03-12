@@ -182,6 +182,18 @@ function CodeNode({
               ].join(" ")}
               onClick={handleChildClick(child.onClick)}
             >
+              <Handle
+                id={`in-child-${child.id}`}
+                type="target"
+                position={Position.Left}
+                className="cgHandle cgHandle--child"
+              />
+              <Handle
+                id={`out-child-${child.id}`}
+                type="source"
+                position={Position.Right}
+                className="cgHandle cgHandle--child"
+              />
               <div className="cgChildTop">
                 <div className="cgChildTitle">{child.title}</div>
                 <div className="cgChildBadge">{child.kind.toUpperCase()}</div>
@@ -296,12 +308,16 @@ function toReactFlowEdges(
       ...e,
       source: parentIdByNodeId.get(e.source) ?? e.source,
       target: parentIdByNodeId.get(e.target) ?? e.target,
+      originalSource: e.source,
+      originalTarget: e.target,
+      sourceHandleId: parentIdByNodeId.has(e.source) ? `out-child-${e.source}` : undefined,
+      targetHandleId: parentIdByNodeId.has(e.target) ? `in-child-${e.target}` : undefined,
     }))
     .filter((e) => e.source !== e.target);
 
   const dedupedEdges = new Map<string, (typeof remappedEdges)[number]>();
   for (const edge of remappedEdges) {
-    const key = `${edge.kind}:${edge.source}:${edge.target}:${edge.label ?? ""}`;
+    const key = `${edge.kind}:${edge.source}:${edge.target}:${edge.sourceHandleId ?? ""}:${edge.targetHandleId ?? ""}:${edge.label ?? ""}`;
     if (!dedupedEdges.has(key)) dedupedEdges.set(key, edge);
   }
 
@@ -331,7 +347,8 @@ function toReactFlowEdges(
 
     const isSelectedFlow = Boolean(
       selectedNodeId &&
-        (e.source === selectedNodeId || e.target === selectedNodeId),
+        (e.originalSource === selectedNodeId ||
+          e.originalTarget === selectedNodeId),
     );
     const muted = Boolean(selectedNodeId && !isSelectedFlow && isDataflow);
     const showDataflowLabel = Boolean(selectedNodeId && isSelectedFlow);
@@ -356,8 +373,10 @@ function toReactFlowEdges(
       source: e.source,
       target: e.target,
       type: isDataflow ? "dataflow" : undefined, // ✅ dataflow만 커스텀 엣지 사용
-      sourceHandle: isDataflow ? "out-dataflow" : "out-control",
-      targetHandle: isDataflow ? "in-dataflow" : "in-control",
+      sourceHandle:
+        e.sourceHandleId ?? (isDataflow ? "out-dataflow" : "out-control"),
+      targetHandle:
+        e.targetHandleId ?? (isDataflow ? "in-dataflow" : "in-control"),
       markerEnd: isDataflow
         ? {
             type: MarkerType.ArrowClosed,

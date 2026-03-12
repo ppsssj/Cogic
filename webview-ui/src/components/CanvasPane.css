@@ -47,6 +47,7 @@
   min-width: 190px;
   max-width: 260px;
   color: rgba(226, 232, 240, 0.92);
+  overflow: visible;
 }
 
 .cgNode::before {
@@ -146,6 +147,24 @@
   background: rgba(30, 41, 59, 0.9);
 }
 
+.cgHandle--child {
+  width: 8px;
+  height: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: color-mix(in srgb, var(--cg-node-accent) 80%, rgba(30, 41, 59, 0.95));
+  border-color: color-mix(in srgb, var(--cg-node-accent) 90%, white 10%);
+  z-index: 4;
+}
+
+.cgHandle--child.react-flow__handle-left {
+  left: -14px;
+}
+
+.cgHandle--child.react-flow__handle-right {
+  right: -14px;
+}
+
 .cgNodeTop {
   display: flex;
   align-items: center;
@@ -190,6 +209,7 @@
   gap: 8px;
   padding-top: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: visible;
 }
 
 .cgChildListHeader {
@@ -222,12 +242,14 @@
 }
 
 .cgChildNode {
+  position: relative;
   border-radius: 10px;
   border: 1px solid color-mix(in srgb, var(--cg-node-accent) 70%, transparent);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
     rgba(255, 255, 255, 0.03);
   padding: 8px 10px;
+  overflow: visible;
 }
 
 .cgChildNode--interactive {
