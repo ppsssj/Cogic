@@ -601,16 +601,19 @@ function buildActiveFileGraph(
         ...(extra ?? {}),
       },
     });
+
+    return id;
   };
 
-  // collect nodes (top-level + class members)
-  const visitDecls = (node: ts.Node) => {
-    // 1) top-level function declarations
+  const visitDecls = (node: ts.Node, parentId?: string) => {
     if (ts.isFunctionDeclaration(node) && node.name && node.body) {
-      pushNode(node, "function", node.name.text);
+      const fnId = pushNode(node, "function", node.name.text, {
+        ...(parentId ? { parentId } : {}),
+      });
+      ts.forEachChild(node.body, (child) => visitDecls(child, fnId));
+      return;
     }
 
-    // 2) top-level const foo = () => {} / function() {}
     if (ts.isVariableStatement(node)) {
       for (const d of node.declarationList.declarations) {
         if (!d.initializer) continue;
@@ -633,28 +636,44 @@ function buildActiveFileGraph(
         if (!hasBody) continue;
 
         // NOTE: Use initializer node for stable body-owner switching during walk()
-        pushNode(init as unknown as ts.Declaration, "function", varName);
+        const fnId = pushNode(
+          init as unknown as ts.Declaration,
+          "function",
+          varName,
+          {
+            ...(parentId ? { parentId } : {}),
+          },
+        );
+
+        if (ts.isBlock(init.body)) {
+          ts.forEachChild(init.body, (child) => visitDecls(child, fnId));
+        }
       }
+      return;
     }
 
-    // 3) classes + members
     if (ts.isClassDeclaration(node) && node.name) {
       const className = node.name.text;
-      pushNode(node, "class", className);
+      const classId = pushNode(node, "class", className, {
+        ...(parentId ? { parentId } : {}),
+      });
 
       for (const m of node.members) {
-        // method declarations
         if (
           ts.isMethodDeclaration(m) &&
           m.name &&
           ts.isIdentifier(m.name) &&
           m.body
         ) {
-          pushNode(m, "method", `${className}.${m.name.text}`);
+          const methodId = pushNode(m, "method", `${className}.${m.name.text}`, {
+            parentId: classId,
+          });
+          if (m.body) {
+            ts.forEachChild(m.body, (child) => visitDecls(child, methodId));
+          }
           continue;
         }
 
-        // class field initializer: foo = () => {} / foo = function() {}
         if (ts.isPropertyDeclaration(m) && m.initializer && m.name) {
           const init = m.initializer;
           const isFnInit =
@@ -675,22 +694,29 @@ function buildActiveFileGraph(
               : false;
           if (!hasBody) continue;
 
-          // Model as a "method" since it behaves like one (this-bound field)
-          pushNode(
+          const methodId = pushNode(
             init as unknown as ts.Declaration,
             "method",
             `${className}.${memberName}`,
+            {
+              parentId: classId,
+            },
           );
+          if (ts.isBlock(init.body)) {
+            ts.forEachChild(init.body, (child) => visitDecls(child, methodId));
+          }
         }
       }
+      return;
     }
 
-    // 4) interfaces / type aliases / enums (modeled under kind="interface" for the Interfaces filter)
     if (ts.isInterfaceDeclaration(node) && node.name) {
       pushNode(node, "interface" as GraphNodeKind, node.name.text, {
+        ...(parentId ? { parentId } : {}),
         subkind: "interface",
         signature: `interface ${node.name.text}`,
       });
+      return;
     }
 
     if (ts.isTypeAliasDeclaration(node) && node.name) {
@@ -703,20 +729,24 @@ function buildActiveFileGraph(
       }
       const short = rhs && rhs.length > 120 ? rhs.slice(0, 117) + "..." : rhs;
       pushNode(node, "interface" as GraphNodeKind, name, {
+        ...(parentId ? { parentId } : {}),
         subkind: "type",
         signature: short ? `type ${name} = ${short}` : `type ${name}`,
       });
+      return;
     }
 
     if (ts.isEnumDeclaration(node) && node.name) {
       const name = node.name.text;
       pushNode(node, "interface" as GraphNodeKind, name, {
+        ...(parentId ? { parentId } : {}),
         subkind: "enum",
         signature: `enum ${name}`,
       });
+      return;
     }
 
-    ts.forEachChild(node, visitDecls);
+    ts.forEachChild(node, (child) => visitDecls(child, parentId));
   };
   visitDecls(sf);
 

@@ -158,6 +158,19 @@ export class CodeGraphPanel {
     void this.postWorkspaceFiles();
   }
 
+  private getPreferredEditorColumn(): vscode.ViewColumn {
+    const panelColumn = this.panel.viewColumn;
+    const visibleTextEditor = vscode.window.visibleTextEditors.find(
+      (editor) => editor.viewColumn && editor.viewColumn !== panelColumn,
+    );
+
+    if (visibleTextEditor?.viewColumn) {
+      return visibleTextEditor.viewColumn;
+    }
+
+    return vscode.ViewColumn.Beside;
+  }
+
   private getEditor(): vscode.TextEditor | undefined {
     return this.lastTextEditor ?? vscode.window.activeTextEditor;
   }
@@ -356,7 +369,7 @@ export class CodeGraphPanel {
     const uri = vscode.Uri.file(filePath);
     const doc = await vscode.workspace.openTextDocument(uri);
     const editor = await vscode.window.showTextDocument(doc, {
-      viewColumn: vscode.ViewColumn.Active,
+      viewColumn: this.getPreferredEditorColumn(),
       preserveFocus: false,
       preview: true,
     });
@@ -393,14 +406,15 @@ export class CodeGraphPanel {
       if (existingEditor) {
         // 해당 탭으로 포커스 이동(열려있는 탭을 "가리키는" 느낌)
         editor = await vscode.window.showTextDocument(existingEditor.document, {
-          viewColumn: existingEditor.viewColumn,
+          viewColumn:
+            existingEditor.viewColumn ?? this.getPreferredEditorColumn(),
           preserveFocus: Boolean(preserveFocus),
           preview: true,
         });
       } else {
         // 2) 없으면 새로 열기
         editor = await vscode.window.showTextDocument(uri, {
-          viewColumn: vscode.ViewColumn.Active,
+          viewColumn: this.getPreferredEditorColumn(),
           preserveFocus: Boolean(preserveFocus),
           preview: true,
         });

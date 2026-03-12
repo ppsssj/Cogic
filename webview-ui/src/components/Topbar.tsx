@@ -67,12 +67,21 @@ export function Topbar({
   const isDownloading = downloadStatus === "downloading";
   const isDone = downloadStatus === "done";
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickerQuery, setPickerQuery] = useState("");
   const pickerRef = useRef<HTMLDivElement | null>(null);
 
   const activeWorkspaceFile = useMemo(
     () => workspaceFiles.find((file) => file.path === activeFilePath) ?? null,
     [activeFilePath, workspaceFiles],
   );
+  const filteredWorkspaceFiles = useMemo(() => {
+    const q = pickerQuery.trim().toLowerCase();
+    if (!q) return workspaceFiles;
+
+    return workspaceFiles.filter((file) =>
+      `${file.label} ${file.path}`.toLowerCase().includes(q),
+    );
+  }, [pickerQuery, workspaceFiles]);
 
   useEffect(() => {
     if (!pickerOpen) return;
@@ -93,6 +102,10 @@ export function Topbar({
       window.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("keydown", onKeyDown);
     };
+  }, [pickerOpen]);
+
+  useEffect(() => {
+    if (!pickerOpen) setPickerQuery("");
   }, [pickerOpen]);
 
   return (
@@ -137,9 +150,20 @@ export function Topbar({
                 </span>
               </div>
 
+              <div className="projectMenuSearch">
+                <Search className="icon" />
+                <input
+                  className="projectMenuSearchInput"
+                  placeholder="Search files..."
+                  value={pickerQuery}
+                  onChange={(e) => setPickerQuery(e.target.value)}
+                  autoFocus
+                />
+              </div>
+
               <div className="projectMenuList" role="listbox">
-                {workspaceFiles.length > 0 ? (
-                  workspaceFiles.map((file) => {
+                {filteredWorkspaceFiles.length > 0 ? (
+                  filteredWorkspaceFiles.map((file) => {
                     const active = file.path === activeFilePath;
                     return (
                       <button
@@ -160,7 +184,7 @@ export function Topbar({
                     );
                   })
                 ) : (
-                  <div className="projectMenuEmpty">No workspace files</div>
+                  <div className="projectMenuEmpty">No matching files</div>
                 )}
               </div>
             </div>

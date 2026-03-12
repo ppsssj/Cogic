@@ -152,6 +152,33 @@ body.vscode-high-contrast .logoDark {
   padding: 6px;
 }
 
+.projectMenuSearch {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--inputBg);
+  color: var(--muted);
+}
+
+.projectMenuSearchInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--inputFg);
+  font-size: 12px;
+  min-width: 0;
+}
+
+.projectMenuSearchInput::placeholder {
+  color: var(--placeholder);
+}
+
 .projectMenuItem {
   width: 100%;
   display: flex;

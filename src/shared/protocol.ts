@@ -46,6 +46,7 @@ export type GraphNode = {
   kind: GraphNodeKind;
   name: string;
   file: string;
+  parentId?: string;
   range: {
     start: { line: number; character: number };
     end: { line: number; character: number };

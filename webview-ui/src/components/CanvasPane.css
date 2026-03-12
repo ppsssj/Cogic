@@ -183,6 +183,106 @@
   white-space: nowrap;
 }
 
+.cgChildList {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cgChildListHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cgChildListTitle {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--cg-node-subtext);
+}
+
+.cgChildListCount {
+  min-width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--cg-node-accent) 70%, transparent);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--cg-node-accent-strong);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.cgChildNode {
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--cg-node-accent) 70%, transparent);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
+    rgba(255, 255, 255, 0.03);
+  padding: 8px 10px;
+}
+
+.cgChildNode--interactive {
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    border-color 120ms ease,
+    background 120ms ease;
+}
+
+.cgChildNode--interactive:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--cg-node-accent) 100%, white 10%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0)),
+    rgba(255, 255, 255, 0.05);
+}
+
+.cgChildTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cgChildTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cg-node-accent-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cgChildBadge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--cg-node-badge-bg);
+  border: 1px solid color-mix(in srgb, var(--cg-node-accent) 80%, transparent);
+  color: var(--cg-node-badge-text);
+  white-space: nowrap;
+}
+
+.cgChildSub {
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--cg-node-subtext);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Edge label */
 .cgEdgeLabel {
   position: absolute;

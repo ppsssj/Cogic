@@ -6,6 +6,7 @@ import {
   useMemo,
   useRef,
   type MouseEvent as ReactMouseEvent,
+  type MouseEvent as ReactDomMouseEvent,
 } from "react";
 import ReactFlow, {
   Background,
@@ -39,6 +40,13 @@ type CodeNodeData = {
   kind: GraphNode["kind"];
   subkind?: InterfaceSubkind;
   searchHit?: boolean;
+  childItems?: Array<{
+    id: string;
+    kind: string;
+    title: string;
+    subtitle: string;
+    onClick?: () => void;
+  }>;
   /** Absolute/relative file path used to expand external nodes. */
   file: string;
 };
@@ -72,6 +80,20 @@ function nodeTitle(n: GraphNode) {
   return n.name;
 }
 
+function childTitle(parent: GraphNode, child: GraphNode) {
+  if (child.kind === "method") {
+    return child.name.replace(`${parent.name}.`, "") + "()";
+  }
+  if (child.kind === "function") return `${child.name}()`;
+  if (child.kind === "class") return `class ${child.name}`;
+  return child.name;
+}
+
+function childKindLabel(child: GraphNode) {
+  if (child.kind === "interface" && child.subkind) return child.subkind;
+  return child.kind;
+}
+
 function getNodeToneClass(data: CodeNodeData): string {
   if (data.kind === "class") return "cgNode--class";
   if (data.kind === "function" || data.kind === "method") {
@@ -99,6 +121,11 @@ function CodeNode({
       : data.kind === "external"
         ? "external"
         : undefined;
+  const handleChildClick =
+    (onClick?: () => void) => (event: ReactDomMouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      onClick?.();
+    };
 
   return (
     <div
@@ -140,6 +167,30 @@ function CodeNode({
         {badge ? <div className="cgBadge">{badge.toUpperCase()}</div> : null}
       </div>
       <div className="cgNodeSub">{data.subtitle}</div>
+      {data.childItems?.length ? (
+        <div className="cgChildList">
+          <div className="cgChildListHeader">
+            <span className="cgChildListTitle">Nested</span>
+            <span className="cgChildListCount">{data.childItems.length}</span>
+          </div>
+          {data.childItems.map((child) => (
+            <div
+              key={child.id}
+              className={[
+                "cgChildNode",
+                child.onClick ? "cgChildNode--interactive" : "",
+              ].join(" ")}
+              onClick={handleChildClick(child.onClick)}
+            >
+              <div className="cgChildTop">
+                <div className="cgChildTitle">{child.title}</div>
+                <div className="cgChildBadge">{child.kind.toUpperCase()}</div>
+              </div>
+              <div className="cgChildSub">{child.subtitle}</div>
+            </div>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -230,8 +281,31 @@ function toReactFlowEdges(
 ): Array<Edge<DataflowEdgeData>> {
   if (!graph) return [];
 
+  const collapsedNodeIds = new Set(
+    graph.nodes.filter((n) => n.parentId).map((n) => n.id),
+  );
+  const parentIdByNodeId = new Map(
+    graph.nodes
+      .filter((n) => n.parentId)
+      .map((n) => [n.id, n.parentId as string]),
+  );
+
   const nodeById = new Map(graph.nodes.map((n) => [n.id, n]));
-  const visibleEdges = graph.edges.filter((e) => {
+  const remappedEdges = graph.edges
+    .map((e) => ({
+      ...e,
+      source: parentIdByNodeId.get(e.source) ?? e.source,
+      target: parentIdByNodeId.get(e.target) ?? e.target,
+    }))
+    .filter((e) => e.source !== e.target);
+
+  const dedupedEdges = new Map<string, (typeof remappedEdges)[number]>();
+  for (const edge of remappedEdges) {
+    const key = `${edge.kind}:${edge.source}:${edge.target}:${edge.label ?? ""}`;
+    if (!dedupedEdges.has(key)) dedupedEdges.set(key, edge);
+  }
+
+  const visibleEdges = [...dedupedEdges.values()].filter((e) => {
     const src = nodeById.get(e.source);
     const tgt = nodeById.get(e.target);
     if (!src || !tgt) return true;
@@ -239,6 +313,7 @@ function toReactFlowEdges(
     // File container edges are noisy and often visually occluded by the group frame.
     // Keep file node as a visual header only.
     if (src.kind === "file" || tgt.kind === "file") return false;
+    if (collapsedNodeIds.has(src.id) || collapsedNodeIds.has(tgt.id)) return false;
     return true;
   });
 
@@ -330,10 +405,21 @@ function filterGraph(
 ): GraphPayload | undefined {
   if (!graph) return undefined;
 
-  const nodes = graph.nodes.filter((n) => {
-    if (!matchesChipFilter(n, chip)) return false;
-    return true;
-  });
+  const matched = graph.nodes.filter((n) => matchesChipFilter(n, chip));
+  const byId = new Map(graph.nodes.map((n) => [n.id, n]));
+  const nodeMap = new Map(matched.map((n) => [n.id, n]));
+
+  for (const node of matched) {
+    let parentId = node.parentId;
+    while (parentId) {
+      const parent = byId.get(parentId);
+      if (!parent) break;
+      nodeMap.set(parent.id, parent);
+      parentId = parent.parentId;
+    }
+  }
+
+  const nodes = [...nodeMap.values()];
 
   const idSet = new Set(nodes.map((n) => n.id));
   const edges = graph.edges.filter(
@@ -354,6 +440,11 @@ function getSearchHitIds(
   if (!q) return ids;
 
   const matchedFiles = new Set<string>();
+  const parentIdByNodeId = new Map(
+    graph.nodes
+      .filter((n) => n.parentId)
+      .map((n) => [n.id, n.parentId as string]),
+  );
   for (const n of graph.nodes) {
     const fileText = `${n.file} ${shortFile(n.file)}`.toLowerCase();
     if (fileText.includes(q)) matchedFiles.add(n.file);
@@ -362,7 +453,14 @@ function getSearchHitIds(
   for (const n of graph.nodes) {
     if (n.kind === "file") continue;
     const text = `${n.name} ${n.kind} ${n.file} ${n.signature ?? ""}`.toLowerCase();
-    if (text.includes(q) || matchedFiles.has(n.file)) ids.add(n.id);
+    if (text.includes(q) || matchedFiles.has(n.file)) {
+      ids.add(n.id);
+      let parentId = parentIdByNodeId.get(n.id);
+      while (parentId) {
+        ids.add(parentId);
+        parentId = parentIdByNodeId.get(parentId);
+      }
+    }
   }
 
   return ids;
@@ -573,6 +671,7 @@ function centerPositionsInGroup(
 function toReactFlowNodes(
   graph?: GraphPayload,
   searchHitIds?: Set<string>,
+  onActivateNode?: (nodeId: string) => void,
 ): Array<Node<CodeNodeData | FileGroupData>> {
   if (!graph) return [];
 
@@ -582,10 +681,18 @@ function toReactFlowNodes(
     if (n.kind === "file") fileNodeByPath.set(n.file, n);
   }
 
+  const childItemsByParentId = new Map<string, GraphNode[]>();
+  for (const n of graph.nodes) {
+    if (!n.parentId) continue;
+    if (!childItemsByParentId.has(n.parentId)) childItemsByParentId.set(n.parentId, []);
+    childItemsByParentId.get(n.parentId)!.push(n);
+  }
+
   // Group child (non-file) nodes by their owning file path.
   const byFile = new Map<string, GraphNode[]>();
   for (const n of graph.nodes) {
     if (n.kind === "file") continue; // file is rendered as a container only
+    if (n.parentId) continue;
     const key = n.file;
     if (!byFile.has(key)) byFile.set(key, []);
     byFile.get(key)!.push(n);
@@ -593,11 +700,17 @@ function toReactFlowNodes(
 
   // Layout parameters
   const childColW = 340;
-  const childRowH = 190;
   const pad = 18;
   const headerH = 52;
 
   const groups = [...byFile.entries()].map(([file, children]) => {
+    const childRowH = Math.max(
+      190,
+      ...children.map((n) => {
+        const childItems = childItemsByParentId.get(n.id) ?? [];
+        return childItems.length > 0 ? 126 + childItems.length * 62 : 190;
+      }),
+    );
     const layout = layoutChildrenByFlow(children, graph, {
       pad,
       headerH,
@@ -607,6 +720,7 @@ function toReactFlowNodes(
     return {
       file,
       children,
+      childRowH,
       positions: layout.positions,
       width: layout.width,
       height: layout.height,
@@ -666,7 +780,7 @@ function toReactFlowNodes(
       const subtitle = `${kindLabel} · ${shortFile(n.file)}:${n.range.start.line + 1}`;
       const pos = g.positions.get(n.id) ?? {
         x: pad,
-        y: headerH + pad + i * childRowH,
+        y: headerH + pad + i * g.childRowH,
       };
 
       const data: CodeNodeData = {
@@ -675,8 +789,18 @@ function toReactFlowNodes(
         kind: n.kind,
         subkind: sk,
         searchHit: Boolean(searchHitIds?.has(n.id)),
+        childItems: (childItemsByParentId.get(n.id) ?? []).map((child) => ({
+          id: child.id,
+          kind: childKindLabel(child),
+          title: childTitle(n, child),
+          subtitle: `${childKindLabel(child)} · ${shortFile(child.file)}:${child.range.start.line + 1}`,
+          onClick: onActivateNode ? () => onActivateNode(child.id) : undefined,
+        })),
         file: n.file,
       };
+
+      const childItems = childItemsByParentId.get(n.id) ?? [];
+      const nodeHeight = childItems.length > 0 ? 94 + childItems.length * 62 : undefined;
 
       rfNodes.push({
         id: n.id,
@@ -685,7 +809,11 @@ function toReactFlowNodes(
         data,
         parentNode: parentId,
         extent: "parent",
-        style: { zIndex: 2 },
+        style: {
+          zIndex: 2,
+          width: childItems.length > 0 ? 272 : undefined,
+          height: nodeHeight,
+        },
       });
     }
   }
@@ -728,8 +856,17 @@ export function CanvasPane({
   );
 
   const nodes = useMemo<Array<Node<CodeNodeData | FileGroupData>>>(
-    () => toReactFlowNodes(filteredGraph, searchHitIds),
-    [filteredGraph, searchHitIds],
+    () =>
+      toReactFlowNodes(filteredGraph, searchHitIds, (nodeId) => {
+        const target = graph?.nodes.find((node) => node.id === nodeId);
+        if (!target) return;
+        onSelectNode(nodeId);
+        onOpenNode?.(target);
+        if (target.kind === "external") {
+          onExpandExternal?.(target.file);
+        }
+      }),
+    [filteredGraph, graph, onExpandExternal, onOpenNode, onSelectNode, searchHitIds],
   );
 
   const edges = useMemo<Array<Edge<DataflowEdgeData>>>(
