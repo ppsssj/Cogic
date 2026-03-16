@@ -198,9 +198,9 @@ type Graph = {
 
 ## Screenshots
 
-| Demo                      | Inspector                      |
+| Demo                      | Debug                      |
 | ------------------------- | ------------------------------ |
-| ![Demo](assets/demo2.png) | ![Inspector](assets/demo3.png) |
+| ![Demo](assets/demo5.png) | ![Inspector](assets/debug_demo.gif) |
 
 <!-- > `assets/` 아래에 스크린샷을 추가해 주세요. -->
 
