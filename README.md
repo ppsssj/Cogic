@@ -37,9 +37,9 @@ It is split into two parts:
 
 ![Debug Walkthrough](assets/debug_demo.gif)
 
-## Diagnostics Demo
+## Error Demo
 
-![Diagnostics Demo](assets/error_demo.png)
+![Error Demo](assets/error_demo.png)
 
 ---
 
