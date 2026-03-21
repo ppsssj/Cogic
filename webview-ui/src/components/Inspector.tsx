@@ -150,6 +150,7 @@ function PanelChevron({
 
 function InspectorPanel({
   title,
+  collapsedLabel,
   open,
   onToggle,
   collapseDirection,
@@ -158,6 +159,7 @@ function InspectorPanel({
   children,
 }: {
   title: string;
+  collapsedLabel?: string;
   open: boolean;
   onToggle: () => void;
   collapseDirection: CollapseDirection;
@@ -165,6 +167,10 @@ function InspectorPanel({
   actions?: ReactNode;
   children: ReactNode;
 }) {
+  const headerLabel =
+    !open && collapseDirection === "horizontal"
+      ? (collapsedLabel ?? title)
+      : title;
   return (
     <div
       className={[
@@ -182,6 +188,7 @@ function InspectorPanel({
             type="button"
             aria-expanded={open}
             aria-label={open ? `Collapse ${title}` : `Expand ${title}`}
+            title={title}
             onClick={onToggle}
           >
             <PanelChevron
@@ -189,7 +196,9 @@ function InspectorPanel({
               collapseDirection={collapseDirection}
             />
           </button>
-          <span className="panelHeaderTitleText">{title}</span>
+          <span className="panelHeaderTitleText" title={title}>
+            {headerLabel}
+          </span>
         </div>
         {open && actions ? <div className="panelHeaderActions">{actions}</div> : null}
       </div>
@@ -449,6 +458,7 @@ export function Inspector({
         <div className="inspectorPad">
           <ActiveFileSnapshot
             className="panel--snapshot"
+            collapsedLabel="Active File"
             fileName={activeFile?.fileName}
             languageId={activeFile?.languageId}
             text={activeFile?.text}
@@ -461,6 +471,7 @@ export function Inspector({
           <InspectorPanel
             className="panel--root"
             title="ROOT"
+            collapsedLabel="Root"
             open={sectionOpen.root}
             onToggle={() => toggleSection("root")}
             collapseDirection={collapseDirection}
@@ -499,6 +510,7 @@ export function Inspector({
           <InspectorPanel
             className="panel--selected"
             title="SELECTED NODE"
+            collapsedLabel="Selected"
             open={sectionOpen.selected}
             onToggle={() => toggleSection("selected")}
             collapseDirection={collapseDirection}
@@ -538,6 +550,7 @@ export function Inspector({
           <InspectorPanel
             className="panel--selection"
             title="SELECTION"
+            collapsedLabel="Selection"
             open={sectionOpen.selection}
             onToggle={() => toggleSection("selection")}
             collapseDirection={collapseDirection}
@@ -572,6 +585,7 @@ export function Inspector({
           <InspectorPanel
             className="panel--flow"
             title="PARAM FLOW"
+            collapsedLabel="Flow"
             open={sectionOpen.flow}
             onToggle={() => toggleSection("flow")}
             collapseDirection={collapseDirection}
@@ -626,6 +640,7 @@ export function Inspector({
             analysis={analysis}
             graph={graph}
             className="panel--analysis"
+            collapsedLabel="Analysis"
             onOpenDiagnostic={onOpenDiagnostic}
             onSelectGraphNode={onSelectGraphNode}
             onActivateGraphNode={onActivateGraphNode}

@@ -13,6 +13,7 @@ type CollapseDirection = "vertical" | "horizontal";
 
 type Props = {
   title?: string;
+  collapsedLabel?: string;
   fileName?: string;
   languageId?: string;
   text?: string;
@@ -54,6 +55,7 @@ function PanelChevron({
 
 export function ActiveFileSnapshot({
   title = "ACTIVE FILE SNAPSHOT",
+  collapsedLabel = "Active File",
   fileName,
   languageId,
   text,
@@ -65,6 +67,8 @@ export function ActiveFileSnapshot({
   collapseDirection = "vertical",
 }: Props) {
   const body = text ? clipText(text, 200) : "";
+  const headerLabel =
+    collapsed && collapseDirection === "horizontal" ? collapsedLabel : title;
 
   return (
     <div
@@ -84,6 +88,7 @@ export function ActiveFileSnapshot({
               type="button"
               aria-expanded={!collapsed}
               aria-label={collapsed ? `Expand ${title}` : `Collapse ${title}`}
+              title={title}
               onClick={onToggleCollapsed}
             >
               <PanelChevron
@@ -92,7 +97,9 @@ export function ActiveFileSnapshot({
               />
             </button>
           ) : null}
-          <span className="panelHeaderTitleText">{title}</span>
+          <span className="panelHeaderTitleText" title={title}>
+            {headerLabel}
+          </span>
         </div>
 
         {!collapsed ? (

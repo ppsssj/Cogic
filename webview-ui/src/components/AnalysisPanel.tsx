@@ -28,6 +28,7 @@ type Props = {
   analysis: AnalysisPayload;
   graph?: GraphPayload;
   className?: string;
+  collapsedLabel?: string;
   onOpenDiagnostic?: (diagnostic: CodeDiagnostic) => void;
   onSelectGraphNode?: (nodeId: string) => void;
   onActivateGraphNode?: (nodeId: string) => void;
@@ -267,6 +268,7 @@ export function AnalysisPanel({
   analysis,
   graph,
   className,
+  collapsedLabel = "Analysis",
   onOpenDiagnostic,
   onSelectGraphNode,
   onActivateGraphNode,
@@ -274,6 +276,10 @@ export function AnalysisPanel({
   onToggleCollapsed,
   collapseDirection = "vertical",
 }: Props) {
+  const headerLabel =
+    collapsed && collapseDirection === "horizontal"
+      ? collapsedLabel
+      : "ANALYSIS";
   const panelClassName = [
     "panel",
     className ?? "",
@@ -293,6 +299,7 @@ export function AnalysisPanel({
                 type="button"
                 aria-expanded={!collapsed}
                 aria-label={collapsed ? "Expand Analysis" : "Collapse Analysis"}
+                title="ANALYSIS"
                 onClick={onToggleCollapsed}
               >
                 <PanelChevron
@@ -301,7 +308,9 @@ export function AnalysisPanel({
                 />
               </button>
             ) : null}
-            <span className="panelHeaderTitleText">ANALYSIS</span>
+            <span className="panelHeaderTitleText" title="ANALYSIS">
+              {headerLabel}
+            </span>
           </div>
         </div>
         {!collapsed ? (
@@ -337,6 +346,7 @@ export function AnalysisPanel({
               type="button"
               aria-expanded={!collapsed}
               aria-label={collapsed ? "Expand Analysis" : "Collapse Analysis"}
+              title="ANALYSIS"
               onClick={onToggleCollapsed}
             >
               <PanelChevron
@@ -345,7 +355,9 @@ export function AnalysisPanel({
               />
             </button>
           ) : null}
-          <span className="panelHeaderTitleText">ANALYSIS</span>
+          <span className="panelHeaderTitleText" title="ANALYSIS">
+            {headerLabel}
+          </span>
         </div>
         {!collapsed ? (
           <span className="panelHeaderMeta mono" style={{ opacity: 0.75 }}>
