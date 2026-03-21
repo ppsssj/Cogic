@@ -5,6 +5,7 @@ import {
   useEffect,
   useMemo,
   useRef,
+  useState,
   type MouseEvent as ReactMouseEvent,
   type MouseEvent as ReactDomMouseEvent,
 } from "react";
@@ -46,7 +47,9 @@ type CodeNodeData = {
   kind: GraphNode["kind"];
   subkind?: InterfaceSubkind;
   searchHit?: boolean;
+  selected?: boolean;
   highlighted?: boolean;
+  focusPulseToken?: number;
   diagnosticSeverity?: "error" | "warning";
   diagnosticCount?: number;
   warningCount?: number;
@@ -55,6 +58,8 @@ type CodeNodeData = {
     kind: string;
     title: string;
     subtitle: string;
+    selected?: boolean;
+    focusPulseToken?: number;
     diagnosticSeverity?: "error" | "warning";
     diagnosticCount?: number;
     warningCount?: number;
@@ -320,6 +325,7 @@ function CodeNode({
   data: CodeNodeData;
   selected?: boolean;
 }) {
+  const isSelected = Boolean(selected || data.selected);
   const badge =
     data.kind === "interface"
       ? data.subkind
@@ -338,9 +344,13 @@ function CodeNode({
         "cgNode",
         getNodeToneClass(data),
         data.highlighted ? "cgNode--connected" : "",
-        selected || data.searchHit ? "cgNode--selected" : "",
+        data.searchHit ? "cgNode--searchHit" : "",
+        isSelected ? "cgNode--selected" : "",
       ].join(" ")}
     >
+      {data.focusPulseToken ? (
+        <span key={data.focusPulseToken} className="cgNodePulse" aria-hidden="true" />
+      ) : null}
       {/* Structural edges (calls/constructs/references) */}
       <Handle
         id="in-control"
@@ -398,10 +408,18 @@ function CodeNode({
               key={child.id}
               className={[
                 "cgChildNode",
+                child.selected ? "cgChildNode--selected" : "",
                 child.onClick ? "cgChildNode--interactive" : "",
               ].join(" ")}
               onClick={handleChildClick(child.onClick)}
             >
+              {child.focusPulseToken ? (
+                <span
+                  key={child.focusPulseToken}
+                  className="cgChildPulse"
+                  aria-hidden="true"
+                />
+              ) : null}
               <Handle
                 id={`in-child-${child.id}`}
                 type="target"
@@ -942,9 +960,16 @@ function toReactFlowNodes(
   searchHitIds?: Set<string>,
   diagnostics?: CodeDiagnostic[],
   highlightedNodeIds?: Set<string>,
+  selectedNodeId?: string | null,
+  focusPulseRequests?: Array<{
+    nodeId: string;
+    visibleNodeId: string;
+    token: number;
+  }>,
   onActivateNode?: (nodeId: string) => void,
 ): Array<Node<CodeNodeData | FileGroupData>> {
   if (!graph) return [];
+  const orderedFocusPulseRequests = [...(focusPulseRequests ?? [])].reverse();
 
   // Reuse existing file-node ids if analyzer already created them.
   const fileNodeByPath = new Map<string, GraphNode>();
@@ -1047,6 +1072,7 @@ function toReactFlowNodes(
     // Child nodes inside the parent
     for (let i = 0; i < g.children.length; i++) {
       const n = g.children[i];
+      const childItems = childItemsByParentId.get(n.id) ?? [];
 
       const sk = getInterfaceSubkind(n);
       const kindLabel = String(n.kind) === "interface" && sk ? sk : n.kind;
@@ -1056,6 +1082,11 @@ function toReactFlowNodes(
         y: headerH + pad + i * g.childRowH,
       };
 
+      const hasSelectedChild = childItems.some((child) => child.id === selectedNodeId);
+      const visiblePulseRequest = orderedFocusPulseRequests.find(
+        (request) => request.visibleNodeId === n.id,
+      );
+
       const data: CodeNodeData = {
         ...(diagnosticSummaryByNode.get(n.id) ?? {}),
         title: nodeTitle(n),
@@ -1064,18 +1095,25 @@ function toReactFlowNodes(
         subkind: sk,
         highlighted: Boolean(highlightedNodeIds?.has(n.id)),
         searchHit: Boolean(searchHitIds?.has(n.id)),
-        childItems: (childItemsByParentId.get(n.id) ?? []).map((child) => ({
+        selected: selectedNodeId === n.id || hasSelectedChild,
+        focusPulseToken: visiblePulseRequest?.token,
+        childItems: childItems.map((child) => {
+          const childPulseRequest = orderedFocusPulseRequests.find(
+            (request) => request.nodeId === child.id,
+          );
+          return {
           id: child.id,
           kind: childKindLabel(child),
           title: childTitle(n, child),
+          selected: selectedNodeId === child.id,
+          focusPulseToken: childPulseRequest?.token,
           subtitle: `${childKindLabel(child)} · ${shortFile(child.file)}:${child.range.start.line + 1}`,
           ...(diagnosticSummaryByNode.get(child.id) ?? {}),
           onClick: onActivateNode ? () => onActivateNode(child.id) : undefined,
-        })),
+          };
+        }),
         file: n.file,
       };
-
-      const childItems = childItemsByParentId.get(n.id) ?? [];
       const nodeHeight = childItems.length > 0 ? 94 + childItems.length * 62 : undefined;
 
       rfNodes.push({
@@ -1127,6 +1165,11 @@ export function CanvasPane({
   frameGraphTick,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
+  const [focusPulseRequest, setFocusPulseRequest] = useState<{
+    nodeId: string;
+    visibleNodeId: string;
+    token: number;
+  } | null>(null);
   const filteredGraph = useMemo(
     () => filterGraph(graph, activeFilter),
     [graph, activeFilter],
@@ -1152,6 +1195,33 @@ export function CanvasPane({
     if (!target) return null;
     return target.parentId ?? target.id;
   }, [graph, inspectorFocusRequest]);
+  const visibleSelectedNodeId = useMemo(() => {
+    if (!graph || !selectedNodeId) return selectedNodeId;
+    const target = graph.nodes.find((node) => node.id === selectedNodeId);
+    if (!target) return selectedNodeId;
+    return target.parentId ?? target.id;
+  }, [graph, selectedNodeId]);
+  const inspectorPulseRequest = useMemo(() => {
+    if (!inspectorFocusRequest || !visibleInspectorFocusNodeId) return null;
+    return {
+      nodeId: inspectorFocusRequest.nodeId,
+      visibleNodeId: visibleInspectorFocusNodeId,
+      token: inspectorFocusRequest.token,
+    };
+  }, [inspectorFocusRequest, visibleInspectorFocusNodeId]);
+  const focusPulseRequests = useMemo(
+    () =>
+      [focusPulseRequest, inspectorPulseRequest].filter(
+        (
+          request,
+        ): request is {
+          nodeId: string;
+          visibleNodeId: string;
+          token: number;
+        } => Boolean(request),
+      ),
+    [focusPulseRequest, inspectorPulseRequest],
+  );
 
   const nodes = useMemo<Array<Node<CodeNodeData | FileGroupData>>>(
     () =>
@@ -1160,8 +1230,16 @@ export function CanvasPane({
         searchHitIds,
         analysisDiagnostics,
         visibleHighlightedNodeIds,
+        selectedNodeId,
+        focusPulseRequests,
         (nodeId) => {
           const target = graph?.nodes.find((node) => node.id === nodeId);
+          const visibleNodeId = target?.parentId ?? nodeId;
+          setFocusPulseRequest((current) => ({
+            nodeId,
+            visibleNodeId,
+            token: (current?.token ?? 0) + 1,
+          }));
           if (!target) return;
           onSelectNode(nodeId);
           onOpenNode?.(target);
@@ -1177,7 +1255,9 @@ export function CanvasPane({
       onExpandExternal,
       onOpenNode,
       onSelectNode,
+      selectedNodeId,
       searchHitIds,
+      focusPulseRequests,
       visibleHighlightedNodeIds,
     ],
   );
@@ -1193,6 +1273,11 @@ export function CanvasPane({
     _event: ReactMouseEvent,
     node: Node<CodeNodeData | FileGroupData>,
   ) => {
+    setFocusPulseRequest((current) => ({
+      nodeId: node.id,
+      visibleNodeId: node.id,
+      token: (current?.token ?? 0) + 1,
+    }));
     onSelectNode(node.id);
 
     // File containers do not map to a code location.
@@ -1211,9 +1296,9 @@ export function CanvasPane({
   const onZoomOut = () => rfRef.current?.zoomOut?.();
   const onFocusSelection = () => {
     const inst = rfRef.current;
-    if (!inst || !selectedNodeId) return;
+    if (!inst || !visibleSelectedNodeId) return;
 
-    const node = inst.getNode(selectedNodeId);
+    const node = inst.getNode(visibleSelectedNodeId);
     if (!node) return;
     focusCanvasNode(inst, node, 1.2, 320);
   };
