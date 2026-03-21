@@ -19,6 +19,7 @@ import {
   type GraphNode,
   type GraphPayload,
   type GraphTraceEvent,
+  type RuntimeDebugPayload,
   type UINotice,
   type WebviewToExtMessage,
 } from "./lib/vscode";
@@ -52,6 +53,10 @@ type AnalysisRequest = Extract<
 type FlowExportResultPayload = Extract<
   ExtToWebviewMessage,
   { type: "flowExportResult" }
+>["payload"];
+type RuntimeDebugState = Extract<
+  ExtToWebviewMessage,
+  { type: "runtimeDebug" }
 >["payload"];
 type NoticeSeverity = UINotice["severity"];
 type OpenLocationPayload = Extract<
@@ -144,11 +149,72 @@ function shortBaseName(p: string) {
   const parts = norm.split("/");
   return parts[parts.length - 1] || p;
 }
+function normalizeComparablePath(p: string) {
+  return normalizePath(p).toLowerCase();
+}
 function uriToFsPath(uri: string): string {
   if (!uri.startsWith("file://")) return uri;
   let p = decodeURIComponent(uri.replace("file://", ""));
   if (p.match(/^\/[A-Za-z]:\//)) p = p.slice(1); // windows /C:/...
   return p;
+}
+function rangeSize(range: GraphNode["range"]) {
+  return (
+    (range.end.line - range.start.line) * 1_000_000 +
+    (range.end.character - range.start.character)
+  );
+}
+function distanceToRange(pos: Pos, range: GraphNode["range"]) {
+  if (cmpPos(pos, range.start) < 0) {
+    return (
+      (range.start.line - pos.line) * 1_000_000 +
+      (range.start.character - pos.character)
+    );
+  }
+  if (cmpPos(pos, range.end) > 0) {
+    return (
+      (pos.line - range.end.line) * 1_000_000 +
+      (pos.character - range.end.character)
+    );
+  }
+  return 0;
+}
+function findGraphNodeForRuntimeFrame(
+  graph: GraphPayload | undefined,
+  frame: RuntimeDebugPayload["frame"],
+) {
+  if (!graph || !frame?.filePath || frame.line === undefined) return null;
+
+  const filePath = normalizeComparablePath(frame.filePath);
+  const pos = {
+    line: frame.line,
+    character: frame.column ?? 0,
+  };
+
+  const sameFileNodes = graph.nodes.filter(
+    (node) => normalizeComparablePath(node.file) === filePath,
+  );
+  if (sameFileNodes.length === 0) return null;
+
+  const containing = sameFileNodes
+    .filter((node) => inRange(pos, node.range.start, node.range.end))
+    .sort((a, b) => {
+      const filePenaltyA = a.kind === "file" ? 1 : 0;
+      const filePenaltyB = b.kind === "file" ? 1 : 0;
+      if (filePenaltyA !== filePenaltyB) return filePenaltyA - filePenaltyB;
+      return rangeSize(a.range) - rangeSize(b.range);
+    });
+  if (containing.length > 0) return containing[0] ?? null;
+
+  const nearest = sameFileNodes.sort((a, b) => {
+    const distanceDiff = distanceToRange(pos, a.range) - distanceToRange(pos, b.range);
+    if (distanceDiff !== 0) return distanceDiff;
+    const filePenaltyA = a.kind === "file" ? 1 : 0;
+    const filePenaltyB = b.kind === "file" ? 1 : 0;
+    if (filePenaltyA !== filePenaltyB) return filePenaltyA - filePenaltyB;
+    return rangeSize(a.range) - rangeSize(b.range);
+  });
+  return nearest[0] ?? null;
 }
 
 type TracePreviewTarget = {
@@ -343,6 +409,7 @@ export default function App() {
   const [focusedFlow, setFocusedFlow] = useState<FocusedFlowState | null>(null);
   const [inspectorFocusRequest, setInspectorFocusRequest] =
     useState<InspectorFocusRequest | null>(null);
+  const [runtimeDebug, setRuntimeDebug] = useState<RuntimeDebugState | null>(null);
 
   const [pendingUseSelectionAsRoot, setPendingUseSelectionAsRoot] =
     useState(false);
@@ -612,6 +679,11 @@ export default function App() {
         return;
       }
 
+      if (msg.type === "runtimeDebug") {
+        setRuntimeDebug(msg.payload);
+        return;
+      }
+
       if (msg.type === "analysisResult") {
         const request: AnalysisRequest = msg.request;
         const payload = msg.payload;
@@ -868,6 +940,21 @@ export default function App() {
   );
   const traceActiveNodeId =
     traceFocusEvent?.type === "node" ? traceFocusEvent.node.id : null;
+  const runtimeActiveNode = useMemo(() => {
+    if (!runtimeDebug || runtimeDebug.state !== "paused") return null;
+    return findGraphNodeForRuntimeFrame(graph, runtimeDebug.frame);
+  }, [graph, runtimeDebug]);
+  const runtimeActiveNodeId = runtimeActiveNode?.id ?? null;
+  const runtimeFocusRequest = useMemo(() => {
+    if (!runtimeDebug || runtimeDebug.state !== "paused" || !runtimeActiveNodeId) {
+      return null;
+    }
+    const token = Date.parse(runtimeDebug.updatedAt);
+    return {
+      nodeId: runtimeActiveNodeId,
+      token: Number.isFinite(token) ? token : Date.now(),
+    };
+  }, [runtimeActiveNodeId, runtimeDebug]);
 
   const selectedNode: GraphNode | null = useMemo(() => {
     return findNodeById(graph, selectedNodeId);
@@ -949,6 +1036,21 @@ export default function App() {
       },
     });
   };
+
+  useEffect(() => {
+    if (!runtimeDebug || runtimeDebug.state !== "paused") return;
+    if (runtimeActiveNodeId) return;
+    if (activeGraphGenerationRef.current < 0) return;
+    const filePath = runtimeDebug.frame?.filePath;
+    if (!filePath) return;
+    const hasAnyNodeInFile = Boolean(
+      graph?.nodes.some(
+        (node) => normalizeComparablePath(node.file) === normalizeComparablePath(filePath),
+      ),
+    );
+    if (hasAnyNodeInFile) return;
+    expandExternalFile(filePath);
+  }, [graph, runtimeActiveNodeId, runtimeDebug]);
 
   const openDiagnostic = (diagnostic: CodeDiagnostic) => {
     if (!diagnostic.filePath) return;
@@ -1296,6 +1398,8 @@ export default function App() {
           }
           highlightedEdgeId={effectiveFocusedFlow?.edgeId ?? null}
           traceActiveNodeId={traceActiveNodeId}
+          runtimeActiveNodeId={runtimeActiveNodeId}
+          runtimeFocusRequest={runtimeFocusRequest}
           inspectorFocusRequest={inspectorFocusRequest}
           notice={canvasNotice}
           traceVisible={Boolean(traceEvents && traceEvents.length > 0)}
@@ -1339,6 +1443,8 @@ export default function App() {
           analysis={analysis}
           graph={graph}
           selectedNode={selectedNode}
+          runtimeDebug={runtimeDebug}
+          runtimeActiveNode={runtimeActiveNode}
           notice={inspectorNotice}
           onOpenDiagnostic={openDiagnostic}
           onSelectGraphNode={selectGraphNodeFromInspector}

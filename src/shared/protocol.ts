@@ -113,6 +113,42 @@ export type GraphTraceEvent =
   | { type: "node"; node: GraphNode }
   | { type: "edge"; edge: GraphEdge };
 
+export type RuntimeDebugVariablePreview = {
+  scope: string;
+  name: string;
+  value: string;
+  type?: string;
+  evaluateName?: string;
+  variablesReference?: number;
+};
+
+export type RuntimeDebugSessionInfo = {
+  id: string;
+  name: string;
+  type: string;
+};
+
+export type RuntimeDebugFrame = {
+  id: number;
+  name: string;
+  sourceName?: string;
+  filePath?: string;
+  line?: number;
+  column?: number;
+  endLine?: number;
+  endColumn?: number;
+};
+
+export type RuntimeDebugPayload = {
+  state: "inactive" | "running" | "paused";
+  session?: RuntimeDebugSessionInfo;
+  reason?: string;
+  threadId?: number;
+  frame?: RuntimeDebugFrame | null;
+  variables?: RuntimeDebugVariablePreview[];
+  updatedAt: string;
+};
+
 export type UINoticeSeverity = "info" | "warning" | "error";
 export type UINoticeScope = "toast" | "canvas" | "inspector";
 export type UINotice = {
@@ -245,4 +281,8 @@ export type ExtToWebviewMessage =
             canceled?: boolean;
             error?: string;
           };
+    }
+  | {
+      type: "runtimeDebug";
+      payload: RuntimeDebugPayload;
     };

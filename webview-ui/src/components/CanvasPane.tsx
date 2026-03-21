@@ -991,6 +991,7 @@ function toReactFlowNodes(
   highlightedNodeIds?: Set<string>,
   selectedNodeId?: string | null,
   traceActiveNodeId?: string | null,
+  runtimeActiveNodeId?: string | null,
   focusPulseRequests?: Array<{
     nodeId: string;
     visibleNodeId: string;
@@ -1117,6 +1118,9 @@ function toReactFlowNodes(
 
       const hasSelectedChild = childItems.some((child) => child.id === selectedNodeId);
       const hasTraceActiveChild = childItems.some((child) => child.id === traceActiveNodeId);
+      const hasRuntimeActiveChild = childItems.some(
+        (child) => child.id === runtimeActiveNodeId,
+      );
       const visiblePulseRequest = orderedFocusPulseRequests.find(
         (request) => request.visibleNodeId === n.id,
       );
@@ -1132,8 +1136,10 @@ function toReactFlowNodes(
         selected:
           selectedNodeId === n.id ||
           traceActiveNodeId === n.id ||
+          runtimeActiveNodeId === n.id ||
           hasSelectedChild ||
-          hasTraceActiveChild,
+          hasTraceActiveChild ||
+          hasRuntimeActiveChild,
         focusPulseToken: visiblePulseRequest?.token,
         childItems: childItems.map((child) => {
           const childPulseRequest = orderedFocusPulseRequests.find(
@@ -1143,7 +1149,10 @@ function toReactFlowNodes(
           id: child.id,
           kind: childKindLabel(child),
           title: childTitle(n, child),
-          selected: selectedNodeId === child.id || traceActiveNodeId === child.id,
+          selected:
+            selectedNodeId === child.id ||
+            traceActiveNodeId === child.id ||
+            runtimeActiveNodeId === child.id,
           focusPulseToken: childPulseRequest?.token,
           subtitle: `${childKindLabel(child)} · ${shortFile(child.file)}:${child.range.start.line + 1}`,
           ...(diagnosticSummaryByNode.get(child.id) ?? {}),
@@ -1194,6 +1203,8 @@ export function CanvasPane({
   highlightedNodeIds,
   highlightedEdgeId,
   traceActiveNodeId,
+  runtimeActiveNodeId,
+  runtimeFocusRequest,
   inspectorFocusRequest,
   notice,
   traceVisible,
@@ -1261,6 +1272,13 @@ export function CanvasPane({
     const hasParent = Boolean(target.parentId && graph.nodes.some((node) => node.id === target.parentId));
     return hasParent ? (target.parentId as string) : target.id;
   }, [graph, traceActiveNodeId]);
+  const visibleRuntimeActiveNodeId = useMemo(() => {
+    if (!graph || !runtimeActiveNodeId) return runtimeActiveNodeId;
+    const target = graph.nodes.find((node) => node.id === runtimeActiveNodeId);
+    if (!target) return runtimeActiveNodeId;
+    const hasParent = Boolean(target.parentId && graph.nodes.some((node) => node.id === target.parentId));
+    return hasParent ? (target.parentId as string) : target.id;
+  }, [graph, runtimeActiveNodeId]);
   const inspectorPulseRequest = useMemo(() => {
     if (!inspectorFocusRequest || !visibleInspectorFocusNodeId) return null;
     return {
@@ -1279,9 +1297,22 @@ export function CanvasPane({
       token: traceCursor,
     };
   }, [traceActiveNodeId, traceCursor, traceVisible, visibleTraceActiveNodeId]);
+  const runtimePulseRequest = useMemo(() => {
+    if (!runtimeFocusRequest || !visibleRuntimeActiveNodeId) return null;
+    return {
+      nodeId: runtimeFocusRequest.nodeId,
+      visibleNodeId: visibleRuntimeActiveNodeId,
+      token: runtimeFocusRequest.token,
+    };
+  }, [runtimeFocusRequest, visibleRuntimeActiveNodeId]);
   const focusPulseRequests = useMemo(
     () =>
-      [focusPulseRequest, inspectorPulseRequest, tracePulseRequest].filter(
+      [
+        focusPulseRequest,
+        inspectorPulseRequest,
+        tracePulseRequest,
+        runtimePulseRequest,
+      ].filter(
         (
           request,
         ): request is {
@@ -1290,7 +1321,7 @@ export function CanvasPane({
           token: number;
         } => Boolean(request),
       ),
-    [focusPulseRequest, inspectorPulseRequest, tracePulseRequest],
+    [focusPulseRequest, inspectorPulseRequest, runtimePulseRequest, tracePulseRequest],
   );
 
   const nodes = useMemo<Array<Node<CodeNodeData | FileGroupData>>>(
@@ -1302,6 +1333,7 @@ export function CanvasPane({
         visibleHighlightedNodeIds,
         selectedNodeId,
         traceActiveNodeId,
+        runtimeActiveNodeId,
         focusPulseRequests,
         (nodeId, visibleNodeId) => {
           const target = graph?.nodes.find((node) => node.id === nodeId);
@@ -1347,6 +1379,7 @@ export function CanvasPane({
       onSelectNode,
       selectedNodeId,
       traceActiveNodeId,
+      runtimeActiveNodeId,
       searchHitIds,
       focusPulseRequests,
       visibleHighlightedNodeIds,
@@ -1667,6 +1700,16 @@ export function CanvasPane({
   }, [inspectorFocusRequest, visibleInspectorFocusNodeId]);
 
   useEffect(() => {
+    if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
+    const inst = rfRef.current;
+    if (!inst || !visibleRuntimeActiveNodeId || !runtimeFocusRequest) return;
+
+    const node = inst.getNode(visibleRuntimeActiveNodeId);
+    if (!node) return;
+    focusCanvasNode(inst, node, 1.2, 320);
+  }, [runtimeFocusRequest, visibleRuntimeActiveNodeId]);
+
+  useEffect(() => {
     const inst = rfRef.current;
     if (!inst || !canvasFocusRequest) return;
 
@@ -1941,6 +1984,8 @@ type Props = {
   highlightedNodeIds?: string[];
   highlightedEdgeId?: string | null;
   traceActiveNodeId?: string | null;
+  runtimeActiveNodeId?: string | null;
+  runtimeFocusRequest?: { nodeId: string; token: number } | null;
   inspectorFocusRequest?: { nodeId: string; token: number } | null;
   notice?: UINotice | null;
   traceVisible: boolean;

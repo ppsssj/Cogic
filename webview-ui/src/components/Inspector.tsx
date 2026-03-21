@@ -12,6 +12,7 @@ import type {
   ExtToWebviewMessage,
   GraphNode,
   GraphPayload,
+  RuntimeDebugPayload,
   UINotice,
 } from "../lib/vscode";
 import { ActiveFileSnapshot } from "./ActiveFileSnapshot";
@@ -30,6 +31,10 @@ type AnalysisPayload = Extract<
   ExtToWebviewMessage,
   { type: "analysisResult" }
 >["payload"];
+type RuntimeDebugState = Extract<
+  ExtToWebviewMessage,
+  { type: "runtimeDebug" }
+>["payload"];
 
 export type InspectorPlacement = "auto" | "right" | "bottom";
 export type EffectiveInspectorPlacement = Exclude<InspectorPlacement, "auto">;
@@ -37,6 +42,7 @@ type CollapseDirection = "vertical" | "horizontal";
 type SectionKey =
   | "snapshot"
   | "root"
+  | "runtime"
   | "selected"
   | "selection"
   | "flow"
@@ -48,6 +54,8 @@ type Props = {
   analysis: AnalysisPayload;
   graph?: GraphPayload;
   selectedNode: GraphNode | null;
+  runtimeDebug?: RuntimeDebugState | null;
+  runtimeActiveNode?: GraphNode | null;
   notice?: UINotice | null;
   onOpenDiagnostic: (diagnostic: CodeDiagnostic) => void;
   onSelectGraphNode: (nodeId: string) => void;
@@ -81,11 +89,13 @@ const SECTION_STORAGE_KEY = "cg.inspector.sections";
 const DEFAULT_SECTION_STATE: Record<SectionKey, boolean> = {
   snapshot: true,
   root: true,
+  runtime: false,
   selected: true,
   selection: true,
   flow: true,
   analysis: true,
 };
+const RUNTIME_VAR_HOVER_DELAY_MS = 300;
 
 function shortFile(p: string) {
   const parts = p.split(/[/\\]/);
@@ -96,6 +106,34 @@ function fmtRange(n: GraphNode) {
   const s = n.range.start;
   const e = n.range.end;
   return `${s.line + 1}:${s.character + 1} -> ${e.line + 1}:${e.character + 1}`;
+}
+
+function fmtRuntimeLocation(frame: RuntimeDebugPayload["frame"]) {
+  if (!frame) return "(no frame)";
+  if (frame.filePath && frame.line !== undefined) {
+    const column = frame.column !== undefined ? `:${frame.column + 1}` : "";
+    return `${shortFile(frame.filePath)}:${frame.line + 1}${column}`;
+  }
+  if (frame.sourceName) return frame.sourceName;
+  return frame.name;
+}
+
+function fmtRuntimeScope(scope: string) {
+  const lower = scope.toLowerCase();
+  if (lower === "arguments") {
+    return "ARG";
+  }
+  if (lower === "locals") {
+    return "LOCAL";
+  }
+  return scope.toUpperCase();
+}
+
+function compactRuntimeValue(value: string, max = 24) {
+  if (value.length <= max) {
+    return value;
+  }
+  return `${value.slice(0, max - 3)}...`;
 }
 
 type NodeSig = {
@@ -219,6 +257,8 @@ export function Inspector({
   analysis,
   graph,
   selectedNode,
+  runtimeDebug = null,
+  runtimeActiveNode = null,
   notice,
   onOpenDiagnostic,
   onSelectGraphNode,
@@ -242,7 +282,10 @@ export function Inspector({
   const [sectionOpen, setSectionOpen] = useState<Record<SectionKey, boolean>>(
     () => loadSectionState(),
   );
+  const [hoveredRuntimeVarKey, setHoveredRuntimeVarKey] = useState<string | null>(null);
+  const [pinnedRuntimeVarKeys, setPinnedRuntimeVarKeys] = useState<string[]>([]);
   const settingsRef = useRef<HTMLDivElement | null>(null);
+  const runtimeVarHoverTimerRef = useRef<number | null>(null);
   const nodeById = new Map((graph?.nodes ?? []).map((n) => [n.id, n]));
   const collapseDirection: CollapseDirection =
     effectivePlacement === "bottom" ? "horizontal" : "vertical";
@@ -309,8 +352,71 @@ export function Inspector({
     }
   }, [sectionOpen]);
 
+  useEffect(() => {
+    setSectionOpen((prev) => {
+      const shouldOpen = Boolean(runtimeDebug && runtimeDebug.state !== "inactive");
+      if (prev.runtime === shouldOpen) {
+        return prev;
+      }
+      return { ...prev, runtime: shouldOpen };
+    });
+  }, [runtimeDebug]);
+
+  useEffect(() => {
+    const variableKeys = new Set(
+      (runtimeDebug?.variables ?? []).map((variable) => `${variable.scope}:${variable.name}`),
+    );
+    setHoveredRuntimeVarKey((current) =>
+      current && variableKeys.has(current) ? current : null,
+    );
+    setPinnedRuntimeVarKeys((current) =>
+      current.filter((key) => variableKeys.has(key)),
+    );
+  }, [runtimeDebug]);
+
+  useEffect(() => {
+    return () => {
+      if (runtimeVarHoverTimerRef.current !== null) {
+        window.clearTimeout(runtimeVarHoverTimerRef.current);
+      }
+    };
+  }, []);
+
   const toggleSection = (key: SectionKey) => {
     setSectionOpen((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+  const scheduleRuntimeVarHover = (variableKey: string) => {
+    if (runtimeVarHoverTimerRef.current !== null) {
+      window.clearTimeout(runtimeVarHoverTimerRef.current);
+    }
+    runtimeVarHoverTimerRef.current = window.setTimeout(() => {
+      setHoveredRuntimeVarKey(variableKey);
+      runtimeVarHoverTimerRef.current = null;
+    }, RUNTIME_VAR_HOVER_DELAY_MS);
+  };
+  const clearRuntimeVarHover = (variableKey?: string) => {
+    if (runtimeVarHoverTimerRef.current !== null) {
+      window.clearTimeout(runtimeVarHoverTimerRef.current);
+      runtimeVarHoverTimerRef.current = null;
+    }
+    setHoveredRuntimeVarKey((current) => {
+      if (!variableKey || current === variableKey) {
+        return null;
+      }
+      return current;
+    });
+  };
+  const togglePinnedRuntimeVar = (variableKey: string) => {
+    const isPinned = pinnedRuntimeVarKeys.includes(variableKey);
+    if (isPinned) {
+      clearRuntimeVarHover(variableKey);
+    }
+    setPinnedRuntimeVarKeys((current) => {
+      if (current.includes(variableKey)) {
+        return current.filter((key) => key !== variableKey);
+      }
+      return [...current, variableKey];
+    });
   };
 
   const collapseIcon =
@@ -527,6 +633,131 @@ export function Inspector({
                 <div className="kvRow">
                   <div className="kvKey mono">range</div>
                   <div className="kvVal mono">{fmtRange(rootNode)}</div>
+                </div>
+              </div>
+            )}
+          </InspectorPanel>
+
+          <InspectorPanel
+            className="panel--runtime"
+            title="RUNTIME FRAME"
+            collapsedLabel="Runtime"
+            open={sectionOpen.runtime}
+            onToggle={() => toggleSection("runtime")}
+            collapseDirection={collapseDirection}
+          >
+            {!runtimeDebug || runtimeDebug.state === "inactive" ? (
+              <div className="mutedText">No active debug session.</div>
+            ) : runtimeDebug.state === "running" ? (
+              <div className="kvList">
+                <div className="kvRow">
+                  <div className="kvKey mono">status</div>
+                  <div className="kvVal mono">
+                    Running{runtimeDebug.session?.name ? ` in ${runtimeDebug.session.name}` : ""}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: "grid", gap: 12 }}>
+                <div
+                  style={{
+                    padding: 12,
+                    borderRadius: 12,
+                    border: "1px solid rgba(56, 189, 248, 0.28)",
+                    background: "rgba(56, 189, 248, 0.06)",
+                    display: "grid",
+                    gap: 8,
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 10,
+                    }}
+                  >
+                    <div className="mono" style={{ fontSize: 11, opacity: 0.75 }}>
+                      {runtimeDebug.reason ?? "paused"}
+                    </div>
+                    {runtimeActiveNode ? (
+                      <button
+                        className="smallBtn"
+                        type="button"
+                        onClick={() => onActivateGraphNode(runtimeActiveNode.id)}
+                        title={runtimeActiveNode.file}
+                      >
+                        {runtimeActiveNode.name}
+                      </button>
+                    ) : null}
+                  </div>
+                  <div className="mono" style={{ fontSize: 13, fontWeight: 800 }}>
+                    {runtimeDebug.frame?.name ?? "(unavailable frame)"}
+                  </div>
+                  <div className="mono" style={{ fontSize: 12, opacity: 0.8 }}>
+                    {fmtRuntimeLocation(runtimeDebug.frame)}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="mono" style={{ fontSize: 11, opacity: 0.75, marginBottom: 8 }}>
+                    Key Variables
+                  </div>
+                  {runtimeDebug.variables && runtimeDebug.variables.length > 0 ? (
+                    <div className="kvList">
+                      {runtimeDebug.variables.map((variable) => {
+                        const variableKey = `${variable.scope}:${variable.name}`;
+                        const expanded =
+                          pinnedRuntimeVarKeys.includes(variableKey) ||
+                          hoveredRuntimeVarKey === variableKey;
+
+                        return (
+                          <div
+                            className={[
+                              "runtimeVarCard",
+                              expanded ? "isExpanded" : "",
+                              pinnedRuntimeVarKeys.includes(variableKey) ? "isPinned" : "",
+                            ].join(" ").trim()}
+                            key={variableKey}
+                            role="button"
+                            tabIndex={0}
+                            onMouseEnter={() => scheduleRuntimeVarHover(variableKey)}
+                            onMouseLeave={() => clearRuntimeVarHover(variableKey)}
+                            onClick={() => togglePinnedRuntimeVar(variableKey)}
+                            onKeyDown={(event) => {
+                              if (event.key !== "Enter" && event.key !== " ") return;
+                              event.preventDefault();
+                              togglePinnedRuntimeVar(variableKey);
+                            }}
+                          >
+                            <div className="runtimeVarCardTop">
+                              <div className="runtimeVarCardName mono" title={variable.scope}>
+                                {fmtRuntimeScope(variable.scope)} {variable.name}
+                              </div>
+                              <div className="runtimeVarCardValue mono" title={variable.value}>
+                                {expanded ? variable.value : compactRuntimeValue(variable.value)}
+                              </div>
+                            </div>
+
+                            {expanded ? (
+                              <div className="runtimeVarCardDetail">
+                                {variable.type ? (
+                                  <div className="runtimeVarCardMeta mono">{variable.type}</div>
+                                ) : null}
+                                {variable.evaluateName ? (
+                                  <div className="runtimeVarCardMeta mono">
+                                    {variable.evaluateName}
+                                  </div>
+                                ) : null}
+                              </div>
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="mutedText">No useful locals or arguments yet.</div>
+                  )}
                 </div>
               </div>
             )}

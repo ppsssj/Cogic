@@ -15,6 +15,8 @@ export type {
   GraphNode,
   GraphPayload,
   GraphTraceEvent,
+  RuntimeDebugPayload,
+  RuntimeDebugVariablePreview,
   UINotice,
 } from "../../../src/shared/protocol";
 
@@ -69,6 +71,7 @@ export function isExtToWebviewMessage(x: unknown): x is ExtToWebviewMessage {
     t === "selection" ||
     t === "analysisResult" ||
     t === "uiNotice" ||
-    t === "flowExportResult"
+    t === "flowExportResult" ||
+    t === "runtimeDebug"
   );
 }

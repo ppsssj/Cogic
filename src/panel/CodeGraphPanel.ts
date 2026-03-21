@@ -13,6 +13,7 @@ import {
   dumpPanelDebugBuffer,
   pushPanelDebugEvent,
 } from "./debugLog";
+import { RuntimeDebugBridge } from "./runtimeDebug";
 
 function getGraphCounts(payload?: { nodes: unknown[]; edges: unknown[] }) {
   return {
@@ -63,6 +64,7 @@ export class CodeGraphPanel {
   private analysisSequence = 0;
   private latestActiveAnalysisSequence = 0;
   private traceHighlightTimer: NodeJS.Timeout | undefined;
+  private runtimeDebugBridge: RuntimeDebugBridge | undefined;
   private readonly traceHighlightDecoration =
     vscode.window.createTextEditorDecorationType({
       backgroundColor: "rgba(56, 189, 248, 0.14)",
@@ -102,6 +104,12 @@ export class CodeGraphPanel {
 
   private init() {
     this.panel.webview.html = getWebviewHtml(this.context, this.panel.webview);
+    this.runtimeDebugBridge = new RuntimeDebugBridge((payload) => {
+      this.panel.webview.postMessage({
+        type: "runtimeDebug",
+        payload,
+      } satisfies ExtToWebviewMessage);
+    });
 
     this.lastTextEditor = vscode.window.activeTextEditor;
     this.lastSelection = vscode.window.activeTextEditor?.selection;
@@ -161,6 +169,13 @@ export class CodeGraphPanel {
     this.postActiveFile();
     void this.postWorkspaceFiles();
     this.postSelection();
+    const runtimePayload = this.runtimeDebugBridge?.getLastPayload();
+    if (runtimePayload) {
+      this.panel.webview.postMessage({
+        type: "runtimeDebug",
+        payload: runtimePayload,
+      } satisfies ExtToWebviewMessage);
+    }
 
     // ---- auto-analysis for active file changes (debounced) ----
     const scheduleAnalysis = (delayMs: number) => {
@@ -276,6 +291,8 @@ export class CodeGraphPanel {
       if (this.traceHighlightTimer) {
         clearTimeout(this.traceHighlightTimer);
       }
+      this.runtimeDebugBridge?.dispose();
+      this.runtimeDebugBridge = undefined;
       this.traceHighlightDecoration.dispose();
     });
   }

@@ -210,18 +210,130 @@
 }
 
 .inspector--bottom .panel--root .kvRow,
-.inspector--bottom .panel--selected .kvRow {
+.inspector--bottom .panel--selected .kvRow,
+.inspector--bottom .panel--runtime .kvRow {
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
 }
 
 .inspector--bottom .panel--root .kvVal,
-.inspector--bottom .panel--selected .kvVal {
+.inspector--bottom .panel--selected .kvVal,
+.inspector--bottom .panel--runtime .kvVal {
   max-width: 100%;
   width: 100%;
   text-align: left;
   white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.panel--runtime .kvRow {
+  align-items: flex-start;
+}
+
+.panel--runtime .kvVal {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.panel--runtime .smallBtn {
+  display: inline-block;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.runtimeVarCard {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.035);
+  cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.runtimeVarCard:hover {
+  transform: translateY(-1px);
+  border-color: rgba(56, 189, 248, 0.3);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.runtimeVarCard.isExpanded {
+  border-color: rgba(56, 189, 248, 0.38);
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.runtimeVarCard.isPinned {
+  box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.18);
+}
+
+.runtimeVarCard:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.5);
+  outline-offset: 2px;
+}
+
+.runtimeVarCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.runtimeVarCardName {
+  flex: 0 0 auto;
+  max-width: 48%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.92;
+}
+
+.runtimeVarCardValue {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: right;
+  opacity: 0.8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.runtimeVarCard.isExpanded .runtimeVarCardTop {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.runtimeVarCard.isExpanded .runtimeVarCardName,
+.runtimeVarCard.isExpanded .runtimeVarCardValue {
+  max-width: 100%;
+  width: 100%;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.runtimeVarCardDetail {
+  margin-top: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.runtimeVarCardMeta {
+  font-size: 11px;
+  opacity: 0.68;
   overflow-wrap: anywhere;
 }
 

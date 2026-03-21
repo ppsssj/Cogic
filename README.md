@@ -16,7 +16,7 @@ CodeGraph analyzes the active file in your workspace and renders:
 
 - file, function, method, class, interface, type, enum, and external nodes
 - call edges, reference edges, and parameter/data-flow edges
-- inspector details, diagnostics, and trace mode playback
+- inspector details, diagnostics, trace mode playback, and runtime debug overlays
 
 It is split into two parts:
 
@@ -37,6 +37,17 @@ It is split into two parts:
 
 ![Trace Walkthrough](assets/Trace_demo.gif)
 
+## Runtime Debug Walkthrough
+
+![Runtime Debug Walkthrough](assets/debug_demo.gif)
+
+The intended flow is:
+
+1. open the sample workspace
+2. generate the graph once
+3. start a VS Code debug session
+4. step through code while CodeGraph follows the active frame
+
 ## Error Demo
 
 ![Error Demo](assets/error_demo.png)
@@ -48,6 +59,7 @@ It is split into two parts:
 - Analyze the active TypeScript/JavaScript file and render an interactive graph
 - Canvas node interactions split selection and navigation for more stable graph rendering
 - Trace mode to step through graph construction events
+- Debug mode to follow the currently paused runtime frame from the VS Code debugger
 - Inspector panel with diagnostics, graph metadata, and node details
 - Workspace file picker and graph search from the top bar
 - Canvas controls for zoom, focus-selection, and fit-graph actions
@@ -69,6 +81,41 @@ It is split into two parts:
 - Trace playback steps through graph construction events one step at a time
 - Newly introduced trace nodes are visually focused in the canvas
 - Parameter-flow trace steps highlight the edge and surface the active flow in the inspector panel
+
+## Debug Mode
+
+- Debug mode listens to VS Code debug sessions and reads the active paused stack frame
+- The current frame `file/line` is mapped onto the existing graph and the matched node is highlighted
+- Stepping with `Step Over` / `Step Into` updates the graph focus as the active frame changes
+- The inspector surfaces the current runtime frame and a compact preview of key variables
+
+### Recommended flow
+
+1. open the target file
+2. click `Generate` to build the graph
+3. start a normal VS Code debug session with breakpoints
+4. when execution pauses, let CodeGraph follow the active frame
+5. continue stepping to watch the graph move across functions and methods
+
+### Current MVP scope
+
+- built around file-backed TypeScript/JavaScript debug flows
+- best experience when the graph has already been generated for the active file
+- focused on paused-frame tracking rather than full execution tracing while the program is running
+
+## Trace Mode vs Debug Mode
+
+| Mode | What it shows | Source of truth | Best for |
+| --- | --- | --- | --- |
+| `Trace Mode` | how the graph is constructed step by step | static analyzer trace events | understanding graph generation order and data-flow construction |
+| `Debug Mode` | where the paused program is currently executing | VS Code debug adapter + active stack frame | following real runtime execution while stepping through code |
+
+In short:
+
+- `Trace Mode` is offline and analyzer-driven
+- `Debug Mode` is live and debugger-driven
+- `Trace Mode` explains how CodeGraph built the graph
+- `Debug Mode` explains where your program is stopped right now
 
 ---
 
@@ -165,6 +212,7 @@ flowchart LR
 | `workspaceFiles` | Workspace root and file list |
 | `selection` | Current selection payload |
 | `analysisResult` | Graph, diagnostics, trace, and metadata |
+| `runtimeDebug` | Current runtime debug session/frame/variable snapshot |
 | `uiNotice` | Toast/canvas/inspector notice |
 | `flowExportResult` | Result of JSON/JPG export save |
 
