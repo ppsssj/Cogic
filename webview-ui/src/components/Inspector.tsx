@@ -57,6 +57,12 @@ type Props = {
     sourceId: string;
     targetId: string;
   }) => void;
+  activeFlowPreview?: {
+    edgeId: string;
+    sourceId: string;
+    targetId: string;
+    origin: "manual" | "trace";
+  } | null;
   onRefreshActive: () => void;
   onResetGraph: () => void;
   onExpandExternal: (filePath: string) => void;
@@ -218,6 +224,7 @@ export function Inspector({
   onSelectGraphNode,
   onActivateGraphNode,
   onFocusParamFlow,
+  activeFlowPreview = null,
   onRefreshActive,
   onResetGraph,
   onExpandExternal,
@@ -254,6 +261,24 @@ export function Inspector({
       to: nodeById.get(e.target)?.name ?? e.target,
       label: e.label ?? "(param flow)",
     }));
+  const activeFlowCard = activeFlowPreview
+    ? (() => {
+        const activeEdge = graph?.edges.find((edge) => edge.id === activeFlowPreview.edgeId);
+        if (!activeEdge || activeEdge.kind !== "dataflow") return null;
+        return {
+          id: activeFlowPreview.edgeId,
+          sourceId: activeFlowPreview.sourceId,
+          targetId: activeFlowPreview.targetId,
+          from: nodeById.get(activeFlowPreview.sourceId)?.name ?? activeFlowPreview.sourceId,
+          to: nodeById.get(activeFlowPreview.targetId)?.name ?? activeFlowPreview.targetId,
+          label: activeEdge.label ?? "(param flow)",
+          origin: activeFlowPreview.origin,
+        };
+      })()
+    : null;
+  const visibleParamFlows = activeFlowCard && !paramFlows.some((flow) => flow.id === activeFlowCard.id)
+    ? [activeFlowCard, ...paramFlows]
+    : paramFlows;
 
   useEffect(() => {
     if (!settingsOpen) return;
@@ -590,7 +615,27 @@ export function Inspector({
             onToggle={() => toggleSection("flow")}
             collapseDirection={collapseDirection}
           >
-            {paramFlows.length === 0 ? (
+            {activeFlowCard ? (
+              <div className="inspectorFlowActive">
+                <div className="inspectorFlowActiveTop">
+                  <span className="inspectorFlowActiveTitle">
+                    {activeFlowCard.origin === "trace" ? "Current Trace Flow" : "Focused Parameter Flow"}
+                  </span>
+                  <span className="inspectorFlowActiveBadge">
+                    {activeFlowCard.origin === "trace" ? "TRACE" : "FOCUS"}
+                  </span>
+                </div>
+                <div className="mono inspectorFlowActivePath">
+                  {activeFlowCard.from}
+                  {" -> "}
+                  {activeFlowCard.to}
+                </div>
+                <div className="mutedText mono" title={activeFlowCard.label}>
+                  {activeFlowCard.label}
+                </div>
+              </div>
+            ) : null}
+            {visibleParamFlows.length === 0 ? (
               <div className="mutedText">
                 {selectedNode
                   ? "No parameter flow for selected node."
@@ -598,9 +643,13 @@ export function Inspector({
               </div>
             ) : (
               <div className="kvList">
-                {paramFlows.map((f) => (
+                {visibleParamFlows.map((f) => (
                   <div
-                    className="kvRow inspectorFlowRow"
+                    className={[
+                      "kvRow",
+                      "inspectorFlowRow",
+                      activeFlowCard?.id === f.id ? "inspectorFlowRow--active" : "",
+                    ].join(" ")}
                     key={f.id}
                     style={{ display: "block" }}
                     onClick={() =>

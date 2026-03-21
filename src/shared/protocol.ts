@@ -7,6 +7,19 @@ export type WebviewToExtMessage =
   | { type: "selectWorkspaceFile"; payload: { filePath: string } }
   | { type: "expandNode"; payload: { filePath: string; generation?: number } }
   | {
+      type: "debugEvent";
+      payload: {
+        event: string;
+        detail?: Record<string, unknown>;
+        recent?: Array<{
+          seq: number;
+          at: string;
+          event: string;
+          detail?: Record<string, unknown>;
+        }>;
+      };
+    }
+  | {
       type: "saveExportFile";
       payload: {
         suggestedFileName: string;

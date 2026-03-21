@@ -47,7 +47,6 @@ export function getVSCodeApi(): VSCodeApi {
   let __vscode_state: unknown = undefined;
   return {
     postMessage: (msg: WebviewToExtMessage) => {
-      console.debug("[vscode.postMessage - dev shim]", msg);
       try {
         window.dispatchEvent(new MessageEvent("message", { data: msg }));
       } catch {

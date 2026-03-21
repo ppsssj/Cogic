@@ -20,7 +20,11 @@ import {
   type GraphPayload,
   type GraphTraceEvent,
   type UINotice,
+  type WebviewToExtMessage,
 } from "./lib/vscode";
+import {
+  pushWebviewDebugEvent,
+} from "./lib/debugLog";
 import "./styles/index.css";
 
 const vscode = getVSCodeApi();
@@ -50,10 +54,44 @@ type FlowExportResultPayload = Extract<
   { type: "flowExportResult" }
 >["payload"];
 type NoticeSeverity = UINotice["severity"];
+type OpenLocationPayload = Extract<
+  WebviewToExtMessage,
+  { type: "openLocation" }
+>["payload"];
+
+const ENABLE_OPEN_LOCATION = true;
 
 function findNodeById(graph: GraphPayload | undefined, id: string | null) {
   if (!graph || !id) return null;
   return graph.nodes.find((n) => n.id === id) ?? null;
+}
+
+function getGraphCounts(graph: GraphPayload | undefined) {
+  return {
+    hasGraph: Boolean(graph),
+    nodes: graph?.nodes.length ?? 0,
+    edges: graph?.edges.length ?? 0,
+  };
+}
+
+function getAnalysisPayloadCounts(payload: AnalysisPayload) {
+  return {
+    hasPayload: Boolean(payload),
+    graphNodes: payload?.graph?.nodes.length ?? 0,
+    graphEdges: payload?.graph?.edges.length ?? 0,
+    traceEvents: payload?.trace?.length ?? 0,
+    diagnostics: payload?.diagnostics?.length ?? 0,
+  };
+}
+
+function getNodeDebugInfo(node: GraphNode | null) {
+  if (!node) return {};
+  return {
+    nodeId: node.id,
+    nodeKind: node.kind,
+    filePath: node.file,
+    line: node.range.start.line + 1,
+  };
 }
 
 function mergeGraph(
@@ -273,6 +311,9 @@ type FocusedFlowState = {
   sourceId: string;
   targetId: string;
 };
+type FlowPreviewState = FocusedFlowState & {
+  origin: "manual" | "trace";
+};
 type InspectorFocusRequest = {
   nodeId: string;
   token: number;
@@ -370,6 +411,45 @@ export default function App() {
   );
   const [exportFormat, setExportFormat] = useState<ExportFormat | null>(null);
 
+  const postMessage = (
+    origin: string,
+    message: WebviewToExtMessage,
+    detail?: Record<string, unknown>,
+  ) => {
+    pushWebviewDebugEvent(`webview.postMessage.${message.type}`, {
+      origin,
+      ...detail,
+    });
+    vscode.postMessage(message);
+  };
+
+  const postOpenLocation = (
+    origin: string,
+    payload: OpenLocationPayload,
+    detail?: Record<string, unknown>,
+  ) => {
+    if (!ENABLE_OPEN_LOCATION) {
+      pushWebviewDebugEvent("openLocation.disabled", {
+        origin,
+        filePath: payload.filePath,
+        preserveFocus: payload.preserveFocus ?? false,
+        startLine: payload.range?.start.line ?? null,
+        endLine: payload.range?.end.line ?? null,
+        ...detail,
+      });
+      return;
+    }
+
+    postMessage(
+      origin,
+      {
+        type: "openLocation",
+        payload,
+      },
+      detail,
+    );
+  };
+
   const finishExport = () => {
     setExportStatus("done");
     window.setTimeout(() => setExportStatus("idle"), 900);
@@ -436,6 +516,19 @@ export default function App() {
   useEffect(() => {
     graphRef.current = graphState;
   }, [graphState]);
+
+  useEffect(() => {
+    pushWebviewDebugEvent("app.graphState.changed", {
+      ...getGraphCounts(graphState),
+      traceMode,
+    });
+  }, [graphState, traceMode]);
+
+  useEffect(() => {
+    pushWebviewDebugEvent("app.selectedNode.changed", {
+      selectedNodeId,
+    });
+  }, [selectedNodeId]);
 
   useEffect(() => {
     const root = appRootRef.current;
@@ -527,9 +620,18 @@ export default function App() {
           ? summarizeDiagnostics(payload.diagnostics)
           : null;
 
+        pushWebviewDebugEvent("analysisResult.received", {
+          lane: request.lane,
+          reason: request.reason,
+          requestId: request.requestId,
+          generation: request.generation,
+          sequence: request.sequence,
+          ...getAnalysisPayloadCounts(payload),
+        });
+
         if (request.lane === "active") {
           if (request.sequence < latestActiveSequenceRef.current) {
-            console.debug("[codegraph] drop stale active result in webview", {
+            pushWebviewDebugEvent("analysisResult.dropped.active.stale", {
               requestId: request.requestId,
               generation: request.generation,
               sequence: request.sequence,
@@ -543,6 +645,10 @@ export default function App() {
           setAnalysis(payload);
 
           if (!payload) {
+            pushWebviewDebugEvent("analysisResult.applied.active.empty", {
+              requestId: request.requestId,
+              generation: request.generation,
+            });
             activeGraphGenerationRef.current = -1;
             setTraceEvents(null);
             setTraceCursor(0);
@@ -565,6 +671,13 @@ export default function App() {
           setRootNodeId(null);
 
           if (trace && trace.length > 0) {
+            pushWebviewDebugEvent("analysisResult.applied.active.trace", {
+              requestId: request.requestId,
+              generation: request.generation,
+              traceEvents: trace.length,
+              graphNodes: g?.nodes.length ?? 0,
+              graphEdges: g?.edges.length ?? 0,
+            });
             const maxEvents = 800;
             const events = trace.slice(0, maxEvents);
             setTraceEvents(events);
@@ -575,6 +688,11 @@ export default function App() {
             return;
           }
 
+          pushWebviewDebugEvent("analysisResult.applied.active.graph", {
+            requestId: request.requestId,
+            generation: request.generation,
+            ...getGraphCounts(g),
+          });
           setTraceEvents(null);
           setTraceCursor(0);
           setGraphState(g);
@@ -583,7 +701,7 @@ export default function App() {
         }
 
         if (request.generation !== activeGraphGenerationRef.current) {
-          console.debug("[codegraph] drop stale expand result in webview", {
+          pushWebviewDebugEvent("analysisResult.dropped.expand.stale", {
             requestId: request.requestId,
             generation: request.generation,
             activeGeneration: activeGraphGenerationRef.current,
@@ -592,7 +710,20 @@ export default function App() {
         }
 
         if (payload?.graph) {
-          setGraphState((prev) => mergeGraph(prev, payload.graph));
+          setGraphState((prev) => {
+            const merged = mergeGraph(prev, payload.graph);
+            pushWebviewDebugEvent("analysisResult.applied.expand.merge", {
+              requestId: request.requestId,
+              generation: request.generation,
+              prevNodes: prev?.nodes.length ?? 0,
+              prevEdges: prev?.edges.length ?? 0,
+              nextNodes: payload.graph?.nodes.length ?? 0,
+              nextEdges: payload.graph?.edges.length ?? 0,
+              mergedNodes: merged?.nodes.length ?? 0,
+              mergedEdges: merged?.edges.length ?? 0,
+            });
+            return merged;
+          });
           setCanvasNotice(diagnosticsNotice);
         }
       }
@@ -600,9 +731,9 @@ export default function App() {
 
     window.addEventListener("message", onMessage);
 
-    vscode.postMessage({ type: "requestActiveFile" });
-    vscode.postMessage({ type: "requestWorkspaceFiles" });
-    vscode.postMessage({ type: "requestSelection" });
+    postMessage("app.mount", { type: "requestActiveFile" });
+    postMessage("app.mount", { type: "requestWorkspaceFiles" });
+    postMessage("app.mount", { type: "requestSelection" });
 
     return () => window.removeEventListener("message", onMessage);
   }, []);
@@ -718,6 +849,26 @@ export default function App() {
       ),
     [analysis?.graph, graph, traceCursor, traceEvents, traceFocusEvent],
   );
+  const traceFocusedFlow = useMemo<FlowPreviewState | null>(() => {
+    if (!traceFocusEvent || traceFocusEvent.type !== "edge") return null;
+    if (traceFocusEvent.edge.kind !== "dataflow") return null;
+    return {
+      edgeId: traceFocusEvent.edge.id,
+      sourceId: traceFocusEvent.edge.source,
+      targetId: traceFocusEvent.edge.target,
+      origin: "trace",
+    };
+  }, [traceFocusEvent]);
+  const effectiveFocusedFlow = traceFocusedFlow ?? (
+    focusedFlow
+      ? {
+          ...focusedFlow,
+          origin: "manual" as const,
+        }
+      : null
+  );
+  const traceActiveNodeId =
+    traceFocusEvent?.type === "node" ? traceFocusEvent.node.id : null;
 
   const selectedNode: GraphNode | null = useMemo(() => {
     return findNodeById(graph, selectedNodeId);
@@ -728,6 +879,10 @@ export default function App() {
     activeFile?.fileName?.replace(/[^\w.-]+/g, "_")?.slice(0, 64) || "codegraph";
 
   const resetGraph = () => {
+    pushWebviewDebugEvent("app.resetGraph", {
+      ...getGraphCounts(graphRef.current),
+      activeGeneration: activeGraphGenerationRef.current,
+    });
     activeGraphGenerationRef.current = -1;
     setTraceEvents(null);
     setTraceCursor(0);
@@ -759,7 +914,7 @@ export default function App() {
       const next = !prev;
       if (next) {
         resetGraph();
-        vscode.postMessage({
+        postMessage("trace.toggle.on", {
           type: "analyzeActiveFile",
           payload: { traceMode: true },
         });
@@ -772,10 +927,19 @@ export default function App() {
   };
 
   const expandExternalFile = (filePath: string) => {
-    if (!filePath) return;
-    if (expandedFilesRef.current.has(filePath)) return;
+    if (!filePath) {
+      pushWebviewDebugEvent("expandNode.skipped.empty-file", {});
+      return;
+    }
+    if (expandedFilesRef.current.has(filePath)) {
+      pushWebviewDebugEvent("expandNode.skipped.already-expanded", {
+        filePath,
+        generation: activeGraphGenerationRef.current,
+      });
+      return;
+    }
     expandedFilesRef.current.add(filePath);
-    vscode.postMessage({
+    postMessage("expandExternalFile", {
       type: "expandNode",
       payload: {
         filePath,
@@ -789,14 +953,19 @@ export default function App() {
 
   const openDiagnostic = (diagnostic: CodeDiagnostic) => {
     if (!diagnostic.filePath) return;
-    vscode.postMessage({
-      type: "openLocation",
-      payload: {
+    postOpenLocation(
+      "inspector.openDiagnostic",
+      {
         filePath: diagnostic.filePath,
         range: diagnostic.range,
         preserveFocus: false,
       },
-    });
+      {
+        filePath: diagnostic.filePath,
+        code: diagnostic.code,
+        severity: diagnostic.severity,
+      },
+    );
   };
 
   const activateGraphNode = (nodeId: string) => {
@@ -804,18 +973,39 @@ export default function App() {
     setSelectedNodeId(nodeId);
     setInspectorFocusRequest({ nodeId, token: Date.now() });
     const targetNode = findNodeById(graph, nodeId);
+    pushWebviewDebugEvent("inspector.node.activate", {
+      requestedNodeId: nodeId,
+      ...getNodeDebugInfo(targetNode),
+      ...getGraphCounts(graph),
+    });
     if (!targetNode) return;
-    vscode.postMessage({
-      type: "openLocation",
-      payload: {
+    postOpenLocation(
+      "inspector.node.activate",
+      {
         filePath: targetNode.file,
         range: targetNode.range,
         preserveFocus: false,
       },
+      getNodeDebugInfo(targetNode),
+    );
+  };
+
+  const selectGraphNodeFromInspector = (nodeId: string) => {
+    const targetNode = findNodeById(graph, nodeId);
+    pushWebviewDebugEvent("inspector.node.select", {
+      requestedNodeId: nodeId,
+      ...getNodeDebugInfo(targetNode),
+      ...getGraphCounts(graph),
     });
+    setSelectedNodeId(nodeId);
   };
 
   const focusParamFlow = (flow: FocusedFlowState) => {
+    pushWebviewDebugEvent("inspector.paramFlow.focus", {
+      edgeId: flow.edgeId,
+      sourceId: flow.sourceId,
+      targetId: flow.targetId,
+    });
     setFocusedFlow(flow);
   };
 
@@ -923,8 +1113,7 @@ export default function App() {
         "Save JSON Export",
         { "JSON Files": ["json"] },
       );
-    } catch (e) {
-      console.error("[codegraph] exportGraphAsJson error:", e);
+    } catch {
       setExportStatus("idle");
       setExportFormat(null);
       showToast("error", "JSON export failed");
@@ -978,8 +1167,7 @@ export default function App() {
         "Save JPG Export",
         { "JPEG Images": ["jpg", "jpeg"] },
       );
-    } catch (e) {
-      console.error("[codegraph] exportGraphAsJpg error:", e);
+    } catch {
       setExportStatus("idle");
       setExportFormat(null);
       showToast("error", "JPG export failed");
@@ -989,14 +1177,19 @@ export default function App() {
   useEffect(() => {
     if (!traceEvents || !tracePreviewTarget) return;
 
-    vscode.postMessage({
-      type: "openLocation",
-      payload: {
+    postOpenLocation(
+      "trace.preview",
+      {
         filePath: tracePreviewTarget.filePath,
         range: tracePreviewTarget.range,
         preserveFocus: true,
       },
-    });
+      {
+        requestId: tracePreviewTarget.requestId,
+        filePath: tracePreviewTarget.filePath,
+        title: tracePreviewTarget.title,
+      },
+    );
   }, [traceEvents, tracePreviewTarget]);
 
   return (
@@ -1008,19 +1201,19 @@ export default function App() {
         activeFilePath={activeFile ? uriToFsPath(activeFile.uri) : null}
         onPickFile={(filePath) => {
           resetGraph();
-          vscode.postMessage({
+          postMessage("topbar.pickFile", {
             type: "selectWorkspaceFile",
             payload: { filePath },
           });
         }}
         onRefresh={() => {
-          vscode.postMessage({ type: "requestActiveFile" });
-          vscode.postMessage({ type: "requestWorkspaceFiles" });
-          vscode.postMessage({ type: "requestSelection" });
+          postMessage("topbar.refresh", { type: "requestActiveFile" });
+          postMessage("topbar.refresh", { type: "requestWorkspaceFiles" });
+          postMessage("topbar.refresh", { type: "requestSelection" });
         }}
         onGenerate={() => {
           resetGraph();
-          vscode.postMessage({
+          postMessage("topbar.generate", {
             type: "analyzeActiveFile",
             payload: { traceMode },
           });
@@ -1055,33 +1248,42 @@ export default function App() {
           rootNodeId={rootNodeId}
           selectedNodeId={selectedNodeId}
           onSelectNode={(nodeId) => {
+            pushWebviewDebugEvent("canvas.selection.request", {
+              nodeId,
+            });
             setFocusedFlow(null);
             setSelectedNodeId(nodeId);
           }}
           onClearSelection={() => {
+            pushWebviewDebugEvent("canvas.selection.clear", {});
             setSelectedNodeId(null);
             setFocusedFlow(null);
           }}
-          // ✅ 노드 클릭 → 코드 위치 이동 복구
           onOpenNode={(n) => {
-            vscode.postMessage({
-              type: "openLocation",
-              payload: {
+            postOpenLocation(
+              "canvas.onOpenNode",
+              {
                 filePath: n.file,
                 range: n.range,
                 preserveFocus: false,
               },
-            });
+              getNodeDebugInfo(n),
+            );
+            if (n.kind === "external") {
+              pushWebviewDebugEvent("canvas.external.expand-requested", {
+                ...getNodeDebugInfo(n),
+              });
+            }
           }}
           onGenerateFromActive={() =>
-            vscode.postMessage({
+            postMessage("canvas.emptyState.generate", {
               type: "analyzeActiveFile",
               payload: { traceMode },
             })
           }
           onUseSelectionAsRoot={() => {
             setPendingUseSelectionAsRoot(true);
-            vscode.postMessage({ type: "requestSelection" });
+            postMessage("canvas.useSelectionAsRoot", { type: "requestSelection" });
           }}
           onClearRoot={() => {
             setRootNodeId(null);
@@ -1090,9 +1292,12 @@ export default function App() {
           onExpandExternal={expandExternalFile}
           analysisDiagnostics={analysis?.diagnostics ?? []}
           highlightedNodeIds={
-            focusedFlow ? [focusedFlow.sourceId, focusedFlow.targetId] : []
+            effectiveFocusedFlow
+              ? [effectiveFocusedFlow.sourceId, effectiveFocusedFlow.targetId]
+              : []
           }
-          highlightedEdgeId={focusedFlow?.edgeId ?? null}
+          highlightedEdgeId={effectiveFocusedFlow?.edgeId ?? null}
+          traceActiveNodeId={traceActiveNodeId}
           inspectorFocusRequest={inspectorFocusRequest}
           notice={canvasNotice}
           traceVisible={Boolean(traceEvents && traceEvents.length > 0)}
@@ -1139,11 +1344,12 @@ export default function App() {
           selectedNode={selectedNode}
           notice={inspectorNotice}
           onOpenDiagnostic={openDiagnostic}
-          onSelectGraphNode={setSelectedNodeId}
+          onSelectGraphNode={selectGraphNodeFromInspector}
           onActivateGraphNode={activateGraphNode}
           onFocusParamFlow={focusParamFlow}
+          activeFlowPreview={effectiveFocusedFlow}
           onRefreshActive={() =>
-            vscode.postMessage({ type: "requestActiveFile" })
+            postMessage("inspector.refreshActive", { type: "requestActiveFile" })
           }
           onResetGraph={resetGraph}
           onExpandExternal={expandExternalFile}

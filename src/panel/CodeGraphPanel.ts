@@ -9,6 +9,50 @@ import type {
   UINotice,
   WebviewToExtMessage,
 } from "../shared/protocol";
+import {
+  dumpPanelDebugBuffer,
+  pushPanelDebugEvent,
+} from "./debugLog";
+
+function getGraphCounts(payload?: { nodes: unknown[]; edges: unknown[] }) {
+  return {
+    graphNodes: payload?.nodes.length ?? 0,
+    graphEdges: payload?.edges.length ?? 0,
+  };
+}
+
+function summarizeInboundMessage(msg: WebviewToExtMessage) {
+  if (msg.type === "debugEvent") {
+    return {
+      event: msg.payload.event,
+      recentCount: msg.payload.recent?.length ?? 0,
+    };
+  }
+  if (msg.type === "openLocation") {
+    return {
+      filePath: msg.payload.filePath,
+      preserveFocus: msg.payload.preserveFocus ?? false,
+      startLine: msg.payload.range?.start.line ?? null,
+    };
+  }
+  if (msg.type === "expandNode") {
+    return {
+      filePath: msg.payload.filePath,
+      generation: msg.payload.generation ?? null,
+    };
+  }
+  if (msg.type === "selectWorkspaceFile") {
+    return {
+      filePath: msg.payload.filePath,
+    };
+  }
+  if (msg.type === "analyzeActiveFile") {
+    return {
+      traceMode: msg.payload?.traceMode ?? false,
+    };
+  }
+  return {};
+}
 
 export class CodeGraphPanel {
   private lastTextEditor: vscode.TextEditor | undefined;
@@ -65,30 +109,47 @@ export class CodeGraphPanel {
     this.panel.webview.onDidReceiveMessage(
       async (msg: WebviewToExtMessage) => {
         try {
-          if (msg.type === "requestActiveFile") return this.postActiveFile();
-          if (msg.type === "requestWorkspaceFiles")
+          pushPanelDebugEvent("panel.message.received", {
+            type: msg.type,
+            ...summarizeInboundMessage(msg),
+          });
+          if (msg.type === "requestActiveFile") {
+            return this.postActiveFile();
+          }
+          if (msg.type === "requestWorkspaceFiles") {
             return await this.postWorkspaceFiles();
-          if (msg.type === "requestSelection") return this.postSelection();
-          if (msg.type === "analyzeActiveFile")
+          }
+          if (msg.type === "requestSelection") {
+            return this.postSelection();
+          }
+          if (msg.type === "analyzeActiveFile") {
             return await this.postAnalysis(
               Boolean(msg.payload?.traceMode),
               msg.payload?.traceMode ? "trace" : "manual",
             ); // workspace-aware
-          if (msg.type === "analyzeWorkspace")
+          }
+          if (msg.type === "analyzeWorkspace") {
             return await this.postAnalysis(false, "manual"); // explicit
-          if (msg.type === "selectWorkspaceFile")
+          }
+          if (msg.type === "selectWorkspaceFile") {
             return await this.selectWorkspaceFile(msg.payload.filePath);
-          if (msg.type === "expandNode")
+          }
+          if (msg.type === "debugEvent") {
+            return this.handleForwardedWebviewDebug(msg.payload);
+          }
+          if (msg.type === "expandNode") {
             return await this.postAnalysisForFile(
               msg.payload.filePath,
               msg.payload.generation,
             );
-          if (msg.type === "saveExportFile")
+          }
+          if (msg.type === "saveExportFile") {
             return await this.saveExportFile(msg.payload);
-          if (msg.type === "openLocation")
+          }
+          if (msg.type === "openLocation") {
             return await this.openLocation(msg.payload);
+          }
         } catch (e) {
-          console.error("[codegraph] onDidReceiveMessage error:", e);
           this.handleRequestError(msg.type, e);
         }
       },
@@ -103,11 +164,12 @@ export class CodeGraphPanel {
 
     // ---- auto-analysis for active file changes (debounced) ----
     const scheduleAnalysis = (delayMs: number) => {
-      if (this.analysisTimer) clearTimeout(this.analysisTimer);
+      if (this.analysisTimer) {
+        clearTimeout(this.analysisTimer);
+      }
       this.analysisTimer = setTimeout(
         () => {
           void this.postAnalysis(false, "auto").catch((e) => {
-            console.error("[codegraph] auto-analysis error:", e);
             this.postNotice(
               "canvas",
               "warning",
@@ -122,6 +184,11 @@ export class CodeGraphPanel {
     };
 
     const subActive = vscode.window.onDidChangeActiveTextEditor((editor) => {
+      pushPanelDebugEvent("editor.active.changed", {
+        hasEditor: Boolean(editor),
+        filePath: editor?.document.fileName ?? null,
+      });
+
       if (editor) {
         this.lastTextEditor = editor;
         this.lastSelection = editor.selection;
@@ -129,10 +196,23 @@ export class CodeGraphPanel {
       this.postActiveFile();
       void this.postWorkspaceFiles();
 
-      if (editor && this.consumeSuppressedAutoAnalysis(editor.document.uri.toString())) {
+      // Webview/panel focus transitions can temporarily leave VS Code without an
+      // active text editor. Treat that as a focus change, not as a new analysis trigger.
+      if (!editor) {
+        pushPanelDebugEvent("analysis.auto.skipped.no-active-editor", {});
         return;
       }
 
+      if (this.consumeSuppressedAutoAnalysis(editor.document.uri.toString())) {
+        pushPanelDebugEvent("analysis.auto.suppressed", {
+          filePath: editor.document.fileName,
+        });
+        return;
+      }
+
+      pushPanelDebugEvent("analysis.auto.scheduled.from-active-editor", {
+        filePath: editor.document.fileName,
+      });
       scheduleAnalysis(0);
     });
 
@@ -140,8 +220,12 @@ export class CodeGraphPanel {
       const active =
         this.lastTextEditor?.document ??
         vscode.window.activeTextEditor?.document;
-      if (!active) return;
-      if (e.document.uri.toString() !== active.uri.toString()) return;
+      if (!active) {
+        return;
+      }
+      if (e.document.uri.toString() !== active.uri.toString()) {
+        return;
+      }
 
       this.postActiveFile();
       scheduleAnalysis(350);
@@ -151,8 +235,12 @@ export class CodeGraphPanel {
       const active =
         this.lastTextEditor?.document ??
         vscode.window.activeTextEditor?.document;
-      if (!active) return;
-      if (doc.uri.toString() !== active.uri.toString()) return;
+      if (!active) {
+        return;
+      }
+      if (doc.uri.toString() !== active.uri.toString()) {
+        return;
+      }
 
       scheduleAnalysis(0);
     });
@@ -182,8 +270,12 @@ export class CodeGraphPanel {
       subFs.dispose();
       subFs2.dispose();
       subFs3.dispose();
-      if (this.analysisTimer) clearTimeout(this.analysisTimer);
-      if (this.traceHighlightTimer) clearTimeout(this.traceHighlightTimer);
+      if (this.analysisTimer) {
+        clearTimeout(this.analysisTimer);
+      }
+      if (this.traceHighlightTimer) {
+        clearTimeout(this.traceHighlightTimer);
+      }
       this.traceHighlightDecoration.dispose();
     });
   }
@@ -200,7 +292,9 @@ export class CodeGraphPanel {
 
   private consumeSuppressedAutoAnalysis(uri: string) {
     const count = this.suppressedAutoAnalysisUris.get(uri) ?? 0;
-    if (count <= 0) return false;
+    if (count <= 0) {
+      return false;
+    }
 
     if (count === 1) {
       this.suppressedAutoAnalysisUris.delete(uri);
@@ -240,6 +334,17 @@ export class CodeGraphPanel {
   private invalidateAndPostWorkspaceFiles() {
     this.invalidateWorkspaceCache();
     void this.postWorkspaceFiles();
+  }
+
+  private handleForwardedWebviewDebug(payload: Extract<
+    WebviewToExtMessage,
+    { type: "debugEvent" }
+  >["payload"]) {
+    pushPanelDebugEvent("webview.debug.forwarded", {
+      event: payload.event,
+      recentCount: payload.recent?.length ?? 0,
+      ...(payload.detail ?? {}),
+    });
   }
 
   private postNotice(
@@ -400,8 +505,19 @@ export class CodeGraphPanel {
     reason: AnalysisRequestReason = "manual",
   ) {
     const request = this.beginActiveAnalysis(reason);
+    pushPanelDebugEvent("analysis.active.begin", {
+      requestId: request.requestId,
+      generation: request.generation,
+      sequence: request.sequence,
+      reason,
+      traceMode,
+    });
     const editor = this.getEditor();
     if (!editor) {
+      pushPanelDebugEvent("analysis.active.post.empty", {
+        requestId: request.requestId,
+        generation: request.generation,
+      });
       this.panel.webview.postMessage({
         type: "analysisResult",
         payload: null,
@@ -447,7 +563,7 @@ export class CodeGraphPanel {
     };
 
     if (request.sequence !== this.latestActiveAnalysisSequence) {
-      console.debug("[codegraph] drop stale active analysis response", {
+      pushPanelDebugEvent("analysis.active.drop.stale", {
         requestId: request.requestId,
         generation: request.generation,
         sequence: request.sequence,
@@ -456,15 +572,15 @@ export class CodeGraphPanel {
       });
       return;
     }
-
-    console.log("[analysis.meta]", result.meta);
-    console.log(
-      "[analysis.graph counts]",
-      "nodes=",
-      result.graph.nodes.length,
-      "edges=",
-      result.graph.edges.length,
-    );
+    pushPanelDebugEvent("analysis.active.post", {
+      requestId: request.requestId,
+      generation: request.generation,
+      sequence: request.sequence,
+      filePath: doc.fileName,
+      traceEvents: traceMode ? result.trace?.length ?? 0 : 0,
+      diagnostics: result.diagnostics.length,
+      ...getGraphCounts(result.graph),
+    });
 
     this.panel.webview.postMessage({
       type: "analysisResult",
@@ -475,8 +591,8 @@ export class CodeGraphPanel {
 
   private async postAnalysisForFile(filePath: string, generation?: number) {
     if (generation !== undefined && generation !== this.analysisGeneration) {
-      console.debug("[codegraph] skip stale expand request", {
-        file: filePath,
+      pushPanelDebugEvent("analysis.expand.skip.stale-request", {
+        filePath,
         requestGeneration: generation,
         currentGeneration: this.analysisGeneration,
       });
@@ -484,6 +600,12 @@ export class CodeGraphPanel {
     }
 
     const request = this.beginExpandAnalysis(generation ?? this.analysisGeneration);
+    pushPanelDebugEvent("analysis.expand.begin", {
+      requestId: request.requestId,
+      generation: request.generation,
+      sequence: request.sequence,
+      filePath,
+    });
     const workspaceRoot = this.getWorkspaceRoot();
     const filePaths = await this.getWorkspaceFilePaths();
 
@@ -519,15 +641,23 @@ export class CodeGraphPanel {
     };
 
     if (request.generation !== this.analysisGeneration) {
-      console.debug("[codegraph] drop stale expand analysis response", {
+      pushPanelDebugEvent("analysis.expand.drop.stale", {
         requestId: request.requestId,
         generation: request.generation,
         currentGeneration: this.analysisGeneration,
-        file: filePath,
+        filePath,
       });
       return;
     }
 
+    pushPanelDebugEvent("analysis.expand.post", {
+      requestId: request.requestId,
+      generation: request.generation,
+      sequence: request.sequence,
+      filePath,
+      diagnostics: result.diagnostics.length,
+      ...getGraphCounts(result.graph),
+    });
     this.panel.webview.postMessage({
       type: "analysisResult",
       payload,
@@ -536,7 +666,9 @@ export class CodeGraphPanel {
   }
 
   private async selectWorkspaceFile(filePath: string) {
-    if (!filePath) return;
+    if (!filePath) {
+      return;
+    }
 
     const uri = vscode.Uri.file(filePath);
     const doc = await vscode.workspace.openTextDocument(uri);
@@ -616,9 +748,17 @@ export class CodeGraphPanel {
     preserveFocus?: boolean;
   }) {
     const { filePath, range, preserveFocus } = payload;
-    if (!filePath) return;
+    if (!filePath) {
+      return;
+    }
 
     try {
+      pushPanelDebugEvent("openLocation.begin", {
+        filePath,
+        preserveFocus: Boolean(preserveFocus),
+        startLine: range?.start.line ?? null,
+        endLine: range?.end.line ?? null,
+      });
       const uri = vscode.Uri.file(filePath);
       if (!preserveFocus) {
         // Graph-click navigation should not replace the current graph via auto-analysis.
@@ -659,8 +799,19 @@ export class CodeGraphPanel {
         editor.revealRange(r, vscode.TextEditorRevealType.InCenter);
         this.flashTraceHighlight(editor, r);
       }
+      pushPanelDebugEvent("openLocation.success", {
+        filePath,
+        preserveFocus: Boolean(preserveFocus),
+        reusedVisibleEditor: Boolean(existingEditor),
+        viewColumn: editor.viewColumn ?? null,
+        startLine: range?.start.line ?? null,
+      });
     } catch (e) {
-      console.error("[codegraph] openLocation error:", e);
+      dumpPanelDebugBuffer("openLocation.error", {
+        filePath,
+        preserveFocus: Boolean(preserveFocus),
+        error: getErrorMessage(e),
+      });
       this.postNotice(
         "toast",
         "error",
@@ -678,7 +829,9 @@ export class CodeGraphPanel {
 
     editor.setDecorations(this.traceHighlightDecoration, [range]);
 
-    if (this.traceHighlightTimer) clearTimeout(this.traceHighlightTimer);
+    if (this.traceHighlightTimer) {
+      clearTimeout(this.traceHighlightTimer);
+    }
     this.traceHighlightTimer = setTimeout(() => {
       for (const visibleEditor of vscode.window.visibleTextEditors) {
         visibleEditor.setDecorations(this.traceHighlightDecoration, []);
@@ -689,8 +842,12 @@ export class CodeGraphPanel {
 }
 
 function getErrorMessage(error: unknown): string {
-  if (error instanceof Error && error.message) return error.message;
-  if (typeof error === "string" && error.trim()) return error;
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+  if (typeof error === "string" && error.trim()) {
+    return error;
+  }
   return "Unknown error";
 }
 
@@ -701,9 +858,17 @@ function decodeBase64(base64: string): Uint8Array {
 
 function guessLanguageId(filePath: string): string {
   const lower = filePath.toLowerCase();
-  if (lower.endsWith(".tsx")) return "typescriptreact";
-  if (lower.endsWith(".ts")) return "typescript";
-  if (lower.endsWith(".jsx")) return "javascriptreact";
-  if (lower.endsWith(".js")) return "javascript";
+  if (lower.endsWith(".tsx")) {
+    return "typescriptreact";
+  }
+  if (lower.endsWith(".ts")) {
+    return "typescript";
+  }
+  if (lower.endsWith(".jsx")) {
+    return "javascriptreact";
+  }
+  if (lower.endsWith(".js")) {
+    return "javascript";
+  }
   return "typescript";
 }

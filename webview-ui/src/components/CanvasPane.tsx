@@ -6,7 +6,6 @@ import {
   useEffect,
   useMemo,
   useRef,
-  startTransition,
   useState,
   type MouseEvent as ReactMouseEvent,
   type MouseEvent as ReactDomMouseEvent,
@@ -35,6 +34,10 @@ import type {
   GraphTraceEvent,
   UINotice,
 } from "../lib/vscode";
+import {
+  dumpWebviewDebugBuffer,
+  pushWebviewDebugEvent,
+} from "../lib/debugLog";
 import type { ChipKey } from "./FiltersBar";
 
 type InterfaceSubkind = "interface" | "type" | "enum";
@@ -66,6 +69,7 @@ type CodeNodeData = {
     diagnosticCount?: number;
     warningCount?: number;
     onClick?: () => void;
+    onDoubleClick?: () => void;
   }>;
   /** Absolute/relative file path used to expand external nodes. */
   file: string;
@@ -146,6 +150,20 @@ function dirName(p: string) {
   const i = norm.lastIndexOf("/");
   return i >= 0 ? norm.slice(0, i) : "";
 }
+
+function getGraphCounts(graph: GraphPayload | undefined) {
+  return {
+    graphNodes: graph?.nodes.length ?? 0,
+    graphEdges: graph?.edges.length ?? 0,
+  };
+}
+
+function shortenTopologyKey(value: string, max = 96) {
+  if (value.length <= max) return value;
+  return `${value.slice(0, max)}...(${value.length})`;
+}
+
+const ENABLE_AUTO_VIEWPORT_EFFECTS = true;
 
 function nodeTitle(n: GraphNode) {
   if (n.kind === "class") return `class ${n.name}`;
@@ -339,6 +357,11 @@ function CodeNode({
       event.stopPropagation();
       onClick?.();
     };
+  const handleChildDoubleClick =
+    (onDoubleClick?: () => void) => (event: ReactDomMouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      onDoubleClick?.();
+    };
 
   return (
     <div
@@ -411,9 +434,10 @@ function CodeNode({
               className={[
                 "cgChildNode",
                 child.selected ? "cgChildNode--selected" : "",
-                child.onClick ? "cgChildNode--interactive" : "",
+                child.onClick || child.onDoubleClick ? "cgChildNode--interactive" : "",
               ].join(" ")}
               onClick={handleChildClick(child.onClick)}
+              onDoubleClick={handleChildDoubleClick(child.onDoubleClick)}
             >
               {child.focusPulseToken ? (
                 <span
@@ -966,12 +990,14 @@ function toReactFlowNodes(
   diagnostics?: CodeDiagnostic[],
   highlightedNodeIds?: Set<string>,
   selectedNodeId?: string | null,
+  traceActiveNodeId?: string | null,
   focusPulseRequests?: Array<{
     nodeId: string;
     visibleNodeId: string;
     token: number;
   }>,
-  onActivateNode?: (nodeId: string) => void,
+  onSelectChildNode?: (nodeId: string, visibleNodeId: string) => void,
+  onOpenChildNode?: (nodeId: string) => void,
 ): Array<Node<CodeNodeData | FileGroupData>> {
   if (!graph) return [];
   const orderedFocusPulseRequests = [...(focusPulseRequests ?? [])].reverse();
@@ -1090,6 +1116,7 @@ function toReactFlowNodes(
       };
 
       const hasSelectedChild = childItems.some((child) => child.id === selectedNodeId);
+      const hasTraceActiveChild = childItems.some((child) => child.id === traceActiveNodeId);
       const visiblePulseRequest = orderedFocusPulseRequests.find(
         (request) => request.visibleNodeId === n.id,
       );
@@ -1102,7 +1129,11 @@ function toReactFlowNodes(
         subkind: sk,
         highlighted: Boolean(highlightedNodeIds?.has(n.id)),
         searchHit: Boolean(searchHitIds?.has(n.id)),
-        selected: selectedNodeId === n.id || hasSelectedChild,
+        selected:
+          selectedNodeId === n.id ||
+          traceActiveNodeId === n.id ||
+          hasSelectedChild ||
+          hasTraceActiveChild,
         focusPulseToken: visiblePulseRequest?.token,
         childItems: childItems.map((child) => {
           const childPulseRequest = orderedFocusPulseRequests.find(
@@ -1112,11 +1143,14 @@ function toReactFlowNodes(
           id: child.id,
           kind: childKindLabel(child),
           title: childTitle(n, child),
-          selected: selectedNodeId === child.id,
+          selected: selectedNodeId === child.id || traceActiveNodeId === child.id,
           focusPulseToken: childPulseRequest?.token,
           subtitle: `${childKindLabel(child)} · ${shortFile(child.file)}:${child.range.start.line + 1}`,
           ...(diagnosticSummaryByNode.get(child.id) ?? {}),
-          onClick: onActivateNode ? () => onActivateNode(child.id) : undefined,
+          onClick:
+            onSelectChildNode ? () => onSelectChildNode(child.id, n.id) : undefined,
+          onDoubleClick:
+            onOpenChildNode ? () => onOpenChildNode(child.id) : undefined,
           };
         }),
         file: n.file,
@@ -1159,6 +1193,7 @@ export function CanvasPane({
   analysisDiagnostics,
   highlightedNodeIds,
   highlightedEdgeId,
+  traceActiveNodeId,
   inspectorFocusRequest,
   notice,
   traceVisible,
@@ -1172,7 +1207,15 @@ export function CanvasPane({
   frameGraphTick,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
-  const canvasActivationTimerRef = useRef<number | null>(null);
+  const canvasFlowRef = useRef<HTMLDivElement | null>(null);
+  const lastVisibleHasDataRef = useRef<boolean | null>(null);
+  const lastRecoveryAtRef = useRef(0);
+  const snapshotTimersRef = useRef<number[]>([]);
+  const [recoveryTick, setRecoveryTick] = useState(0);
+  const [canvasFocusRequest, setCanvasFocusRequest] = useState<{
+    visibleNodeId: string;
+    token: number;
+  } | null>(null);
   const [focusPulseRequest, setFocusPulseRequest] = useState<{
     nodeId: string;
     visibleNodeId: string;
@@ -1212,6 +1255,13 @@ export function CanvasPane({
     const hasParent = Boolean(target.parentId && graph.nodes.some((node) => node.id === target.parentId));
     return hasParent ? (target.parentId as string) : target.id;
   }, [graph, selectedNodeId]);
+  const visibleTraceActiveNodeId = useMemo(() => {
+    if (!graph || !traceActiveNodeId) return traceActiveNodeId;
+    const target = graph.nodes.find((node) => node.id === traceActiveNodeId);
+    if (!target) return traceActiveNodeId;
+    const hasParent = Boolean(target.parentId && graph.nodes.some((node) => node.id === target.parentId));
+    return hasParent ? (target.parentId as string) : target.id;
+  }, [graph, traceActiveNodeId]);
   const inspectorPulseRequest = useMemo(() => {
     if (!inspectorFocusRequest || !visibleInspectorFocusNodeId) return null;
     return {
@@ -1220,9 +1270,19 @@ export function CanvasPane({
       token: inspectorFocusRequest.token,
     };
   }, [inspectorFocusRequest, visibleInspectorFocusNodeId]);
+  const tracePulseRequest = useMemo(() => {
+    if (!traceVisible || traceCursor <= 0 || !traceActiveNodeId || !visibleTraceActiveNodeId) {
+      return null;
+    }
+    return {
+      nodeId: traceActiveNodeId,
+      visibleNodeId: visibleTraceActiveNodeId,
+      token: traceCursor,
+    };
+  }, [traceActiveNodeId, traceCursor, traceVisible, visibleTraceActiveNodeId]);
   const focusPulseRequests = useMemo(
     () =>
-      [focusPulseRequest, inspectorPulseRequest].filter(
+      [focusPulseRequest, inspectorPulseRequest, tracePulseRequest].filter(
         (
           request,
         ): request is {
@@ -1231,59 +1291,7 @@ export function CanvasPane({
           token: number;
         } => Boolean(request),
       ),
-    [focusPulseRequest, inspectorPulseRequest],
-  );
-  const scheduleCanvasNodeActivation = useCallback(
-    (nodeId: string, visibleNodeId: string) => {
-      const target = graph?.nodes.find((node) => node.id === nodeId);
-
-      setFocusPulseRequest((current) => ({
-        nodeId,
-        visibleNodeId,
-        token: (current?.token ?? 0) + 1,
-      }));
-
-      startTransition(() => {
-        onSelectNode(nodeId);
-      });
-
-      if (!target) return;
-
-      if (canvasActivationTimerRef.current) {
-        window.clearTimeout(canvasActivationTimerRef.current);
-      }
-
-      canvasActivationTimerRef.current = window.setTimeout(() => {
-        onOpenNode?.(target);
-        if (target.kind === "external") {
-          onExpandExternal?.(target.file);
-        }
-        canvasActivationTimerRef.current = null;
-      }, 0);
-    },
-    [graph, onExpandExternal, onOpenNode, onSelectNode],
-  );
-  const activateEmbeddedNode = useCallback(
-    (nodeId: string, visibleNodeId: string) => {
-      const target = graph?.nodes.find((node) => node.id === nodeId);
-
-      setFocusPulseRequest((current) => ({
-        nodeId,
-        visibleNodeId,
-        token: (current?.token ?? 0) + 1,
-      }));
-
-      startTransition(() => {
-        onSelectNode(nodeId);
-      });
-
-      if (!target) return;
-      onOpenNode?.(target);
-      if (target.kind === "external") {
-        onExpandExternal?.(target.file);
-      }
-    },
-    [graph, onExpandExternal, onOpenNode, onSelectNode],
+    [focusPulseRequest, inspectorPulseRequest, tracePulseRequest],
   );
 
   const nodes = useMemo<Array<Node<CodeNodeData | FileGroupData>>>(
@@ -1294,19 +1302,52 @@ export function CanvasPane({
         analysisDiagnostics,
         visibleHighlightedNodeIds,
         selectedNodeId,
+        traceActiveNodeId,
         focusPulseRequests,
+        (nodeId, visibleNodeId) => {
+          const target = graph?.nodes.find((node) => node.id === nodeId);
+          pushWebviewDebugEvent("canvas.embedded-node.click", {
+            nodeId,
+            visibleNodeId,
+            nodeKind: target?.kind ?? null,
+            filePath: target?.file ?? null,
+            isExternal: target?.kind === "external",
+            ...getGraphCounts(graph),
+          });
+          setFocusPulseRequest((current) => ({
+            nodeId,
+            visibleNodeId,
+            token: (current?.token ?? 0) + 1,
+          }));
+          onSelectNode(nodeId);
+          setCanvasFocusRequest((current) => ({
+            visibleNodeId,
+            token: (current?.token ?? 0) + 1,
+          }));
+        },
         (nodeId) => {
           const target = graph?.nodes.find((node) => node.id === nodeId);
-          const visibleNodeId = target?.parentId ?? nodeId;
-          activateEmbeddedNode(nodeId, visibleNodeId);
+          pushWebviewDebugEvent("canvas.embedded-node.doubleClick", {
+            nodeId,
+            nodeKind: target?.kind ?? null,
+            filePath: target?.file ?? null,
+          });
+          if (!target) return;
+          onOpenNode?.(target);
+          if (target.kind === "external") {
+            onExpandExternal?.(target.file);
+          }
         },
       ),
     [
-      activateEmbeddedNode,
       analysisDiagnostics,
       filteredGraph,
       graph,
+      onExpandExternal,
+      onOpenNode,
+      onSelectNode,
       selectedNodeId,
+      traceActiveNodeId,
       searchHitIds,
       focusPulseRequests,
       visibleHighlightedNodeIds,
@@ -1333,19 +1374,150 @@ export function CanvasPane({
         .join("|"),
     [edges],
   );
-  const reactFlowTopologyKey = useMemo(
-    () => `${nodeTopologyKey}__${edgeTopologyKey}`,
-    [edgeTopologyKey, nodeTopologyKey],
-  );
-
   const visibleHasData = nodes.length > 0;
+
+  const clearSnapshotTimers = useCallback(() => {
+    for (const timerId of snapshotTimersRef.current) {
+      window.clearTimeout(timerId);
+    }
+    snapshotTimersRef.current = [];
+  }, []);
+
+  const requestCanvasRecovery = useCallback((reason: string, detail: Record<string, unknown>) => {
+    const now = Date.now();
+    if (now - lastRecoveryAtRef.current < 1500) {
+      pushWebviewDebugEvent("canvas.recovery.skipped.cooldown", {
+        reason,
+        recoveryTick,
+      });
+      return;
+    }
+
+    lastRecoveryAtRef.current = now;
+    pushWebviewDebugEvent("canvas.recovery.requested", {
+      reason,
+      recoveryTick,
+      ...detail,
+    });
+    setRecoveryTick((tick) => tick + 1);
+  }, [recoveryTick]);
+
+  const collectCanvasSnapshot = useCallback((reason: string, extra?: Record<string, unknown>) => {
+    const container = canvasFlowRef.current;
+    const reactFlowRoot = container?.querySelector(".react-flow") as HTMLElement | null;
+    const viewportEl = container?.querySelector(".react-flow__viewport") as HTMLElement | null;
+    const domNodes = container?.querySelectorAll(".react-flow__node").length ?? 0;
+    const domEdges = container?.querySelectorAll(".react-flow__edge").length ?? 0;
+    const rect = reactFlowRoot?.getBoundingClientRect();
+    const viewport = (
+      rfRef.current as unknown as {
+        getViewport?: () => { x: number; y: number; zoom: number };
+      } | null
+    )?.getViewport?.();
+    const detail = {
+      reason,
+      hasData,
+      visibleHasData,
+      renderedNodes: nodes.length,
+      renderedEdges: edges.length,
+      domNodes,
+      domEdges,
+      rootWidth: rect ? Math.round(rect.width) : null,
+      rootHeight: rect ? Math.round(rect.height) : null,
+      viewportTransform: viewportEl?.style.transform ?? null,
+      viewportX: viewport?.x ?? null,
+      viewportY: viewport?.y ?? null,
+      viewportZoom: viewport?.zoom ?? null,
+      selectedNodeId,
+      rootNodeId,
+      ...getGraphCounts(graph),
+      ...(extra ?? {}),
+    };
+
+    pushWebviewDebugEvent("canvas.dom.snapshot", detail);
+
+    const hasDomAnomaly =
+      hasData &&
+      (domNodes === 0 ||
+        !rect ||
+        rect.width <= 0 ||
+        rect.height <= 0 ||
+        viewport?.zoom === 0);
+    if (hasDomAnomaly) {
+      dumpWebviewDebugBuffer("canvas.dom.anomaly", detail, 35);
+      requestCanvasRecovery(reason, detail);
+    }
+  }, [
+    edges.length,
+    graph,
+    hasData,
+    nodes.length,
+    requestCanvasRecovery,
+    rootNodeId,
+    selectedNodeId,
+    visibleHasData,
+  ]);
+
+  const scheduleCanvasSnapshots = useCallback((reason: string, extra?: Record<string, unknown>) => {
+    clearSnapshotTimers();
+    for (const delay of [0, 80, 240, 500]) {
+      const timerId = window.setTimeout(() => {
+        collectCanvasSnapshot(`${reason}@${delay}ms`, extra);
+      }, delay);
+      snapshotTimersRef.current.push(timerId);
+    }
+  }, [clearSnapshotTimers, collectCanvasSnapshot]);
 
   const handleNodeClick = (
     _event: ReactMouseEvent,
     node: Node<CodeNodeData | FileGroupData>,
   ) => {
+    const graphNode = graph?.nodes.find((n) => n.id === node.id);
+    pushWebviewDebugEvent("canvas.node.click", {
+      nodeId: node.id,
+      visibleNodeId: node.id,
+      visibleKind: node.data.kind,
+      graphNodeKind: graphNode?.kind ?? null,
+      filePath: "file" in node.data ? node.data.file : null,
+      isExternal: node.data.kind === "external",
+      renderedNodes: nodes.length,
+      renderedEdges: edges.length,
+      ...getGraphCounts(graph),
+    });
+    scheduleCanvasSnapshots("node-click", {
+      nodeId: node.id,
+      visibleKind: node.data.kind,
+    });
+    setFocusPulseRequest((current) => ({
+      nodeId: node.id,
+      visibleNodeId: node.id,
+      token: (current?.token ?? 0) + 1,
+    }));
+    onSelectNode(node.id);
+    setCanvasFocusRequest((current) => ({
+      visibleNodeId: node.id,
+      token: (current?.token ?? 0) + 1,
+    }));
+
     if (node.data?.kind === "file") return;
-    scheduleCanvasNodeActivation(node.id, node.id);
+  };
+
+  const handleNodeDoubleClick = (
+    _event: ReactMouseEvent,
+    node: Node<CodeNodeData | FileGroupData>,
+  ) => {
+    const graphNode = graph?.nodes.find((n) => n.id === node.id);
+    pushWebviewDebugEvent("canvas.node.doubleClick", {
+      nodeId: node.id,
+      visibleKind: node.data.kind,
+      graphNodeKind: graphNode?.kind ?? null,
+      filePath: graphNode?.file ?? ("file" in node.data ? node.data.file : null),
+    });
+    if (node.data.kind === "file" || !graphNode) return;
+    onOpenNode?.(graphNode);
+    if (graphNode.kind === "external") {
+      onExpandExternal?.(graphNode.file);
+    }
   };
 
   const onZoomIn = () => rfRef.current?.zoomIn?.();
@@ -1360,22 +1532,38 @@ export function CanvasPane({
   };
 
   useEffect(() => {
+    pushWebviewDebugEvent("canvas.reactflow.topology-changed", {
+      visibleHasData,
+      renderedNodes: nodes.length,
+      renderedEdges: edges.length,
+      recoveryTick,
+      nodeTopologyKey: shortenTopologyKey(nodeTopologyKey),
+      edgeTopologyKey: shortenTopologyKey(edgeTopologyKey),
+    });
+    scheduleCanvasSnapshots("topology-changed");
+  }, [
+    edgeTopologyKey,
+    nodeTopologyKey,
+    visibleHasData,
+    nodes.length,
+    edges.length,
+    recoveryTick,
+    scheduleCanvasSnapshots,
+  ]);
+
+  useEffect(() => {
     return () => {
-      if (canvasActivationTimerRef.current) {
-        window.clearTimeout(canvasActivationTimerRef.current);
-      }
+      clearSnapshotTimers();
     };
-  }, []);
+  }, [clearSnapshotTimers]);
 
   useEffect(() => {
-    rfRef.current = null;
-  }, [reactFlowTopologyKey]);
-
-  useEffect(() => {
+    if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     fitGraphView(rfRef.current, 350);
   }, [frameGraphTick]);
 
   useEffect(() => {
+    if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     if (!visibleHasData) return;
 
     const rafId = window.requestAnimationFrame(() => {
@@ -1386,29 +1574,76 @@ export function CanvasPane({
   }, [nodeTopologyKey, visibleHasData]);
 
   useEffect(() => {
+    if (lastVisibleHasDataRef.current === visibleHasData) return;
+    lastVisibleHasDataRef.current = visibleHasData;
+
+    const detail = {
+      visibleHasData,
+      hasData,
+      renderedNodes: nodes.length,
+      renderedEdges: edges.length,
+      filteredNodes: filteredGraph?.nodes.length ?? 0,
+      filteredEdges: filteredGraph?.edges.length ?? 0,
+      selectedNodeId,
+      rootNodeId,
+      highlightedEdgeId,
+      nodeTopologyKey: shortenTopologyKey(nodeTopologyKey),
+      edgeTopologyKey: shortenTopologyKey(edgeTopologyKey),
+      ...getGraphCounts(graph),
+    };
+
+    pushWebviewDebugEvent("canvas.visibleHasData.changed", detail);
+    if (!visibleHasData && hasData) {
+      dumpWebviewDebugBuffer("canvas.visibleHasData.false", detail, 35);
+    }
+  }, [
+    edgeTopologyKey,
+    filteredGraph,
+    graph,
+    hasData,
+    highlightedEdgeId,
+    nodeTopologyKey,
+    nodes.length,
+    edges.length,
+    rootNodeId,
+    selectedNodeId,
+    visibleHasData,
+  ]);
+
+  useEffect(() => {
+    if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     // Auto layout keeps its own role, but finishes by reframing the full graph.
     fitGraphView(rfRef.current, 500);
   }, [autoLayoutTick]);
 
   useEffect(() => {
+    if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     const inst = rfRef.current;
     if (!inst || !traceVisible || !traceFocusEvent || traceCursor <= 0) return;
 
     if (traceFocusEvent.type === "node") {
-      const rfNode = inst.getNode(traceFocusEvent.node.id);
+      if (!visibleTraceActiveNodeId) return;
+      const rfNode = inst.getNode(visibleTraceActiveNodeId);
       if (!rfNode) return;
       focusCanvasNode(inst, rfNode, 1.15, 350);
       return;
     }
 
-    const sourceNode = inst.getNode(traceFocusEvent.edge.source);
-    const targetNode = inst.getNode(traceFocusEvent.edge.target);
+    const sourceNodeId =
+      graph?.nodes.find((node) => node.id === traceFocusEvent.edge.source)?.parentId ??
+      traceFocusEvent.edge.source;
+    const targetNodeId =
+      graph?.nodes.find((node) => node.id === traceFocusEvent.edge.target)?.parentId ??
+      traceFocusEvent.edge.target;
+    const sourceNode = inst.getNode(sourceNodeId);
+    const targetNode = inst.getNode(targetNodeId);
     if (!sourceNode || !targetNode) return;
 
     focusCanvasNodePair(inst, sourceNode, targetNode, 0.9, 350);
-  }, [nodes, traceCursor, traceFocusEvent, traceVisible]);
+  }, [graph, nodes, traceCursor, traceFocusEvent, traceVisible, visibleTraceActiveNodeId]);
 
   useEffect(() => {
+    if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     const inst = rfRef.current;
     if (!inst || !highlightedEdgeId || visibleHighlightedNodeIds.size === 0) return;
 
@@ -1428,6 +1663,7 @@ export function CanvasPane({
   }, [highlightedEdgeId, visibleHighlightedNodeIds]);
 
   useEffect(() => {
+    if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     const inst = rfRef.current;
     if (!inst || !visibleInspectorFocusNodeId || !inspectorFocusRequest) return;
 
@@ -1435,6 +1671,15 @@ export function CanvasPane({
     if (!node) return;
     focusCanvasNode(inst, node, 1.18, 320);
   }, [inspectorFocusRequest, visibleInspectorFocusNodeId]);
+
+  useEffect(() => {
+    const inst = rfRef.current;
+    if (!inst || !canvasFocusRequest) return;
+
+    const node = inst.getNode(canvasFocusRequest.visibleNodeId);
+    if (!node) return;
+    focusCanvasNode(inst, node, 1.2, 260);
+  }, [canvasFocusRequest]);
 
   const isTraceAtEnd = traceCursor >= traceTotal;
   const renderEmptyState = (mode: "no-graph" | "no-visible") => (
@@ -1526,10 +1771,10 @@ export function CanvasPane({
       {!hasData ? (
         renderEmptyState("no-graph")
       ) : (
-        <div className="canvasFlow">
-          <ReactFlowProvider key={`provider:${reactFlowTopologyKey}`}>
+        <div className="canvasFlow" ref={canvasFlowRef}>
+          <ReactFlowProvider key={`provider:recovery:${recoveryTick}`}>
             <ReactFlow
-              key={`flow:${reactFlowTopologyKey}`}
+              key={`flow:recovery:${recoveryTick}`}
               nodes={nodes}
               edges={edges}
               nodeTypes={nodeTypes}
@@ -1537,7 +1782,9 @@ export function CanvasPane({
               nodesDraggable={false}
               panOnDrag
               selectionOnDrag={false}
+              zoomOnDoubleClick={false}
               onNodeClick={handleNodeClick}
+              onNodeDoubleClick={handleNodeDoubleClick}
               onPaneClick={onClearSelection}
               fitView
               minZoom={0.1}
@@ -1545,8 +1792,18 @@ export function CanvasPane({
               proOptions={{ hideAttribution: true }}
               onInit={(inst) => {
                 rfRef.current = inst;
-                // Initial mount frames the whole graph, same role as Fit Graph.
-                fitGraphView(inst, 250);
+                pushWebviewDebugEvent("canvas.reactflow.init", {
+                  renderedNodes: nodes.length,
+                  renderedEdges: edges.length,
+                  visibleHasData,
+                  recoveryTick,
+                  autoViewportEffects: ENABLE_AUTO_VIEWPORT_EFFECTS,
+                });
+                scheduleCanvasSnapshots("reactflow-init");
+                if (ENABLE_AUTO_VIEWPORT_EFFECTS) {
+                  // Initial mount frames the whole graph, same role as Fit Graph.
+                  fitGraphView(inst, 250);
+                }
               }}
             >
               <Background gap={24} size={1} />
@@ -1689,6 +1946,7 @@ type Props = {
   analysisDiagnostics?: CodeDiagnostic[];
   highlightedNodeIds?: string[];
   highlightedEdgeId?: string | null;
+  traceActiveNodeId?: string | null;
   inspectorFocusRequest?: { nodeId: string; token: number } | null;
   notice?: UINotice | null;
   traceVisible: boolean;
