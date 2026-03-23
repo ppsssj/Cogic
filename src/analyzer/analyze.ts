@@ -85,6 +85,11 @@ export function analyzeTypeScriptWithTypes(args: {
   const program = ts.createProgram([inMemoryFileName], compilerOptions, host);
   const checker = program.getTypeChecker();
   const sf = program.getSourceFile(inMemoryFileName);
+  const resolveModuleLocation = createModuleLocationResolver(
+    program,
+    compilerOptions,
+    host,
+  );
 
   if (!sf) {
     return {
@@ -100,11 +105,15 @@ export function analyzeTypeScriptWithTypes(args: {
 
   const imports = extractImports(sf);
   const exports = extractExports(sf);
-  const calls = extractCallsResolved(sf, checker);
+  const calls = extractCallsResolved(sf, checker, resolveModuleLocation);
   const diagnostics = collectDiagnostics(program, sf);
 
   // single-file graph: external nodes still possible (but likely null since program has one file)
-  const { graph, trace } = buildActiveFileGraph(sf, checker);
+  const { graph, trace } = buildActiveFileGraph(
+    sf,
+    checker,
+    resolveModuleLocation,
+  );
 
   return {
     imports,
@@ -184,11 +193,11 @@ export function analyzeWithWorkspace(args: {
   const host: ts.CompilerHost = {
     ...defaultHost,
     fileExists: (fileName) => {
-      if (samePath(fileName, activeFile)) return true;
+      if (samePath(fileName, activeFile)) {return true;}
       return defaultHost.fileExists(fileName);
     },
     readFile: (fileName) => {
-      if (samePath(fileName, activeFile)) return active.code;
+      if (samePath(fileName, activeFile)) {return active.code;}
       return defaultHost.readFile(fileName);
     },
     getSourceFile: (
@@ -218,6 +227,11 @@ export function analyzeWithWorkspace(args: {
   const program = ts.createProgram(rootNames, options, host);
   const checker = program.getTypeChecker();
   const sf = program.getSourceFile(activeFile);
+  const resolveModuleLocation = createModuleLocationResolver(
+    program,
+    options,
+    host,
+  );
 
   if (!sf) {
     // rare: if activeFile not in roots, still try single-file
@@ -239,11 +253,15 @@ export function analyzeWithWorkspace(args: {
 
   const imports = extractImports(sf);
   const exports = extractExports(sf);
-  const calls = extractCallsResolved(sf, checker);
+  const calls = extractCallsResolved(sf, checker, resolveModuleLocation);
   const diagnostics = collectDiagnostics(program, sf);
 
   // workspace graph (external nodes enabled)
-  const { graph, trace } = buildActiveFileGraph(sf, checker);
+  const { graph, trace } = buildActiveFileGraph(
+    sf,
+    checker,
+    resolveModuleLocation,
+  );
 
   return {
     imports,
@@ -289,7 +307,7 @@ function collectDiagnostics(
       message,
     ].join("@@");
 
-    if (seen.has(key)) continue;
+    if (seen.has(key)) {continue;}
     seen.add(key);
 
     const severity: CodeDiagnostic["severity"] =
@@ -392,14 +410,75 @@ function samePath(a: string, b: string) {
   return path.resolve(a) === path.resolve(b);
 }
 
+type FileTargetLocation = {
+  fileName: string;
+  pos: number;
+  range: {
+    start: { line: number; character: number };
+    end: { line: number; character: number };
+  };
+};
+
+function sourceFileLocation(sf: ts.SourceFile): FileTargetLocation {
+  const endPos = sf.getEnd();
+  const endLC = sf.getLineAndCharacterOfPosition(endPos);
+  return {
+    fileName: sf.fileName,
+    pos: 0,
+    range: {
+      start: { line: 0, character: 0 },
+      end: { line: endLC.line, character: endLC.character },
+    },
+  };
+}
+
+function createModuleLocationResolver(
+  program: ts.Program,
+  options: ts.CompilerOptions,
+  host: ts.ModuleResolutionHost,
+) {
+  return (moduleText: string, containingFile: string): FileTargetLocation | null => {
+    const resolved = ts.resolveModuleName(
+      moduleText,
+      containingFile,
+      options,
+      host,
+    ).resolvedModule;
+    if (!resolved?.resolvedFileName) {return null;}
+
+    const targetSourceFile = program.getSourceFile(resolved.resolvedFileName);
+    if (targetSourceFile) {
+      return sourceFileLocation(targetSourceFile);
+    }
+
+    if (!fs.existsSync(resolved.resolvedFileName)) {
+      return null;
+    }
+
+    try {
+      const sourceText = fs.readFileSync(resolved.resolvedFileName, "utf8");
+      const fallbackSourceFile = ts.createSourceFile(
+        resolved.resolvedFileName,
+        sourceText,
+        ts.ScriptTarget.ES2022,
+        true,
+        pickScriptKind(resolved.resolvedFileName, ""),
+      );
+      return sourceFileLocation(fallbackSourceFile);
+    } catch {
+      return null;
+    }
+  };
+}
+
 function pickScriptKind(fileName: string, languageId: string): ts.ScriptKind {
   const lower = fileName.toLowerCase();
   if (lower.endsWith(".tsx") || languageId === "typescriptreact")
-    return ts.ScriptKind.TSX;
+    {return ts.ScriptKind.TSX;}
   if (lower.endsWith(".jsx") || languageId === "javascriptreact")
-    return ts.ScriptKind.JSX;
+    {return ts.ScriptKind.JSX;}
   if (lower.endsWith(".js") || languageId === "javascript")
-    return ts.ScriptKind.JS;
+    {return ts.ScriptKind.JS;}
   return ts.ScriptKind.TS;
 }
 
@@ -425,7 +504,7 @@ function extractImports(sf: ts.SourceFile): Array<{
   }> = [];
 
   for (const st of sf.statements) {
-    if (!ts.isImportDeclaration(st)) continue;
+    if (!ts.isImportDeclaration(st)) {continue;}
 
     const source = ts.isStringLiteral(st.moduleSpecifier)
       ? st.moduleSpecifier.text
@@ -439,7 +518,7 @@ function extractImports(sf: ts.SourceFile): Array<{
     const specifiers: string[] = [];
     const { name, namedBindings } = st.importClause;
 
-    if (name) specifiers.push(name.text);
+    if (name) {specifiers.push(name.text);}
 
     if (namedBindings) {
       if (ts.isNamespaceImport(namedBindings)) {
@@ -484,20 +563,20 @@ function extractExports(sf: ts.SourceFile): Array<{
     name: string,
     kind: "function" | "class" | "type" | "interface" | "const" | "unknown",
   ) => {
-    if (!name) return;
+    if (!name) {return;}
     exports.push({ name, kind });
   };
 
   for (const st of sf.statements) {
     if (ts.isFunctionDeclaration(st) && isExported(st)) {
       push(
-        st.name?.text ?? (hasDefaultModifier(st) ? "default" : ""),
+        hasDefaultModifier(st) ? "default" : (st.name?.text ?? ""),
         "function",
       );
       continue;
     }
     if (ts.isClassDeclaration(st) && isExported(st)) {
-      push(st.name?.text ?? (hasDefaultModifier(st) ? "default" : ""), "class");
+      push(hasDefaultModifier(st) ? "default" : (st.name?.text ?? ""), "class");
       continue;
     }
     if (ts.isTypeAliasDeclaration(st) && isExported(st)) {
@@ -554,6 +633,7 @@ function extractExports(sf: ts.SourceFile): Array<{
 function buildActiveFileGraph(
   sf: ts.SourceFile,
   checker: ts.TypeChecker,
+  resolveModuleLocation?: (moduleText: string, containingFile: string) => FileTargetLocation | null,
 ): { graph: GraphPayload; trace: GraphTraceEvent[] } {
   const nodes: GraphNode[] = [];
   const edges: GraphEdge[] = [];
@@ -611,7 +691,7 @@ function buildActiveFileGraph(
       const sig = checker.getSignatureFromDeclaration(
         decl as ts.SignatureDeclaration,
       );
-      if (!sig) return undefined;
+      if (!sig) {return undefined;}
       const params = sig.getParameters().map((sym) => {
         const name = sym.getName();
         const t = checker.getTypeOfSymbolAtLocation(sym, decl);
@@ -655,7 +735,7 @@ function buildActiveFileGraph(
         const sig = checker.getSignatureFromDeclaration(
           decl as unknown as ts.SignatureDeclaration,
         );
-        if (sig) signature = checker.signatureToString(sig);
+        if (sig) {signature = checker.signatureToString(sig);}
         sigParts = getSigParts(decl as unknown as ts.SignatureDeclarationBase);
       }
     } catch {
@@ -689,6 +769,68 @@ function buildActiveFileGraph(
     return id;
   };
 
+  const propertyNameText = (name: ts.PropertyName): string | null => {
+    if (ts.isIdentifier(name) || ts.isStringLiteral(name) || ts.isNumericLiteral(name)) {
+      return name.text;
+    }
+    return null;
+  };
+
+  const visitObjectLiteralMembers = (
+    literal: ts.ObjectLiteralExpression,
+    ownerPath: string,
+    parentId?: string,
+  ) => {
+    for (const prop of literal.properties) {
+      if (ts.isMethodDeclaration(prop) && prop.name && prop.body) {
+        const memberName = propertyNameText(prop.name);
+        if (!memberName) {continue;}
+
+        const methodId = pushNode(prop, "method", `${ownerPath}.${memberName}`, {
+          ...(parentId ? { parentId } : {}),
+        });
+        ts.forEachChild(prop.body, (child) => visitDecls(child, methodId));
+        continue;
+      }
+
+      if (ts.isPropertyAssignment(prop) && prop.name) {
+        const memberName = propertyNameText(prop.name);
+        if (!memberName) {continue;}
+
+        const nextOwnerPath = `${ownerPath}.${memberName}`;
+        const init = prop.initializer;
+        if (ts.isObjectLiteralExpression(init)) {
+          visitObjectLiteralMembers(init, nextOwnerPath, parentId);
+          continue;
+        }
+
+        const isFnInit =
+          ts.isArrowFunction(init) || ts.isFunctionExpression(init);
+        if (!isFnInit) {continue;}
+
+        const hasBody = ts.isArrowFunction(init)
+          ? !!init.body
+          : ts.isFunctionExpression(init)
+            ? !!init.body
+            : false;
+        if (!hasBody) {continue;}
+
+        const methodId = pushNode(
+          init as unknown as ts.Declaration,
+          "method",
+          nextOwnerPath,
+          {
+            ...(parentId ? { parentId } : {}),
+          },
+        );
+
+        if (ts.isBlock(init.body)) {
+          ts.forEachChild(init.body, (child) => visitDecls(child, methodId));
+        }
+      }
+    }
+  };
+
   const visitDecls = (node: ts.Node, parentId?: string) => {
     if (ts.isFunctionDeclaration(node) && node.name && node.body) {
       const fnId = pushNode(node, "function", node.name.text, {
@@ -700,16 +842,19 @@ function buildActiveFileGraph(
 
     if (ts.isVariableStatement(node)) {
       for (const d of node.declarationList.declarations) {
-        if (!d.initializer) continue;
+        if (!d.initializer) {continue;}
+        if (!ts.isIdentifier(d.name)) {continue;}
 
         const init = d.initializer;
+        const varName = d.name.text;
+        if (ts.isObjectLiteralExpression(init)) {
+          visitObjectLiteralMembers(init, varName, parentId);
+          continue;
+        }
+
         const isFnInit =
           ts.isArrowFunction(init) || ts.isFunctionExpression(init);
-        if (!isFnInit) continue;
-
-        // Only model named identifiers for now (avoid destructuring)
-        if (!ts.isIdentifier(d.name)) continue;
-        const varName = d.name.text;
+        if (!isFnInit) {continue;}
 
         // Only include implementations (body)
         const hasBody = ts.isArrowFunction(init)
@@ -717,20 +862,21 @@ function buildActiveFileGraph(
           : ts.isFunctionExpression(init)
             ? !!init.body
             : false;
-        if (!hasBody) continue;
+        if (hasBody) {
+          // NOTE: Use initializer node for stable body-owner switching during walk()
+          const fnId = pushNode(
+            init as unknown as ts.Declaration,
+            "function",
+            varName,
+            {
+              ...(parentId ? { parentId } : {}),
+            },
+          );
 
-        // NOTE: Use initializer node for stable body-owner switching during walk()
-        const fnId = pushNode(
-          init as unknown as ts.Declaration,
-          "function",
-          varName,
-          {
-            ...(parentId ? { parentId } : {}),
-          },
-        );
-
-        if (ts.isBlock(init.body)) {
-          ts.forEachChild(init.body, (child) => visitDecls(child, fnId));
+          if (ts.isBlock(init.body)) {
+            ts.forEachChild(init.body, (child) => visitDecls(child, fnId));
+          }
+          continue;
         }
       }
       return;
@@ -760,23 +906,28 @@ function buildActiveFileGraph(
 
         if (ts.isPropertyDeclaration(m) && m.initializer && m.name) {
           const init = m.initializer;
-          const isFnInit =
-            ts.isArrowFunction(init) || ts.isFunctionExpression(init);
-          if (!isFnInit) continue;
-
           const memberName = ts.isIdentifier(m.name)
             ? m.name.text
             : ts.isStringLiteral(m.name)
               ? m.name.text
               : null;
-          if (!memberName) continue;
+          if (!memberName) {continue;}
+
+          if (ts.isObjectLiteralExpression(init)) {
+            visitObjectLiteralMembers(init, `${className}.${memberName}`, classId);
+            continue;
+          }
+
+          const isFnInit =
+            ts.isArrowFunction(init) || ts.isFunctionExpression(init);
+          if (!isFnInit) {continue;}
 
           const hasBody = ts.isArrowFunction(init)
             ? !!init.body
             : ts.isFunctionExpression(init)
               ? !!init.body
               : false;
-          if (!hasBody) continue;
+          if (!hasBody) {continue;}
 
           const methodId = pushNode(
             init as unknown as ts.Declaration,
@@ -836,6 +987,7 @@ function buildActiveFileGraph(
 
   // external node cache (by decl file+pos)
   const externalIdByDecl = new Map<string, string>();
+  const externalModuleIdByFile = new Map<string, string>();
 
   const ensureExternalNode = (
     name: string,
@@ -844,7 +996,7 @@ function buildActiveFileGraph(
   ) => {
     const key = `${loc.fileName}:${loc.pos}`;
     const existing = externalIdByDecl.get(key);
-    if (existing) return existing;
+    if (existing) {return existing;}
 
     const base = path.basename(loc.fileName);
     const tag = isExternalFile(loc.fileName) ? " [lib]" : "";
@@ -875,6 +1027,39 @@ function buildActiveFileGraph(
     return id;
   };
 
+  const ensureExternalModuleNode = (
+    moduleText: string,
+    loc: FileTargetLocation,
+  ) => {
+    const existing = externalModuleIdByFile.get(loc.fileName);
+    if (existing) {return existing;}
+
+    const base = path.basename(loc.fileName);
+    const displayName = `import("${moduleText}") (${base})`;
+    const id = mkId("external", loc.fileName, -1);
+    externalModuleIdByFile.set(loc.fileName, id);
+    nodes.push({
+      id,
+      kind: "external",
+      name: displayName,
+      file: loc.fileName,
+      range: loc.range,
+      signature: "module",
+    });
+    trace.push({
+      type: "node",
+      node: {
+        id,
+        kind: "external",
+        name: displayName,
+        file: loc.fileName,
+        range: loc.range,
+        signature: "module",
+      },
+    });
+    return id;
+  };
+
   // edge helper
   const edgeKey = new Set<string>();
   const addEdge = (
@@ -885,7 +1070,7 @@ function buildActiveFileGraph(
     dedupeHint?: string,
   ) => {
     const key = `${edgeKind}:${srcId}->${tgtId}@@${label ?? ""}@@${dedupeHint ?? ""}`;
-    if (edgeKey.has(key)) return;
+    if (edgeKey.has(key)) {return;}
     edgeKey.add(key);
     edges.push({
       id: key,
@@ -908,7 +1093,7 @@ function buildActiveFileGraph(
 
   const isDeclarationName = (n: ts.Identifier): boolean => {
     const p = n.parent;
-    if (!p) return false;
+    if (!p) {return false;}
     if (
       (ts.isFunctionDeclaration(p) ||
         ts.isClassDeclaration(p) ||
@@ -946,12 +1131,32 @@ function buildActiveFileGraph(
       ts.isArrowFunction(node) ||
       ts.isFunctionExpression(node));
 
+  const resolveLocalNodeIdForDeclaration = (decl: ts.Declaration | undefined) => {
+    if (!decl) {return null;}
+
+    const directId = idByDeclPos.get(declLocation(decl).pos);
+    if (directId) {return directId;}
+
+    if (
+      (ts.isVariableDeclaration(decl) ||
+        ts.isPropertyDeclaration(decl) ||
+        ts.isPropertyAssignment(decl)) &&
+      decl.initializer &&
+      (ts.isArrowFunction(decl.initializer) ||
+        ts.isFunctionExpression(decl.initializer))
+    ) {
+      return idByDeclPos.get(declLocation(decl.initializer).pos) ?? null;
+    }
+
+    return null;
+  };
+
   const addReferenceEdgesForOwner = (ownerId: string) => {
     const ownerRoot = ownerDeclById.get(ownerId);
-    if (!ownerRoot) return;
+    if (!ownerRoot) {return;}
 
     const visit = (node: ts.Node) => {
-      if (isNodeBoundaryForOwner(node, ownerRoot)) return;
+      if (isNodeBoundaryForOwner(node, ownerRoot)) {return;}
 
       if (ts.isIdentifier(node)) {
         if (isDeclarationName(node)) {
@@ -961,8 +1166,15 @@ function buildActiveFileGraph(
 
         // property access right side (obj.foo) tends to be noisy for "reference" edges
         if (ts.isPropertyAccessExpression(node.parent) && node.parent.name === node) {
-          ts.forEachChild(node, visit);
-          return;
+          const maybeCallParent = node.parent.parent;
+          const isInvokedMember =
+            (ts.isCallExpression(maybeCallParent) ||
+              ts.isNewExpression(maybeCallParent)) &&
+            maybeCallParent.expression === node.parent;
+          if (isInvokedMember) {
+            ts.forEachChild(node, visit);
+            return;
+          }
         }
         if (ts.isCallExpression(node.parent) && node.parent.expression === node) {
           ts.forEachChild(node, visit);
@@ -987,7 +1199,7 @@ function buildActiveFileGraph(
             return;
           }
 
-          const targetId = idByDeclPos.get(loc.pos);
+          const targetId = resolveLocalNodeIdForDeclaration(decl);
           if (!targetId || targetId === ownerId) {
             ts.forEachChild(node, visit);
             return;
@@ -1032,7 +1244,7 @@ function buildActiveFileGraph(
     sigDecl: ts.SignatureDeclaration | undefined,
     callArgs: readonly ts.Expression[] | undefined,
   ) => {
-    if (!sigDecl) return;
+    if (!sigDecl) {return;}
     const params = sigDecl.parameters ?? ts.factory.createNodeArray();
     const args = callArgs ?? [];
 
@@ -1040,7 +1252,7 @@ function buildActiveFileGraph(
     for (let i = 0; i < n; i++) {
       const p = params[i];
       const a = args[i];
-      if (!p || !a) continue;
+      if (!p || !a) {continue;}
 
       const label = buildDataflowLabel(p, a);
       addEdge("dataflow", ownerId, targetId, label, `arg#${i}`);
@@ -1049,6 +1261,21 @@ function buildActiveFileGraph(
 
   const resolveCallTarget = (node: ts.CallExpression) => {
     try {
+      if (node.expression.kind === ts.SyntaxKind.ImportKeyword) {
+        const firstArg = node.arguments[0];
+        if (!firstArg || !ts.isStringLiteralLike(firstArg) || !resolveModuleLocation) {
+          return null;
+        }
+
+        const loc = resolveModuleLocation(firstArg.text, sf.fileName);
+        if (!loc || isTypeScriptLibFile(loc.fileName)) {return null;}
+
+        return {
+          tgtId: ensureExternalModuleNode(firstArg.text, loc),
+          sigDecl: undefined,
+        };
+      }
+
       const calleeName = normalizeCalleeName(node.expression, sf, checker);
       const sig = checker.getResolvedSignature(node);
       const declFromSig = sig?.getDeclaration();
@@ -1057,10 +1284,10 @@ function buildActiveFileGraph(
       const declFromSym = sym ? pickBestDeclaration(sym, checker) : undefined;
 
       const decl = (declFromSig ?? declFromSym) as ts.Declaration | undefined;
-      if (!decl) return null;
+      if (!decl) {return null;}
 
       const loc = declLocation(decl);
-      if (isTypeScriptLibFile(loc.fileName)) return null;
+      if (isTypeScriptLibFile(loc.fileName)) {return null;}
 
       let signature: string | undefined = undefined;
       try {
@@ -1107,10 +1334,10 @@ function buildActiveFileGraph(
       const declFromSym = sym ? pickBestDeclaration(sym, checker) : undefined;
 
       const decl = (declFromSig ?? declFromSym) as ts.Declaration | undefined;
-      if (!decl) return null;
+      if (!decl) {return null;}
 
       const loc = declLocation(decl);
-      if (isTypeScriptLibFile(loc.fileName)) return null;
+      if (isTypeScriptLibFile(loc.fileName)) {return null;}
 
       let sigDecl: ts.SignatureDeclaration | undefined = undefined;
       try {
@@ -1217,6 +1444,7 @@ function buildActiveFileGraph(
 function extractCallsResolved(
   sf: ts.SourceFile,
   checker: ts.TypeChecker,
+  resolveModuleLocation?: (moduleText: string, containingFile: string) => FileTargetLocation | null,
 ): Array<AnalysisCallV2> {
   type Key = string;
   const map = new Map<Key, AnalysisCallV2 & { _declPos: number | null }>();
@@ -1240,11 +1468,16 @@ function extractCallsResolved(
 
   const visit = (node: ts.Node) => {
     if (ts.isCallExpression(node)) {
-      const resolved = resolveCallToDeclaration(node, sf, checker);
-      if (resolved) bump(resolved);
+      const resolved = resolveCallToDeclaration(
+        node,
+        sf,
+        checker,
+        resolveModuleLocation,
+      );
+      if (resolved) {bump(resolved);}
     } else if (ts.isNewExpression(node)) {
       const resolved = resolveNewToDeclaration(node, sf, checker);
-      if (resolved) bump(resolved);
+      if (resolved) {bump(resolved);}
     }
     ts.forEachChild(node, visit);
   };
@@ -1261,7 +1494,27 @@ function resolveCallToDeclaration(
   call: ts.CallExpression,
   sf: ts.SourceFile,
   checker: ts.TypeChecker,
+  resolveModuleLocation?: (moduleText: string, containingFile: string) => FileTargetLocation | null,
 ): (AnalysisCallV2 & { declPos: number | null }) | null {
+  if (call.expression.kind === ts.SyntaxKind.ImportKeyword) {
+    const firstArg = call.arguments[0];
+    const moduleText =
+      firstArg && ts.isStringLiteralLike(firstArg) ? firstArg.text : null;
+    const moduleLocation =
+      moduleText && resolveModuleLocation
+        ? resolveModuleLocation(moduleText, sf.fileName)
+        : null;
+
+    return {
+      calleeName: moduleText ? `import("${moduleText}")` : "import",
+      count: 1,
+      declFile: moduleLocation?.fileName ?? null,
+      declRange: moduleLocation?.range ?? null,
+      isExternal: moduleLocation ? isExternalFile(moduleLocation.fileName) : false,
+      declPos: moduleLocation?.pos ?? null,
+    };
+  }
+
   const calleeName = normalizeCalleeName(call.expression, sf, checker);
 
   const sig = checker.getResolvedSignature(call);
@@ -1272,7 +1525,7 @@ function resolveCallToDeclaration(
 
   const decl = declFromSig ?? declFromSym ?? null;
   const loc = decl ? declLocation(decl) : null;
-  if (loc && isTypeScriptLibFile(loc.fileName)) return null;
+  if (loc && isTypeScriptLibFile(loc.fileName)) {return null;}
 
   const isExternal = loc ? isExternalFile(loc.fileName) : false;
 
@@ -1303,7 +1556,7 @@ function resolveNewToDeclaration(
 
   const decl = declFromSig ?? declFromSym ?? null;
   const loc = decl ? declLocation(decl) : null;
-  if (loc && isTypeScriptLibFile(loc.fileName)) return null;
+  if (loc && isTypeScriptLibFile(loc.fileName)) {return null;}
 
   const isExternal = loc ? isExternalFile(loc.fileName) : false;
 
@@ -1322,7 +1575,7 @@ function normalizeCalleeName(
   sf: ts.SourceFile,
   checker: ts.TypeChecker,
 ): string {
-  if (ts.isIdentifier(expr)) return expr.text;
+  if (ts.isIdentifier(expr)) {return expr.text;}
 
   if (ts.isPropertyAccessExpression(expr)) {
     const method = expr.name.text;
@@ -1352,7 +1605,7 @@ function normalizeCtorName(
   sf: ts.SourceFile,
   checker: ts.TypeChecker,
 ): string {
-  if (ts.isIdentifier(expr)) return expr.text;
+  if (ts.isIdentifier(expr)) {return expr.text;}
   if (ts.isPropertyAccessExpression(expr)) {
     const t = checker.getTypeAtLocation(expr);
     const name = friendlyTypeName(t, checker);
@@ -1362,14 +1615,26 @@ function normalizeCtorName(
 }
 
 function friendlyTypeName(type: ts.Type, checker: ts.TypeChecker): string {
+  const normalizeModuleName = (raw: string) => {
+    const importTypeMatch = raw.match(/^typeof import\("(.+)"\)$/);
+    if (importTypeMatch?.[1]) {
+      return path.basename(importTypeMatch[1]).replace(/\.[^.]+$/, "");
+    }
+    const quotedPathMatch = raw.match(/^"(.+)"$/);
+    if (quotedPathMatch?.[1]) {
+      return path.basename(quotedPathMatch[1]).replace(/\.[^.]+$/, "");
+    }
+    return raw;
+  };
+
   const sym = type.getSymbol();
   if (sym) {
     const aliased =
       sym.flags & ts.SymbolFlags.Alias ? checker.getAliasedSymbol(sym) : sym;
     const name = aliased.getName();
-    if (name && name !== "__type") return name;
+    if (name && name !== "__type") {return normalizeModuleName(name);}
   }
-  return checker.typeToString(type);
+  return normalizeModuleName(checker.typeToString(type));
 }
 
 function pickBestDeclaration(
@@ -1379,7 +1644,7 @@ function pickBestDeclaration(
   const s =
     sym.flags & ts.SymbolFlags.Alias ? checker.getAliasedSymbol(sym) : sym;
   const decls = s.getDeclarations();
-  if (!decls || decls.length === 0) return undefined;
+  if (!decls || decls.length === 0) {return undefined;}
 
   // implementation preferred
   const impl = decls.find(
@@ -1387,7 +1652,23 @@ function pickBestDeclaration(
       ts.isMethodDeclaration(d) ||
       ts.isFunctionDeclaration(d) ||
       ts.isFunctionExpression(d) ||
+      ts.isArrowFunction(d) ||
       ts.isClassDeclaration(d) ||
+      (ts.isVariableDeclaration(d) &&
+        Boolean(
+          d.initializer &&
+            (ts.isArrowFunction(d.initializer) ||
+              ts.isFunctionExpression(d.initializer)),
+        )) ||
+      (ts.isPropertyDeclaration(d) &&
+        Boolean(
+          d.initializer &&
+            (ts.isArrowFunction(d.initializer) ||
+              ts.isFunctionExpression(d.initializer)),
+        )) ||
+      (ts.isPropertyAssignment(d) &&
+        (ts.isArrowFunction(d.initializer) ||
+          ts.isFunctionExpression(d.initializer))) ||
       ts.isInterfaceDeclaration(d),
   );
 

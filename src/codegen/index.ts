@@ -97,7 +97,7 @@ export function buildPatchPreview(
   const patches: GeneratedPatchPlan[] = [];
   for (const filePath of [...assignedFilePaths].sort()) {
     const fileNodesInTarget = nodesByFile.get(filePath) ?? [];
-    if (!fileNodesInTarget.length) continue;
+    if (!fileNodesInTarget.length) {continue;}
 
     const existingText = fs.existsSync(filePath)
       ? fs.readFileSync(filePath, "utf8")
@@ -123,8 +123,8 @@ export function buildPatchPreview(
         ...(context?.implements ?? []),
       ]) {
         const targetNode = resolvedNodeById.get(importTargetId);
-        if (!targetNode) continue;
-        if (targetNode.resolvedFilePath === filePath) continue;
+        if (!targetNode) {continue;}
+        if (targetNode.resolvedFilePath === filePath) {continue;}
 
         const importName = targetNode.name;
         const relativeImport = toImportPath(filePath, targetNode.resolvedFilePath);
@@ -137,7 +137,7 @@ export function buildPatchPreview(
 
     const importsText = [...importLines].sort().join("\n");
     const declarationsText = declarationBlocks.join("\n\n").trim();
-    if (!declarationsText) continue;
+    if (!declarationsText) {continue;}
 
     if (!fs.existsSync(filePath)) {
       const fullText = `${importsText ? `${importsText}\n\n` : ""}${declarationsText}\n`;
@@ -265,7 +265,7 @@ function findParentFileNode(
 ): DesignNode | null {
   let cursor = node.parentId ? nodeById.get(node.parentId) ?? null : null;
   while (cursor) {
-    if (cursor.kind === "file") return cursor;
+    if (cursor.kind === "file") {return cursor;}
     cursor = cursor.parentId ? nodeById.get(cursor.parentId) ?? null : null;
   }
   return null;
@@ -299,7 +299,7 @@ function buildRelationContext(
   >();
 
   for (const edge of edges) {
-    if (!nodes.has(edge.source) || !nodes.has(edge.target)) continue;
+    if (!nodes.has(edge.source) || !nodes.has(edge.target)) {continue;}
     const current = ctx.get(edge.source) ?? {
       dependsOn: [],
       extends: [],
@@ -485,19 +485,19 @@ function toKebabCase(value: string) {
 
 function toLowerCamel(value: string) {
   const sanitized = value.replace(/[^A-Za-z0-9]+/g, " ").trim();
-  if (!sanitized) return "dependency";
+  if (!sanitized) {return "dependency";}
   const parts = sanitized.split(/\s+/);
   const joined = parts
     .map((part, index) => {
       const normalized = part.replace(/^[^A-Za-z]+/, "");
-      if (!normalized) return "";
+      if (!normalized) {return "";}
       if (index === 0) {
         return normalized.charAt(0).toLowerCase() + normalized.slice(1);
       }
       return normalized.charAt(0).toUpperCase() + normalized.slice(1);
     })
     .join("");
-  if (joined) return joined;
+  if (joined) {return joined;}
   return value.charAt(0).toLowerCase() + value.slice(1);
 }
 
@@ -512,7 +512,7 @@ function toImportPath(fromFilePath: string, targetFilePath: string) {
 }
 
 function hasExistingSymbol(text: string, node: { kind: DesignNodeKind; name: string }) {
-  if (!text.trim()) return false;
+  if (!text.trim()) {return false;}
   const escaped = escapeRegExp(node.name);
   if (node.kind === "class") {
     return new RegExp(`\\bclass\\s+${escaped}\\b`).test(text);
