@@ -11,14 +11,17 @@ import { Topbar } from "./components/Topbar";
 import { FiltersBar, type ChipKey } from "./components/FiltersBar";
 import { CanvasPane } from "./components/CanvasPane";
 import { Inspector } from "./components/Inspector";
+import { ScaffoldLab } from "./components/ScaffoldLab";
 import {
   getVSCodeApi,
   isExtToWebviewMessage,
+  type DesignGraph,
   type ExtToWebviewMessage,
   type CodeDiagnostic,
   type GraphNode,
   type GraphPayload,
   type GraphTraceEvent,
+  type PatchPreview,
   type RuntimeDebugPayload,
   type UINotice,
   type WebviewToExtMessage,
@@ -57,6 +60,14 @@ type FlowExportResultPayload = Extract<
 type RuntimeDebugState = Extract<
   ExtToWebviewMessage,
   { type: "runtimeDebug" }
+>["payload"];
+type PatchPreviewResultPayload = Extract<
+  ExtToWebviewMessage,
+  { type: "patchPreviewResult" }
+>["payload"];
+type PatchApplyResultPayload = Extract<
+  ExtToWebviewMessage,
+  { type: "patchApplyResult" }
 >["payload"];
 type NoticeSeverity = UINotice["severity"];
 type OpenLocationPayload = Extract<
@@ -367,6 +378,78 @@ function isHostedInVSCode() {
   return typeof window.acquireVsCodeApi === "function";
 }
 
+const SCAFFOLD_PANEL_GUTTER = 12;
+const SCAFFOLD_PANEL_DEFAULT_WIDTH = 360;
+const SCAFFOLD_PANEL_DEFAULT_HEIGHT = 520;
+const SCAFFOLD_PANEL_MIN_WIDTH = 280;
+const SCAFFOLD_PANEL_MIN_HEIGHT = 260;
+
+function clamp(value: number, min: number, max: number) {
+  return Math.max(min, Math.min(value, max));
+}
+
+function clampScaffoldPanelSize(args: {
+  appRect: DOMRect;
+  width: number;
+  height: number;
+  left?: number;
+  top?: number;
+}) {
+  const maxWidth = Math.max(
+    220,
+    args.appRect.width - (args.left ?? SCAFFOLD_PANEL_GUTTER) - SCAFFOLD_PANEL_GUTTER,
+  );
+  const maxHeight = Math.max(
+    220,
+    args.appRect.height - (args.top ?? SCAFFOLD_PANEL_GUTTER) - SCAFFOLD_PANEL_GUTTER,
+  );
+  const minWidth = Math.min(SCAFFOLD_PANEL_MIN_WIDTH, maxWidth);
+  const minHeight = Math.min(SCAFFOLD_PANEL_MIN_HEIGHT, maxHeight);
+
+  return {
+    width: clamp(args.width, minWidth, maxWidth),
+    height: clamp(args.height, minHeight, maxHeight),
+  };
+}
+
+function clampScaffoldPanelPosition(args: {
+  appRect: DOMRect;
+  left: number;
+  top: number;
+  panelWidth: number;
+  panelHeight: number;
+}) {
+  const maxLeft = Math.max(
+    SCAFFOLD_PANEL_GUTTER,
+    args.appRect.width - args.panelWidth - SCAFFOLD_PANEL_GUTTER,
+  );
+  const maxTop = Math.max(
+    SCAFFOLD_PANEL_GUTTER,
+    args.appRect.height - args.panelHeight - SCAFFOLD_PANEL_GUTTER,
+  );
+
+  return {
+    left: clamp(args.left, SCAFFOLD_PANEL_GUTTER, maxLeft),
+    top: clamp(args.top, SCAFFOLD_PANEL_GUTTER, maxTop),
+  };
+}
+
+function placeScaffoldPanelAtPointer(args: {
+  appRect: DOMRect;
+  clientX: number;
+  clientY: number;
+  panelWidth: number;
+  panelHeight: number;
+}) {
+  return clampScaffoldPanelPosition({
+    appRect: args.appRect,
+    left: args.clientX - args.appRect.left + 10,
+    top: args.clientY - args.appRect.top + 10,
+    panelWidth: args.panelWidth,
+    panelHeight: args.panelHeight,
+  });
+}
+
 type ToastKind = "info" | "success" | "warning" | "error";
 type ToastState = { open: boolean; kind: ToastKind; message: string };
 type InspectorPlacement = "auto" | "right" | "bottom";
@@ -383,6 +466,24 @@ type FlowPreviewState = FocusedFlowState & {
 type InspectorFocusRequest = {
   nodeId: string;
   token: number;
+};
+type ScaffoldPanelPosition = {
+  left: number;
+  top: number;
+};
+type ScaffoldPanelSize = {
+  width: number;
+  height: number;
+};
+type OpenScaffoldPanelArgs = {
+  clientX: number;
+  clientY: number;
+};
+type ScaffoldPreviewState = {
+  requestId: string | null;
+  patches: PatchPreview[];
+  warnings: string[];
+  error: string | null;
 };
 
 export default function App() {
@@ -410,6 +511,25 @@ export default function App() {
   const [inspectorFocusRequest, setInspectorFocusRequest] =
     useState<InspectorFocusRequest | null>(null);
   const [runtimeDebug, setRuntimeDebug] = useState<RuntimeDebugState | null>(null);
+  const [scaffoldPreview, setScaffoldPreview] = useState<ScaffoldPreviewState>({
+    requestId: null,
+    patches: [],
+    warnings: [],
+    error: null,
+  });
+  const [scaffoldPreviewBusy, setScaffoldPreviewBusy] = useState(false);
+  const [scaffoldApplyBusy, setScaffoldApplyBusy] = useState(false);
+  const [scaffoldModalOpen, setScaffoldModalOpen] = useState(false);
+  const [scaffoldPanelPosition, setScaffoldPanelPosition] =
+    useState<ScaffoldPanelPosition>({ left: 24, top: 96 });
+  const [scaffoldPanelSize, setScaffoldPanelSize] = useState<ScaffoldPanelSize>({
+    width: SCAFFOLD_PANEL_DEFAULT_WIDTH,
+    height: SCAFFOLD_PANEL_DEFAULT_HEIGHT,
+  });
+  const scaffoldPanelRef = useRef<HTMLDivElement | null>(null);
+  const [isDraggingScaffoldPanel, setIsDraggingScaffoldPanel] = useState(false);
+  const [isResizingScaffoldPanel, setIsResizingScaffoldPanel] = useState(false);
+  const [scaffoldPanelInactive, setScaffoldPanelInactive] = useState(false);
 
   const [pendingUseSelectionAsRoot, setPendingUseSelectionAsRoot] =
     useState(false);
@@ -459,6 +579,10 @@ export default function App() {
   const [appWidth, setAppWidth] = useState<number>(() => {
     if (typeof window === "undefined") return 1280;
     return window.innerWidth;
+  });
+  const [appHeight, setAppHeight] = useState<number>(() => {
+    if (typeof window === "undefined") return 720;
+    return window.innerHeight;
   });
   const [isResizingInspector, setIsResizingInspector] = useState(false);
 
@@ -569,6 +693,77 @@ export default function App() {
     },
   );
 
+  const handlePatchPreviewResult = useEffectEvent(
+    (result: PatchPreviewResultPayload) => {
+      setScaffoldPreviewBusy(false);
+      if (!result.ok) {
+        setScaffoldPreview({
+          requestId: result.requestId,
+          patches: [],
+          warnings: result.warnings ?? [],
+          error: result.error ?? "Patch preview failed",
+        });
+        showToast("error", result.error || "Patch preview failed");
+        return;
+      }
+
+      setScaffoldPreview({
+        requestId: result.requestId,
+        patches: result.patches ?? [],
+        warnings: result.warnings ?? [],
+        error: null,
+      });
+      showToast("success", "Patch preview ready", 1200);
+    },
+  );
+
+  const handlePatchApplyResult = useEffectEvent(
+    (result: PatchApplyResultPayload) => {
+      setScaffoldApplyBusy(false);
+      if (!result.ok) {
+        showToast("error", result.error || "Patch apply failed");
+        return;
+      }
+
+      setScaffoldModalOpen(false);
+      const appliedCount = result.appliedFiles?.length ?? 0;
+      showToast(
+        "success",
+        appliedCount > 0
+          ? `Applied ${appliedCount} scaffold patch${appliedCount > 1 ? "es" : ""}`
+          : "Scaffold applied",
+      );
+    },
+  );
+
+  const getScaffoldAppRect = () => appRootRef.current?.getBoundingClientRect() ?? null;
+
+  const openScaffoldPanelAt = (args: OpenScaffoldPanelArgs) => {
+    const appRect = getScaffoldAppRect();
+    setScaffoldPanelInactive(false);
+    if (!appRect) {
+      setScaffoldModalOpen(true);
+      return;
+    }
+
+    const nextSize = clampScaffoldPanelSize({
+      appRect,
+      width: scaffoldPanelSize.width,
+      height: scaffoldPanelSize.height,
+    });
+    setScaffoldPanelSize(nextSize);
+    setScaffoldPanelPosition(
+      placeScaffoldPanelAtPointer({
+        appRect,
+        clientX: args.clientX,
+        clientY: args.clientY,
+        panelWidth: nextSize.width,
+        panelHeight: nextSize.height,
+      }),
+    );
+    setScaffoldModalOpen(true);
+  };
+
   // Keep latest values for selection-root logic
   const pendingRootRef = useRef(false);
   const graphRef = useRef<GraphPayload | undefined>(undefined);
@@ -600,15 +795,20 @@ export default function App() {
     const root = appRootRef.current;
     if (!root || typeof ResizeObserver === "undefined") return;
 
-    const updateWidth = (nextWidth?: number) => {
+    const updateBounds = (nextWidth?: number, nextHeight?: number) => {
       const width = nextWidth ?? root.clientWidth;
+      const height = nextHeight ?? root.clientHeight;
       if (width > 0) setAppWidth(width);
+      if (height > 0) setAppHeight(height);
     };
 
-    updateWidth();
+    updateBounds();
 
     const observer = new ResizeObserver((entries) => {
-      updateWidth(entries[0]?.contentRect.width);
+      updateBounds(
+        entries[0]?.contentRect.width,
+        entries[0]?.contentRect.height,
+      );
     });
     observer.observe(root);
     return () => observer.disconnect();
@@ -676,6 +876,16 @@ export default function App() {
 
       if (msg.type === "flowExportResult") {
         handleFlowExportResult(msg.payload);
+        return;
+      }
+
+      if (msg.type === "patchPreviewResult") {
+        handlePatchPreviewResult(msg.payload);
+        return;
+      }
+
+      if (msg.type === "patchApplyResult") {
+        handlePatchApplyResult(msg.payload);
         return;
       }
 
@@ -860,6 +1070,74 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  useEffect(() => {
+    if (!scaffoldModalOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setScaffoldModalOpen(false);
+      }
+    };
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node | null;
+      if (scaffoldPanelRef.current?.contains(target)) {
+        setScaffoldPanelInactive(false);
+        return;
+      }
+      setScaffoldPanelInactive(true);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [scaffoldModalOpen]);
+
+  useEffect(() => {
+    if (!scaffoldModalOpen) return;
+    const appRect = getScaffoldAppRect();
+    if (!appRect) return;
+
+    const nextSize = clampScaffoldPanelSize({
+      appRect,
+      width: scaffoldPanelSize.width,
+      height: scaffoldPanelSize.height,
+      left: scaffoldPanelPosition.left,
+      top: scaffoldPanelPosition.top,
+    });
+    const nextPosition = clampScaffoldPanelPosition({
+      appRect,
+      left: scaffoldPanelPosition.left,
+      top: scaffoldPanelPosition.top,
+      panelWidth: nextSize.width,
+      panelHeight: nextSize.height,
+    });
+
+    if (
+      nextSize.width !== scaffoldPanelSize.width ||
+      nextSize.height !== scaffoldPanelSize.height
+    ) {
+      setScaffoldPanelSize(nextSize);
+    }
+    if (
+      nextPosition.left !== scaffoldPanelPosition.left ||
+      nextPosition.top !== scaffoldPanelPosition.top
+    ) {
+      setScaffoldPanelPosition(nextPosition);
+    }
+  }, [
+    appHeight,
+    appWidth,
+    scaffoldModalOpen,
+    scaffoldPanelPosition.left,
+    scaffoldPanelPosition.top,
+    scaffoldPanelSize.height,
+    scaffoldPanelSize.width,
+  ]);
+
   const clampInspectorWidth = (w: number) => Math.min(720, Math.max(260, w));
   const clampInspectorHeight = (h: number) => Math.min(520, Math.max(180, h));
   const effectiveInspectorPlacement: EffectiveInspectorPlacement =
@@ -894,6 +1172,90 @@ export default function App() {
 
     const onUp = () => {
       setIsResizingInspector(false);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+    };
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+  };
+
+  const beginDragScaffoldPanel = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement | null;
+    if (target?.closest("button, input, textarea, select, a")) {
+      return;
+    }
+
+    const appRect = getScaffoldAppRect();
+    if (!appRect) return;
+
+    e.preventDefault();
+    setScaffoldPanelInactive(false);
+    setIsDraggingScaffoldPanel(true);
+
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startLeft = scaffoldPanelPosition.left;
+    const startTop = scaffoldPanelPosition.top;
+    const panelWidth = scaffoldPanelSize.width;
+    const panelHeight = scaffoldPanelSize.height;
+
+    const onMove = (ev: PointerEvent) => {
+      setScaffoldPanelPosition(
+        clampScaffoldPanelPosition({
+          appRect,
+          left: startLeft + (ev.clientX - startX),
+          top: startTop + (ev.clientY - startY),
+          panelWidth,
+          panelHeight,
+        }),
+      );
+    };
+
+    const onUp = () => {
+      setIsDraggingScaffoldPanel(false);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+    };
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+  };
+
+  const beginResizeScaffoldPanel = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const appRect = getScaffoldAppRect();
+    if (!appRect) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    setScaffoldPanelInactive(false);
+    setIsResizingScaffoldPanel(true);
+
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startWidth = scaffoldPanelSize.width;
+    const startHeight = scaffoldPanelSize.height;
+    const panelLeft = scaffoldPanelPosition.left;
+    const panelTop = scaffoldPanelPosition.top;
+
+    const onMove = (ev: PointerEvent) => {
+      setScaffoldPanelSize(
+        clampScaffoldPanelSize({
+          appRect,
+          width: startWidth + (ev.clientX - startX),
+          height: startHeight + (ev.clientY - startY),
+          left: panelLeft,
+          top: panelTop,
+        }),
+      );
+    };
+
+    const onUp = () => {
+      setIsResizingScaffoldPanel(false);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       window.removeEventListener("pointercancel", onUp);
@@ -960,6 +1322,8 @@ export default function App() {
     return findNodeById(graph, selectedNodeId);
   }, [graph, selectedNodeId]);
 
+  const activeFilePath = activeFile ? uriToFsPath(activeFile.uri) : null;
+  const workspaceRoot = workspaceFiles?.rootPath ?? null;
   const projectName = activeFile?.fileName ? activeFile.fileName : "Select file";
   const exportBaseName =
     activeFile?.fileName?.replace(/[^\w.-]+/g, "_")?.slice(0, 64) || "codegraph";
@@ -1108,6 +1472,42 @@ export default function App() {
       targetId: flow.targetId,
     });
     setFocusedFlow(flow);
+  };
+
+  const requestScaffoldPreview = (payload: {
+    design: DesignGraph;
+    workspaceRoot: string | null;
+  }) => {
+    setScaffoldPreviewBusy(true);
+    setScaffoldPreview((current) => ({
+      ...current,
+      error: null,
+    }));
+    postMessage("scaffold.preview", {
+      type: "requestPatchPreview",
+      payload: {
+        design: payload.design,
+        options: {
+          workspaceRoot: payload.workspaceRoot,
+        },
+      },
+    });
+  };
+
+  const applyScaffoldPreview = (
+    requestId: string,
+    selectedPatchIds: string[],
+    editedPatches: Array<{ patchId: string; content: string }>,
+  ) => {
+    setScaffoldApplyBusy(true);
+    postMessage("scaffold.apply", {
+      type: "applyPatchPreview",
+      payload: {
+        requestId,
+        selectedPatchIds,
+        editedPatches,
+      },
+    });
   };
 
   const buildFlowExportPayload = () => ({
@@ -1299,7 +1699,7 @@ export default function App() {
         projectName={projectName}
         workspaceRootName={workspaceFiles?.rootName ?? null}
         workspaceFiles={workspaceFiles?.files ?? []}
-        activeFilePath={activeFile ? uriToFsPath(activeFile.uri) : null}
+        activeFilePath={activeFilePath}
         onPickFile={(filePath) => {
           resetGraph();
           postMessage("topbar.pickFile", {
@@ -1410,6 +1810,7 @@ export default function App() {
           onTraceNext={stepTraceNext}
           onTraceFinish={finishTraceMode}
           autoLayoutTick={autoLayoutTick}
+          onOpenScaffoldModal={openScaffoldPanelAt}
         />
 
         {inspectorOpen ? (
@@ -1463,6 +1864,70 @@ export default function App() {
           }}
         />
       </div>
+
+      {scaffoldModalOpen ? (
+        <div
+          ref={scaffoldPanelRef}
+          className={[
+            "scaffoldFloatingPanel",
+            isDraggingScaffoldPanel ? "isDragging" : "",
+            isResizingScaffoldPanel ? "isResizing" : "",
+            scaffoldPanelInactive ? "isInactive" : "",
+          ]
+            .join(" ")
+            .trim()}
+          style={{
+            left: scaffoldPanelPosition.left,
+            top: scaffoldPanelPosition.top,
+            width: scaffoldPanelSize.width,
+            height: scaffoldPanelSize.height,
+          }}
+          role="dialog"
+          aria-modal="false"
+          aria-label="Scaffold Lab"
+          onPointerDownCapture={() => setScaffoldPanelInactive(false)}
+          onFocusCapture={() => setScaffoldPanelInactive(false)}
+        >
+          <div
+            className="scaffoldFloatingHeader inspectorHeader"
+            onPointerDown={beginDragScaffoldPanel}
+          >
+            <div>
+              <h1>Scaffold Lab</h1>
+              <p>STRUCTURE GENERATOR</p>
+            </div>
+            <div className="inspectorHeaderActions">
+              <button
+                className="iconBtn subtle"
+                type="button"
+                onClick={() => setScaffoldModalOpen(false)}
+                aria-label="Close Scaffold Lab"
+                title="Close"
+              >
+                x
+              </button>
+            </div>
+          </div>
+
+          <div className="scaffoldFloatingBody">
+            <ScaffoldLab
+              appendTargetFilePath={activeFilePath}
+              workspaceRoot={workspaceRoot}
+              previewState={scaffoldPreview}
+              isPreviewBusy={scaffoldPreviewBusy}
+              isApplyBusy={scaffoldApplyBusy}
+              onRequestPreview={requestScaffoldPreview}
+              onApplyPreview={applyScaffoldPreview}
+            />
+          </div>
+          <div
+            className="scaffoldResizeHandle"
+            onPointerDown={beginResizeScaffoldPanel}
+            role="presentation"
+            aria-hidden="true"
+          />
+        </div>
+      ) : null}
 
       {toast.open ? (
         <div className={`cgToast cgToast--${toast.kind}`}>{toast.message}</div>

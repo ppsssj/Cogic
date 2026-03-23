@@ -9,6 +9,10 @@
 export type {
   AnalysisRequestMeta,
   CodeDiagnostic,
+  DesignGraph,
+  DesignNode,
+  DesignEdge,
+  PatchPreview,
   WebviewToExtMessage,
   ExtToWebviewMessage,
   GraphEdge,
@@ -72,6 +76,8 @@ export function isExtToWebviewMessage(x: unknown): x is ExtToWebviewMessage {
     t === "analysisResult" ||
     t === "uiNotice" ||
     t === "flowExportResult" ||
-    t === "runtimeDebug"
+    t === "runtimeDebug" ||
+    t === "patchPreviewResult" ||
+    t === "patchApplyResult"
   );
 }

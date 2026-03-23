@@ -49,6 +49,26 @@ export type WebviewToExtMessage =
         };
         preserveFocus?: boolean;
       };
+    }
+  | {
+      type: "requestPatchPreview";
+      payload: {
+        design: DesignGraph;
+        options?: {
+          workspaceRoot?: string | null;
+        };
+      };
+    }
+  | {
+      type: "applyPatchPreview";
+      payload: {
+        requestId: string;
+        selectedPatchIds?: string[];
+        editedPatches?: Array<{
+          patchId: string;
+          content: string;
+        }>;
+      };
     };
 
 export type AnalysisCallV1 = { name: string; count: number };
@@ -107,6 +127,56 @@ export type GraphEdge = {
 export type GraphPayload = {
   nodes: GraphNode[];
   edges: GraphEdge[];
+};
+
+export type DesignNodeKind = "file" | "function" | "class" | "interface" | "type";
+
+export type DesignNode = {
+  id: string;
+  kind: DesignNodeKind;
+  name: string;
+  filePath?: string;
+  parentId?: string;
+  exported?: boolean;
+  signature?: {
+    params?: Array<{ name: string; type?: string; optional?: boolean }>;
+    returnType?: string;
+    typeParams?: string[];
+  };
+  members?: Array<
+    | { kind: "method"; name: string; returnType?: string }
+    | { kind: "field"; name: string; type?: string; readonly?: boolean }
+  >;
+  source?: "graph" | "imported-from-analysis" | "scaffold-lab";
+};
+
+export type DesignEdgeKind =
+  | "contains"
+  | "dependsOn"
+  | "extends"
+  | "implements";
+
+export type DesignEdge = {
+  id: string;
+  kind: DesignEdgeKind;
+  source: string;
+  target: string;
+  label?: string;
+};
+
+export type DesignGraph = {
+  nodes: DesignNode[];
+  edges: DesignEdge[];
+};
+
+export type PatchPreview = {
+  id: string;
+  filePath: string;
+  kind: "create" | "update";
+  summary: string;
+  diffText: string;
+  editableContent?: string;
+  warnings?: string[];
 };
 
 export type GraphTraceEvent =
@@ -285,4 +355,23 @@ export type ExtToWebviewMessage =
   | {
       type: "runtimeDebug";
       payload: RuntimeDebugPayload;
+    }
+  | {
+      type: "patchPreviewResult";
+      payload: {
+        requestId: string;
+        ok: boolean;
+        patches?: PatchPreview[];
+        warnings?: string[];
+        error?: string;
+      };
+    }
+  | {
+      type: "patchApplyResult";
+      payload: {
+        requestId: string;
+        ok: boolean;
+        appliedFiles?: string[];
+        error?: string;
+      };
     };

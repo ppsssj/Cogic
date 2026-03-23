@@ -1215,6 +1215,7 @@ export function CanvasPane({
   onTraceNext,
   onTraceFinish,
   autoLayoutTick,
+  onOpenScaffoldModal,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
   const canvasFlowRef = useRef<HTMLDivElement | null>(null);
@@ -1552,6 +1553,54 @@ export function CanvasPane({
     }
   };
 
+  const handleCanvasContextMenu = (event: ReactDomMouseEvent<HTMLElement>) => {
+    const target = event.target as HTMLElement | null;
+    if (target?.closest("button, input, textarea, select, a")) {
+      return;
+    }
+
+    event.preventDefault();
+    pushWebviewDebugEvent("canvas.contextMenu.openScaffold", {
+      selectedNodeId,
+      hasData,
+      visibleHasData,
+      clientX: event.clientX,
+      clientY: event.clientY,
+      ...getGraphCounts(graph),
+    });
+    onOpenScaffoldModal?.({
+      clientX: event.clientX,
+      clientY: event.clientY,
+    });
+  };
+
+  const handleNodeContextMenu = (
+    event: ReactMouseEvent,
+    node: Node<CodeNodeData | FileGroupData>,
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const graphNode = graph?.nodes.find((candidate) => candidate.id === node.id) ?? null;
+    pushWebviewDebugEvent("canvas.node.contextMenu.openScaffold", {
+      nodeId: node.id,
+      visibleKind: node.data.kind,
+      graphNodeKind: graphNode?.kind ?? null,
+      filePath: graphNode?.file ?? ("file" in node.data ? node.data.file : null),
+      selectedNodeId,
+      hasData,
+      visibleHasData,
+      clientX: event.clientX,
+      clientY: event.clientY,
+      ...getGraphCounts(graph),
+    });
+    onSelectNode(node.id);
+    onOpenScaffoldModal?.({
+      clientX: event.clientX,
+      clientY: event.clientY,
+    });
+  };
+
   const onZoomIn = () => rfRef.current?.zoomIn?.();
   const onZoomOut = () => rfRef.current?.zoomOut?.();
   const onFocusSelection = () => {
@@ -1804,7 +1853,7 @@ export function CanvasPane({
   );
 
   return (
-    <section className="canvas">
+    <section className="canvas" onContextMenu={handleCanvasContextMenu}>
       {!hasData ? (
         renderEmptyState("no-graph")
       ) : (
@@ -1822,6 +1871,7 @@ export function CanvasPane({
               zoomOnDoubleClick={false}
               onNodeClick={handleNodeClick}
               onNodeDoubleClick={handleNodeDoubleClick}
+              onNodeContextMenu={handleNodeContextMenu}
               onPaneClick={onClearSelection}
               fitView
               minZoom={0.1}
@@ -1996,4 +2046,8 @@ type Props = {
   onTraceNext: () => void;
   onTraceFinish: () => void;
   autoLayoutTick: number;
+  onOpenScaffoldModal?: (args: {
+    clientX: number;
+    clientY: number;
+  }) => void;
 };

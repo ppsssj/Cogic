@@ -1,0 +1,513 @@
+{
+  "schema": "codegraph.flow.v1",
+  "exportedAt": "2026-03-23T06:30:13.800Z",
+  "ui": {
+    "activeFilter": "all",
+    "searchQuery": "",
+    "rootNodeId": null,
+    "selectedNodeId": null,
+    "inspector": {
+      "open": true,
+      "placement": "right",
+      "effectivePlacement": "right",
+      "width": 401,
+      "height": 180
+    }
+  },
+  "activeFile": {
+    "uri": "file:///c%3A/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+    "fileName": "sample_debug.ts",
+    "languageId": "typescript"
+  },
+  "analysisMeta": {
+    "mode": "workspace",
+    "rootFiles": 12,
+    "usedTsconfig": false,
+    "projectRoot": "c:\\Users\\SCH\\Documents\\CodeGraph\\CodeGraph\\test-workspace"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "file:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0",
+        "kind": "file",
+        "name": "sample_debug.ts",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 66,
+            "character": 0
+          }
+        }
+      },
+      {
+        "id": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0",
+        "kind": "interface",
+        "name": "CartItem",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 4,
+            "character": 2
+          }
+        },
+        "signature": "type CartItem = {\r\n  name: string;\r\n  price: number;\r\n  quantity: number;\r\n}",
+        "subkind": "type"
+      },
+      {
+        "id": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:79",
+        "kind": "interface",
+        "name": "Coupon",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 5,
+            "character": 0
+          },
+          "end": {
+            "line": 7,
+            "character": 37
+          }
+        },
+        "signature": "type Coupon = | { kind: \"percent\"; value: number }\r\n  | { kind: \"fixed\"; value: number }",
+        "subkind": "type"
+      },
+      {
+        "id": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:173",
+        "kind": "function",
+        "name": "subtotal",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 8,
+            "character": 0
+          },
+          "end": {
+            "line": 10,
+            "character": 1
+          }
+        },
+        "signature": "(items: CartItem[]): number",
+        "sig": {
+          "params": [
+            {
+              "name": "items",
+              "type": "CartItem[]"
+            }
+          ],
+          "returnType": "number"
+        }
+      },
+      {
+        "id": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:292",
+        "kind": "function",
+        "name": "applyDiscount",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 11,
+            "character": 0
+          },
+          "end": {
+            "line": 17,
+            "character": 1
+          }
+        },
+        "signature": "(amount: number, coupon?: Coupon): number",
+        "sig": {
+          "params": [
+            {
+              "name": "amount",
+              "type": "number"
+            },
+            {
+              "name": "coupon",
+              "type": "Coupon",
+              "optional": true
+            }
+          ],
+          "returnType": "number"
+        }
+      },
+      {
+        "id": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:494",
+        "kind": "function",
+        "name": "addTax",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 18,
+            "character": 0
+          },
+          "end": {
+            "line": 20,
+            "character": 1
+          }
+        },
+        "signature": "(amount: number, taxRate: number): number",
+        "sig": {
+          "params": [
+            {
+              "name": "amount",
+              "type": "number"
+            },
+            {
+              "name": "taxRate",
+              "type": "number"
+            }
+          ],
+          "returnType": "number"
+        }
+      },
+      {
+        "id": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:586",
+        "kind": "function",
+        "name": "roundMoney",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 21,
+            "character": 0
+          },
+          "end": {
+            "line": 23,
+            "character": 1
+          }
+        },
+        "signature": "(amount: number): number",
+        "sig": {
+          "params": [
+            {
+              "name": "amount",
+              "type": "number"
+            }
+          ],
+          "returnType": "number"
+        }
+      },
+      {
+        "id": "class:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:670",
+        "kind": "class",
+        "name": "CheckoutService",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 24,
+            "character": 0
+          },
+          "end": {
+            "line": 34,
+            "character": 1
+          }
+        }
+      },
+      {
+        "id": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "kind": "method",
+        "name": "CheckoutService.checkout",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 25,
+            "character": 2
+          },
+          "end": {
+            "line": 30,
+            "character": 3
+          }
+        },
+        "signature": "(items: CartItem[], coupon?: Coupon): number",
+        "sig": {
+          "params": [
+            {
+              "name": "items",
+              "type": "CartItem[]"
+            },
+            {
+              "name": "coupon",
+              "type": "Coupon",
+              "optional": true
+            }
+          ],
+          "returnType": "number"
+        },
+        "parentId": "class:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:670"
+      },
+      {
+        "id": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:915",
+        "kind": "method",
+        "name": "CheckoutService.fdsa",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 31,
+            "character": 2
+          },
+          "end": {
+            "line": 33,
+            "character": 3
+          }
+        },
+        "signature": "(): void",
+        "sig": {
+          "params": [],
+          "returnType": "void"
+        },
+        "parentId": "class:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:670"
+      },
+      {
+        "id": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "kind": "function",
+        "name": "runDemo",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 35,
+            "character": 0
+          },
+          "end": {
+            "line": 48,
+            "character": 1
+          }
+        },
+        "signature": "(): void",
+        "sig": {
+          "params": [],
+          "returnType": "void"
+        }
+      },
+      {
+        "id": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1455",
+        "kind": "function",
+        "name": "User",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 53,
+            "character": 0
+          },
+          "end": {
+            "line": 55,
+            "character": 1
+          }
+        },
+        "signature": "(input: unknown): void",
+        "sig": {
+          "params": [
+            {
+              "name": "input",
+              "type": "unknown"
+            }
+          ],
+          "returnType": "void"
+        }
+      },
+      {
+        "id": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545",
+        "kind": "function",
+        "name": "scaffoldProbe",
+        "file": "c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts",
+        "range": {
+          "start": {
+            "line": 57,
+            "character": 0
+          },
+          "end": {
+            "line": 65,
+            "character": 1
+          }
+        },
+        "signature": "(items: CartItem[], coupon?: Coupon): { totalItems: number; couponKind: string; }",
+        "sig": {
+          "params": [
+            {
+              "name": "items",
+              "type": "CartItem[]"
+            },
+            {
+              "name": "coupon",
+              "type": "Coupon",
+              "optional": true
+            }
+          ],
+          "returnType": "{ totalItems: number; couponKind: string; }"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "references:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:173->interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0@@@@",
+        "kind": "references",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:173",
+        "target": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0"
+      },
+      {
+        "id": "references:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:292->interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:79@@@@",
+        "kind": "references",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:292",
+        "target": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:79"
+      },
+      {
+        "id": "references:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0@@@@",
+        "kind": "references",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0"
+      },
+      {
+        "id": "references:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:79@@@@",
+        "kind": "references",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:79"
+      },
+      {
+        "id": "references:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959->interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0@@@@",
+        "kind": "references",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "target": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0"
+      },
+      {
+        "id": "references:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959->interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:79@@@@",
+        "kind": "references",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "target": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:79"
+      },
+      {
+        "id": "references:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545->interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0@@@@",
+        "kind": "references",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545",
+        "target": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0"
+      },
+      {
+        "id": "references:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545->interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:79@@@@",
+        "kind": "references",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545",
+        "target": "interface:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:79"
+      },
+      {
+        "id": "calls:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:173@@@@",
+        "kind": "calls",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:173"
+      },
+      {
+        "id": "dataflow:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:173@@items ← items@@arg#0",
+        "kind": "dataflow",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:173",
+        "label": "items ← items"
+      },
+      {
+        "id": "calls:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:292@@@@",
+        "kind": "calls",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:292"
+      },
+      {
+        "id": "dataflow:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:292@@amount ← base@@arg#0",
+        "kind": "dataflow",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:292",
+        "label": "amount ← base"
+      },
+      {
+        "id": "dataflow:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:292@@coupon ← coupon@@arg#1",
+        "kind": "dataflow",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:292",
+        "label": "coupon ← coupon"
+      },
+      {
+        "id": "calls:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:494@@@@",
+        "kind": "calls",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:494"
+      },
+      {
+        "id": "dataflow:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:494@@amount ← discounted@@arg#0",
+        "kind": "dataflow",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:494",
+        "label": "amount ← discounted"
+      },
+      {
+        "id": "dataflow:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:494@@taxRate ← 0.1@@arg#1",
+        "kind": "dataflow",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:494",
+        "label": "taxRate ← 0.1"
+      },
+      {
+        "id": "calls:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:586@@@@",
+        "kind": "calls",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:586"
+      },
+      {
+        "id": "dataflow:method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:586@@amount ← taxed@@arg#0",
+        "kind": "dataflow",
+        "source": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:586",
+        "label": "amount ← taxed"
+      },
+      {
+        "id": "constructs:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959->class:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:670@@@@",
+        "kind": "constructs",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "target": "class:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:670"
+      },
+      {
+        "id": "calls:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959->method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697@@@@",
+        "kind": "calls",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "target": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697"
+      },
+      {
+        "id": "dataflow:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959->method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697@@items ← cart@@arg#0",
+        "kind": "dataflow",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "target": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "label": "items ← cart"
+      },
+      {
+        "id": "dataflow:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959->method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697@@coupon ← coupon@@arg#1",
+        "kind": "dataflow",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "target": "method:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:697",
+        "label": "coupon ← coupon"
+      },
+      {
+        "id": "calls:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545@@@@",
+        "kind": "calls",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545"
+      },
+      {
+        "id": "dataflow:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545@@items ← cart@@arg#0",
+        "kind": "dataflow",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545",
+        "label": "items ← cart"
+      },
+      {
+        "id": "dataflow:function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545@@coupon ← coupon@@arg#1",
+        "kind": "dataflow",
+        "source": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:1545",
+        "label": "coupon ← coupon"
+      },
+      {
+        "id": "calls:file:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0->function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959@@@@",
+        "kind": "calls",
+        "source": "file:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:0",
+        "target": "function:c:/Users/SCH/Documents/CodeGraph/CodeGraph/test-workspace/sample_debug.ts:959"
+      }
+    ]
+  }
+}

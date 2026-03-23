@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import * as path from "path";
 import { getWebviewHtml } from "../webview/html";
 import { analyzeWorkspaceActive } from "../analyzer";
+import { buildPatchPreview, type GeneratedPatchPlan } from "../codegen";
 import type {
   AnalysisRequestMeta,
   AnalysisRequestReason,
@@ -52,6 +53,18 @@ function summarizeInboundMessage(msg: WebviewToExtMessage) {
       traceMode: msg.payload?.traceMode ?? false,
     };
   }
+  if (msg.type === "requestPatchPreview") {
+    return {
+      nodes: msg.payload.design.nodes.length,
+      edges: msg.payload.design.edges.length,
+    };
+  }
+  if (msg.type === "applyPatchPreview") {
+    return {
+      requestId: msg.payload.requestId,
+      selectedPatchIds: msg.payload.selectedPatchIds?.length ?? 0,
+    };
+  }
   return {};
 }
 
@@ -65,6 +78,7 @@ export class CodeGraphPanel {
   private latestActiveAnalysisSequence = 0;
   private traceHighlightTimer: NodeJS.Timeout | undefined;
   private runtimeDebugBridge: RuntimeDebugBridge | undefined;
+  private readonly patchPreviewStore = new Map<string, GeneratedPatchPlan[]>();
   private readonly traceHighlightDecoration =
     vscode.window.createTextEditorDecorationType({
       backgroundColor: "rgba(56, 189, 248, 0.14)",
@@ -156,6 +170,12 @@ export class CodeGraphPanel {
           }
           if (msg.type === "openLocation") {
             return await this.openLocation(msg.payload);
+          }
+          if (msg.type === "requestPatchPreview") {
+            return await this.postPatchPreview(msg.payload);
+          }
+          if (msg.type === "applyPatchPreview") {
+            return await this.applyPatchPreview(msg.payload);
           }
         } catch (e) {
           this.handleRequestError(msg.type, e);
@@ -405,6 +425,30 @@ export class CodeGraphPanel {
       this.panel.webview.postMessage({
         type: "flowExportResult",
         payload: { ok: false, error: detail },
+      } satisfies ExtToWebviewMessage);
+      return;
+    }
+
+    if (action === "requestPatchPreview") {
+      this.panel.webview.postMessage({
+        type: "patchPreviewResult",
+        payload: {
+          requestId: `patch-preview-error-${Date.now()}`,
+          ok: false,
+          error: detail,
+        },
+      } satisfies ExtToWebviewMessage);
+      return;
+    }
+
+    if (action === "applyPatchPreview") {
+      this.panel.webview.postMessage({
+        type: "patchApplyResult",
+        payload: {
+          requestId: `patch-apply-error-${Date.now()}`,
+          ok: false,
+          error: detail,
+        },
       } satisfies ExtToWebviewMessage);
       return;
     }
@@ -856,6 +900,135 @@ export class CodeGraphPanel {
       this.traceHighlightTimer = undefined;
     }, 1200);
   }
+
+  private async postPatchPreview(payload: Extract<
+    WebviewToExtMessage,
+    { type: "requestPatchPreview" }
+  >["payload"]) {
+    const requestId = `patch-preview-${Date.now()}`;
+    const workspaceRoot = payload.options?.workspaceRoot ?? this.getWorkspaceRoot();
+    const result = buildPatchPreview({
+      design: payload.design,
+      workspaceRoot,
+    });
+
+    this.patchPreviewStore.set(requestId, result.patches);
+    this.panel.webview.postMessage({
+      type: "patchPreviewResult",
+      payload: {
+        requestId,
+        ok: true,
+        patches: result.patches.map((patch) => patch.preview),
+        warnings: result.warnings,
+      },
+    } satisfies ExtToWebviewMessage);
+  }
+
+  private async applyPatchPreview(payload: Extract<
+    WebviewToExtMessage,
+    { type: "applyPatchPreview" }
+  >["payload"]) {
+    const plans = this.patchPreviewStore.get(payload.requestId);
+    if (!plans?.length) {
+      this.panel.webview.postMessage({
+        type: "patchApplyResult",
+        payload: {
+          requestId: payload.requestId,
+          ok: false,
+          error: "Patch preview request was not found.",
+        },
+      } satisfies ExtToWebviewMessage);
+      return;
+    }
+
+    const selectedIds = new Set(payload.selectedPatchIds ?? []);
+    const editedContentByPatchId = new Map(
+      (payload.editedPatches ?? []).map((item) => [item.patchId, item.content]),
+    );
+    const effectivePlans =
+      selectedIds.size > 0
+        ? plans.filter((plan) => selectedIds.has(plan.preview.id))
+        : plans;
+
+    if (!effectivePlans.length) {
+      this.panel.webview.postMessage({
+        type: "patchApplyResult",
+        payload: {
+          requestId: payload.requestId,
+          ok: false,
+          error: "No patches were selected.",
+        },
+      } satisfies ExtToWebviewMessage);
+      return;
+    }
+
+    const edit = new vscode.WorkspaceEdit();
+    const appliedFiles: string[] = [];
+
+    for (const plan of effectivePlans) {
+      const editedContent = editedContentByPatchId.get(plan.preview.id);
+      const operation = editedContent
+        ? applyEditedContent(plan, editedContent)
+        : plan.operation;
+      const uri = vscode.Uri.file(plan.operation.filePath);
+
+      if (operation.kind === "create") {
+        edit.createFile(uri, { overwrite: false, ignoreIfExists: false });
+        edit.insert(uri, new vscode.Position(0, 0), operation.fullText);
+        appliedFiles.push(operation.filePath);
+        continue;
+      }
+
+      if (operation.prependText) {
+        edit.insert(uri, new vscode.Position(0, 0), operation.prependText);
+      }
+
+      const doc = await vscode.workspace.openTextDocument(uri);
+      const lastLine = Math.max(0, doc.lineCount - 1);
+      const lastCharacter = doc.lineAt(lastLine).text.length;
+      edit.insert(
+        uri,
+        new vscode.Position(lastLine, lastCharacter),
+        operation.appendText,
+      );
+      appliedFiles.push(operation.filePath);
+    }
+
+    const ok = await vscode.workspace.applyEdit(edit);
+    this.panel.webview.postMessage({
+      type: "patchApplyResult",
+      payload: ok
+        ? {
+            requestId: payload.requestId,
+            ok: true,
+            appliedFiles,
+          }
+        : {
+            requestId: payload.requestId,
+            ok: false,
+            error: "VS Code could not apply the generated patch.",
+          },
+    } satisfies ExtToWebviewMessage);
+  }
+}
+
+function applyEditedContent(
+  plan: GeneratedPatchPlan,
+  editedContent: string,
+): GeneratedPatchPlan["operation"] {
+  const normalized = editedContent.replace(/\r\n/g, "\n").trimEnd();
+  if (plan.operation.kind === "create") {
+    return {
+      ...plan.operation,
+      fullText: normalized ? `${normalized}\n` : "",
+    };
+  }
+
+  const leading = plan.operation.appendText.match(/^\s*/)?.[0] ?? "\n\n";
+  return {
+    ...plan.operation,
+    appendText: normalized ? `${leading}${normalized}\n` : leading,
+  };
 }
 
 function getErrorMessage(error: unknown): string {

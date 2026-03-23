@@ -1,0 +1,159 @@
+.scaffoldLab {
+  display: grid;
+  gap: 10px;
+}
+
+.scaffoldSection {
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+}
+
+.scaffoldSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 11px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.scaffoldSectionTitle {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.96);
+}
+
+.scaffoldSectionMeta {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scaffoldSectionBody {
+  display: grid;
+  gap: 10px;
+  padding: 11px;
+}
+
+.scaffoldLabForm {
+  display: grid;
+  gap: 10px;
+}
+
+.scaffoldField {
+  display: grid;
+  gap: 6px;
+}
+
+.scaffoldFieldLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.scaffoldInput {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  background: var(--inputBg, rgba(255, 255, 255, 0.06));
+  color: inherit;
+  padding: 8px 10px;
+  font: inherit;
+}
+
+.scaffoldHint {
+  font-size: 11px;
+  line-height: 1.4;
+  opacity: 0.78;
+}
+
+.scaffoldActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.scaffoldError {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(248, 113, 113, 0.28);
+  background: rgba(248, 113, 113, 0.08);
+  color: #fecaca;
+  font-size: 12px;
+}
+
+.scaffoldWarnings {
+  display: grid;
+  gap: 6px;
+}
+
+.scaffoldWarningItem {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(251, 191, 36, 0.26);
+  background: rgba(251, 191, 36, 0.08);
+  color: #fde68a;
+  font-size: 12px;
+}
+
+.scaffoldPreviewList {
+  display: grid;
+  gap: 10px;
+}
+
+.scaffoldPreviewCard {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.scaffoldPreviewHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.scaffoldPreviewTitle {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.scaffoldPreviewMeta {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.scaffoldPreviewWarnings {
+  font-size: 11px;
+  color: #fde68a;
+}
+
+.scaffoldPreviewEditor {
+  width: 100%;
+  max-height: 180px;
+  min-height: 132px;
+  overflow: auto;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+  font-size: 10px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  resize: vertical;
+}
