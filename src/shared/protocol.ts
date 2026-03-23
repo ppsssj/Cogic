@@ -114,6 +114,7 @@ export type GraphEdgeKind =
   | "calls"
   | "constructs"
   | "dataflow"
+  | "updates"
   | "references";
 
 export type GraphEdge = {

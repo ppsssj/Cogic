@@ -356,6 +356,230 @@ suite("Analyzer Test Suite", function () {
     );
   });
 
+  test("treats local JSX component usage as a call edge", () => {
+    const result = analyzeTypeScriptWithTypes({
+      fileName: "jsx-local.tsx",
+      languageId: "typescriptreact",
+      code: `
+        function Button() {
+          return null;
+        }
+
+        export function App() {
+          return <Button />;
+        }
+      `,
+    });
+
+    const appNode = result.graph.nodes.find((node) => node.name === "App");
+    const buttonNode = result.graph.nodes.find((node) => node.name === "Button");
+
+    assert.ok(
+      result.calls.some(
+        (call) =>
+          call.calleeName === "Button" &&
+          normalizeComparablePath(call.declFile) === "jsx-local.tsx",
+      ),
+      "JSX component usage should appear in the call summary",
+    );
+    assert.ok(appNode);
+    assert.ok(buttonNode);
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.label === "jsx" &&
+          edge.source === appNode?.id &&
+          edge.target === buttonNode?.id,
+      ),
+      "JSX component usage should create a calls edge between components",
+    );
+  });
+
+  test("resolves imported JSX components across workspace files", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "codegraph-analyzer-"));
+    const entryFile = path.join(root, "App.tsx");
+    const buttonFile = path.join(root, "Button.tsx");
+
+    fs.writeFileSync(
+      buttonFile,
+      `
+        export function Button() {
+          return null;
+        }
+      `,
+      "utf8",
+    );
+
+    const result = analyzeWithWorkspace({
+      active: {
+        fileName: entryFile,
+        languageId: "typescriptreact",
+        code: `
+          import { Button } from "./Button";
+
+          export function App() {
+            return <Button />;
+          }
+        `,
+      },
+      workspaceRoot: root,
+      filePaths: [entryFile, buttonFile],
+    });
+
+    assert.ok(
+      result.calls.some(
+        (call) =>
+          call.calleeName === "Button" &&
+          normalizeComparablePath(call.declFile) ===
+            normalizeComparablePath(buttonFile),
+      ),
+      "imported JSX component usage should resolve to the source file",
+    );
+    assert.ok(
+      result.graph.nodes.some(
+        (node) =>
+          node.kind === "external" &&
+          node.name.includes("Button") &&
+          normalizeComparablePath(node.file) === normalizeComparablePath(buttonFile),
+      ),
+      "workspace JSX usage should create an external node for the imported component",
+    );
+  });
+
+  test("promotes React hook callbacks into separate graph owners", () => {
+    const result = analyzeTypeScriptWithTypes({
+      fileName: "react-hooks.tsx",
+      languageId: "typescriptreact",
+      code: `
+        import { useEffect, useMemo, useCallback } from "react";
+
+        function helper(v: number) {
+          return v + 1;
+        }
+
+        export function App({ value }: { value: number }) {
+          useEffect(() => {
+            helper(value);
+          }, [value]);
+
+          const computed = useMemo(() => helper(value), [value]);
+          const onClick = useCallback(() => helper(computed), [computed]);
+
+          return <button onClick={onClick}>{computed}</button>;
+        }
+      `,
+    });
+
+    const effectNode = result.graph.nodes.find(
+      (node) => node.name === "App.useEffect#1",
+    );
+    const memoNode = result.graph.nodes.find(
+      (node) => node.name === "App.useMemo#1",
+    );
+    const callbackNode = result.graph.nodes.find(
+      (node) => node.name === "App.useCallback#1",
+    );
+    const helperNode = result.graph.nodes.find((node) => node.name === "helper");
+
+    assert.ok(effectNode, "useEffect callback should become a graph node");
+    assert.ok(memoNode, "useMemo callback should become a graph node");
+    assert.ok(callbackNode, "useCallback callback should become a graph node");
+    assert.ok(helperNode);
+
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === effectNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "useEffect callback should own helper() call edges",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === memoNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "useMemo callback should own helper() call edges",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === callbackNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "useCallback callback should own helper() call edges",
+    );
+  });
+
+  test("connects useState and useReducer updates back to hook sources", () => {
+    const result = analyzeTypeScriptWithTypes({
+      fileName: "react-state-hooks.tsx",
+      languageId: "typescriptreact",
+      code: `
+        import { useEffect, useReducer, useState } from "react";
+
+        function reducer(state: number, action: { type: "inc" }) {
+          if (action.type === "inc") {
+            return state + 1;
+          }
+          return state;
+        }
+
+        export function App() {
+          const [count, setCount] = useState(0);
+          const [value, dispatch] = useReducer(reducer, 0);
+
+          useEffect(() => {
+            setCount((current) => current + 1);
+            dispatch({ type: "inc" });
+          }, []);
+
+          return <button>{count + value}</button>;
+        }
+      `,
+    });
+
+    const effectNode = result.graph.nodes.find(
+      (node) => node.name === "App.useEffect#1",
+    );
+    const stateHookNode = result.graph.nodes.find(
+      (node) => node.name === "App.useState#1",
+    );
+    const reducerHookNode = result.graph.nodes.find(
+      (node) => node.name === "App.useReducer#1",
+    );
+
+    assert.ok(effectNode, "useEffect callback should still become a graph node");
+    assert.ok(stateHookNode, "useState should create a hook source node");
+    assert.ok(reducerHookNode, "useReducer should create a hook source node");
+
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "updates" &&
+          edge.label === "setCount" &&
+          edge.source === effectNode?.id &&
+          edge.target === stateHookNode?.id,
+      ),
+      "setCount() should create an updates edge to the originating useState hook",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "updates" &&
+          edge.label === "dispatch" &&
+          edge.source === effectNode?.id &&
+          edge.target === reducerHookNode?.id,
+      ),
+      "dispatch() should create an updates edge to the originating useReducer hook",
+    );
+  });
+
   test("resolves workspace calls across sibling files", () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "codegraph-analyzer-"));
     const entryFile = path.join(root, "entry.ts");
