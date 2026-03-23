@@ -68,7 +68,7 @@ type CodeNodeData = {
     diagnosticSeverity?: "error" | "warning";
     diagnosticCount?: number;
     warningCount?: number;
-    onClick?: () => void;
+    onClick?: (event: ReactDomMouseEvent<HTMLDivElement>) => void;
     onDoubleClick?: () => void;
   }>;
   /** Absolute/relative file path used to expand external nodes. */
@@ -145,6 +145,16 @@ function shortFile(p: string) {
 function baseName(p: string) {
   return shortFile(p);
 }
+
+function isMultiSelectEvent(
+  event:
+    | ReactMouseEvent
+    | ReactDomMouseEvent<HTMLDivElement>
+    | ReactDomMouseEvent<HTMLElement>,
+) {
+  return event.ctrlKey || event.metaKey;
+}
+
 function dirName(p: string) {
   const norm = p.replace(/\\/g, "/");
   const i = norm.lastIndexOf("/");
@@ -353,9 +363,10 @@ function CodeNode({
         ? "external"
         : undefined;
   const handleChildClick =
-    (onClick?: () => void) => (event: ReactDomMouseEvent<HTMLDivElement>) => {
+    (onClick?: (event: ReactDomMouseEvent<HTMLDivElement>) => void) =>
+    (event: ReactDomMouseEvent<HTMLDivElement>) => {
       event.stopPropagation();
-      onClick?.();
+      onClick?.(event);
     };
   const handleChildDoubleClick =
     (onDoubleClick?: () => void) => (event: ReactDomMouseEvent<HTMLDivElement>) => {
@@ -575,10 +586,11 @@ const edgeTypes = { dataflow: DataflowEdge };
 
 function toReactFlowEdges(
   graph?: GraphPayload,
-  selectedNodeId?: string | null,
+  selectedNodeIds?: string[],
   highlightedEdgeId?: string | null,
 ): Array<Edge<DataflowEdgeData>> {
   if (!graph) return [];
+  const selectedNodeIdSet = new Set(selectedNodeIds ?? []);
 
   const existingNodeIds = new Set(graph.nodes.map((n) => n.id));
   const collapsedNodeIds = new Set(
@@ -636,18 +648,18 @@ function toReactFlowEdges(
     const isDataflow = e.kind === "dataflow";
 
     const isSelectedFlow = Boolean(
-      selectedNodeId &&
-        (e.originalSource === selectedNodeId ||
-          e.originalTarget === selectedNodeId),
+      selectedNodeIdSet.size > 0 &&
+        (selectedNodeIdSet.has(e.originalSource) ||
+          selectedNodeIdSet.has(e.originalTarget)),
     );
     const isFocusedFlow = Boolean(highlightedEdgeId && e.id === highlightedEdgeId);
     const muted = Boolean(
       isDataflow &&
         ((highlightedEdgeId && !isFocusedFlow) ||
-          (!highlightedEdgeId && selectedNodeId && !isSelectedFlow)),
+          (!highlightedEdgeId && selectedNodeIdSet.size > 0 && !isSelectedFlow)),
     );
     const showDataflowLabel = Boolean(
-      isFocusedFlow || (selectedNodeId && isSelectedFlow),
+      isFocusedFlow || (selectedNodeIdSet.size > 0 && isSelectedFlow),
     );
 
     let lane = 0;
@@ -989,7 +1001,7 @@ function toReactFlowNodes(
   searchHitIds?: Set<string>,
   diagnostics?: CodeDiagnostic[],
   highlightedNodeIds?: Set<string>,
-  selectedNodeId?: string | null,
+  selectedNodeIds?: string[],
   traceActiveNodeId?: string | null,
   runtimeActiveNodeId?: string | null,
   focusPulseRequests?: Array<{
@@ -997,12 +1009,17 @@ function toReactFlowNodes(
     visibleNodeId: string;
     token: number;
   }>,
-  onSelectChildNode?: (nodeId: string, visibleNodeId: string) => void,
+  onSelectChildNode?: (
+    nodeId: string,
+    visibleNodeId: string,
+    options?: { toggle?: boolean },
+  ) => void,
   onOpenChildNode?: (nodeId: string) => void,
 ): Array<Node<CodeNodeData | FileGroupData>> {
   if (!graph) return [];
   const orderedFocusPulseRequests = [...(focusPulseRequests ?? [])].reverse();
   const existingNodeIds = new Set(graph.nodes.map((n) => n.id));
+  const selectedNodeIdSet = new Set(selectedNodeIds ?? []);
 
   // Reuse existing file-node ids if analyzer already created them.
   const fileNodeByPath = new Map<string, GraphNode>();
@@ -1116,7 +1133,7 @@ function toReactFlowNodes(
         y: headerH + pad + i * g.childRowH,
       };
 
-      const hasSelectedChild = childItems.some((child) => child.id === selectedNodeId);
+      const hasSelectedChild = childItems.some((child) => selectedNodeIdSet.has(child.id));
       const hasTraceActiveChild = childItems.some((child) => child.id === traceActiveNodeId);
       const hasRuntimeActiveChild = childItems.some(
         (child) => child.id === runtimeActiveNodeId,
@@ -1134,7 +1151,7 @@ function toReactFlowNodes(
         highlighted: Boolean(highlightedNodeIds?.has(n.id)),
         searchHit: Boolean(searchHitIds?.has(n.id)),
         selected:
-          selectedNodeId === n.id ||
+          selectedNodeIdSet.has(n.id) ||
           traceActiveNodeId === n.id ||
           runtimeActiveNodeId === n.id ||
           hasSelectedChild ||
@@ -1150,14 +1167,19 @@ function toReactFlowNodes(
           kind: childKindLabel(child),
           title: childTitle(n, child),
           selected:
-            selectedNodeId === child.id ||
+            selectedNodeIdSet.has(child.id) ||
             traceActiveNodeId === child.id ||
             runtimeActiveNodeId === child.id,
           focusPulseToken: childPulseRequest?.token,
           subtitle: `${childKindLabel(child)} · ${shortFile(child.file)}:${child.range.start.line + 1}`,
           ...(diagnosticSummaryByNode.get(child.id) ?? {}),
           onClick:
-            onSelectChildNode ? () => onSelectChildNode(child.id, n.id) : undefined,
+            onSelectChildNode
+              ? (event) =>
+                  onSelectChildNode(child.id, n.id, {
+                    toggle: isMultiSelectEvent(event),
+                  })
+              : undefined,
           onDoubleClick:
             onOpenChildNode ? () => onOpenChildNode(child.id) : undefined,
           };
@@ -1193,6 +1215,7 @@ export function CanvasPane({
   rootNodeId,
   onClearRoot,
   selectedNodeId,
+  selectedNodeIds,
   onSelectNode,
   onClearSelection,
   onOpenNode,
@@ -1332,11 +1355,11 @@ export function CanvasPane({
         searchHitIds,
         analysisDiagnostics,
         visibleHighlightedNodeIds,
-        selectedNodeId,
+        selectedNodeIds,
         traceActiveNodeId,
         runtimeActiveNodeId,
         focusPulseRequests,
-        (nodeId, visibleNodeId) => {
+        (nodeId, visibleNodeId, options) => {
           const target = graph?.nodes.find((node) => node.id === nodeId);
           pushWebviewDebugEvent("canvas.embedded-node.click", {
             nodeId,
@@ -1344,6 +1367,7 @@ export function CanvasPane({
             nodeKind: target?.kind ?? null,
             filePath: target?.file ?? null,
             isExternal: target?.kind === "external",
+            toggle: options?.toggle ?? false,
             ...getGraphCounts(graph),
           });
           setFocusPulseRequest((current) => ({
@@ -1351,7 +1375,7 @@ export function CanvasPane({
             visibleNodeId,
             token: (current?.token ?? 0) + 1,
           }));
-          onSelectNode(nodeId);
+          onSelectNode(nodeId, options);
           setCanvasFocusRequest((current) => ({
             visibleNodeId,
             token: (current?.token ?? 0) + 1,
@@ -1379,6 +1403,7 @@ export function CanvasPane({
       onOpenNode,
       onSelectNode,
       selectedNodeId,
+      selectedNodeIds,
       traceActiveNodeId,
       runtimeActiveNodeId,
       searchHitIds,
@@ -1396,8 +1421,8 @@ export function CanvasPane({
   );
 
   const edges = useMemo<Array<Edge<DataflowEdgeData>>>(
-    () => toReactFlowEdges(filteredGraph, selectedNodeId, highlightedEdgeId),
-    [filteredGraph, highlightedEdgeId, selectedNodeId],
+    () => toReactFlowEdges(filteredGraph, selectedNodeIds, highlightedEdgeId),
+    [filteredGraph, highlightedEdgeId, selectedNodeIds],
   );
   const edgeTopologyKey = useMemo(
     () =>
@@ -1502,9 +1527,10 @@ export function CanvasPane({
   }, [clearSnapshotTimers, collectCanvasSnapshot]);
 
   const handleNodeClick = (
-    _event: ReactMouseEvent,
+    event: ReactMouseEvent,
     node: Node<CodeNodeData | FileGroupData>,
   ) => {
+    const toggle = isMultiSelectEvent(event);
     const graphNode = graph?.nodes.find((n) => n.id === node.id);
     pushWebviewDebugEvent("canvas.node.click", {
       nodeId: node.id,
@@ -1513,6 +1539,7 @@ export function CanvasPane({
       graphNodeKind: graphNode?.kind ?? null,
       filePath: "file" in node.data ? node.data.file : null,
       isExternal: node.data.kind === "external",
+      toggle,
       renderedNodes: nodes.length,
       renderedEdges: edges.length,
       ...getGraphCounts(graph),
@@ -1526,7 +1553,7 @@ export function CanvasPane({
       visibleNodeId: node.id,
       token: (current?.token ?? 0) + 1,
     }));
-    onSelectNode(node.id);
+    onSelectNode(node.id, { toggle });
     setCanvasFocusRequest((current) => ({
       visibleNodeId: node.id,
       token: (current?.token ?? 0) + 1,
@@ -1757,6 +1784,33 @@ export function CanvasPane({
     if (!node) return;
     focusCanvasNode(inst, node, 1.2, 320);
   }, [runtimeFocusRequest, visibleRuntimeActiveNodeId]);
+
+  useEffect(() => {
+    if (!runtimeFocusRequest || !visibleRuntimeActiveNodeId) return;
+
+    pushWebviewDebugEvent("canvas.runtime-focus.changed", {
+      runtimeNodeId: runtimeFocusRequest.nodeId,
+      visibleRuntimeNodeId: visibleRuntimeActiveNodeId,
+      runtimeToken: runtimeFocusRequest.token,
+      visibleHasData,
+      renderedNodes: nodes.length,
+      renderedEdges: edges.length,
+      ...getGraphCounts(graph),
+    });
+    scheduleCanvasSnapshots("runtime-focus", {
+      runtimeNodeId: runtimeFocusRequest.nodeId,
+      visibleRuntimeNodeId: visibleRuntimeActiveNodeId,
+      runtimeToken: runtimeFocusRequest.token,
+    });
+  }, [
+    graph,
+    nodes.length,
+    edges.length,
+    runtimeFocusRequest,
+    scheduleCanvasSnapshots,
+    visibleHasData,
+    visibleRuntimeActiveNodeId,
+  ]);
 
   useEffect(() => {
     const inst = rfRef.current;
@@ -2021,7 +2075,8 @@ type Props = {
   onClearRoot: () => void;
 
   selectedNodeId: string | null;
-  onSelectNode: (nodeId: string) => void;
+  selectedNodeIds: string[];
+  onSelectNode: (nodeId: string, options?: { toggle?: boolean }) => void;
   onClearSelection: () => void;
 
   onOpenNode?: (node: GraphNode) => void;

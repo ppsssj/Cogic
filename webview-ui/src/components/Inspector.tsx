@@ -96,6 +96,7 @@ const DEFAULT_SECTION_STATE: Record<SectionKey, boolean> = {
   analysis: true,
 };
 const RUNTIME_VAR_HOVER_DELAY_MS = 300;
+const AUTO_EXPAND_SECTION_KEYS: SectionKey[] = ["selected", "flow"];
 
 function shortFile(p: string) {
   const parts = p.split(/[/\\]/);
@@ -286,6 +287,10 @@ export function Inspector({
   const [pinnedRuntimeVarKeys, setPinnedRuntimeVarKeys] = useState<string[]>([]);
   const settingsRef = useRef<HTMLDivElement | null>(null);
   const runtimeVarHoverTimerRef = useRef<number | null>(null);
+  const previousAutoExpandFingerprintsRef = useRef<Partial<Record<SectionKey, string>> | null>(
+    null,
+  );
+  const previousSelectedNodeIdRef = useRef<string | null>(selectedNode?.id ?? null);
   const nodeById = new Map((graph?.nodes ?? []).map((n) => [n.id, n]));
   const collapseDirection: CollapseDirection =
     effectivePlacement === "bottom" ? "horizontal" : "vertical";
@@ -322,6 +327,39 @@ export function Inspector({
   const visibleParamFlows = activeFlowCard && !paramFlows.some((flow) => flow.id === activeFlowCard.id)
     ? [activeFlowCard, ...paramFlows]
     : paramFlows;
+  const selectedSectionFingerprint = JSON.stringify(
+    selectedNode
+      ? {
+          id: selectedNode.id,
+          kind: selectedNode.kind,
+          name: selectedNode.name,
+          file: selectedNode.file,
+          range: selectedNode.range,
+          signature: fmtSig(selectedNode as GraphNodeWithSig),
+        }
+      : null,
+  );
+  const flowSectionFingerprint = JSON.stringify({
+    active: activeFlowCard
+      ? {
+          id: activeFlowCard.id,
+          sourceId: activeFlowCard.sourceId,
+          targetId: activeFlowCard.targetId,
+          from: activeFlowCard.from,
+          to: activeFlowCard.to,
+          label: activeFlowCard.label,
+          origin: activeFlowCard.origin,
+        }
+      : null,
+    flows: visibleParamFlows.map((flow) => ({
+      id: flow.id,
+      sourceId: flow.sourceId,
+      targetId: flow.targetId,
+      from: flow.from,
+      to: flow.to,
+      label: flow.label,
+    })),
+  });
 
   useEffect(() => {
     if (!settingsOpen) return;
@@ -361,6 +399,47 @@ export function Inspector({
       return { ...prev, runtime: shouldOpen };
     });
   }, [runtimeDebug]);
+
+  useEffect(() => {
+    const currentSelectedNodeId = selectedNode?.id ?? null;
+    const previousSelectedNodeId = previousSelectedNodeIdRef.current;
+    const previousFingerprints = previousAutoExpandFingerprintsRef.current;
+    const currentFingerprints: Partial<Record<SectionKey, string>> = {
+      selected: selectedSectionFingerprint,
+      flow: flowSectionFingerprint,
+    };
+
+    previousSelectedNodeIdRef.current = currentSelectedNodeId;
+    previousAutoExpandFingerprintsRef.current = currentFingerprints;
+
+    if (!currentSelectedNodeId || previousFingerprints === null) {
+      return;
+    }
+    if (previousSelectedNodeId === currentSelectedNodeId) {
+      return;
+    }
+
+    const changedKeys = AUTO_EXPAND_SECTION_KEYS.filter(
+      (key) => currentFingerprints[key] !== previousFingerprints[key],
+    );
+    if (!changedKeys.length) {
+      return;
+    }
+
+    setSectionOpen((prev) => {
+      let next = prev;
+      for (const key of changedKeys) {
+        if (next[key]) {
+          continue;
+        }
+        if (next === prev) {
+          next = { ...prev };
+        }
+        next[key] = true;
+      }
+      return next;
+    });
+  }, [flowSectionFingerprint, selectedNode?.id, selectedSectionFingerprint]);
 
   useEffect(() => {
     const variableKeys = new Set(

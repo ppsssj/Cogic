@@ -1,4 +1,5 @@
 import {
+  useCallback,
   useEffect,
   useEffectEvent,
   useMemo,
@@ -374,6 +375,14 @@ function dataUrlToBase64(dataUrl: string) {
   return base64;
 }
 
+function hashString(value: string) {
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash * 31 + value.charCodeAt(i)) | 0;
+  }
+  return hash >>> 0;
+}
+
 function isHostedInVSCode() {
   return typeof window.acquireVsCodeApi === "function";
 }
@@ -475,6 +484,7 @@ type ScaffoldPanelSize = {
   width: number;
   height: number;
 };
+type ScaffoldPanelLayout = ScaffoldPanelPosition & ScaffoldPanelSize;
 type OpenScaffoldPanelArgs = {
   clientX: number;
   clientY: number;
@@ -507,6 +517,7 @@ export default function App() {
   const [autoLayoutTick, setAutoLayoutTick] = useState(0);
 
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+  const [selectedNodeIds, setSelectedNodeIds] = useState<string[]>([]);
   const [focusedFlow, setFocusedFlow] = useState<FocusedFlowState | null>(null);
   const [inspectorFocusRequest, setInspectorFocusRequest] =
     useState<InspectorFocusRequest | null>(null);
@@ -527,6 +538,18 @@ export default function App() {
     height: SCAFFOLD_PANEL_DEFAULT_HEIGHT,
   });
   const scaffoldPanelRef = useRef<HTMLDivElement | null>(null);
+  const scaffoldPanelPositionRef = useRef<ScaffoldPanelPosition>({
+    left: 24,
+    top: 96,
+  });
+  const scaffoldPanelSizeRef = useRef<ScaffoldPanelSize>({
+    width: SCAFFOLD_PANEL_DEFAULT_WIDTH,
+    height: SCAFFOLD_PANEL_DEFAULT_HEIGHT,
+  });
+  const pendingScaffoldPanelLayoutRef = useRef<Partial<ScaffoldPanelLayout> | null>(
+    null,
+  );
+  const scaffoldPanelRafRef = useRef<number | null>(null);
   const [isDraggingScaffoldPanel, setIsDraggingScaffoldPanel] = useState(false);
   const [isResizingScaffoldPanel, setIsResizingScaffoldPanel] = useState(false);
   const [scaffoldPanelInactive, setScaffoldPanelInactive] = useState(false);
@@ -738,6 +761,31 @@ export default function App() {
 
   const getScaffoldAppRect = () => appRootRef.current?.getBoundingClientRect() ?? null;
 
+  const flushScaffoldPanelLayout = useCallback(() => {
+    const panel = scaffoldPanelRef.current;
+    const pending = pendingScaffoldPanelLayoutRef.current;
+    if (!panel || !pending) return;
+
+    if (pending.left !== undefined) panel.style.left = `${pending.left}px`;
+    if (pending.top !== undefined) panel.style.top = `${pending.top}px`;
+    if (pending.width !== undefined) panel.style.width = `${pending.width}px`;
+    if (pending.height !== undefined) panel.style.height = `${pending.height}px`;
+    pendingScaffoldPanelLayoutRef.current = null;
+  }, []);
+
+  const scheduleScaffoldPanelLayout = useCallback((layout: Partial<ScaffoldPanelLayout>) => {
+    pendingScaffoldPanelLayoutRef.current = {
+      ...(pendingScaffoldPanelLayoutRef.current ?? {}),
+      ...layout,
+    };
+    if (scaffoldPanelRafRef.current !== null) return;
+
+    scaffoldPanelRafRef.current = window.requestAnimationFrame(() => {
+      scaffoldPanelRafRef.current = null;
+      flushScaffoldPanelLayout();
+    });
+  }, [flushScaffoldPanelLayout]);
+
   const openScaffoldPanelAt = (args: OpenScaffoldPanelArgs) => {
     const appRect = getScaffoldAppRect();
     setScaffoldPanelInactive(false);
@@ -748,8 +796,8 @@ export default function App() {
 
     const nextSize = clampScaffoldPanelSize({
       appRect,
-      width: scaffoldPanelSize.width,
-      height: scaffoldPanelSize.height,
+      width: scaffoldPanelSizeRef.current.width,
+      height: scaffoldPanelSizeRef.current.height,
     });
     setScaffoldPanelSize(nextSize);
     setScaffoldPanelPosition(
@@ -788,8 +836,9 @@ export default function App() {
   useEffect(() => {
     pushWebviewDebugEvent("app.selectedNode.changed", {
       selectedNodeId,
+      selectedNodeIds,
     });
-  }, [selectedNodeId]);
+  }, [selectedNodeId, selectedNodeIds]);
 
   useEffect(() => {
     const root = appRootRef.current;
@@ -935,7 +984,7 @@ export default function App() {
             setTraceCursor(0);
             setGraphState(undefined);
             expandedFilesRef.current.clear();
-            setSelectedNodeId(null);
+            clearSelectedNodes();
             setFocusedFlow(null);
             setInspectorFocusRequest(null);
             setRootNodeId(null);
@@ -946,7 +995,7 @@ export default function App() {
           const g = payload.graph;
           const trace = payload.trace;
           expandedFilesRef.current.clear();
-          setSelectedNodeId(null);
+          clearSelectedNodes();
           setFocusedFlow(null);
           setInspectorFocusRequest(null);
           setRootNodeId(null);
@@ -1068,6 +1117,24 @@ export default function App() {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    scaffoldPanelPositionRef.current = scaffoldPanelPosition;
+    scheduleScaffoldPanelLayout(scaffoldPanelPosition);
+  }, [scaffoldPanelPosition, scheduleScaffoldPanelLayout]);
+
+  useEffect(() => {
+    scaffoldPanelSizeRef.current = scaffoldPanelSize;
+    scheduleScaffoldPanelLayout(scaffoldPanelSize);
+  }, [scaffoldPanelSize, scheduleScaffoldPanelLayout]);
+
+  useEffect(() => {
+    return () => {
+      if (scaffoldPanelRafRef.current !== null) {
+        window.cancelAnimationFrame(scaffoldPanelRafRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -1197,25 +1264,32 @@ export default function App() {
 
     const startX = e.clientX;
     const startY = e.clientY;
-    const startLeft = scaffoldPanelPosition.left;
-    const startTop = scaffoldPanelPosition.top;
-    const panelWidth = scaffoldPanelSize.width;
-    const panelHeight = scaffoldPanelSize.height;
+    const startLeft = scaffoldPanelPositionRef.current.left;
+    const startTop = scaffoldPanelPositionRef.current.top;
+    const panelWidth = scaffoldPanelSizeRef.current.width;
+    const panelHeight = scaffoldPanelSizeRef.current.height;
 
     const onMove = (ev: PointerEvent) => {
-      setScaffoldPanelPosition(
-        clampScaffoldPanelPosition({
-          appRect,
-          left: startLeft + (ev.clientX - startX),
-          top: startTop + (ev.clientY - startY),
-          panelWidth,
-          panelHeight,
-        }),
-      );
+      const nextPosition = clampScaffoldPanelPosition({
+        appRect,
+        left: startLeft + (ev.clientX - startX),
+        top: startTop + (ev.clientY - startY),
+        panelWidth,
+        panelHeight,
+      });
+      scaffoldPanelPositionRef.current = nextPosition;
+      scheduleScaffoldPanelLayout(nextPosition);
     };
 
     const onUp = () => {
       setIsDraggingScaffoldPanel(false);
+      setScaffoldPanelPosition((current) => {
+        const next = scaffoldPanelPositionRef.current;
+        if (current.left === next.left && current.top === next.top) {
+          return current;
+        }
+        return next;
+      });
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       window.removeEventListener("pointercancel", onUp);
@@ -1237,25 +1311,32 @@ export default function App() {
 
     const startX = e.clientX;
     const startY = e.clientY;
-    const startWidth = scaffoldPanelSize.width;
-    const startHeight = scaffoldPanelSize.height;
-    const panelLeft = scaffoldPanelPosition.left;
-    const panelTop = scaffoldPanelPosition.top;
+    const startWidth = scaffoldPanelSizeRef.current.width;
+    const startHeight = scaffoldPanelSizeRef.current.height;
+    const panelLeft = scaffoldPanelPositionRef.current.left;
+    const panelTop = scaffoldPanelPositionRef.current.top;
 
     const onMove = (ev: PointerEvent) => {
-      setScaffoldPanelSize(
-        clampScaffoldPanelSize({
-          appRect,
-          width: startWidth + (ev.clientX - startX),
-          height: startHeight + (ev.clientY - startY),
-          left: panelLeft,
-          top: panelTop,
-        }),
-      );
+      const nextSize = clampScaffoldPanelSize({
+        appRect,
+        width: startWidth + (ev.clientX - startX),
+        height: startHeight + (ev.clientY - startY),
+        left: panelLeft,
+        top: panelTop,
+      });
+      scaffoldPanelSizeRef.current = nextSize;
+      scheduleScaffoldPanelLayout(nextSize);
     };
 
     const onUp = () => {
       setIsResizingScaffoldPanel(false);
+      setScaffoldPanelSize((current) => {
+        const next = scaffoldPanelSizeRef.current;
+        if (current.width === next.width && current.height === next.height) {
+          return current;
+        }
+        return next;
+      });
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       window.removeEventListener("pointercancel", onUp);
@@ -1307,20 +1388,60 @@ export default function App() {
     return findGraphNodeForRuntimeFrame(graph, runtimeDebug.frame);
   }, [graph, runtimeDebug]);
   const runtimeActiveNodeId = runtimeActiveNode?.id ?? null;
-  const runtimeFocusRequest = useMemo(() => {
+  const runtimeFocusKey = useMemo(() => {
     if (!runtimeDebug || runtimeDebug.state !== "paused" || !runtimeActiveNodeId) {
       return null;
     }
-    const token = Date.parse(runtimeDebug.updatedAt);
+
+    const frame = runtimeDebug.frame;
+    return [
+      runtimeDebug.session?.id ?? "no-session",
+      runtimeActiveNodeId,
+      frame?.id ?? "no-frame",
+      frame?.filePath ?? "no-file",
+      frame?.line ?? "no-line",
+      frame?.column ?? "no-column",
+      runtimeDebug.reason ?? "paused",
+    ].join("|");
+  }, [runtimeActiveNodeId, runtimeDebug]);
+  const runtimeFocusRequest = useMemo(() => {
+    if (!runtimeFocusKey || !runtimeActiveNodeId) {
+      return null;
+    }
     return {
       nodeId: runtimeActiveNodeId,
-      token: Number.isFinite(token) ? token : Date.now(),
+      token: hashString(runtimeFocusKey),
     };
-  }, [runtimeActiveNodeId, runtimeDebug]);
+  }, [runtimeActiveNodeId, runtimeFocusKey]);
 
   const selectedNode: GraphNode | null = useMemo(() => {
     return findNodeById(graph, selectedNodeId);
   }, [graph, selectedNodeId]);
+
+  const replaceSelectedNodes = (nodeId: string | null) => {
+    setSelectedNodeId(nodeId);
+    setSelectedNodeIds(nodeId ? [nodeId] : []);
+  };
+
+  const clearSelectedNodes = () => {
+    setSelectedNodeId(null);
+    setSelectedNodeIds([]);
+  };
+
+  const toggleSelectedNode = (nodeId: string) => {
+    setSelectedNodeIds((current) => {
+      if (current.includes(nodeId)) {
+        const next = current.filter((id) => id !== nodeId);
+        setSelectedNodeId((currentPrimary) =>
+          currentPrimary === nodeId ? (next[next.length - 1] ?? null) : currentPrimary,
+        );
+        return next;
+      }
+
+      setSelectedNodeId(nodeId);
+      return [...current, nodeId];
+    });
+  };
 
   const activeFilePath = activeFile ? uriToFsPath(activeFile.uri) : null;
   const workspaceRoot = workspaceFiles?.rootPath ?? null;
@@ -1338,7 +1459,7 @@ export default function App() {
     setTraceCursor(0);
     setGraphState(undefined);
     expandedFilesRef.current.clear();
-    setSelectedNodeId(null);
+    clearSelectedNodes();
     setFocusedFlow(null);
     setInspectorFocusRequest(null);
     setRootNodeId(null);
@@ -1435,7 +1556,7 @@ export default function App() {
 
   const activateGraphNode = (nodeId: string) => {
     setFocusedFlow(null);
-    setSelectedNodeId(nodeId);
+    replaceSelectedNodes(nodeId);
     setInspectorFocusRequest({ nodeId, token: Date.now() });
     const targetNode = findNodeById(graph, nodeId);
     pushWebviewDebugEvent("inspector.node.activate", {
@@ -1462,7 +1583,7 @@ export default function App() {
       ...getNodeDebugInfo(targetNode),
       ...getGraphCounts(graph),
     });
-    setSelectedNodeId(nodeId);
+    replaceSelectedNodes(nodeId);
   };
 
   const focusParamFlow = (flow: FocusedFlowState) => {
@@ -1518,6 +1639,7 @@ export default function App() {
       searchQuery,
       rootNodeId,
       selectedNodeId,
+      selectedNodeIds,
       inspector: {
         open: inspectorOpen,
         placement: inspectorPlacement,
@@ -1747,16 +1869,22 @@ export default function App() {
           searchQuery={searchQuery}
           rootNodeId={rootNodeId}
           selectedNodeId={selectedNodeId}
-          onSelectNode={(nodeId) => {
+          selectedNodeIds={selectedNodeIds}
+          onSelectNode={(nodeId, options) => {
             pushWebviewDebugEvent("canvas.selection.request", {
               nodeId,
+              toggle: options?.toggle ?? false,
             });
             setFocusedFlow(null);
-            setSelectedNodeId(nodeId);
+            if (options?.toggle) {
+              toggleSelectedNode(nodeId);
+              return;
+            }
+            replaceSelectedNodes(nodeId);
           }}
           onClearSelection={() => {
             pushWebviewDebugEvent("canvas.selection.clear", {});
-            setSelectedNodeId(null);
+            clearSelectedNodes();
             setFocusedFlow(null);
           }}
           onOpenNode={(n) => {

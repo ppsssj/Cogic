@@ -99,11 +99,19 @@ export class CodeGraphPanel {
     private readonly panel: vscode.WebviewPanel,
   ) {}
 
+  private static getInitialPanelColumn(): vscode.ViewColumn {
+    const activeColumn = vscode.window.activeTextEditor?.viewColumn;
+    if (activeColumn !== undefined) {
+      return vscode.ViewColumn.Beside;
+    }
+    return vscode.ViewColumn.Beside;
+  }
+
   static open(context: vscode.ExtensionContext) {
     const panel = vscode.window.createWebviewPanel(
       "codegraph",
       "CodeGraph",
-      vscode.ViewColumn.One,
+      CodeGraphPanel.getInitialPanelColumn(),
       {
         enableScripts: true,
         localResourceRoots: [
