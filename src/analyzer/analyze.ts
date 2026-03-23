@@ -644,6 +644,12 @@ function buildActiveFileGraph(
   const idByDeclPos = new Map<number, string>();
   const ownerDeclById = new Map<string, ts.Node>();
   const hookSourceIdByBindingDeclPos = new Map<number, string>();
+  const pendingHookReferences: Array<{
+    hookId: string;
+    parentId: string;
+    expr: ts.Expression;
+    label: string;
+  }> = [];
 
   // IMPORTANT: Node IDs must be stable. Never derive IDs from display names.
   // Use only kind + filePath + position (or range) so merges/expansions don't create duplicates.
@@ -827,16 +833,72 @@ function buildActiveFileGraph(
   const hookCallbackCountByOwner = new Map<string, Map<string, number>>();
   const hookSourceCountByOwner = new Map<string, Map<string, number>>();
 
+  const getImportDeclaration = (
+    node: ts.Node | undefined,
+  ): ts.ImportDeclaration | null => {
+    let current = node;
+    while (current) {
+      if (ts.isImportDeclaration(current)) {
+        return current;
+      }
+      current = current.parent;
+    }
+    return null;
+  };
+
+  const isReactImportDeclaration = (node: ts.Node | undefined): boolean => {
+    const importDecl = getImportDeclaration(node);
+    return !!(
+      importDecl &&
+      ts.isStringLiteral(importDecl.moduleSpecifier) &&
+      importDecl.moduleSpecifier.text === "react"
+    );
+  };
+
+  const getReactImportKind = (symbol: ts.Symbol | undefined): string | null => {
+    if (!symbol) {
+      return null;
+    }
+
+    for (const decl of symbol.declarations ?? []) {
+      if (!isReactImportDeclaration(decl)) {
+        continue;
+      }
+      if (ts.isImportSpecifier(decl)) {
+        return (decl.propertyName ?? decl.name).text;
+      }
+      if (ts.isNamespaceImport(decl)) {
+        return "*";
+      }
+      if (ts.isImportClause(decl) && decl.name) {
+        return "default";
+      }
+    }
+
+    return null;
+  };
+
   const getReactHookName = (
     expr: ts.LeftHandSideExpression,
     allowedHooks: Set<string>,
   ): string | null => {
-    if (ts.isIdentifier(expr) && allowedHooks.has(expr.text)) {
-      return expr.text;
+    if (ts.isIdentifier(expr)) {
+      const symbol = checker.getSymbolAtLocation(expr);
+      const importedName = getReactImportKind(symbol);
+      if (importedName && allowedHooks.has(importedName)) {
+        return importedName;
+      }
+      return null;
     }
+
     if (ts.isPropertyAccessExpression(expr) && allowedHooks.has(expr.name.text)) {
-      return expr.name.text;
+      const baseSymbol = checker.getSymbolAtLocation(expr.expression);
+      const importKind = getReactImportKind(baseSymbol);
+      if (importKind === "default" || importKind === "*") {
+        return expr.name.text;
+      }
     }
+
     return null;
   };
 
@@ -868,6 +930,7 @@ function buildActiveFileGraph(
       return false;
     }
 
+    const stateBinding = decl.name.elements[0];
     const setterBinding = decl.name.elements[1];
     if (!setterBinding || ts.isOmittedExpression(setterBinding)) {
       return false;
@@ -895,7 +958,38 @@ function buildActiveFileGraph(
         signature,
       },
     );
+    if (
+      stateBinding &&
+      !ts.isOmittedExpression(stateBinding) &&
+      ts.isBindingElement(stateBinding) &&
+      ts.isIdentifier(stateBinding.name)
+    ) {
+      hookSourceIdByBindingDeclPos.set(declLocation(stateBinding).pos, hookId);
+    }
     hookSourceIdByBindingDeclPos.set(declLocation(setterBinding).pos, hookId);
+
+    if (hookName === "useReducer") {
+      const reducerArg = call.arguments[0];
+      if (reducerArg) {
+        pendingHookReferences.push({
+          hookId,
+          parentId,
+          expr: reducerArg,
+          label: "reducer",
+        });
+      }
+
+      const initializerArg = call.arguments[2];
+      if (initializerArg) {
+        pendingHookReferences.push({
+          hookId,
+          parentId,
+          expr: initializerArg,
+          label: "initializer",
+        });
+      }
+    }
+
     return true;
   };
 
@@ -1323,6 +1417,88 @@ function buildActiveFileGraph(
     return null;
   };
 
+  const expressionReferenceName = (expr: ts.Expression) =>
+    expr.getText(sf).replace(/\s+/g, " ").trim();
+
+  const resolveExpressionSymbol = (expr: ts.Expression) =>
+    checker.getSymbolAtLocation(expr) ??
+    (ts.isPropertyAccessExpression(expr)
+      ? checker.getSymbolAtLocation(expr.name)
+      : undefined);
+
+  const addHookReferenceEdge = (
+    hookId: string,
+    parentId: string,
+    expr: ts.Expression,
+    label: string,
+  ) => {
+    try {
+      if (ts.isArrowFunction(expr) || ts.isFunctionExpression(expr)) {
+        const hookName = nodeNameById.get(hookId) ?? "hook";
+        const targetId = pushNode(
+          expr as unknown as ts.Declaration,
+          "function",
+          `${hookName}.${label}`,
+          { parentId },
+        );
+        if (targetId !== hookId) {
+          addEdge("references", hookId, targetId, label);
+        }
+        return;
+      }
+
+      const sym = resolveExpressionSymbol(expr);
+      const decl = sym ? pickBestDeclaration(sym, checker) : undefined;
+      if (!decl) {
+        return;
+      }
+
+      const localId = resolveLocalNodeIdForDeclaration(decl);
+      if (localId) {
+        if (localId !== hookId) {
+          addEdge("references", hookId, localId, label);
+        }
+        return;
+      }
+
+      const loc = declLocation(decl);
+      if (isTypeScriptLibFile(loc.fileName)) {
+        return;
+      }
+
+      if (loc.fileName === sf.fileName) {
+        const targetId = idByDeclPos.get(loc.pos);
+        if (targetId && targetId !== hookId) {
+          addEdge("references", hookId, targetId, label);
+        }
+        return;
+      }
+
+      let signature: string | undefined;
+      try {
+        if (ts.isFunctionLike(decl as ts.Node)) {
+          const sig = checker.getSignatureFromDeclaration(
+            decl as ts.SignatureDeclaration,
+          );
+          signature = sig ? checker.signatureToString(sig) : undefined;
+        }
+      } catch {
+        signature = undefined;
+      }
+
+      const targetId = ensureExternalNode(
+        expressionReferenceName(expr),
+        loc,
+        signature,
+      );
+      if (targetId !== hookId) {
+        addEdge("references", hookId, targetId, label);
+      }
+    } catch {
+      // ignore reducer/init lookup failures
+    }
+  };
+
   const resolveJsxTarget = (
     node: ts.JsxSelfClosingElement | ts.JsxOpeningElement,
   ) => {
@@ -1577,6 +1753,15 @@ function buildActiveFileGraph(
   };
 
   // same-file declaration references: class<->class, class->interface, function->function, etc.
+  for (const relation of pendingHookReferences) {
+    addHookReferenceEdge(
+      relation.hookId,
+      relation.parentId,
+      relation.expr,
+      relation.label,
+    );
+  }
+
   for (const ownerId of ownerDeclById.keys()) {
     addReferenceEdgesForOwner(ownerId);
   }

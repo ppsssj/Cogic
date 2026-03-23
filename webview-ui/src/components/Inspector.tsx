@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import type {
   CodeDiagnostic,
   ExtToWebviewMessage,
+  GraphEdge,
   GraphNode,
   GraphPayload,
   RuntimeDebugPayload,
@@ -158,6 +159,95 @@ function fmtSig(n: GraphNodeWithSig) {
   }
 
   return n.signature?.trim() ? n.signature : "(none)";
+}
+
+function fmtAnalyzerMode(mode: string | undefined) {
+  if (mode === "workspace") return "Workspace";
+  if (mode === "single") return "Single File";
+  if (mode === "single-file") return "Single File";
+  return mode ?? "Unknown";
+}
+
+function describeEdgeReason(
+  edge: GraphEdge,
+  sourceName: string,
+  targetName: string,
+) {
+  if (edge.kind === "calls") {
+    if (edge.label === "jsx") {
+      return `${sourceName} renders ${targetName} in JSX.`;
+    }
+    if (edge.label) {
+      return `${sourceName} calls ${targetName} through ${edge.label}.`;
+    }
+    return `${sourceName} calls ${targetName}.`;
+  }
+  if (edge.kind === "constructs") {
+    return `${sourceName} creates ${targetName}.`;
+  }
+  if (edge.kind === "dataflow") {
+    if (edge.label) {
+      return `${sourceName} passes an argument into ${targetName}.`;
+    }
+    return `${sourceName} passes argument data into ${targetName}.`;
+  }
+  if (edge.kind === "updates") {
+    if (edge.label) {
+      return `${sourceName} updates ${targetName} through ${edge.label}.`;
+    }
+    return `${sourceName} updates ${targetName}.`;
+  }
+  if (edge.kind === "references") {
+    if (edge.label === "reducer") {
+      return `${sourceName} uses ${targetName} as its reducer.`;
+    }
+    if (edge.label === "initializer") {
+      return `${sourceName} uses ${targetName} as its initializer.`;
+    }
+    return `${sourceName} reads from or captures ${targetName}.`;
+  }
+  return `${sourceName} is connected to ${targetName}.`;
+}
+
+function getEvidenceHeading(
+  kind: GraphEdge["kind"],
+  direction: "incoming" | "outgoing",
+) {
+  if (kind === "calls") {
+    return direction === "outgoing" ? "Calls From This Node" : "Called By";
+  }
+  if (kind === "constructs") {
+    return direction === "outgoing" ? "Creates From This Node" : "Created By";
+  }
+  if (kind === "dataflow") {
+    return direction === "outgoing" ? "Arguments Passed From Here" : "Arguments Passed Into This Node";
+  }
+  if (kind === "updates") {
+    return direction === "outgoing" ? "Updates From This Node" : "Updated By";
+  }
+  if (kind === "references") {
+    return direction === "outgoing" ? "Reads / Captures From Here" : "Referenced By";
+  }
+  return direction === "outgoing" ? "Outgoing Connection" : "Incoming Connection";
+}
+
+function getEvidenceLabelText(
+  kind: GraphEdge["kind"],
+  label: string | null,
+) {
+  if (!label) {
+    return null;
+  }
+  if (kind === "dataflow") {
+    return `Parameter mapping: ${label}`;
+  }
+  if (kind === "updates") {
+    return `Update trigger: ${label}`;
+  }
+  if (kind === "references") {
+    return `Reference type: ${label}`;
+  }
+  return `Analyzer label: ${label}`;
 }
 
 function loadSectionState() {
@@ -327,6 +417,37 @@ export function Inspector({
   const visibleParamFlows = activeFlowCard && !paramFlows.some((flow) => flow.id === activeFlowCard.id)
     ? [activeFlowCard, ...paramFlows]
     : paramFlows;
+  const selectedNodeEvidence = selectedNode
+    ? (graph?.edges ?? [])
+        .filter((edge) => edge.source === selectedNode.id || edge.target === selectedNode.id)
+        .slice(0, 8)
+        .map((edge) => {
+          const sourceName = nodeById.get(edge.source)?.name ?? edge.source;
+          const targetName = nodeById.get(edge.target)?.name ?? edge.target;
+          const otherId = edge.source === selectedNode.id ? edge.target : edge.source;
+          const otherNode = nodeById.get(otherId) ?? null;
+          const direction: "incoming" | "outgoing" =
+            edge.source === selectedNode.id ? "outgoing" : "incoming";
+          return {
+            id: edge.id,
+            kind: edge.kind,
+            label: edge.label ?? null,
+            direction,
+            otherId,
+            otherName: otherNode?.name ?? otherId,
+            otherFile: otherNode?.file ?? null,
+            reason: describeEdgeReason(edge, sourceName, targetName),
+          };
+        })
+    : [];
+  const activeFlowEdge =
+    activeFlowCard
+      ? graph?.edges.find((edge) => edge.id === activeFlowCard.id) ?? null
+      : null;
+  const activeFlowReason =
+    activeFlowCard && activeFlowEdge
+      ? describeEdgeReason(activeFlowEdge, activeFlowCard.from, activeFlowCard.to)
+      : null;
   const selectedSectionFingerprint = JSON.stringify(
     selectedNode
       ? {
@@ -336,6 +457,13 @@ export function Inspector({
           file: selectedNode.file,
           range: selectedNode.range,
           signature: fmtSig(selectedNode as GraphNodeWithSig),
+          evidence: selectedNodeEvidence.map((edge) => ({
+            id: edge.id,
+            kind: edge.kind,
+            label: edge.label,
+            direction: edge.direction,
+            otherId: edge.otherId,
+          })),
         }
       : null,
   );
@@ -349,6 +477,8 @@ export function Inspector({
           to: activeFlowCard.to,
           label: activeFlowCard.label,
           origin: activeFlowCard.origin,
+          kind: activeFlowEdge?.kind ?? null,
+          reason: activeFlowReason,
         }
       : null,
     flows: visibleParamFlows.map((flow) => ({
@@ -855,28 +985,127 @@ export function Inspector({
                 No node selected. Click a node in the graph.
               </div>
             ) : (
-              <div className="kvList">
-                <div className="kvRow">
-                  <div className="kvKey mono">kind</div>
-                  <div className="kvVal mono">{selectedNode.kind}</div>
-                </div>
-                <div className="kvRow">
-                  <div className="kvKey mono">name</div>
-                  <div className="kvVal mono">{selectedNode.name}</div>
-                </div>
-                <div className="kvRow">
-                  <div className="kvKey mono">file</div>
-                  <div className="kvVal mono">{shortFile(selectedNode.file)}</div>
-                </div>
-                <div className="kvRow">
-                  <div className="kvKey mono">range</div>
-                  <div className="kvVal mono">{fmtRange(selectedNode)}</div>
-                </div>
-                <div className="kvRow">
-                  <div className="kvKey mono">signature</div>
-                  <div className="kvVal mono">
-                    {fmtSig(selectedNode as GraphNodeWithSig)}
+              <div style={{ display: "grid", gap: 12 }}>
+                <div className="kvList">
+                  <div className="kvRow">
+                    <div className="kvKey mono">kind</div>
+                    <div className="kvVal mono">{selectedNode.kind}</div>
                   </div>
+                  <div className="kvRow">
+                    <div className="kvKey mono">name</div>
+                    <div className="kvVal mono">{selectedNode.name}</div>
+                  </div>
+                  <div className="kvRow">
+                    <div className="kvKey mono">file</div>
+                    <div className="kvVal mono">{shortFile(selectedNode.file)}</div>
+                  </div>
+                  <div className="kvRow">
+                    <div className="kvKey mono">range</div>
+                    <div className="kvVal mono">{fmtRange(selectedNode)}</div>
+                  </div>
+                  <div className="kvRow">
+                    <div className="kvKey mono">signature</div>
+                    <div className="kvVal mono">
+                      {fmtSig(selectedNode as GraphNodeWithSig)}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    className="mono"
+                    style={{ fontSize: 11, opacity: 0.75, marginBottom: 8 }}
+                  >
+                    Analyzer Context
+                  </div>
+                  <div className="kvList">
+                    <div className="kvRow">
+                      <div className="kvKey mono">mode</div>
+                      <div className="kvVal mono">
+                        {fmtAnalyzerMode(analysis?.meta?.mode)}
+                      </div>
+                    </div>
+                    <div className="kvRow">
+                      <div className="kvKey mono">language</div>
+                      <div className="kvVal mono">{analysis?.languageId ?? "(unknown)"}</div>
+                    </div>
+                    {analysis?.meta?.mode === "workspace" ? (
+                      <>
+                        <div className="kvRow">
+                          <div className="kvKey mono">root files</div>
+                          <div className="kvVal mono">{analysis.meta.rootFiles}</div>
+                        </div>
+                        <div className="kvRow">
+                          <div className="kvKey mono">tsconfig</div>
+                          <div className="kvVal mono">
+                            {analysis.meta.usedTsconfig ? "enabled" : "fallback"}
+                          </div>
+                        </div>
+                      </>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    className="mono"
+                    style={{ fontSize: 11, opacity: 0.75, marginBottom: 8 }}
+                  >
+                    How This Node Is Connected
+                  </div>
+                  <div className="mutedText" style={{ marginBottom: 10 }}>
+                    These cards show who calls this node, what values flow into it, and what it
+                    reads or updates.
+                  </div>
+                  {selectedNodeEvidence.length === 0 ? (
+                    <div className="mutedText">
+                      No graph connections are attached to this node yet.
+                    </div>
+                  ) : (
+                    <div style={{ display: "grid", gap: 8 }}>
+                      {selectedNodeEvidence.map((edge) => (
+                        <div
+                          key={edge.id}
+                          style={{
+                            padding: 10,
+                            borderRadius: 10,
+                            border: "1px solid var(--border)",
+                            background: "rgba(255,255,255,0.03)",
+                            display: "grid",
+                            gap: 6,
+                          }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                              justifyContent: "space-between",
+                              gap: 10,
+                              flexWrap: "wrap",
+                              }}
+                            >
+                              <div className="mono" style={{ fontSize: 11, opacity: 0.8 }}>
+                                {getEvidenceHeading(edge.kind, edge.direction)}
+                              </div>
+                              <button
+                                className="smallBtn"
+                                type="button"
+                                onClick={() => onSelectGraphNode(edge.otherId)}
+                              title={edge.otherFile ?? edge.otherName}
+                            >
+                              {edge.otherName}
+                            </button>
+                          </div>
+                          <div className="mutedText">{edge.reason}</div>
+                          {getEvidenceLabelText(edge.kind, edge.label) ? (
+                            <div className="mono" style={{ fontSize: 11, opacity: 0.72 }}>
+                              {getEvidenceLabelText(edge.kind, edge.label)}
+                            </div>
+                          ) : null}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -926,22 +1155,43 @@ export function Inspector({
             collapseDirection={collapseDirection}
           >
             {activeFlowCard ? (
-              <div className="inspectorFlowActive">
-                <div className="inspectorFlowActiveTop">
-                  <span className="inspectorFlowActiveTitle">
-                    {activeFlowCard.origin === "trace" ? "Current Trace Flow" : "Focused Parameter Flow"}
-                  </span>
-                  <span className="inspectorFlowActiveBadge">
-                    {activeFlowCard.origin === "trace" ? "TRACE" : "FOCUS"}
-                  </span>
+              <div style={{ display: "grid", gap: 10 }}>
+                <div className="inspectorFlowActive">
+                  <div className="inspectorFlowActiveTop">
+                    <span className="inspectorFlowActiveTitle">
+                      {activeFlowCard.origin === "trace" ? "Current Trace Flow" : "Focused Parameter Flow"}
+                    </span>
+                    <span className="inspectorFlowActiveBadge">
+                      {activeFlowCard.origin === "trace" ? "TRACE" : "FOCUS"}
+                    </span>
+                  </div>
+                  <div className="mono inspectorFlowActivePath">
+                    {activeFlowCard.from}
+                    {" -> "}
+                    {activeFlowCard.to}
+                  </div>
+                  <div className="mutedText mono" title={activeFlowCard.label}>
+                    {activeFlowCard.label}
+                  </div>
                 </div>
-                <div className="mono inspectorFlowActivePath">
-                  {activeFlowCard.from}
-                  {" -> "}
-                  {activeFlowCard.to}
-                </div>
-                <div className="mutedText mono" title={activeFlowCard.label}>
-                  {activeFlowCard.label}
+
+                <div className="kvList">
+                  <div className="kvRow">
+                    <div className="kvKey mono">edge type</div>
+                    <div className="kvVal mono">{activeFlowEdge?.kind ?? "dataflow"}</div>
+                  </div>
+                  <div className="kvRow">
+                    <div className="kvKey mono">meaning</div>
+                    <div className="kvVal">
+                      {activeFlowReason ?? "Analyzer recorded this as the currently focused flow edge."}
+                    </div>
+                  </div>
+                  {activeFlowCard.label ? (
+                    <div className="kvRow">
+                      <div className="kvKey mono">mapping</div>
+                      <div className="kvVal mono">{activeFlowCard.label}</div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             ) : null}

@@ -313,7 +313,7 @@ type GraphPayload = {
   }>;
   edges: Array<{
     id: string;
-    kind: "calls" | "constructs" | "dataflow" | "references";
+    kind: "calls" | "constructs" | "dataflow" | "references" | "updates";
     source: string;
     target: string;
     label?: string;

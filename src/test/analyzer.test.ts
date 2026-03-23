@@ -523,6 +523,10 @@ suite("Analyzer Test Suite", function () {
       code: `
         import { useEffect, useReducer, useState } from "react";
 
+        function helper(value: number) {
+          return value + 1;
+        }
+
         function reducer(state: number, action: { type: "inc" }) {
           if (action.type === "inc") {
             return state + 1;
@@ -530,14 +534,20 @@ suite("Analyzer Test Suite", function () {
           return state;
         }
 
+        function init(seed: number) {
+          return seed + 10;
+        }
+
         export function App() {
           const [count, setCount] = useState(0);
-          const [value, dispatch] = useReducer(reducer, 0);
+          const [value, dispatch] = useReducer(reducer, 0, init);
 
           useEffect(() => {
+            helper(count);
+            helper(value);
             setCount((current) => current + 1);
             dispatch({ type: "inc" });
-          }, []);
+          }, [count, value]);
 
           return <button>{count + value}</button>;
         }
@@ -547,16 +557,22 @@ suite("Analyzer Test Suite", function () {
     const effectNode = result.graph.nodes.find(
       (node) => node.name === "App.useEffect#1",
     );
+    const appNode = result.graph.nodes.find((node) => node.name === "App");
     const stateHookNode = result.graph.nodes.find(
       (node) => node.name === "App.useState#1",
     );
     const reducerHookNode = result.graph.nodes.find(
       (node) => node.name === "App.useReducer#1",
     );
+    const reducerNode = result.graph.nodes.find((node) => node.name === "reducer");
+    const initNode = result.graph.nodes.find((node) => node.name === "init");
 
     assert.ok(effectNode, "useEffect callback should still become a graph node");
+    assert.ok(appNode, "component should still be present as a graph owner");
     assert.ok(stateHookNode, "useState should create a hook source node");
     assert.ok(reducerHookNode, "useReducer should create a hook source node");
+    assert.ok(reducerNode, "reducer function should still be present in the graph");
+    assert.ok(initNode, "initializer function should still be present in the graph");
 
     assert.ok(
       result.graph.edges.some(
@@ -577,6 +593,236 @@ suite("Analyzer Test Suite", function () {
           edge.target === reducerHookNode?.id,
       ),
       "dispatch() should create an updates edge to the originating useReducer hook",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.label === "reducer" &&
+          edge.source === reducerHookNode?.id &&
+          edge.target === reducerNode?.id,
+      ),
+      "useReducer hook source should reference its reducer function",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.label === "initializer" &&
+          edge.source === reducerHookNode?.id &&
+          edge.target === initNode?.id,
+      ),
+      "useReducer hook source should reference its initializer function",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === effectNode?.id &&
+          edge.target === stateHookNode?.id,
+      ),
+      "hook callbacks should reference the originating useState source when reading state",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === effectNode?.id &&
+          edge.target === reducerHookNode?.id,
+      ),
+      "hook callbacks should reference the originating useReducer source when reading reducer state",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === appNode?.id &&
+          edge.target === stateHookNode?.id,
+      ),
+      "component body should reference the originating useState source when rendering state",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === appNode?.id &&
+          edge.target === reducerHookNode?.id,
+      ),
+      "component body should reference the originating useReducer source when rendering state",
+    );
+  });
+
+  test("recognizes aliased React hooks via symbol resolution", () => {
+    const result = analyzeTypeScriptWithTypes({
+      fileName: "react-hook-aliases.tsx",
+      languageId: "typescriptreact",
+      code: `
+        import React, {
+          useCallback as callbackHook,
+          useEffect as effect,
+          useMemo as memoized,
+          useReducer as reduceHook,
+          useState as stateHook,
+        } from "react";
+
+        function helper(value: number) {
+          return value + 1;
+        }
+
+        function reducer(state: number, action: { type: "inc" }) {
+          if (action.type === "inc") {
+            return state + 1;
+          }
+          return state;
+        }
+
+        function init(seed: number) {
+          return seed + 10;
+        }
+
+        export function App() {
+          const [count, setCount] = stateHook(0);
+          const [value, dispatch] = reduceHook(reducer, 0, init);
+
+          effect(() => {
+            setCount((current) => current + 1);
+            dispatch({ type: "inc" });
+          }, []);
+
+          const computed = memoized(() => helper(count), [count]);
+          const onClick = callbackHook(() => helper(value), [value]);
+
+          React.useLayoutEffect(() => {
+            helper(computed);
+          }, [computed]);
+
+          return <button onClick={onClick}>{computed + value}</button>;
+        }
+      `,
+    });
+
+    const effectNode = result.graph.nodes.find(
+      (node) => node.name === "App.useEffect#1",
+    );
+    const memoNode = result.graph.nodes.find(
+      (node) => node.name === "App.useMemo#1",
+    );
+    const callbackNode = result.graph.nodes.find(
+      (node) => node.name === "App.useCallback#1",
+    );
+    const layoutNode = result.graph.nodes.find(
+      (node) => node.name === "App.useLayoutEffect#1",
+    );
+    const stateHookNode = result.graph.nodes.find(
+      (node) => node.name === "App.useState#1",
+    );
+    const reducerHookNode = result.graph.nodes.find(
+      (node) => node.name === "App.useReducer#1",
+    );
+    const reducerNode = result.graph.nodes.find((node) => node.name === "reducer");
+    const initNode = result.graph.nodes.find((node) => node.name === "init");
+    const helperNode = result.graph.nodes.find((node) => node.name === "helper");
+
+    assert.ok(effectNode, "aliased useEffect should still create a callback node");
+    assert.ok(memoNode, "aliased useMemo should still create a callback node");
+    assert.ok(callbackNode, "aliased useCallback should still create a callback node");
+    assert.ok(
+      layoutNode,
+      "React.useLayoutEffect should still create a callback node",
+    );
+    assert.ok(stateHookNode, "aliased useState should still create a hook source");
+    assert.ok(
+      reducerHookNode,
+      "aliased useReducer should still create a hook source",
+    );
+    assert.ok(reducerNode, "reducer should still be present in the graph");
+    assert.ok(initNode, "initializer should still be present in the graph");
+    assert.ok(helperNode, "helper() should still be present in the graph");
+
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "updates" &&
+          edge.label === "setCount" &&
+          edge.source === effectNode?.id &&
+          edge.target === stateHookNode?.id,
+      ),
+      "setCount() should still update the aliased useState source",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "updates" &&
+          edge.label === "dispatch" &&
+          edge.source === effectNode?.id &&
+          edge.target === reducerHookNode?.id,
+      ),
+      "dispatch() should still update the aliased useReducer source",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === memoNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "aliased useMemo callback should still own helper() call edges",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === callbackNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "aliased useCallback callback should still own helper() call edges",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === layoutNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "React.useLayoutEffect callback should still own helper() call edges",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.label === "reducer" &&
+          edge.source === reducerHookNode?.id &&
+          edge.target === reducerNode?.id,
+      ),
+      "aliased useReducer hook source should still reference its reducer function",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.label === "initializer" &&
+          edge.source === reducerHookNode?.id &&
+          edge.target === initNode?.id,
+      ),
+      "aliased useReducer hook source should still reference its initializer function",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === memoNode?.id &&
+          edge.target === stateHookNode?.id,
+      ),
+      "aliased useMemo callback should still reference the originating useState source",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === callbackNode?.id &&
+          edge.target === reducerHookNode?.id,
+      ),
+      "aliased useCallback callback should still reference the originating useReducer source",
     );
   });
 

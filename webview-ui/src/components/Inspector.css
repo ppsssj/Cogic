@@ -250,6 +250,19 @@
   white-space: nowrap;
 }
 
+.panel--flow .kvRow {
+  align-items: flex-start;
+}
+
+.panel--flow .kvVal {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-align: left;
+}
+
 .runtimeVarCard {
   padding: 10px 12px;
   border-radius: 12px;
@@ -372,14 +385,17 @@
   background:
     linear-gradient(135deg, rgba(10, 22, 48, 0.94), rgba(7, 15, 30, 0.96));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  min-width: 0;
 }
 
 .inspectorFlowActiveTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 8px;
+  min-width: 0;
 }
 
 .inspectorFlowActiveTitle {
@@ -388,6 +404,9 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: rgba(226, 232, 240, 0.9);
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .inspectorFlowActiveBadge {
@@ -399,11 +418,17 @@
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.08em;
+  flex: 0 0 auto;
+  max-width: 100%;
 }
 
 .inspectorFlowActivePath {
   font-size: 12px;
   margin-bottom: 4px;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .inspectorFlowRow:hover {

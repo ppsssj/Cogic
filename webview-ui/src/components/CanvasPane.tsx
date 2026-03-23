@@ -89,6 +89,15 @@ type FileGroupData = {
   count: number;
 };
 
+type NodeWithAbsolutePosition = Node<CodeNodeData | FileGroupData> & {
+  positionAbsolute?: { x: number; y: number };
+};
+
+function getNodeAbsolutePosition(node: Node<CodeNodeData | FileGroupData>) {
+  const absolute = (node as NodeWithAbsolutePosition).positionAbsolute;
+  return absolute ?? node.position;
+}
+
 function fitGraphView(inst: ReactFlowInstance | null, duration = 400) {
   if (!inst) return;
   inst.fitView({ padding: 0.12, duration });
@@ -101,9 +110,10 @@ function focusCanvasNode(
   duration: number,
 ) {
   if (!inst) return;
+  const pos = getNodeAbsolutePosition(node);
   inst.setCenter(
-    node.position.x + (node.width ?? 210) / 2,
-    node.position.y + (node.height ?? 72) / 2,
+    pos.x + (node.width ?? 210) / 2,
+    pos.y + (node.height ?? 72) / 2,
     { zoom, duration },
   );
 }
@@ -117,20 +127,22 @@ function focusCanvasNodePair(
 ) {
   if (!inst) return;
 
+  const firstPos = getNodeAbsolutePosition(firstNode);
+  const secondPos = getNodeAbsolutePosition(secondNode);
   const firstWidth = firstNode.width ?? 210;
   const firstHeight = firstNode.height ?? 72;
   const secondWidth = secondNode.width ?? 210;
   const secondHeight = secondNode.height ?? 72;
   const centerX =
-    (firstNode.position.x +
+    (firstPos.x +
       firstWidth / 2 +
-      secondNode.position.x +
+      secondPos.x +
       secondWidth / 2) /
     2;
   const centerY =
-    (firstNode.position.y +
+    (firstPos.y +
       firstHeight / 2 +
-      secondNode.position.y +
+      secondPos.y +
       secondHeight / 2) /
     2;
 
@@ -546,7 +558,7 @@ function DataflowEdge({
   const lane = data?.lane ?? 0;
   const laneOffset = 30 + Math.abs(lane) * 22;
   const laneShiftY = lane * 18;
-  const labelShiftY = lane * 28;
+  const labelShiftY = 18 + Math.abs(lane) * 10;
   const sourceYLaned = sourceY + laneShiftY;
   const targetYLaned = targetY + laneShiftY;
 
@@ -569,7 +581,7 @@ function DataflowEdge({
           <div
             className="cgEdgeLabel"
             style={{
-              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY + labelShiftY}px)`,
+              transform: `translate(-50%, 0) translate(${labelX}px, ${labelY + labelShiftY}px)`,
               opacity: data.muted ? 0.35 : 1,
               borderColor: data.highlighted ? "rgba(56,189,248,0.75)" : undefined,
             }}
@@ -1049,8 +1061,8 @@ function toReactFlowNodes(
 
   // Layout parameters
   const childColW = 340;
-  const pad = 18;
-  const headerH = 52;
+  const pad = 28;
+  const headerH = 96;
 
   const groups = [...byFile.entries()].map(([file, children]) => {
     const childRowH = Math.max(
@@ -1077,8 +1089,8 @@ function toReactFlowNodes(
   });
 
   // Dynamic shelf layout for file groups to avoid overlaps on varying group sizes.
-  const groupGapX = 130;
-  const groupGapY = 130;
+  const groupGapX = 170;
+  const groupGapY = 180;
   const maxRowWidth = 1800;
   let cursorX = 0;
   let cursorY = 0;
@@ -1390,9 +1402,6 @@ export function CanvasPane({
           });
           if (!target) return;
           onOpenNode?.(target);
-          if (target.kind === "external") {
-            onExpandExternal?.(target.file);
-          }
         },
       ),
     [
@@ -1575,9 +1584,6 @@ export function CanvasPane({
     });
     if (node.data.kind === "file" || !graphNode) return;
     onOpenNode?.(graphNode);
-    if (graphNode.kind === "external") {
-      onExpandExternal?.(graphNode.file);
-    }
   };
 
   const handleCanvasContextMenu = (event: ReactDomMouseEvent<HTMLElement>) => {
