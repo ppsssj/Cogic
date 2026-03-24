@@ -558,7 +558,6 @@ function DataflowEdge({
   const lane = data?.lane ?? 0;
   const laneOffset = 30 + Math.abs(lane) * 22;
   const laneShiftY = lane * 18;
-  const labelShiftY = 18 + Math.abs(lane) * 10;
   const sourceYLaned = sourceY + laneShiftY;
   const targetYLaned = targetY + laneShiftY;
 
@@ -581,7 +580,7 @@ function DataflowEdge({
           <div
             className="cgEdgeLabel"
             style={{
-              transform: `translate(-50%, 0) translate(${labelX}px, ${labelY + labelShiftY}px)`,
+              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
               opacity: data.muted ? 0.35 : 1,
               borderColor: data.highlighted ? "rgba(56,189,248,0.75)" : undefined,
             }}

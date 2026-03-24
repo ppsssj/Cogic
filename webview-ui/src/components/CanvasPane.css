@@ -692,8 +692,8 @@
 .cgGroupHeader {
   position: absolute;
   left: 50%;
-  top: 12px;
-  transform: translateX(-50%);
+  top: 0;
+  transform: translate(-50%, -46%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -707,6 +707,7 @@
   border-radius: 12px;
   box-shadow: 0 10px 24px rgba(2, 6, 23, 0.24);
   pointer-events: auto;
+  z-index: 3;
 }
 
 .cgGroupTitle {
