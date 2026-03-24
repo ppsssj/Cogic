@@ -85,6 +85,7 @@ type DiagnosticSummary = {
 type FileGroupData = {
   title: string;
   subtitle: string;
+  subtitleTitle?: string;
   kind: "file";
   file: string;
   count: number;
@@ -175,6 +176,42 @@ function dirName(p: string) {
   const norm = p.replace(/\\/g, "/");
   const i = norm.lastIndexOf("/");
   return i >= 0 ? norm.slice(0, i) : "";
+}
+
+function relativePathFromRoot(path: string, workspaceRoot?: string | null) {
+  if (!workspaceRoot) return normalizePath(path);
+  const normalizedPath = normalizePath(path);
+  const normalizedRoot = normalizePath(workspaceRoot).replace(/\/+$/, "");
+  if (!normalizedRoot) return normalizedPath;
+  if (normalizedPath === normalizedRoot) return "";
+  const prefix = `${normalizedRoot}/`;
+  return normalizedPath.startsWith(prefix)
+    ? normalizedPath.slice(prefix.length)
+    : normalizedPath;
+}
+
+function compactDisplayPath(path: string, keepHead = 2, keepTail = 2) {
+  const parts = normalizePath(path)
+    .split("/")
+    .filter(Boolean);
+  if (parts.length <= keepHead + keepTail + 1) {
+    return parts.join("/");
+  }
+  return [
+    ...parts.slice(0, keepHead),
+    "...",
+    ...parts.slice(parts.length - keepTail),
+  ].join("/");
+}
+
+function formatFileGroupSubtitle(filePath: string, workspaceRoot?: string | null) {
+  const directoryPath = dirName(filePath);
+  const relativeDirectory = relativePathFromRoot(directoryPath, workspaceRoot);
+  const fullSubtitle = relativeDirectory || ".";
+  return {
+    subtitle: compactDisplayPath(fullSubtitle),
+    subtitleTitle: fullSubtitle,
+  };
 }
 
 function getGraphCounts(graph: GraphPayload | undefined) {
@@ -572,7 +609,9 @@ function FileGroupNode({
       >
         <div className="cgGroupTitle">{data.title}</div>
         <div className="cgGroupMeta">
-          <span className="cgGroupPath">{data.subtitle}</span>
+          <span className="cgGroupPath" title={data.subtitleTitle ?? data.subtitle}>
+            {data.subtitle}
+          </span>
           <span className="cgGroupCount">
             {data.collapsed ? `${data.count} hidden` : `${data.count} nodes`}
           </span>
@@ -1133,6 +1172,7 @@ function toReactFlowNodes(
   collapsedFilePaths?: Set<string>,
   collapsingFilePaths?: Set<string>,
   expandingFilePaths?: Set<string>,
+  workspaceRoot?: string | null,
   traceActiveNodeId?: string | null,
   runtimeActiveNodeId?: string | null,
   focusPulseRequests?: Array<{
@@ -1241,6 +1281,7 @@ function toReactFlowNodes(
 
     const existingFileNode = fileNodeByPath.get(g.file);
     const parentId = existingFileNode?.id ?? `file:${g.file}`;
+    const groupSubtitle = formatFileGroupSubtitle(g.file, workspaceRoot);
 
     if (cursorX > 0 && cursorX + g.width > maxRowWidth) {
       cursorX = 0;
@@ -1277,7 +1318,8 @@ function toReactFlowNodes(
       selected: hasSelectedDescendant,
       data: {
         title: baseName(g.file),
-        subtitle: dirName(g.file),
+        subtitle: groupSubtitle.subtitle,
+        subtitleTitle: groupSubtitle.subtitleTitle,
         kind: "file",
         file: g.file,
         count: g.children.length,
@@ -1416,6 +1458,7 @@ export function CanvasPane({
   onTraceNext,
   onTraceFinish,
   autoLayoutTick,
+  workspaceRoot,
   onOpenScaffoldModal,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
@@ -1646,6 +1689,7 @@ export function CanvasPane({
         collapsedFilePathSet,
         collapsingFilePathSet,
         expandingFilePathSet,
+        workspaceRoot,
         traceActiveNodeId,
         runtimeActiveNodeId,
         focusPulseRequests,
@@ -1701,6 +1745,7 @@ export function CanvasPane({
       searchHitIds,
       focusPulseRequests,
       visibleHighlightedNodeIds,
+      workspaceRoot,
     ],
   );
   const nodeTopologyKey = useMemo(
@@ -2396,6 +2441,7 @@ type Props = {
   onTraceNext: () => void;
   onTraceFinish: () => void;
   autoLayoutTick: number;
+  workspaceRoot?: string | null;
   onOpenScaffoldModal?: (args: {
     clientX: number;
     clientY: number;

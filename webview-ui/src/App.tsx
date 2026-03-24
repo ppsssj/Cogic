@@ -1938,6 +1938,7 @@ export default function App() {
           onTraceNext={stepTraceNext}
           onTraceFinish={finishTraceMode}
           autoLayoutTick={autoLayoutTick}
+          workspaceRoot={workspaceRoot}
           onOpenScaffoldModal={openScaffoldPanelAt}
         />
 
