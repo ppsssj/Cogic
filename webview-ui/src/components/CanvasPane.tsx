@@ -113,12 +113,13 @@ function focusCanvasNode(
   node: Node<CodeNodeData | FileGroupData>,
   zoom: number,
   duration: number,
+  focusOffset?: { x?: number; y?: number },
 ) {
   if (!inst) return;
   const pos = getNodeAbsolutePosition(node);
   inst.setCenter(
-    pos.x + (node.width ?? 210) / 2,
-    pos.y + (node.height ?? 72) / 2,
+    pos.x + (node.width ?? 210) / 2 + (focusOffset?.x ?? 0),
+    pos.y + (node.height ?? 72) / 2 + (focusOffset?.y ?? 0),
     { zoom, duration },
   );
 }
@@ -1183,7 +1184,7 @@ function toReactFlowNodes(
   onSelectChildNode?: (
     nodeId: string,
     visibleNodeId: string,
-    options?: { toggle?: boolean },
+    options?: { toggle?: boolean; focusOffsetY?: number },
   ) => void,
   onOpenChildNode?: (nodeId: string) => void,
   onToggleFileGroup?: (filePath: string) => void,
@@ -1398,6 +1399,22 @@ function toReactFlowNodes(
               ? (event) =>
                   onSelectChildNode(child.id, n.id, {
                     toggle: isMultiSelectEvent(event),
+                    focusOffsetY:
+                      (() => {
+                        const childEl = event.currentTarget;
+                        const parentNodeEl = childEl.closest(".cgNode") as HTMLElement | null;
+                        if (!parentNodeEl) return 0;
+                        const childRect = childEl.getBoundingClientRect();
+                        const parentRect = parentNodeEl.getBoundingClientRect();
+                        const childCenterDelta =
+                          childRect.top +
+                          childRect.height / 2 -
+                          (parentRect.top + parentRect.height / 2);
+
+                        // Bias the viewport slightly downward so nested child items
+                        // stay comfortably in view after selection.
+                        return childCenterDelta + 140;
+                      })(),
                   })
               : undefined,
           onDoubleClick:
@@ -1470,6 +1487,7 @@ export function CanvasPane({
   const [canvasFocusRequest, setCanvasFocusRequest] = useState<{
     visibleNodeId: string;
     token: number;
+    focusOffsetY?: number;
   } | null>(null);
   const [focusPulseRequest, setFocusPulseRequest] = useState<{
     nodeId: string;
@@ -1702,6 +1720,7 @@ export function CanvasPane({
             filePath: target?.file ?? null,
             isExternal: target?.kind === "external",
             toggle: options?.toggle ?? false,
+            focusOffsetY: options?.focusOffsetY ?? 0,
             ...getGraphCounts(graph),
           });
           setFocusPulseRequest((current) => ({
@@ -1713,6 +1732,7 @@ export function CanvasPane({
           setCanvasFocusRequest((current) => ({
             visibleNodeId,
             token: (current?.token ?? 0) + 1,
+            focusOffsetY: options?.focusOffsetY,
           }));
         },
         (nodeId) => {
@@ -2158,7 +2178,14 @@ export function CanvasPane({
 
     const node = inst.getNode(canvasFocusRequest.visibleNodeId);
     if (!node) return;
-    focusCanvasNode(inst, node, 1.2, 260);
+    const viewport =
+      (inst as unknown as {
+        getViewport?: () => { x: number; y: number; zoom: number };
+      }).getViewport?.() ?? null;
+    const zoom = Math.max(viewport?.zoom ?? 1, 0.01);
+    focusCanvasNode(inst, node, 1.2, 260, {
+      y: (canvasFocusRequest.focusOffsetY ?? 0) / zoom,
+    });
   }, [canvasFocusRequest]);
 
   const isTraceAtEnd = traceCursor >= traceTotal;

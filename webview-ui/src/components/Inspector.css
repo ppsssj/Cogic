@@ -231,6 +231,40 @@
   align-items: flex-start;
 }
 
+.panel--selected .kvList,
+.panel--selected .panelBody {
+  min-width: 0;
+}
+
+.panel--selected .kvRow {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.panel--selected .kvKey,
+.panel--selected .kvVal {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.panel--selected .kvVal {
+  width: 100%;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.panel--selected .smallBtn {
+  display: inline-block;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .panel--runtime .kvVal {
   width: 100%;
   max-width: 100%;

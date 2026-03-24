@@ -111,6 +111,11 @@ function getNodeDebugInfo(node: GraphNode | null) {
   };
 }
 
+function isNodeModulesPath(filePath: string | null | undefined) {
+  if (!filePath) return false;
+  return filePath.replace(/\\/g, "/").includes("/node_modules/");
+}
+
 function mergeGraph(
   prev: GraphPayload | undefined,
   next: GraphPayload | undefined,
@@ -1888,6 +1893,13 @@ export default function App() {
             setFocusedFlow(null);
           }}
           onOpenNode={(n) => {
+            if (isNodeModulesPath(n.file)) {
+              pushWebviewDebugEvent("canvas.onOpenNode.blocked.nodeModules", {
+                ...getNodeDebugInfo(n),
+              });
+              showToast("info", "node_modules declaration files stay collapsed in the graph");
+              return;
+            }
             postOpenLocation(
               "canvas.onOpenNode",
               {
