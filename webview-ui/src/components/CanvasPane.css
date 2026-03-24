@@ -665,6 +665,64 @@
   margin-bottom: 6px;
 }
 
+.canvasLoading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(56, 189, 248, 0.34);
+  background: rgba(8, 18, 38, 0.92);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  color: rgba(226, 232, 240, 0.92);
+  z-index: 7;
+}
+
+.canvasLoading--inline {
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  transform: translateX(-50%);
+  min-width: 280px;
+  max-width: min(560px, calc(100% - 120px));
+}
+
+.canvasLoading--overlay {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: min(420px, calc(100% - 48px));
+}
+
+.canvasLoadingIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  background: rgba(56, 189, 248, 0.12);
+  color: rgba(186, 230, 253, 0.96);
+  flex: 0 0 auto;
+}
+
+.canvasLoadingBody {
+  min-width: 0;
+}
+
+.canvasLoadingTitle {
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(226, 232, 240, 0.97);
+}
+
+.canvasLoadingDetail {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(226, 232, 240, 0.72);
+}
+
 .rootText {
   font-size: 12px;
 }

@@ -7,6 +7,7 @@ import type {
   AnalysisRequestMeta,
   AnalysisRequestReason,
   ExtToWebviewMessage,
+  GraphPayload,
   UINotice,
   WebviewToExtMessage,
 } from "../shared/protocol";
@@ -20,6 +21,58 @@ function getGraphCounts(payload?: { nodes: unknown[]; edges: unknown[] }) {
   return {
     graphNodes: payload?.nodes.length ?? 0,
     graphEdges: payload?.edges.length ?? 0,
+  };
+}
+
+function normalizeComparablePath(filePath: string) {
+  return filePath.replace(/\\/g, "/").toLowerCase();
+}
+
+function clampGraphDepth(depth: number | undefined) {
+  if (!Number.isFinite(depth)) {return 0;}
+  return Math.max(0, Math.min(3, Math.round(depth ?? 0)));
+}
+
+function mergeGraphPayload(
+  prev: GraphPayload | undefined,
+  next: GraphPayload | undefined,
+) {
+  if (!next) {return prev;}
+  if (!prev) {return next;}
+
+  const nodeById = new Map(
+    prev.nodes.map((node) => [String((node as { id: string }).id), node]),
+  );
+  for (const node of next.nodes) {
+    nodeById.set(String((node as { id: string }).id), node);
+  }
+
+  const edgeById = new Map(
+    prev.edges.map((edge) => [String((edge as { id: string }).id), edge]),
+  );
+  for (const edge of next.edges) {
+    edgeById.set(String((edge as { id: string }).id), edge);
+  }
+
+  return {
+    nodes: [...nodeById.values()],
+    edges: [...edgeById.values()],
+  };
+}
+
+function pruneGraphToFile(graph: GraphPayload, filePath: string) {
+  const comparableFilePath = normalizeComparablePath(filePath);
+  const keptNodes = graph.nodes.filter(
+    (node) => normalizeComparablePath(node.file) === comparableFilePath,
+  );
+  const keptNodeIds = new Set(keptNodes.map((node) => node.id));
+  const keptEdges = graph.edges.filter(
+    (edge) => keptNodeIds.has(edge.source) && keptNodeIds.has(edge.target),
+  );
+
+  return {
+    nodes: keptNodes,
+    edges: keptEdges,
   };
 }
 
@@ -46,11 +99,18 @@ function summarizeInboundMessage(msg: WebviewToExtMessage) {
   if (msg.type === "selectWorkspaceFile") {
     return {
       filePath: msg.payload.filePath,
+      graphDepth: msg.payload.graphDepth ?? null,
     };
   }
   if (msg.type === "analyzeActiveFile") {
     return {
       traceMode: msg.payload?.traceMode ?? false,
+      graphDepth: msg.payload?.graphDepth ?? null,
+    };
+  }
+  if (msg.type === "setGraphDepth") {
+    return {
+      graphDepth: msg.payload.graphDepth,
     };
   }
   if (msg.type === "requestPatchPreview") {
@@ -93,6 +153,7 @@ export class CodeGraphPanel {
   // cache workspace file list (ts/js)
   private cachedFilePaths: string[] = [];
   private cachedAt = 0;
+  private graphDepth = 0;
 
   private constructor(
     private readonly context: vscode.ExtensionContext,
@@ -153,16 +214,29 @@ export class CodeGraphPanel {
             return this.postSelection();
           }
           if (msg.type === "analyzeActiveFile") {
+            if (msg.payload?.graphDepth !== undefined) {
+              this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
+            }
             return await this.postAnalysis(
               Boolean(msg.payload?.traceMode),
               msg.payload?.traceMode ? "trace" : "manual",
             ); // workspace-aware
           }
           if (msg.type === "analyzeWorkspace") {
+            if (msg.payload?.graphDepth !== undefined) {
+              this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
+            }
             return await this.postAnalysis(false, "manual"); // explicit
           }
           if (msg.type === "selectWorkspaceFile") {
+            if (msg.payload.graphDepth !== undefined) {
+              this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
+            }
             return await this.selectWorkspaceFile(msg.payload.filePath);
+          }
+          if (msg.type === "setGraphDepth") {
+            this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
+            return;
           }
           if (msg.type === "debugEvent") {
             return this.handleForwardedWebviewDebug(msg.payload);
@@ -598,17 +672,12 @@ export class CodeGraphPanel {
     const doc = editor.document;
     const text = doc.getText();
 
-    const workspaceRoot = this.getWorkspaceRoot();
-    const filePaths = await this.getWorkspaceFilePaths();
-
-    const result = analyzeWorkspaceActive({
-      active: {
-        code: text,
-        fileName: doc.fileName,
-        languageId: doc.languageId,
-      },
-      workspaceRoot,
-      filePaths,
+    const result = await this.analyzeWorkspaceWithDepth({
+      code: text,
+      fileName: doc.fileName,
+      languageId: doc.languageId,
+      traceMode,
+      graphDepth: this.graphDepth,
     });
 
     const payload: Extract<
@@ -675,19 +744,18 @@ export class CodeGraphPanel {
       sequence: request.sequence,
       filePath,
     });
-    const workspaceRoot = this.getWorkspaceRoot();
-    const filePaths = await this.getWorkspaceFilePaths();
-
     const uri = vscode.Uri.file(filePath);
     const bytes = await vscode.workspace.fs.readFile(uri);
     const code = new TextDecoder("utf-8").decode(bytes);
 
     const languageId = guessLanguageId(filePath);
 
-    const result = analyzeWorkspaceActive({
-      active: { code, fileName: filePath, languageId },
-      workspaceRoot,
-      filePaths,
+    const result = await this.analyzeWorkspaceWithDepth({
+      code,
+      fileName: filePath,
+      languageId,
+      graphDepth: 0,
+      traceMode: false,
     });
 
     const payload: Extract<
@@ -753,6 +821,128 @@ export class CodeGraphPanel {
     this.postActiveFile();
     this.postSelection();
     await this.postAnalysis(false, "select-file");
+  }
+
+  private async analyzeWorkspaceWithDepth(args: {
+    code: string;
+    fileName: string;
+    languageId: string;
+    traceMode: boolean;
+    graphDepth: number;
+  }) {
+    const workspaceRoot = this.getWorkspaceRoot();
+    const filePaths = await this.getWorkspaceFilePaths();
+    const comparableWorkspacePaths = new Set(
+      filePaths.map((filePath) => normalizeComparablePath(filePath)),
+    );
+    const analyzedFiles = new Set<string>([
+      normalizeComparablePath(args.fileName),
+    ]);
+
+    const baseResult = analyzeWorkspaceActive({
+      active: {
+        code: args.code,
+        fileName: args.fileName,
+        languageId: args.languageId,
+      },
+      workspaceRoot,
+      filePaths,
+    });
+
+    if (args.traceMode || !baseResult.graph) {
+      return baseResult;
+    }
+
+    if (args.graphDepth <= 0) {
+      return {
+        ...baseResult,
+        graph: pruneGraphToFile(baseResult.graph, args.fileName),
+      };
+    }
+
+    if (args.graphDepth === 1) {
+      return baseResult;
+    }
+
+    let mergedGraph = baseResult.graph;
+    let frontier = this.collectDepthExpansionFiles(
+      baseResult.graph,
+      comparableWorkspacePaths,
+      analyzedFiles,
+    );
+
+    for (let hop = 0; hop < args.graphDepth - 1; hop += 1) {
+      if (frontier.length === 0) {
+        break;
+      }
+
+      const nextFrontier = new Set<string>();
+
+      for (const targetFile of frontier) {
+        const comparable = normalizeComparablePath(targetFile);
+        analyzedFiles.add(comparable);
+
+        try {
+          const bytes = await vscode.workspace.fs.readFile(vscode.Uri.file(targetFile));
+          const code = new TextDecoder("utf-8").decode(bytes);
+          const expandedResult = analyzeWorkspaceActive({
+            active: {
+              code,
+              fileName: targetFile,
+              languageId: guessLanguageId(targetFile),
+            },
+            workspaceRoot,
+            filePaths,
+          });
+
+          mergedGraph = mergeGraphPayload(mergedGraph, expandedResult.graph) ?? mergedGraph;
+
+          for (const discoveredFile of this.collectDepthExpansionFiles(
+            expandedResult.graph,
+            comparableWorkspacePaths,
+            analyzedFiles,
+          )) {
+            nextFrontier.add(discoveredFile);
+          }
+        } catch {
+          // ignore unreadable expansion targets
+        }
+      }
+
+      frontier = [...nextFrontier];
+    }
+
+    return {
+      ...baseResult,
+      graph: mergedGraph,
+    };
+  }
+
+  private collectDepthExpansionFiles(
+    graph: NonNullable<ReturnType<typeof analyzeWorkspaceActive>["graph"]>,
+    comparableWorkspacePaths: Set<string>,
+    analyzedFiles: Set<string>,
+  ) {
+    const discovered = new Set<string>();
+
+    for (const node of graph.nodes) {
+      if (node.kind !== "external") {
+        continue;
+      }
+
+      const comparable = normalizeComparablePath(node.file);
+      if (
+        analyzedFiles.has(comparable) ||
+        !comparableWorkspacePaths.has(comparable) ||
+        comparable.endsWith(".d.ts")
+      ) {
+        continue;
+      }
+
+      discovered.add(node.file);
+    }
+
+    return [...discovered];
   }
 
   private async saveExportFile(payload: {

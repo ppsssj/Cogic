@@ -2,10 +2,17 @@ export type WebviewToExtMessage =
   | { type: "requestActiveFile" }
   | { type: "requestWorkspaceFiles" }
   | { type: "requestSelection" }
-  | { type: "analyzeActiveFile"; payload?: { traceMode?: boolean } }
-  | { type: "analyzeWorkspace" }
-  | { type: "selectWorkspaceFile"; payload: { filePath: string } }
+  | {
+      type: "analyzeActiveFile";
+      payload?: { traceMode?: boolean; graphDepth?: number };
+    }
+  | { type: "analyzeWorkspace"; payload?: { graphDepth?: number } }
+  | {
+      type: "selectWorkspaceFile";
+      payload: { filePath: string; graphDepth?: number };
+    }
   | { type: "expandNode"; payload: { filePath: string; generation?: number } }
+  | { type: "setGraphDepth"; payload: { graphDepth: number } }
   | {
       type: "debugEvent";
       payload: {

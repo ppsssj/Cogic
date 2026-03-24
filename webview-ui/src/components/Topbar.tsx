@@ -24,7 +24,9 @@ type Props = {
   workspaceRootName: string | null;
   workspaceFiles: WorkspaceFileItem[];
   activeFilePath: string | null;
+  graphDepth: number;
   onPickFile: (filePath: string) => void;
+  onGraphDepthChange: (depth: number) => void;
   onRefresh: () => void;
   onGenerate: () => void;
   onAutoLayout: () => void;
@@ -44,7 +46,9 @@ export function Topbar({
   workspaceRootName,
   workspaceFiles,
   activeFilePath,
+  graphDepth,
   onPickFile,
+  onGraphDepthChange,
   onRefresh,
   onGenerate,
   onAutoLayout,
@@ -221,6 +225,20 @@ export function Topbar({
             </div>
           ) : null}
         </div>
+
+        <label className="depthControl" title="How many additional external hops to preload into the graph">
+          <select
+            className="depthSelect"
+            value={String(graphDepth)}
+            onChange={(e) => onGraphDepthChange(Number(e.target.value))}
+            aria-label="Graph depth"
+          >
+            <option value="0">0 · file only</option>
+            <option value="1">1 · direct</option>
+            <option value="2">2 · one more</option>
+            <option value="3">3 · two more</option>
+          </select>
+        </label>
 
         <div className="searchWrap">
           <div className="searchBox">

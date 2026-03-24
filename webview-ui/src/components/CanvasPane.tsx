@@ -26,7 +26,7 @@ import ReactFlow, {
   type ReactFlowInstance,
 } from "reactflow";
 
-import { Crosshair, Network, Sigma, ZoomIn, ZoomOut } from "lucide-react";
+import { Crosshair, Loader2, Network, Sigma, ZoomIn, ZoomOut } from "lucide-react";
 import type {
   CodeDiagnostic,
   GraphNode,
@@ -895,13 +895,21 @@ function matchesChipFilter(node: GraphNode, chip: ChipKey): boolean {
   return true;
 }
 
+function matchesAnyChipFilter(node: GraphNode, chips: ChipKey[]): boolean {
+  if (chips.length === 0 || chips.includes("all")) {
+    return true;
+  }
+
+  return chips.some((chip) => matchesChipFilter(node, chip));
+}
+
 function filterGraph(
   graph: GraphPayload | undefined,
-  chip: ChipKey,
+  chips: ChipKey[],
 ): GraphPayload | undefined {
   if (!graph) return undefined;
 
-  const matched = graph.nodes.filter((n) => matchesChipFilter(n, chip));
+  const matched = graph.nodes.filter((n) => matchesAnyChipFilter(n, chips));
   const byId = new Map(graph.nodes.map((n) => [n.id, n]));
   const nodeMap = new Map(matched.map((n) => [n.id, n]));
 
@@ -1413,7 +1421,7 @@ function toReactFlowNodes(
 
                         // Bias the viewport slightly downward so nested child items
                         // stay comfortably in view after selection.
-                        return childCenterDelta + 140;
+                        return childCenterDelta + 78;
                       })(),
                   })
               : undefined,
@@ -1447,6 +1455,7 @@ function toReactFlowNodes(
 export function CanvasPane({
   hasData,
   graph,
+  loadingState,
   activeFilter,
   searchQuery,
   rootNodeId,
@@ -2178,13 +2187,8 @@ export function CanvasPane({
 
     const node = inst.getNode(canvasFocusRequest.visibleNodeId);
     if (!node) return;
-    const viewport =
-      (inst as unknown as {
-        getViewport?: () => { x: number; y: number; zoom: number };
-      }).getViewport?.() ?? null;
-    const zoom = Math.max(viewport?.zoom ?? 1, 0.01);
     focusCanvasNode(inst, node, 1.2, 260, {
-      y: (canvasFocusRequest.focusOffsetY ?? 0) / zoom,
+      y: canvasFocusRequest.focusOffsetY ?? 0,
     });
   }, [canvasFocusRequest]);
 
@@ -2273,12 +2277,34 @@ export function CanvasPane({
     </div>
   );
 
+  const renderLoadingState = (mode: "overlay" | "inline") => (
+    <div
+      className={[
+        "canvasLoading",
+        mode === "overlay" ? "canvasLoading--overlay" : "canvasLoading--inline",
+      ].join(" ")}
+    >
+      <div className="canvasLoadingIcon">
+        <Loader2 size={18} className="spin" />
+      </div>
+      <div className="canvasLoadingBody">
+        <div className="canvasLoadingTitle">
+          {loadingState?.message ?? "Rendering graph..."}
+        </div>
+        <div className="canvasLoadingDetail">
+          {loadingState?.detail ?? "Analyzing files and preparing the graph view."}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <section className="canvas" onContextMenu={handleCanvasContextMenu}>
       {!hasData ? (
-        renderEmptyState("no-graph")
+        loadingState?.active ? renderLoadingState("overlay") : renderEmptyState("no-graph")
       ) : (
         <div className="canvasFlow" ref={canvasFlowRef}>
+          {loadingState?.active ? renderLoadingState("inline") : null}
           <ReactFlowProvider key={`provider:recovery:${recoveryTick}`}>
             <ReactFlow
               key={`flow:recovery:${recoveryTick}`}
@@ -2374,7 +2400,7 @@ export function CanvasPane({
 
               {/* Filter/search props are currently handled upstream or will be applied later */}
               <div style={{ display: "none" }}>
-                {activeFilter} {searchQuery}
+                {activeFilter.join(",")} {searchQuery}
               </div>
 
               {/* Selection actions */}
@@ -2435,8 +2461,13 @@ export function CanvasPane({
 type Props = {
   hasData: boolean;
   graph?: GraphPayload;
+  loadingState?: {
+    active: boolean;
+    message: string;
+    detail?: string;
+  } | null;
 
-  activeFilter: ChipKey;
+  activeFilter: ChipKey[];
   searchQuery: string;
   rootNodeId: string | null;
   onClearRoot: () => void;

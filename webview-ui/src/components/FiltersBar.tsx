@@ -10,8 +10,8 @@ export type ChipKey =
   | "variables";
 
 type Props = {
-  active: ChipKey;
-  onChange: (k: ChipKey) => void;
+  active: ChipKey[];
+  onChange: (next: ChipKey[]) => void;
 };
 
 const chips: Array<{ key: ChipKey; label: string }> = [
@@ -24,18 +24,34 @@ const chips: Array<{ key: ChipKey; label: string }> = [
 ];
 
 export function FiltersBar({ active, onChange }: Props) {
+  const toggleChip = (chip: ChipKey) => {
+    if (chip === "all") {
+      onChange(["all"]);
+      return;
+    }
+
+    const current = active.includes("all")
+      ? []
+      : active.filter((key) => key !== "all");
+    const next = current.includes(chip)
+      ? current.filter((key) => key !== chip)
+      : [...current, chip];
+
+    onChange(next.length > 0 ? next : ["all"]);
+  };
+
   return (
     <div className="filtersBar">
       <span className="filtersLabel">Filters:</span>
 
       {chips.map((c) => {
-        const isActive = active === c.key;
+        const isActive = active.includes(c.key);
         return (
           <button
             key={c.key}
             className={`chip ${isActive ? "chip--active" : ""}`}
             type="button"
-            onClick={() => onChange(c.key)}
+            onClick={() => toggleChip(c.key)}
           >
             {isActive ? <Check className="icon chipCheck" /> : null}
             {c.label}

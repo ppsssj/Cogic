@@ -87,6 +87,36 @@ body.vscode-high-contrast .logoDark {
   min-width: 0;
 }
 
+.depthControl {
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 8px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: var(--inputBg);
+  color: var(--inputFg);
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.depthSelect {
+  min-width: 98px;
+  border: none;
+  background: transparent;
+  color: var(--inputFg);
+  font-size: 12px;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+}
+
+.depthSelect option {
+  color: var(--inputFg);
+  background: var(--bg);
+}
+
 .exportMenuWrap {
   position: relative;
 }

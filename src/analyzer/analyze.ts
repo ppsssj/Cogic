@@ -348,6 +348,44 @@ function collectDiagnostics(
   return out;
 }
 
+function readParsedTsConfig(tsconfigPath: string) {
+  const cfg = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
+  if (cfg.error) {
+    throw new Error(
+      ts.flattenDiagnosticMessageText(cfg.error.messageText, "\n"),
+    );
+  }
+
+  const configDir = path.dirname(tsconfigPath);
+  const parsed = ts.parseJsonConfigFileContent(
+    cfg.config,
+    ts.sys,
+    configDir,
+  );
+
+  return {
+    raw: cfg.config as {
+      references?: Array<{
+        path?: string;
+      }>;
+    },
+    parsed,
+    configDir,
+  };
+}
+
+function resolveReferencedTsconfigPath(
+  baseDir: string,
+  refPath: string | undefined,
+) {
+  if (!refPath) {return null;}
+  const resolved = path.resolve(baseDir, refPath);
+  const tsconfigPath = resolved.endsWith(".json")
+    ? resolved
+    : path.join(resolved, "tsconfig.json");
+  return fs.existsSync(tsconfigPath) ? tsconfigPath : null;
+}
+
 function buildWorkspaceRoots(args: {
   workspaceRoot: string;
   filePaths: string[];
@@ -362,18 +400,57 @@ function buildWorkspaceRoots(args: {
   const tsconfigPath = path.join(workspaceRoot, "tsconfig.json");
   if (fs.existsSync(tsconfigPath)) {
     try {
-      const cfg = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
-      const parsed = ts.parseJsonConfigFileContent(
-        cfg.config,
-        ts.sys,
-        workspaceRoot,
-      );
+      const { raw, parsed, configDir } = readParsedTsConfig(tsconfigPath);
       const rootNames = parsed.fileNames.length ? parsed.fileNames : filePaths;
       const options: ts.CompilerOptions = {
         ...parsed.options,
         noEmit: true,
         skipLibCheck: parsed.options.skipLibCheck ?? true,
       };
+
+      const hasResolvedConfig =
+        parsed.fileNames.length > 0 || Object.keys(parsed.options).length > 0;
+
+      if (hasResolvedConfig) {
+        return {
+          rootNames,
+          options,
+          usedTsconfig: true,
+          projectRoot: workspaceRoot,
+        };
+      }
+
+      const referenceConfigs = (raw.references ?? [])
+        .map((ref) => resolveReferencedTsconfigPath(configDir, ref.path))
+        .filter((refPath): refPath is string => Boolean(refPath));
+
+      if (referenceConfigs.length > 0) {
+        const mergedReferenceOptions = referenceConfigs.reduce<ts.CompilerOptions>(
+          (acc, refPath) => {
+            try {
+              const refParsed = readParsedTsConfig(refPath);
+              return { ...acc, ...refParsed.parsed.options };
+            } catch {
+              return acc;
+            }
+          },
+          {},
+        );
+
+        if (Object.keys(mergedReferenceOptions).length > 0) {
+          return {
+            rootNames: filePaths,
+            options: {
+              ...mergedReferenceOptions,
+              noEmit: true,
+              skipLibCheck: mergedReferenceOptions.skipLibCheck ?? true,
+            },
+            usedTsconfig: true,
+            projectRoot: workspaceRoot,
+          };
+        }
+      }
+
       return {
         rootNames,
         options,
@@ -430,6 +507,31 @@ function sourceFileLocation(sf: ts.SourceFile): FileTargetLocation {
       end: { line: endLC.line, character: endLC.character },
     },
   };
+}
+
+function formatSafeDataflowLabel(
+  argumentSourceFile: ts.SourceFile,
+  parameter: ts.ParameterDeclaration,
+  argument: ts.Expression,
+) {
+  const clampText = (value: string, max = 80) =>
+    value.length <= max ? value : `${value.slice(0, max - 3)}...`;
+
+  const parameterSourceFile = parameter.getSourceFile();
+  const rawName = parameter.name
+    .getText(parameterSourceFile)
+    .replace(/\s+/g, " ")
+    .trim();
+  const parameterName = clampText(
+    parameter.dotDotDotToken ? `...${rawName}` : rawName,
+    60,
+  );
+  const argumentText = clampText(
+    argument.getText(argumentSourceFile).replace(/\s+/g, " ").trim(),
+    80,
+  );
+
+  return `${parameterName} <- ${argumentText}`;
 }
 
 function createModuleLocationResolver(
@@ -1636,7 +1738,7 @@ function buildActiveFileGraph(
       const a = args[i];
       if (!p || !a) {continue;}
 
-      const label = buildDataflowLabel(p, a);
+      const label = formatSafeDataflowLabel(sf, p, a);
       addEdge("dataflow", ownerId, targetId, label, `arg#${i}`);
     }
   };

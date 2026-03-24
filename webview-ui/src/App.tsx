@@ -169,11 +169,51 @@ function shortBaseName(p: string) {
 function normalizeComparablePath(p: string) {
   return normalizePath(p).toLowerCase();
 }
+function clampGraphDepth(depth: number) {
+  if (!Number.isFinite(depth)) {return 0;}
+  return Math.max(0, Math.min(3, Math.round(depth)));
+}
+function describeDepth(graphDepth: number) {
+  if (graphDepth <= 0) return "file only";
+  if (graphDepth === 1) return "direct connections";
+  return `${graphDepth} hops`;
+}
 function uriToFsPath(uri: string): string {
   if (!uri.startsWith("file://")) return uri;
   let p = decodeURIComponent(uri.replace("file://", ""));
   if (p.match(/^\/[A-Za-z]:\//)) p = p.slice(1); // windows /C:/...
   return p;
+}
+function fsPathToUri(filePath: string): string {
+  const normalized = normalizePath(filePath);
+  const uriPath = normalized.match(/^[A-Za-z]:\//)
+    ? `/${normalized}`
+    : normalized;
+  return `file://${encodeURI(uriPath)}`;
+}
+function inferLanguageIdFromPath(filePath: string): string {
+  const normalized = normalizePath(filePath).toLowerCase();
+  if (normalized.endsWith(".tsx")) return "typescriptreact";
+  if (normalized.endsWith(".ts")) return "typescript";
+  if (normalized.endsWith(".jsx")) return "javascriptreact";
+  if (normalized.endsWith(".js")) return "javascript";
+  return "plaintext";
+}
+function getPrimaryGraphFilePath(graph: GraphPayload | undefined): string | null {
+  if (!graph?.nodes.length) return null;
+
+  const localCounts = new Map<string, number>();
+  for (const node of graph.nodes) {
+    if (node.kind === "file" || node.kind === "external") continue;
+    localCounts.set(node.file, (localCounts.get(node.file) ?? 0) + 1);
+  }
+
+  if (localCounts.size > 0) {
+    return [...localCounts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;
+  }
+
+  const fileNode = graph.nodes.find((node) => node.kind === "file");
+  return fileNode?.file ?? graph.nodes[0]?.file ?? null;
 }
 function rangeSize(range: GraphNode["range"]) {
   return (
@@ -500,6 +540,11 @@ type ScaffoldPreviewState = {
   warnings: string[];
   error: string | null;
 };
+type AnalysisLoadingState = {
+  active: boolean;
+  message: string;
+  detail?: string;
+};
 
 export default function App() {
   const [activeFile, setActiveFile] = useState<ActiveFilePayload>(null);
@@ -514,9 +559,17 @@ export default function App() {
 
   const expandedFilesRef = useRef<Set<string>>(new Set());
 
-  const [activeChip, setActiveChip] = useState<ChipKey>("all");
+  const [activeChip, setActiveChip] = useState<ChipKey[]>(["all"]);
   const [searchQuery, setSearchQuery] = useState("");
   const [traceMode, setTraceMode] = useState(false);
+  const LS_GRAPH_DEPTH = "cg.graphDepth";
+  const [graphDepth, setGraphDepth] = useState<number>(() => {
+    try {
+      return clampGraphDepth(Number(localStorage.getItem(LS_GRAPH_DEPTH) ?? "0"));
+    } catch {
+      return 0;
+    }
+  });
   const [traceEvents, setTraceEvents] = useState<GraphTraceEvent[] | null>(null);
   const [traceCursor, setTraceCursor] = useState(0);
   const [autoLayoutTick, setAutoLayoutTick] = useState(0);
@@ -622,6 +675,8 @@ export default function App() {
   });
   const [canvasNotice, setCanvasNotice] = useState<UINotice | null>(null);
   const [inspectorNotice, setInspectorNotice] = useState<UINotice | null>(null);
+  const [analysisLoading, setAnalysisLoading] =
+    useState<AnalysisLoadingState | null>(null);
   const toastTimerRef = useRef<number | null>(null);
 
   const [exportStatus, setExportStatus] = useState<"idle" | "exporting" | "done">(
@@ -690,6 +745,16 @@ export default function App() {
   };
 
   const applyNotice = useEffectEvent((notice: UINotice) => {
+    if (
+      notice.scope === "canvas" ||
+      notice.source === "analyzeActiveFile" ||
+      notice.source === "analyzeWorkspace" ||
+      notice.source === "expandNode" ||
+      notice.source === "auto-analysis"
+    ) {
+      setAnalysisLoading(null);
+    }
+
     if (notice.scope === "toast") {
       const text = notice.detail
         ? `${notice.message}: ${notice.detail}`
@@ -965,6 +1030,7 @@ export default function App() {
         });
 
         if (request.lane === "active") {
+          finishAnalysisLoading();
           if (request.sequence < latestActiveSequenceRef.current) {
             pushWebviewDebugEvent("analysisResult.dropped.active.stale", {
               requestId: request.requestId,
@@ -1035,6 +1101,7 @@ export default function App() {
           return;
         }
 
+        finishAnalysisLoading();
         if (request.generation !== activeGraphGenerationRef.current) {
           pushWebviewDebugEvent("analysisResult.dropped.expand.stale", {
             requestId: request.requestId,
@@ -1454,6 +1521,27 @@ export default function App() {
   const exportBaseName =
     activeFile?.fileName?.replace(/[^\w.-]+/g, "_")?.slice(0, 64) || "codegraph";
 
+  const beginAnalysisLoading = (message: string, detail?: string) => {
+    setAnalysisLoading({ active: true, message, detail });
+  };
+
+  const finishAnalysisLoading = () => {
+    setAnalysisLoading(null);
+  };
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(LS_GRAPH_DEPTH, String(graphDepth));
+    } catch {
+      // ignore persistence failures
+    }
+
+    postMessage("app.graphDepth.sync", {
+      type: "setGraphDepth",
+      payload: { graphDepth },
+    });
+  }, [graphDepth]);
+
   const resetGraph = () => {
     pushWebviewDebugEvent("app.resetGraph", {
       ...getGraphCounts(graphRef.current),
@@ -1490,6 +1578,10 @@ export default function App() {
       const next = !prev;
       if (next) {
         resetGraph();
+        beginAnalysisLoading(
+          "Loading trace graph...",
+          "Tracing the active file and preparing a step-by-step graph view.",
+        );
         postMessage("trace.toggle.on", {
           type: "analyzeActiveFile",
           payload: { traceMode: true },
@@ -1515,6 +1607,10 @@ export default function App() {
       return;
     }
     expandedFilesRef.current.add(filePath);
+    beginAnalysisLoading(
+      `Expanding ${shortBaseName(filePath)}...`,
+      "Analyzing the connected file and merging it into the current graph.",
+    );
     postMessage("expandExternalFile", {
       type: "expandNode",
       payload: {
@@ -1636,33 +1732,45 @@ export default function App() {
     });
   };
 
-  const buildFlowExportPayload = () => ({
-    schema: "codegraph.flow.v1",
-    exportedAt: new Date().toISOString(),
-    ui: {
-      activeFilter: activeChip,
-      searchQuery,
-      rootNodeId,
-      selectedNodeId,
-      selectedNodeIds,
-      inspector: {
-        open: inspectorOpen,
-        placement: inspectorPlacement,
-        effectivePlacement: effectiveInspectorPlacement,
-        width: inspectorWidth,
-        height: inspectorHeight,
+  const buildFlowExportPayload = () => {
+    const graphPrimaryFilePath = getPrimaryGraphFilePath(graph);
+    const exportFilePath =
+      graphPrimaryFilePath ?? (activeFile ? uriToFsPath(activeFile.uri) : null);
+    const exportActiveFile =
+      exportFilePath
+        ? {
+            uri: fsPathToUri(exportFilePath),
+            fileName: shortBaseName(exportFilePath),
+            languageId:
+              activeFile && uriToFsPath(activeFile.uri) === exportFilePath
+                ? activeFile.languageId
+                : inferLanguageIdFromPath(exportFilePath),
+          }
+        : null;
+
+    return {
+      schema: "codegraph.flow.v1",
+      exportedAt: new Date().toISOString(),
+      ui: {
+        activeFilter: activeChip,
+        graphDepth,
+        searchQuery,
+        rootNodeId,
+        selectedNodeId,
+        selectedNodeIds,
+        inspector: {
+          open: inspectorOpen,
+          placement: inspectorPlacement,
+          effectivePlacement: effectiveInspectorPlacement,
+          width: inspectorWidth,
+          height: inspectorHeight,
+        },
       },
-    },
-    activeFile: activeFile
-      ? {
-          uri: activeFile.uri,
-          fileName: activeFile.fileName,
-          languageId: activeFile.languageId,
-        }
-      : null,
-    analysisMeta: analysis?.meta ?? null,
-    graph,
-  });
+      activeFile: exportActiveFile,
+      analysisMeta: analysis?.meta ?? null,
+      graph,
+    };
+  };
 
   const saveExportText = (
     suggestedFileName: string,
@@ -1829,9 +1937,29 @@ export default function App() {
         activeFilePath={activeFilePath}
         onPickFile={(filePath) => {
           resetGraph();
+          beginAnalysisLoading(
+            `Loading ${shortBaseName(filePath)}...`,
+            `Building the graph with ${describeDepth(graphDepth)}.`,
+          );
           postMessage("topbar.pickFile", {
             type: "selectWorkspaceFile",
-            payload: { filePath },
+            payload: { filePath, graphDepth },
+          });
+        }}
+        graphDepth={graphDepth}
+        onGraphDepthChange={(nextDepth) => {
+          const normalized = clampGraphDepth(nextDepth);
+          if (normalized === graphDepth) {return;}
+          setGraphDepth(normalized);
+          if (traceMode || !activeFilePath) {return;}
+          resetGraph();
+          beginAnalysisLoading(
+            "Rebuilding graph...",
+            `Updating the view for ${describeDepth(normalized)}.`,
+          );
+          postMessage("topbar.graphDepth.change", {
+            type: "analyzeActiveFile",
+            payload: { traceMode: false, graphDepth: normalized },
           });
         }}
         onRefresh={() => {
@@ -1841,9 +1969,15 @@ export default function App() {
         }}
         onGenerate={() => {
           resetGraph();
+          beginAnalysisLoading(
+            traceMode ? "Loading trace graph..." : "Rendering graph...",
+            traceMode
+              ? "Tracing the active file and preparing a step-by-step graph view."
+              : `Analyzing the active file with ${describeDepth(graphDepth)}.`,
+          );
           postMessage("topbar.generate", {
             type: "analyzeActiveFile",
-            payload: { traceMode },
+            payload: { traceMode, graphDepth },
           });
         }}
         onAutoLayout={() => setAutoLayoutTick((v) => v + 1)}
@@ -1915,12 +2049,18 @@ export default function App() {
               });
             }
           }}
-          onGenerateFromActive={() =>
+          onGenerateFromActive={() => {
+            beginAnalysisLoading(
+              traceMode ? "Loading trace graph..." : "Rendering graph...",
+              traceMode
+                ? "Tracing the active file and preparing a step-by-step graph view."
+                : `Analyzing the active file with ${describeDepth(graphDepth)}.`,
+            );
             postMessage("canvas.emptyState.generate", {
               type: "analyzeActiveFile",
-              payload: { traceMode },
-            })
-          }
+              payload: { traceMode, graphDepth },
+            });
+          }}
           onUseSelectionAsRoot={() => {
             setPendingUseSelectionAsRoot(true);
             postMessage("canvas.useSelectionAsRoot", { type: "requestSelection" });
@@ -1949,6 +2089,7 @@ export default function App() {
           onTracePrev={stepTracePrev}
           onTraceNext={stepTraceNext}
           onTraceFinish={finishTraceMode}
+          loadingState={analysisLoading}
           autoLayoutTick={autoLayoutTick}
           workspaceRoot={workspaceRoot}
           onOpenScaffoldModal={openScaffoldPanelAt}
