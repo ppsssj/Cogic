@@ -234,12 +234,15 @@
 .panel--selected .kvList,
 .panel--selected .panelBody {
   min-width: 0;
+  width: 100%;
 }
 
 .panel--selected .kvRow {
   align-items: flex-start;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .panel--selected .kvKey,
@@ -258,11 +261,62 @@
 
 .panel--selected .smallBtn {
   display: inline-block;
+  flex: 0 1 auto;
   max-width: 100%;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.selectedNodeView,
+.selectedNodeBlock,
+.selectedNodeEvidenceList,
+.selectedNodeEvidenceCard,
+.selectedNodeEvidenceTop {
+  min-width: 0;
+}
+
+.selectedNodeView {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+
+.selectedNodeBlock {
+  width: 100%;
+}
+
+.selectedNodeEvidenceList {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+}
+
+.selectedNodeEvidenceCard {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  display: grid;
+  gap: 6px;
+}
+
+.selectedNodeEvidenceTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.selectedNodeEvidenceHeading {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .panel--runtime .kvVal {

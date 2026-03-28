@@ -1,6 +1,12 @@
 import * as path from "path";
 import * as fs from "fs";
 import * as ts from "typescript";
+import {
+  defaultFrameworkSemanticAdapters,
+  resolveFrameworkCallbackHook,
+  resolveFrameworkStateHook,
+} from "./adapters";
+import type { FrameworkSemanticAdapter } from "./adapters";
 import type {
   AnalysisCallV2,
   CodeDiagnostic,
@@ -20,6 +26,7 @@ export function analyzeTypeScriptWithTypes(args: {
   code: string;
   fileName: string;
   languageId: string;
+  adapters?: readonly FrameworkSemanticAdapter[];
 }): {
   imports: Array<{
     source: string;
@@ -36,7 +43,12 @@ export function analyzeTypeScriptWithTypes(args: {
   trace: GraphTraceEvent[];
   meta: { mode: "single-file" };
 } {
-  const { code, fileName, languageId } = args;
+  const {
+    code,
+    fileName,
+    languageId,
+    adapters = defaultFrameworkSemanticAdapters,
+  } = args;
 
   const scriptKind = pickScriptKind(fileName, languageId);
 
@@ -113,6 +125,7 @@ export function analyzeTypeScriptWithTypes(args: {
     sf,
     checker,
     resolveModuleLocation,
+    adapters,
   );
 
   return {
@@ -136,6 +149,7 @@ export function analyzeWithWorkspace(args: {
   active: { code: string; fileName: string; languageId: string };
   workspaceRoot: string | null;
   filePaths: string[];
+  adapters?: readonly FrameworkSemanticAdapter[];
 }): {
   imports: Array<{
     source: string;
@@ -157,7 +171,12 @@ export function analyzeWithWorkspace(args: {
     projectRoot?: string;
   };
 } {
-  const { active, workspaceRoot, filePaths } = args;
+  const {
+    active,
+    workspaceRoot,
+    filePaths,
+    adapters = defaultFrameworkSemanticAdapters,
+  } = args;
   const activeFile = active.fileName;
 
   // no workspace: fall back to single-file behavior
@@ -261,6 +280,7 @@ export function analyzeWithWorkspace(args: {
     sf,
     checker,
     resolveModuleLocation,
+    adapters,
   );
 
   return {
@@ -736,6 +756,7 @@ function buildActiveFileGraph(
   sf: ts.SourceFile,
   checker: ts.TypeChecker,
   resolveModuleLocation?: (moduleText: string, containingFile: string) => FileTargetLocation | null,
+  adapters: readonly FrameworkSemanticAdapter[] = defaultFrameworkSemanticAdapters,
 ): { graph: GraphPayload; trace: GraphTraceEvent[] } {
   const nodes: GraphNode[] = [];
   const edges: GraphEdge[] = [];
@@ -745,7 +766,7 @@ function buildActiveFileGraph(
   // declStartPos -> nodeId (only for active file decls)
   const idByDeclPos = new Map<number, string>();
   const ownerDeclById = new Map<string, ts.Node>();
-  const hookSourceIdByBindingDeclPos = new Map<number, string>();
+  const hookSourceIdByDeclPos = new Map<number, string>();
   const pendingHookReferences: Array<{
     hookId: string;
     parentId: string;
@@ -923,86 +944,8 @@ function buildActiveFileGraph(
     return null;
   };
 
-  const REACT_CALLBACK_HOOKS = new Set([
-    "useEffect",
-    "useLayoutEffect",
-    "useInsertionEffect",
-    "useMemo",
-    "useCallback",
-  ]);
-  const REACT_STATE_HOOKS = new Set(["useState", "useReducer"]);
-
   const hookCallbackCountByOwner = new Map<string, Map<string, number>>();
   const hookSourceCountByOwner = new Map<string, Map<string, number>>();
-
-  const getImportDeclaration = (
-    node: ts.Node | undefined,
-  ): ts.ImportDeclaration | null => {
-    let current = node;
-    while (current) {
-      if (ts.isImportDeclaration(current)) {
-        return current;
-      }
-      current = current.parent;
-    }
-    return null;
-  };
-
-  const isReactImportDeclaration = (node: ts.Node | undefined): boolean => {
-    const importDecl = getImportDeclaration(node);
-    return !!(
-      importDecl &&
-      ts.isStringLiteral(importDecl.moduleSpecifier) &&
-      importDecl.moduleSpecifier.text === "react"
-    );
-  };
-
-  const getReactImportKind = (symbol: ts.Symbol | undefined): string | null => {
-    if (!symbol) {
-      return null;
-    }
-
-    for (const decl of symbol.declarations ?? []) {
-      if (!isReactImportDeclaration(decl)) {
-        continue;
-      }
-      if (ts.isImportSpecifier(decl)) {
-        return (decl.propertyName ?? decl.name).text;
-      }
-      if (ts.isNamespaceImport(decl)) {
-        return "*";
-      }
-      if (ts.isImportClause(decl) && decl.name) {
-        return "default";
-      }
-    }
-
-    return null;
-  };
-
-  const getReactHookName = (
-    expr: ts.LeftHandSideExpression,
-    allowedHooks: Set<string>,
-  ): string | null => {
-    if (ts.isIdentifier(expr)) {
-      const symbol = checker.getSymbolAtLocation(expr);
-      const importedName = getReactImportKind(symbol);
-      if (importedName && allowedHooks.has(importedName)) {
-        return importedName;
-      }
-      return null;
-    }
-
-    if (ts.isPropertyAccessExpression(expr) && allowedHooks.has(expr.name.text)) {
-      const baseSymbol = checker.getSymbolAtLocation(expr.expression);
-      const importKind = getReactImportKind(baseSymbol);
-      if (importKind === "default" || importKind === "*") {
-        return expr.name.text;
-      }
-    }
-
-    return null;
-  };
 
   const getHookCallbackName = (ownerId: string, hookName: string) => {
     const ownerName = nodeNameById.get(ownerId) ?? "scope";
@@ -1027,19 +970,15 @@ function buildActiveFileGraph(
     call: ts.CallExpression,
     parentId: string,
   ) => {
-    const hookName = getReactHookName(call.expression, REACT_STATE_HOOKS);
-    if (!hookName || !ts.isArrayBindingPattern(decl.name)) {
+    const stateHook = resolveFrameworkStateHook({
+      adapters,
+      checker,
+      expression: call.expression,
+    });
+    if (!stateHook) {
       return false;
     }
-
-    const stateBinding = decl.name.elements[0];
-    const setterBinding = decl.name.elements[1];
-    if (!setterBinding || ts.isOmittedExpression(setterBinding)) {
-      return false;
-    }
-    if (!ts.isBindingElement(setterBinding) || !ts.isIdentifier(setterBinding.name)) {
-      return false;
-    }
+    const hookName = stateHook.name;
 
     let signature: string | undefined;
     try {
@@ -1060,15 +999,36 @@ function buildActiveFileGraph(
         signature,
       },
     );
-    if (
-      stateBinding &&
-      !ts.isOmittedExpression(stateBinding) &&
-      ts.isBindingElement(stateBinding) &&
-      ts.isIdentifier(stateBinding.name)
-    ) {
-      hookSourceIdByBindingDeclPos.set(declLocation(stateBinding).pos, hookId);
+    if (stateHook.bindingKind === "tuple") {
+      if (!ts.isArrayBindingPattern(decl.name)) {
+        return false;
+      }
+      const stateBinding = decl.name.elements[0];
+      const setterBinding = decl.name.elements[1];
+      if (!setterBinding || ts.isOmittedExpression(setterBinding)) {
+        return false;
+      }
+      if (
+        !ts.isBindingElement(setterBinding) ||
+        !ts.isIdentifier(setterBinding.name)
+      ) {
+        return false;
+      }
+      if (
+        stateBinding &&
+        !ts.isOmittedExpression(stateBinding) &&
+        ts.isBindingElement(stateBinding) &&
+        ts.isIdentifier(stateBinding.name)
+      ) {
+        hookSourceIdByDeclPos.set(declLocation(stateBinding).pos, hookId);
+      }
+      hookSourceIdByDeclPos.set(declLocation(setterBinding).pos, hookId);
+    } else if (stateHook.bindingKind === "identifier") {
+      if (!ts.isIdentifier(decl.name)) {
+        return false;
+      }
+      hookSourceIdByDeclPos.set(declLocation(decl).pos, hookId);
     }
-    hookSourceIdByBindingDeclPos.set(declLocation(setterBinding).pos, hookId);
 
     if (hookName === "useReducer") {
       const reducerArg = call.arguments[0];
@@ -1099,12 +1059,16 @@ function buildActiveFileGraph(
     call: ts.CallExpression,
     parentId: string,
   ) => {
-    const hookName = getReactHookName(call.expression, REACT_CALLBACK_HOOKS);
-    if (!hookName) {
+    const callbackHook = resolveFrameworkCallbackHook({
+      adapters,
+      checker,
+      expression: call.expression,
+    });
+    if (!callbackHook) {
       return false;
     }
-
-    const callback = call.arguments[0];
+    const hookName = callbackHook.name;
+    const callback = call.arguments[callbackHook.callbackArgIndex];
     if (
       !callback ||
       (!ts.isArrowFunction(callback) && !ts.isFunctionExpression(callback))
@@ -1501,8 +1465,11 @@ function buildActiveFileGraph(
     const directId = idByDeclPos.get(declLocation(decl).pos);
     if (directId) {return directId;}
 
+    const hookSourceId = hookSourceIdByDeclPos.get(declLocation(decl).pos);
+    if (hookSourceId) {return hookSourceId;}
+
     if (ts.isBindingElement(decl)) {
-      return hookSourceIdByBindingDeclPos.get(declLocation(decl).pos) ?? null;
+      return hookSourceIdByDeclPos.get(declLocation(decl).pos) ?? null;
     }
 
     if (
@@ -1771,7 +1738,7 @@ function buildActiveFileGraph(
       if (!decl) {return null;}
 
       if (ts.isBindingElement(decl)) {
-        const hookSourceId = hookSourceIdByBindingDeclPos.get(declLocation(decl).pos);
+        const hookSourceId = hookSourceIdByDeclPos.get(declLocation(decl).pos);
         if (hookSourceId) {
           return {
             tgtId: hookSourceId,
@@ -1853,6 +1820,39 @@ function buildActiveFileGraph(
       return null;
     }
   };
+
+  const resolveHookSourceIdForExpression = (
+    expr: ts.Expression,
+  ): string | null => {
+    const rootExpr = ts.isPropertyAccessExpression(expr) ||
+      ts.isElementAccessExpression(expr)
+      ? expr.expression
+      : expr;
+
+    if (ts.isIdentifier(rootExpr)) {
+      const symbol = checker.getSymbolAtLocation(rootExpr);
+      const decl = symbol ? pickBestDeclaration(symbol, checker) : undefined;
+      return resolveLocalNodeIdForDeclaration(decl);
+    }
+
+    if (
+      ts.isPropertyAccessExpression(rootExpr) ||
+      ts.isElementAccessExpression(rootExpr)
+    ) {
+      return resolveHookSourceIdForExpression(rootExpr.expression);
+    }
+
+    return null;
+  };
+
+  const isAssignmentOperator = (kind: ts.SyntaxKind) =>
+    kind >= ts.SyntaxKind.FirstAssignment &&
+    kind <= ts.SyntaxKind.LastAssignment;
+
+  const buildUpdateLabel = (
+    expr: ts.Expression,
+    suffix: string,
+  ) => `${expr.getText(sf).replace(/\s+/g, " ").trim()}${suffix}`;
 
   // same-file declaration references: class<->class, class->interface, function->function, etc.
   for (const relation of pendingHookReferences) {
@@ -1942,6 +1942,56 @@ function buildActiveFileGraph(
           r.tgtId,
           r.sigDecl,
           node.arguments,
+        );
+      }
+    }
+
+    if (
+      ts.isBinaryExpression(node) &&
+      isAssignmentOperator(node.operatorToken.kind)
+    ) {
+      const hookSourceId = resolveHookSourceIdForExpression(node.left);
+      if (hookSourceId) {
+        addEdge(
+          "updates",
+          ownerId,
+          hookSourceId,
+          buildUpdateLabel(
+            node.left,
+            ` ${ts.tokenToString(node.operatorToken.kind) ?? "="}`,
+          ),
+        );
+      }
+    }
+
+    if (
+      ts.isPrefixUnaryExpression(node) &&
+      (node.operator === ts.SyntaxKind.PlusPlusToken ||
+        node.operator === ts.SyntaxKind.MinusMinusToken)
+    ) {
+      const hookSourceId = resolveHookSourceIdForExpression(node.operand);
+      if (hookSourceId) {
+        addEdge(
+          "updates",
+          ownerId,
+          hookSourceId,
+          buildUpdateLabel(node.operand, ts.tokenToString(node.operator) ?? "++"),
+        );
+      }
+    }
+
+    if (
+      ts.isPostfixUnaryExpression(node) &&
+      (node.operator === ts.SyntaxKind.PlusPlusToken ||
+        node.operator === ts.SyntaxKind.MinusMinusToken)
+    ) {
+      const hookSourceId = resolveHookSourceIdForExpression(node.operand);
+      if (hookSourceId) {
+        addEdge(
+          "updates",
+          ownerId,
+          hookSourceId,
+          buildUpdateLabel(node.operand, ts.tokenToString(node.operator) ?? "++"),
         );
       }
     }

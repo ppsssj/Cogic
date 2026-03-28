@@ -974,8 +974,8 @@ export function Inspector({
             No node selected. Click a node in the graph.
           </div>
         ) : (
-          <div style={{ display: "grid", gap: 12 }}>
-            <div className="kvList">
+          <div className="selectedNodeView">
+            <div className="kvList selectedNodeBlock">
               <div className="kvRow">
                 <div className="kvKey mono">kind</div>
                 <div className="kvVal mono">{selectedNode.kind}</div>
@@ -1000,7 +1000,7 @@ export function Inspector({
               </div>
             </div>
 
-            <div>
+            <div className="selectedNodeBlock">
               <div
                 className="mono"
                 style={{ fontSize: 11, opacity: 0.75, marginBottom: 8 }}
@@ -1035,7 +1035,7 @@ export function Inspector({
               </div>
             </div>
 
-            <div>
+            <div className="selectedNodeBlock">
               <div
                 className="mono"
                 style={{ fontSize: 11, opacity: 0.75, marginBottom: 8 }}
@@ -1051,29 +1051,17 @@ export function Inspector({
                   No graph connections are attached to this node yet.
                 </div>
               ) : (
-                <div style={{ display: "grid", gap: 8 }}>
+                <div className="selectedNodeEvidenceList">
                   {selectedNodeEvidence.map((edge) => (
                     <div
                       key={edge.id}
-                      style={{
-                        padding: 10,
-                        borderRadius: 10,
-                        border: "1px solid var(--border)",
-                        background: "rgba(255,255,255,0.03)",
-                        display: "grid",
-                        gap: 6,
-                      }}
+                      className="selectedNodeEvidenceCard"
                     >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          gap: 10,
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        <div className="mono" style={{ fontSize: 11, opacity: 0.8 }}>
+                      <div className="selectedNodeEvidenceTop">
+                        <div
+                          className="mono selectedNodeEvidenceHeading"
+                          style={{ fontSize: 11, opacity: 0.8 }}
+                        >
                           {getEvidenceHeading(edge.kind, edge.direction)}
                         </div>
                         <button

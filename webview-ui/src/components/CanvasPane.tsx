@@ -338,6 +338,7 @@ function shortenTopologyKey(value: string, max = 96) {
 }
 
 const ENABLE_AUTO_VIEWPORT_EFFECTS = true;
+const ENABLE_CANVAS_DEBUG_SNAPSHOTS = false;
 
 function nodeTitle(n: GraphNode) {
   if (n.kind === "class") return `class ${n.name}`;
@@ -1441,6 +1442,14 @@ function toReactFlowNodes(
   onToggleFolderGroup?: (folderPath: string) => void,
 ): Array<Node<CanvasNodeData>> {
   if (!graph) return [];
+  const folderChainCache = new Map<string, string[]>();
+  const getCachedFolderChain = (folderPath: string) => {
+    const cached = folderChainCache.get(folderPath);
+    if (cached) return cached;
+    const chain = getFolderPathChain(folderPath, workspaceRoot);
+    folderChainCache.set(folderPath, chain);
+    return chain;
+  };
   const orderedFocusPulseRequests = [...(focusPulseRequests ?? [])].reverse();
   const focusPulseRequestByVisibleNodeId = new Map(
     orderedFocusPulseRequests.map((request) => [request.visibleNodeId, request] as const),
@@ -1545,17 +1554,22 @@ function toReactFlowNodes(
       );
     });
 
-  const directFileGroupsByFolder = groups.reduce((map, group) => {
+  const groupsWithSelection = groups.map((group) => ({
+    ...group,
+    hasSelectedDescendant: hasSelectedDescendant(group.children),
+  }));
+
+  const directFileGroupsByFolder = groupsWithSelection.reduce((map, group) => {
     const folderPath = folderKeyForFile(group.file);
     const current = map.get(folderPath) ?? [];
     current.push(group);
     map.set(folderPath, current);
     return map;
-  }, new Map<string, typeof groups>());
+  }, new Map<string, typeof groupsWithSelection>());
 
   const folderPathSet = new Set<string>();
   for (const folderPath of directFileGroupsByFolder.keys()) {
-    for (const ancestorPath of getFolderPathChain(folderPath, workspaceRoot)) {
+    for (const ancestorPath of getCachedFolderChain(folderPath)) {
       folderPathSet.add(ancestorPath);
     }
   }
@@ -1563,7 +1577,7 @@ function toReactFlowNodes(
   const parentFolderPathByFolder = new Map<string, string | null>();
   const childFolderPathsByFolder = new Map<string, string[]>();
   for (const folderPath of folderPathSet) {
-    const folderChain = getFolderPathChain(folderPath, workspaceRoot);
+    const folderChain = getCachedFolderChain(folderPath);
     const parentFolderPath =
       folderChain.length > 1 ? folderChain[folderChain.length - 2] : null;
     parentFolderPathByFolder.set(
@@ -1582,7 +1596,7 @@ function toReactFlowNodes(
     string,
     {
       folderPath: string;
-      directFileGroups: typeof groups;
+      directFileGroups: typeof groupsWithSelection;
       childFolderPaths: string[];
       collapsed: boolean;
       transitionState?: FolderGroupData["transitionState"];
@@ -1597,7 +1611,7 @@ function toReactFlowNodes(
 
   const sortedFolderPaths = [...folderPathSet].sort((a, b) => {
     const depthDiff =
-      getFolderPathChain(b, workspaceRoot).length - getFolderPathChain(a, workspaceRoot).length;
+      getCachedFolderChain(b).length - getCachedFolderChain(a).length;
     if (depthDiff !== 0) return depthDiff;
     return a.localeCompare(b);
   });
@@ -1677,7 +1691,7 @@ function toReactFlowNodes(
         0,
       );
     const hasNestedSelection =
-      directFileGroups.some((group) => hasSelectedDescendant(group.children)) ||
+      directFileGroups.some((group) => group.hasSelectedDescendant) ||
       childFolderPaths.some(
         (childFolderPath) =>
           folderLayoutStateByPath.get(childFolderPath)?.hasSelectedDescendant ?? false,
@@ -1714,7 +1728,7 @@ function toReactFlowNodes(
   const reactFlowNodes: Array<Node<CanvasNodeData>> = [];
 
   const appendCodeNodesForFileGroup = (
-    group: (typeof groups)[number],
+    group: (typeof groupsWithSelection)[number],
     parentId: string,
   ) => {
     if (group.collapsed) return;
@@ -1814,7 +1828,7 @@ function toReactFlowNodes(
   };
 
   const appendFileGroupNode = (
-    group: (typeof groups)[number],
+    group: (typeof groupsWithSelection)[number],
     folderId: string,
     position: Positioned,
   ) => {
@@ -1831,7 +1845,7 @@ function toReactFlowNodes(
       draggable: false,
       selectable: true,
       focusable: true,
-      selected: hasSelectedDescendant(group.children) || selectedNodeIdSet.has(parentId),
+        selected: group.hasSelectedDescendant || selectedNodeIdSet.has(parentId),
       data: {
         title: baseName(group.file),
         subtitle: groupSubtitle.subtitle,
@@ -1850,7 +1864,6 @@ function toReactFlowNodes(
         width: group.width,
         height: group.height,
         zIndex: 1,
-        transition: "width 180ms ease, height 180ms ease",
       },
     });
 
@@ -1896,7 +1909,6 @@ function toReactFlowNodes(
         width: folderState.width,
         height: folderState.height,
         zIndex: 0,
-        transition: "width 180ms ease, height 180ms ease",
       },
     });
 
@@ -1986,11 +1998,23 @@ export const CanvasPane = memo(function CanvasPane({
   const lastRecoveryAtRef = useRef(0);
   const snapshotTimersRef = useRef<number[]>([]);
   const canvasFocusTimerRef = useRef<number | null>(null);
+  const suppressTopologyFitRef = useRef(false);
+  const topologyFitResumeTimerRef = useRef<number | null>(null);
   const clearPendingCanvasFocus = useCallback(() => {
     if (canvasFocusTimerRef.current !== null) {
       window.clearTimeout(canvasFocusTimerRef.current);
       canvasFocusTimerRef.current = null;
     }
+  }, []);
+  const suppressTopologyFit = useCallback((ms = 320) => {
+    suppressTopologyFitRef.current = true;
+    if (topologyFitResumeTimerRef.current !== null) {
+      window.clearTimeout(topologyFitResumeTimerRef.current);
+    }
+    topologyFitResumeTimerRef.current = window.setTimeout(() => {
+      suppressTopologyFitRef.current = false;
+      topologyFitResumeTimerRef.current = null;
+    }, ms);
   }, []);
   const [recoveryTick, setRecoveryTick] = useState(0);
   const [canvasFocusRequest, setCanvasFocusRequest] = useState<{
@@ -2250,13 +2274,13 @@ export const CanvasPane = memo(function CanvasPane({
       const groupNodeId = fileGroupIdByFile.get(normalized) ?? `file:${filePath}`;
       const isCollapsed = collapsedFilePathSet.has(normalized);
       const isCollapsing = collapsingFilePathSet.has(normalized);
-
-      setGroupFollowRequest((current) => ({
-        nodeId: groupNodeId,
-        token: (current?.token ?? 0) + 1,
-      }));
+      suppressTopologyFit();
 
       if (isCollapsed || isCollapsing) {
+        setGroupFollowRequest((current) => ({
+          nodeId: groupNodeId,
+          token: (current?.token ?? 0) + 1,
+        }));
         updateLayoutState((current) => ({
           ...current,
           collapsedFilePaths: current.collapsedFilePaths.filter(
@@ -2290,6 +2314,7 @@ export const CanvasPane = memo(function CanvasPane({
       collapsedFilePathSet,
       collapsingFilePathSet,
       fileGroupIdByFile,
+      suppressTopologyFit,
       updateLayoutState,
     ],
   );
@@ -2298,13 +2323,13 @@ export const CanvasPane = memo(function CanvasPane({
     (folderPath: string) => {
       const isCollapsed = collapsedFolderPathSet.has(folderPath);
       const isCollapsing = collapsingFolderPathSet.has(folderPath);
-
-      setGroupFollowRequest((current) => ({
-        nodeId: `folder:${folderPath}`,
-        token: (current?.token ?? 0) + 1,
-      }));
+      suppressTopologyFit();
 
       if (isCollapsed || isCollapsing) {
+        setGroupFollowRequest((current) => ({
+          nodeId: `folder:${folderPath}`,
+          token: (current?.token ?? 0) + 1,
+        }));
         updateLayoutState((current) => ({
           ...current,
           collapsedFolderPaths: current.collapsedFolderPaths.filter(
@@ -2330,7 +2355,7 @@ export const CanvasPane = memo(function CanvasPane({
           : [...current.collapsingFolderPaths, folderPath],
       }));
     },
-    [collapsedFolderPathSet, collapsingFolderPathSet, updateLayoutState],
+    [collapsedFolderPathSet, collapsingFolderPathSet, suppressTopologyFit, updateLayoutState],
   );
 
   const resolveVisibleNodeId = useCallback(
@@ -2569,6 +2594,16 @@ export const CanvasPane = memo(function CanvasPane({
     [edges],
   );
   const visibleHasData = nodes.length > 0;
+  const filteredGraphSignature = useMemo(
+    () =>
+      filteredGraph
+        ? `${filteredGraph.nodes.length}:${filteredGraph.edges.length}:${filteredGraph.nodes
+            .map((node) => node.id)
+            .sort()
+            .join("|")}`
+        : "empty",
+    [filteredGraph],
+  );
   const selectedVisibleNode = useMemo(
     () => (selectedNodeId ? nodes.find((node) => node.id === selectedNodeId) ?? null : null),
     [nodes, selectedNodeId],
@@ -2601,6 +2636,9 @@ export const CanvasPane = memo(function CanvasPane({
   }, [recoveryTick]);
 
   const collectCanvasSnapshot = useCallback((reason: string, extra?: Record<string, unknown>) => {
+    if (!ENABLE_CANVAS_DEBUG_SNAPSHOTS) {
+      return;
+    }
     const container = canvasFlowRef.current;
     const reactFlowRoot = container?.querySelector(".react-flow") as HTMLElement | null;
     const viewportEl = container?.querySelector(".react-flow__viewport") as HTMLElement | null;
@@ -2657,6 +2695,9 @@ export const CanvasPane = memo(function CanvasPane({
   ]);
 
   const scheduleCanvasSnapshots = useCallback((reason: string, extra?: Record<string, unknown>) => {
+    if (!ENABLE_CANVAS_DEBUG_SNAPSHOTS) {
+      return;
+    }
     clearSnapshotTimers();
     for (const delay of [0, 80, 240, 500]) {
       const timerId = window.setTimeout(() => {
@@ -2828,19 +2869,25 @@ export const CanvasPane = memo(function CanvasPane({
   useEffect(() => {
     return () => {
       clearSnapshotTimers();
+      clearPendingCanvasFocus();
+      if (topologyFitResumeTimerRef.current !== null) {
+        window.clearTimeout(topologyFitResumeTimerRef.current);
+        topologyFitResumeTimerRef.current = null;
+      }
     };
-  }, [clearSnapshotTimers]);
+  }, [clearPendingCanvasFocus, clearSnapshotTimers]);
 
   useEffect(() => {
     if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     if (!visibleHasData) return;
+    if (suppressTopologyFitRef.current) return;
 
     const rafId = window.requestAnimationFrame(() => {
-      fitGraphView(rfRef.current, 280);
+      fitGraphView(rfRef.current, 160);
     });
 
     return () => window.cancelAnimationFrame(rafId);
-  }, [nodeTopologyKey, visibleHasData]);
+  }, [filteredGraphSignature, visibleHasData]);
 
   useEffect(() => {
     if (lastVisibleHasDataRef.current === visibleHasData) return;
@@ -3001,7 +3048,7 @@ export const CanvasPane = memo(function CanvasPane({
         y: canvasFocusRequest.focusOffsetY ?? 0,
       });
       canvasFocusTimerRef.current = null;
-    }, 210);
+    }, 150);
 
     return clearPendingCanvasFocus;
   }, [canvasFocusRequest, clearPendingCanvasFocus]);
@@ -3014,7 +3061,7 @@ export const CanvasPane = memo(function CanvasPane({
     const node = inst.getNode(groupFollowRequest.nodeId);
     if (!node) return;
 
-    focusCanvasNode(inst, node, 1.02, 260);
+    focusCanvasNode(inst, node, 1.02, 140);
     handledGroupFollowTokenRef.current = groupFollowRequest.token;
   }, [groupFollowRequest, nodeTopologyKey]);
 
@@ -3147,6 +3194,7 @@ export const CanvasPane = memo(function CanvasPane({
               onNodeContextMenu={handleNodeContextMenu}
               onPaneClick={onClearSelection}
               fitView
+              onlyRenderVisibleElements
               minZoom={0.1}
               maxZoom={2.2}
               proOptions={{ hideAttribution: true }}

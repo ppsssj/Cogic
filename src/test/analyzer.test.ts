@@ -826,6 +826,251 @@ suite("Analyzer Test Suite", function () {
     );
   });
 
+  test("promotes Vue composition callbacks into separate graph owners", () => {
+    const result = analyzeTypeScriptWithTypes({
+      fileName: "vue-hooks.ts",
+      languageId: "typescript",
+      code: `
+        import { computed, watchEffect } from "vue";
+
+        function helper(value: number) {
+          return value + 1;
+        }
+
+        export function useCounter(seed: number) {
+          const total = computed(() => helper(seed));
+
+          watchEffect(() => {
+            helper(total.value);
+          });
+
+          return { total };
+        }
+      `,
+    });
+
+    const computedNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter.computed#1",
+    );
+    const watchEffectNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter.watchEffect#1",
+    );
+    const helperNode = result.graph.nodes.find((node) => node.name === "helper");
+
+    assert.ok(computedNode, "computed() callback should become a graph node");
+    assert.ok(
+      watchEffectNode,
+      "watchEffect() callback should become a graph node",
+    );
+    assert.ok(helperNode, "helper() should still be present in the graph");
+
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === computedNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "computed() callback should own helper() call edges",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === watchEffectNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "watchEffect() callback should own helper() call edges",
+    );
+  });
+
+  test("recognizes aliased and namespace Vue composition callbacks", () => {
+    const result = analyzeTypeScriptWithTypes({
+      fileName: "vue-hook-aliases.ts",
+      languageId: "typescript",
+      code: `
+        import { computed as makeComputed, watchEffect as effect } from "vue";
+        import * as Vue from "vue";
+
+        function helper(value: number) {
+          return value + 1;
+        }
+
+        export function useCounter(seed: number) {
+          const total = makeComputed(() => helper(seed));
+
+          effect(() => {
+            helper(total.value);
+          });
+
+          Vue.watchPostEffect(() => {
+            helper(seed);
+          });
+
+          return { total };
+        }
+      `,
+    });
+
+    const computedNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter.computed#1",
+    );
+    const watchEffectNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter.watchEffect#1",
+    );
+    const postEffectNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter.watchPostEffect#1",
+    );
+    const helperNode = result.graph.nodes.find((node) => node.name === "helper");
+
+    assert.ok(computedNode, "aliased computed() should still create a callback node");
+    assert.ok(
+      watchEffectNode,
+      "aliased watchEffect() should still create a callback node",
+    );
+    assert.ok(
+      postEffectNode,
+      "Vue.watchPostEffect() should still create a callback node",
+    );
+    assert.ok(helperNode, "helper() should still be present in the graph");
+
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === computedNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "aliased computed() callback should still own helper() call edges",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === watchEffectNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "aliased watchEffect() callback should still own helper() call edges",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "calls" &&
+          edge.source === postEffectNode?.id &&
+          edge.target === helperNode?.id,
+      ),
+      "Vue.watchPostEffect() callback should still own helper() call edges",
+    );
+  });
+
+  test("creates Vue state source nodes and tracks watch callbacks", () => {
+    const result = analyzeTypeScriptWithTypes({
+      fileName: "vue-state-hooks.ts",
+      languageId: "typescript",
+      code: `
+        import { computed, reactive, ref, watch } from "vue";
+
+        function helper(value: number) {
+          return value + 1;
+        }
+
+        export function useCounter(seed: number) {
+          const count = ref(seed);
+          const state = reactive({ step: 1 });
+
+          const total = computed(() => helper(count.value + state.step));
+
+          watch(count, () => {
+            helper(state.step);
+            count.value = helper(state.step);
+            state.step += 1;
+          });
+
+          return { count, state, total };
+        }
+      `,
+    });
+
+    const ownerNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter",
+    );
+    const computedNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter.computed#1",
+    );
+    const watchNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter.watch#1",
+    );
+    const refNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter.ref#1",
+    );
+    const reactiveNode = result.graph.nodes.find(
+      (node) => node.name === "useCounter.reactive#1",
+    );
+    const helperNode = result.graph.nodes.find((node) => node.name === "helper");
+
+    assert.ok(refNode, "ref() should create a state source node");
+    assert.ok(reactiveNode, "reactive() should create a state source node");
+    assert.ok(computedNode, "computed() callback should still become a graph node");
+    assert.ok(watchNode, "watch() callback should become a graph node");
+    assert.ok(helperNode, "helper() should still be present in the graph");
+    assert.ok(ownerNode, "composable owner should still be present");
+
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === computedNode?.id &&
+          edge.target === refNode?.id,
+      ),
+      "computed() callback should reference the originating ref() source",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === computedNode?.id &&
+          edge.target === reactiveNode?.id,
+      ),
+      "computed() callback should reference the originating reactive() source",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === watchNode?.id &&
+          edge.target === reactiveNode?.id,
+      ),
+      "watch() callback should reference the originating reactive() source",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "references" &&
+          edge.source === ownerNode?.id &&
+          edge.target === refNode?.id,
+      ),
+      "composable body should reference the originating ref() source when returning it",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "updates" &&
+          edge.source === watchNode?.id &&
+          edge.target === refNode?.id,
+      ),
+      "watch() callback should update the originating ref() source",
+    );
+    assert.ok(
+      result.graph.edges.some(
+        (edge) =>
+          edge.kind === "updates" &&
+          edge.source === watchNode?.id &&
+          edge.target === reactiveNode?.id,
+      ),
+      "watch() callback should update the originating reactive() source",
+    );
+  });
+
   test("resolves workspace calls across sibling files", () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "codegraph-analyzer-"));
     const entryFile = path.join(root, "entry.ts");
