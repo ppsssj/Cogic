@@ -24,12 +24,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ppsssj/CodeGraph.git"
+    "url": "https://github.com/ppsssj/Cogic.git"
   },
   "bugs": {
-    "url": "https://github.com/ppsssj/CodeGraph/issues"
+    "url": "https://github.com/ppsssj/Cogic/issues"
   },
-  "homepage": "https://github.com/ppsssj/CodeGraph#readme",
+  "homepage": "https://github.com/ppsssj/Cogic#readme",
   "galleryBanner": {
     "color": "#171717",
     "theme": "dark"
@@ -71,12 +71,14 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run build:all",
+    "vscode:prepublish": "npm run lint:all && npm run build:all",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
+    "pretest": "npm run compile && npm run lint:all",
     "lint": "eslint src",
-    "test": "vscode-test",
+    "lint:webview": "cd webview-ui && npm run lint",
+    "lint:all": "npm run lint && npm run lint:webview",
+    "test": "node ./scripts/run-vscode-tests.mjs",
     "build:webview": "cd webview-ui && npm run build",
     "copy:webview": "node ./scripts/copy-webview.mjs",
     "build:all": "npm run build:webview && npm run copy:webview && npm run compile",

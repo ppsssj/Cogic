@@ -1972,7 +1972,6 @@ export const CanvasPane = memo(function CanvasPane({
   onGenerateFromActive,
   onUseSelectedFileAsRoot,
   onUseSelectedFolderAsRoot,
-  onExpandExternal,
   analysisDiagnostics,
   highlightedNodeIds,
   highlightedEdgeId,
@@ -1997,26 +1996,8 @@ export const CanvasPane = memo(function CanvasPane({
   const lastVisibleHasDataRef = useRef<boolean | null>(null);
   const lastRecoveryAtRef = useRef(0);
   const snapshotTimersRef = useRef<number[]>([]);
-  const canvasFocusTimerRef = useRef<number | null>(null);
-  const suppressTopologyFitRef = useRef(false);
-  const topologyFitResumeTimerRef = useRef<number | null>(null);
-  const clearPendingCanvasFocus = useCallback(() => {
-    if (canvasFocusTimerRef.current !== null) {
-      window.clearTimeout(canvasFocusTimerRef.current);
-      canvasFocusTimerRef.current = null;
-    }
-  }, []);
-  const suppressTopologyFit = useCallback((ms = 320) => {
-    suppressTopologyFitRef.current = true;
-    if (topologyFitResumeTimerRef.current !== null) {
-      window.clearTimeout(topologyFitResumeTimerRef.current);
-    }
-    topologyFitResumeTimerRef.current = window.setTimeout(() => {
-      suppressTopologyFitRef.current = false;
-      topologyFitResumeTimerRef.current = null;
-    }, ms);
-  }, []);
   const [recoveryTick, setRecoveryTick] = useState(0);
+  const [topologyFitSuppressedUntil, setTopologyFitSuppressedUntil] = useState(0);
   const [canvasFocusRequest, setCanvasFocusRequest] = useState<{
     visibleNodeId: string;
     token: number;
@@ -2041,6 +2022,12 @@ export const CanvasPane = memo(function CanvasPane({
     collapsingFolderPaths: [],
     expandingFolderPaths: [],
   });
+  const cancelCanvasFocus = useCallback(() => {
+    setCanvasFocusRequest(null);
+  }, []);
+  const suppressTopologyFit = useCallback((ms = 320) => {
+    setTopologyFitSuppressedUntil(Date.now() + ms);
+  }, []);
   const filteredGraph = useMemo(
     () => filterGraph(graph, activeFilter),
     [graph, activeFilter],
@@ -2109,16 +2096,8 @@ export const CanvasPane = memo(function CanvasPane({
       visibleFolderPaths,
     ],
   );
-  const effectiveLayoutState =
+  const baseLayoutState =
     layoutState.key === layoutStateKey ? layoutState : defaultLayoutState;
-  const {
-    collapsedFilePaths,
-    collapsingFilePaths,
-    expandingFilePaths,
-    collapsedFolderPaths,
-    collapsingFolderPaths,
-    expandingFolderPaths,
-  } = effectiveLayoutState;
   const updateLayoutState = useCallback(
     (updater: (current: CollapseLayoutState) => CollapseLayoutState) => {
       setLayoutState((current) =>
@@ -2127,14 +2106,14 @@ export const CanvasPane = memo(function CanvasPane({
     },
     [defaultLayoutState, layoutStateKey],
   );
-  useEffect(() => {
+  const effectiveLayoutState = useMemo(() => {
     if (!graph || !traceVisible || traceCursor <= 0 || !traceActiveNodeId) {
-      return;
+      return baseLayoutState;
     }
 
     const traceNode = graph.nodes.find((node) => node.id === traceActiveNodeId);
     if (!traceNode) {
-      return;
+      return baseLayoutState;
     }
 
     const targetFilePath = normalizePath(traceNode.file);
@@ -2142,57 +2121,62 @@ export const CanvasPane = memo(function CanvasPane({
       folderKeyForFile(traceNode.file),
       workspaceRoot,
     );
+    const nextCollapsedFiles = baseLayoutState.collapsedFilePaths.filter(
+      (item) => normalizePath(item) !== targetFilePath,
+    );
+    const nextCollapsingFiles = baseLayoutState.collapsingFilePaths.filter(
+      (item) => normalizePath(item) !== targetFilePath,
+    );
+    const nextExpandingFiles = baseLayoutState.expandingFilePaths.some(
+      (item) => normalizePath(item) === targetFilePath,
+    )
+      ? baseLayoutState.expandingFilePaths
+      : [...baseLayoutState.expandingFilePaths, targetFilePath];
 
-    updateLayoutState((current) => {
-      const nextCollapsedFiles = current.collapsedFilePaths.filter(
-        (item) => normalizePath(item) !== targetFilePath,
-      );
-      const nextCollapsingFiles = current.collapsingFilePaths.filter(
-        (item) => normalizePath(item) !== targetFilePath,
-      );
-      const nextExpandingFiles = current.expandingFilePaths.some(
-        (item) => normalizePath(item) === targetFilePath,
-      )
-        ? current.expandingFilePaths
-        : [...current.expandingFilePaths, targetFilePath];
-
-      const targetFolderSet = new Set(targetFolderPaths);
-      const nextCollapsedFolders = current.collapsedFolderPaths.filter(
-        (item) => !targetFolderSet.has(item),
-      );
-      const nextCollapsingFolders = current.collapsingFolderPaths.filter(
-        (item) => !targetFolderSet.has(item),
-      );
-      const nextExpandingFolders = [...current.expandingFolderPaths];
-      for (const folderPath of targetFolderPaths) {
-        if (!nextExpandingFolders.includes(folderPath)) {
-          nextExpandingFolders.push(folderPath);
-        }
+    const targetFolderSet = new Set(targetFolderPaths);
+    const nextCollapsedFolders = baseLayoutState.collapsedFolderPaths.filter(
+      (item) => !targetFolderSet.has(item),
+    );
+    const nextCollapsingFolders = baseLayoutState.collapsingFolderPaths.filter(
+      (item) => !targetFolderSet.has(item),
+    );
+    const nextExpandingFolders = [...baseLayoutState.expandingFolderPaths];
+    for (const folderPath of targetFolderPaths) {
+      if (!nextExpandingFolders.includes(folderPath)) {
+        nextExpandingFolders.push(folderPath);
       }
+    }
 
-      const changed =
-        nextCollapsedFiles.length !== current.collapsedFilePaths.length ||
-        nextCollapsingFiles.length !== current.collapsingFilePaths.length ||
-        nextExpandingFiles.length !== current.expandingFilePaths.length ||
-        nextCollapsedFolders.length !== current.collapsedFolderPaths.length ||
-        nextCollapsingFolders.length !== current.collapsingFolderPaths.length ||
-        nextExpandingFolders.length !== current.expandingFolderPaths.length;
+    const changed =
+      nextCollapsedFiles.length !== baseLayoutState.collapsedFilePaths.length ||
+      nextCollapsingFiles.length !== baseLayoutState.collapsingFilePaths.length ||
+      nextExpandingFiles.length !== baseLayoutState.expandingFilePaths.length ||
+      nextCollapsedFolders.length !== baseLayoutState.collapsedFolderPaths.length ||
+      nextCollapsingFolders.length !== baseLayoutState.collapsingFolderPaths.length ||
+      nextExpandingFolders.length !== baseLayoutState.expandingFolderPaths.length;
 
-      if (!changed) {
-        return current;
-      }
+    if (!changed) {
+      return baseLayoutState;
+    }
 
-      return {
-        ...current,
-        collapsedFilePaths: nextCollapsedFiles,
-        collapsingFilePaths: nextCollapsingFiles,
-        expandingFilePaths: nextExpandingFiles,
-        collapsedFolderPaths: nextCollapsedFolders,
-        collapsingFolderPaths: nextCollapsingFolders,
-        expandingFolderPaths: nextExpandingFolders,
-      };
-    });
-  }, [graph, traceActiveNodeId, traceCursor, traceVisible, updateLayoutState, workspaceRoot]);
+    return {
+      ...baseLayoutState,
+      collapsedFilePaths: nextCollapsedFiles,
+      collapsingFilePaths: nextCollapsingFiles,
+      expandingFilePaths: nextExpandingFiles,
+      collapsedFolderPaths: nextCollapsedFolders,
+      collapsingFolderPaths: nextCollapsingFolders,
+      expandingFolderPaths: nextExpandingFolders,
+    };
+  }, [baseLayoutState, graph, traceActiveNodeId, traceCursor, traceVisible, workspaceRoot]);
+  const {
+    collapsedFilePaths,
+    collapsingFilePaths,
+    expandingFilePaths,
+    collapsedFolderPaths,
+    collapsingFolderPaths,
+    expandingFolderPaths,
+  } = effectiveLayoutState;
   const collapsedFilePathSet = useMemo(() => {
     if (!filteredGraph) return new Set<string>();
     return new Set(
@@ -2574,7 +2558,7 @@ export const CanvasPane = memo(function CanvasPane({
             nodeKind: target?.kind ?? null,
             filePath: target?.file ?? null,
           });
-          clearPendingCanvasFocus();
+          cancelCanvasFocus();
           if (!target) return;
           onOpenNode?.(target);
         },
@@ -2600,7 +2584,7 @@ export const CanvasPane = memo(function CanvasPane({
       ),
     [
       analysisDiagnostics,
-      clearPendingCanvasFocus,
+      cancelCanvasFocus,
       collapsedFilePathSet,
       collapsingFilePathSet,
       expandingFilePathSet,
@@ -2611,7 +2595,6 @@ export const CanvasPane = memo(function CanvasPane({
       graph,
       handleToggleFileGroup,
       handleToggleFolderGroup,
-      onExpandExternal,
       onOpenNode,
       onSelectNode,
       selectedNodeIds,
@@ -2801,7 +2784,7 @@ export const CanvasPane = memo(function CanvasPane({
       node.data.kind !== "folder" &&
       graphNode
     ) {
-      clearPendingCanvasFocus();
+      cancelCanvasFocus();
       onOpenNode?.(graphNode);
       return;
     }
@@ -2823,7 +2806,7 @@ export const CanvasPane = memo(function CanvasPane({
   ) => {
     event.preventDefault();
     event.stopPropagation();
-    clearPendingCanvasFocus();
+    cancelCanvasFocus();
     const graphNode = graph?.nodes.find((n) => n.id === node.id);
     pushWebviewDebugEvent("canvas.node.doubleClick", {
       nodeId: node.id,
@@ -2935,25 +2918,20 @@ export const CanvasPane = memo(function CanvasPane({
   useEffect(() => {
     return () => {
       clearSnapshotTimers();
-      clearPendingCanvasFocus();
-      if (topologyFitResumeTimerRef.current !== null) {
-        window.clearTimeout(topologyFitResumeTimerRef.current);
-        topologyFitResumeTimerRef.current = null;
-      }
     };
-  }, [clearPendingCanvasFocus, clearSnapshotTimers]);
+  }, [clearSnapshotTimers]);
 
   useEffect(() => {
     if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     if (!visibleHasData) return;
-    if (suppressTopologyFitRef.current) return;
+    if (topologyFitSuppressedUntil > Date.now()) return;
 
     const rafId = window.requestAnimationFrame(() => {
       fitGraphView(rfRef.current, 160);
     });
 
     return () => window.cancelAnimationFrame(rafId);
-  }, [filteredGraphSignature, visibleHasData]);
+  }, [filteredGraphSignature, topologyFitSuppressedUntil, visibleHasData]);
 
   useEffect(() => {
     if (lastVisibleHasDataRef.current === visibleHasData) return;
@@ -3104,8 +3082,7 @@ export const CanvasPane = memo(function CanvasPane({
     const inst = rfRef.current;
     if (!inst || !canvasFocusRequest) return;
 
-    clearPendingCanvasFocus();
-    canvasFocusTimerRef.current = window.setTimeout(() => {
+    const timerId = window.setTimeout(() => {
       const currentInst = rfRef.current;
       if (!currentInst) return;
       const node = currentInst.getNode(canvasFocusRequest.visibleNodeId);
@@ -3113,11 +3090,10 @@ export const CanvasPane = memo(function CanvasPane({
       focusCanvasNode(currentInst, node, 1.2, 260, {
         y: canvasFocusRequest.focusOffsetY ?? 0,
       });
-      canvasFocusTimerRef.current = null;
     }, 150);
 
-    return clearPendingCanvasFocus;
-  }, [canvasFocusRequest, clearPendingCanvasFocus]);
+    return () => window.clearTimeout(timerId);
+  }, [canvasFocusRequest]);
 
   useEffect(() => {
     const inst = rfRef.current;
@@ -3424,7 +3400,6 @@ type Props = {
   onUseSelectedFileAsRoot: () => void;
   onUseSelectedFolderAsRoot: (folderPath: string) => void;
 
-  onExpandExternal?: (filePath: string) => void;
   analysisDiagnostics?: CodeDiagnostic[];
   highlightedNodeIds?: string[];
   highlightedEdgeId?: string | null;

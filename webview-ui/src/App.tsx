@@ -853,6 +853,23 @@ export default function App() {
     }, ms);
   }, []);
 
+  const clearSelectedNodes = useCallback(() => {
+    setSelectedNodeId(null);
+    setSelectedNodeIds([]);
+  }, []);
+
+  const syncGraphRoot = useCallback((nextRoot: GraphRootTarget) => {
+    setRootTarget(nextRoot);
+    postMessage("app.graphRoot.sync", {
+      type: "setGraphRoot",
+      payload: { root: nextRoot },
+    });
+  }, [postMessage]);
+
+  const finishAnalysisLoading = useCallback(() => {
+    setAnalysisLoading(null);
+  }, []);
+
   const syncTraceState = useCallback((nextTraceMode: boolean, nextTraceScope: TraceScope) => {
     postMessage("trace.state.sync", {
       type: "setTraceState",
@@ -1269,7 +1286,7 @@ export default function App() {
     postMessage("app.mount", { type: "requestHostState" });
 
     return () => window.removeEventListener("message", onMessage);
-  }, []);
+  }, [clearSelectedNodes, finishAnalysisLoading, postMessage, showToast, syncGraphRoot]);
 
   // ✅ ESLint no-empty 해결: 빈 catch 제거
   useEffect(() => {
@@ -1579,13 +1596,16 @@ export default function App() {
       origin: "trace",
     };
   }, [traceFocusEvent]);
-  const effectiveFocusedFlow = traceFocusedFlow ?? (
-    focusedFlow
-      ? {
-          ...focusedFlow,
-          origin: "manual" as const,
-        }
-      : null
+  const effectiveFocusedFlow = useMemo<FlowPreviewState | null>(
+    () =>
+      traceFocusedFlow ??
+      (focusedFlow
+        ? {
+            ...focusedFlow,
+            origin: "manual" as const,
+          }
+        : null),
+    [focusedFlow, traceFocusedFlow],
   );
   const highlightedNodeIds = useMemo(
     () =>
@@ -1644,11 +1664,6 @@ export default function App() {
     setSelectedNodeIds(nodeId ? [nodeId] : []);
   }, []);
 
-  const clearSelectedNodes = useCallback(() => {
-    setSelectedNodeId(null);
-    setSelectedNodeIds([]);
-  }, []);
-
   const toggleSelectedNode = useCallback((nodeId: string) => {
     setSelectedNodeIds((current) => {
       if (current.includes(nodeId)) {
@@ -1689,20 +1704,8 @@ export default function App() {
       .replace(/[^\w.-]+/g, "_")
       .slice(0, 64) || "cogic";
 
-  const syncGraphRoot = useCallback((nextRoot: GraphRootTarget) => {
-    setRootTarget(nextRoot);
-    postMessage("app.graphRoot.sync", {
-      type: "setGraphRoot",
-      payload: { root: nextRoot },
-    });
-  }, [postMessage]);
-
   const beginAnalysisLoading = useCallback((message: string, detail?: string) => {
     setAnalysisLoading({ active: true, message, detail });
-  }, []);
-
-  const finishAnalysisLoading = useCallback(() => {
-    setAnalysisLoading(null);
   }, []);
 
   useEffect(() => {
@@ -1716,7 +1719,7 @@ export default function App() {
       type: "setGraphDepth",
       payload: { graphDepth },
     });
-  }, [graphDepth]);
+  }, [graphDepth, postMessage]);
 
   const resetGraph = useCallback(() => {
     pushWebviewDebugEvent("app.resetGraph", {
@@ -2341,7 +2344,7 @@ export default function App() {
         title: tracePreviewTarget.title,
       },
     );
-  }, [traceEvents, tracePreviewTarget]);
+  }, [postOpenLocation, traceEvents, tracePreviewTarget]);
 
   return (
     <div className="appRoot" ref={appRootRef}>
@@ -2530,7 +2533,6 @@ export default function App() {
           onUseSelectedFileAsRoot={handleUseSelectedFileAsRoot}
           onUseSelectedFolderAsRoot={handleUseSelectedFolderAsRoot}
           onClearRoot={handleClearRoot}
-          onExpandExternal={expandExternalFile}
           analysisDiagnostics={analysis?.diagnostics ?? []}
           highlightedNodeIds={highlightedNodeIds}
           highlightedEdgeId={effectiveFocusedFlow?.edgeId ?? null}

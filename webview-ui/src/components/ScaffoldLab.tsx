@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { DesignGraph, PatchPreview } from "../lib/vscode";
 import "./ScaffoldLab.css";
 
@@ -42,6 +42,12 @@ type Props = {
 type TemplateOption = {
   value: ScaffoldTemplate;
   label: string;
+};
+
+type PatchDraftState = {
+  key: string;
+  selectedPatchIds: string[];
+  editedContentByPatchId: Record<string, string>;
 };
 
 const FILE_CONTEXT_TEMPLATES: TemplateOption[] = [
@@ -297,6 +303,19 @@ function buildDesignGraph(args: {
   };
 }
 
+function buildPatchDraftState(
+  key: string,
+  patches: PatchPreview[],
+): PatchDraftState {
+  return {
+    key,
+    selectedPatchIds: patches.map((patch) => patch.id),
+    editedContentByPatchId: Object.fromEntries(
+      patches.map((patch) => [patch.id, patch.editableContent ?? patch.diffText]),
+    ),
+  };
+}
+
 export function ScaffoldLab({
   targetContext,
   targetFilePath,
@@ -313,40 +332,54 @@ export function ScaffoldLab({
     if (targetContext === "file") return FILE_CONTEXT_TEMPLATES;
     return CANVAS_CONTEXT_TEMPLATES;
   }, [targetContext]);
-
-  const [template, setTemplate] = useState<ScaffoldTemplate>(
-    templateOptions[0]?.value ?? "function",
+  const defaultTemplate = templateOptions[0]?.value ?? "function";
+  const defaultName = targetContext === "folder" ? "new-item" : "User";
+  const patchDraftKey = useMemo(
+    () =>
+      [
+        previewState.requestId ?? "draft",
+        ...previewState.patches.map((patch) => patch.id),
+      ].join(":"),
+    [previewState.patches, previewState.requestId],
   );
-  const [name, setName] = useState("User");
-  const [selectedPatchIds, setSelectedPatchIds] = useState<string[]>([]);
-  const [editedContentByPatchId, setEditedContentByPatchId] = useState<
-    Record<string, string>
-  >({});
+  const patchById = useMemo(
+    () => new Map(previewState.patches.map((patch) => [patch.id, patch] as const)),
+    [previewState.patches],
+  );
 
-  useEffect(() => {
-    setSelectedPatchIds(previewState.patches.map((patch) => patch.id));
-    setEditedContentByPatchId(
-      Object.fromEntries(
-        previewState.patches.map((patch) => [
-          patch.id,
-          patch.editableContent ?? patch.diffText,
-        ]),
-      ),
-    );
-  }, [previewState.patches]);
+  const [selectedTemplate, setSelectedTemplate] = useState<ScaffoldTemplate>(defaultTemplate);
+  const [nameState, setNameState] = useState(() => ({
+    value: defaultName,
+    lastDefault: defaultName,
+  }));
+  const [patchDraftState, setPatchDraftState] = useState<PatchDraftState>(() =>
+    buildPatchDraftState(patchDraftKey, previewState.patches),
+  );
 
-  useEffect(() => {
-    if (templateOptions.some((option) => option.value === template)) return;
-    setTemplate(templateOptions[0]?.value ?? "function");
-  }, [template, templateOptions]);
+  const template = templateOptions.some((option) => option.value === selectedTemplate)
+    ? selectedTemplate
+    : defaultTemplate;
+  const name =
+    nameState.value === nameState.lastDefault ? defaultName : nameState.value;
+  const currentPatchDraftState =
+    patchDraftState.key === patchDraftKey
+      ? patchDraftState
+      : buildPatchDraftState(patchDraftKey, previewState.patches);
+  const selectedPatchIds = currentPatchDraftState.selectedPatchIds;
+  const editedContentByPatchId = currentPatchDraftState.editedContentByPatchId;
 
-  useEffect(() => {
-    if (targetContext === "folder") {
-      setName((current) => (current === "User" ? "new-item" : current));
-      return;
-    }
-    setName((current) => (current === "new-item" ? "User" : current));
-  }, [targetContext]);
+  const updatePatchDraftState = useCallback(
+    (updater: (current: PatchDraftState) => PatchDraftState) => {
+      setPatchDraftState((current) => {
+        const base =
+          current.key === patchDraftKey
+            ? current
+            : buildPatchDraftState(patchDraftKey, previewState.patches);
+        return updater(base);
+      });
+    },
+    [patchDraftKey, previewState.patches],
+  );
 
   const helperText = useMemo(() => {
     if (targetContext === "file") {
@@ -392,13 +425,32 @@ export function ScaffoldLab({
     });
   };
 
-  const togglePatch = (patchId: string) => {
-    setSelectedPatchIds((current) =>
-      current.includes(patchId)
-        ? current.filter((id) => id !== patchId)
-        : [...current, patchId],
+  const togglePatch = useCallback((patchId: string) => {
+    updatePatchDraftState((current) => ({
+      ...current,
+      selectedPatchIds: current.selectedPatchIds.includes(patchId)
+        ? current.selectedPatchIds.filter((id) => id !== patchId)
+        : [...current.selectedPatchIds, patchId],
+    }));
+  }, [updatePatchDraftState]);
+
+  const handleApply = useCallback(() => {
+    if (!previewState.requestId) return;
+    onApplyPreview(
+      previewState.requestId,
+      selectedPatchIds,
+      selectedPatchIds.map((patchId) => ({
+        patchId,
+        content: editedContentByPatchId[patchId] ?? patchById.get(patchId)?.editableContent ?? "",
+      })),
     );
-  };
+  }, [
+    editedContentByPatchId,
+    onApplyPreview,
+    patchById,
+    previewState.requestId,
+    selectedPatchIds,
+  ]);
 
   return (
     <div className="scaffoldLab">
@@ -414,7 +466,7 @@ export function ScaffoldLab({
               className="scaffoldInput"
               value={template}
               onChange={(event) =>
-                setTemplate(event.target.value as ScaffoldTemplate)
+                setSelectedTemplate(event.target.value as ScaffoldTemplate)
               }
             >
               {templateOptions.map((option) => (
@@ -430,7 +482,12 @@ export function ScaffoldLab({
             <input
               className="scaffoldInput"
               value={name}
-              onChange={(event) => setName(event.target.value)}
+              onChange={(event) =>
+                setNameState({
+                  value: event.target.value,
+                  lastDefault: defaultName,
+                })
+              }
               placeholder={namePlaceholder}
             />
           </label>
@@ -449,22 +506,7 @@ export function ScaffoldLab({
             <button
               className="smallBtn"
               type="button"
-              onClick={() =>
-                previewState.requestId
-                  ? onApplyPreview(
-                      previewState.requestId,
-                      selectedPatchIds,
-                      selectedPatchIds.map((patchId) => ({
-                        patchId,
-                        content:
-                          editedContentByPatchId[patchId] ??
-                          previewState.patches.find((patch) => patch.id === patchId)
-                            ?.editableContent ??
-                          "",
-                      })),
-                    )
-                  : undefined
-              }
+              onClick={handleApply}
               disabled={
                 isApplyBusy ||
                 !previewState.requestId ||
@@ -525,9 +567,12 @@ export function ScaffoldLab({
                       className="scaffoldPreviewEditor mono"
                       value={editedContentByPatchId[patch.id] ?? ""}
                       onChange={(event) =>
-                        setEditedContentByPatchId((current) => ({
+                        updatePatchDraftState((current) => ({
                           ...current,
-                          [patch.id]: event.target.value,
+                          editedContentByPatchId: {
+                            ...current.editedContentByPatchId,
+                            [patch.id]: event.target.value,
+                          },
                         }))
                       }
                       spellCheck={false}
