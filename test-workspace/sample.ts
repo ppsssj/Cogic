@@ -68,7 +68,7 @@ export function withLog<T>(tag: string, fn: (x: number) => T, x: number): T {
 }
 
 // -------------------- 실행 파트 (top-level calls) --------------------
-const u: User = { id: 1, name: "CodeGraph", meta: { role: "dev" } };
+const u: User = { id: 1, name: "Cogic", meta: { role: "dev" } };
 
 console.log(greet(u)); // u -> greet.user (prefix default)
 console.log(greet(u, "Hi")); // u -> greet.user, "Hi" -> greet.prefix

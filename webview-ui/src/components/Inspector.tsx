@@ -8,7 +8,7 @@ import {
   Settings,
 } from "lucide-react";
 import { Fragment, type ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type {
   CodeDiagnostic,
   ExtToWebviewMessage,
@@ -63,8 +63,36 @@ type Props = {
   runtimeActiveNode?: GraphNode | null;
   notice?: UINotice | null;
   onOpenDiagnostic: (diagnostic: CodeDiagnostic) => void;
-  onSelectGraphNode: (nodeId: string) => void;
-  onActivateGraphNode: (nodeId: string) => void;
+  onSelectGraphNode: (
+    nodeId: string,
+    origin?:
+      | "graph"
+      | "runtime"
+      | "selected-evidence"
+      | "analysis-graph"
+      | "analysis-import"
+      | "analysis-call"
+      | "analysis-diagnostic",
+  ) => void;
+  onActivateGraphNode: (
+    nodeId: string,
+    origin?:
+      | "graph"
+      | "runtime"
+      | "selected-evidence"
+      | "analysis-graph"
+      | "analysis-import"
+      | "analysis-call"
+      | "analysis-diagnostic",
+  ) => void;
+  inspectorSelectionOrigin?:
+    | "graph"
+    | "runtime"
+    | "selected-evidence"
+    | "analysis-graph"
+    | "analysis-import"
+    | "analysis-call"
+    | "analysis-diagnostic";
   onFocusParamFlow: (flow: {
     edgeId: string;
     sourceId: string;
@@ -427,6 +455,7 @@ export function Inspector({
   onOpenDiagnostic,
   onSelectGraphNode,
   onActivateGraphNode,
+  inspectorSelectionOrigin = "graph",
   onFocusParamFlow,
   activeFlowPreview = null,
   onRefreshActive,
@@ -597,16 +626,6 @@ export function Inspector({
   }, [sectionOrder, sectionVisible]);
 
   useEffect(() => {
-    setSectionOpen((prev) => {
-      const shouldOpen = Boolean(runtimeDebug && runtimeDebug.state !== "inactive");
-      if (prev.runtime === shouldOpen) {
-        return prev;
-      }
-      return { ...prev, runtime: shouldOpen };
-    });
-  }, [runtimeDebug]);
-
-  useEffect(() => {
     const currentSelectedNodeId = selectedNode?.id ?? null;
     const previousSelectedNodeId = previousSelectedNodeIdRef.current;
     const previousFingerprints = previousAutoExpandFingerprintsRef.current;
@@ -646,18 +665,6 @@ export function Inspector({
       return next;
     });
   }, [flowSectionFingerprint, selectedNode?.id, selectedSectionFingerprint]);
-
-  useEffect(() => {
-    const variableKeys = new Set(
-      (runtimeDebug?.variables ?? []).map((variable) => `${variable.scope}:${variable.name}`),
-    );
-    setHoveredRuntimeVarKey((current) =>
-      current && variableKeys.has(current) ? current : null,
-    );
-    setPinnedRuntimeVarKeys((current) =>
-      current.filter((key) => variableKeys.has(key)),
-    );
-  }, [runtimeDebug]);
 
   useEffect(() => {
     return () => {
@@ -702,6 +709,33 @@ export function Inspector({
       return next;
     });
   };
+  const runtimeVariableKeys = useMemo(
+    () =>
+      new Set(
+        (runtimeDebug?.variables ?? []).map((variable) => `${variable.scope}:${variable.name}`),
+      ),
+    [runtimeDebug?.variables],
+  );
+  const effectiveSectionOpen = useMemo(
+    () => ({
+      ...sectionOpen,
+      runtime:
+        sectionOpen.runtime || Boolean(runtimeDebug && runtimeDebug.state !== "inactive"),
+    }),
+    [runtimeDebug, sectionOpen],
+  );
+  const effectiveHoveredRuntimeVarKey =
+    hoveredRuntimeVarKey && runtimeVariableKeys.has(hoveredRuntimeVarKey)
+      ? hoveredRuntimeVarKey
+      : null;
+  const effectivePinnedRuntimeVarKeys = useMemo(
+    () => pinnedRuntimeVarKeys.filter((key) => runtimeVariableKeys.has(key)),
+    [pinnedRuntimeVarKeys, runtimeVariableKeys],
+  );
+  const isRuntimeActiveNodeSelected =
+    runtimeActiveNode !== null &&
+    selectedNode?.id === runtimeActiveNode.id &&
+    inspectorSelectionOrigin === "runtime";
   const scheduleRuntimeVarHover = (variableKey: string) => {
     if (runtimeVarHoverTimerRef.current !== null) {
       window.clearTimeout(runtimeVarHoverTimerRef.current);
@@ -724,15 +758,16 @@ export function Inspector({
     });
   };
   const togglePinnedRuntimeVar = (variableKey: string) => {
-    const isPinned = pinnedRuntimeVarKeys.includes(variableKey);
+    const isPinned = effectivePinnedRuntimeVarKeys.includes(variableKey);
     if (isPinned) {
       clearRuntimeVarHover(variableKey);
     }
     setPinnedRuntimeVarKeys((current) => {
-      if (current.includes(variableKey)) {
-        return current.filter((key) => key !== variableKey);
+      const nextCurrent = current.filter((key) => runtimeVariableKeys.has(key));
+      if (nextCurrent.includes(variableKey)) {
+        return nextCurrent.filter((key) => key !== variableKey);
       }
-      return [...current, variableKey];
+      return [...nextCurrent, variableKey];
     });
   };
 
@@ -766,9 +801,9 @@ export function Inspector({
         ? { width }
         : undefined;
   const hostModeOptions = [
-    ["sidebar-left", "Sidebar Left", "Dock CodeGraph in the left sidebar"],
-    ["sidebar-right", "Sidebar Right", "Dock CodeGraph in the right sidebar"],
-    ["panel", "Editor Panel", "Open CodeGraph as a separate editor tab"],
+    ["sidebar-left", "Sidebar Left", "Dock Cogic in the left sidebar"],
+    ["sidebar-right", "Sidebar Right", "Dock Cogic in the right sidebar"],
+    ["panel", "Editor Panel", "Open Cogic as a separate editor tab"],
   ] as const;
   const placementOptions = [
     ["auto", "Auto", "Follow window width"],
@@ -785,7 +820,7 @@ export function Inspector({
         languageId={activeFile?.languageId}
         text={activeFile?.text}
         onRefresh={onRefreshActive}
-        collapsed={!sectionOpen.snapshot}
+        collapsed={!effectiveSectionOpen.snapshot}
         onToggleCollapsed={() => toggleSection("snapshot")}
         collapseDirection={collapseDirection}
       />
@@ -795,7 +830,7 @@ export function Inspector({
         className="panel--root"
         title="ROOT"
         collapsedLabel="Root"
-        open={sectionOpen.root}
+        open={effectiveSectionOpen.root}
         onToggle={() => toggleSection("root")}
         collapseDirection={collapseDirection}
         actions={
@@ -839,7 +874,7 @@ export function Inspector({
         className="panel--runtime"
         title="RUNTIME FRAME"
         collapsedLabel="Runtime"
-        open={sectionOpen.runtime}
+        open={effectiveSectionOpen.runtime}
         onToggle={() => toggleSection("runtime")}
         collapseDirection={collapseDirection}
       >
@@ -879,9 +914,9 @@ export function Inspector({
                 </div>
                 {runtimeActiveNode ? (
                   <button
-                    className="smallBtn"
+                    className={["smallBtn", isRuntimeActiveNodeSelected ? "isActive" : ""].join(" ")}
                     type="button"
-                    onClick={() => onActivateGraphNode(runtimeActiveNode.id)}
+                    onClick={() => onActivateGraphNode(runtimeActiveNode.id, "runtime")}
                     title={runtimeActiveNode.file}
                   >
                     {runtimeActiveNode.name}
@@ -905,15 +940,15 @@ export function Inspector({
                   {runtimeDebug.variables.map((variable) => {
                     const variableKey = `${variable.scope}:${variable.name}`;
                     const expanded =
-                      pinnedRuntimeVarKeys.includes(variableKey) ||
-                      hoveredRuntimeVarKey === variableKey;
+                      effectivePinnedRuntimeVarKeys.includes(variableKey) ||
+                      effectiveHoveredRuntimeVarKey === variableKey;
 
                     return (
                       <div
                         className={[
                           "runtimeVarCard",
                           expanded ? "isExpanded" : "",
-                          pinnedRuntimeVarKeys.includes(variableKey) ? "isPinned" : "",
+                          effectivePinnedRuntimeVarKeys.includes(variableKey) ? "isPinned" : "",
                         ].join(" ").trim()}
                         key={variableKey}
                         role="button"
@@ -965,7 +1000,7 @@ export function Inspector({
         className="panel--selected"
         title="SELECTED NODE"
         collapsedLabel="Selected"
-        open={sectionOpen.selected}
+        open={effectiveSectionOpen.selected}
         onToggle={() => toggleSection("selected")}
         collapseDirection={collapseDirection}
       >
@@ -1067,7 +1102,7 @@ export function Inspector({
                         <button
                           className="smallBtn"
                           type="button"
-                          onClick={() => onSelectGraphNode(edge.otherId)}
+                          onClick={() => onSelectGraphNode(edge.otherId, "selected-evidence")}
                           title={edge.otherFile ?? edge.otherName}
                         >
                           {edge.otherName}
@@ -1093,7 +1128,7 @@ export function Inspector({
         className="panel--selection"
         title="SELECTION"
         collapsedLabel="Selection"
-        open={sectionOpen.selection}
+        open={effectiveSectionOpen.selection}
         onToggle={() => toggleSection("selection")}
         collapseDirection={collapseDirection}
       >
@@ -1129,7 +1164,7 @@ export function Inspector({
         className="panel--flow"
         title="PARAM FLOW"
         collapsedLabel="Flow"
-        open={sectionOpen.flow}
+        open={effectiveSectionOpen.flow}
         onToggle={() => toggleSection("flow")}
         collapseDirection={collapseDirection}
       >
@@ -1228,12 +1263,14 @@ export function Inspector({
       <AnalysisPanel
         analysis={analysis}
         graph={graph}
+        selectedNodeId={selectedNode?.id ?? null}
+        selectedNodeOrigin={inspectorSelectionOrigin}
         className="panel--analysis"
         collapsedLabel="Analysis"
         onOpenDiagnostic={onOpenDiagnostic}
         onSelectGraphNode={onSelectGraphNode}
         onActivateGraphNode={onActivateGraphNode}
-        collapsed={!sectionOpen.analysis}
+        collapsed={!effectiveSectionOpen.analysis}
         onToggleCollapsed={() => toggleSection("analysis")}
         collapseDirection={collapseDirection}
       />

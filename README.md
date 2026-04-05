@@ -1,7 +1,7 @@
-# CodeGraph
+# Cogic
 
 <p align="center">
-  <img src="assets/logo1.svg" alt="CodeGraph Logo" width="220" />
+  <img src="assets/logo.png" alt="Cogic Logo" width="220" />
 </p>
 
 <p align="center">
@@ -12,15 +12,15 @@
 
 ## 개요
 
-CodeGraph는 현재 열려 있는 파일과 워크스페이스 파일들을 분석해 다음 정보를 그래프로 보여줍니다.
+Cogic는 현재 열려 있는 파일과 워크스페이스 파일들을 분석해 다음 정보를 그래프로 보여줍니다.
 
 - 코드 엔티티: `file`, `function`, `method`, `class`, `interface`, `type`, `enum`, `external`
 - 관계: `calls`, `constructs`, `references`, `updates`, `dataflow`
 - 시각 계층: `folder -> child folder -> file -> symbol`
 
-CodeGraph는 두 가지 호스트 모드를 지원합니다.
+Cogic는 두 가지 호스트 모드를 지원합니다.
 
-- `Sidebar View`: Activity Bar의 CodeGraph 컨테이너 안에서 열리는 사이드바 Webview
+- `Sidebar View`: Activity Bar의 Cogic 컨테이너 안에서 열리는 사이드바 Webview
 - `Editor Panel`: 일반 에디터 탭처럼 여는 독립 Webview 패널
 
 프로젝트는 크게 두 부분으로 나뉩니다.
@@ -79,8 +79,8 @@ CodeGraph는 두 가지 호스트 모드를 지원합니다.
 
 ### 명령어
 
-- `CodeGraph: Open Editor Panel`
-- `CodeGraph: Focus Sidebar View`
+- `Cogic: Open Editor Panel`
+- `Cogic: Focus Sidebar View`
 
 내부 command id는 다음과 같습니다.
 
@@ -89,7 +89,7 @@ CodeGraph는 두 가지 호스트 모드를 지원합니다.
 
 ### Activity Bar
 
-확장은 `CodeGraph` Activity Bar 아이콘을 추가합니다. 이 아이콘을 누르면 사이드바 Webview가 열립니다.
+확장은 `Cogic` Activity Bar 아이콘을 추가합니다. 이 아이콘을 누르면 사이드바 Webview가 열립니다.
 
 ---
 
@@ -467,7 +467,7 @@ npm run build:all
 ## 현재 참고 사항
 
 - 폴더 그룹은 analyzer 원본 graph schema가 아니라 UI 계층입니다.
-- `Sidebar Right`는 CodeGraph만 따로 옮기는 방식이 아니라 VS Code sidebar 위치를 전환하는 방식입니다.
+- `Sidebar Right`는 Cogic만 따로 옮기는 방식이 아니라 VS Code sidebar 위치를 전환하는 방식입니다.
 - sidebar host와 editor panel host는 둘 다 지원하지만, 서로 별도 웹뷰 호스트입니다.
 - framework adapter는 계속 확장 가능한 구조이며, 현재는 React / Vue / Express / Nest를 기본 지원합니다.
 

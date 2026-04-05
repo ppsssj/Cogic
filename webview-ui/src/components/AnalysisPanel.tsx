@@ -27,11 +27,40 @@ type CollapseDirection = "vertical" | "horizontal";
 type Props = {
   analysis: AnalysisPayload;
   graph?: GraphPayload;
+  selectedNodeId?: string | null;
+  selectedNodeOrigin?:
+    | "graph"
+    | "runtime"
+    | "selected-evidence"
+    | "analysis-graph"
+    | "analysis-import"
+    | "analysis-call"
+    | "analysis-diagnostic";
   className?: string;
   collapsedLabel?: string;
   onOpenDiagnostic?: (diagnostic: CodeDiagnostic) => void;
-  onSelectGraphNode?: (nodeId: string) => void;
-  onActivateGraphNode?: (nodeId: string) => void;
+  onSelectGraphNode?: (
+    nodeId: string,
+    origin?:
+      | "graph"
+      | "runtime"
+      | "selected-evidence"
+      | "analysis-graph"
+      | "analysis-import"
+      | "analysis-call"
+      | "analysis-diagnostic",
+  ) => void;
+  onActivateGraphNode?: (
+    nodeId: string,
+    origin?:
+      | "graph"
+      | "runtime"
+      | "selected-evidence"
+      | "analysis-graph"
+      | "analysis-import"
+      | "analysis-call"
+      | "analysis-diagnostic",
+  ) => void;
   collapsed?: boolean;
   onToggleCollapsed?: () => void;
   collapseDirection?: CollapseDirection;
@@ -267,6 +296,8 @@ function PanelChevron({
 export function AnalysisPanel({
   analysis,
   graph,
+  selectedNodeId = null,
+  selectedNodeOrigin = "graph",
   className,
   collapsedLabel = "Analysis",
   onOpenDiagnostic,
@@ -328,12 +359,19 @@ export function AnalysisPanel({
   const graphNodes =
     (graph ?? analysis.graph)?.nodes?.filter((node) => node.kind !== "file") ?? [];
 
-  const activateNode = (nodeId: string) => {
+  const activateNode = (
+    nodeId: string,
+    origin:
+      | "analysis-graph"
+      | "analysis-import"
+      | "analysis-call"
+      | "analysis-diagnostic",
+  ) => {
     if (onActivateGraphNode) {
-      onActivateGraphNode(nodeId);
+      onActivateGraphNode(nodeId, origin);
       return;
     }
-    onSelectGraphNode?.(nodeId);
+    onSelectGraphNode?.(nodeId, origin);
   };
 
   return (
@@ -383,23 +421,26 @@ export function AnalysisPanel({
                       : diag.filePath
                         ? shortFile(diag.filePath)
                         : "workspace";
+                  const targetNode =
+                    diag.filePath && diag.range
+                      ? findBestNodeByLocation(graph, diag.filePath, diag.range)
+                      : null;
 
                   return (
                     <div
                       className={[
                         "kvRow",
                         diag.filePath && diag.range ? "analysisInteractiveRow" : "",
+                        targetNode?.id === selectedNodeId &&
+                        selectedNodeOrigin === "analysis-diagnostic"
+                          ? "isActive"
+                          : "",
                       ].join(" ")}
                       key={`${diag.code}-${location}-${idx}`}
                       style={{ display: "flex", flexDirection: "column", gap: 6 }}
                       onClick={() => {
                         if (diag.filePath && diag.range) {
-                          const targetNode = findBestNodeByLocation(
-                            graph,
-                            diag.filePath,
-                            diag.range,
-                          );
-                          if (targetNode) activateNode(targetNode.id);
+                          if (targetNode) activateNode(targetNode.id, "analysis-diagnostic");
                           onOpenDiagnostic?.(diag);
                         }
                       }}
@@ -412,12 +453,7 @@ export function AnalysisPanel({
                           (event.key === "Enter" || event.key === " ")
                         ) {
                           event.preventDefault();
-                          const targetNode = findBestNodeByLocation(
-                            graph,
-                            diag.filePath,
-                            diag.range,
-                          );
-                          if (targetNode) activateNode(targetNode.id);
+                          if (targetNode) activateNode(targetNode.id, "analysis-diagnostic");
                           onOpenDiagnostic?.(diag);
                         }
                       }}
@@ -468,9 +504,16 @@ export function AnalysisPanel({
                 {graphNodes.slice(0, 12).map((node) => (
                   <button
                     key={node.id}
-                    className="analysisInteractiveRow analysisInteractiveButton"
+                    className={[
+                      "analysisInteractiveRow",
+                      "analysisInteractiveButton",
+                      selectedNodeId === node.id &&
+                      selectedNodeOrigin === "analysis-graph"
+                        ? "isActive"
+                        : "",
+                    ].join(" ")}
                     type="button"
-                    onClick={() => activateNode(node.id)}
+                    onClick={() => activateNode(node.id, "analysis-graph")}
                   >
                     <span
                       className="mono analysisInteractivePrimary"
@@ -507,11 +550,15 @@ export function AnalysisPanel({
                       className={[
                         "analysisInteractiveButton",
                         targetNode ? "analysisInteractiveRow" : "",
+                        targetNode?.id === selectedNodeId &&
+                        selectedNodeOrigin === "analysis-import"
+                          ? "isActive"
+                          : "",
                       ].join(" ")}
                       type="button"
                       key={`${imp.source}-${idx}`}
                       onClick={() => {
-                        if (targetNode) activateNode(targetNode.id);
+                        if (targetNode) activateNode(targetNode.id, "analysis-import");
                       }}
                       disabled={!targetNode}
                     >
@@ -580,29 +627,35 @@ export function AnalysisPanel({
                   const key = isCallV2(c)
                     ? `${safeLabel}-${c.declFile ?? "null"}-${c.declRange?.start.line ?? "n"}-${idx}`
                     : `${safeLabel}-${idx}`;
+                  const targetNode = isCallV2(c)
+                    ? c.declFile
+                      ? findBestNodeByLocation(
+                          graph,
+                          c.declFile,
+                          c.declRange,
+                          candidateNamesFromCall(c),
+                        )
+                      : findBestNodeByNames(
+                          graph,
+                          candidateNamesFromCall(c),
+                        )
+                    : null;
 
                   return (
                     <div
                       className={[
                         "kvRow",
                         isCallV2(c) && c.declFile ? "analysisInteractiveRow" : "",
+                        targetNode?.id === selectedNodeId &&
+                        selectedNodeOrigin === "analysis-call"
+                          ? "isActive"
+                          : "",
                       ].join(" ")}
                       key={key}
                       style={{ display: "flex", flexDirection: "column", gap: 4 }}
                       onClick={() => {
                         if (!isCallV2(c)) return;
-                        const targetNode = c.declFile
-                          ? findBestNodeByLocation(
-                              graph,
-                              c.declFile,
-                              c.declRange,
-                              candidateNamesFromCall(c),
-                            )
-                          : findBestNodeByNames(
-                              graph,
-                              candidateNamesFromCall(c),
-                            );
-                        if (targetNode) activateNode(targetNode.id);
+                        if (targetNode) activateNode(targetNode.id, "analysis-call");
                       }}
                       role={isCallV2(c) ? "button" : undefined}
                       tabIndex={isCallV2(c) ? 0 : undefined}
@@ -610,18 +663,7 @@ export function AnalysisPanel({
                         if (!isCallV2(c)) return;
                         if (event.key !== "Enter" && event.key !== " ") return;
                         event.preventDefault();
-                        const targetNode = c.declFile
-                          ? findBestNodeByLocation(
-                              graph,
-                              c.declFile,
-                              c.declRange,
-                              candidateNamesFromCall(c),
-                            )
-                          : findBestNodeByNames(
-                              graph,
-                              candidateNamesFromCall(c),
-                            );
-                        if (targetNode) activateNode(targetNode.id);
+                        if (targetNode) activateNode(targetNode.id, "analysis-call");
                       }}
                     >
                       <div

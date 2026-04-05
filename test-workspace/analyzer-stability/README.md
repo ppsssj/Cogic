@@ -2,7 +2,7 @@
 
 This folder contains small verification samples for the current TS/JS analyzer stability work.
 
-Suggested files to open in CodeGraph:
+Suggested files to open in Cogic:
 
 - `sample-default-and-object.ts`
 - `src/app.ts`

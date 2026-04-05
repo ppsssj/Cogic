@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="256" viewBox="0 0 820 256" role="img" aria-label="CodeGraph lockup A">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="256" viewBox="0 0 820 256" role="img" aria-label="Cogic lockup A">
   <defs>
     <linearGradient id="cgA_grad" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#4F46E5"/>
@@ -23,5 +23,5 @@
         font-size="76"
         font-weight="700"
         letter-spacing="-1.5"
-        fill="#0F172A">CodeGraph</text>
+        fill="#0F172A">Cogic</text>
 </svg>

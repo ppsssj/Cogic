@@ -46,7 +46,7 @@ function executeWorkerFlow(prefix: string): string {
 }
 
 function runAll(): void {
-  const greetResult = executeGreetingFlow("CodeGraph");
+  const greetResult = executeGreetingFlow("Cogic");
   const workerResult = executeWorkerFlow("trace");
 
   console.log(greetResult);

@@ -457,6 +457,13 @@
   color: var(--fg);
 }
 
+.smallBtn.isActive {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surfaceActive));
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--fg);
+}
+
 .inspectorFlowRow {
   cursor: pointer;
   transition:

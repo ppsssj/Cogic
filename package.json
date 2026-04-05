@@ -1,14 +1,38 @@
 {
-  "name": "codegraph",
-  "displayName": "CodeGraph",
-  "description": "Code Visualize",
+  "name": "cogic",
+  "publisher": "ppsssj",
+  "displayName": "Cogic",
+  "description": "Visualize code structure, calls, data flow, and framework routes inside VS Code.",
   "version": "0.0.1",
+  "icon": "assets/logo.png",
   "engines": {
     "vscode": "^1.108.1"
   },
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "graph",
+    "visualization",
+    "typescript",
+    "javascript",
+    "react",
+    "vue",
+    "express",
+    "nest"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ppsssj/CodeGraph.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ppsssj/CodeGraph/issues"
+  },
+  "homepage": "https://github.com/ppsssj/CodeGraph#readme",
+  "galleryBanner": {
+    "color": "#171717",
+    "theme": "dark"
+  },
   "activationEvents": [
     "onCommand:codegraph.open",
     "onCommand:codegraph.openSidebar",
@@ -20,7 +44,7 @@
       "activitybar": [
         {
           "id": "codegraph",
-          "title": "CodeGraph",
+          "title": "Cogic",
           "icon": "assets/logo.svg"
         }
       ]
@@ -30,23 +54,23 @@
         {
           "id": "codegraph.sidebar",
           "type": "webview",
-          "name": "CodeGraph"
+          "name": "Cogic"
         }
       ]
     },
     "commands": [
       {
         "command": "codegraph.open",
-        "title": "CodeGraph: Open Editor Panel"
+        "title": "Cogic: Open Editor Panel"
       },
       {
         "command": "codegraph.openSidebar",
-        "title": "CodeGraph: Focus Sidebar View"
+        "title": "Cogic: Focus Sidebar View"
       }
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run build:all",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
@@ -54,7 +78,9 @@
     "test": "vscode-test",
     "build:webview": "cd webview-ui && npm run build",
     "copy:webview": "node ./scripts/copy-webview.mjs",
-    "build:all": "npm run build:webview && npm run copy:webview && npm run compile"
+    "build:all": "npm run build:webview && npm run copy:webview && npm run compile",
+    "package:vsix": "npx @vscode/vsce package",
+    "publish:marketplace": "npx @vscode/vsce publish"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

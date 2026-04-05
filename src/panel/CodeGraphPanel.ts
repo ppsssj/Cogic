@@ -209,7 +209,7 @@ export class CodeGraphPanel {
 
     const panel = vscode.window.createWebviewPanel(
       "codegraph",
-      "CodeGraph",
+      "Cogic",
       CodeGraphPanel.getInitialPanelColumn(),
       {
         enableScripts: true,
@@ -526,10 +526,16 @@ export class CodeGraphPanel {
     const payload: Extract<
       ExtToWebviewMessage,
       { type: "hostState" }
-    >["payload"] = {
-      currentHost: this.hostKind,
-      sidebarLocation: this.getSidebarLocation(),
-    };
+    >["payload"] =
+      this.hostKind === "sidebar"
+        ? {
+            currentHost: "sidebar",
+            sidebarLocation: this.getSidebarLocation(),
+          }
+        : {
+            currentHost: "panel",
+            sidebarLocation: this.getSidebarLocation(),
+          };
 
     this.panel.webview.postMessage({
       type: "hostState",
@@ -1365,42 +1371,43 @@ export class CodeGraphPanel {
       const operation = editedContent
         ? applyEditedContent(plan, editedContent)
         : plan.operation;
-      const uri = vscode.Uri.file(operation.filePath);
 
-      if (operation.kind === "mkdir") {
-        await vscode.workspace.fs.createDirectory(uri);
-        appliedFiles.push(operation.filePath);
-        continue;
-      }
-
-      if (operation.kind === "create") {
-        const parentDir = path.dirname(operation.filePath);
-        if (parentDir && parentDir !== "." && parentDir !== operation.filePath) {
-          await vscode.workspace.fs.createDirectory(vscode.Uri.file(parentDir));
+      switch (operation.kind) {
+        case "mkdir": {
+          const uri = vscode.Uri.file(operation.filePath);
+          await vscode.workspace.fs.createDirectory(uri);
+          appliedFiles.push(operation.filePath);
+          break;
         }
-        edit.createFile(uri, { overwrite: false, ignoreIfExists: false });
-        edit.insert(uri, new vscode.Position(0, 0), operation.fullText);
-        appliedFiles.push(operation.filePath);
-        continue;
-      }
+        case "create": {
+          const uri = vscode.Uri.file(operation.filePath);
+          const parentDir = path.dirname(operation.filePath);
+          if (parentDir && parentDir !== "." && parentDir !== operation.filePath) {
+            await vscode.workspace.fs.createDirectory(vscode.Uri.file(parentDir));
+          }
+          edit.createFile(uri, { overwrite: false, ignoreIfExists: false });
+          edit.insert(uri, new vscode.Position(0, 0), operation.fullText);
+          appliedFiles.push(operation.filePath);
+          break;
+        }
+        case "update": {
+          const uri = vscode.Uri.file(operation.filePath);
+          if (operation.prependText) {
+            edit.insert(uri, new vscode.Position(0, 0), operation.prependText);
+          }
 
-      if (operation.kind !== "update") {
-        continue;
+          const doc = await vscode.workspace.openTextDocument(uri);
+          const lastLine = Math.max(0, doc.lineCount - 1);
+          const lastCharacter = doc.lineAt(lastLine).text.length;
+          edit.insert(
+            uri,
+            new vscode.Position(lastLine, lastCharacter),
+            operation.appendText,
+          );
+          appliedFiles.push(operation.filePath);
+          break;
+        }
       }
-
-      if (operation.prependText) {
-        edit.insert(uri, new vscode.Position(0, 0), operation.prependText);
-      }
-
-      const doc = await vscode.workspace.openTextDocument(uri);
-      const lastLine = Math.max(0, doc.lineCount - 1);
-      const lastCharacter = doc.lineAt(lastLine).text.length;
-      edit.insert(
-        uri,
-        new vscode.Position(lastLine, lastCharacter),
-        operation.appendText,
-      );
-      appliedFiles.push(operation.filePath);
     }
 
     const ok = await vscode.workspace.applyEdit(edit);
@@ -1426,21 +1433,22 @@ function applyEditedContent(
   editedContent: string,
 ): GeneratedPatchPlan["operation"] {
   const normalized = editedContent.replace(/\r\n/g, "\n").trimEnd();
-  if (plan.operation.kind === "mkdir") {
-    return plan.operation;
+  switch (plan.operation.kind) {
+    case "mkdir":
+      return plan.operation;
+    case "create":
+      return {
+        ...plan.operation,
+        fullText: normalized ? `${normalized}\n` : "",
+      };
+    case "update": {
+      const leading = plan.operation.appendText.match(/^\s*/)?.[0] ?? "\n\n";
+      return {
+        ...plan.operation,
+        appendText: normalized ? `${leading}${normalized}\n` : leading,
+      };
+    }
   }
-  if (plan.operation.kind === "create") {
-    return {
-      ...plan.operation,
-      fullText: normalized ? `${normalized}\n` : "",
-    };
-  }
-
-  const leading = plan.operation.appendText.match(/^\s*/)?.[0] ?? "\n\n";
-  return {
-    ...plan.operation,
-    appendText: normalized ? `${leading}${normalized}\n` : leading,
-  };
 }
 
 function getErrorMessage(error: unknown): string {

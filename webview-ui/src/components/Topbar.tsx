@@ -150,14 +150,14 @@ export function Topbar({
           <img
             className="brandLogoIcon logoLight"
             src={logoLightUrl}
-            alt="CodeGraph"
+            alt="Cogic"
           />
           <img
             className="brandLogoIcon logoDark"
             src={logoDarkUrl}
-            alt="CodeGraph"
+            alt="Cogic"
           />
-          <h1 className="brandTitle">CodeGraph</h1>
+          <h1 className="brandTitle">Cogic</h1>
         </div>
 
         <div className="projectPickerWrap" ref={pickerRef}>

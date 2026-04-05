@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="256" viewBox="0 0 820 256" role="img" aria-label="CodeGraph lockup A mono inverse" style="color:#FFFFFF">
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="256" viewBox="0 0 820 256" role="img" aria-label="Cogic lockup A mono inverse" style="color:#FFFFFF">
   <g transform="translate(32,0)">
     <rect x="44" y="62" width="108" height="30" rx="8" fill="currentColor"/>
     <rect x="44" y="106" width="124" height="30" rx="8" fill="currentColor" opacity="0.90"/>
@@ -14,5 +14,5 @@
         font-size="76"
         font-weight="700"
         letter-spacing="-1.5"
-        fill="currentColor">CodeGraph</text>
+        fill="currentColor">Cogic</text>
 </svg>

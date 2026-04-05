@@ -1,5 +1,10 @@
 .vscode/**
 .vscode-test/**
+sample-workspace/**
+test-workspace/**
+webview-ui/**
+docs/**
+tmp_index.html
 src/**
 .gitignore
 .yarnrc

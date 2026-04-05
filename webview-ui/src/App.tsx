@@ -79,6 +79,14 @@ type OpenLocationPayload = Extract<
   WebviewToExtMessage,
   { type: "openLocation" }
 >["payload"];
+type InspectorSelectionOrigin =
+  | "graph"
+  | "runtime"
+  | "selected-evidence"
+  | "analysis-graph"
+  | "analysis-import"
+  | "analysis-call"
+  | "analysis-diagnostic";
 
 const ENABLE_OPEN_LOCATION = true;
 
@@ -572,6 +580,8 @@ export default function App() {
 
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [selectedNodeIds, setSelectedNodeIds] = useState<string[]>([]);
+  const [inspectorSelectionOrigin, setInspectorSelectionOrigin] =
+    useState<InspectorSelectionOrigin>("graph");
   const [focusedFlow, setFocusedFlow] = useState<FocusedFlowState | null>(null);
   const [inspectorFocusRequest, setInspectorFocusRequest] =
     useState<InspectorFocusRequest | null>(null);
@@ -1531,9 +1541,9 @@ export default function App() {
     scaffoldTargetContext.targetContext;
   const projectName = graphFilePath ? shortBaseName(graphFilePath) : "Select file";
   const exportBaseName =
-    shortBaseName(graphFilePath ?? activeFile?.fileName ?? "codegraph")
+    shortBaseName(graphFilePath ?? activeFile?.fileName ?? "cogic")
       .replace(/[^\w.-]+/g, "_")
-      .slice(0, 64) || "codegraph";
+      .slice(0, 64) || "cogic";
 
   const syncGraphRoot = useCallback((nextRoot: GraphRootTarget) => {
     setRootTarget(nextRoot);
@@ -1684,6 +1694,7 @@ export default function App() {
         toggle: options?.toggle ?? false,
       });
       setFocusedFlow(null);
+      setInspectorSelectionOrigin("graph");
       if (options?.toggle) {
         toggleSelectedNode(nodeId);
         return;
@@ -1696,6 +1707,7 @@ export default function App() {
   const handleCanvasClearSelection = useCallback(() => {
     pushWebviewDebugEvent("canvas.selection.clear", {});
     clearSelectedNodes();
+    setInspectorSelectionOrigin("graph");
     setFocusedFlow(null);
   }, [clearSelectedNodes]);
 
@@ -1803,9 +1815,13 @@ export default function App() {
     setInspectorNotice(null);
   }, [syncGraphRoot]);
 
-  const activateGraphNode = (nodeId: string) => {
+  const activateGraphNode = (
+    nodeId: string,
+    origin: InspectorSelectionOrigin = "graph",
+  ) => {
     setFocusedFlow(null);
     replaceSelectedNodes(nodeId);
+    setInspectorSelectionOrigin(origin);
     setInspectorFocusRequest({ nodeId, token: Date.now() });
     const targetNode = findNodeById(graph, nodeId);
     pushWebviewDebugEvent("inspector.node.activate", {
@@ -1825,7 +1841,10 @@ export default function App() {
     );
   };
 
-  const selectGraphNodeFromInspector = (nodeId: string) => {
+  const selectGraphNodeFromInspector = (
+    nodeId: string,
+    origin: InspectorSelectionOrigin = "graph",
+  ) => {
     const targetNode = findNodeById(graph, nodeId);
     pushWebviewDebugEvent("inspector.node.select", {
       requestedNodeId: nodeId,
@@ -1833,6 +1852,7 @@ export default function App() {
       ...getGraphCounts(graph),
     });
     replaceSelectedNodes(nodeId);
+    setInspectorSelectionOrigin(origin);
   };
 
   const focusParamFlow = (flow: FocusedFlowState) => {
@@ -1993,7 +2013,7 @@ export default function App() {
       saveExportText(
         suggestedFileName,
         text,
-        "Save CodeGraph JSON Export",
+        "Save Cogic JSON Export",
         "Save JSON Export",
         { "JSON Files": ["json"] },
       );
@@ -2047,7 +2067,7 @@ export default function App() {
       saveExportDataUrl(
         suggestedFileName,
         dataUrl,
-        "Save CodeGraph JPG Export",
+        "Save Cogic JPG Export",
         "Save JPG Export",
         { "JPEG Images": ["jpg", "jpeg"] },
       );
@@ -2254,6 +2274,7 @@ export default function App() {
           onOpenDiagnostic={openDiagnostic}
           onSelectGraphNode={selectGraphNodeFromInspector}
           onActivateGraphNode={activateGraphNode}
+          inspectorSelectionOrigin={inspectorSelectionOrigin}
           onFocusParamFlow={focusParamFlow}
           activeFlowPreview={effectiveFocusedFlow}
           onRefreshActive={() =>
