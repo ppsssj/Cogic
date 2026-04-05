@@ -61,6 +61,16 @@ type Props = {
   selectedNode: GraphNode | null;
   runtimeDebug?: RuntimeDebugState | null;
   runtimeActiveNode?: GraphNode | null;
+  runtimeMatch?: {
+    mode:
+      | "exact-range"
+      | "name-fallback"
+      | "nearest-fallback"
+      | "outside-root"
+      | "no-file-in-graph"
+      | "no-nearby-match";
+    distance?: number | null;
+  } | null;
   notice?: UINotice | null;
   onOpenDiagnostic: (diagnostic: CodeDiagnostic) => void;
   onSelectGraphNode: (
@@ -452,6 +462,7 @@ export function Inspector({
   selectedNode,
   runtimeDebug = null,
   runtimeActiveNode = null,
+  runtimeMatch = null,
   notice,
   onOpenDiagnostic,
   onSelectGraphNode,
@@ -738,6 +749,24 @@ export function Inspector({
     runtimeActiveNode !== null &&
     selectedNode?.id === runtimeActiveNode.id &&
     inspectorSelectionOrigin === "runtime";
+  const runtimeMatchLabel =
+    runtimeMatch?.mode === "exact-range"
+      ? "Matched by exact range"
+      : runtimeMatch?.mode === "name-fallback"
+      ? "Matched by frame name fallback"
+      : runtimeMatch?.mode === "nearest-fallback"
+      ? "Matched by nearest in-file node"
+      : runtimeMatch?.mode === "outside-root"
+      ? "Frame file is outside the current root"
+      : runtimeMatch?.mode === "no-file-in-graph"
+      ? "Frame file is not in the current graph"
+      : runtimeMatch?.mode === "no-nearby-match"
+      ? "No nearby node matched this frame"
+      : null;
+  const runtimeMatchDetail =
+    runtimeMatch?.mode === "nearest-fallback" && runtimeMatch.distance
+      ? `Fallback distance: ${runtimeMatch.distance}`
+      : null;
   const scheduleRuntimeVarHover = (variableKey: string) => {
     if (runtimeVarHoverTimerRef.current !== null) {
       window.clearTimeout(runtimeVarHoverTimerRef.current);
@@ -931,6 +960,12 @@ export function Inspector({
               <div className="mono" style={{ fontSize: 12, opacity: 0.8 }}>
                 {fmtRuntimeLocation(runtimeDebug.frame)}
               </div>
+              {runtimeMatchLabel ? (
+                <div className="mono" style={{ fontSize: 11, opacity: 0.78 }}>
+                  {runtimeMatchLabel}
+                  {runtimeMatchDetail ? ` · ${runtimeMatchDetail}` : ""}
+                </div>
+              ) : null}
             </div>
 
             <div>

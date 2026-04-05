@@ -89,6 +89,23 @@ type InspectorSelectionOrigin =
   | "analysis-call"
   | "analysis-diagnostic";
 
+type RuntimeNodeMatch =
+  | {
+      mode: "exact-range";
+      node: GraphNode;
+      distance: 0;
+    }
+  | {
+      mode: "name-fallback" | "nearest-fallback";
+      node: GraphNode;
+      distance: number;
+    }
+  | {
+      mode: "outside-root" | "no-file-in-graph" | "no-nearby-match";
+      node: null;
+      distance?: number;
+    };
+
 const ENABLE_OPEN_LOCATION = true;
 
 function findNodeById(graph: GraphPayload | undefined, id: string | null) {
@@ -238,6 +255,26 @@ function inferLanguageIdFromPath(filePath: string): string {
   if (normalized.endsWith(".js")) return "javascript";
   return "plaintext";
 }
+function matchesRootTarget(
+  filePath: string,
+  rootTarget:
+    | {
+        kind: "file" | "folder";
+        path: string;
+      }
+    | null,
+) {
+  if (!rootTarget) {
+    return true;
+  }
+
+  const normalizedFilePath = normalizeComparablePath(filePath);
+  if (rootTarget.kind === "file") {
+    return normalizedFilePath === normalizeComparablePath(rootTarget.path);
+  }
+
+  return normalizeComparablePath(dirName(filePath)) === normalizeComparablePath(rootTarget.path);
+}
 function getPrimaryGraphFilePath(graph: GraphPayload | undefined): string | null {
   if (!graph?.nodes.length) return null;
 
@@ -278,8 +315,10 @@ function distanceToRange(pos: Pos, range: GraphNode["range"]) {
 function findGraphNodeForRuntimeFrame(
   graph: GraphPayload | undefined,
   frame: RuntimeDebugPayload["frame"],
-) {
-  if (!graph || !frame?.filePath || frame.line === undefined) return null;
+) : RuntimeNodeMatch {
+  if (!graph || !frame?.filePath || frame.line === undefined) {
+    return { mode: "no-file-in-graph", node: null };
+  }
 
   const filePath = normalizeComparablePath(frame.filePath);
   const pos = {
@@ -290,7 +329,9 @@ function findGraphNodeForRuntimeFrame(
   const sameFileNodes = graph.nodes.filter(
     (node) => normalizeComparablePath(node.file) === filePath,
   );
-  if (sameFileNodes.length === 0) return null;
+  if (sameFileNodes.length === 0) {
+    return { mode: "no-file-in-graph", node: null };
+  }
 
   const containing = sameFileNodes
     .filter((node) => inRange(pos, node.range.start, node.range.end))
@@ -300,17 +341,53 @@ function findGraphNodeForRuntimeFrame(
       if (filePenaltyA !== filePenaltyB) return filePenaltyA - filePenaltyB;
       return rangeSize(a.range) - rangeSize(b.range);
     });
-  if (containing.length > 0) return containing[0] ?? null;
+  if (containing.length > 0 && containing[0]) {
+    return { mode: "exact-range", node: containing[0], distance: 0 };
+  }
 
-  const nearest = sameFileNodes.sort((a, b) => {
-    const distanceDiff = distanceToRange(pos, a.range) - distanceToRange(pos, b.range);
-    if (distanceDiff !== 0) return distanceDiff;
-    const filePenaltyA = a.kind === "file" ? 1 : 0;
-    const filePenaltyB = b.kind === "file" ? 1 : 0;
-    if (filePenaltyA !== filePenaltyB) return filePenaltyA - filePenaltyB;
-    return rangeSize(a.range) - rangeSize(b.range);
-  });
-  return nearest[0] ?? null;
+  const runtimeName = frame.name?.trim();
+  const normalizedRuntimeName = runtimeName?.replace(/\s+/g, "") ?? null;
+  if (normalizedRuntimeName) {
+    const byName = sameFileNodes
+      .filter((node) => node.kind !== "file")
+      .filter((node) => node.name.replace(/\s+/g, "") === normalizedRuntimeName)
+      .sort((a, b) => {
+        const distanceDiff = distanceToRange(pos, a.range) - distanceToRange(pos, b.range);
+        if (distanceDiff !== 0) return distanceDiff;
+        return rangeSize(a.range) - rangeSize(b.range);
+      });
+    if (byName.length > 0 && byName[0]) {
+      return {
+        mode: "name-fallback",
+        node: byName[0],
+        distance: distanceToRange(pos, byName[0].range),
+      };
+    }
+  }
+
+  const nearest = sameFileNodes
+    .filter((node) => node.kind !== "file")
+    .sort((a, b) => {
+      const distanceDiff = distanceToRange(pos, a.range) - distanceToRange(pos, b.range);
+      if (distanceDiff !== 0) return distanceDiff;
+      return rangeSize(a.range) - rangeSize(b.range);
+    });
+  const nearestNode = nearest[0] ?? null;
+  if (!nearestNode) {
+    return { mode: "no-nearby-match", node: null };
+  }
+
+  const nearestDistance = distanceToRange(pos, nearestNode.range);
+  const maxFallbackDistance = 2_000_200;
+  if (nearestDistance > maxFallbackDistance) {
+    return { mode: "no-nearby-match", node: null, distance: nearestDistance };
+  }
+
+  return {
+    mode: "nearest-fallback",
+    node: nearestNode,
+    distance: nearestDistance,
+  };
 }
 
 type TracePreviewTarget = {
@@ -1519,10 +1596,18 @@ export default function App() {
   );
   const traceActiveNodeId =
     traceFocusEvent?.type === "node" ? traceFocusEvent.node.id : null;
-  const runtimeActiveNode = useMemo(() => {
+  const runtimeFrameFilePath = runtimeDebug?.frame?.filePath ?? null;
+  const runtimeFrameOutsideRoot = Boolean(
+    runtimeFrameFilePath && !matchesRootTarget(runtimeFrameFilePath, rootTarget),
+  );
+  const runtimeMatch = useMemo<RuntimeNodeMatch | null>(() => {
     if (!runtimeDebug || runtimeDebug.state !== "paused") return null;
+    if (runtimeFrameOutsideRoot) {
+      return { mode: "outside-root", node: null };
+    }
     return findGraphNodeForRuntimeFrame(graph, runtimeDebug.frame);
-  }, [graph, runtimeDebug]);
+  }, [graph, runtimeDebug, runtimeFrameOutsideRoot]);
+  const runtimeActiveNode = runtimeMatch?.node ?? null;
   const runtimeActiveNodeId = runtimeActiveNode?.id ?? null;
   const runtimeFocusKey = useMemo(() => {
     if (!runtimeDebug || runtimeDebug.state !== "paused" || !runtimeActiveNodeId) {
@@ -1765,6 +1850,14 @@ export default function App() {
     if (activeGraphGenerationRef.current < 0) return;
     const filePath = runtimeDebug.frame?.filePath;
     if (!filePath) return;
+    if (!matchesRootTarget(filePath, rootTarget)) {
+      pushWebviewDebugEvent("runtimeDebug.autoExpand.skipped.root-lock", {
+        filePath,
+        rootKind: rootTarget?.kind ?? null,
+        rootPath: rootTarget?.path ?? null,
+      });
+      return;
+    }
     const hasAnyNodeInFile = Boolean(
       graph?.nodes.some(
         (node) => normalizeComparablePath(node.file) === normalizeComparablePath(filePath),
@@ -1772,7 +1865,7 @@ export default function App() {
     );
     if (hasAnyNodeInFile) return;
     expandExternalFile(filePath);
-  }, [graph, runtimeActiveNodeId, runtimeDebug]);
+  }, [expandExternalFile, graph, rootTarget, runtimeActiveNodeId, runtimeDebug]);
 
   const openDiagnostic = (diagnostic: CodeDiagnostic) => {
     if (!diagnostic.filePath) return;
@@ -2500,6 +2593,14 @@ export default function App() {
           selectedNode={selectedNode}
           runtimeDebug={runtimeDebug}
           runtimeActiveNode={runtimeActiveNode}
+          runtimeMatch={
+            runtimeMatch
+              ? {
+                  mode: runtimeMatch.mode,
+                  distance: runtimeMatch.distance ?? null,
+                }
+              : null
+          }
           notice={inspectorNotice}
           onOpenDiagnostic={openDiagnostic}
           onSelectGraphNode={selectGraphNodeFromInspector}
