@@ -1,6 +1,7 @@
 // import "./../App.css";
 import "reactflow/dist/style.css";
 import "./CanvasPane.css";
+import { toJpeg, toSvg } from "html-to-image";
 import {
   memo,
   useCallback,
@@ -20,6 +21,7 @@ import ReactFlow, {
   EdgeLabelRenderer,
   BaseEdge,
   getSmoothStepPath,
+  getNodesBounds,
   type EdgeProps,
   type Edge,
   type Node,
@@ -124,10 +126,41 @@ type CollapseLayoutState = {
 type NodeWithAbsolutePosition = Node<CanvasNodeData> & {
   positionAbsolute?: { x: number; y: number };
 };
+type SnapshotFormat = "jpg" | "svg";
+
+const EXPORT_PADDING = 96;
+const EXPORT_BACKGROUND = "#081226";
 
 function getNodeAbsolutePosition(node: Node<CanvasNodeData>) {
   const absolute = (node as NodeWithAbsolutePosition).positionAbsolute;
   return absolute ?? node.position;
+}
+
+function waitForAnimationFrames(count = 1) {
+  return new Promise<void>((resolve) => {
+    const step = (remaining: number) => {
+      window.requestAnimationFrame(() => {
+        if (remaining <= 1) {
+          resolve();
+          return;
+        }
+        step(remaining - 1);
+      });
+    };
+    step(count);
+  });
+}
+
+function exportNodeFilter(node: globalThis.Node) {
+  if (!(node instanceof HTMLElement)) return true;
+  return !(
+    node.classList.contains("canvasControls") ||
+    node.classList.contains("selectionBanner") ||
+    node.classList.contains("rootBanner") ||
+    node.classList.contains("canvasNotice") ||
+    node.classList.contains("canvasLoading") ||
+    node.classList.contains("canvasOverlay")
+  );
 }
 
 function fitGraphView(inst: ReactFlowInstance | null, duration = 400) {
@@ -1990,12 +2023,14 @@ export const CanvasPane = memo(function CanvasPane({
   autoLayoutTick,
   workspaceRoot,
   onOpenScaffoldModal,
+  onRegisterSnapshotExporter,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
   const canvasFlowRef = useRef<HTMLDivElement | null>(null);
   const lastVisibleHasDataRef = useRef<boolean | null>(null);
   const lastRecoveryAtRef = useRef(0);
   const snapshotTimersRef = useRef<number[]>([]);
+  const [renderAllForExport, setRenderAllForExport] = useState(false);
   const [recoveryTick, setRecoveryTick] = useState(0);
   const [topologyFitSuppressedUntil, setTopologyFitSuppressedUntil] = useState(0);
   const [canvasFocusRequest, setCanvasFocusRequest] = useState<{
@@ -2895,6 +2930,126 @@ export const CanvasPane = memo(function CanvasPane({
     focusCanvasNode(inst, node, 1.2, 320);
   };
 
+  const exportFullGraphSnapshot = useCallback(async (format: SnapshotFormat) => {
+    const inst = rfRef.current;
+    const container = canvasFlowRef.current;
+    if (!inst || !container || !visibleHasData) {
+      throw new Error("Graph canvas is not ready");
+    }
+
+    setRenderAllForExport(true);
+
+    try {
+      await waitForAnimationFrames(2);
+
+      const reactFlowRoot = container.querySelector(".react-flow") as HTMLElement | null;
+      const exportViewport = reactFlowRoot?.querySelector(".react-flow__viewport") as HTMLElement | null;
+      const renderedNodes = inst.getNodes();
+      if (!reactFlowRoot || !exportViewport || renderedNodes.length === 0) {
+        throw new Error("Graph canvas is not ready");
+      }
+
+      const bounds = getNodesBounds(renderedNodes);
+      if (
+        !Number.isFinite(bounds.x) ||
+        !Number.isFinite(bounds.y) ||
+        !Number.isFinite(bounds.width) ||
+        !Number.isFinite(bounds.height)
+      ) {
+        throw new Error("Graph bounds are invalid");
+      }
+
+      const exportWidth = Math.max(320, Math.ceil(bounds.width + EXPORT_PADDING * 2));
+      const exportHeight = Math.max(240, Math.ceil(bounds.height + EXPORT_PADDING * 2));
+      const resizeTargets = [
+        reactFlowRoot,
+        ...Array.from(
+          reactFlowRoot.querySelectorAll<HTMLElement>(
+            ".react-flow__renderer, .react-flow__pane, .react-flow__selectionpane, .react-flow__edges, .react-flow__edgelabel-renderer, .react-flow__nodes",
+          ),
+        ),
+      ];
+      const previousStyles = new Map<
+        HTMLElement,
+        {
+          width: string;
+          height: string;
+          overflow: string;
+          background: string;
+          transform: string;
+        }
+      >();
+
+      resizeTargets.forEach((element) => {
+        previousStyles.set(element, {
+          width: element.style.width,
+          height: element.style.height,
+          overflow: element.style.overflow,
+          background: element.style.background,
+          transform: element.style.transform,
+        });
+      });
+
+      Object.assign(reactFlowRoot.style, {
+        width: `${exportWidth}px`,
+        height: `${exportHeight}px`,
+        overflow: "hidden",
+        background: EXPORT_BACKGROUND,
+      });
+
+      resizeTargets.slice(1).forEach((element) => {
+        element.style.width = `${exportWidth}px`;
+        element.style.height = `${exportHeight}px`;
+      });
+
+      exportViewport.style.transform = `translate(${Math.round(EXPORT_PADDING - bounds.x)}px, ${Math.round(EXPORT_PADDING - bounds.y)}px) scale(1)`;
+      await waitForAnimationFrames(2);
+
+      try {
+        if (format === "svg") {
+          return await toSvg(reactFlowRoot, {
+            cacheBust: true,
+            backgroundColor: EXPORT_BACKGROUND,
+            width: exportWidth,
+            height: exportHeight,
+            filter: exportNodeFilter,
+          });
+        }
+
+        return await toJpeg(reactFlowRoot, {
+          cacheBust: true,
+          pixelRatio: 2,
+          quality: 0.94,
+          backgroundColor: EXPORT_BACKGROUND,
+          width: exportWidth,
+          height: exportHeight,
+          canvasWidth: exportWidth,
+          canvasHeight: exportHeight,
+          filter: exportNodeFilter,
+        });
+      } finally {
+        resizeTargets.forEach((element) => {
+          const previous = previousStyles.get(element);
+          if (!previous) return;
+          element.style.width = previous.width;
+          element.style.height = previous.height;
+          element.style.overflow = previous.overflow;
+          element.style.background = previous.background;
+          element.style.transform = previous.transform;
+        });
+      }
+    } finally {
+      setRenderAllForExport(false);
+    }
+  }, [visibleHasData]);
+
+  useEffect(() => {
+    onRegisterSnapshotExporter?.(exportFullGraphSnapshot);
+    return () => {
+      onRegisterSnapshotExporter?.(null);
+    };
+  }, [exportFullGraphSnapshot, onRegisterSnapshotExporter]);
+
   useEffect(() => {
     pushWebviewDebugEvent("canvas.reactflow.topology-changed", {
       visibleHasData,
@@ -3236,7 +3391,7 @@ export const CanvasPane = memo(function CanvasPane({
               onNodeContextMenu={handleNodeContextMenu}
               onPaneClick={onClearSelection}
               fitView
-              onlyRenderVisibleElements
+              onlyRenderVisibleElements={!renderAllForExport}
               minZoom={0.1}
               maxZoom={2.2}
               proOptions={{ hideAttribution: true }}
@@ -3424,4 +3579,5 @@ type Props = {
     targetFilePath?: string | null;
     targetFolderPath?: string | null;
   }) => void;
+  onRegisterSnapshotExporter?: (exporter: ((format: SnapshotFormat) => Promise<string>) | null) => void;
 };

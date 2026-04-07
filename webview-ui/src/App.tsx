@@ -7,7 +7,6 @@ import {
   useState,
   type PointerEvent as ReactPointerEvent,
 } from "react";
-import { toJpeg } from "html-to-image";
 import { Topbar } from "./components/Topbar";
 import { FiltersBar, type ChipKey } from "./components/FiltersBar";
 import { CanvasPane } from "./components/CanvasPane";
@@ -504,6 +503,11 @@ function dataUrlToBase64(dataUrl: string) {
   return base64;
 }
 
+function dataUrlToText(dataUrl: string) {
+  const [, encoded = ""] = dataUrl.split(",", 2);
+  return decodeURIComponent(encoded);
+}
+
 function hashString(value: string) {
   let hash = 0;
   for (let i = 0; i < value.length; i += 1) {
@@ -592,12 +596,14 @@ type ToastKind = "info" | "success" | "warning" | "error";
 type ToastState = { open: boolean; kind: ToastKind; message: string };
 type InspectorPlacement = "auto" | "left" | "right" | "bottom";
 type EffectiveInspectorPlacement = Exclude<InspectorPlacement, "auto">;
-type ExportFormat = "json" | "jpg";
+type ExportFormat = "json" | "jpg" | "svg";
 type FocusedFlowState = {
   edgeId: string;
   sourceId: string;
   targetId: string;
 };
+type SnapshotFormat = "jpg" | "svg";
+type SnapshotExporter = (format: SnapshotFormat) => Promise<string>;
 type FlowPreviewState = FocusedFlowState & {
   origin: "manual" | "trace";
 };
@@ -798,6 +804,7 @@ export default function App() {
     "idle",
   );
   const [exportFormat, setExportFormat] = useState<ExportFormat | null>(null);
+  const snapshotExporterRef = useRef<SnapshotExporter | null>(null);
 
   const postMessage = useCallback((
     origin: string,
@@ -2193,6 +2200,7 @@ export default function App() {
   const saveExportText = (
     suggestedFileName: string,
     text: string,
+    type: string,
     title: string,
     saveLabel: string,
     filters: Record<string, string[]>,
@@ -2211,7 +2219,7 @@ export default function App() {
       return;
     }
 
-    downloadText(suggestedFileName, text, "application/json;charset=utf-8");
+    downloadText(suggestedFileName, text, type);
     finishExport();
     showToast("success", "Export complete", 1500);
   };
@@ -2263,6 +2271,7 @@ export default function App() {
       saveExportText(
         suggestedFileName,
         text,
+        "application/json;charset=utf-8",
         "Save Cogic JSON Export",
         "Save JSON Export",
         { "JSON Files": ["json"] },
@@ -2287,29 +2296,12 @@ export default function App() {
       showToast("info", "Preparing JPG snapshot...", 1200);
 
       await new Promise((r) => setTimeout(r, 0));
-
-      const canvasRoot = appRootRef.current?.querySelector(
-        ".canvasFlow .react-flow",
-      ) as HTMLElement | null;
-      if (!canvasRoot) {
+      const exportSnapshot = snapshotExporterRef.current;
+      if (!exportSnapshot) {
         throw new Error("Graph canvas is not ready");
       }
 
-      const dataUrl = await toJpeg(canvasRoot, {
-        cacheBust: true,
-        pixelRatio: 2,
-        quality: 0.94,
-        backgroundColor: "#081226",
-        filter: (node) => {
-          if (!(node instanceof HTMLElement)) return true;
-          return !(
-            node.classList.contains("canvasControls") ||
-            node.classList.contains("selectionBanner") ||
-            node.classList.contains("rootBanner") ||
-            node.classList.contains("canvasNotice")
-          );
-        },
-      });
+      const dataUrl = await exportSnapshot("jpg");
 
       const exportedAt = new Date().toISOString().replace(/[:.]/g, "-");
       const suggestedFileName = `${exportBaseName}.flow.${exportedAt}.jpg`;
@@ -2325,6 +2317,55 @@ export default function App() {
       setExportStatus("idle");
       setExportFormat(null);
       showToast("error", "JPG export failed");
+    }
+  };
+
+  const exportGraphAsSvg = async () => {
+    if (!hasGraphData) {
+      showToast("info", "No graph to export");
+      return;
+    }
+    if (exportStatus === "exporting") return;
+
+    try {
+      setExportStatus("exporting");
+      setExportFormat("svg");
+      showToast("info", "Preparing SVG snapshot...", 1200);
+
+      await new Promise((r) => setTimeout(r, 0));
+      const exportSnapshot = snapshotExporterRef.current;
+      if (!exportSnapshot) {
+        throw new Error("Graph canvas is not ready");
+      }
+
+      const dataUrl = await exportSnapshot("svg");
+
+      const exportedAt = new Date().toISOString().replace(/[:.]/g, "-");
+      const suggestedFileName = `${exportBaseName}.flow.${exportedAt}.svg`;
+
+      if (isHostedInVSCode()) {
+        saveExportText(
+          suggestedFileName,
+          dataUrlToText(dataUrl),
+          "image/svg+xml;charset=utf-8",
+          "Save Cogic SVG Export",
+          "Save SVG Export",
+          { "SVG Images": ["svg"] },
+        );
+        return;
+      }
+
+      saveExportDataUrl(
+        suggestedFileName,
+        dataUrl,
+        "Save Cogic SVG Export",
+        "Save SVG Export",
+        { "SVG Images": ["svg"] },
+      );
+    } catch {
+      setExportStatus("idle");
+      setExportFormat(null);
+      showToast("error", "SVG export failed");
     }
   };
 
@@ -2501,6 +2542,7 @@ export default function App() {
         onToggleTraceMode={toggleTraceMode}
         onExportJson={exportGraphAsJson}
         onExportJpg={exportGraphAsJpg}
+        onExportSvg={exportGraphAsSvg}
         exportEnabled={exportEnabled}
         exportStatus={exportStatus}
         exportFormat={exportFormat}
@@ -2552,6 +2594,9 @@ export default function App() {
           autoLayoutTick={autoLayoutTick}
           workspaceRoot={workspaceRoot}
           onOpenScaffoldModal={openScaffoldPanelAt}
+          onRegisterSnapshotExporter={(exporter) => {
+            snapshotExporterRef.current = exporter;
+          }}
         />
 
         {inspectorOpen ? (

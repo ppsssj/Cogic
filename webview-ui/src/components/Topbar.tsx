@@ -38,9 +38,10 @@ type Props = {
   onToggleTraceMode: () => void;
   onExportJson: () => void;
   onExportJpg: () => void;
+  onExportSvg: () => void;
   exportEnabled: boolean;
   exportStatus: "idle" | "exporting" | "done";
-  exportFormat: "json" | "jpg" | null;
+  exportFormat: "json" | "jpg" | "svg" | null;
   searchQuery: string;
   onSearchQueryChange: (v: string) => void;
 };
@@ -62,6 +63,7 @@ export function Topbar({
   onToggleTraceMode,
   onExportJson,
   onExportJpg,
+  onExportSvg,
   exportEnabled,
   exportStatus,
   exportFormat,
@@ -335,6 +337,17 @@ export function Topbar({
               >
                 <span className="exportMenuItemTitle">JSON export</span>
                 <span className="exportMenuItemMeta">.json</span>
+              </button>
+              <button
+                className="exportMenuItem"
+                type="button"
+                onClick={() => {
+                  closeExportMenu();
+                  onExportSvg();
+                }}
+              >
+                <span className="exportMenuItemTitle">SVG snapshot</span>
+                <span className="exportMenuItemMeta">.svg</span>
               </button>
               <button
                 className="exportMenuItem"
