@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.0.4] - 2026-05-04
+
+- Fix packaged extension missing TypeScript default library definitions.
+
 ## [0.0.3] - 2026-04-07
 
 - Add GitHub and VS Marketplace links to the README.

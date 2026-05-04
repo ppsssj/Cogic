@@ -3,7 +3,7 @@
   "publisher": "ppsssj",
   "displayName": "Cogic",
   "description": "Visualize code structure, calls, data flow, and framework routes inside VS Code.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "SEE LICENSE IN LICENSE",
   "icon": "assets/logo.png",
   "engines": {
