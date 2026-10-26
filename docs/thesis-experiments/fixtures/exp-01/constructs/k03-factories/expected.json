@@ -1,0 +1,40 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "k03-factories",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Shape", "type": "typeLike", "file": "main.ts", "line": 1, "name": "Shape" },
+    { "id": "Circle", "type": "class", "file": "main.ts", "line": 5, "name": "Circle" },
+    { "id": "Square", "type": "class", "file": "main.ts", "line": 13, "name": "Square" },
+    { "id": "Triangle", "type": "class", "file": "main.ts", "line": 21, "name": "Triangle" },
+    { "id": "makeShape", "type": "callable", "file": "main.ts", "line": 29, "name": "makeShape" },
+    { "id": "defaults", "type": "callable", "file": "main.ts", "line": 39, "name": "defaults" },
+    { "id": "totalArea", "type": "callable", "file": "main.ts", "line": 43, "name": "totalArea" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "Circle", "target": "Shape", "pattern": "REF-HERITAGE", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R02", "kind": "references", "source": "Square", "target": "Shape", "pattern": "REF-HERITAGE", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R03", "kind": "references", "source": "Triangle", "target": "Shape", "pattern": "REF-HERITAGE", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R04", "kind": "constructs", "source": "makeShape", "target": "Circle", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:31"] },
+    { "id": "R05", "kind": "constructs", "source": "makeShape", "target": "Square", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:34"] },
+    { "id": "R06", "kind": "constructs", "source": "makeShape", "target": "Triangle", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:36"] },
+    { "id": "R07", "kind": "dataflow", "source": "makeShape", "target": "Circle", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:31"] },
+    { "id": "R08", "kind": "dataflow", "source": "makeShape", "target": "Square", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:34"] },
+    { "id": "R09", "kind": "dataflow", "source": "makeShape", "target": "Triangle", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:36"] },
+    { "id": "R10", "kind": "dataflow", "source": "makeShape", "target": "Triangle", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:36"] },
+    { "id": "R11", "kind": "references", "source": "makeShape", "target": "Shape", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:29"] },
+    { "id": "R12", "kind": "constructs", "source": "defaults", "target": "Circle", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:40"] },
+    { "id": "R13", "kind": "constructs", "source": "defaults", "target": "Square", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:40"] },
+    { "id": "R14", "kind": "constructs", "source": "defaults", "target": "Triangle", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:40"] },
+    { "id": "R15", "kind": "dataflow", "source": "defaults", "target": "Circle", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:40"] },
+    { "id": "R16", "kind": "dataflow", "source": "defaults", "target": "Square", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:40"] },
+    { "id": "R17", "kind": "dataflow", "source": "defaults", "target": "Triangle", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:40"] },
+    { "id": "R18", "kind": "dataflow", "source": "defaults", "target": "Triangle", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:40"] },
+    { "id": "R19", "kind": "references", "source": "defaults", "target": "Shape", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:39"] },
+    { "id": "R20", "kind": "references", "source": "totalArea", "target": "Shape", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:43"] },
+    { "id": "I01", "kind": "calls", "source": "totalArea", "candidates": "unbounded", "pattern": "CALL-INTERFACE-DISPATCH", "gtStatus": "indeterminate", "evidence": ["main.ts:46"], "reason": "s의 정적 타입은 Shape 인터페이스다. totalArea는 export되어 있어 fixture 밖 코드가 area()를 가진 임의의 객체를 넘길 수 있다(구조적 타입). fixture 안 구현은 Circle/Square/Triangle.area(8, 16, 24행)지만 후보를 그것으로 한정할 수 없다" }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "r04-anonymous-callback",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Item", "type": "typeLike", "file": "main.ts", "line": 1, "name": "Item" },
+    { "id": "isValid", "type": "callable", "file": "main.ts", "line": 5, "name": "isValid" },
+    { "id": "format", "type": "callable", "file": "main.ts", "line": 9, "name": "format" },
+    { "id": "summarize", "type": "callable", "file": "main.ts", "line": 13, "name": "summarize" },
+    { "id": "defer", "type": "callable", "file": "main.ts", "line": 17, "name": "defer" },
+    { "id": "register", "type": "callable", "file": "main.ts", "line": 21, "name": "register" },
+    { "id": "libFilter", "type": "lib", "symbol": "Array.filter" },
+    { "id": "libMap", "type": "lib", "symbol": "Array.map" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "isValid", "target": "Item", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R02", "kind": "references", "source": "format", "target": "Item", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R03", "kind": "references", "source": "summarize", "target": "Item", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:13", "main.ts:14"] },
+    { "id": "R04", "kind": "calls", "source": "summarize", "target": "libFilter", "pattern": "CALL-LIB", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R05", "kind": "dataflow", "source": "summarize", "target": "libFilter", "argIndex": 0, "pattern": "DF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R06", "kind": "calls", "source": "summarize", "target": "libMap", "pattern": "CALL-LIB", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R07", "kind": "dataflow", "source": "summarize", "target": "libMap", "argIndex": 0, "pattern": "DF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R08", "kind": "calls", "source": "summarize", "target": "isValid", "pattern": "CALL-IN-ANON-CALLBACK", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R09", "kind": "dataflow", "source": "summarize", "target": "isValid", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R10", "kind": "calls", "source": "summarize", "target": "format", "pattern": "CALL-IN-ANON-CALLBACK", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R11", "kind": "dataflow", "source": "summarize", "target": "format", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R12", "kind": "calls", "source": "register", "target": "defer", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R13", "kind": "dataflow", "source": "register", "target": "defer", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R14", "kind": "references", "source": "register", "target": "format", "pattern": "REF-IN-ANON-CALLBACK", "gtStatus": "determinate", "evidence": ["main.ts:23"], "note": "익명 콜백은 노드가 아니므로 참조의 owner는 register다(calls와 같은 규칙)" }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

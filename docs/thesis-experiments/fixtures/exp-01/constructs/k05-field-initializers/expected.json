@@ -1,0 +1,37 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "k05-field-initializers",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "ValidationError", "type": "class", "file": "main.ts", "line": 1, "name": "ValidationError" },
+    { "id": "NotFoundError", "type": "class", "file": "main.ts", "line": 5, "name": "NotFoundError" },
+    { "id": "Logger", "type": "class", "file": "main.ts", "line": 9, "name": "Logger" },
+    { "id": "info", "type": "callable", "file": "main.ts", "line": 10, "name": "info" },
+    { "id": "Repo", "type": "class", "file": "main.ts", "line": 15, "name": "Repo" },
+    { "id": "find", "type": "callable", "file": "main.ts", "line": 18, "name": "find" },
+    { "id": "createRepo", "type": "callable", "file": "main.ts", "line": 30, "name": "createRepo" },
+    { "id": "handle", "type": "callable", "file": "main.ts", "line": 34, "name": "handle" },
+    { "id": "makeLogger", "type": "callable", "file": "main.ts", "line": 42, "name": "makeLogger" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "constructs", "source": "Repo", "target": "Logger", "pattern": "CONS-FIELD-INIT", "gtStatus": "determinate", "evidence": ["main.ts:16"], "note": "인스턴스 필드 초기화식은 생성 시 실행되는 class Repo의 코드다" },
+    { "id": "R02", "kind": "constructs", "source": "find", "target": "ValidationError", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:20"] },
+    { "id": "R03", "kind": "dataflow", "source": "find", "target": "ValidationError", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:20"] },
+    { "id": "R04", "kind": "constructs", "source": "find", "target": "NotFoundError", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R05", "kind": "dataflow", "source": "find", "target": "NotFoundError", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R06", "kind": "calls", "source": "find", "target": "info", "pattern": "CALL-METHOD-INSTANCE", "gtStatus": "determinate", "evidence": ["main.ts:25"] },
+    { "id": "R07", "kind": "dataflow", "source": "find", "target": "info", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:25"] },
+    { "id": "R08", "kind": "constructs", "source": "createRepo", "target": "Repo", "pattern": "CONS-LOCAL-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:31"] },
+    { "id": "R09", "kind": "references", "source": "createRepo", "target": "Repo", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:30"] },
+    { "id": "R10", "kind": "calls", "source": "handle", "target": "createRepo", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:36"] },
+    { "id": "R11", "kind": "calls", "source": "handle", "target": "find", "pattern": "CALL-METHOD-INSTANCE", "gtStatus": "determinate", "evidence": ["main.ts:36"] },
+    { "id": "R12", "kind": "dataflow", "source": "handle", "target": "find", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:36"] },
+    { "id": "R13", "kind": "constructs", "source": "handle", "target": "NotFoundError", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:38"] },
+    { "id": "R14", "kind": "dataflow", "source": "handle", "target": "NotFoundError", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:38"] },
+    { "id": "R15", "kind": "constructs", "source": "makeLogger", "target": "Logger", "pattern": "CONS-LOCAL-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:42"] },
+    { "id": "R16", "kind": "references", "source": "makeLogger", "target": "Logger", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:42"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

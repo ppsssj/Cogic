@@ -1,0 +1,34 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "k07-events",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Emitter", "type": "class", "file": "main.ts", "line": 1, "name": "Emitter" },
+    { "id": "on", "type": "callable", "file": "main.ts", "line": 2, "name": "on" },
+    { "id": "emit", "type": "callable", "file": "main.ts", "line": 7, "name": "emit" },
+    { "id": "Timer", "type": "class", "file": "main.ts", "line": 12, "name": "Timer" },
+    { "id": "wire", "type": "callable", "file": "main.ts", "line": 16, "name": "wire" },
+    { "id": "restart", "type": "callable", "file": "main.ts", "line": 25, "name": "restart" },
+    { "id": "Clock", "type": "class", "file": "main.ts", "line": 29, "name": "Clock" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "constructs", "source": "wire", "target": "Emitter", "pattern": "CONS-LOCAL-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:17"] },
+    { "id": "R02", "kind": "constructs", "source": "wire", "target": "Timer", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R03", "kind": "dataflow", "source": "wire", "target": "Timer", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R04", "kind": "calls", "source": "wire", "target": "on", "pattern": "CALL-METHOD-INSTANCE", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R05", "kind": "dataflow", "source": "wire", "target": "on", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R06", "kind": "dataflow", "source": "wire", "target": "on", "argIndex": 1, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R07", "kind": "calls", "source": "wire", "target": "emit", "pattern": "CALL-IN-ANON-CALLBACK", "gtStatus": "determinate", "evidence": ["main.ts:20"], "note": "익명 화살표 함수는 노드가 아니므로 owner는 wire다(ANNOTATION_GUIDE §3.3)" },
+    { "id": "R08", "kind": "dataflow", "source": "wire", "target": "emit", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:20"] },
+    { "id": "R09", "kind": "references", "source": "wire", "target": "Emitter", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:16"] },
+    { "id": "R10", "kind": "constructs", "source": "restart", "target": "Timer", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:26"] },
+    { "id": "R11", "kind": "dataflow", "source": "restart", "target": "Timer", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:26"] },
+    { "id": "R12", "kind": "references", "source": "restart", "target": "Timer", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:25"] },
+    { "id": "R13", "kind": "constructs", "source": "Clock", "target": "Timer", "pattern": "CONS-FIELD-INIT", "gtStatus": "determinate", "evidence": ["main.ts:30"] },
+    { "id": "R14", "kind": "dataflow", "source": "Clock", "target": "Timer", "argIndex": 0, "pattern": "DF-FIELD-INIT", "gtStatus": "determinate", "evidence": ["main.ts:30"] },
+    { "id": "R15", "kind": "constructs", "source": "Clock", "target": "Emitter", "pattern": "CONS-FIELD-INIT", "gtStatus": "determinate", "evidence": ["main.ts:31"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

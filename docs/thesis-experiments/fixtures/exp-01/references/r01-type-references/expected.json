@@ -1,0 +1,28 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "r01-type-references",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Address", "type": "typeLike", "file": "main.ts", "line": 1, "name": "Address" },
+    { "id": "Person", "type": "typeLike", "file": "main.ts", "line": 5, "name": "Person" },
+    { "id": "Id", "type": "typeLike", "file": "main.ts", "line": 10, "name": "Id" },
+    { "id": "Role", "type": "typeLike", "file": "main.ts", "line": 12, "name": "Role" },
+    { "id": "Account", "type": "typeLike", "file": "main.ts", "line": 17, "name": "Account" },
+    { "id": "describe", "type": "callable", "file": "main.ts", "line": 23, "name": "describe" },
+    { "id": "roleOf", "type": "callable", "file": "main.ts", "line": 27, "name": "roleOf" },
+    { "id": "key", "type": "callable", "file": "main.ts", "line": 31, "name": "key" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "Person", "target": "Address", "pattern": "REF-TYPE-MEMBER", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R02", "kind": "references", "source": "Account", "target": "Id", "pattern": "REF-TYPE-MEMBER", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R03", "kind": "references", "source": "Account", "target": "Person", "pattern": "REF-TYPE-MEMBER", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R04", "kind": "references", "source": "Account", "target": "Role", "pattern": "REF-TYPE-MEMBER", "gtStatus": "determinate", "evidence": ["main.ts:20"] },
+    { "id": "R05", "kind": "references", "source": "describe", "target": "Person", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R06", "kind": "references", "source": "roleOf", "target": "Account", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:27"] },
+    { "id": "R07", "kind": "references", "source": "roleOf", "target": "Role", "pattern": "REF-ENUM-MEMBER", "gtStatus": "determinate", "evidence": ["main.ts:28"] },
+    { "id": "R08", "kind": "references", "source": "key", "target": "Id", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:31"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "k06-imported-scene",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Scene", "type": "class", "file": "main.ts", "line": 3, "name": "Scene" },
+    { "id": "addRect", "type": "callable", "file": "main.ts", "line": 6, "name": "addRect" },
+    { "id": "background", "type": "callable", "file": "main.ts", "line": 12, "name": "background" },
+    { "id": "demo", "type": "callable", "file": "main.ts", "line": 17, "name": "demo" },
+    { "id": "palette", "type": "callable", "file": "main.ts", "line": 23, "name": "palette" },
+    { "id": "Vec", "type": "external", "file": "geometry.ts", "line": 1, "name": "Vec" },
+    { "id": "Rect", "type": "external", "file": "geometry.ts", "line": 5, "name": "Rect" },
+    { "id": "Color", "type": "external", "file": "geometry.ts", "line": 9, "name": "Color" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "Scene", "target": "Rect", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R02", "kind": "constructs", "source": "addRect", "target": "Rect", "pattern": "CONS-IMPORTED-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R03", "kind": "constructs", "source": "addRect", "target": "Vec", "pattern": "CONS-IMPORTED-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R04", "kind": "dataflow", "source": "addRect", "target": "Rect", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R05", "kind": "dataflow", "source": "addRect", "target": "Rect", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R06", "kind": "dataflow", "source": "addRect", "target": "Vec", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R07", "kind": "dataflow", "source": "addRect", "target": "Vec", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R08", "kind": "references", "source": "addRect", "target": "Rect", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R09", "kind": "constructs", "source": "background", "target": "Color", "pattern": "CONS-IMPORTED-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R10", "kind": "dataflow", "source": "background", "target": "Color", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R11", "kind": "dataflow", "source": "background", "target": "Color", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R12", "kind": "dataflow", "source": "background", "target": "Color", "argIndex": 2, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R13", "kind": "references", "source": "background", "target": "Color", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:12"] },
+    { "id": "R14", "kind": "constructs", "source": "demo", "target": "Scene", "pattern": "CONS-LOCAL-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R15", "kind": "calls", "source": "demo", "target": "addRect", "pattern": "CALL-METHOD-INSTANCE", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R16", "kind": "dataflow", "source": "demo", "target": "addRect", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R17", "kind": "dataflow", "source": "demo", "target": "addRect", "argIndex": 1, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R18", "kind": "references", "source": "demo", "target": "Scene", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:17"] },
+    { "id": "R19", "kind": "constructs", "source": "palette", "target": "Color", "pattern": "CONS-IMPORTED-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:24"] },
+    { "id": "R20", "kind": "dataflow", "source": "palette", "target": "Color", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:24"] },
+    { "id": "R21", "kind": "dataflow", "source": "palette", "target": "Color", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:24"] },
+    { "id": "R22", "kind": "dataflow", "source": "palette", "target": "Color", "argIndex": 2, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:24"] },
+    { "id": "R23", "kind": "references", "source": "palette", "target": "Color", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:23"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c02-methods",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Counter", "type": "class", "file": "main.ts", "line": 1, "name": "Counter" },
+    { "id": "create", "type": "callable", "file": "main.ts", "line": 4, "name": "create" },
+    { "id": "increment", "type": "callable", "file": "main.ts", "line": 8, "name": "increment" },
+    { "id": "log", "type": "callable", "file": "main.ts", "line": 13, "name": "log" },
+    { "id": "reset", "type": "callable", "file": "main.ts", "line": 15, "name": "reset" },
+    { "id": "useCounter", "type": "callable", "file": "main.ts", "line": 21, "name": "useCounter" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "constructs", "source": "create", "target": "Counter", "pattern": "CONS-LOCAL-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R02", "kind": "references", "source": "create", "target": "Counter", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R03", "kind": "calls", "source": "increment", "target": "log", "pattern": "CALL-METHOD-THIS", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R04", "kind": "calls", "source": "reset", "target": "log", "pattern": "CALL-METHOD-THIS", "gtStatus": "determinate", "evidence": ["main.ts:17"] },
+    { "id": "R05", "kind": "calls", "source": "useCounter", "target": "create", "pattern": "CALL-METHOD-STATIC", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R06", "kind": "calls", "source": "useCounter", "target": "increment", "pattern": "CALL-METHOD-INSTANCE", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R07", "kind": "calls", "source": "useCounter", "target": "reset", "pattern": "CALL-METHOD-INSTANCE", "gtStatus": "determinate", "evidence": ["main.ts:24"] },
+    { "id": "R08", "kind": "references", "source": "useCounter", "target": "Counter", "pattern": "REF-RECEIVER", "gtStatus": "determinate", "evidence": ["main.ts:22"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

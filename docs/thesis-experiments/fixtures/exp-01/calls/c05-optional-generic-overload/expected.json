@@ -1,0 +1,26 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c05-optional-generic-overload",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "notify", "type": "callable", "file": "main.ts", "line": 1, "name": "notify" },
+    { "id": "identity", "type": "callable", "file": "main.ts", "line": 5, "name": "identity" },
+    { "id": "format", "type": "callable", "file": "main.ts", "line": 11, "name": "format" },
+    { "id": "Service", "type": "class", "file": "main.ts", "line": 15, "name": "Service" },
+    { "id": "stop", "type": "callable", "file": "main.ts", "line": 16, "name": "stop" },
+    { "id": "main", "type": "callable", "file": "main.ts", "line": 19, "name": "main" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "main", "target": "notify", "pattern": "CALL-OPTIONAL", "gtStatus": "determinate", "evidence": ["main.ts:20"] },
+    { "id": "R02", "kind": "dataflow", "source": "main", "target": "notify", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:20"] },
+    { "id": "R03", "kind": "calls", "source": "main", "target": "stop", "pattern": "CALL-OPTIONAL", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R04", "kind": "references", "source": "main", "target": "Service", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R05", "kind": "calls", "source": "main", "target": "identity", "pattern": "CALL-GENERIC", "gtStatus": "determinate", "evidence": ["main.ts:22", "main.ts:23"] },
+    { "id": "R06", "kind": "dataflow", "source": "main", "target": "identity", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:22", "main.ts:23"] },
+    { "id": "R07", "kind": "calls", "source": "main", "target": "format", "pattern": "CALL-OVERLOAD-LOCAL", "gtStatus": "determinate", "evidence": ["main.ts:24"], "note": "overload 시그니처(9, 10행)는 본문이 없어 그래프 노드가 아니다. 정답 대상은 구현(11행)이다" },
+    { "id": "R08", "kind": "dataflow", "source": "main", "target": "format", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:24"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

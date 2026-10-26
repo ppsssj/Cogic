@@ -1,0 +1,37 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "u05-react-negatives",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "setTitle", "type": "callable", "file": "main.ts", "line": 3, "name": "setTitle" },
+    { "id": "Viewer", "type": "callable", "file": "main.ts", "line": 7, "name": "Viewer" },
+    { "id": "countSrc", "type": "synthetic", "file": "main.ts", "line": 8, "framework": "react", "role": "state-source", "anchor": "useState" },
+    { "id": "show", "type": "callable", "file": "main.ts", "line": 10, "name": "show" },
+    { "id": "shadow", "type": "callable", "file": "main.ts", "line": 14, "name": "shadow" },
+    { "id": "rename", "type": "callable", "file": "main.ts", "line": 20, "name": "rename" },
+    { "id": "expose", "type": "callable", "file": "main.ts", "line": 24, "name": "expose" },
+    { "id": "useState", "type": "external", "file": "shims/react.d.ts", "line": 5, "name": "useState" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "owner", "source": "countSrc", "pattern": "FW-REACT-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R02", "kind": "calls", "source": "Viewer", "target": "useState", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R03", "kind": "dataflow", "source": "Viewer", "target": "useState", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R04", "kind": "references", "source": "show", "target": "countSrc", "pattern": "REF-STATE-READ", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R05", "kind": "calls", "source": "rename", "target": "setTitle", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R06", "kind": "dataflow", "source": "rename", "target": "setTitle", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R07", "kind": "references", "source": "expose", "target": "countSrc", "pattern": "REF-STATE-SETTER-VALUE", "gtStatus": "determinate", "evidence": ["main.ts:25"] },
+    { "id": "R08", "kind": "references", "source": "Viewer", "target": "show", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:28"] },
+    { "id": "R09", "kind": "references", "source": "Viewer", "target": "shadow", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:28"] },
+    { "id": "R10", "kind": "references", "source": "Viewer", "target": "rename", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:28"] },
+    { "id": "R11", "kind": "references", "source": "Viewer", "target": "expose", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:28"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "updates", "source": "show", "target": "countSrc", "pattern": "NEG-READ-ONLY", "evidence": ["main.ts:11"], "rationale": "count를 읽기만 한다" },
+    { "id": "N02", "kind": "updates", "source": "shadow", "target": "countSrc", "pattern": "NEG-SHADOW-STATE", "evidence": ["main.ts:15", "main.ts:16"], "rationale": "15행 지역 변수 count가 상태 count를 가린다. count++는 지역 변수만 바꾼다" },
+    { "id": "N03", "kind": "references", "source": "shadow", "target": "countSrc", "pattern": "NEG-SHADOW", "evidence": ["main.ts:15", "main.ts:16", "main.ts:17"], "rationale": "shadow 안의 count는 모두 지역 변수다" },
+    { "id": "N04", "kind": "updates", "source": "rename", "target": "countSrc", "pattern": "NEG-NOT-SETTER", "evidence": ["main.ts:21"], "rationale": "setTitle은 이름만 setter와 비슷한 일반 함수다" },
+    { "id": "N05", "kind": "updates", "source": "expose", "target": "countSrc", "pattern": "NEG-SETTER-AS-VALUE", "evidence": ["main.ts:25"], "rationale": "setCount를 반환할 뿐 호출하지 않는다" }
+  ],
+  "excludedSites": []
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "u02-react-todo",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "TodoList", "type": "callable", "file": "main.ts", "line": 3, "name": "TodoList" },
+    { "id": "itemsSrc", "type": "synthetic", "file": "main.ts", "line": 4, "framework": "react", "role": "state-source", "anchor": "useState" },
+    { "id": "draftSrc", "type": "synthetic", "file": "main.ts", "line": 5, "framework": "react", "role": "state-source", "anchor": "useState" },
+    { "id": "errorSrc", "type": "synthetic", "file": "main.ts", "line": 6, "framework": "react", "role": "state-source", "anchor": "useState" },
+    { "id": "onInput", "type": "callable", "file": "main.ts", "line": 8, "name": "onInput" },
+    { "id": "onSubmit", "type": "callable", "file": "main.ts", "line": 13, "name": "onSubmit" },
+    { "id": "onClear", "type": "callable", "file": "main.ts", "line": 22, "name": "onClear" },
+    { "id": "useState", "type": "external", "file": "shims/react.d.ts", "line": 5, "name": "useState" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "owner", "source": "itemsSrc", "pattern": "FW-REACT-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R02", "kind": "owner", "source": "draftSrc", "pattern": "FW-REACT-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R03", "kind": "owner", "source": "errorSrc", "pattern": "FW-REACT-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R04", "kind": "calls", "source": "TodoList", "target": "useState", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:4", "main.ts:5", "main.ts:6"] },
+    { "id": "R05", "kind": "dataflow", "source": "TodoList", "target": "useState", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:4", "main.ts:5", "main.ts:6"] },
+    { "id": "R06", "kind": "updates", "source": "onInput", "target": "draftSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R07", "kind": "updates", "source": "onInput", "target": "errorSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R08", "kind": "updates", "source": "onSubmit", "target": "errorSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:15"] },
+    { "id": "R09", "kind": "updates", "source": "onSubmit", "target": "itemsSrc", "pattern": "UPD-REACT-SETTER-FN", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R10", "kind": "updates", "source": "onSubmit", "target": "draftSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R11", "kind": "references", "source": "onSubmit", "target": "draftSrc", "pattern": "REF-STATE-READ", "gtStatus": "determinate", "evidence": ["main.ts:14", "main.ts:18"] },
+    { "id": "R12", "kind": "updates", "source": "onClear", "target": "itemsSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R13", "kind": "updates", "source": "onClear", "target": "errorSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:24"] },
+    { "id": "R14", "kind": "references", "source": "TodoList", "target": "itemsSrc", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:27"] },
+    { "id": "R15", "kind": "references", "source": "TodoList", "target": "onInput", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:27"] },
+    { "id": "R16", "kind": "references", "source": "TodoList", "target": "onSubmit", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:27"] },
+    { "id": "R17", "kind": "references", "source": "TodoList", "target": "onClear", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:27"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

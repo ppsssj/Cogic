@@ -1,0 +1,28 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c03-imports",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "total", "type": "callable", "file": "main.ts", "line": 4, "name": "total" },
+    { "id": "render", "type": "callable", "file": "main.ts", "line": 12, "name": "render" },
+    { "id": "add", "type": "external", "file": "math.ts", "line": 1, "name": "add" },
+    { "id": "negate", "type": "external", "file": "math.ts", "line": 5, "name": "negate" },
+    { "id": "square", "type": "external", "file": "math.ts", "line": 9, "name": "square" },
+    { "id": "pad", "type": "external", "file": "format.ts", "line": 1, "name": "pad" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "total", "target": "add", "pattern": "CALL-IMPORT-NAMED", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R02", "kind": "calls", "source": "total", "target": "square", "pattern": "CALL-IMPORT-NAMED", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R03", "kind": "calls", "source": "total", "target": "negate", "pattern": "CALL-IMPORT-DEFAULT", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R04", "kind": "calls", "source": "render", "target": "pad", "pattern": "CALL-IMPORT-NAMESPACE", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R05", "kind": "dataflow", "source": "total", "target": "add", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R06", "kind": "dataflow", "source": "total", "target": "add", "argIndex": 1, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R07", "kind": "dataflow", "source": "total", "target": "square", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R08", "kind": "dataflow", "source": "total", "target": "negate", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R09", "kind": "dataflow", "source": "render", "target": "pad", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R10", "kind": "dataflow", "source": "render", "target": "pad", "argIndex": 1, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:13"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

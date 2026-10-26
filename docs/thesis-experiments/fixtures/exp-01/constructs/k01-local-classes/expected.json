@@ -1,0 +1,34 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "k01-local-classes",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "file", "type": "file", "file": "main.ts" },
+    { "id": "Point", "type": "class", "file": "main.ts", "line": 1, "name": "Point" },
+    { "id": "Empty", "type": "class", "file": "main.ts", "line": 5, "name": "Empty" },
+    { "id": "Line", "type": "class", "file": "main.ts", "line": 7, "name": "Line" },
+    { "id": "origin", "type": "callable", "file": "main.ts", "line": 17, "name": "origin" },
+    { "id": "unit", "type": "callable", "file": "main.ts", "line": 21, "name": "unit" },
+    { "id": "blank", "type": "callable", "file": "main.ts", "line": 25, "name": "blank" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "constructs", "source": "origin", "target": "Point", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R02", "kind": "dataflow", "source": "origin", "target": "Point", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R03", "kind": "dataflow", "source": "origin", "target": "Point", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R04", "kind": "references", "source": "origin", "target": "Point", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:17"] },
+    { "id": "R05", "kind": "constructs", "source": "unit", "target": "Line", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R06", "kind": "constructs", "source": "unit", "target": "Point", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R07", "kind": "dataflow", "source": "unit", "target": "Line", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R08", "kind": "dataflow", "source": "unit", "target": "Line", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R09", "kind": "dataflow", "source": "unit", "target": "Point", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R10", "kind": "dataflow", "source": "unit", "target": "Point", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R11", "kind": "references", "source": "unit", "target": "Line", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R12", "kind": "constructs", "source": "blank", "target": "Empty", "pattern": "CONS-LOCAL-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:26"] },
+    { "id": "R13", "kind": "references", "source": "blank", "target": "Empty", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:25"] },
+    { "id": "R14", "kind": "constructs", "source": "file", "target": "Empty", "pattern": "CONS-TOPLEVEL", "gtStatus": "determinate", "evidence": ["main.ts:29"] },
+    { "id": "R15", "kind": "references", "source": "Line", "target": "Point", "pattern": "REF-TYPE-MEMBER", "gtStatus": "determinate", "evidence": ["main.ts:8", "main.ts:9", "main.ts:11"], "note": "필드 타입과 생성자 파라미터 타입. 생성자는 그래프 노드가 아니므로 owner는 class Line이다" }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

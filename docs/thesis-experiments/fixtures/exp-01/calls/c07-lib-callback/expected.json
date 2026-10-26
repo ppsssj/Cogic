@@ -1,0 +1,24 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c07-lib-callback",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "square", "type": "callable", "file": "main.ts", "line": 1, "name": "square" },
+    { "id": "stats", "type": "callable", "file": "main.ts", "line": 5, "name": "stats" },
+    { "id": "libArrayMap", "type": "lib", "symbol": "Array.map" },
+    { "id": "libMathMax", "type": "lib", "symbol": "Math.max" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "stats", "target": "square", "pattern": "REF-VALUE-FN", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R02", "kind": "calls", "source": "stats", "target": "libArrayMap", "pattern": "CALL-LIB", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R03", "kind": "dataflow", "source": "stats", "target": "libArrayMap", "argIndex": 0, "pattern": "DF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R04", "kind": "calls", "source": "stats", "target": "libMathMax", "pattern": "CALL-LIB", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R05", "kind": "dataflow", "source": "stats", "target": "libMathMax", "argIndex": 0, "pattern": "DF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:7"], "note": "...squares는 rest 파라미터 values(0번)로 모인다" }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "calls", "source": "stats", "target": "square", "pattern": "NEG-CALLBACK-PASS", "evidence": ["main.ts:6"], "rationale": "square는 map에 전달될 뿐 stats가 직접 호출하지 않는다" },
+    { "id": "N02", "kind": "dataflow", "source": "stats", "target": "square", "argIndex": 0, "pattern": "NEG-CALLBACK-PASS", "evidence": ["main.ts:6"], "rationale": "stats의 호출식이 square의 파라미터에 값을 넘기지 않는다" }
+  ],
+  "excludedSites": []
+}

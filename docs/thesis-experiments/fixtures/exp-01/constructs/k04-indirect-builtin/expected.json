@@ -1,0 +1,32 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "k04-indirect-builtin",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Box", "type": "class", "file": "main.ts", "line": 1, "name": "Box" },
+    { "id": "BoxFactory", "type": "typeLike", "file": "main.ts", "line": 5, "name": "BoxFactory" },
+    { "id": "viaVariable", "type": "callable", "file": "main.ts", "line": 7, "name": "viaVariable" },
+    { "id": "viaGeneric", "type": "callable", "file": "main.ts", "line": 12, "name": "viaGeneric" },
+    { "id": "notConstructed", "type": "callable", "file": "main.ts", "line": 16, "name": "notConstructed" },
+    { "id": "builtin", "type": "callable", "file": "main.ts", "line": 20, "name": "builtin" },
+    { "id": "libMap", "type": "lib", "symbol": "Map" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "BoxFactory", "target": "Box", "pattern": "REF-TYPE-MEMBER", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R02", "kind": "references", "source": "viaVariable", "target": "Box", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:7", "main.ts:8"], "note": "반환 타입 Box<number>와 값 대입 = Box" },
+    { "id": "R03", "kind": "references", "source": "viaVariable", "target": "BoxFactory", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R04", "kind": "constructs", "source": "viaVariable", "target": "Box", "pattern": "CONS-VIA-VARIABLE", "gtStatus": "determinate", "evidence": ["main.ts:9"], "note": "Ctor는 const이며 Box로만 초기화된다" },
+    { "id": "R05", "kind": "dataflow", "source": "viaVariable", "target": "Box", "argIndex": 0, "pattern": "DF-INDIRECT", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R06", "kind": "constructs", "source": "viaGeneric", "target": "Box", "pattern": "CONS-GENERIC", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R07", "kind": "dataflow", "source": "viaGeneric", "target": "Box", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R08", "kind": "references", "source": "viaGeneric", "target": "Box", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:12"] },
+    { "id": "R09", "kind": "references", "source": "notConstructed", "target": "Box", "pattern": "REF-CLASS-VALUE", "gtStatus": "determinate", "evidence": ["main.ts:16", "main.ts:17"] },
+    { "id": "R10", "kind": "constructs", "source": "builtin", "target": "libMap", "pattern": "CONS-LIB", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R11", "kind": "references", "source": "builtin", "target": "libMap", "pattern": "REF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:20"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "constructs", "source": "notConstructed", "target": "Box", "pattern": "NEG-CLASS-VALUE", "evidence": ["main.ts:17"], "rationale": "클래스를 반환할 뿐 인스턴스를 만들지 않는다" }
+  ],
+  "excludedSites": []
+}

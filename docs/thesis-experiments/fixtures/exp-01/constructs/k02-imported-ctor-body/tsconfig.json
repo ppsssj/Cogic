@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022"],
+    "types": [],
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "paths": {
+      "react": ["./shims/react.d.ts"],
+      "vue": ["./shims/vue.d.ts"],
+      "express": ["./shims/express.d.ts"],
+      "@nestjs/common": ["./shims/nest.d.ts"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}

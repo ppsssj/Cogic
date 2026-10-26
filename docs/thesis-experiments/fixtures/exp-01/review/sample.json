@@ -1,0 +1,60 @@
+{
+  "gtVersion": 1,
+  "rate": 0.2,
+  "seed": 20261026,
+  "population": 708,
+  "sampled": 146,
+  "sampledShare": 0.2062146892655367,
+  "perCategory": [
+    {
+      "category": "calls",
+      "population": 156,
+      "sampled": 32
+    },
+    {
+      "category": "constructs",
+      "population": 44,
+      "sampled": 9
+    },
+    {
+      "category": "dataflow",
+      "population": 188,
+      "sampled": 38
+    },
+    {
+      "category": "express-route-owner",
+      "population": 31,
+      "sampled": 7
+    },
+    {
+      "category": "nest-route-owner",
+      "population": 25,
+      "sampled": 5
+    },
+    {
+      "category": "react-hook-owner",
+      "population": 27,
+      "sampled": 6
+    },
+    {
+      "category": "references",
+      "population": 161,
+      "sampled": 33
+    },
+    {
+      "category": "updates",
+      "population": 43,
+      "sampled": 9
+    },
+    {
+      "category": "vue-hook-owner",
+      "population": 33,
+      "sampled": 7
+    }
+  ],
+  "labels": [
+    "exists",
+    "not-exists",
+    "undeterminable"
+  ]
+}

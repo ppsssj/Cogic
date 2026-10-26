@@ -1,0 +1,28 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "n04-local-decorators",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "file", "type": "file", "file": "main.ts" },
+    { "id": "ControllerFn", "type": "callable", "file": "main.ts", "line": 1, "name": "Controller" },
+    { "id": "GetFn", "type": "callable", "file": "main.ts", "line": 6, "name": "Get" },
+    { "id": "aNeg", "type": "synthetic", "file": "main.ts", "line": 13, "framework": "nest", "role": "route-owner", "anchor": "@Get" },
+    { "id": "bNeg", "type": "synthetic", "file": "main.ts", "line": 18, "framework": "nest", "role": "route-owner", "anchor": "@Get" },
+    { "id": "libClassDecorator", "type": "lib", "symbol": "ClassDecorator" },
+    { "id": "libMethodDecorator", "type": "lib", "symbol": "MethodDecorator" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "ControllerFn", "target": "libClassDecorator", "pattern": "REF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:1"] },
+    { "id": "R02", "kind": "references", "source": "GetFn", "target": "libMethodDecorator", "pattern": "REF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R03", "kind": "calls", "source": "file", "target": "ControllerFn", "pattern": "CALL-DECORATOR-CLASS", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R04", "kind": "dataflow", "source": "file", "target": "ControllerFn", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R05", "kind": "calls", "source": "file", "target": "GetFn", "pattern": "CALL-DECORATOR-METHOD", "gtStatus": "determinate", "evidence": ["main.ts:13", "main.ts:18"] },
+    { "id": "R06", "kind": "dataflow", "source": "file", "target": "GetFn", "argIndex": 0, "pattern": "DF-DECORATOR-METHOD", "gtStatus": "determinate", "evidence": ["main.ts:13", "main.ts:18"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "owner", "source": "aNeg", "pattern": "NEG-NEST-LOCAL-DECORATOR", "evidence": ["main.ts:11", "main.ts:13"], "rationale": "Controller/Get은 이 파일의 지역 함수이며 @nestjs/common이 아니다" },
+    { "id": "N02", "kind": "owner", "source": "bNeg", "pattern": "NEG-NEST-LOCAL-DECORATOR", "evidence": ["main.ts:11", "main.ts:18"], "rationale": "Controller/Get은 이 파일의 지역 함수이며 @nestjs/common이 아니다" }
+  ],
+  "excludedSites": []
+}

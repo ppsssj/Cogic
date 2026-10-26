@@ -1,0 +1,18 @@
+{
+  "schema": "exp01-case/1",
+  "caseId": "k01-local-classes",
+  "category": "constructs",
+  "title": "같은 파일 클래스 생성(명시적/암시적 생성자)",
+  "activeFile": "main.ts",
+  "description": "생성자 인자 dataflow, 필드·생성자 파라미터 타입 참조.",
+  "authoring": {
+    "author": "Claude Code (generative AI, model claude-opus-5-5)",
+    "date": "2026-10-26",
+    "method": "fixture 소스를 먼저 작성하고, 같은 소스의 TypeScript 정적 의미만 근거로 expected.json을 작성했다. Cogic analyzer는 이 fixture에 실행하지 않았다.",
+    "cogicOutputUsed": false,
+    "implementationKnowledge": "작성자는 Cogic 구현 소스를 읽었다(지원 범위 분류 목적). 정답 관계 자체는 구현 동작이 아니라 ANNOTATION_GUIDE의 정의로 정했다.",
+    "humanReviewed": false
+  },
+  "reviewStatus": "not-reviewed",
+  "reviewNotes": []
+}

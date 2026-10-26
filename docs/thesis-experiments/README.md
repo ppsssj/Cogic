@@ -42,6 +42,9 @@
 | [evidence-matrix.md](evidence-matrix.md) | 논문 주장 → 소스코드 → 테스트/실험 → 상태 → 추가 작업 |
 | [reproducibility.md](reproducibility.md) | 환경 비교, 버전, 재현 명령, 과거 산출물 무결성 해시 |
 | [risks-and-limitations.md](risks-and-limitations.md) | 위험 목록(심각도·대응), P0 자체의 한계 |
+| [p1a-ground-truth.md](p1a-ground-truth.md) | P1-A: EXP-01 Ground Truth 작성 방법, 독립성·검토 상태, 채점 규칙, 사전 등록, P0와의 차이 |
+| [fixtures/exp-01/](fixtures/exp-01/README.md) | P1-A: EXP-01 코퍼스 A(fixture 44개, GT v1), 주석 지침, 패턴 카탈로그, 커버리지, 검토 표본 |
+| `tools/exp01/` | P1-A: GT 검증, 채점, 커버리지, 검토 표본, manifest 도구와 단위 테스트 |
 | `tools/` | P0 읽기 전용 감사 도구 2개 |
 | `data/p0/` | P0 도구 출력(감사 결과, SourceFile 요청 probe) |
 
@@ -77,3 +80,4 @@
 |---|---|---|---|---|
 | P0 | 2026-10-26 | 최초 작성 | Baseline audit, 기존 벤치마크 감사, EXP-01/02/03 계획 | 전체 |
 | P0-R1 | 2026-10-26 | PR #1 검토 의견 | ① **선언 파일 비중 해석**: 요청 90.1%(건수, MEASURED[P0-PROBE])와 시간 기여도를 분리했다. "이득의 대부분이 선언 파일 재파싱 회피"는 INFERRED로 재분류하고 evidence C09a를 추가했다. ② **EXP-01 GT 판정**: GT 결정성 축을 추가했다. 정답이 결정 불가능한 사례는 P/R/F1 확증 평가에서 빼고 별도 보고한다. 정답이 명확한 unsupported-by-design 사례는 overall Recall에 포함한다. strict/lenient와 in-scope/overall 구분은 유지했다. ③ **EXP-02 재현 판정**: 단일 3단계 판정을 METHOD_REPRODUCED / EFFECT_DIRECTION_REPRODUCED / MAGNITUDE_COMPATIBLE 세 차원으로 바꾸었다. 과거 점추정 66.4%와 현재 CI만으로 동일 성능 재현을 확정하지 않는다 | README, existing-benchmark-audit, evidence-matrix, risks-and-limitations, reproducibility, experimental-design, exp-01, exp-02 |
+| P1-A | 2026-10-26 | EXP-01 준비 | EXP-01 GT v1(44 사례, 확증 651, 정답 불확정 8, 부정 49)과 채점 도구를 사전 등록했다. 측정은 하지 않았다. P0 문서는 고치지 않았다. P0와의 차이·의문점은 [p1a-ground-truth.md §8](p1a-ground-truth.md#8-p0-문서와의-차이와-의문점)에 보고했다 | README(문서 목록), p1a-ground-truth, fixtures/exp-01, tools/exp01 |

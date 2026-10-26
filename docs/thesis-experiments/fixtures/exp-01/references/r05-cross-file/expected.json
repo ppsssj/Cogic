@@ -1,0 +1,23 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "r05-cross-file",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "close", "type": "callable", "file": "main.ts", "line": 3, "name": "close" },
+    { "id": "hook", "type": "callable", "file": "main.ts", "line": 8, "name": "hook" },
+    { "id": "Order", "type": "external", "file": "types.ts", "line": 1, "name": "Order" },
+    { "id": "Status", "type": "external", "file": "types.ts", "line": 6, "name": "Status" },
+    { "id": "audit", "type": "external", "file": "types.ts", "line": 8, "name": "audit" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "close", "target": "audit", "pattern": "CALL-IMPORT-NAMED", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R02", "kind": "dataflow", "source": "close", "target": "audit", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R03", "kind": "references", "source": "close", "target": "Order", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:3"] },
+    { "id": "R04", "kind": "references", "source": "close", "target": "Status", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:3"] },
+    { "id": "R05", "kind": "references", "source": "hook", "target": "Order", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R06", "kind": "references", "source": "hook", "target": "audit", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:9"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

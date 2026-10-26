@@ -1,0 +1,36 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "n02-namespace-negatives",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "file", "type": "file", "file": "main.ts" },
+    { "id": "ping", "type": "callable", "file": "main.ts", "line": 6, "name": "ping" },
+    { "id": "status", "type": "callable", "file": "main.ts", "line": 11, "name": "status" },
+    { "id": "pingRoute", "type": "synthetic", "file": "main.ts", "line": 6, "framework": "nest", "role": "route-owner", "anchor": "@common.Get" },
+    { "id": "statusRoute", "type": "synthetic", "file": "main.ts", "line": 11, "framework": "nest", "role": "route-owner", "anchor": "@Get" },
+    { "id": "helperNeg", "type": "synthetic", "file": "main.ts", "line": 16, "framework": "nest", "role": "route-owner", "anchor": "helper" },
+    { "id": "ghostNeg", "type": "synthetic", "file": "main.ts", "line": 23, "framework": "nest", "role": "route-owner", "anchor": "@Get" },
+    { "id": "handlerNeg", "type": "synthetic", "file": "main.ts", "line": 30, "framework": "nest", "role": "route-owner", "anchor": "@Get" },
+    { "id": "Controller", "type": "external", "file": "shims/nest.d.ts", "line": 2, "name": "Controller" },
+    { "id": "Injectable", "type": "external", "file": "shims/nest.d.ts", "line": 3, "name": "Injectable" },
+    { "id": "Get", "type": "external", "file": "shims/nest.d.ts", "line": 4, "name": "Get" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "owner", "source": "pingRoute", "pattern": "FW-NEST-NAMESPACE", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R02", "kind": "calls", "source": "pingRoute", "target": "ping", "pattern": "FW-NEST-HANDLER-CALL", "gtStatus": "determinate", "evidence": ["main.ts:6", "main.ts:7"] },
+    { "id": "R03", "kind": "owner", "source": "statusRoute", "pattern": "FW-NEST-ROUTE", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R04", "kind": "calls", "source": "statusRoute", "target": "status", "pattern": "FW-NEST-HANDLER-CALL", "gtStatus": "determinate", "evidence": ["main.ts:11", "main.ts:12"] },
+    { "id": "R05", "kind": "calls", "source": "status", "target": "ping", "pattern": "CALL-METHOD-THIS", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R06", "kind": "calls", "source": "file", "target": "Controller", "pattern": "CALL-DECORATOR-CLASS", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R07", "kind": "calls", "source": "file", "target": "Injectable", "pattern": "CALL-DECORATOR-CLASS", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R08", "kind": "calls", "source": "file", "target": "Get", "pattern": "CALL-DECORATOR-METHOD", "gtStatus": "determinate", "evidence": ["main.ts:6", "main.ts:11", "main.ts:23", "main.ts:30"] },
+    { "id": "R09", "kind": "dataflow", "source": "file", "target": "Get", "argIndex": 0, "pattern": "DF-DECORATOR-METHOD", "gtStatus": "determinate", "evidence": ["main.ts:6", "main.ts:11", "main.ts:23", "main.ts:30"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "owner", "source": "helperNeg", "pattern": "NEG-NEST-NO-ROUTE-DECORATOR", "evidence": ["main.ts:16"], "rationale": "route 데코레이터가 없는 메서드다" },
+    { "id": "N02", "kind": "owner", "source": "ghostNeg", "pattern": "NEG-NEST-NOT-CONTROLLER", "evidence": ["main.ts:21", "main.ts:23"], "rationale": "Service는 @Injectable 클래스이며 @Controller가 아니다" },
+    { "id": "N03", "kind": "owner", "source": "handlerNeg", "pattern": "NEG-NEST-NOT-CONTROLLER", "evidence": ["main.ts:29", "main.ts:30"], "rationale": "Plain에는 클래스 데코레이터가 없다" }
+  ],
+  "excludedSites": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c06-jsx-dynamic-import",
+  "gtVersion": 1,
+  "activeFile": "main.tsx",
+  "nodes": [
+    { "id": "Title", "type": "callable", "file": "main.tsx", "line": 3, "name": "Title" },
+    { "id": "Page", "type": "callable", "file": "main.tsx", "line": 7, "name": "Page" },
+    { "id": "loadSettings", "type": "callable", "file": "main.tsx", "line": 16, "name": "loadSettings" },
+    { "id": "Card", "type": "external", "file": "Card.tsx", "line": 1, "name": "Card" },
+    { "id": "settingsModule", "type": "module", "file": "settings.ts" },
+    { "id": "defaults", "type": "external", "file": "settings.ts", "line": 1, "name": "defaults" },
+    { "id": "jsxDiv", "type": "external", "file": "shims/jsx.d.ts", "line": 6, "name": "div" },
+    { "id": "jsxH1", "type": "external", "file": "shims/jsx.d.ts", "line": 7, "name": "h1" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "Page", "target": "Title", "pattern": "CALL-JSX-LOCAL", "gtStatus": "determinate", "evidence": ["main.tsx:10"] },
+    { "id": "R02", "kind": "calls", "source": "Page", "target": "Card", "pattern": "CALL-JSX-IMPORT", "gtStatus": "determinate", "evidence": ["main.tsx:11"] },
+    { "id": "R03", "kind": "calls", "source": "loadSettings", "target": "settingsModule", "pattern": "CALL-DYNAMIC-IMPORT", "gtStatus": "determinate", "evidence": ["main.tsx:17"] },
+    { "id": "R04", "kind": "calls", "source": "loadSettings", "target": "defaults", "pattern": "CALL-DYNAMIC-MODULE-MEMBER", "gtStatus": "determinate", "evidence": ["main.tsx:18"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "calls", "source": "Title", "target": "jsxH1", "pattern": "NEG-JSX-INTRINSIC", "evidence": ["main.tsx:4"], "rationale": "<h1>은 intrinsic 요소이며 사용자 컴포넌트 호출이 아니다" },
+    { "id": "N02", "kind": "calls", "source": "Page", "target": "jsxDiv", "pattern": "NEG-JSX-INTRINSIC", "evidence": ["main.tsx:9"], "rationale": "<div>는 intrinsic 요소이며 사용자 컴포넌트 호출이 아니다" },
+    { "id": "N03", "kind": "dataflow", "source": "Page", "target": "Title", "argIndex": 0, "pattern": "NEG-JSX-PROPS", "evidence": ["main.tsx:10"], "rationale": "dataflow는 호출식 인자 목록에만 정의한다. JSX 속성 text=\"hi\"는 해당하지 않는다(ANNOTATION_GUIDE §4.5)" }
+  ],
+  "excludedSites": []
+}

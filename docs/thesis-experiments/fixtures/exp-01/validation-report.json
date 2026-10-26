@@ -1,0 +1,590 @@
+{
+  "typescript": "5.9.3",
+  "cases": 44,
+  "errorCount": 0,
+  "warningCount": 5,
+  "results": [
+    {
+      "caseId": "c01-local-direct",
+      "category": "calls",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 5,
+        "relations": 11,
+        "negatives": 0,
+        "callSites": 7,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "c02-methods",
+      "category": "calls",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 6,
+        "relations": 8,
+        "negatives": 0,
+        "callSites": 6,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "c03-imports",
+      "category": "calls",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 6,
+        "relations": 10,
+        "negatives": 0,
+        "callSites": 4,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "c04-barrel-alias",
+      "category": "calls",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 4,
+        "relations": 8,
+        "negatives": 0,
+        "callSites": 4,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "c05-optional-generic-overload",
+      "category": "calls",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 6,
+        "relations": 8,
+        "negatives": 0,
+        "callSites": 6,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "c06-jsx-dynamic-import",
+      "category": "calls",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 8,
+        "relations": 4,
+        "negatives": 3,
+        "callSites": 6,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "c07-lib-callback",
+      "category": "calls",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 4,
+        "relations": 5,
+        "negatives": 2,
+        "callSites": 2,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "c08-dynamic-access",
+      "category": "calls",
+      "errors": [],
+      "warnings": [
+        "relation I01: no evidence line mentions start/stop"
+      ],
+      "stats": {
+        "nodes": 9,
+        "relations": 11,
+        "negatives": 0,
+        "callSites": 5,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "c09-recursion-callback-param",
+      "category": "calls",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 6,
+        "relations": 10,
+        "negatives": 1,
+        "callSites": 5,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "c10-negatives",
+      "category": "calls",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 8,
+        "relations": 4,
+        "negatives": 6,
+        "callSites": 2,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "k01-local-classes",
+      "category": "constructs",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 15,
+        "negatives": 0,
+        "callSites": 6,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "k02-imported-ctor-body",
+      "category": "constructs",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 13,
+        "negatives": 0,
+        "callSites": 7,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "k03-factories",
+      "category": "constructs",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 21,
+        "negatives": 0,
+        "callSites": 7,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "k04-indirect-builtin",
+      "category": "constructs",
+      "errors": [],
+      "warnings": [
+        "relation R04: no evidence line mentions Box"
+      ],
+      "stats": {
+        "nodes": 7,
+        "relations": 11,
+        "negatives": 1,
+        "callSites": 3,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "k05-field-initializers",
+      "category": "constructs",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 9,
+        "relations": 16,
+        "negatives": 0,
+        "callSites": 9,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "k06-imported-scene",
+      "category": "constructs",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 8,
+        "relations": 23,
+        "negatives": 0,
+        "callSites": 8,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "k07-events",
+      "category": "constructs",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 15,
+        "negatives": 0,
+        "callSites": 7,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "k08-negatives",
+      "category": "constructs",
+      "errors": [],
+      "warnings": [
+        "negative N04: no evidence line mentions Widget"
+      ],
+      "stats": {
+        "nodes": 7,
+        "relations": 7,
+        "negatives": 4,
+        "callSites": 2,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "d01-parameter-binding",
+      "category": "dataflow",
+      "errors": [],
+      "warnings": [
+        "relation I01: no evidence line mentions pair/scale"
+      ],
+      "stats": {
+        "nodes": 13,
+        "relations": 21,
+        "negatives": 2,
+        "callSites": 8,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "d02-methods-constructors",
+      "category": "dataflow",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 6,
+        "relations": 16,
+        "negatives": 1,
+        "callSites": 5,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "e01-inline-handlers",
+      "category": "express",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 12,
+        "relations": 20,
+        "negatives": 0,
+        "callSites": 9,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "e02-named-middleware",
+      "category": "express",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 14,
+        "relations": 24,
+        "negatives": 0,
+        "callSites": 5,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "e03-unsupported-negatives",
+      "category": "express",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 22,
+        "relations": 34,
+        "negatives": 5,
+        "callSites": 12,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "n01-controller",
+      "category": "nest",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 15,
+        "relations": 18,
+        "negatives": 0,
+        "callSites": 7,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "n02-namespace-negatives",
+      "category": "nest",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 11,
+        "relations": 9,
+        "negatives": 3,
+        "callSites": 7,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "n03-paths",
+      "category": "nest",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 14,
+        "relations": 21,
+        "negatives": 0,
+        "callSites": 9,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "n04-local-decorators",
+      "category": "nest",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 6,
+        "negatives": 2,
+        "callSites": 3,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "h01-reducer-effect",
+      "category": "react",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 10,
+        "relations": 21,
+        "negatives": 0,
+        "callSites": 6,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "h02-alias-namespace-memo",
+      "category": "react",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 14,
+        "relations": 30,
+        "negatives": 0,
+        "callSites": 10,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "h03-unsupported-negatives",
+      "category": "react",
+      "errors": [],
+      "warnings": [
+        "relation R16: no evidence line mentions useMemo"
+      ],
+      "stats": {
+        "nodes": 16,
+        "relations": 18,
+        "negatives": 5,
+        "callSites": 7,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "r01-type-references",
+      "category": "references",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 8,
+        "relations": 8,
+        "negatives": 0,
+        "callSites": 0,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "r02-value-references",
+      "category": "references",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 9,
+        "negatives": 0,
+        "callSites": 2,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "r03-heritage-members",
+      "category": "references",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 8,
+        "relations": 11,
+        "negatives": 0,
+        "callSites": 4,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "r04-anonymous-callback",
+      "category": "references",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 8,
+        "relations": 14,
+        "negatives": 0,
+        "callSites": 5,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "r05-cross-file",
+      "category": "references",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 5,
+        "relations": 6,
+        "negatives": 0,
+        "callSites": 1,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "u01-react-usestate",
+      "category": "updates",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 14,
+        "negatives": 0,
+        "callSites": 7,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "u02-react-todo",
+      "category": "updates",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 8,
+        "relations": 17,
+        "negatives": 0,
+        "callSites": 10,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "u03-vue-ref-reactive",
+      "category": "updates",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 9,
+        "relations": 27,
+        "negatives": 0,
+        "callSites": 3,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "u04-vue-form",
+      "category": "updates",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 9,
+        "relations": 25,
+        "negatives": 0,
+        "callSites": 3,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "u05-react-negatives",
+      "category": "updates",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 8,
+        "relations": 11,
+        "negatives": 5,
+        "callSites": 2,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "u06-vue-negatives",
+      "category": "updates",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 8,
+        "relations": 12,
+        "negatives": 4,
+        "callSites": 2,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "v01-computed-watch",
+      "category": "vue",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 12,
+        "relations": 27,
+        "negatives": 0,
+        "callSites": 7,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "v02-namespace-unsupported",
+      "category": "vue",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 13,
+        "relations": 27,
+        "negatives": 0,
+        "callSites": 6,
+        "tsDiagnostics": 0
+      }
+    },
+    {
+      "caseId": "v03-negatives",
+      "category": "vue",
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "nodes": 12,
+        "relations": 13,
+        "negatives": 5,
+        "callSites": 6,
+        "tsDiagnostics": 0
+      }
+    }
+  ]
+}
