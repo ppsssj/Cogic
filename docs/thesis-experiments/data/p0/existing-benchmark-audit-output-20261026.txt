@@ -1,0 +1,25 @@
+ISSUES: none
+CSV vs JSON: 54 rows compared
+results.md scenario-table rows matched: 54/54
+SourceFile requests per analysis cogic: 172 (harness fileCount 84, diff 88)
+SourceFile requests per analysis synthetic-100: 259 (harness fileCount 100, diff 159)
+SourceFile requests per analysis synthetic-500: 659 (harness fileCount 500, diff 159)
+SourceFile requests per analysis synthetic-1000: 1159 (harness fileCount 1000, diff 159)
+SourceFile requests per analysis synthetic-2000: 2159 (harness fileCount 2000, diff 159)
+SourceFile requests per analysis external-zod: 534 (harness fileCount 490, diff 44)
+High-variability rows (CV>10% or max/p50>1.4): 10
+  - cogic/repeated/off: CV=12.1% max/p50=1.43 (p50 1189.26 ms, max 1700.92 ms)
+  - cogic/repeated/sourcefile: CV=12.0% max/p50=1.44 (p50 385.44 ms, max 555.64 ms)
+  - cogic/repeated/full: CV=12.2% max/p50=1.33 (p50 6.07 ms, max 8.06 ms)
+  - synthetic-100/repeated/off: CV=19.8% max/p50=1.90 (p50 1178.34 ms, max 2239.76 ms)
+  - synthetic-100/repeated/full: CV=97.6% max/p50=8.20 (p50 0.50 ms, max 4.08 ms)
+  - synthetic-500/repeated/full: CV=18.8% max/p50=1.68 (p50 2.72 ms, max 4.57 ms)
+  - synthetic-1000/cold/full: CV=12.1% max/p50=1.54 (p50 2122.54 ms, max 3262.14 ms)
+  - synthetic-1000/repeated/full: CV=11.8% max/p50=1.40 (p50 5.13 ms, max 7.20 ms)
+  - synthetic-2000/repeated/full: CV=45.9% max/p50=3.57 (p50 11.74 ms, max 41.93 ms)
+  - external-zod/repeated/full: CV=19.3% max/p50=1.58 (p50 1.77 ms, max 2.80 ms)
+README headline: OFF 1088.25 ms, SF 366.03 ms (66.4%), Full 378.67 ms (65.2%)
+README conservative statement says '1.09 s to 0.38 s' while SourceFile-only p50 = 0.366 s (0.38 s matches Full result 0.379 s)
+Condition order (per target): scenarios cold -> repeated -> active-edit, modes off -> sourcefile -> full
+Duration: 2026-08-29T12:24:56.061Z -> 2026-08-29T13:10:02.137Z
+Per-iteration samples present in raw JSON: NO (aggregates only)
