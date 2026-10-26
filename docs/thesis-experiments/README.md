@@ -51,7 +51,7 @@
 2. **측정된 analyzer 코드는 현재 HEAD와 같다** (`git diff d9faa02 HEAD -- src` = 0줄). 하드웨어·OS·Node는 모두 달라 same-environment 재현은 현재 장비로 불가능하다.
 3. **기존 correctness 검증은 캐시 hit 경로를 거치지 않았다.** "ON/OFF 결과 동일"은 cold 경로에 한정된 주장이다.
 4. **Full result 모드의 active-edit 수치(−65.2%)는 result cache 효과가 아니다** (hit 0). SourceFile cache 효과와 harness 오버헤드다.
-5. Cogic 대상 분석 1회의 SourceFile 요청 172건 중 **90.1%가 TS lib/@types 선언 파일**이고, 요청 순서는 분석 간 동일하다(P0 probe). 대규모 hit 0 현상은 순환 접근 LRU의 이론적 예측과 맞는다. 단 아직 INFERRED이며 EXP-03에서 검증한다.
+5. Cogic 대상 분석 1회의 SourceFile **요청 172건 중 90.1%(건수 기준)가 TS lib/@types 선언 파일**이고, 요청 순서는 분석 간 동일하다(MEASURED[P0-PROBE], count만). 이 비중은 **성능 개선 기여도가 아니다.** 선언 파일 재파싱 회피가 시간 단축의 대부분을 차지한다는 해석은 INFERRED다. 대규모 hit 0 현상은 순환 접근 LRU의 이론적 예측과 맞는다. 이것도 아직 INFERRED이며 EXP-03에서 검증한다.
 6. 기존 테스트 25개는 모두 통과하지만, 관계의 **존재만 단언**한다. 정밀도(FP)를 검증한 근거는 없다 → EXP-01 필요.
 7. **`npm run benchmark:cache`는 과거 원본을 덮어쓴다.** 신규 실험에서는 사용하면 안 된다.
 
@@ -68,3 +68,12 @@
 - `docs/benchmarks/analysis-cache/` = HIST-0829 원본. 읽기 전용이다.
 - 신규 실험 데이터는 `docs/thesis-experiments/data/<exp>/<run-id>/`에만 쓴다.
 - 가설과 다른 결과, 실패·중단 run도 삭제하지 않고 status와 함께 보존한다.
+
+## 변경 이력
+
+모든 개정은 실험을 실행하기 전에 이루어졌다. 개정 시점에 존재하는 실험 데이터는 없다(`data/exp-*` 없음). 따라서 결과를 보고 규칙을 바꾼 경우에 해당하지 않는다.
+
+| 개정 | 날짜 | 계기 | 변경 내용 | 영향 문서 |
+|---|---|---|---|---|
+| P0 | 2026-10-26 | 최초 작성 | Baseline audit, 기존 벤치마크 감사, EXP-01/02/03 계획 | 전체 |
+| P0-R1 | 2026-10-26 | PR #1 검토 의견 | ① **선언 파일 비중 해석**: 요청 90.1%(건수, MEASURED[P0-PROBE])와 시간 기여도를 분리했다. "이득의 대부분이 선언 파일 재파싱 회피"는 INFERRED로 재분류하고 evidence C09a를 추가했다. ② **EXP-01 GT 판정**: GT 결정성 축을 추가했다. 정답이 결정 불가능한 사례는 P/R/F1 확증 평가에서 빼고 별도 보고한다. 정답이 명확한 unsupported-by-design 사례는 overall Recall에 포함한다. strict/lenient와 in-scope/overall 구분은 유지했다. ③ **EXP-02 재현 판정**: 단일 3단계 판정을 METHOD_REPRODUCED / EFFECT_DIRECTION_REPRODUCED / MAGNITUDE_COMPATIBLE 세 차원으로 바꾸었다. 과거 점추정 66.4%와 현재 CI만으로 동일 성능 재현을 확정하지 않는다 | README, existing-benchmark-audit, evidence-matrix, risks-and-limitations, reproducibility, experimental-design, exp-01, exp-02 |

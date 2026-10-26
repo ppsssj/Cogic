@@ -8,7 +8,7 @@
 |---|---|---|---|---|---|
 | R-01 | `npm run benchmark:cache`가 `docs/benchmarks/analysis-cache/` 7개 파일을 무조건 덮어쓴다 | `benchmark-analysis-cache.mjs:210-240` | **H** | 기존 스크립트 실행 금지. 신규 도구는 출력 경로를 강제하고 원본 해시를 대조한다([reproducibility.md §3](reproducibility.md#3-과거-산출물-무결성)) | P2 전 |
 | R-02 | 결과 문서의 해석 문장이 하드코딩되어 재실행 시 표와 모순될 수 있다 | `:866`, `:870`, `:985`, `:1034` | M | 신규 도구의 `summary.md`는 데이터에서만 생성한다 | P2 |
-| R-03 | 과거 원시 데이터가 집계값뿐(반복별 표본 없음) | JSON `rows[].stats` | M | 신규 실험은 표본 저장. 과거와는 점추정 기준 비교 | P2 |
+| R-03 | 과거 원시 데이터가 집계값뿐(반복별 표본 없음) | JSON `rows[].stats` | M | 신규 실험은 표본 저장. 과거와는 점추정 기준 비교. 크기 비교는 MAGNITUDE_COMPATIBLE의 제한적 판단만 하고 동일 성능 재현을 주장하지 않는다 | P2 |
 | R-04 | 과거 correctness 검증이 캐시 hit 경로를 거치지 않는다 | `:677-690` (clear 직후 1회 실행) | **H** | EXP-02 Phase D로 hit 경로를 검증한다. 그 전에는 "cold 경로 동일"로만 서술 | P2 |
 | R-05 | 과거 실행 SHA(`d9faa02`)에 스크립트가 없었다(미커밋 실행, dirty 미기록) | `git show --stat fed34a0` | M | 신규 도구는 dirty 거부와 도구 SHA-256 기록 | P2 |
 | R-06 | 과거와 현재 하드웨어·OS·Node가 모두 다르다 | [reproducibility.md §1](reproducibility.md#1-실행-환경-비교) | M | 상대 지표로 판정, Node 22 조건 추가. 원래 장비를 쓸 수 있으면 추가 실행 | P2 |
@@ -21,7 +21,7 @@
 |---|---|---|---|---|
 | R-11 | Full result 측정이 production 메서드가 아닌 등가 harness다 | `PanelEquivalentResultCache` vs `CodeGraphPanel.ts:1274-1353` | M | 논문에 명시. 키 정규화 차이(경로 처리)를 기록 |
 | R-12 | production은 문서 변경 이벤트마다 result cache 전체를 비운다 | `CodeGraphPanel.ts:581`, `:820` | M | repeated Full hit(99.5%)는 실제 편집 흐름에서 일어나지 않는 상한임을 명시 |
-| R-13 | SF cache 이득의 대부분이 lib/@types 선언 재파싱 회피다(cogic 90.1%) | P0 probe | M | 해석 문장에 반영. 대상별 요청 구성 표 제시 |
+| R-13 | SF 요청의 90.1%(건수, cogic)가 lib/@types 선언 파일이다. 이 비중을 시간 기여도로 오독할 위험이 있다. 이득의 대부분이 선언 재파싱 회피라는 해석은 INFERRED다 | P0 probe(count만) | M | 요청 비중(MEASURED)과 기여도(INFERRED)를 분리해 서술. 대상별 요청 구성 표 제시. 기여도 확정은 요청별 파싱 시간 측정 후 |
 | R-14 | 합성 workspace가 상위 `node_modules/@types`를 자동 포함한다(L ≈ 159) | 요청 수 = N + 159 | M | L 실측·기록, EXP-03 H3-4로 분리 |
 | R-15 | 측정은 analyzer 실행 시간이다. UI·debounce·`findFiles`는 제외된다 | harness 측정 구간 | M | "분석 실행 시간"으로 한정 서술. UX 개선 주장 금지 |
 | R-16 | production 기본 depth는 0, 벤치마크는 depth 1, depth ≥2는 미측정 | `CodeGraphPanel.ts:282`, `App.tsx:683` | L | depth 0은 사후 prune만 추가되어 analyzer 비용이 같다(코드 근거). depth ≥2는 범위 밖으로 명시 |
@@ -40,6 +40,7 @@
 | R-24 | `calls` 목록이 상위 60개로 잘린다 | L | 정확도와 정합성은 graph edges로 평가 |
 | R-25 | 다른 파일 reference가 설계상 없다 | M | in-scope/overall 재현율 병기 |
 | R-26 | shim 선언과 실제 패키지 타입이 다르다 | L | shim 고정, exploratory 비교 |
+| R-27 | 어려운 사례를 `indeterminate`로 분류해 확증 지표에서 빼면 지표가 부풀려질 수 있다 | M | blind 부여·사전 등록, 출력 확인 후 변경 금지, 제외 비율·제외 예측 수·전부-FP 민감도 Precision 보고([EXP-01 §6.5](experiments/exp-01-accuracy.md#65-gt-결정성과-평가-집합-사전-고정)) |
 
 ## 4. 구현 제약 (실험 결과에 직접 영향)
 

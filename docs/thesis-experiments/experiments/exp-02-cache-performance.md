@@ -4,6 +4,7 @@
 - 준비도: **PARTIALLY_READY** — 측정 대상 analyzer 코드는 과거 실행과 동일하다(`git diff d9faa02 HEAD -- src` = 0줄). 기존 harness 로직을 재사용할 수 있다. 다만 기존 스크립트는 과거 산출물을 덮어쓰고 반복별 표본을 남기지 않으므로 **그대로 실행하면 안 된다**. 원래 하드웨어가 없으면 same-environment 재현은 불가능하다.
 - 과거 기준 결과: MEASURED[HIST-0829] ([../existing-benchmark-audit.md](../existing-benchmark-audit.md))
 - 측정 대상: **analyzer 실행 시간**(+harness result cache 오버헤드). UI 응답시간이 아니다.
+- 개정: P0-R1(2026-10-26, 실험 실행 전). §9 재현 판정을 단일 3단계(REPRODUCED / DIRECTION_ONLY / NOT_REPRODUCED)에서 세 차원 판정으로 바꾸었다. 선언 파일 요청 비중 서술(§11)을 고쳤다. 사유는 [../README.md 변경 이력](../README.md#변경-이력)에 있다.
 
 ---
 
@@ -108,14 +109,26 @@
 ## 9. Statistical Analysis
 
 - **주 지표**: Cogic active-edit `r_SF = 1 − median(SF)/median(OFF)`
-- **재현 판정 규칙(사전 고정)**. 과거 원시 표본이 없으므로 과거 점추정 `r_hist = 0.664`를 기준으로 쓴다.
-  - **REPRODUCED**: 신규 `r_SF`의 95% CI가 0.664를 포함하고 하한 > 0
-  - **DIRECTION_ONLY**: 하한 > 0이지만 CI가 0.664를 포함하지 않음(효과 방향은 같고 크기가 다름)
-  - **NOT_REPRODUCED**: CI가 0을 포함하거나 음수
-  - 환경이 다르므로 DIRECTION_ONLY도 그 자체로 해석 가능한 결과다. 절대 ms 일치는 판정에 사용하지 않는다
-- 보조 지표는 같은 규칙을 각 조건의 과거 점추정에 적용한다(표로 보고)
-- count 지표(H2-4)는 정확 일치 여부로 판정한다
-- P-robust는 블록별 중앙값의 분포와 블록 간 변동(블록 중앙값의 범위·CV)을 보고하고, P-orig와 결론(판정 범주)이 같은지 비교한다
+- **재현 판정 규칙(사전 고정)**. 과거와 현재는 하드웨어·OS·Node가 모두 다르다([../reproducibility.md §1](../reproducibility.md#1-실행-환경-비교)). 그래서 재현을 하나의 판정으로 묶지 않고 서로 독립인 세 차원으로 나누어 각각 판정한다. 하나가 충족되어도 다른 차원의 충족을 뜻하지 않는다.
+
+  | 차원 | 묻는 것 | 판정 기준 | 결과 값 |
+  |---|---|---|---|
+  | **METHOD_REPRODUCED** | 실험 절차와 측정 정의를 같게 재현했는가 | 다음을 **모두** 충족: (a) 측정 로직이 기존 스크립트의 복사본이다(`exp02-diff-from-original.md`로 확인), (b) 대상·시나리오·모드·warm-up 5·측정 30·`performance.now()` 측정 구간·통계 정의(nearest-rank median 포함)가 과거와 같다, (c) P-orig 54개 조건을 모두 측정했다, (d) 결정적 count가 과거와 정확히 같다(H2-4 요청 수, Full repeated 전부 result hit, active-edit result hit 0) | MET / NOT_MET (미충족 항목 명시) |
+  | **EFFECT_DIRECTION_REPRODUCED** | 캐시 적용이 과거와 같은 방향(시간 감소)의 효과를 내는가 | 신규 `r_SF`의 95% CI 하한 > 0. P-orig와 P-robust에서 각각 판정 | YES / NO (CI가 0을 포함) / REVERSED (CI 상한 < 0) |
+  | **MAGNITUDE_COMPATIBLE** | 과거와 현재 효과 크기가 비슷하다고 볼 수 있는가 (**제한적 판단**) | 과거 점추정 `r_hist = 0.664`가 신규 `r_SF` 95% CI 안에 있으면 COMPATIBLE, 밖에 있으면 NOT_COMPATIBLE | COMPATIBLE / NOT_COMPATIBLE / NOT_ASSESSED (방향 미재현 시) |
+
+- **MAGNITUDE_COMPATIBLE의 해석 한계**(판정과 함께 반드시 보고):
+  - 과거 결과는 반복별 표본이 없는 **점추정 하나**다. 과거 쪽 불확실성(CI)을 알 수 없으므로 두 효과 크기의 차이를 검정할 수 없다.
+  - 따라서 COMPATIBLE은 "현재 측정의 불확실성 범위가 과거 점추정과 모순되지 않는다"는 뜻일 뿐이다. **"같은 성능이 재현되었다"거나 "효과 크기가 같다"고 확정하지 않는다.** 동등성(equivalence)을 주장하려면 사전에 정한 동등성 한계와 양쪽 표본이 필요한데, 과거 표본이 없어 불가능하다.
+  - NOT_COMPATIBLE도 과거 결과가 틀렸다는 뜻이 아니다. 환경 차이(CPU 세대, 디스크, OS, Node/V8 버전)만으로 상대 효과 크기가 달라질 수 있다. 원인 구분은 Node 22 조건 비교와 원래 장비 추가 실행(가능할 때)으로만 부분적으로 할 수 있다.
+  - 현재 CI가 넓으면 COMPATIBLE이 쉽게 나온다. 그래서 CI 반폭을 함께 보고하고, 반폭이 파일럿 목표(5%p)를 넘으면 판정 옆에 "정밀도 부족"을 표시한다.
+- **논문 서술 규칙**:
+  - 세 차원을 항상 따로 적는다. 예: "방법 재현 MET, 효과 방향 재현 YES(P-orig, P-robust), 크기 호환성 COMPATIBLE(제한적)".
+  - "재현되었다"라는 단일 표현은 METHOD_REPRODUCED = MET이고 EFFECT_DIRECTION_REPRODUCED = YES일 때 "방법과 효과 방향이 재현되었다"는 형태로만 쓴다.
+  - 절대 ms 일치는 어떤 차원의 판정에도 사용하지 않는다. 과거·현재 ms는 환경이 다르다는 주석과 함께 나란히 표시만 한다.
+- 보조 지표는 EFFECT_DIRECTION_REPRODUCED와 MAGNITUDE_COMPATIBLE 규칙을 각 조건의 과거 점추정에 적용한다(표로 보고). 과거 효과가 0에 가깝거나 음수인 조건(cold 오버헤드, 합성 1000/2000)은 "방향"을 과거 점추정의 부호로 정의하고, 판정 표에 그 정의를 함께 적는다
+- count 지표(H2-4)는 정확 일치 여부로 판정한다. 이 결과는 METHOD_REPRODUCED (d)에 들어간다
+- P-robust는 블록별 중앙값의 분포와 블록 간 변동(블록 중앙값의 범위·CV)을 보고하고, P-orig와 세 차원의 판정이 같은지 비교한다
 - 다중 비교: 보조 조건의 Mann–Whitney p값에 Holm 보정
 
 ## 10. Correctness Validation
@@ -138,9 +151,9 @@
 | 구성 | 측정값은 analyzer 실행 시간이지 UX 지연이 아님 | 논문에서 명시. UI·debounce·`findFiles` 제외 |
 | 구성 | Full result는 production 메서드가 아닌 등가 harness | 명시. production은 문서 변경마다 result cache 전체를 clear한다(baseline K6) |
 | 구성 | SourceFile only는 production에 없는 분리 조건 | 분석용 조건임을 명시 |
-| 구성 | SF 이득의 90%가 lib 선언 재파싱 회피(cogic) | 해석에 반영. 대상별 요청 구성을 표로 제시 |
+| 구성 | SF 요청의 90.1%(건수, cogic)가 lib 선언 파일이다. 시간 기여도는 측정하지 않는다 | 대상별 요청 구성을 표로 제시. "이득의 대부분이 선언 재파싱 회피"는 INFERRED로만 서술 |
 | 외적 | 대상 6개, 실제 저장소는 cogic·zod 2개 | 일반화 제한. 보조 workload는 exploratory |
-| 결론 | 과거 표본 부재로 분포 비교 불가 | 점추정 기준 판정 규칙 사용, 한계 명시 |
+| 결론 | 과거 표본 부재로 분포 비교 불가 | 재현을 세 차원으로 나누어 판정(§9). 크기 비교는 MAGNITUDE_COMPATIBLE의 제한적 판단으로만 하고 동일 성능 재현으로 서술하지 않음 |
 
 ## 12. Expected Output Files
 
@@ -152,7 +165,7 @@ docs/thesis-experiments/data/exp-02/<run-id>/
 ├── samples.csv              # target,scenario,mode,process,block,iteration,isWarmup,elapsedMs,sfHit,sfMiss,sfStale,resultHit,resultMiss,heapUsed,rss,resultHash,timestamp
 ├── correctness.csv          # Phase D 결과
 ├── summary.csv              # 조건별 통계 (type7 & nearest-rank)
-├── comparison-to-hist.csv   # 조건별 과거 점추정, 신규 CI, 판정
+├── comparison-to-hist.csv   # 조건별 과거 점추정, 신규 CI·반폭, 세 차원 판정
 ├── integrity.json           # 과거 산출물 해시 사전·사후
 └── summary.md               # 도구 생성
 docs/thesis-experiments/tools/exp02-cache-benchmark.mjs
@@ -178,6 +191,6 @@ node docs/thesis-experiments/tools/exp02-cache-benchmark.mjs --protocol robust -
 - [ ] Phase D hit 경로 정합성 결과 기록(통과/실패 무관하게 보고)
 - [ ] `env.json`·`workloads.json` 필수 필드 완비
 - [ ] 과거 산출물 해시 불변(`integrity.json` PASS)
-- [ ] 주 지표 판정(REPRODUCED/DIRECTION_ONLY/NOT_REPRODUCED)과 보조 지표 표 생성
+- [ ] 주 지표의 세 차원 판정(METHOD_REPRODUCED, EFFECT_DIRECTION_REPRODUCED, MAGNITUDE_COMPATIBLE)과 보조 지표 표 생성. MAGNITUDE_COMPATIBLE에는 해석 한계와 CI 반폭을 함께 기록
 - [ ] P-robust k ≥ 3 블록 완료 및 P-orig와 결론 비교
 - [ ] 측정 범위(analyzer 실행 시간)와 비측정 범위(UI)가 보고서에 명시됨

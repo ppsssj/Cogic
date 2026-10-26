@@ -36,7 +36,7 @@
 
 | ID | 논문의 주장 | 근거 소스코드 | 테스트·실험 | 현재 상태 | 논문 사용 가능 문구 / 추가 작업 |
 |---|---|---|---|---|---|
-| C01 | Cogic active-edit에서 SF cache가 p50 분석 시간을 1088.25 → 366.03 ms(−66.4%)로 줄였다 | 측정: `benchmark-analysis-cache.mjs:509-612` | 기존 벤치마크 | **MEASURED[HIST-0829]**, 미재현. 원시 표본 없음, 단일 환경 1회 | "과거 단일 환경 1회 측정에서 …"로만 사용. **EXP-02 재현 필요** |
+| C01 | Cogic active-edit에서 SF cache가 p50 분석 시간을 1088.25 → 366.03 ms(−66.4%)로 줄였다 | 측정: `benchmark-analysis-cache.mjs:509-612` | 기존 벤치마크 | **MEASURED[HIST-0829]**, 미재현. 원시 표본 없음, 단일 환경 1회 | "과거 단일 환경 1회 측정에서 …"로만 사용. **EXP-02 재현 필요**: 방법·효과 방향·크기 호환성을 따로 판정한다. 과거 표본이 없어 동일 성능 재현은 확정할 수 없다([EXP-02 §9](experiments/exp-02-cache-performance.md#9-statistical-analysis)) |
 | C02 | Full result 모드 active-edit 378.67 ms(−65.2%) | 동일 | 동일 | MEASURED[HIST-0829] | result cache 효과가 아님(hit 0). 그렇게 서술하면 안 된다 |
 | C03 | Repeated Full result에서 99.5% 감소 | 동일 | 동일 | MEASURED[HIST-0829], best-case | 상한값으로만. 실제 편집에서는 일어나지 않음(B03) |
 | C04 | 캐시 ON/OFF 분석 결과가 동일하다 | `benchmark-analysis-cache.mjs:677-737` | 기존 correctness 12건 | MEASURED[HIST-0829], **cold 경로만** | "캐시 활성 cold 경로에서 동일". hit 경로는 **EXP-02 Phase D** |
@@ -44,7 +44,8 @@
 | C06 | 합성 1000/2000에서 SF hit 0, ON이 7–14% 느리다 | 동일 | 동일 | MEASURED[HIST-0829] | 관찰 사실로 사용 가능. 원인은 C08 |
 | C07 | 분석 1회당 SF 요청 수 = N + 159 (synthetic), cogic 172 | 원시 hit+miss / 30 | 기존 데이터 + P0 probe | MEASURED[HIST-0829] + MEASURED[P0-PROBE](cogic 172 일치) | 사용 가능 |
 | C08 | 대규모 hit 0의 원인은 W > C에서의 순환 접근 LRU 스래싱이다 | `analyze.ts:710-722` | — | **INFERRED** (요청 순서 동일성은 P0-PROBE로 확인) | **EXP-03** 기준 1–5 충족 시 주장 |
-| C09 | cogic의 SF 재사용 대상 90.1%는 lib/@types 선언 파일이다 | probe | `data/p0/sourcefile-request-probe-20261026.json` | MEASURED[P0-PROBE] | 해석 문장에 반영 가능(cogic 대상 한정) |
+| C09 | cogic 분석 1회의 SF 요청 172건 중 90.1%(건수 기준)가 lib/@types 선언 파일이다 | probe | `data/p0/sourcefile-request-probe-20261026.json` | MEASURED[P0-PROBE] (count만) | "요청 건수 비중"으로만 사용 가능(cogic 대상 한정). 시간 기여도로 읽으면 안 된다 |
+| C09a | SF cache 시간 단축의 대부분은 선언 파일 재파싱 회피에서 온다 | `analyze.ts:579-722` | — | **INFERRED** (요청 비중 C09에서 추론, 파일별 시간 미측정) | "가능성이 있다"로만 서술. 확정하려면 요청별 파싱 시간 측정 필요([existing-benchmark-audit.md §8](existing-benchmark-audit.md#8-추가-측정이-필요한-항목) 8번, 미배정) |
 | C10 | zero-hit 조건의 ON 지연은 stat·정렬·GC 비용 때문이다 | `analyze.ts:613-623`, `:710-722` | — | INFERRED | EXP-03 RQ3-4 |
 | C11 | 용량을 늘리면 대규모 workspace에서 hit가 회복된다 | — | — | INFERRED (LRU 이론) | EXP-03 H3-2 (용량 주입 필요) |
 | C12 | 캐시는 메모리를 X MB 사용한다 | — | — | PLANNED | EXP-03 H3-6 |

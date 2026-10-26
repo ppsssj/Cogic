@@ -91,7 +91,7 @@ cd ..\cogic-bench; npm ci; npm run compile
 | 장애 | 영향 | 대응 |
 |---|---|---|
 | 기존 스크립트가 `docs/benchmarks/analysis-cache`를 덮어씀 | 원본 손실 | 기존 스크립트 실행 금지, 신규 도구 사용, §3 대조 |
-| 과거 원시 데이터가 집계값뿐 | 분포 비교 불가 | 점추정 기준 판정(EXP-02 §9) |
+| 과거 원시 데이터가 집계값뿐 | 분포 비교·동등성 검정 불가 | 방법·효과 방향·크기 호환성 세 차원 판정. 크기는 제한적 판단만([EXP-02 §9](experiments/exp-02-cache-performance.md#9-statistical-analysis)) |
 | 과거 실행의 스크립트 미커밋 | 실행 코드 동일성 증명 불가 | 현재 커밋본을 "추정 동일"로 사용, 한계 명시 |
 | VS Code 테스트 버전 자동 갱신 | 테스트 환경 drift | `VSCODE_TEST_VERSION` 고정 |
 | Zod 최신 HEAD clone | workload drift | SHA checkout |

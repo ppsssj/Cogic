@@ -29,7 +29,7 @@
 ## 2. 사전 등록 원칙 (Pre-registration)
 
 1. **계획 고정**: 각 실험은 실행 전에 이 계획 문서, 가설, 판정 규칙, (EXP-01) Ground Truth를 커밋한다. 첫 측정 run은 그 커밋 SHA를 `preregistrationCommit`으로 기록한다.
-2. **판정 규칙 사전 정의**: 가설 채택/기각, 재현 판정(REPRODUCED / DIRECTION_ONLY / NOT_REPRODUCED)은 실험별 문서에 정의한 규칙만 사용한다. 결과를 보고 규칙을 바꾸면 변경 이력과 사유를 남기고 두 결과를 모두 보고한다.
+2. **판정 규칙 사전 정의**: 가설 채택/기각, 재현 판정(METHOD_REPRODUCED / EFFECT_DIRECTION_REPRODUCED / MAGNITUDE_COMPATIBLE의 세 차원, [EXP-02 §9](experiments/exp-02-cache-performance.md#9-statistical-analysis))은 실험별 문서에 정의한 규칙만 사용한다. 결과를 보고 규칙을 바꾸면 변경 이력과 사유를 남기고 두 결과를 모두 보고한다.
 3. **결과 보존**: 가설과 다른 결과, 실패한 run, 중단된 run도 삭제하지 않는다. 각 run 폴더에 `status: completed | aborted | invalid`와 사유를 기록한다.
 4. **사후 탐색 구분**: 계획에 없던 분석은 "exploratory"로 표시해 확증(confirmatory) 결과와 구분한다.
 5. **성능 개선 금지**: 실험 기간 동안 측정 결과를 좋게 만드는 production 최적화를 하지 않는다. 최적화를 하려면 별도 실험으로 분리하고, 최적화 전 결과를 먼저 고정한다.
