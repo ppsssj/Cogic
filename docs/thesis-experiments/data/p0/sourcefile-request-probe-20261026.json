@@ -1,0 +1,52 @@
+{
+  "kind": "P0 instrumentation probe (counts only, no timing)",
+  "recordedAt": "2026-10-26T05:45:45.711Z",
+  "git": {
+    "head": "fed34a0950f1dc7b4b9e922a8c0b3b331c8aaa19",
+    "dirty": true
+  },
+  "environment": {
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "platform": "Windows_NT 10.0.26100 x64",
+    "cpu": "Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz",
+    "logicalCpus": 6,
+    "totalMemoryBytes": 8531333120
+  },
+  "activeFile": "src/panel/CodeGraphPanel.ts",
+  "meta": {
+    "mode": "workspace",
+    "rootFiles": 18,
+    "usedTsconfig": true
+  },
+  "analysis1": {
+    "requests": 172,
+    "uniqueFiles": 172,
+    "miss": 172,
+    "hit": 0,
+    "stale": 0,
+    "bypass": 0
+  },
+  "analysis2": {
+    "requests": 172,
+    "miss": 0,
+    "hit": 172
+  },
+  "sameRequestOrderAcrossAnalyses": true,
+  "compositionOfAnalysis1": {
+    "workspace": 17,
+    "@types/vscode": 1,
+    "typescript-lib": 46,
+    "@types/estree": 1,
+    "@types/istanbul-lib-coverage": 1,
+    "@types/json-schema": 1,
+    "@types/mocha": 1,
+    "@types/node": 67,
+    "node_modules/undici-types": 37
+  },
+  "graphCounts": {
+    "nodes": 131,
+    "edges": 576,
+    "callsListEntries": 60
+  }
+}
