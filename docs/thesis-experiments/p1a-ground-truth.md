@@ -1,6 +1,6 @@
 # P1-A: Ground Truth Corpus & Scoring Infrastructure
 
-- 상태: Ground Truth v1과 채점 규칙을 사전 등록했다. **측정은 하지 않았다.**
+- 상태: Ground Truth v1과 채점 규칙을 사전 등록했다(커밋 `41bbe19`). **측정은 하지 않았다.**
 - 기준: `origin/main` = `6ebd265b204900bb24b467cdc54e133e713214c2` (P0 PR #1 병합 커밋), 2026-10-26 fetch 후 확인
 - 작업 브랜치: `research/thesis-p1a-ground-truth`
 - 실험 기준 문서: [experiments/exp-01-accuracy.md](experiments/exp-01-accuracy.md)(P0-R1 포함), [experimental-design.md](experimental-design.md)
@@ -196,7 +196,7 @@ P0 문서는 고치지 않았다. 아래 항목은 P1-B 측정과 해석 때 확
 
   | 항목 | 값 |
   |---|---|
-  | 사전 등록 커밋(preregistrationCommit) | `PREREG_SHA_PENDING` |
+  | 사전 등록 커밋(preregistrationCommit) | `41bbe19434b4d284c6368b5fb5158cf1a5dbdf1e` (2026-10-26) |
   | manifest | `fixtures/exp-01/gt-manifest.json`(LF 정규화 SHA-256, fixture·도구 파일 전체) |
 
 - **고정 확인**: `node docs/thesis-experiments/tools/exp01/manifest.mjs --check`. P1-B 실행 도구는 측정 전에 이 검사가 통과해야 시작하도록 만든다.
