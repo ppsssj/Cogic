@@ -272,7 +272,7 @@ strict 모드의 기존 동작은 유지된다. 사전 등록 시점의 테스�
 |---|---|
 | GT 사전 등록 커밋 | `41bbe19434b4d284c6368b5fb5158cf1a5dbdf1e`(변경 없음) |
 | 채점 도구 버전 | `exp01-scorer/1.1`(`lib.mjs` `SCORER_VERSION`, `summary.json`의 `scorerVersion`) |
-| 평가 도구 기준 커밋(evaluationToolCommit) | 후속 커밋으로 아래에 기록한다(같은 커밋에 자기 SHA를 쓸 수 없다) |
+| 평가 도구 기준 커밋(evaluationToolCommit) | `ae82bfbf0e26b7cba67e40af2b1f0a1fe89b81ca` (2026-10-27). 이 SHA는 후속 커밋으로 기록했다(같은 커밋에 자기 SHA를 쓸 수 없다) |
 | 평가 도구 manifest | `fixtures/exp-01/eval-manifest.r1.json` |
 | GT 데이터 무결성 | `manifest.mjs --check --scope gt`: 사전 등록 manifest와 214개 파일 일치 |
 | 사전 등록 manifest와 다른 파일 | `tools/exp01/lib.mjs`, `score.mjs`, `manifest.mjs`, `test/score.test.mjs`, `fixtures/exp-01/ANNOTATION_GUIDE.md`, `GT_CHANGELOG.md`, `README.md`(7개, 모두 의도된 변경). GT 데이터 파일은 없다 |
