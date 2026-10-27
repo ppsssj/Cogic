@@ -10,7 +10,8 @@ fixtures/exp-01/
 ├── catalog.csv              # 패턴 ID, 범주, 지원 분류, 코드 근거
 ├── COVERAGE.md, coverage.json   # 범주별 표본 수(도구 생성)
 ├── GT_CHANGELOG.md          # 사전 등록 이후 GT 변경 기록
-├── gt-manifest.json         # 사전 등록 시점 파일 해시(도구 생성)
+├── gt-manifest.json         # 사전 등록 시점 파일 해시(도구 생성, 고정)
+├── eval-manifest.r1.json    # P1-A-R1 평가 도구 기준 해시(도구 생성)
 ├── validation-report.json   # validator 결과(도구 생성)
 ├── review/                  # 독립 검토 표본·양식(결과 칸은 비어 있음)
 └── <category>/<case-id>/
@@ -30,7 +31,8 @@ fixtures/exp-01/
 node docs/thesis-experiments/tools/exp01/validate-gt.mjs          # 타입 검사, 스키마, 참조 무결성, 호출 지점 커버리지
 node docs/thesis-experiments/tools/exp01/coverage.mjs             # COVERAGE.md / coverage.json 재생성
 node docs/thesis-experiments/tools/exp01/review-sample.mjs        # review/ 표본 재생성(같은 seed면 같은 결과)
-node docs/thesis-experiments/tools/exp01/manifest.mjs --check     # 사전 등록 이후 변경 여부 확인
+node docs/thesis-experiments/tools/exp01/manifest.mjs --check --scope gt   # GT 데이터가 사전 등록과 같은지 확인
+node docs/thesis-experiments/tools/exp01/manifest.mjs --check --manifest docs/thesis-experiments/fixtures/exp-01/eval-manifest.r1.json   # 평가 도구 기준(P1-A-R1) 확인
 node --test docs/thesis-experiments/tools/exp01/test/score.test.mjs
 ```
 

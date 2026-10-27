@@ -15,7 +15,10 @@ import {
   computeMetrics,
   f1,
   listCaseDirs,
+  isConfirmatory,
   loadCatalog,
+  maximumMatching,
+  metricsByPattern,
   mulberry32,
   normalizeCogicGraph,
   parseCsv,
@@ -27,7 +30,7 @@ import {
   validateGtStructure,
   wilson,
 } from "../lib.mjs";
-import { loadPrediction, scoreCorpus } from "../score.mjs";
+import { loadPrediction, scoreCorpus, writeOutputs } from "../score.mjs";
 import { collectItems, drawSample } from "../review-sample.mjs";
 import { agreement } from "../review-agreement.mjs";
 
@@ -603,5 +606,250 @@ test("score CLI writes all output files for synthetic predictions", async () => 
   for (const f of ["matches.csv", "metrics-by-category.csv", "metrics-by-pattern.csv", "indeterminate.csv", "negatives.csv", "diagnostics.json", "summary.json"]) {
     assert.ok(fs.existsSync(path.join(tmp, f)), f);
   }
+  fs.rmSync(tmp, { recursive: true, force: true });
+});
+
+// ===========================================================================
+// P1-A-R1 regression tests (synthetic predictions only)
+// ===========================================================================
+
+const tpCount = (r) => r.predRows.filter((p) => p.verdict === "TP").length;
+const gtTp = (r) => r.gtRows.filter((g) => g.verdict === "TP").map((g) => g.id).sort();
+const shape = (r) => ({
+  pred: r.predRows.map((p) => `${p.key}=${p.verdict}:${p.note}`).sort(),
+  gt: r.gtRows.map((g) => `${g.id}=${g.verdict}:${g.matchedBy}`).sort(),
+});
+
+// GT with two structural relations of different kinds on the same endpoints (b -> a).
+function sameEndpointGt() {
+  return baseGt({
+    relations: [
+      { id: "S1", kind: "calls", source: "b", target: "a", pattern: "CALL-LOCAL-FN", gtStatus: "determinate", evidence: ["main.ts:6"] },
+      { id: "S2", kind: "references", source: "b", target: "a", pattern: "REF-VALUE-FN", gtStatus: "determinate", evidence: ["main.ts:6"] },
+    ],
+  });
+}
+
+test("R1 lenient: one prediction matches at most one GT relation on shared endpoints", () => {
+  const n = baseGraph();
+  const graph = { nodes: Object.values(n), edges: [cedge("calls", n.b, n.a)] };
+  const lenient = score(sameEndpointGt(), graph, "lenient");
+  assert.equal(tpCount(lenient), 1);
+  assert.deepEqual(gtTp(lenient).filter((id) => id.startsWith("S")), ["S1"], "same-kind GT is preferred");
+  assert.equal(lenient.gtRows.find((g) => g.id === "S2").verdict, "FN");
+  const m = micro(lenient);
+  assert.equal(m.tpPred, m.tpOverall, "TP on the prediction side equals TP on the GT side");
+  const strict = score(sameEndpointGt(), graph, "strict");
+  assert.deepEqual(gtTp(strict).filter((id) => id.startsWith("S")), ["S1"]);
+});
+
+test("R1 lenient: two GT, one prediction of a third kind -> exactly one TP", () => {
+  const n = baseGraph();
+  const graph = { nodes: Object.values(n), edges: [cedge("constructs", n.b, n.a)] };
+  const lenient = score(sameEndpointGt(), graph, "lenient");
+  assert.equal(tpCount(lenient), 1);
+  assert.equal(lenient.gtRows.filter((g) => g.id.startsWith("S") && g.verdict === "TP").length, 1);
+  const strict = score(sameEndpointGt(), graph, "strict");
+  assert.equal(strict.gtRows.filter((g) => g.id.startsWith("S") && g.verdict === "TP").length, 0);
+});
+
+test("R1 lenient: two predictions on one GT relation -> one TP, one FP(EXTRA-LENIENT)", () => {
+  const gt = baseGt({
+    relations: [{ id: "S1", kind: "calls", source: "b", target: "a", pattern: "CALL-LOCAL-FN", gtStatus: "determinate", evidence: ["main.ts:6"] }],
+  });
+  const n = baseGraph();
+  const r = score(gt, { nodes: Object.values(n), edges: [cedge("calls", n.b, n.a), cedge("references", n.b, n.a)] }, "lenient");
+  const rows = r.predRows.filter((p) => p.key.endsWith("|D|main.ts|5|callable|D|main.ts|1|callable"));
+  assert.deepEqual(rows.map((p) => `${p.kind}:${p.verdict}:${p.note}`).sort(), ["calls:TP:", "references:FP:EXTRA-LENIENT"]);
+  assert.equal(r.gtRows.find((g) => g.id === "S1").matchedBy, "calls|D|main.ts|5|callable|D|main.ts|1|callable");
+});
+
+test("R1 lenient: both kinds predicted -> both GT relations TP, no double count", () => {
+  const n = baseGraph();
+  const r = score(sameEndpointGt(), { nodes: Object.values(n), edges: [cedge("references", n.b, n.a), cedge("calls", n.b, n.a)] }, "lenient");
+  const s = r.gtRows.filter((g) => g.id.startsWith("S"));
+  assert.deepEqual(s.map((g) => `${g.id}<-${g.matchedBy.split("|")[0]}`).sort(), ["S1<-calls", "S2<-references"]);
+});
+
+function alternativesGt() {
+  return baseGt({
+    nodes: [
+      { id: "o1", type: "external", file: "lib.ts", line: 10, name: "o" },
+      { id: "o2", type: "external", file: "lib.ts", line: 11, name: "o" },
+    ],
+    relations: [
+      { id: "G1", kind: "calls", source: "b", target: "o1", targetAlternatives: ["o2"], pattern: "CALL-IMPORT-NAMED", gtStatus: "determinate", evidence: ["main.ts:7"] },
+      { id: "G2", kind: "calls", source: "b", target: "o2", pattern: "CALL-IMPORT-NAMED", gtStatus: "determinate", evidence: ["main.ts:7"] },
+    ],
+  });
+}
+
+test("R1 targetAlternatives: maximum matching instead of first-free greedy (strict and lenient)", () => {
+  const n = baseGraph();
+  const o1 = cnode("external", "lib.ts", 10, "o");
+  const o2 = cnode("external", "lib.ts", 11, "o");
+  for (const mode of ["strict", "lenient"]) {
+    for (const edges of [
+      [cedge("calls", n.b, o2), cedge("calls", n.b, o1)],
+      [cedge("calls", n.b, o1), cedge("calls", n.b, o2)],
+    ]) {
+      const r = score(alternativesGt(), { nodes: [...Object.values(n), o1, o2], edges }, mode);
+      assert.deepEqual(gtTp(r).filter((id) => id.startsWith("G")), ["G1", "G2"], mode);
+      assert.equal(tpCount(r), 2, mode);
+    }
+  }
+});
+
+test("R1 targetAlternatives: one prediction on a shared target matches only one GT", () => {
+  const n = baseGraph();
+  const o2 = cnode("external", "lib.ts", 11, "o");
+  for (const mode of ["strict", "lenient"]) {
+    const r = score(alternativesGt(), { nodes: [...Object.values(n), o2], edges: [cedge("calls", n.b, o2)] }, mode);
+    assert.equal(tpCount(r), 1, mode);
+    assert.deepEqual(gtTp(r).filter((id) => id.startsWith("G")), ["G2"], `${mode}: primary target preferred over alternative`);
+  }
+  // lenient + alternatives + another kind: still 1:1.
+  const r = score(alternativesGt(), { nodes: [...Object.values(n), o2], edges: [cedge("references", n.b, o2), cedge("calls", n.b, o2)] }, "lenient");
+  assert.equal(tpCount(r), 2);
+  assert.equal(r.gtRows.filter((g) => g.id.startsWith("G") && g.verdict === "TP").length, 2);
+});
+
+test("R1 matching is independent of node and edge input order", () => {
+  const n = baseGraph();
+  const o1 = cnode("external", "lib.ts", 10, "o");
+  const o2 = cnode("external", "lib.ts", 11, "o");
+  const edges = [
+    cedge("calls", n.b, o2),
+    cedge("references", n.b, o1),
+    cedge("calls", n.b, n.a),
+    cedge("references", n.b, n.a),
+    cedge("constructs", n.b, n.a),
+    cedge("calls", n.a, n.b),
+  ];
+  const gt = baseGt({
+    nodes: alternativesGt().nodes.slice(-2),
+    relations: [...alternativesGt().relations.slice(-2), ...sameEndpointGt().relations.slice(-2)],
+  });
+  const rand = mulberry32(7);
+  for (const mode of ["strict", "lenient"]) {
+    const ref = shape(score(gt, { nodes: [...Object.values(n), o1, o2], edges }, mode));
+    for (let i = 0; i < 20; i++) {
+      const shuffled = [...edges].sort(() => rand() - 0.5);
+      const nodes = [...Object.values(n), o1, o2].sort(() => rand() - 0.5);
+      assert.deepEqual(shape(score(gt, { nodes, edges: shuffled }, mode)), ref, mode);
+    }
+  }
+});
+
+test("R1 maximumMatching finds the matching that first-free greedy would miss", () => {
+  // pred0 -> {0,1}, pred1 -> {0}: greedy pred0->0 leaves pred1 unmatched.
+  assert.deepEqual(maximumMatching([[0, 1], [0]], 2).predToGt, [1, 0]);
+  assert.deepEqual(maximumMatching([[0], [0], [0]], 1).predToGt.filter((g) => g >= 0), [0]);
+});
+
+test("R1 TP is identical on both sides and lenient never scores below strict", () => {
+  const n = baseGraph();
+  const graph = { nodes: Object.values(n), edges: [cedge("calls", n.b, n.a), cedge("references", n.b, n.a), cedge("constructs", n.b, n.a)] };
+  const s = micro(score(sameEndpointGt(), graph, "strict"));
+  const l = micro(score(sameEndpointGt(), graph, "lenient"));
+  assert.equal(l.tpPred, l.tpOverall);
+  assert.equal(s.tpPred, s.tpOverall);
+  assert.ok(l.tpOverall >= s.tpOverall);
+  assert.ok(l.tpOverall <= l.gtOverall);
+});
+
+// --- R2. fail-closed diagnostics -------------------------------------------
+function scoreGraph(graph) {
+  const pred = normalize(graph);
+  return { pred, r: scoreCase(resolveGt(baseGt(), catalog), pred, "strict") };
+}
+
+test("R2 clean prediction is SCORED and confirmatory", () => {
+  const n = baseGraph();
+  const { r } = scoreGraph({ nodes: Object.values(n), edges: [cedge("calls", n.a, n.b)] });
+  assert.equal(r.status, "SCORED");
+  assert.deepEqual(r.blockers, []);
+  assert.ok(isConfirmatory(r));
+});
+
+test("R2 each diagnostic class blocks the case and keeps the raw record", () => {
+  const n = baseGraph();
+  const cases = {
+    "node-key-collision": { nodes: [...Object.values(n), cnode("function", "main.ts", 1, "a2", { pos: 105 })], edges: [] },
+    "invalid-endpoint": { nodes: Object.values(n), edges: [{ ...cedge("calls", n.a, n.b), target: "function:missing" }] },
+    "unparsable-dataflow-index": { nodes: Object.values(n), edges: [{ ...cedge("dataflow", n.a, n.b), id: "dataflow:a->b@@x@@arg#one" }] },
+    "unknown-edge-kind": { nodes: Object.values(n), edges: [cedge("imports", n.a, n.b)] },
+    "unknown-node-kind": { nodes: [...Object.values(n), cnode("variable", "main.ts", 3, "v")], edges: [] },
+  };
+  for (const [code, graph] of Object.entries(cases)) {
+    const before = JSON.stringify(graph);
+    const { pred, r } = scoreGraph(graph);
+    assert.equal(r.status, "SCORING_BLOCKED", code);
+    assert.deepEqual(r.blockers.map((b) => b.code), [code], code);
+    assert.ok(r.gtRows.every((g) => g.caseStatus === "SCORING_BLOCKED"), code);
+    const raw = [...pred.collisions, ...pred.malformed, ...pred.unknownNodes];
+    assert.equal(raw.length, 1, code);
+    assert.ok(raw[0].ids || raw[0].raw, `${code}: raw diagnostic kept`);
+    assert.equal(JSON.stringify(graph), before, `${code}: input graph not modified`);
+  }
+});
+
+test("R2 blocked cases are excluded from confirmatory metrics, pattern table and bootstrap", () => {
+  const n = baseGraph();
+  const ok = scoreGraph({ nodes: Object.values(n), edges: [cedge("calls", n.a, n.b)] }).r;
+  const bad = { ...scoreGraph({ nodes: Object.values(n), edges: [cedge("calls", n.a, n.b), cedge("imports", n.a, n.b)] }).r, caseId: "t02" };
+  const m = computeMetrics([ok, bad]);
+  assert.equal(m.scoredCases, 1);
+  assert.deepEqual(m.blockedCases, ["t02"]);
+  assert.deepEqual(m.micro, computeMetrics([ok]).micro);
+  assert.equal(computeMetrics([bad]).micro.gtOverall, 0);
+  assert.deepEqual(metricsByPattern([ok, bad]), metricsByPattern([ok]));
+  assert.deepEqual(bootstrapMicroF1([ok, bad], { resamples: 50, seed: 3 }), bootstrapMicroF1([ok], { resamples: 50, seed: 3 }));
+});
+
+test("R2 pre-normalized predictions get the same fail-closed checks", () => {
+  const doc = {
+    schema: "exp01-pred/1",
+    caseId: "t01",
+    relations: [
+      { kind: "calls", srcKey: "D|main.ts|1|callable", tgtKey: "D|main.ts|5|callable" },
+      { kind: "dataflow", srcKey: "D|main.ts|1|callable", tgtKey: "D|main.ts|5|callable", argIndex: "0" },
+      { kind: "imports", srcKey: "F|main.ts", tgtKey: "M|x.ts" },
+      { kind: "calls", srcKey: "D|main.ts|1|callable" },
+    ],
+  };
+  const pred = loadPrediction(doc, "t01");
+  assert.deepEqual(pred.malformed.map((m) => m.code).sort(), ["invalid-endpoint", "unknown-edge-kind", "unparsable-dataflow-index"]);
+  assert.ok(pred.malformed.every((m) => m.raw));
+  assert.equal(pred.relations.length, 1);
+  assert.equal(scoreCase(resolveGt(baseGt(), catalog), pred, "strict").status, "SCORING_BLOCKED");
+  const collided = loadPrediction({ ...doc, relations: doc.relations.slice(0, 1), collisions: [{ key: "D|main.ts|1|callable", ids: ["x", "y"] }] }, "t01");
+  assert.equal(scoreCase(resolveGt(baseGt(), catalog), collided, "strict").status, "SCORING_BLOCKED");
+});
+
+test("R2 corpus run with one blocked case: summary BLOCKED, diagnostics kept, others still scored", () => {
+  const dirs = listCaseDirs(corpus);
+  const victim = path.basename(dirs[0]);
+  const scored = scoreCorpus({
+    corpus,
+    allowMissing: true,
+    predictionFor: (caseId) =>
+      caseId === victim
+        ? { caseId, relations: [], collisions: [{ code: "node-key-collision", key: "D|main.ts|1|callable", ids: ["p", "q"] }], duplicates: [], malformed: [], unknownNodes: [] }
+        : null,
+  });
+  assert.deepEqual(scored.blocked, [victim]);
+  const d = scored.diagnostics.find((x) => x.caseId === victim);
+  assert.equal(d.status, "SCORING_BLOCKED");
+  assert.deepEqual(d.collisions[0].ids, ["p", "q"]);
+  assert.equal(computeMetrics(scored.results.strict).scoredCases, dirs.length - 1);
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "exp01-blocked-"));
+  const summary = writeOutputs(tmp, scored, { bootstrap: 0, seed: 1, gtVersion: 1 });
+  assert.equal(summary.scoringStatus, "BLOCKED");
+  assert.deepEqual(summary.blockedCases, [victim]);
+  const matches = parseCsv(fs.readFileSync(path.join(tmp, "matches.csv"), "utf8"));
+  assert.ok(matches.some((row) => row.caseId === victim && row.caseStatus === "SCORING_BLOCKED"));
+  const diag = readJson(path.join(tmp, "diagnostics.json"));
+  assert.equal(diag.find((x) => x.caseId === victim).blockers[0].code, "node-key-collision");
   fs.rmSync(tmp, { recursive: true, force: true });
 });

@@ -11,6 +11,8 @@ import path from "node:path";
 export const GT_SCHEMA = "exp01-gt/1";
 export const CASE_SCHEMA = "exp01-case/1";
 export const PRED_SCHEMA = "exp01-pred/1";
+// 1.0 = P1-A pre-registration (41bbe19). 1.1 = P1-A-R1: 1:1 maximum matching, fail-closed diagnostics.
+export const SCORER_VERSION = "exp01-scorer/1.1";
 
 export const EDGE_KINDS = ["calls", "constructs", "references", "dataflow", "updates"];
 export const RELATION_KINDS = [...EDGE_KINDS, "owner"];
@@ -630,7 +632,10 @@ export function normalizeCogicGraph(graph, { fixtureRoot, caseId }) {
   }
   const collisions = [...idsByKey.entries()]
     .filter(([, ids]) => ids.length > 1)
-    .map(([key, ids]) => ({ key, ids }));
+    .map(([key, ids]) => ({ code: "node-key-collision", key, ids }));
+  const unknownNodes = (graph.nodes ?? [])
+    .filter((n) => keyById.get(n.id).startsWith("?|"))
+    .map((n) => ({ code: "unknown-node-kind", nodeId: n.id, kind: n.kind, raw: n }));
 
   const relations = new Map();
   const malformed = [];
@@ -658,22 +663,23 @@ export function normalizeCogicGraph(graph, { fixtureRoot, caseId }) {
   for (const [key, fw] of frameworkByKey.entries()) {
     add("owner", key, null, undefined, idsByKey.get(key)[0]);
   }
+  // Malformed edges are not scored; the raw edge is kept for manual review.
   for (const e of graph.edges ?? []) {
     const src = keyById.get(e.source);
     const tgt = keyById.get(e.target);
     if (!src || !tgt) {
-      malformed.push({ edgeId: e.id, reason: "unknown endpoint" });
+      malformed.push({ code: "invalid-endpoint", edgeId: e.id, reason: "unknown endpoint", raw: e });
       continue;
     }
     if (!EDGE_KINDS.includes(e.kind)) {
-      malformed.push({ edgeId: e.id, reason: `unknown kind ${e.kind}` });
+      malformed.push({ code: "unknown-edge-kind", edgeId: e.id, reason: `unknown kind ${e.kind}`, raw: e });
       continue;
     }
     let argIndex;
     if (e.kind === "dataflow") {
       const m = String(e.id ?? "").match(/@@arg#(\d+)$/);
       if (!m) {
-        malformed.push({ edgeId: e.id, reason: "dataflow edge without arg#i" });
+        malformed.push({ code: "unparsable-dataflow-index", edgeId: e.id, reason: "dataflow edge without arg#i", raw: e });
         continue;
       }
       argIndex = Number(m[1]);
@@ -683,7 +689,29 @@ export function normalizeCogicGraph(graph, { fixtureRoot, caseId }) {
 
   const all = [...relations.values()].sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
   const duplicates = all.filter((r) => r.occurrences > 1).map((r) => ({ key: r.key, occurrences: r.occurrences }));
-  return { schema: PRED_SCHEMA, caseId, relations: all, collisions, duplicates, malformed };
+  return { schema: PRED_SCHEMA, caseId, relations: all, collisions, duplicates, malformed, unknownNodes };
+}
+
+// Fail-closed gate (P1-A-R1). Any of these makes the case SCORING_BLOCKED:
+// it is still scored row by row for manual review, but excluded from confirmatory statistics.
+export const BLOCKING_CODES = [
+  "node-key-collision",
+  "invalid-endpoint",
+  "unparsable-dataflow-index",
+  "unknown-edge-kind",
+  "unknown-node-kind",
+];
+
+export function scoringBlockers(normalizedPred) {
+  return [
+    ...(normalizedPred.collisions ?? []),
+    ...(normalizedPred.malformed ?? []),
+    ...(normalizedPred.unknownNodes ?? []),
+  ].map((d) => ({ code: d.code ?? "unclassified-diagnostic", detail: d.key ?? d.edgeId ?? d.nodeId ?? null }));
+}
+
+export function isConfirmatory(caseResult) {
+  return caseResult.status === "SCORED";
 }
 
 // ---------------------------------------------------------------------------
@@ -716,10 +744,48 @@ function matchesIndeterminate(p, entry, mode) {
   return entry.candidates.some((c) => c.lenientKey === p.lenientKey);
 }
 
+// Deterministic maximum-cardinality bipartite matching (augmenting paths, Kuhn).
+// adjacency[p] lists GT indices in preference order. Every prediction and every
+// GT relation is matched at most once. With the same adjacency the result does not
+// depend on input order because callers sort both sides before building it.
+export function maximumMatching(adjacency, gtCount) {
+  const gtToPred = new Array(gtCount).fill(-1);
+  const predToGt = new Array(adjacency.length).fill(-1);
+  const tryAugment = (p, seen) => {
+    for (const g of adjacency[p]) {
+      if (seen[g]) {
+        continue;
+      }
+      seen[g] = true;
+      if (gtToPred[g] === -1 || tryAugment(gtToPred[g], seen)) {
+        gtToPred[g] = p;
+        predToGt[p] = g;
+        return true;
+      }
+    }
+    return false;
+  };
+  for (let p = 0; p < adjacency.length; p++) {
+    tryAugment(p, new Array(gtCount).fill(false));
+  }
+  return { predToGt, gtToPred };
+}
+
+const byString = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
 // Scores one case in one mode ("strict" | "lenient").
 // Returns row-level verdicts; aggregation happens in computeMetrics().
+//
+// Matching (P1-A-R1): predictions and determinate GT relations are paired 1:1 by
+// maximum bipartite matching. strict: a pair needs an exact key (primary target or
+// one of targetAlternatives). lenient: a pair needs an equal lenient key, so
+// structural kinds may differ. Preference among candidate GT relations, used only
+// to break ties deterministically: same kind and primary target, same kind and
+// alternative target, different structural kind; then GT id. Predictions are
+// processed in key order.
 export function scoreCase(resolvedGt, normalizedPred, mode = "strict") {
   const useLenient = mode === "lenient";
+  const blockers = scoringBlockers(normalizedPred);
   const gtRows = resolvedGt.determinate.map((g) => ({
     caseId: resolvedGt.caseId,
     mode,
@@ -730,19 +796,39 @@ export function scoreCase(resolvedGt, normalizedPred, mode = "strict") {
     category: g.category,
     pattern: g.pattern,
     support: g.support,
-    matched: false,
-    matchedBy: [],
+    matchedBy: "",
   }));
   const gtByKey = new Map();
   resolvedGt.determinate.forEach((g, idx) => {
     const ks = useLenient ? g.lenientKeys : g.keys;
-    for (const k of ks) {
+    ks.forEach((k, pos) => {
       if (!gtByKey.has(k)) {
         gtByKey.set(k, []);
       }
-      gtByKey.get(k).push(idx);
-    }
+      gtByKey.get(k).push({ idx, pos });
+    });
   });
+
+  const preds = [...normalizedPred.relations].sort((x, y) => byString(x.key, y.key));
+  const rank = (p, hit) => {
+    const g = resolvedGt.determinate[hit.idx];
+    const sameKind = g.kind === p.kind ? 0 : 2;
+    return sameKind + (hit.pos === 0 ? 0 : 1);
+  };
+  const adjacency = preds.map((p) => {
+    const hits = gtByKey.get(useLenient ? p.lenientKey : p.key) ?? [];
+    const best = new Map();
+    for (const h of hits) {
+      const r = rank(p, h);
+      if (!best.has(h.idx) || r < best.get(h.idx)) {
+        best.set(h.idx, r);
+      }
+    }
+    return [...best.entries()]
+      .sort((x, y) => x[1] - y[1] || byString(resolvedGt.determinate[x[0]].id, resolvedGt.determinate[y[0]].id))
+      .map(([idx]) => idx);
+  });
+  const { predToGt } = maximumMatching(adjacency, gtRows.length);
 
   const indeterminateRows = resolvedGt.indeterminate.map((e) => ({
     caseId: resolvedGt.caseId,
@@ -759,34 +845,18 @@ export function scoreCase(resolvedGt, normalizedPred, mode = "strict") {
   }));
 
   const predRows = [];
-  for (const p of normalizedPred.relations) {
-    const k = useLenient ? p.lenientKey : p.key;
-    const hits = gtByKey.get(k) ?? [];
+  preds.forEach((p, pi) => {
     let verdict = "FP";
     let note = "";
     let category = predCategory(p);
-    let matchedGt = [];
-    if (hits.length > 0) {
-      if (useLenient) {
-        verdict = "TP";
-        matchedGt = hits;
-      } else {
-        const free = hits.find((i) => !gtRows[i].matched);
-        if (free !== undefined) {
-          verdict = "TP";
-          matchedGt = [free];
-        } else {
-          verdict = "FP";
-          note = "EXTRA-ALTERNATIVE";
-        }
-      }
-      if (matchedGt.length > 0) {
-        category = gtRows[matchedGt[0]].category;
-        for (const i of matchedGt) {
-          gtRows[i].matched = true;
-          gtRows[i].matchedBy.push(p.key);
-        }
-      }
+    const g = predToGt[pi];
+    if (g >= 0) {
+      verdict = "TP";
+      category = gtRows[g].category;
+      gtRows[g].matchedBy = p.key;
+    } else if (adjacency[pi].length > 0) {
+      // Matched a GT relation that another prediction already took.
+      note = useLenient ? "EXTRA-LENIENT" : "EXTRA-ALTERNATIVE";
     }
     if (verdict === "FP" && note === "") {
       const entryIdx = resolvedGt.indeterminate.findIndex((e) => matchesIndeterminate(p, e, mode));
@@ -808,7 +878,7 @@ export function scoreCase(resolvedGt, normalizedPred, mode = "strict") {
       note,
       occurrences: p.occurrences,
     });
-  }
+  });
 
   const predKeys = new Set(normalizedPred.relations.map((p) => (useLenient ? p.lenientKey : p.key)));
   const negativeRows = resolvedGt.negatives.map((n) => ({
@@ -823,18 +893,22 @@ export function scoreCase(resolvedGt, normalizedPred, mode = "strict") {
   }));
 
   for (const g of gtRows) {
-    g.verdict = g.matched ? "TP" : "FN";
-    g.matchedBy = g.matchedBy.join(" ; ");
-    delete g.matched;
+    g.verdict = g.matchedBy ? "TP" : "FN";
   }
   for (const r of indeterminateRows) {
     r.excludedCount = r.excludedPredictions.length;
     r.excludedPredictions = r.excludedPredictions.join(" ; ");
   }
 
+  const status = blockers.length > 0 ? "SCORING_BLOCKED" : "SCORED";
+  for (const row of [...gtRows, ...predRows]) {
+    row.caseStatus = status;
+  }
   return {
     caseId: resolvedGt.caseId,
     mode,
+    status,
+    blockers,
     gtRows,
     predRows,
     indeterminateRows,
@@ -842,6 +916,7 @@ export function scoreCase(resolvedGt, normalizedPred, mode = "strict") {
     collisions: normalizedPred.collisions ?? [],
     duplicates: normalizedPred.duplicates ?? [],
     malformed: normalizedPred.malformed ?? [],
+    unknownNodes: normalizedPred.unknownNodes ?? [],
   };
 }
 
@@ -919,7 +994,11 @@ export function metricsFromCounts(c) {
   };
 }
 
-export function computeMetrics(caseResults, { categories = CATEGORIES } = {}) {
+// Confirmatory aggregation uses SCORED cases only; SCORING_BLOCKED cases are
+// listed in blockedCases and never contribute counts (P1-A-R1 fail-closed rule).
+export function computeMetrics(allCaseResults, { categories = CATEGORIES } = {}) {
+  const caseResults = allCaseResults.filter(isConfirmatory);
+  const blockedCases = allCaseResults.filter((r) => !isConfirmatory(r)).map((r) => r.caseId);
   const gtRows = caseResults.flatMap((r) => r.gtRows);
   const predRows = caseResults.flatMap((r) => r.predRows);
   const seen = new Set([...categories, ...gtRows.map((r) => r.category), ...predRows.map((r) => r.category)]);
@@ -938,6 +1017,8 @@ export function computeMetrics(caseResults, { categories = CATEGORIES } = {}) {
     };
   };
   return {
+    scoredCases: caseResults.length,
+    blockedCases,
     byCategory,
     micro,
     macro: {
@@ -948,7 +1029,7 @@ export function computeMetrics(caseResults, { categories = CATEGORIES } = {}) {
 }
 
 export function metricsByPattern(caseResults) {
-  const gtRows = caseResults.flatMap((r) => r.gtRows);
+  const gtRows = caseResults.filter(isConfirmatory).flatMap((r) => r.gtRows);
   const groups = new Map();
   for (const r of gtRows) {
     const k = `${r.pattern}|${r.category}|${r.support}`;
@@ -991,7 +1072,7 @@ function percentile(sorted, q) {
 // Cluster bootstrap over cases for micro F1 (in-scope and overall).
 export function bootstrapMicroF1(caseResults, { resamples = 10000, seed = 20261026 } = {}) {
   const rand = mulberry32(seed);
-  const perCase = caseResults.map((r) => countsFrom(r.gtRows, r.predRows));
+  const perCase = caseResults.filter(isConfirmatory).map((r) => countsFrom(r.gtRows, r.predRows));
   const n = perCase.length;
   const inScope = [];
   const overall = [];

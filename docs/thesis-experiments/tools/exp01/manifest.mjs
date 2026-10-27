@@ -5,9 +5,17 @@
 // prove that GT and rules did not change after pre-registration. Hashes are computed on
 // LF-normalized text so core.autocrlf checkouts produce the same value.
 //
+// Manifests:
+//   fixtures/exp-01/gt-manifest.json        pre-registration (41bbe19). Frozen; never rewritten.
+//   fixtures/exp-01/eval-manifest.r1.json   evaluation-tool baseline after P1-A-R1 (scorer fix).
+//
 // Usage:
-//   node manifest.mjs            # write fixtures/exp-01/gt-manifest.json
-//   node manifest.mjs --check    # verify current files against the manifest (exit 1 on drift)
+//   node manifest.mjs --check [--manifest <file>] [--scope all|gt]
+//       verify current files (exit 1 on drift). Default manifest: gt-manifest.json.
+//       --scope gt checks only GT data: every file under fixtures/exp-01 except *.md
+//       (expected/case JSON, fixture sources, tsconfig, shims, catalog.csv, review sample).
+//   node manifest.mjs --write --manifest <file> [--force]
+//       write a new manifest. Refuses to overwrite an existing file without --force.
 
 import crypto from "node:crypto";
 import fs from "node:fs";
@@ -17,13 +25,18 @@ import { fileURLToPath } from "node:url";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(here, "../../../..");
 const corpus = path.join(repoRoot, "docs/thesis-experiments/fixtures/exp-01");
-const manifestPath = path.join(corpus, "gt-manifest.json");
+const defaultManifest = path.join(corpus, "gt-manifest.json");
 const ROOTS = ["docs/thesis-experiments/fixtures/exp-01", "docs/thesis-experiments/tools/exp01"];
 // Generated or reviewer-owned files that may legitimately change after pre-registration.
 const EXCLUDE = new Set([
   "docs/thesis-experiments/fixtures/exp-01/gt-manifest.json",
+  "docs/thesis-experiments/fixtures/exp-01/eval-manifest.r1.json",
   "docs/thesis-experiments/fixtures/exp-01/validation-report.json",
 ]);
+
+export function isGtData(rel) {
+  return rel.startsWith("docs/thesis-experiments/fixtures/exp-01/") && !rel.endsWith(".md");
+}
 
 function walk(rel) {
   const abs = path.join(repoRoot, rel);
@@ -52,21 +65,41 @@ function build() {
   return Object.fromEntries(files.map((f) => [f, hashFile(path.join(repoRoot, f))]));
 }
 
+function argValue(name) {
+  const i = process.argv.indexOf(name);
+  return i >= 0 ? process.argv[i + 1] : null;
+}
+
 function main() {
-  const check = process.argv.includes("--check");
+  const manifestArg = argValue("--manifest");
+  const manifestPath = manifestArg ? path.resolve(manifestArg) : defaultManifest;
+  const scope = argValue("--scope") ?? "all";
+  if (!["all", "gt"].includes(scope)) {
+    throw new Error(`unknown scope ${scope}`);
+  }
   const current = build();
-  if (!check) {
+  if (process.argv.includes("--write")) {
+    if (fs.existsSync(manifestPath) && !process.argv.includes("--force")) {
+      throw new Error(`${path.relative(repoRoot, manifestPath)} exists; refusing to overwrite (use --force)`);
+    }
     const doc = {
       schema: "exp01-manifest/1",
-      note: "SHA-256 of LF-normalized UTF-8 text. Excludes this file and validation-report.json.",
+      note: "SHA-256 of LF-normalized UTF-8 text. Excludes manifest files and validation-report.json.",
       fileCount: Object.keys(current).length,
       files: current,
     };
-    fs.writeFileSync(manifestPath, `${JSON.stringify(doc, null, 2)}\n`);
+    fs.writeFileSync(manifestPath, `${JSON.stringify(doc, null, 2)}
+`);
     console.log(`wrote ${path.relative(repoRoot, manifestPath)} (${doc.fileCount} files)`);
     return;
   }
-  const recorded = JSON.parse(fs.readFileSync(manifestPath, "utf8")).files;
+  if (!process.argv.includes("--check")) {
+    throw new Error("use --check or --write");
+  }
+  const inScope = (f) => scope === "all" || isGtData(f);
+  const recorded = Object.fromEntries(
+    Object.entries(JSON.parse(fs.readFileSync(manifestPath, "utf8")).files).filter(([f]) => inScope(f)),
+  );
   const problems = [];
   for (const [f, h] of Object.entries(recorded)) {
     if (!(f in current)) {
@@ -75,7 +108,7 @@ function main() {
       problems.push(`changed ${f}`);
     }
   }
-  for (const f of Object.keys(current)) {
+  for (const f of Object.keys(current).filter(inScope)) {
     if (!(f in recorded)) {
       problems.push(`added ${f}`);
     }
@@ -83,7 +116,8 @@ function main() {
   for (const p of problems) {
     console.log(p);
   }
-  console.log(problems.length === 0 ? `manifest OK (${Object.keys(recorded).length} files)` : `manifest DRIFT (${problems.length})`);
+  const label = `${path.relative(repoRoot, manifestPath).replace(/\\/g, "/")}, scope ${scope}`;
+  console.log(problems.length === 0 ? `manifest OK (${Object.keys(recorded).length} files; ${label})` : `manifest DRIFT (${problems.length}; ${label})`);
   process.exitCode = problems.length === 0 ? 0 : 1;
 }
 

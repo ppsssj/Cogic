@@ -18,7 +18,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   CATEGORIES,
+  EDGE_KINDS,
   PRED_SCHEMA,
+  SCORER_VERSION,
   bootstrapMicroF1,
   computeMetrics,
   gtFileName,
@@ -101,9 +103,34 @@ function parseArgs(argv) {
 }
 
 // Accepts raw analyzer output or pre-normalized predictions.
+// Pre-normalized relations get the same fail-closed checks as raw graphs.
+function checkPredRelation(r) {
+  if (r.kind !== "owner" && !EDGE_KINDS.includes(r.kind)) {
+    return { code: "unknown-edge-kind", reason: `unknown kind ${r.kind}` };
+  }
+  if (typeof r.srcKey !== "string" || r.srcKey === "" || (r.kind !== "owner" && (typeof r.tgtKey !== "string" || r.tgtKey === ""))) {
+    return { code: "invalid-endpoint", reason: "missing srcKey/tgtKey" };
+  }
+  if (r.kind === "dataflow" && !Number.isInteger(r.argIndex)) {
+    return { code: "unparsable-dataflow-index", reason: `argIndex ${JSON.stringify(r.argIndex)}` };
+  }
+  return null;
+}
+
 export function loadPrediction(doc, caseId) {
   if (doc.schema === PRED_SCHEMA) {
-    const relations = (doc.relations ?? []).map((r) => ({
+    const malformed = (doc.malformed ?? []).map((m) => ({ code: m.code ?? "unclassified-diagnostic", ...m }));
+    const valid = [];
+    for (const r of doc.relations ?? []) {
+      const problem = checkPredRelation(r);
+      if (problem) {
+        malformed.push({ ...problem, edgeId: r.id ?? null, raw: r });
+      } else {
+        valid.push(r);
+      }
+    }
+    const collisions = (doc.collisions ?? []).map((c) => ({ code: "node-key-collision", ...c }));
+    const relations = valid.map((r) => ({
       kind: r.kind,
       srcKey: r.srcKey,
       tgtKey: r.tgtKey ?? null,
@@ -127,7 +154,7 @@ export function loadPrediction(doc, caseId) {
         duplicates.push({ key: r.key, occurrences: r.occurrences });
       }
     }
-    return { caseId, relations: [...unique.values()], collisions: doc.collisions ?? [], duplicates, malformed: [] };
+    return { caseId, relations: [...unique.values()], collisions, duplicates, malformed, unknownNodes: doc.unknownNodes ?? [] };
   }
   const graph = doc.analyzerOutput?.graph ?? doc.graph;
   if (!graph) {
@@ -157,23 +184,29 @@ export function scoreCorpus({ corpus, gtVersion = 1, predictionFor, allowMissing
         throw new Error(`missing prediction for ${gt.caseId}`);
       }
       missing.push(gt.caseId);
-      pred = { caseId: gt.caseId, relations: [], collisions: [], duplicates: [], malformed: [] };
+      pred = { caseId: gt.caseId, relations: [], collisions: [], duplicates: [], malformed: [], unknownNodes: [] };
     }
+    const strict = scoreCase(resolved, pred, "strict");
+    results.strict.push(strict);
+    results.lenient.push(scoreCase(resolved, pred, "lenient"));
+    // Raw diagnostics are kept verbatim; nothing in the prediction or GT is rewritten.
     diagnostics.push({
       caseId: gt.caseId,
+      status: strict.status,
+      blockers: strict.blockers,
       collisions: pred.collisions,
       duplicates: pred.duplicates,
       malformed: pred.malformed,
+      unknownNodes: pred.unknownNodes ?? [],
     });
-    results.strict.push(scoreCase(resolved, pred, "strict"));
-    results.lenient.push(scoreCase(resolved, pred, "lenient"));
   }
-  return { results, missing, diagnostics };
+  const blocked = diagnostics.filter((d) => d.status !== "SCORED").map((d) => d.caseId);
+  return { results, missing, diagnostics, blocked };
 }
 
 function writeOutputs(out, scored, { bootstrap, seed, gtVersion }) {
   fs.mkdirSync(out, { recursive: true });
-  const { results, missing, diagnostics } = scored;
+  const { results, missing, diagnostics, blocked } = scored;
   const all = [...results.strict, ...results.lenient];
 
   const matchRows = [];
@@ -187,10 +220,19 @@ function writeOutputs(out, scored, { bootstrap, seed, gtVersion }) {
   }
   fs.writeFileSync(
     path.join(out, "matches.csv"),
-    toCsv(matchRows, ["caseId", "mode", "side", "id", "kind", "key", "category", "pattern", "support", "verdict", "note", "matchedBy", "occurrences", "causeCode"]),
+    toCsv(matchRows, ["caseId", "mode", "side", "id", "kind", "key", "category", "pattern", "support", "verdict", "note", "matchedBy", "occurrences", "caseStatus", "causeCode"]),
   );
 
-  const summary = { gtVersion, missingPredictions: missing, modes: {} };
+  // COMPLETE only when every case passed the fail-closed gate. BLOCKED metrics cover
+  // SCORED cases only and must not be reported as the confirmatory result.
+  const summary = {
+    scorerVersion: SCORER_VERSION,
+    gtVersion,
+    scoringStatus: blocked.length === 0 ? "COMPLETE" : "BLOCKED",
+    blockedCases: blocked,
+    missingPredictions: missing,
+    modes: {},
+  };
   const metricRows = [];
   const patternRows = [];
   for (const mode of ["strict", "lenient"]) {
@@ -203,6 +245,7 @@ function writeOutputs(out, scored, { bootstrap, seed, gtVersion }) {
       patternRows.push({ mode, ...row });
     }
     summary.modes[mode] = {
+      scoredCases: m.scoredCases,
       micro: m.micro,
       macro: m.macro,
       bootstrap: bootstrap > 0 ? bootstrapMicroF1(results[mode], { resamples: bootstrap, seed }) : null,
@@ -253,6 +296,10 @@ function main() {
   }
   if (scored.missing.length > 0) {
     console.log(`missing predictions (scored as empty): ${scored.missing.join(", ")}`);
+  }
+  if (scored.blocked.length > 0) {
+    console.error(`SCORING_BLOCKED (excluded from metrics, see diagnostics.json): ${scored.blocked.join(", ")}`);
+    process.exitCode = 2;
   }
 }
 

@@ -153,6 +153,10 @@ framework owner는 그 framework가 **실행하거나 관리하는** 콜백·상
   - `useContext`, `createContext`
   - 사용자 정의 hook. 일반 `calls`로 표현한다.
   - `react`가 아닌 모듈의 같은 이름 함수
+- **"owner가 아닌 것"의 범위**(P1-A-R1 명확화, 의미 변경 없음):
+  - 위 항목에 대한 부정 사례(`NEG-USEREF`, `NEG-USECONTEXT`, `NEG-CUSTOM-HOOK`)는 그 호출 위치에 **React synthetic 노드(콜백 owner·상태 source)가 생기면 안 된다**는 뜻이다. `kind: "owner"` 부정 사례이고, 대상은 그 줄의 synthetic 노드다.
+  - 같은 호출의 일반 관계는 부정하지 않는다. 바깥 owner → `useRef`/`useContext`/사용자 hook의 `calls`, 인자의 `dataflow`, 식별자의 `references`는 §4의 정의대로 정답(positive)이다. 예: `h03` R10–R15.
+  - 사용자 정의 hook **본문 안의** `useState` 등은 그 자체로 상태 source다(예: `h03` R03). 부정되는 것은 사용자 hook 호출 위치에 생기는 owner뿐이다.
 
 ### 5.2 Vue (`vue` 모듈에서 가져온 것만, namespace import 포함)
 
@@ -222,6 +226,7 @@ P0-R1 [exp-01-accuracy.md §6.5](../../experiments/exp-01-accuracy.md#65-gt-결�
 - 정답이 아닌데 분석기가 만들 수 있는 관계를 `negatives`에 적는다(`rationale` 필수).
 - 부정 사례는 채점에서 별도 지표가 아니다. 예측되면 일반 FP이고, `negatives.csv`에 "위반"으로 표시된다.
 - framework 부정 사례는 존재하면 안 되는 synthetic 노드를 정의하고 `kind: "owner"`로 적는다.
+  - 이 부정 사례는 해당 framework synthetic 노드(owner/state-source/route-owner)의 **존재만** 부정한다. 같은 위치의 `calls`·`references`·`dataflow`는 별개 관계이며, 정답 여부는 §4로 정한다(P1-A-R1 명확화).
 - 범주별로 최소 5개를 둔다(P0 §5.1).
 
 ## 8. 근거와 호출 지점 커버리지
