@@ -18,6 +18,7 @@
 // Usage (repository root, after `npm run compile`):
 //   node docs/thesis-experiments/tools/exp01-run.mjs [--run-id <id>] [--cases <id,id>]
 //        [--repeat 2] [--bootstrap 10000] [--no-score] [--allow-dirty]
+//   --bootstrap: non-negative integer; only the pre-registered 10000 can be confirmatory.
 //
 // Exit codes: 0 confirmatory-eligible, 2 usage error, 3 preflight failed,
 //             4 run incomplete or invalid, 5 run complete but not confirmatory.
@@ -33,7 +34,7 @@ import { SCORER_VERSION, listCaseDirs } from "./exp01/lib.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(here, "../../..");
-export const RUNNER_VERSION = "exp01-runner/1.0";
+export const RUNNER_VERSION = "exp01-runner/1.1";
 export const RAW_SCHEMA = "exp01-raw/1";
 export const RUN_SCHEMA = "exp01-run/1";
 
@@ -44,7 +45,17 @@ export const PROTOCOL = {
   evaluationToolCommit: "ae82bfbf0e26b7cba67e40af2b1f0a1fe89b81ca",
   scorerVersion: SCORER_VERSION,
   d11Decision: "D11_KEEP_PRE_REGISTERED_SCORING",
+  // P0 exp-01 §9: cluster bootstrap with 10,000 resamples. Other values are diagnostic only.
+  bootstrapResamples: 10000,
 };
+
+// Accepts a non-negative integer. 0 (no bootstrap CI) is allowed for diagnostic runs only.
+export function validateBootstrap(value) {
+  if (typeof value !== "number" || !Number.isFinite(value) || !Number.isInteger(value) || value < 0) {
+    throw new Error(`--bootstrap must be a non-negative integer, got ${JSON.stringify(String(value))}`);
+  }
+  return value;
+}
 
 const DEFAULT_CORPUS = path.join(REPO_ROOT, "docs/thesis-experiments/fixtures/exp-01");
 const DEFAULT_DATA_ROOT = path.join(REPO_ROOT, "docs/thesis-experiments/data/exp-01");
@@ -448,8 +459,54 @@ export function defaultScorer({ repoRoot = REPO_ROOT, corpus, predictionsDir, ou
     { cwd: repoRoot, encoding: "utf8" },
   );
   const summaryPath = path.join(outDir, "summary.json");
-  const summary = fs.existsSync(summaryPath) ? JSON.parse(fs.readFileSync(summaryPath, "utf8")) : null;
-  return { exitCode: r.status, log: `${r.stdout ?? ""}${r.stderr ?? ""}`.trim(), summary };
+  let summary = null;
+  let summaryError = null;
+  if (fs.existsSync(summaryPath)) {
+    try {
+      summary = JSON.parse(fs.readFileSync(summaryPath, "utf8"));
+    } catch (e) {
+      summaryError = `summary.json unreadable: ${e.message}`;
+    }
+  }
+  return {
+    exitCode: r.status,
+    signal: r.signal ?? null,
+    spawnError: r.error ? String(r.error.message ?? r.error) : null,
+    log: `${r.stdout ?? ""}${r.stderr ?? ""}`.trim(),
+    summary,
+    summaryError,
+  };
+}
+
+// Confirmatory gate for one scorer result (P1-B-R1). All conditions must hold:
+// exit code 0, summary present, scoringStatus COMPLETE, scorerVersion exp01-scorer/1.1.
+export function scoringGate(s) {
+  const reasons = [];
+  if (s.exitCode !== 0) {
+    reasons.push(`SCORER_EXIT_${s.exitCode ?? "NULL"}`);
+  }
+  if (!s.summary) {
+    reasons.push("SCORING_MISSING_SUMMARY");
+  } else {
+    if (s.summary.scoringStatus !== "COMPLETE") {
+      reasons.push(`SCORING_${s.summary.scoringStatus ?? "UNKNOWN"}`);
+    }
+    if (s.summary.scorerVersion !== PROTOCOL.scorerVersion) {
+      reasons.push(`SCORER_VERSION_MISMATCH:${s.summary.scorerVersion}`);
+    }
+  }
+  return reasons;
+}
+
+// Cache hit-path claim (P1-B-R1), kept separate from accuracy confirmatory eligibility.
+export function cacheHitPathClaim(cases) {
+  if (cases.length === 0 || cases.some((c) => c.status !== "OK" || !c.checks)) {
+    return { status: "NOT_EVALUATED", casesWithoutHits: [], mismatchedCases: [] };
+  }
+  const mismatchedCases = cases.filter((c) => !c.checks.cacheConsistent).map((c) => c.caseId);
+  const casesWithoutHits = cases.filter((c) => !c.checks.cacheHitPathExercised).map((c) => c.caseId);
+  const status = mismatchedCases.length > 0 ? "MISMATCH" : casesWithoutHits.length > 0 ? "NOT_VERIFIED_NO_HITS" : "VERIFIED";
+  return { status, casesWithoutHits, mismatchedCases };
 }
 
 // Main entry. All side-effecting dependencies are injectable for tests.
@@ -472,6 +529,7 @@ export function runExperiment(options = {}) {
   if (!Number.isInteger(repeat) || repeat < 2) {
     throw new Error("--repeat must be an integer >= 2");
   }
+  const bootstrap = validateBootstrap(options.bootstrap ?? PROTOCOL.bootstrapResamples);
   const startedAt = now();
   const gitInfo = gitInfoFn();
   const runId = options.runId ?? defaultRunId(gitInfo, startedAt);
@@ -497,12 +555,14 @@ export function runExperiment(options = {}) {
     args: options.args ?? null,
     corpus: path.relative(repoRoot, corpus).replace(/\\/g, "/") || corpus,
     repeat,
+    bootstrap,
     comparedFields: COMPARED_FIELDS,
     status: null,
     statusReasons: [],
     preflight: {},
     cases: [],
     scoring: null,
+    cacheHitPath: null,
     confirmatory: { eligible: false, reasons: [] },
   };
   const finish = (status, exitCode) => {
@@ -559,10 +619,19 @@ export function runExperiment(options = {}) {
     }
     caseDirs = caseDirs.filter((d) => wanted.has(path.basename(d)));
   }
-  const analyzer = loadAnalyzer();
+  let analyzer;
+  try {
+    analyzer = loadAnalyzer();
+  } catch (e) {
+    record.statusReasons = ["ANALYZER_LOAD_FAILED"];
+    record.confirmatory.reasons = record.statusReasons;
+    record.analyzerLoadError = { message: e?.message ?? String(e), stack: e?.stack ?? null };
+    return finish("aborted", 3);
+  }
   for (const caseDir of caseDirs) {
     record.cases.push(runCase({ analyzer, caseDir, corpus, runDir, repeat, record, repoRoot, log }));
   }
+  record.cacheHitPath = cacheHitPathClaim(record.cases);
 
   const protectedAfter = Object.fromEntries(protectedRoots.map((r) => [r, hashTree(r)]));
   const protectedChanged = protectedRoots.filter((r) => stableStringify(protectedBefore[r]) !== stableStringify(protectedAfter[r]));
@@ -611,30 +680,33 @@ export function runExperiment(options = {}) {
     // D11: pre-registered scoring is kept; unexpected TS lib relations require review first.
     confirmReasons.push(`D11_TS_LIB_RELATIONS_REVIEW_REQUIRED:${libCases.map((c) => c.caseId).join(",")}`);
   }
+  if (bootstrap !== PROTOCOL.bootstrapResamples) {
+    confirmReasons.push(`BOOTSTRAP_NOT_PREREGISTERED:${bootstrap}`);
+  }
   if (doScore) {
     const scoreDir = path.join(runDir, "score");
-    const s = scorer({
-      repoRoot,
-      corpus,
-      predictionsDir: path.join(runDir, "predictions"),
-      outDir: scoreDir,
-      bootstrap: options.bootstrap ?? 10000,
-    });
-    const scoringStatus = s.summary?.scoringStatus ?? "MISSING_SUMMARY";
+    let s;
+    try {
+      s = scorer({ repoRoot, corpus, predictionsDir: path.join(runDir, "predictions"), outDir: scoreDir, bootstrap });
+    } catch (e) {
+      s = { exitCode: null, log: "", summary: null, error: { message: e?.message ?? String(e), stack: e?.stack ?? null } };
+    }
+    const gate = s.error ? ["SCORER_ERROR"] : scoringGate(s);
     record.scoring = {
-      status: scoringStatus,
-      exitCode: s.exitCode,
+      status: s.error ? "SCORER_ERROR" : (s.summary?.scoringStatus ?? "MISSING_SUMMARY"),
+      exitCode: s.exitCode ?? null,
+      signal: s.signal ?? null,
+      spawnError: s.spawnError ?? null,
+      summaryError: s.summaryError ?? null,
+      error: s.error ?? null,
       scorerVersion: s.summary?.scorerVersion ?? null,
       blockedCases: s.summary?.blockedCases ?? [],
+      gateFailures: gate,
+      logTail: String(s.log ?? "").slice(-4000),
       outDir: "score/",
     };
     writeNew(path.join(runDir, "score-log.txt"), `${s.log ?? ""}\n`);
-    if (scoringStatus !== "COMPLETE") {
-      confirmReasons.push(`SCORING_${scoringStatus}`);
-    }
-    if (s.summary && s.summary.scorerVersion !== PROTOCOL.scorerVersion) {
-      confirmReasons.push(`SCORER_VERSION_MISMATCH:${s.summary.scorerVersion}`);
-    }
+    confirmReasons.push(...gate);
   } else {
     record.scoring = { status: "NOT_RUN", reason: "--no-score" };
     confirmReasons.push("NOT_SCORED");
@@ -643,7 +715,31 @@ export function runExperiment(options = {}) {
   return finish("completed", confirmReasons.length === 0 ? 0 : 5);
 }
 
-function runCase({ analyzer, caseDir, corpus, runDir, repeat, record, repoRoot, log }) {
+function runCase(ctx) {
+  const holder = {};
+  try {
+    return runCaseInner({ ...ctx, holder });
+  } catch (e) {
+    // Runner-side failure (e.g. unserializable output). Files already written stay, and the
+    // partial entry keeps the completed variants and saved file hashes.
+    const caseId = path.basename(ctx.caseDir);
+    const entry = holder.entry ?? {
+      caseId,
+      caseDir: path.relative(ctx.corpus, ctx.caseDir).replace(/\\/g, "/"),
+      files: {},
+      warnings: [],
+      tsLibRelations: [],
+      completedVariants: [],
+    };
+    entry.status = "RUNNER_ERROR";
+    entry.errors = [e?.message ?? String(e)];
+    entry.failedVariant = holder.currentVariant ?? null;
+    entry.stack = e?.stack ?? null;
+    return entry;
+  }
+}
+
+function runCaseInner({ analyzer, caseDir, corpus, runDir, repeat, record, repoRoot, log, holder }) {
   const prepared = prepareCaseInput(caseDir);
   const entry = {
     caseId: prepared.caseId,
@@ -652,12 +748,15 @@ function runCase({ analyzer, caseDir, corpus, runDir, repeat, record, repoRoot, 
     errors: [],
     warnings: [],
     inputHash: prepared.input?.inputHash ?? null,
+    completedVariants: [],
+    failedVariant: null,
     checks: null,
     hashes: {},
     events: {},
     tsLibRelations: [],
     files: {},
   };
+  holder.entry = entry;
   const fail = (status, errors, extra = {}) => {
     entry.status = status;
     entry.errors = errors;
@@ -667,6 +766,8 @@ function runCase({ analyzer, caseDir, corpus, runDir, repeat, record, repoRoot, 
       caseId: entry.caseId,
       status,
       errors,
+      completedVariants: entry.completedVariants,
+      savedFiles: { ...entry.files },
       ...extra,
     });
     log(`${entry.caseId}: ${status}`);
@@ -681,52 +782,68 @@ function runCase({ analyzer, caseDir, corpus, runDir, repeat, record, repoRoot, 
     { name: "on-cold", cacheEnabled: true, clear: true },
     { name: "on-warm", cacheEnabled: true, clear: false },
   ];
+  const analyzerInput = (v) => ({
+    workspaceRoot: "<fixtureRoot>",
+    activeFile: input.activeFileRel,
+    languageId: input.languageId,
+    filePaths: input.filePaths.map((f) => path.relative(caseDir, f).replace(/\\/g, "/")),
+    cacheEnabled: v.cacheEnabled,
+    variant: v.name,
+  });
+  const runInfo = {
+    runId: record.runId,
+    runnerVersion: RUNNER_VERSION,
+    headCommit: record.headCommit,
+    dirty: record.dirty,
+    preregistrationCommit: PROTOCOL.preregistrationCommit,
+    evaluationToolCommit: PROTOCOL.evaluationToolCommit,
+    scorerVersion: PROTOCOL.scorerVersion,
+    analyzerBuildHash: record.analyzerBuildHash,
+    node: process.version,
+    platform: process.platform,
+  };
+  // Each variant is written as soon as it returns: off#1 to predictions/ (scored),
+  // the others to repeats/ (evidence). A later failure cannot remove earlier files.
   const results = {};
   for (const v of variants) {
+    holder.currentVariant = v.name;
+    let r;
     try {
       if (v.clear && typeof analyzer.clearAnalyzerCaches === "function") {
         analyzer.clearAnalyzerCaches();
       }
-      results[v.name] = analyzeOnce(analyzer, input, v.cacheEnabled);
+      r = analyzeOnce(analyzer, input, v.cacheEnabled);
     } catch (e) {
-      return fail("ANALYZER_ERROR", [`${v.name}: ${e?.message ?? String(e)}`], { variant: v.name, stack: e?.stack ?? null });
+      entry.failedVariant = v.name;
+      return fail("ANALYZER_ERROR", [`${v.name}: ${e?.message ?? String(e)}`], { failedVariant: v.name, stack: e?.stack ?? null });
     }
+    const doc = {
+      schema: RAW_SCHEMA,
+      caseId: entry.caseId,
+      fixtureRoot: caseDir,
+      analyzerInput: analyzerInput(v),
+      run: runInfo,
+      inputHash: input.inputHash,
+      inputFiles: input.fileHashes,
+      analyzerOutput: r.output,
+    };
+    if (v.name === "off#1") {
+      entry.files.raw = `predictions/${entry.caseId}.json`;
+      entry.files.rawSha256 = writeNew(path.join(runDir, entry.files.raw), doc);
+    } else {
+      const rel = `repeats/${entry.caseId}.${v.name.replace("#", "")}.json`;
+      entry.files[`variant:${v.name}`] = rel;
+      entry.files[`variant:${v.name}:sha256`] = writeNew(path.join(runDir, rel), doc);
+    }
+    results[v.name] = r;
+    entry.completedVariants.push(v.name);
+    entry.events[v.name] = r.events;
   }
+  holder.currentVariant = null;
   const primary = results["off#1"].output;
-  const raw = {
-    schema: RAW_SCHEMA,
-    caseId: entry.caseId,
-    fixtureRoot: caseDir,
-    analyzerInput: {
-      workspaceRoot: "<fixtureRoot>",
-      activeFile: input.activeFileRel,
-      languageId: input.languageId,
-      filePaths: input.filePaths.map((f) => path.relative(caseDir, f).replace(/\\/g, "/")),
-      cacheEnabled: false,
-      variant: "off#1",
-    },
-    run: {
-      runId: record.runId,
-      runnerVersion: RUNNER_VERSION,
-      headCommit: record.headCommit,
-      dirty: record.dirty,
-      preregistrationCommit: PROTOCOL.preregistrationCommit,
-      evaluationToolCommit: PROTOCOL.evaluationToolCommit,
-      scorerVersion: PROTOCOL.scorerVersion,
-      analyzerBuildHash: record.analyzerBuildHash,
-      node: process.version,
-      platform: process.platform,
-    },
-    inputHash: input.inputHash,
-    inputFiles: input.fileHashes,
-    analyzerOutput: primary,
-  };
-  entry.files.raw = `predictions/${entry.caseId}.json`;
-  entry.files.rawSha256 = writeNew(path.join(runDir, "predictions", `${entry.caseId}.json`), raw);
 
   for (const [name, r] of Object.entries(results)) {
     entry.hashes[name] = canonicalHashes(r.output, { fixtureRoot: caseDir, repoRoot });
-    entry.events[name] = r.events;
   }
   const ref = entry.hashes["off#1"].semanticHash;
   const offNames = variants.filter((v) => !v.cacheEnabled).map((v) => v.name);
@@ -742,18 +859,6 @@ function runCase({ analyzer, caseDir, corpus, runDir, repeat, record, repoRoot, 
   };
   if (!entry.checks.cacheHitPathExercised) {
     entry.warnings.push("on-warm run reported no sourceFileCache.hit events; OFF/ON check did not exercise the hit path");
-  }
-  // Keep every differing repetition as evidence.
-  for (const [name, r] of Object.entries(results)) {
-    if (name !== "off#1" && entry.hashes[name].semanticHash !== ref) {
-      entry.files[`repeat:${name}`] = writeNew(path.join(runDir, "repeats", `${entry.caseId}.${name.replace("#", "")}.json`), {
-        schema: RAW_SCHEMA,
-        caseId: entry.caseId,
-        fixtureRoot: caseDir,
-        variant: name,
-        analyzerOutput: r.output,
-      });
-    }
   }
 
   const structure = validateAnalyzerOutput(primary);
@@ -790,7 +895,11 @@ export function parseArgs(argv) {
     } else if (a === "--repeat") {
       args.repeat = Number(next());
     } else if (a === "--bootstrap") {
-      args.bootstrap = Number(next());
+      const v = next();
+      if (!/^\d+$/.test(v)) {
+        throw new Error(`--bootstrap must be a non-negative integer, got ${JSON.stringify(v)}`);
+      }
+      args.bootstrap = validateBootstrap(Number(v));
     } else if (a === "--no-score") {
       args.score = false;
     } else if (a === "--allow-dirty") {
@@ -822,6 +931,7 @@ function main() {
   const r = result.record;
   console.log(`run ${r.runId}: status ${r.status}${r.statusReasons.length ? ` (${r.statusReasons.join("; ")})` : ""}`);
   console.log(`scoring: ${r.scoring?.status ?? "NOT_RUN"}`);
+  console.log(`cache hit path: ${r.cacheHitPath?.status ?? "NOT_EVALUATED"}`);
   console.log(
     r.confirmatory.eligible
       ? "confirmatory: ELIGIBLE"

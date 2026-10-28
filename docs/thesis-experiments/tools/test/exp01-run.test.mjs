@@ -10,7 +10,9 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {
+  cacheHitPathClaim,
   canonicalHashes,
+  defaultScorer,
   defaultManifestChecks,
   parseArgs,
   prepareCaseInput,
@@ -18,6 +20,7 @@ import {
   sha256,
   tsLibRelations,
   validateAnalyzerOutput,
+  validateBootstrap,
 } from "../exp01-run.mjs";
 import { loadPrediction } from "../exp01/score.mjs";
 
@@ -85,10 +88,15 @@ function mockAnalyzer(behaviour = {}) {
     analyzeWorkspaceActive(args) {
       state.calls.push(args);
       state.total += 1;
+      state.perRoot = state.perRoot ?? {};
+      const nth = (state.perRoot[args.workspaceRoot] = (state.perRoot[args.workspaceRoot] ?? 0) + 1);
       const warm = args.cacheEnabled && state.sinceClear > 0;
       state.sinceClear += 1;
       if (args.cacheEnabled) {
-        args.debug?.(warm ? "analyzer.sourceFileCache.hit" : "analyzer.sourceFileCache.miss");
+        args.debug?.(warm && !behaviour.noHits ? "analyzer.sourceFileCache.hit" : "analyzer.sourceFileCache.miss");
+      }
+      if (behaviour.failAtCall === nth) {
+        throw new Error(`synthetic failure at call ${nth}`);
       }
       if (behaviour.throwFor && args.workspaceRoot.endsWith(behaviour.throwFor)) {
         throw new Error("synthetic analyzer failure");
@@ -122,6 +130,11 @@ function mockAnalyzer(behaviour = {}) {
       }
       if (behaviour.badOutput) {
         edges.push({ id: "calls:x->missing@@@@", kind: "calls", source: nodes[1].id, target: "missing" });
+      }
+      if (behaviour.cyclicAtCall === nth) {
+        const cyclic = { graph: { nodes, edges } };
+        cyclic.self = cyclic;
+        return cyclic;
       }
       return {
         imports: [],
@@ -162,7 +175,7 @@ function run(env, extra = {}) {
     protectedRoots: [env.protectedDir],
     score: extra.score,
     cases: extra.cases,
-    bootstrap: 0,
+    bootstrap: extra.bootstrap ?? 10000,
   });
   return { ...result, analyzer, loaded: () => loaded };
 }
@@ -517,6 +530,253 @@ test("CLI argument parsing", () => {
   const env = makeEnv(["t01-ok"]);
   try {
     assert.throws(() => runExperiment({ corpus: env.corpus, dataRoot: env.dataRoot, repeat: 1 }), /repeat/);
+  } finally {
+    env.cleanup();
+  }
+});
+
+// ===========================================================================
+// P1-B-R1 regression tests (synthetic only)
+// ===========================================================================
+
+// --- R1-1. scorer exit code and summary gate ---------------------------------
+test("R1-1 scorer gate: only exit 0 + summary + COMPLETE + exp01-scorer/1.1 is confirmatory", () => {
+  const env = makeEnv();
+  try {
+    const summary = (scoringStatus, scorerVersion = "exp01-scorer/1.1") => ({ scorerVersion, scoringStatus, blockedCases: scoringStatus === "BLOCKED" ? ["t01-ok"] : [] });
+    const cases = [
+      { id: "s1", scorer: () => ({ exitCode: 0, log: "", summary: summary("COMPLETE") }), eligible: true, reasons: [] },
+      { id: "s2", scorer: () => ({ exitCode: 1, log: "boom", summary: summary("COMPLETE") }), eligible: false, reasons: ["SCORER_EXIT_1"] },
+      { id: "s3", scorer: () => ({ exitCode: 2, log: "SCORING_BLOCKED", summary: summary("BLOCKED") }), eligible: false, reasons: ["SCORER_EXIT_2", "SCORING_BLOCKED"] },
+      { id: "s4", scorer: () => ({ exitCode: 0, log: "", summary: null }), eligible: false, reasons: ["SCORING_MISSING_SUMMARY"] },
+      { id: "s6", scorer: () => ({ exitCode: null, signal: "SIGKILL", log: "", summary: null }), eligible: false, reasons: ["SCORER_EXIT_NULL", "SCORING_MISSING_SUMMARY"] },
+    ];
+    for (const c of cases) {
+      const r = run(env, { runId: c.id, scorer: c.scorer });
+      assert.equal(r.record.confirmatory.eligible, c.eligible, c.id);
+      assert.deepEqual(r.record.scoring.gateFailures, c.reasons, c.id);
+      for (const reason of c.reasons) {
+        assert.ok(r.record.confirmatory.reasons.includes(reason), `${c.id}: ${reason}`);
+      }
+      assert.equal(r.exitCode, c.eligible ? 0 : 5, c.id);
+      const saved = readJson(path.join(r.runDir, "run.json"));
+      assert.deepEqual(saved.scoring.gateFailures, c.reasons, `${c.id}: persisted`);
+    }
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("R1-1 scorer exception is caught, blocks confirmatory use and is written to run.json", () => {
+  const env = makeEnv();
+  try {
+    const r = run(env, {
+      scorer: () => {
+        throw new Error("synthetic scorer crash");
+      },
+    });
+    assert.equal(r.record.status, "completed");
+    assert.equal(r.record.scoring.status, "SCORER_ERROR");
+    assert.equal(r.record.confirmatory.eligible, false);
+    assert.ok(r.record.confirmatory.reasons.includes("SCORER_ERROR"));
+    assert.equal(r.exitCode, 5);
+    const saved = readJson(path.join(r.runDir, "run.json"));
+    assert.match(saved.scoring.error.message, /synthetic scorer crash/);
+    assert.ok(saved.scoring.error.stack);
+    assert.ok(fs.existsSync(path.join(r.runDir, "predictions", "t01-ok.json")), "raw output kept");
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("R1-1 defaultScorer reports a crashing scorer process and an unreadable summary", () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "exp01-scorer-"));
+  try {
+    // A repo root without score.mjs: node exits non-zero, no summary.
+    const crashed = defaultScorer({ repoRoot: tmp, corpus: tmp, predictionsDir: tmp, outDir: path.join(tmp, "out"), bootstrap: 0 });
+    assert.notEqual(crashed.exitCode, 0);
+    assert.equal(crashed.summary, null);
+    assert.match(crashed.log, /Cannot find module|ERR_MODULE_NOT_FOUND/);
+    // Unreadable summary.json left in the output directory.
+    const out = path.join(tmp, "out2");
+    fs.mkdirSync(out);
+    fs.writeFileSync(path.join(out, "summary.json"), "{ truncated");
+    const broken = defaultScorer({ repoRoot: tmp, corpus: tmp, predictionsDir: tmp, outDir: out, bootstrap: 0 });
+    assert.equal(broken.summary, null);
+    assert.match(broken.summaryError, /summary\.json unreadable/);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+// --- R1-2. partial results are preserved -------------------------------------
+test("R1-2 a failure in a later variant keeps every earlier result and records the variant", () => {
+  const variantsInOrder = ["off#1", "off#2", "on-cold", "on-warm"];
+  for (const [failAtCall, failedVariant] of [[2, "off#2"], [3, "on-cold"], [4, "on-warm"]]) {
+    const env = makeEnv(["t01-ok"]);
+    try {
+      const r = run(env, { behaviour: { failAtCall } });
+      const c = r.record.cases[0];
+      assert.equal(c.status, "ANALYZER_ERROR", failedVariant);
+      assert.equal(c.failedVariant, failedVariant);
+      assert.deepEqual(c.completedVariants, variantsInOrder.slice(0, failAtCall - 1));
+      const rawFile = path.join(r.runDir, "predictions", "t01-ok.json");
+      assert.ok(fs.existsSync(rawFile), `${failedVariant}: off#1 kept`);
+      assert.equal(sha256(fs.readFileSync(rawFile)), c.files.rawSha256);
+      assert.equal(readJson(rawFile).analyzerInput.variant, "off#1");
+      for (const done of c.completedVariants.slice(1)) {
+        const rel = c.files[`variant:${done}`];
+        assert.ok(rel && fs.existsSync(path.join(r.runDir, rel)), `${failedVariant}: ${done} kept`);
+        assert.equal(sha256(fs.readFileSync(path.join(r.runDir, rel))), c.files[`variant:${done}:sha256`]);
+      }
+      const failure = readJson(path.join(r.runDir, c.files.failure));
+      assert.equal(failure.failedVariant, failedVariant);
+      assert.match(failure.errors[0], new RegExp(`^${failedVariant}: synthetic failure`));
+      assert.ok(failure.stack);
+      assert.deepEqual(failure.completedVariants, c.completedVariants);
+      assert.equal(r.record.status, "incomplete");
+      assert.equal(r.record.scoring.status, "NOT_RUN");
+      assert.equal(r.record.confirmatory.eligible, false);
+    } finally {
+      env.cleanup();
+    }
+  }
+});
+
+test("R1-2 a failure in off#1 writes no prediction and is still recorded", () => {
+  const env = makeEnv(["t01-ok"]);
+  try {
+    const r = run(env, { behaviour: { failAtCall: 1 } });
+    const c = r.record.cases[0];
+    assert.equal(c.failedVariant, "off#1");
+    assert.deepEqual(c.completedVariants, []);
+    assert.equal(fs.existsSync(path.join(r.runDir, "predictions", "t01-ok.json")), false);
+    assert.ok(fs.existsSync(path.join(r.runDir, c.files.failure)));
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("R1-2 every variant is saved as it completes, in a scorer-compatible format", () => {
+  const env = makeEnv(["t01-ok"]);
+  try {
+    const r = run(env);
+    const c = r.record.cases[0];
+    assert.deepEqual(c.completedVariants, ["off#1", "off#2", "on-cold", "on-warm"]);
+    for (const v of ["off#2", "on-cold", "on-warm"]) {
+      const doc = readJson(path.join(r.runDir, c.files[`variant:${v}`]));
+      assert.equal(doc.schema, "exp01-raw/1");
+      assert.equal(doc.analyzerInput.variant, v);
+      assert.equal(doc.analyzerInput.cacheEnabled, v !== "off#2");
+      assert.equal(loadPrediction(doc, c.caseId).relations.length, 1);
+    }
+    assert.deepEqual(fs.readdirSync(path.join(r.runDir, "predictions")), ["t01-ok.json"], "only off#1 is scored");
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("R1-2 a runner-side error (unserializable output) keeps earlier files and run.json", () => {
+  const env = makeEnv(["t01-ok", "t02-ok"]);
+  try {
+    const r = run(env, { behaviour: { cyclicAtCall: 3 } });
+    for (const c of r.record.cases) {
+      assert.equal(c.status, "RUNNER_ERROR");
+      assert.equal(c.failedVariant, "on-cold");
+      assert.deepEqual(c.completedVariants, ["off#1", "off#2"]);
+      assert.equal(sha256(fs.readFileSync(path.join(r.runDir, c.files.raw))), c.files.rawSha256);
+      assert.ok(c.stack);
+    }
+    assert.ok(fs.existsSync(path.join(r.runDir, "run.json")));
+    assert.equal(r.record.status, "incomplete");
+    assert.equal(r.exitCode, 4);
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("R1-2 analyzer load failure aborts with a record", () => {
+  const env = makeEnv(["t01-ok"]);
+  try {
+    const result = runExperiment({
+      corpus: env.corpus,
+      dataRoot: env.dataRoot,
+      runId: "noload",
+      manifestChecks: MANIFEST_OK,
+      gitInfo: CLEAN_GIT,
+      buildCheck: BUILD_OK,
+      loadAnalyzer: () => {
+        throw new Error("Cannot find module out/analyzer");
+      },
+      protectedRoots: [env.protectedDir],
+    });
+    assert.equal(result.exitCode, 3);
+    assert.deepEqual(result.record.statusReasons, ["ANALYZER_LOAD_FAILED"]);
+    assert.match(readJson(path.join(result.runDir, "run.json")).analyzerLoadError.message, /Cannot find module/);
+  } finally {
+    env.cleanup();
+  }
+});
+
+// --- R1-3. bootstrap --------------------------------------------------------
+test("R1-3 --bootstrap accepts non-negative integers only", () => {
+  for (const bad of ["NaN", "Infinity", "-1", "1.5", "1e4", "", "10000abc", "0x10"]) {
+    assert.throws(() => parseArgs(["--bootstrap", bad]), /non-negative integer/, bad);
+  }
+  assert.equal(parseArgs(["--bootstrap", "0"]).bootstrap, 0);
+  assert.equal(parseArgs(["--bootstrap", "10000"]).bootstrap, 10000);
+  for (const bad of [NaN, Infinity, -1, 1.5, "10000", null]) {
+    assert.throws(() => validateBootstrap(bad), /non-negative integer/, String(bad));
+  }
+  const env = makeEnv(["t01-ok"]);
+  try {
+    assert.throws(() => runExperiment({ corpus: env.corpus, dataRoot: env.dataRoot, bootstrap: Number.NaN }), /non-negative integer/);
+    assert.equal(fs.existsSync(env.dataRoot), false, "rejected before anything is written");
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("R1-3 only the pre-registered 10,000 resamples can be confirmatory", () => {
+  const env = makeEnv(["t01-ok"]);
+  try {
+    let seen = null;
+    const spy = (args) => {
+      seen = args.bootstrap;
+      return SCORER_COMPLETE();
+    };
+    const pre = run(env, { runId: "b10000", scorer: spy });
+    assert.equal(seen, 10000);
+    assert.equal(pre.record.bootstrap, 10000);
+    assert.equal(pre.record.confirmatory.eligible, true);
+    for (const n of [0, 1000, 20000]) {
+      const r = run(env, { runId: `b${n}`, bootstrap: n, scorer: spy });
+      assert.equal(seen, n);
+      assert.equal(r.record.confirmatory.eligible, false, String(n));
+      assert.ok(r.record.confirmatory.reasons.includes(`BOOTSTRAP_NOT_PREREGISTERED:${n}`));
+    }
+  } finally {
+    env.cleanup();
+  }
+});
+
+// --- R1-4. cache hit path claim ------------------------------------------------
+test("R1-4 cache hit-path claim is separate from accuracy eligibility", () => {
+  const env = makeEnv();
+  try {
+    const hits = run(env, { runId: "hits" });
+    assert.equal(hits.record.cacheHitPath.status, "VERIFIED");
+    const noHits = run(env, { runId: "nohits", behaviour: { noHits: true } });
+    assert.equal(noHits.record.cacheHitPath.status, "NOT_VERIFIED_NO_HITS");
+    assert.deepEqual(noHits.record.cacheHitPath.casesWithoutHits, ["t01-ok", "t02-ok"]);
+    assert.equal(noHits.record.confirmatory.eligible, true, "accuracy scoring itself is not blocked");
+    assert.ok(noHits.record.cases.every((c) => c.warnings.some((w) => w.includes("did not exercise the hit path"))));
+    const mismatch = run(env, { runId: "mismatch", behaviour: { cacheDiff: true } });
+    assert.equal(mismatch.record.cacheHitPath.status, "MISMATCH");
+    assert.equal(mismatch.record.confirmatory.eligible, false);
+    const broken = run(env, { runId: "broken", behaviour: { throwFor: "t02-ok" } });
+    assert.equal(broken.record.cacheHitPath.status, "NOT_EVALUATED");
+    assert.equal(cacheHitPathClaim([]).status, "NOT_EVALUATED");
   } finally {
     env.cleanup();
   }
