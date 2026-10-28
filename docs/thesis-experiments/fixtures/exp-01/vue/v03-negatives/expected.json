@@ -1,0 +1,43 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "v03-negatives",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "useNeg", "type": "callable", "file": "main.ts", "line": 5, "name": "useNeg" },
+    { "id": "aSrc", "type": "synthetic", "file": "main.ts", "line": 6, "framework": "vue", "role": "state-source", "anchor": "ref" },
+    { "id": "deriveNeg", "type": "synthetic", "file": "main.ts", "line": 7, "framework": "vue", "role": "callback-owner", "anchor": "derive" },
+    { "id": "otherComputedNeg", "type": "synthetic", "file": "main.ts", "line": 8, "framework": "vue", "role": "callback-owner", "anchor": "Other.computed" },
+    { "id": "otherRefNeg", "type": "synthetic", "file": "main.ts", "line": 9, "framework": "vue", "role": "state-source", "anchor": "Other.ref" },
+    { "id": "otherReactiveNeg", "type": "synthetic", "file": "main.ts", "line": 10, "framework": "vue", "role": "state-source", "anchor": "Other.reactive" },
+    { "id": "otherWatchNeg", "type": "synthetic", "file": "main.ts", "line": 12, "framework": "vue", "role": "callback-owner", "anchor": "Other.watch" },
+    { "id": "ref", "type": "external", "file": "shims/vue.d.ts", "line": 5, "name": "ref" },
+    { "id": "localComputed", "type": "external", "file": "local.ts", "line": 1, "name": "computed" },
+    { "id": "localRef", "type": "external", "file": "local.ts", "line": 5, "name": "ref" },
+    { "id": "localWatch", "type": "external", "file": "local.ts", "line": 9, "name": "watch" },
+    { "id": "localReactive", "type": "external", "file": "local.ts", "line": 14, "name": "reactive" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "owner", "source": "aSrc", "pattern": "FW-VUE-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R02", "kind": "calls", "source": "useNeg", "target": "ref", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R03", "kind": "dataflow", "source": "useNeg", "target": "ref", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R04", "kind": "calls", "source": "useNeg", "target": "localComputed", "pattern": "CALL-IMPORT-NAMED", "gtStatus": "determinate", "evidence": ["main.ts:7", "main.ts:8"], "note": "derive(alias)와 Other.computed(namespace)는 같은 선언 local.ts:1이다" },
+    { "id": "R05", "kind": "dataflow", "source": "useNeg", "target": "localComputed", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:7", "main.ts:8"] },
+    { "id": "R06", "kind": "calls", "source": "useNeg", "target": "localRef", "pattern": "CALL-IMPORT-NAMESPACE", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R07", "kind": "dataflow", "source": "useNeg", "target": "localRef", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R08", "kind": "calls", "source": "useNeg", "target": "localReactive", "pattern": "CALL-IMPORT-NAMESPACE", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R09", "kind": "dataflow", "source": "useNeg", "target": "localReactive", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R10", "kind": "calls", "source": "useNeg", "target": "localWatch", "pattern": "CALL-IMPORT-NAMESPACE", "gtStatus": "determinate", "evidence": ["main.ts:12"] },
+    { "id": "R11", "kind": "dataflow", "source": "useNeg", "target": "localWatch", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:12"] },
+    { "id": "R12", "kind": "dataflow", "source": "useNeg", "target": "localWatch", "argIndex": 1, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:12"] },
+    { "id": "R13", "kind": "references", "source": "useNeg", "target": "aSrc", "pattern": "REF-STATE-READ", "gtStatus": "determinate", "evidence": ["main.ts:7", "main.ts:12", "main.ts:16"], "note": "12행 인자와 16행 shorthand는 useNeg 본문에 직접 있다. 7행은 익명 콜백 안이며 같은 관계에 속한다" }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "owner", "source": "deriveNeg", "pattern": "NEG-NON-FRAMEWORK-MODULE", "evidence": ["main.ts:7"], "rationale": "derive는 ./local의 computed이며 vue 모듈이 아니다" },
+    { "id": "N02", "kind": "owner", "source": "otherComputedNeg", "pattern": "NEG-NON-FRAMEWORK-MODULE", "evidence": ["main.ts:8"], "rationale": "Other는 ./local namespace다" },
+    { "id": "N03", "kind": "owner", "source": "otherRefNeg", "pattern": "NEG-VUE-NOT-STATE", "evidence": ["main.ts:9"], "rationale": "Other.ref는 일반 객체를 반환하는 사용자 함수다" },
+    { "id": "N04", "kind": "owner", "source": "otherReactiveNeg", "pattern": "NEG-VUE-NOT-STATE", "evidence": ["main.ts:10"], "rationale": "Other.reactive는 인자를 그대로 반환하는 사용자 함수다" },
+    { "id": "N05", "kind": "owner", "source": "otherWatchNeg", "pattern": "NEG-NON-FRAMEWORK-MODULE", "evidence": ["main.ts:12"], "rationale": "Other.watch는 vue의 watch가 아니다" }
+  ],
+  "excludedSites": []
+}

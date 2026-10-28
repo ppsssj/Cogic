@@ -1,0 +1,43 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "h01-reducer-effect",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Action", "type": "typeLike", "file": "main.ts", "line": 3, "name": "Action" },
+    { "id": "reducer", "type": "callable", "file": "main.ts", "line": 5, "name": "reducer" },
+    { "id": "Stepper", "type": "callable", "file": "main.ts", "line": 9, "name": "Stepper" },
+    { "id": "reducerSrc", "type": "synthetic", "file": "main.ts", "line": 10, "framework": "react", "role": "state-source", "anchor": "useReducer" },
+    { "id": "ticksSrc", "type": "synthetic", "file": "main.ts", "line": 11, "framework": "react", "role": "state-source", "anchor": "useState" },
+    { "id": "effectOwner", "type": "synthetic", "file": "main.ts", "line": 13, "framework": "react", "role": "callback-owner", "anchor": "useEffect" },
+    { "id": "down", "type": "callable", "file": "main.ts", "line": 18, "name": "down" },
+    { "id": "useState", "type": "external", "file": "shims/react.d.ts", "line": 5, "name": "useState" },
+    { "id": "useReducer", "type": "external", "file": "shims/react.d.ts", "line": 6, "name": "useReducer" },
+    { "id": "useEffect", "type": "external", "file": "shims/react.d.ts", "line": 7, "name": "useEffect" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "owner", "source": "reducerSrc", "pattern": "FW-REACT-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R02", "kind": "owner", "source": "ticksSrc", "pattern": "FW-REACT-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R03", "kind": "owner", "source": "effectOwner", "pattern": "FW-REACT-CALLBACK-INLINE", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R04", "kind": "references", "source": "reducerSrc", "target": "reducer", "pattern": "FW-REACT-REDUCER-BINDING", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R05", "kind": "references", "source": "reducer", "target": "Action", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R06", "kind": "calls", "source": "Stepper", "target": "useReducer", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R07", "kind": "dataflow", "source": "Stepper", "target": "useReducer", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R08", "kind": "dataflow", "source": "Stepper", "target": "useReducer", "argIndex": 1, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R09", "kind": "calls", "source": "Stepper", "target": "useState", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R10", "kind": "dataflow", "source": "Stepper", "target": "useState", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R11", "kind": "calls", "source": "Stepper", "target": "useEffect", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R12", "kind": "dataflow", "source": "Stepper", "target": "useEffect", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R13", "kind": "dataflow", "source": "Stepper", "target": "useEffect", "argIndex": 1, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:16"] },
+    { "id": "R14", "kind": "references", "source": "Stepper", "target": "reducer", "pattern": "REF-VALUE-FN", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R15", "kind": "references", "source": "Stepper", "target": "ticksSrc", "pattern": "REF-STATE-READ", "gtStatus": "determinate", "evidence": ["main.ts:16"], "note": "의존성 배열 [ticks, step]은 Stepper 본문에서 평가된다" },
+    { "id": "R16", "kind": "updates", "source": "effectOwner", "target": "reducerSrc", "pattern": "UPD-REACT-DISPATCH", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R17", "kind": "updates", "source": "effectOwner", "target": "ticksSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:15"] },
+    { "id": "R18", "kind": "references", "source": "effectOwner", "target": "ticksSrc", "pattern": "REF-STATE-READ", "gtStatus": "determinate", "evidence": ["main.ts:15"] },
+    { "id": "R19", "kind": "updates", "source": "down", "target": "reducerSrc", "pattern": "UPD-REACT-DISPATCH", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R20", "kind": "references", "source": "Stepper", "target": "reducerSrc", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:22"], "note": "value는 useReducer 상태 값이다" },
+    { "id": "R21", "kind": "references", "source": "Stepper", "target": "down", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:22"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

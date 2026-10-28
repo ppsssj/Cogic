@@ -1,0 +1,37 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "u06-vue-negatives",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "useView", "type": "callable", "file": "main.ts", "line": 3, "name": "useView" },
+    { "id": "stateSrc", "type": "synthetic", "file": "main.ts", "line": 4, "framework": "vue", "role": "state-source", "anchor": "reactive" },
+    { "id": "flagSrc", "type": "synthetic", "file": "main.ts", "line": 5, "framework": "vue", "role": "state-source", "anchor": "ref" },
+    { "id": "peek", "type": "callable", "file": "main.ts", "line": 7, "name": "peek" },
+    { "id": "copy", "type": "callable", "file": "main.ts", "line": 11, "name": "copy" },
+    { "id": "local", "type": "callable", "file": "main.ts", "line": 17, "name": "local" },
+    { "id": "ref", "type": "external", "file": "shims/vue.d.ts", "line": 5, "name": "ref" },
+    { "id": "reactive", "type": "external", "file": "shims/vue.d.ts", "line": 7, "name": "reactive" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "owner", "source": "stateSrc", "pattern": "FW-VUE-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R02", "kind": "owner", "source": "flagSrc", "pattern": "FW-VUE-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R03", "kind": "calls", "source": "useView", "target": "reactive", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R04", "kind": "dataflow", "source": "useView", "target": "reactive", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R05", "kind": "calls", "source": "useView", "target": "ref", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R06", "kind": "dataflow", "source": "useView", "target": "ref", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R07", "kind": "references", "source": "peek", "target": "stateSrc", "pattern": "REF-STATE-READ", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R08", "kind": "references", "source": "copy", "target": "stateSrc", "pattern": "REF-STATE-READ", "gtStatus": "determinate", "evidence": ["main.ts:12"] },
+    { "id": "R09", "kind": "references", "source": "useView", "target": "peek", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R10", "kind": "references", "source": "useView", "target": "copy", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R11", "kind": "references", "source": "useView", "target": "local", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R12", "kind": "references", "source": "useView", "target": "flagSrc", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:23"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "updates", "source": "peek", "target": "stateSrc", "pattern": "NEG-READ-ONLY", "evidence": ["main.ts:8"], "rationale": "state.count를 읽기만 한다" },
+    { "id": "N02", "kind": "updates", "source": "copy", "target": "stateSrc", "pattern": "NEG-COPY-MUTATION", "evidence": ["main.ts:13"], "rationale": "spread로 만든 snapshot은 reactive 상태가 아닌 새 객체다" },
+    { "id": "N03", "kind": "updates", "source": "local", "target": "flagSrc", "pattern": "NEG-SHADOW-STATE", "evidence": ["main.ts:19"], "rationale": "18행 지역 flag가 상태 flag를 가린다" },
+    { "id": "N04", "kind": "references", "source": "local", "target": "flagSrc", "pattern": "NEG-SHADOW", "evidence": ["main.ts:18", "main.ts:19", "main.ts:20"], "rationale": "local 안의 flag는 모두 지역 객체다" }
+  ],
+  "excludedSites": []
+}

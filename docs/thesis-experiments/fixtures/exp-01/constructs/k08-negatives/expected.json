@@ -1,0 +1,31 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "k08-negatives",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Widget", "type": "class", "file": "main.ts", "line": 1, "name": "Widget" },
+    { "id": "create", "type": "callable", "file": "main.ts", "line": 2, "name": "create" },
+    { "id": "Gadget", "type": "class", "file": "main.ts", "line": 7, "name": "Gadget" },
+    { "id": "check", "type": "callable", "file": "main.ts", "line": 9, "name": "check" },
+    { "id": "viaFactory", "type": "callable", "file": "main.ts", "line": 13, "name": "viaFactory" },
+    { "id": "typeOnly", "type": "callable", "file": "main.ts", "line": 17, "name": "typeOnly" },
+    { "id": "cloneLike", "type": "callable", "file": "main.ts", "line": 21, "name": "cloneLike" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "constructs", "source": "create", "target": "Widget", "pattern": "CONS-LOCAL-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:3"] },
+    { "id": "R02", "kind": "references", "source": "create", "target": "Widget", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:2"] },
+    { "id": "R03", "kind": "references", "source": "check", "target": "Widget", "pattern": "REF-CLASS-VALUE", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R04", "kind": "calls", "source": "viaFactory", "target": "create", "pattern": "CALL-METHOD-STATIC", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R05", "kind": "references", "source": "viaFactory", "target": "Widget", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:13", "main.ts:14"], "note": "반환 타입과 Widget.create의 수신 객체" },
+    { "id": "R06", "kind": "references", "source": "typeOnly", "target": "Gadget", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:17"] },
+    { "id": "R07", "kind": "references", "source": "cloneLike", "target": "Widget", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:21"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "constructs", "source": "check", "target": "Widget", "pattern": "NEG-INSTANCEOF", "evidence": ["main.ts:10"], "rationale": "instanceof는 검사일 뿐 인스턴스를 만들지 않는다" },
+    { "id": "N02", "kind": "constructs", "source": "viaFactory", "target": "Widget", "pattern": "NEG-STATIC-FACTORY", "evidence": ["main.ts:14"], "rationale": "생성은 Widget.create가 한다. viaFactory는 호출만 한다" },
+    { "id": "N03", "kind": "constructs", "source": "typeOnly", "target": "Gadget", "pattern": "NEG-TYPE-ONLY", "evidence": ["main.ts:17"], "rationale": "Gadget은 타입 위치에만 나온다" },
+    { "id": "N04", "kind": "constructs", "source": "cloneLike", "target": "Widget", "pattern": "NEG-SPREAD-COPY", "evidence": ["main.ts:22"], "rationale": "객체 spread는 일반 객체를 만들며 Widget 생성자를 호출하지 않는다" }
+  ],
+  "excludedSites": []
+}

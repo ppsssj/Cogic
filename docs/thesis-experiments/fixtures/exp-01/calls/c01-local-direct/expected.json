@@ -1,0 +1,28 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c01-local-direct",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "file", "type": "file", "file": "main.ts" },
+    { "id": "helper", "type": "callable", "file": "main.ts", "line": 1, "name": "helper" },
+    { "id": "double", "type": "callable", "file": "main.ts", "line": 5, "name": "double" },
+    { "id": "compute", "type": "callable", "file": "main.ts", "line": 7, "name": "compute" },
+    { "id": "run", "type": "callable", "file": "main.ts", "line": 13, "name": "run" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "compute", "target": "helper", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:8", "main.ts:10"] },
+    { "id": "R02", "kind": "calls", "source": "compute", "target": "double", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R03", "kind": "calls", "source": "run", "target": "compute", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R04", "kind": "calls", "source": "run", "target": "double", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R05", "kind": "calls", "source": "file", "target": "compute", "pattern": "CALL-TOPLEVEL", "gtStatus": "determinate", "evidence": ["main.ts:17"] },
+    { "id": "R06", "kind": "calls", "source": "file", "target": "run", "pattern": "CALL-TOPLEVEL", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R07", "kind": "dataflow", "source": "compute", "target": "helper", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:8", "main.ts:10"] },
+    { "id": "R08", "kind": "dataflow", "source": "compute", "target": "double", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R09", "kind": "dataflow", "source": "run", "target": "compute", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R10", "kind": "dataflow", "source": "run", "target": "double", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R11", "kind": "dataflow", "source": "file", "target": "compute", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:17"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

@@ -1,0 +1,1771 @@
+{
+  "gtVersion": 1,
+  "caseCount": 44,
+  "totals": {
+    "supported": 565,
+    "unsupported": 68,
+    "ambiguousDeterminate": 18,
+    "determinate": 651,
+    "indeterminate": 8,
+    "negatives": 49
+  },
+  "categories": [
+    {
+      "category": "calls",
+      "supported": 126,
+      "unsupported": 15,
+      "ambiguousDeterminate": 2,
+      "determinate": 143,
+      "indeterminate": 6,
+      "negatives": 7
+    },
+    {
+      "category": "constructs",
+      "supported": 33,
+      "unsupported": 5,
+      "ambiguousDeterminate": 1,
+      "determinate": 39,
+      "indeterminate": 0,
+      "negatives": 5
+    },
+    {
+      "category": "references",
+      "supported": 137,
+      "unsupported": 19,
+      "ambiguousDeterminate": 0,
+      "determinate": 156,
+      "indeterminate": 0,
+      "negatives": 5
+    },
+    {
+      "category": "dataflow",
+      "supported": 149,
+      "unsupported": 17,
+      "ambiguousDeterminate": 15,
+      "determinate": 181,
+      "indeterminate": 2,
+      "negatives": 5
+    },
+    {
+      "category": "updates",
+      "supported": 35,
+      "unsupported": 1,
+      "ambiguousDeterminate": 0,
+      "determinate": 36,
+      "indeterminate": 0,
+      "negatives": 7
+    },
+    {
+      "category": "react-hook-owner",
+      "supported": 22,
+      "unsupported": 0,
+      "ambiguousDeterminate": 0,
+      "determinate": 22,
+      "indeterminate": 0,
+      "negatives": 5
+    },
+    {
+      "category": "vue-hook-owner",
+      "supported": 25,
+      "unsupported": 3,
+      "ambiguousDeterminate": 0,
+      "determinate": 28,
+      "indeterminate": 0,
+      "negatives": 5
+    },
+    {
+      "category": "express-route-owner",
+      "supported": 18,
+      "unsupported": 8,
+      "ambiguousDeterminate": 0,
+      "determinate": 26,
+      "indeterminate": 0,
+      "negatives": 5
+    },
+    {
+      "category": "nest-route-owner",
+      "supported": 20,
+      "unsupported": 0,
+      "ambiguousDeterminate": 0,
+      "determinate": 20,
+      "indeterminate": 0,
+      "negatives": 5
+    }
+  ],
+  "checks": [
+    {
+      "category": "calls",
+      "rule": "in-scope(supported) >= 30",
+      "value": 126,
+      "pass": true
+    },
+    {
+      "category": "calls",
+      "rule": "negatives >= 5",
+      "value": 7,
+      "pass": true
+    },
+    {
+      "category": "constructs",
+      "rule": "in-scope(supported) >= 30",
+      "value": 33,
+      "pass": true
+    },
+    {
+      "category": "constructs",
+      "rule": "negatives >= 5",
+      "value": 5,
+      "pass": true
+    },
+    {
+      "category": "references",
+      "rule": "in-scope(supported) >= 30",
+      "value": 137,
+      "pass": true
+    },
+    {
+      "category": "references",
+      "rule": "negatives >= 5",
+      "value": 5,
+      "pass": true
+    },
+    {
+      "category": "dataflow",
+      "rule": "in-scope(supported) >= 30",
+      "value": 149,
+      "pass": true
+    },
+    {
+      "category": "dataflow",
+      "rule": "negatives >= 5",
+      "value": 5,
+      "pass": true
+    },
+    {
+      "category": "updates",
+      "rule": "in-scope(supported) >= 30",
+      "value": 35,
+      "pass": true
+    },
+    {
+      "category": "updates",
+      "rule": "negatives >= 5",
+      "value": 7,
+      "pass": true
+    },
+    {
+      "category": "react-hook-owner",
+      "rule": "in-scope(supported) >= 15",
+      "value": 22,
+      "pass": true
+    },
+    {
+      "category": "react-hook-owner",
+      "rule": "negatives >= 5",
+      "value": 5,
+      "pass": true
+    },
+    {
+      "category": "vue-hook-owner",
+      "rule": "in-scope(supported) >= 15",
+      "value": 25,
+      "pass": true
+    },
+    {
+      "category": "vue-hook-owner",
+      "rule": "negatives >= 5",
+      "value": 5,
+      "pass": true
+    },
+    {
+      "category": "express-route-owner",
+      "rule": "in-scope(supported) >= 15",
+      "value": 18,
+      "pass": true
+    },
+    {
+      "category": "express-route-owner",
+      "rule": "negatives >= 5",
+      "value": 5,
+      "pass": true
+    },
+    {
+      "category": "nest-route-owner",
+      "rule": "in-scope(supported) >= 15",
+      "value": 20,
+      "pass": true
+    },
+    {
+      "category": "nest-route-owner",
+      "rule": "negatives >= 5",
+      "value": 5,
+      "pass": true
+    },
+    {
+      "category": "total",
+      "rule": "determinate >= 250",
+      "value": 651,
+      "pass": true
+    }
+  ],
+  "cases": [
+    {
+      "caseId": "c01-local-direct",
+      "category": "calls",
+      "determinate": 11,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "c02-methods",
+      "category": "calls",
+      "determinate": 8,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "c03-imports",
+      "category": "calls",
+      "determinate": 10,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "c04-barrel-alias",
+      "category": "calls",
+      "determinate": 8,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "c05-optional-generic-overload",
+      "category": "calls",
+      "determinate": 8,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "c06-jsx-dynamic-import",
+      "category": "calls",
+      "determinate": 4,
+      "indeterminate": 0,
+      "negatives": 3
+    },
+    {
+      "caseId": "c07-lib-callback",
+      "category": "calls",
+      "determinate": 5,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "caseId": "c08-dynamic-access",
+      "category": "calls",
+      "determinate": 10,
+      "indeterminate": 1,
+      "negatives": 0
+    },
+    {
+      "caseId": "c09-recursion-callback-param",
+      "category": "calls",
+      "determinate": 9,
+      "indeterminate": 1,
+      "negatives": 1
+    },
+    {
+      "caseId": "c10-negatives",
+      "category": "calls",
+      "determinate": 4,
+      "indeterminate": 0,
+      "negatives": 6
+    },
+    {
+      "caseId": "k01-local-classes",
+      "category": "constructs",
+      "determinate": 15,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "k02-imported-ctor-body",
+      "category": "constructs",
+      "determinate": 13,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "k03-factories",
+      "category": "constructs",
+      "determinate": 20,
+      "indeterminate": 1,
+      "negatives": 0
+    },
+    {
+      "caseId": "k04-indirect-builtin",
+      "category": "constructs",
+      "determinate": 11,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "caseId": "k05-field-initializers",
+      "category": "constructs",
+      "determinate": 16,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "k06-imported-scene",
+      "category": "constructs",
+      "determinate": 23,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "k07-events",
+      "category": "constructs",
+      "determinate": 15,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "k08-negatives",
+      "category": "constructs",
+      "determinate": 7,
+      "indeterminate": 0,
+      "negatives": 4
+    },
+    {
+      "caseId": "d01-parameter-binding",
+      "category": "dataflow",
+      "determinate": 19,
+      "indeterminate": 2,
+      "negatives": 2
+    },
+    {
+      "caseId": "d02-methods-constructors",
+      "category": "dataflow",
+      "determinate": 16,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "caseId": "e01-inline-handlers",
+      "category": "express",
+      "determinate": 20,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "e02-named-middleware",
+      "category": "express",
+      "determinate": 24,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "e03-unsupported-negatives",
+      "category": "express",
+      "determinate": 34,
+      "indeterminate": 0,
+      "negatives": 5
+    },
+    {
+      "caseId": "n01-controller",
+      "category": "nest",
+      "determinate": 18,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "n02-namespace-negatives",
+      "category": "nest",
+      "determinate": 9,
+      "indeterminate": 0,
+      "negatives": 3
+    },
+    {
+      "caseId": "n03-paths",
+      "category": "nest",
+      "determinate": 21,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "n04-local-decorators",
+      "category": "nest",
+      "determinate": 6,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "caseId": "h01-reducer-effect",
+      "category": "react",
+      "determinate": 21,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "h02-alias-namespace-memo",
+      "category": "react",
+      "determinate": 30,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "h03-unsupported-negatives",
+      "category": "react",
+      "determinate": 18,
+      "indeterminate": 0,
+      "negatives": 5
+    },
+    {
+      "caseId": "r01-type-references",
+      "category": "references",
+      "determinate": 8,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "r02-value-references",
+      "category": "references",
+      "determinate": 7,
+      "indeterminate": 2,
+      "negatives": 0
+    },
+    {
+      "caseId": "r03-heritage-members",
+      "category": "references",
+      "determinate": 10,
+      "indeterminate": 1,
+      "negatives": 0
+    },
+    {
+      "caseId": "r04-anonymous-callback",
+      "category": "references",
+      "determinate": 14,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "r05-cross-file",
+      "category": "references",
+      "determinate": 6,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "u01-react-usestate",
+      "category": "updates",
+      "determinate": 14,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "u02-react-todo",
+      "category": "updates",
+      "determinate": 17,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "u03-vue-ref-reactive",
+      "category": "updates",
+      "determinate": 27,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "u04-vue-form",
+      "category": "updates",
+      "determinate": 25,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "u05-react-negatives",
+      "category": "updates",
+      "determinate": 11,
+      "indeterminate": 0,
+      "negatives": 5
+    },
+    {
+      "caseId": "u06-vue-negatives",
+      "category": "updates",
+      "determinate": 12,
+      "indeterminate": 0,
+      "negatives": 4
+    },
+    {
+      "caseId": "v01-computed-watch",
+      "category": "vue",
+      "determinate": 27,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "v02-namespace-unsupported",
+      "category": "vue",
+      "determinate": 27,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "caseId": "v03-negatives",
+      "category": "vue",
+      "determinate": 13,
+      "indeterminate": 0,
+      "negatives": 5
+    }
+  ],
+  "patterns": [
+    {
+      "pattern": "CALL-BARREL",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-CTOR-BODY",
+      "category": "calls",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-DECORATOR-CLASS",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 5,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-DECORATOR-METHOD",
+      "category": "calls",
+      "support": "unsupported-by-design",
+      "determinate": 8,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-DYNAMIC-IMPORT",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-DYNAMIC-MODULE-MEMBER",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-ELEMENT-DYNAMIC",
+      "category": "calls",
+      "support": "ambiguous",
+      "determinate": 0,
+      "indeterminate": 1,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-ELEMENT-LITERAL",
+      "category": "calls",
+      "support": "ambiguous",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-FN-CALL-APPLY-BIND",
+      "category": "calls",
+      "support": "ambiguous",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-FW-API",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 47,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-GENERIC",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-IMPORT-DEFAULT",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-IMPORT-NAMED",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 5,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-IMPORT-NAMESPACE",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 4,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-IN-ANON-CALLBACK",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 3,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-INTERFACE-DISPATCH",
+      "category": "calls",
+      "support": "ambiguous",
+      "determinate": 0,
+      "indeterminate": 2,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-JSX-IMPORT",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-JSX-LOCAL",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-LIB",
+      "category": "calls",
+      "support": "unsupported-by-design",
+      "determinate": 6,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-LOCAL-FN",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 23,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-METHOD-INSTANCE",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 8,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-METHOD-STATIC",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-METHOD-THIS",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 5,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-NESTED-LOCAL-FN",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-OBJ-LITERAL-METHOD",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-OPTIONAL",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-OVERLOAD-LOCAL",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-PARAM-CALLBACK",
+      "category": "calls",
+      "support": "ambiguous",
+      "determinate": 0,
+      "indeterminate": 1,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-PATH-ALIAS",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-RECURSIVE",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-SUPER-METHOD",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-TOPLEVEL",
+      "category": "calls",
+      "support": "supported",
+      "determinate": 6,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-VARIABLE-ALIAS",
+      "category": "calls",
+      "support": "ambiguous",
+      "determinate": 0,
+      "indeterminate": 2,
+      "negatives": 0
+    },
+    {
+      "pattern": "NEG-CALLBACK-PASS",
+      "category": "calls",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "pattern": "NEG-COMMENT-STRING",
+      "category": "calls",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-JSX-INTRINSIC",
+      "category": "calls",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "pattern": "NEG-SHADOW",
+      "category": "calls",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-TYPEOF",
+      "category": "calls",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "CONS-CTOR-BODY",
+      "category": "constructs",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-FIELD-INIT",
+      "category": "constructs",
+      "support": "unsupported-by-design",
+      "determinate": 3,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-GENERIC",
+      "category": "constructs",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-IMPORTED-EXPLICIT-CTOR",
+      "category": "constructs",
+      "support": "supported",
+      "determinate": 4,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-IMPORTED-IMPLICIT-CTOR",
+      "category": "constructs",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-INHERITED-CTOR",
+      "category": "constructs",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-LIB",
+      "category": "constructs",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-LOCAL-EXPLICIT-CTOR",
+      "category": "constructs",
+      "support": "supported",
+      "determinate": 16,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-LOCAL-IMPLICIT-CTOR",
+      "category": "constructs",
+      "support": "supported",
+      "determinate": 9,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-TOPLEVEL",
+      "category": "constructs",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CONS-VIA-VARIABLE",
+      "category": "constructs",
+      "support": "ambiguous",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "NEG-CLASS-VALUE",
+      "category": "constructs",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-INSTANCEOF",
+      "category": "constructs",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-SPREAD-COPY",
+      "category": "constructs",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-STATIC-FACTORY",
+      "category": "constructs",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-TYPE-ONLY",
+      "category": "constructs",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "DF-CONSTRUCTOR",
+      "category": "dataflow",
+      "support": "supported",
+      "determinate": 33,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-CTOR-BODY",
+      "category": "dataflow",
+      "support": "unsupported-by-design",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-DECORATOR-METHOD",
+      "category": "dataflow",
+      "support": "unsupported-by-design",
+      "determinate": 7,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-DESTRUCTURED-PARAM",
+      "category": "dataflow",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-EXTERNAL",
+      "category": "dataflow",
+      "support": "supported",
+      "determinate": 71,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-FIELD-INIT",
+      "category": "dataflow",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-INDIRECT",
+      "category": "dataflow",
+      "support": "ambiguous",
+      "determinate": 2,
+      "indeterminate": 2,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-INHERITED-CTOR",
+      "category": "dataflow",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-LIB",
+      "category": "dataflow",
+      "support": "unsupported-by-design",
+      "determinate": 7,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-OPTIONAL-PARAM",
+      "category": "dataflow",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-POSITIONAL",
+      "category": "dataflow",
+      "support": "supported",
+      "determinate": 41,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-REST-PARAM",
+      "category": "dataflow",
+      "support": "ambiguous",
+      "determinate": 10,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-SPREAD-REST",
+      "category": "dataflow",
+      "support": "ambiguous",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-SPREAD-TUPLE",
+      "category": "dataflow",
+      "support": "ambiguous",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "NEG-CALLBACK-PASS",
+      "category": "dataflow",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-DEFAULT-OMITTED",
+      "category": "dataflow",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "pattern": "NEG-JSX-PROPS",
+      "category": "dataflow",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-ZERO-ARGS",
+      "category": "dataflow",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "CALL-LOCAL-FN",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-EXTERNAL",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-POSITIONAL",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-EXTRA-HANDLER",
+      "category": "express-route-owner",
+      "support": "unsupported-by-design",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-HANDLER-CALL",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 4,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-IMPORTED-APP",
+      "category": "express-route-owner",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-INLINE",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-MIDDLEWARE",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-MOUNT",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-NAMED",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 3,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-ROUTE-CHAIN",
+      "category": "express-route-owner",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-ROUTER",
+      "category": "express-route-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "category": "express-route-owner",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-UNSUPPORTED-OWNER-EDGE",
+      "category": "express-route-owner",
+      "support": "unsupported-by-design",
+      "determinate": 3,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "NEG-EXPRESS-NONROUTE",
+      "category": "express-route-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 4
+    },
+    {
+      "pattern": "NEG-NOT-EXPRESS",
+      "category": "express-route-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "FW-NEST-HANDLER-CALL",
+      "category": "nest-route-owner",
+      "support": "supported",
+      "determinate": 10,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-NEST-NAMESPACE",
+      "category": "nest-route-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-NEST-ROUTE",
+      "category": "nest-route-owner",
+      "support": "supported",
+      "determinate": 9,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "NEG-NEST-LOCAL-DECORATOR",
+      "category": "nest-route-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "pattern": "NEG-NEST-NO-ROUTE-DECORATOR",
+      "category": "nest-route-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-NEST-NOT-CONTROLLER",
+      "category": "nest-route-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "pattern": "CALL-LOCAL-FN",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-POSITIONAL",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-REACT-ALIAS-IMPORT",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-REACT-CALLBACK-INLINE",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 3,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-REACT-CALLBACK-NAMED",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-REACT-NAMED-CALLBACK-CALL",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-REACT-NAMESPACE-IMPORT",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-REACT-REDUCER-BINDING",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-REACT-STATE-SOURCE",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 9,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "NEG-CREATECONTEXT",
+      "category": "react-hook-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-CUSTOM-HOOK",
+      "category": "react-hook-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-NON-FRAMEWORK-MODULE",
+      "category": "react-hook-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-USECONTEXT",
+      "category": "react-hook-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-USEREF",
+      "category": "react-hook-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "REF-STATE-READ",
+      "category": "react-hook-owner",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "NEG-COMMENT-STRING",
+      "category": "references",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-PROPERTY-NAME",
+      "category": "references",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-SHADOW",
+      "category": "references",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 3
+    },
+    {
+      "pattern": "REF-CLASS-VALUE",
+      "category": "references",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-CROSS-FILE",
+      "category": "references",
+      "support": "unsupported-by-design",
+      "determinate": 10,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-ENUM-MEMBER",
+      "category": "references",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-FIELD-INIT",
+      "category": "references",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-HERITAGE",
+      "category": "references",
+      "support": "supported",
+      "determinate": 7,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-IN-ANON-CALLBACK",
+      "category": "references",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-LIB",
+      "category": "references",
+      "support": "unsupported-by-design",
+      "determinate": 3,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-METHOD-VALUE",
+      "category": "references",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-RECEIVER",
+      "category": "references",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-SHORTHAND-PROPERTY",
+      "category": "references",
+      "support": "supported",
+      "determinate": 39,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-STATE-READ",
+      "category": "references",
+      "support": "supported",
+      "determinate": 12,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-STATE-SETTER-VALUE",
+      "category": "references",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-STATE-WRITE",
+      "category": "references",
+      "support": "supported",
+      "determinate": 15,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-TOPLEVEL",
+      "category": "references",
+      "support": "unsupported-by-design",
+      "determinate": 3,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-TYPE-ANNOTATION",
+      "category": "references",
+      "support": "supported",
+      "determinate": 32,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-TYPE-MEMBER",
+      "category": "references",
+      "support": "supported",
+      "determinate": 6,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-TYPEOF-QUERY",
+      "category": "references",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-UNSUPPORTED-STATE",
+      "category": "references",
+      "support": "unsupported-by-design",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-VALUE-FN",
+      "category": "references",
+      "support": "supported",
+      "determinate": 17,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "NEG-COPY-MUTATION",
+      "category": "updates",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-NOT-SETTER",
+      "category": "updates",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-READ-ONLY",
+      "category": "updates",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "pattern": "NEG-SETTER-AS-VALUE",
+      "category": "updates",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 1
+    },
+    {
+      "pattern": "NEG-SHADOW-STATE",
+      "category": "updates",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "pattern": "UPD-REACT-DISPATCH",
+      "category": "updates",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "UPD-REACT-SETTER",
+      "category": "updates",
+      "support": "supported",
+      "determinate": 15,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "UPD-REACT-SETTER-FN",
+      "category": "updates",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "UPD-UNSUPPORTED-STATE",
+      "category": "updates",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "UPD-VUE-REACTIVE-PROP",
+      "category": "updates",
+      "support": "supported",
+      "determinate": 6,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "UPD-VUE-REF",
+      "category": "updates",
+      "support": "supported",
+      "determinate": 10,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "CALL-LOCAL-FN",
+      "category": "vue-hook-owner",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "DF-POSITIONAL",
+      "category": "vue-hook-owner",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-UNSUPPORTED-OWNER-EDGE",
+      "category": "vue-hook-owner",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-VUE-CALLBACK",
+      "category": "vue-hook-owner",
+      "support": "supported",
+      "determinate": 3,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-VUE-LIFECYCLE",
+      "category": "vue-hook-owner",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-VUE-NAMESPACE-IMPORT",
+      "category": "vue-hook-owner",
+      "support": "supported",
+      "determinate": 2,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-VUE-STATE-SOURCE",
+      "category": "vue-hook-owner",
+      "support": "supported",
+      "determinate": 12,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "FW-VUE-STATE-UNSUPPORTED",
+      "category": "vue-hook-owner",
+      "support": "unsupported-by-design",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "NEG-NON-FRAMEWORK-MODULE",
+      "category": "vue-hook-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 3
+    },
+    {
+      "pattern": "NEG-VUE-NOT-STATE",
+      "category": "vue-hook-owner",
+      "support": "negative",
+      "determinate": 0,
+      "indeterminate": 0,
+      "negatives": 2
+    },
+    {
+      "pattern": "REF-STATE-READ",
+      "category": "vue-hook-owner",
+      "support": "supported",
+      "determinate": 3,
+      "indeterminate": 0,
+      "negatives": 0
+    },
+    {
+      "pattern": "REF-STATE-WRITE",
+      "category": "vue-hook-owner",
+      "support": "supported",
+      "determinate": 1,
+      "indeterminate": 0,
+      "negatives": 0
+    }
+  ]
+}

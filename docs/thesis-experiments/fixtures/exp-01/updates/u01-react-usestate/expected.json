@@ -1,0 +1,33 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "u01-react-usestate",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Counter", "type": "callable", "file": "main.ts", "line": 3, "name": "Counter" },
+    { "id": "countSrc", "type": "synthetic", "file": "main.ts", "line": 4, "framework": "react", "role": "state-source", "anchor": "useState" },
+    { "id": "labelSrc", "type": "synthetic", "file": "main.ts", "line": 5, "framework": "react", "role": "state-source", "anchor": "useState" },
+    { "id": "increment", "type": "callable", "file": "main.ts", "line": 7, "name": "increment" },
+    { "id": "reset", "type": "callable", "file": "main.ts", "line": 12, "name": "reset" },
+    { "id": "toggle", "type": "callable", "file": "main.ts", "line": 17, "name": "toggle" },
+    { "id": "useState", "type": "external", "file": "shims/react.d.ts", "line": 5, "name": "useState" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "owner", "source": "countSrc", "pattern": "FW-REACT-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R02", "kind": "owner", "source": "labelSrc", "pattern": "FW-REACT-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R03", "kind": "calls", "source": "Counter", "target": "useState", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:4", "main.ts:5"] },
+    { "id": "R04", "kind": "dataflow", "source": "Counter", "target": "useState", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:4", "main.ts:5"] },
+    { "id": "R05", "kind": "updates", "source": "increment", "target": "countSrc", "pattern": "UPD-REACT-SETTER-FN", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R06", "kind": "updates", "source": "increment", "target": "labelSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R07", "kind": "updates", "source": "reset", "target": "countSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R08", "kind": "updates", "source": "reset", "target": "labelSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R09", "kind": "updates", "source": "toggle", "target": "labelSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R10", "kind": "references", "source": "toggle", "target": "labelSrc", "pattern": "REF-STATE-READ", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R11", "kind": "references", "source": "Counter", "target": "countSrc", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R12", "kind": "references", "source": "Counter", "target": "increment", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R13", "kind": "references", "source": "Counter", "target": "reset", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R14", "kind": "references", "source": "Counter", "target": "toggle", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:21"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

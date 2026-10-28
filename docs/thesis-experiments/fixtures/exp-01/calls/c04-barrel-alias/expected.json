@@ -1,0 +1,24 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c04-barrel-alias",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "label", "type": "callable", "file": "main.ts", "line": 4, "name": "label" },
+    { "id": "upper", "type": "external", "file": "lib/strings.ts", "line": 1, "name": "upper" },
+    { "id": "lower", "type": "external", "file": "lib/strings.ts", "line": 5, "name": "lower" },
+    { "id": "clamp", "type": "external", "file": "lib/numbers.ts", "line": 1, "name": "clamp" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "label", "target": "clamp", "pattern": "CALL-BARREL", "gtStatus": "determinate", "evidence": ["main.ts:5"], "note": "export * from \"./numbers\" 경유" },
+    { "id": "R02", "kind": "calls", "source": "label", "target": "upper", "pattern": "CALL-BARREL", "gtStatus": "determinate", "evidence": ["main.ts:6"], "note": "upper()는 barrel 경유, up2()는 @lib alias 경유이며 둘 다 lib/strings.ts:1의 같은 선언이다(관계 1개)" },
+    { "id": "R03", "kind": "calls", "source": "label", "target": "lower", "pattern": "CALL-PATH-ALIAS", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R04", "kind": "dataflow", "source": "label", "target": "clamp", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R05", "kind": "dataflow", "source": "label", "target": "clamp", "argIndex": 1, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R06", "kind": "dataflow", "source": "label", "target": "clamp", "argIndex": 2, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R07", "kind": "dataflow", "source": "label", "target": "upper", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:6"] },
+    { "id": "R08", "kind": "dataflow", "source": "label", "target": "lower", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:6"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

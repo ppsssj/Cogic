@@ -1,0 +1,31 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "r03-heritage-members",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Repository", "type": "typeLike", "file": "main.ts", "line": 1, "name": "Repository" },
+    { "id": "BaseRepo", "type": "class", "file": "main.ts", "line": 5, "name": "BaseRepo" },
+    { "id": "FileRepo", "type": "class", "file": "main.ts", "line": 9, "name": "FileRepo" },
+    { "id": "fileLoad", "type": "callable", "file": "main.ts", "line": 10, "name": "load" },
+    { "id": "CachedRepo", "type": "class", "file": "main.ts", "line": 15, "name": "CachedRepo" },
+    { "id": "cachedLoad", "type": "callable", "file": "main.ts", "line": 18, "name": "load" },
+    { "id": "makeRepo", "type": "callable", "file": "main.ts", "line": 23, "name": "makeRepo" },
+    { "id": "handlerFor", "type": "callable", "file": "main.ts", "line": 27, "name": "handlerFor" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "BaseRepo", "target": "Repository", "pattern": "REF-HERITAGE", "gtStatus": "determinate", "evidence": ["main.ts:5"] },
+    { "id": "R02", "kind": "references", "source": "FileRepo", "target": "BaseRepo", "pattern": "REF-HERITAGE", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R03", "kind": "references", "source": "CachedRepo", "target": "FileRepo", "pattern": "REF-HERITAGE", "gtStatus": "determinate", "evidence": ["main.ts:15"] },
+    { "id": "R04", "kind": "references", "source": "CachedRepo", "target": "Repository", "pattern": "REF-HERITAGE", "gtStatus": "determinate", "evidence": ["main.ts:15", "main.ts:16"], "note": "implements 절과 필드 타입 origin?: Repository" },
+    { "id": "R05", "kind": "calls", "source": "cachedLoad", "target": "fileLoad", "pattern": "CALL-SUPER-METHOD", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "I01", "kind": "calls", "source": "cachedLoad", "candidates": [{ "target": "fileLoad" }, { "target": "cachedLoad" }], "pattern": "CALL-INTERFACE-DISPATCH", "gtStatus": "indeterminate", "evidence": ["main.ts:19"], "reason": "this.origin의 정적 타입은 Repository다. 실행되는 load는 origin에 담긴 객체의 런타임 클래스(FileRepo 또는 CachedRepo)에 따라 달라진다" },
+    { "id": "R06", "kind": "constructs", "source": "makeRepo", "target": "CachedRepo", "pattern": "CONS-LOCAL-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:24"] },
+    { "id": "R07", "kind": "constructs", "source": "makeRepo", "target": "FileRepo", "pattern": "CONS-LOCAL-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:24"] },
+    { "id": "R08", "kind": "references", "source": "makeRepo", "target": "Repository", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R09", "kind": "references", "source": "handlerFor", "target": "FileRepo", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:27"] },
+    { "id": "R10", "kind": "references", "source": "handlerFor", "target": "fileLoad", "pattern": "REF-METHOD-VALUE", "gtStatus": "determinate", "evidence": ["main.ts:28"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c08-dynamic-access",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "start", "type": "callable", "file": "main.ts", "line": 2, "name": "start" },
+    { "id": "stop", "type": "callable", "file": "main.ts", "line": 5, "name": "stop" },
+    { "id": "HandlerName", "type": "typeLike", "file": "main.ts", "line": 10, "name": "HandlerName" },
+    { "id": "dispatchFixed", "type": "callable", "file": "main.ts", "line": 12, "name": "dispatchFixed" },
+    { "id": "dispatch", "type": "callable", "file": "main.ts", "line": 16, "name": "dispatch" },
+    { "id": "greet", "type": "callable", "file": "main.ts", "line": 20, "name": "greet" },
+    { "id": "callBound", "type": "callable", "file": "main.ts", "line": 24, "name": "callBound" },
+    { "id": "libBind", "type": "lib", "symbol": "Function.bind" },
+    { "id": "libCall", "type": "lib", "symbol": "Function.call" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "dispatchFixed", "target": "start", "pattern": "CALL-ELEMENT-LITERAL", "gtStatus": "determinate", "evidence": ["main.ts:13"], "note": "키가 문자열 리터럴이라 대상이 정적으로 결정된다" },
+    { "id": "I01", "kind": "calls", "source": "dispatch", "candidates": [{ "target": "start" }, { "target": "stop" }], "pattern": "CALL-ELEMENT-DYNAMIC", "gtStatus": "indeterminate", "evidence": ["main.ts:17"], "reason": "name은 \"start\" | \"stop\" 런타임 값이다. 어느 메서드가 호출되는지 소스만으로 하나로 정할 수 없다" },
+    { "id": "R02", "kind": "references", "source": "dispatch", "target": "HandlerName", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:16"] },
+    { "id": "R03", "kind": "calls", "source": "callBound", "target": "libBind", "pattern": "CALL-LIB", "gtStatus": "determinate", "evidence": ["main.ts:25"] },
+    { "id": "R04", "kind": "dataflow", "source": "callBound", "target": "libBind", "argIndex": 0, "pattern": "DF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:25"] },
+    { "id": "R05", "kind": "calls", "source": "callBound", "target": "libCall", "pattern": "CALL-LIB", "gtStatus": "determinate", "evidence": ["main.ts:26"] },
+    { "id": "R06", "kind": "dataflow", "source": "callBound", "target": "libCall", "argIndex": 0, "pattern": "DF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:26"] },
+    { "id": "R07", "kind": "dataflow", "source": "callBound", "target": "libCall", "argIndex": 1, "pattern": "DF-LIB", "gtStatus": "determinate", "evidence": ["main.ts:26"], "note": "Function.call(thisArg, ...argArray): \"hi\"는 rest 파라미터 argArray(1번)" },
+    { "id": "R08", "kind": "calls", "source": "callBound", "target": "greet", "pattern": "CALL-FN-CALL-APPLY-BIND", "gtStatus": "determinate", "evidence": ["main.ts:26"], "note": "greet.call(...)과 bound(...) 모두 greet을 실행한다. bound는 const이며 greet.bind 결과로만 초기화된다" },
+    { "id": "R09", "kind": "dataflow", "source": "callBound", "target": "greet", "argIndex": 0, "pattern": "DF-INDIRECT", "gtStatus": "determinate", "evidence": ["main.ts:26"], "note": "\"hi\"와 \"yo\"가 greeting(0번)으로 간다" },
+    { "id": "R10", "kind": "references", "source": "callBound", "target": "greet", "pattern": "REF-RECEIVER", "gtStatus": "determinate", "evidence": ["main.ts:25", "main.ts:26"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

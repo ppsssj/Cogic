@@ -1,0 +1,36 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "d02-methods-constructors",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "Account", "type": "class", "file": "main.ts", "line": 1, "name": "Account" },
+    { "id": "deposit", "type": "callable", "file": "main.ts", "line": 4, "name": "deposit" },
+    { "id": "fee", "type": "callable", "file": "main.ts", "line": 10, "name": "fee" },
+    { "id": "send", "type": "callable", "file": "main.ts", "line": 15, "name": "send" },
+    { "id": "transfer", "type": "callable", "file": "main.ts", "line": 20, "name": "transfer" },
+    { "id": "open", "type": "callable", "file": "main.ts", "line": 26, "name": "open" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "transfer", "target": "fee", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R02", "kind": "dataflow", "source": "transfer", "target": "fee", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R03", "kind": "dataflow", "source": "transfer", "target": "fee", "argIndex": 1, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:21"] },
+    { "id": "R04", "kind": "calls", "source": "transfer", "target": "deposit", "pattern": "CALL-METHOD-INSTANCE", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R05", "kind": "dataflow", "source": "transfer", "target": "deposit", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R06", "kind": "calls", "source": "transfer", "target": "send", "pattern": "CALL-OBJ-LITERAL-METHOD", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R07", "kind": "dataflow", "source": "transfer", "target": "send", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R08", "kind": "dataflow", "source": "transfer", "target": "send", "argIndex": 1, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "R09", "kind": "references", "source": "transfer", "target": "Account", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:20"] },
+    { "id": "R10", "kind": "constructs", "source": "open", "target": "Account", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:27"] },
+    { "id": "R11", "kind": "dataflow", "source": "open", "target": "Account", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:27"] },
+    { "id": "R12", "kind": "dataflow", "source": "open", "target": "Account", "argIndex": 1, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:27"] },
+    { "id": "R13", "kind": "calls", "source": "open", "target": "deposit", "pattern": "CALL-METHOD-INSTANCE", "gtStatus": "determinate", "evidence": ["main.ts:28"] },
+    { "id": "R14", "kind": "dataflow", "source": "open", "target": "deposit", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:28"] },
+    { "id": "R15", "kind": "dataflow", "source": "open", "target": "deposit", "argIndex": 1, "pattern": "DF-OPTIONAL-PARAM", "gtStatus": "determinate", "evidence": ["main.ts:28"] },
+    { "id": "R16", "kind": "references", "source": "open", "target": "Account", "pattern": "REF-TYPE-ANNOTATION", "gtStatus": "determinate", "evidence": ["main.ts:26"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "dataflow", "source": "transfer", "target": "deposit", "argIndex": 1, "pattern": "NEG-DEFAULT-OMITTED", "evidence": ["main.ts:22"], "rationale": "선택 파라미터 note를 넘기지 않는다" }
+  ],
+  "excludedSites": []
+}

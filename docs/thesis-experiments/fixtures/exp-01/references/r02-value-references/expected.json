@@ -1,0 +1,28 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "r02-value-references",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "file", "type": "file", "file": "main.ts" },
+    { "id": "validate", "type": "callable", "file": "main.ts", "line": 1, "name": "validate" },
+    { "id": "transform", "type": "callable", "file": "main.ts", "line": 5, "name": "transform" },
+    { "id": "pick", "type": "callable", "file": "main.ts", "line": 11, "name": "pick" },
+    { "id": "convert", "type": "callable", "file": "main.ts", "line": 17, "name": "convert" },
+    { "id": "Form", "type": "class", "file": "main.ts", "line": 22, "name": "Form" },
+    { "id": "submit", "type": "callable", "file": "main.ts", "line": 25, "name": "submit" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "file", "target": "validate", "pattern": "REF-TOPLEVEL", "gtStatus": "determinate", "evidence": ["main.ts:9", "main.ts:16"], "note": "최상위 배열 원소와 최상위 객체 리터럴 속성 값" },
+    { "id": "R02", "kind": "references", "source": "file", "target": "transform", "pattern": "REF-TOPLEVEL", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R03", "kind": "references", "source": "pick", "target": "validate", "pattern": "REF-VALUE-FN", "gtStatus": "determinate", "evidence": ["main.ts:12"] },
+    { "id": "R04", "kind": "references", "source": "pick", "target": "transform", "pattern": "REF-VALUE-FN", "gtStatus": "determinate", "evidence": ["main.ts:12"] },
+    { "id": "R05", "kind": "calls", "source": "convert", "target": "transform", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R06", "kind": "dataflow", "source": "convert", "target": "transform", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R07", "kind": "references", "source": "Form", "target": "validate", "pattern": "REF-FIELD-INIT", "gtStatus": "determinate", "evidence": ["main.ts:23"] },
+    { "id": "I01", "kind": "calls", "source": "submit", "candidates": "unbounded", "pattern": "CALL-VARIABLE-ALIAS", "gtStatus": "indeterminate", "evidence": ["main.ts:27"], "reason": "validator는 public 가변 필드다. 외부에서 다른 함수로 바꿀 수 있어 호출 대상을 열거할 수 없다" },
+    { "id": "I02", "kind": "dataflow", "source": "submit", "candidates": "unbounded", "pattern": "DF-INDIRECT", "gtStatus": "indeterminate", "evidence": ["main.ts:27"], "reason": "호출 대상이 정해지지 않으므로 인자를 받는 파라미터도 정할 수 없다" }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

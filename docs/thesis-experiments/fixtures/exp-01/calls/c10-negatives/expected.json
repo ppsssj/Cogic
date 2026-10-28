@@ -1,0 +1,31 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c10-negatives",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "target", "type": "callable", "file": "main.ts", "line": 1, "name": "target" },
+    { "id": "other", "type": "callable", "file": "main.ts", "line": 5, "name": "other" },
+    { "id": "onlyType", "type": "callable", "file": "main.ts", "line": 9, "name": "onlyType" },
+    { "id": "comment", "type": "callable", "file": "main.ts", "line": 13, "name": "comment" },
+    { "id": "localShadow", "type": "callable", "file": "main.ts", "line": 19, "name": "localShadow" },
+    { "id": "innerTarget", "type": "callable", "file": "main.ts", "line": 20, "name": "target" },
+    { "id": "paramShadow", "type": "callable", "file": "main.ts", "line": 24, "name": "paramShadow" },
+    { "id": "propertyName", "type": "callable", "file": "main.ts", "line": 28, "name": "propertyName" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "references", "source": "onlyType", "target": "target", "pattern": "REF-TYPEOF-QUERY", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R02", "kind": "references", "source": "onlyType", "target": "other", "pattern": "REF-VALUE-FN", "gtStatus": "determinate", "evidence": ["main.ts:10"] },
+    { "id": "R03", "kind": "calls", "source": "comment", "target": "other", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:16"] },
+    { "id": "R04", "kind": "calls", "source": "localShadow", "target": "innerTarget", "pattern": "CALL-NESTED-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:21"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "calls", "source": "onlyType", "target": "target", "pattern": "NEG-TYPEOF", "evidence": ["main.ts:9"], "rationale": "typeof target은 타입 쿼리이며 호출이 아니다" },
+    { "id": "N02", "kind": "calls", "source": "comment", "target": "target", "pattern": "NEG-COMMENT-STRING", "evidence": ["main.ts:14", "main.ts:15"], "rationale": "주석과 문자열 리터럴 안의 target()은 코드가 아니다" },
+    { "id": "N03", "kind": "references", "source": "comment", "target": "target", "pattern": "NEG-COMMENT-STRING", "evidence": ["main.ts:14", "main.ts:15"], "rationale": "주석과 문자열 리터럴은 식별자 참조가 아니다" },
+    { "id": "N04", "kind": "calls", "source": "localShadow", "target": "target", "pattern": "NEG-SHADOW", "evidence": ["main.ts:21"], "rationale": "20행의 지역 target이 최상위 target을 가린다" },
+    { "id": "N05", "kind": "references", "source": "paramShadow", "target": "target", "pattern": "NEG-SHADOW", "evidence": ["main.ts:25"], "rationale": "파라미터 target(number)이 최상위 함수를 가린다" },
+    { "id": "N06", "kind": "references", "source": "propertyName", "target": "target", "pattern": "NEG-PROPERTY-NAME", "evidence": ["main.ts:29", "main.ts:30"], "rationale": "box.target은 객체 속성이며 함수 target과 무관하다" }
+  ],
+  "excludedSites": []
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "k02-imported-ctor-body",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "normalize", "type": "callable", "file": "main.ts", "line": 3, "name": "normalize" },
+    { "id": "Session", "type": "class", "file": "main.ts", "line": 7, "name": "Session" },
+    { "id": "bootstrap", "type": "callable", "file": "main.ts", "line": 15, "name": "bootstrap" },
+    { "id": "User", "type": "external", "file": "models.ts", "line": 1, "name": "User" },
+    { "id": "Admin", "type": "external", "file": "models.ts", "line": 5, "name": "Admin" },
+    { "id": "Registry", "type": "external", "file": "models.ts", "line": 9, "name": "Registry" },
+    { "id": "registryAdd", "type": "external", "file": "models.ts", "line": 12, "name": "add" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "constructs", "source": "Session", "target": "User", "pattern": "CONS-CTOR-BODY", "gtStatus": "determinate", "evidence": ["main.ts:11"], "note": "생성자 본문은 class Session의 코드다(ANNOTATION_GUIDE §3.2)" },
+    { "id": "R02", "kind": "calls", "source": "Session", "target": "normalize", "pattern": "CALL-CTOR-BODY", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R03", "kind": "dataflow", "source": "Session", "target": "User", "argIndex": 0, "pattern": "DF-CTOR-BODY", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R04", "kind": "dataflow", "source": "Session", "target": "normalize", "argIndex": 0, "pattern": "DF-CTOR-BODY", "gtStatus": "determinate", "evidence": ["main.ts:11"] },
+    { "id": "R05", "kind": "references", "source": "Session", "target": "User", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R06", "kind": "constructs", "source": "bootstrap", "target": "Registry", "pattern": "CONS-IMPORTED-IMPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:16"] },
+    { "id": "R07", "kind": "constructs", "source": "bootstrap", "target": "Admin", "pattern": "CONS-INHERITED-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:17"] },
+    { "id": "R08", "kind": "constructs", "source": "bootstrap", "target": "Session", "pattern": "CONS-LOCAL-EXPLICIT-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R09", "kind": "calls", "source": "bootstrap", "target": "registryAdd", "pattern": "CALL-METHOD-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:17", "main.ts:18"] },
+    { "id": "R10", "kind": "dataflow", "source": "bootstrap", "target": "registryAdd", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:17", "main.ts:18"] },
+    { "id": "R11", "kind": "dataflow", "source": "bootstrap", "target": "Admin", "argIndex": 0, "pattern": "DF-INHERITED-CTOR", "gtStatus": "determinate", "evidence": ["main.ts:17"], "note": "Admin은 User(name)의 생성자를 상속한다" },
+    { "id": "R12", "kind": "dataflow", "source": "bootstrap", "target": "Session", "argIndex": 0, "pattern": "DF-CONSTRUCTOR", "gtStatus": "determinate", "evidence": ["main.ts:18"] },
+    { "id": "R13", "kind": "references", "source": "bootstrap", "target": "Registry", "pattern": "REF-CROSS-FILE", "gtStatus": "determinate", "evidence": ["main.ts:15"] }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

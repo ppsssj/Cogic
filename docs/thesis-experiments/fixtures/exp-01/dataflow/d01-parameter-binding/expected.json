@@ -1,0 +1,49 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "d01-parameter-binding",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "connect", "type": "callable", "file": "main.ts", "line": 1, "name": "connect" },
+    { "id": "sum", "type": "callable", "file": "main.ts", "line": 5, "name": "sum" },
+    { "id": "point", "type": "callable", "file": "main.ts", "line": 13, "name": "point" },
+    { "id": "pair", "type": "callable", "file": "main.ts", "line": 17, "name": "pair" },
+    { "id": "callDefaults", "type": "callable", "file": "main.ts", "line": 21, "name": "callDefaults" },
+    { "id": "callAll", "type": "callable", "file": "main.ts", "line": 25, "name": "callAll" },
+    { "id": "callRest", "type": "callable", "file": "main.ts", "line": 29, "name": "callRest" },
+    { "id": "callRestEmpty", "type": "callable", "file": "main.ts", "line": 33, "name": "callRestEmpty" },
+    { "id": "callDestructure", "type": "callable", "file": "main.ts", "line": 37, "name": "callDestructure" },
+    { "id": "spreadTuple", "type": "callable", "file": "main.ts", "line": 41, "name": "spreadTuple" },
+    { "id": "spreadRest", "type": "callable", "file": "main.ts", "line": 45, "name": "spreadRest" },
+    { "id": "scale", "type": "callable", "file": "main.ts", "line": 49, "name": "scale" },
+    { "id": "choose", "type": "callable", "file": "main.ts", "line": 53, "name": "choose" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "callDefaults", "target": "connect", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R02", "kind": "dataflow", "source": "callDefaults", "target": "connect", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R03", "kind": "dataflow", "source": "callDefaults", "target": "connect", "argIndex": 1, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:22"] },
+    { "id": "R04", "kind": "calls", "source": "callAll", "target": "connect", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:26"] },
+    { "id": "R05", "kind": "dataflow", "source": "callAll", "target": "connect", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:26"] },
+    { "id": "R06", "kind": "dataflow", "source": "callAll", "target": "connect", "argIndex": 1, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:26"] },
+    { "id": "R07", "kind": "dataflow", "source": "callAll", "target": "connect", "argIndex": 2, "pattern": "DF-OPTIONAL-PARAM", "gtStatus": "determinate", "evidence": ["main.ts:26"] },
+    { "id": "R08", "kind": "calls", "source": "callRest", "target": "sum", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:30"] },
+    { "id": "R09", "kind": "dataflow", "source": "callRest", "target": "sum", "argIndex": 0, "pattern": "DF-REST-PARAM", "gtStatus": "determinate", "evidence": ["main.ts:30"], "note": "세 인자가 모두 rest 파라미터 values(0번)로 간다. 관계 단위이므로 1개" },
+    { "id": "R10", "kind": "calls", "source": "callRestEmpty", "target": "sum", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:34"] },
+    { "id": "R11", "kind": "calls", "source": "callDestructure", "target": "point", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:38"] },
+    { "id": "R12", "kind": "dataflow", "source": "callDestructure", "target": "point", "argIndex": 0, "pattern": "DF-DESTRUCTURED-PARAM", "gtStatus": "determinate", "evidence": ["main.ts:38"] },
+    { "id": "R13", "kind": "calls", "source": "spreadTuple", "target": "pair", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:42"] },
+    { "id": "R14", "kind": "dataflow", "source": "spreadTuple", "target": "pair", "argIndex": 0, "pattern": "DF-SPREAD-TUPLE", "gtStatus": "determinate", "evidence": ["main.ts:42"] },
+    { "id": "R15", "kind": "dataflow", "source": "spreadTuple", "target": "pair", "argIndex": 1, "pattern": "DF-SPREAD-TUPLE", "gtStatus": "determinate", "evidence": ["main.ts:42"], "note": "[number, number] 튜플의 1번 원소가 b로 간다" },
+    { "id": "R16", "kind": "calls", "source": "spreadRest", "target": "sum", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:46"] },
+    { "id": "R17", "kind": "dataflow", "source": "spreadRest", "target": "sum", "argIndex": 0, "pattern": "DF-SPREAD-REST", "gtStatus": "determinate", "evidence": ["main.ts:46"] },
+    { "id": "R18", "kind": "references", "source": "choose", "target": "pair", "pattern": "REF-VALUE-FN", "gtStatus": "determinate", "evidence": ["main.ts:54"] },
+    { "id": "R19", "kind": "references", "source": "choose", "target": "scale", "pattern": "REF-VALUE-FN", "gtStatus": "determinate", "evidence": ["main.ts:54"] },
+    { "id": "I01", "kind": "calls", "source": "choose", "candidates": [{ "target": "pair" }, { "target": "scale" }], "pattern": "CALL-VARIABLE-ALIAS", "gtStatus": "indeterminate", "evidence": ["main.ts:55"], "reason": "op는 런타임 값 flag에 따라 pair 또는 scale이 된다" },
+    { "id": "I02", "kind": "dataflow", "source": "choose", "candidates": [{ "target": "pair", "argIndex": 0 }, { "target": "pair", "argIndex": 1 }, { "target": "scale", "argIndex": 0 }, { "target": "scale", "argIndex": 1 }], "pattern": "DF-INDIRECT", "gtStatus": "indeterminate", "evidence": ["main.ts:55"], "reason": "호출 대상이 런타임에 정해지므로 인자를 받는 함수도 정할 수 없다" }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "dataflow", "source": "callDefaults", "target": "connect", "argIndex": 2, "pattern": "NEG-DEFAULT-OMITTED", "evidence": ["main.ts:22"], "rationale": "secure 인자를 넘기지 않아 기본값이 쓰인다" },
+    { "id": "N02", "kind": "dataflow", "source": "callRestEmpty", "target": "sum", "argIndex": 0, "pattern": "NEG-ZERO-ARGS", "evidence": ["main.ts:34"], "rationale": "인자가 없으므로 values로 흐르는 값이 없다" }
+  ],
+  "excludedSites": []
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "c09-recursion-callback-param",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "file", "type": "file", "file": "main.ts" },
+    { "id": "step", "type": "callable", "file": "main.ts", "line": 1, "name": "step" },
+    { "id": "countdown", "type": "callable", "file": "main.ts", "line": 5, "name": "countdown" },
+    { "id": "schedule", "type": "callable", "file": "main.ts", "line": 12, "name": "schedule" },
+    { "id": "tick", "type": "callable", "file": "main.ts", "line": 16, "name": "tick" },
+    { "id": "start", "type": "callable", "file": "main.ts", "line": 18, "name": "start" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "countdown", "target": "countdown", "pattern": "CALL-RECURSIVE", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R02", "kind": "calls", "source": "countdown", "target": "step", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R03", "kind": "dataflow", "source": "countdown", "target": "countdown", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R04", "kind": "dataflow", "source": "countdown", "target": "step", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "I01", "kind": "calls", "source": "schedule", "candidates": "unbounded", "pattern": "CALL-PARAM-CALLBACK", "gtStatus": "indeterminate", "evidence": ["main.ts:13"], "reason": "task는 파라미터이고 schedule은 export되어 있다. 외부 호출자가 어떤 함수든 넘길 수 있어 후보를 열거할 수 없다" },
+    { "id": "R05", "kind": "calls", "source": "start", "target": "schedule", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R06", "kind": "dataflow", "source": "start", "target": "schedule", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:19"] },
+    { "id": "R07", "kind": "references", "source": "start", "target": "tick", "pattern": "REF-VALUE-FN", "gtStatus": "determinate", "evidence": ["main.ts:19", "main.ts:20"] },
+    { "id": "R08", "kind": "calls", "source": "file", "target": "countdown", "pattern": "CALL-TOPLEVEL", "gtStatus": "determinate", "evidence": ["main.ts:24"] },
+    { "id": "R09", "kind": "dataflow", "source": "file", "target": "countdown", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:24"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "calls", "source": "start", "target": "tick", "pattern": "NEG-CALLBACK-PASS", "evidence": ["main.ts:19", "main.ts:20"], "rationale": "tick은 인자로 전달되고 변수에 대입될 뿐 start가 호출하지 않는다" }
+  ],
+  "excludedSites": []
+}

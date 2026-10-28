@@ -1,0 +1,52 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "h03-unsupported-negatives",
+  "gtVersion": 1,
+  "activeFile": "main.ts",
+  "nodes": [
+    { "id": "file", "type": "file", "file": "main.ts" },
+    { "id": "useToggle", "type": "callable", "file": "main.ts", "line": 6, "name": "useToggle" },
+    { "id": "onSrc", "type": "synthetic", "file": "main.ts", "line": 7, "framework": "react", "role": "state-source", "anchor": "useState" },
+    { "id": "flip", "type": "callable", "file": "main.ts", "line": 8, "name": "flip" },
+    { "id": "Widget", "type": "callable", "file": "main.ts", "line": 12, "name": "Widget" },
+    { "id": "bump", "type": "callable", "file": "main.ts", "line": 18, "name": "bump" },
+    { "id": "ctxNeg", "type": "synthetic", "file": "main.ts", "line": 4, "framework": "react", "role": "callback-owner", "anchor": "createContext" },
+    { "id": "useContextNeg", "type": "synthetic", "file": "main.ts", "line": 13, "framework": "react", "role": "callback-owner", "anchor": "useContext" },
+    { "id": "useRefNeg", "type": "synthetic", "file": "main.ts", "line": 14, "framework": "react", "role": "state-source", "anchor": "useRef" },
+    { "id": "customHookNeg", "type": "synthetic", "file": "main.ts", "line": 15, "framework": "react", "role": "callback-owner", "anchor": "useToggle" },
+    { "id": "memoizeNeg", "type": "synthetic", "file": "main.ts", "line": 16, "framework": "react", "role": "callback-owner", "anchor": "memoize" },
+    { "id": "useState", "type": "external", "file": "shims/react.d.ts", "line": 5, "name": "useState" },
+    { "id": "useRef", "type": "external", "file": "shims/react.d.ts", "line": 11, "name": "useRef" },
+    { "id": "useContext", "type": "external", "file": "shims/react.d.ts", "line": 12, "name": "useContext" },
+    { "id": "createContext", "type": "external", "file": "shims/react.d.ts", "line": 13, "name": "createContext" },
+    { "id": "utilsUseMemo", "type": "external", "file": "utils.ts", "line": 1, "name": "useMemo" }
+  ],
+  "relations": [
+    { "id": "R01", "kind": "calls", "source": "file", "target": "createContext", "pattern": "CALL-TOPLEVEL", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R02", "kind": "dataflow", "source": "file", "target": "createContext", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:4"] },
+    { "id": "R03", "kind": "owner", "source": "onSrc", "pattern": "FW-REACT-STATE-SOURCE", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R04", "kind": "calls", "source": "useToggle", "target": "useState", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R05", "kind": "dataflow", "source": "useToggle", "target": "useState", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:7"] },
+    { "id": "R06", "kind": "updates", "source": "flip", "target": "onSrc", "pattern": "UPD-REACT-SETTER", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R07", "kind": "references", "source": "flip", "target": "onSrc", "pattern": "REF-STATE-READ", "gtStatus": "determinate", "evidence": ["main.ts:8"] },
+    { "id": "R08", "kind": "references", "source": "useToggle", "target": "onSrc", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R09", "kind": "references", "source": "useToggle", "target": "flip", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:9"] },
+    { "id": "R10", "kind": "calls", "source": "Widget", "target": "useContext", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R11", "kind": "dataflow", "source": "Widget", "target": "useContext", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:13"] },
+    { "id": "R12", "kind": "calls", "source": "Widget", "target": "useRef", "pattern": "CALL-FW-API", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R13", "kind": "dataflow", "source": "Widget", "target": "useRef", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:14"] },
+    { "id": "R14", "kind": "calls", "source": "Widget", "target": "useToggle", "pattern": "CALL-LOCAL-FN", "gtStatus": "determinate", "evidence": ["main.ts:15"] },
+    { "id": "R15", "kind": "dataflow", "source": "Widget", "target": "useToggle", "argIndex": 0, "pattern": "DF-POSITIONAL", "gtStatus": "determinate", "evidence": ["main.ts:15"] },
+    { "id": "R16", "kind": "calls", "source": "Widget", "target": "utilsUseMemo", "pattern": "CALL-IMPORT-NAMED", "gtStatus": "determinate", "evidence": ["main.ts:16"] },
+    { "id": "R17", "kind": "dataflow", "source": "Widget", "target": "utilsUseMemo", "argIndex": 0, "pattern": "DF-EXTERNAL", "gtStatus": "determinate", "evidence": ["main.ts:16"] },
+    { "id": "R18", "kind": "references", "source": "Widget", "target": "bump", "pattern": "REF-SHORTHAND-PROPERTY", "gtStatus": "determinate", "evidence": ["main.ts:22"] }
+  ],
+  "negatives": [
+    { "id": "N01", "kind": "owner", "source": "ctxNeg", "pattern": "NEG-CREATECONTEXT", "evidence": ["main.ts:4"], "rationale": "createContext는 hook이 아니며 콜백도 받지 않는다" },
+    { "id": "N02", "kind": "owner", "source": "useContextNeg", "pattern": "NEG-USECONTEXT", "evidence": ["main.ts:13"], "rationale": "useContext는 상태 source도 콜백 owner도 만들지 않는다" },
+    { "id": "N03", "kind": "owner", "source": "useRefNeg", "pattern": "NEG-USEREF", "evidence": ["main.ts:14"], "rationale": "useRef의 current 변경은 렌더 상태 갱신이 아니다(ANNOTATION_GUIDE §5.1)" },
+    { "id": "N04", "kind": "owner", "source": "customHookNeg", "pattern": "NEG-CUSTOM-HOOK", "evidence": ["main.ts:15"], "rationale": "useToggle은 사용자 함수다. 호출은 calls로 표현하고 React owner는 없다" },
+    { "id": "N05", "kind": "owner", "source": "memoizeNeg", "pattern": "NEG-NON-FRAMEWORK-MODULE", "evidence": ["main.ts:16"], "rationale": "memoize는 ./utils의 useMemo이며 react 모듈이 아니다" }
+  ],
+  "excludedSites": []
+}
