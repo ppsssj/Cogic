@@ -1392,4 +1392,186 @@ suite("Analyzer Test Suite", function () {
       "workspace graph should include an external node for the resolved sibling declaration",
     );
   });
+  // --- typed React setters and dispatch (EXP-01 finding, P1-J1) -------------
+  // With a typed `react`, the resolved signature of `setX(...)` points at the function type in the
+  // declaration file. A setter or dispatch bound by a registered state hook must still be `updates`.
+  const REACT_SHIMS: Record<string, string> = {
+    // EXP-01 fixture style: setter/dispatch function types inside the return tuple, one line each
+    "tuple-one-line": [
+      "export declare function useState<S>(initial: S): [S, (next: S | ((prev: S) => S)) => void];",
+      "export declare function useReducer<S, A>(reducer: (state: S, action: A) => S, initial: S): [S, (action: A) => void];",
+      "",
+    ].join("\n"),
+    // @types/react style: aliases on their own lines
+    "alias-split": [
+      "export type SetStateAction<S> = S | ((prev: S) => S);",
+      "export type Dispatch<A> = (value: A) => void;",
+      "export declare function useState<S>(initial: S): [S, Dispatch<SetStateAction<S>>];",
+      "export declare function useReducer<S, A>(reducer: (state: S, action: A) => S, initial: S): [S, Dispatch<A>];",
+      "",
+    ].join("\n"),
+  };
+
+  function analyzeTypedReact(shim: string | null, code: string) {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "codegraph-typed-react-"));
+    const mainFile = path.join(root, "main.ts");
+    const shimFile = path.join(root, "shims", "react.d.ts");
+    fs.mkdirSync(path.dirname(shimFile), { recursive: true });
+    fs.writeFileSync(shimFile, shim ?? 'declare module "react";\n', "utf8");
+    fs.writeFileSync(
+      path.join(root, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          strict: true,
+          noEmit: true,
+          types: [],
+          paths: shim ? { react: ["./shims/react.d.ts"] } : {},
+        },
+        include: ["**/*.ts"],
+      }),
+      "utf8",
+    );
+    fs.writeFileSync(mainFile, code, "utf8");
+    try {
+      clearAnalyzerCaches();
+      const result = analyzeWithWorkspace({
+        active: { fileName: mainFile, languageId: "typescript", code },
+        workspaceRoot: root,
+        filePaths: [mainFile, shimFile],
+        cacheEnabled: false,
+      });
+      const byId = new Map(result.graph.nodes.map((n) => [n.id, n]));
+      // external names carry the declaration file, e.g. "useState (react.d.ts)"
+      const nameOf = (id: string) => (byId.get(id)?.name ?? id).replace(/ \(.*$/, "");
+      const edges = result.graph.edges.map(
+        (e) => `${e.kind} ${nameOf(e.source)} -> ${nameOf(e.target)}`,
+      );
+      const externals = result.graph.nodes
+        .filter((n) => n.kind === "external")
+        .map((n) => n.name.replace(/ \(.*$/, ""));
+      return { result, edges, externals };
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  }
+
+  const COUNTER = `import { useReducer, useState } from "react";
+
+function reducer(state: number, action: { type: "inc" }): number {
+  return action.type === "inc" ? state + 1 : state;
+}
+
+function helper(value: number): number {
+  return value + 1;
+}
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+  const [value, dispatch] = useReducer(reducer, 0);
+  const [, setLabel] = useState("idle");
+
+  function increment() {
+    setCount(helper(count));
+    setLabel("busy");
+  }
+
+  function step() {
+    dispatch({ type: "inc" });
+  }
+
+  return { value, increment, step };
+}
+`;
+
+  for (const [variant, shim] of [["untyped", null], ...Object.entries(REACT_SHIMS)] as Array<[string, string | null]>) {
+    test(`typed React (${variant}): setter and dispatch calls are updates to their hook sources`, () => {
+      const { edges, externals } = analyzeTypedReact(shim, COUNTER);
+
+      assert.ok(edges.includes("updates increment -> Counter.useState#1"), `${variant}: setCount -> useState#1\n${edges.join("\n")}`);
+      assert.ok(edges.includes("updates increment -> Counter.useState#2"), `${variant}: setLabel (omitted state) -> useState#2`);
+      assert.ok(edges.includes("updates step -> Counter.useReducer#1"), `${variant}: dispatch -> useReducer#1`);
+
+      // no setter/dispatch call is emitted as an ordinary call, and no external node for their function types
+      for (const name of ["setCount", "setLabel", "dispatch"]) {
+        assert.ok(!externals.includes(name), `${variant}: no external node named ${name}`);
+      }
+      assert.ok(!edges.some((e) => /^(calls|dataflow) (increment|step) -> (setCount|setLabel|dispatch)/.test(e)), `${variant}: no calls/dataflow to setter types`);
+
+      // ordinary calls and dataflow are unchanged
+      assert.ok(edges.includes("calls increment -> helper"), `${variant}: helper call kept`);
+      assert.ok(edges.includes("dataflow increment -> helper"), `${variant}: helper dataflow kept`);
+      assert.ok(edges.includes("calls Counter -> reducer") === false, `${variant}: reducer is passed, not called`);
+      if (shim) {
+        assert.ok(edges.includes("calls Counter -> useState"), `${variant}: useState call kept`);
+        assert.ok(edges.includes("dataflow Counter -> useState"), `${variant}: useState dataflow kept`);
+        assert.ok(edges.includes("calls Counter -> useReducer"), `${variant}: useReducer call kept`);
+        assert.deepStrictEqual([...new Set(externals)].sort(), ["useReducer", "useState"], `${variant}: only hook declarations are external`);
+      }
+    });
+  }
+
+  test("typed React: functions that only look like setters stay ordinary calls", () => {
+    const { edges } = analyzeTypedReact(
+      REACT_SHIMS["alias-split"],
+      `import { useState } from "react";
+
+function setCount(n: number): number {
+  return n;
+}
+
+export function Panel() {
+  const [count, setTotal] = useState(0);
+  function apply() {
+    setCount(count);
+    setTotal(1);
+  }
+  return apply;
+}
+
+export function Other() {
+  const setTotal = (n: number) => n * 2;
+  function apply() {
+    setTotal(3);
+  }
+  return apply;
+}
+`,
+    );
+    assert.ok(edges.includes("calls apply -> setCount"), `module function named setCount is a call\n${edges.join("\n")}`);
+    assert.ok(edges.includes("dataflow apply -> setCount"), "and keeps its dataflow");
+    assert.ok(!edges.some((e) => e.startsWith("updates") && e.endsWith("-> setCount")), "setCount is not an update");
+    assert.strictEqual(edges.filter((e) => e === "updates apply -> Panel.useState#1").length, 1, "Panel's setter is an update");
+    assert.ok(edges.includes("calls apply -> setTotal"), "Other's local setTotal (same name, different scope) is a call");
+    assert.ok(!edges.includes("updates apply -> Other.useState#1"), "no hook source for Other");
+  });
+
+  test("typed React: calling the state value is not turned into an update", () => {
+    const { edges } = analyzeTypedReact(
+      REACT_SHIMS["tuple-one-line"],
+      `import { useState } from "react";
+
+function make(): () => number {
+  return () => 1;
+}
+
+export function Lazy() {
+  const [getValue, setGetValue] = useState(make());
+  function read() {
+    return getValue();
+  }
+  function reset() {
+    setGetValue(make());
+  }
+  return { read, reset };
+}
+`,
+    );
+    assert.ok(!edges.some((e) => e.startsWith("updates read")), `state value call is not an update\n${edges.join("\n")}`);
+    assert.ok(edges.includes("updates reset -> Lazy.useState#1"), "the setter still is");
+    assert.ok(edges.includes("calls reset -> make"), "setter argument calls are kept");
+  });
+
 });
