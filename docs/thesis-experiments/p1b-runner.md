@@ -6,6 +6,7 @@
   - 평가 도구 기준 커밋 `ae82bfbf0e26b7cba67e40af2b1f0a1fe89b81ca`
   - 채점 도구 `exp01-scorer/1.1`
 - 상태: **구현과 합성 입력 검증만 했다.** 실제 EXP-01 코퍼스에 Cogic analyzer를 실행하지 않았다(NOT_RUN). 정확도 수치도 만들지 않았다.
+- 이 문서는 runner 1.0/1.1에 대한 기록이다. runner 1.2(r2 manifest, scorer 1.2, 사후 개정 프로토콜)의 변경은 [p1h-runner-amendment.md](p1h-runner-amendment.md)에 있다.
 
 ## 1. 산출물
 
