@@ -1,0 +1,149 @@
+{
+  "scorerVersion": "exp01-scorer/1.2",
+  "gtVersion": 1,
+  "scoringStatus": "COMPLETE",
+  "blockedCases": [],
+  "missingPredictions": [],
+  "modes": {
+    "strict": {
+      "scoredCases": 44,
+      "micro": {
+        "category": "micro",
+        "tpPred": 464,
+        "fp": 51,
+        "excluded": 6,
+        "gtInScope": 565,
+        "tpInScope": 449,
+        "fnInScope": 116,
+        "gtOverall": 651,
+        "tpOverall": 464,
+        "fnOverall": 187,
+        "precision": 0.9009708737864077,
+        "precisionLow": 0.8721291911150242,
+        "precisionHigh": 0.9238750467474095,
+        "precisionSensitivity": 0.8905950095969289,
+        "recallInScope": 0.7946902654867256,
+        "recallInScopeLow": 0.759446841973257,
+        "recallInScopeHigh": 0.8259535272093375,
+        "recallOverall": 0.7127496159754224,
+        "recallOverallLow": 0.6768230799292452,
+        "recallOverallHigh": 0.7461800703276888,
+        "f1InScope": 0.8444998429250397,
+        "f1Overall": 0.7958833619210978
+      },
+      "macro": {
+        "f1InScope": {
+          "value": 0.8290405159496873,
+          "includedCategories": [
+            "calls",
+            "constructs",
+            "references",
+            "dataflow",
+            "updates",
+            "react-hook-owner",
+            "vue-hook-owner",
+            "express-route-owner",
+            "nest-route-owner"
+          ]
+        },
+        "f1Overall": {
+          "value": 0.7807204493562039,
+          "includedCategories": [
+            "calls",
+            "constructs",
+            "references",
+            "dataflow",
+            "updates",
+            "react-hook-owner",
+            "vue-hook-owner",
+            "express-route-owner",
+            "nest-route-owner"
+          ]
+        }
+      },
+      "bootstrap": {
+        "resamples": 10000,
+        "seed": 20261026,
+        "undefinedDraws": 0,
+        "f1InScope": {
+          "low": 0.7741034013587513,
+          "high": 0.9061419281742344
+        },
+        "f1Overall": {
+          "low": 0.7263334541172207,
+          "high": 0.8558490653646621
+        }
+      }
+    },
+    "lenient": {
+      "scoredCases": 44,
+      "micro": {
+        "category": "micro",
+        "tpPred": 464,
+        "fp": 52,
+        "excluded": 5,
+        "gtInScope": 565,
+        "tpInScope": 449,
+        "fnInScope": 116,
+        "gtOverall": 651,
+        "tpOverall": 464,
+        "fnOverall": 187,
+        "precision": 0.8992248062015504,
+        "precisionLow": 0.8702294682418631,
+        "precisionHigh": 0.922319861960961,
+        "precisionSensitivity": 0.8905950095969289,
+        "recallInScope": 0.7946902654867256,
+        "recallInScopeLow": 0.759446841973257,
+        "recallInScopeHigh": 0.8259535272093375,
+        "recallOverall": 0.7127496159754224,
+        "recallOverallLow": 0.6768230799292452,
+        "recallOverallHigh": 0.7461800703276888,
+        "f1InScope": 0.8437320287378199,
+        "f1Overall": 0.7952013710368466
+      },
+      "macro": {
+        "f1InScope": {
+          "value": 0.8286511542644663,
+          "includedCategories": [
+            "calls",
+            "constructs",
+            "references",
+            "dataflow",
+            "updates",
+            "react-hook-owner",
+            "vue-hook-owner",
+            "express-route-owner",
+            "nest-route-owner"
+          ]
+        },
+        "f1Overall": {
+          "value": 0.7803868436917158,
+          "includedCategories": [
+            "calls",
+            "constructs",
+            "references",
+            "dataflow",
+            "updates",
+            "react-hook-owner",
+            "vue-hook-owner",
+            "express-route-owner",
+            "nest-route-owner"
+          ]
+        }
+      },
+      "bootstrap": {
+        "resamples": 10000,
+        "seed": 20261026,
+        "undefinedDraws": 0,
+        "f1InScope": {
+          "low": 0.7736311857304089,
+          "high": 0.9050725180136806
+        },
+        "f1Overall": {
+          "low": 0.7260139888660047,
+          "high": 0.854799276131547
+        }
+      }
+    }
+  }
+}

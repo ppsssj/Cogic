@@ -12,7 +12,9 @@ export const GT_SCHEMA = "exp01-gt/1";
 export const CASE_SCHEMA = "exp01-case/1";
 export const PRED_SCHEMA = "exp01-pred/1";
 // 1.0 = P1-A pre-registration (41bbe19). 1.1 = P1-A-R1: 1:1 maximum matching, fail-closed diagnostics.
-export const SCORER_VERSION = "exp01-scorer/1.1";
+// 1.2 = P1-G post-hoc amendment (after the first EXP-01 run): same-line external declarations are told
+//       apart by range containment instead of blocking the case (resolveExternalCollision).
+export const SCORER_VERSION = "exp01-scorer/1.2";
 
 export const EDGE_KINDS = ["calls", "constructs", "references", "dataflow", "updates"];
 export const RELATION_KINDS = [...EDGE_KINDS, "owner"];
@@ -614,6 +616,44 @@ export function cogicNodeKey(node, fixtureRoot) {
   return `?|${rel}|${line}|${node.kind}`;
 }
 
+function rangeContains(outer, inner) {
+  const before = (p, q) => p.line < q.line || (p.line === q.line && p.character <= q.character);
+  return before(outer.start, inner.start) && before(inner.end, outer.end);
+}
+
+function hasRange(n) {
+  const r = n?.range;
+  return [r?.start?.line, r?.start?.character, r?.end?.line, r?.end?.character].every(Number.isInteger);
+}
+
+// Scorer 1.2 (P1-G). Cogic can emit two different external nodes on one declaration line, e.g. a
+// .d.ts `useState` declaration and the setter function type inside its return tuple. Both normalize
+// to X|file|line. GT external nodes are declaration start lines (guide §2), so the node whose range
+// encloses every other node of the group keeps the key; the others get X|file|line|c<column>, which
+// no GT node has. Returns null (the collision stays blocking) unless all of these hold:
+//   - key is X|… and every node is a non-module external node with a full range
+//   - exactly one node encloses all others (identical ranges give two candidates -> null)
+//   - the new keys are distinct and not already used by another node
+export function resolveExternalCollision(key, nodes, usedKeys) {
+  if (!key.startsWith("X|") || nodes.length < 2) {
+    return null;
+  }
+  if (!nodes.every((n) => n?.kind === "external" && !/:-1$/.test(n.id) && hasRange(n))) {
+    return null;
+  }
+  const enclosing = nodes.filter((n) => nodes.every((m) => rangeContains(n.range, m.range)));
+  if (enclosing.length !== 1) {
+    return null;
+  }
+  const kept = enclosing[0];
+  const rekeyed = nodes.filter((n) => n !== kept).map((n) => ({ id: n.id, key: `${key}|c${n.range.start.character}` }));
+  const newKeys = new Set(rekeyed.map((r) => r.key));
+  if (newKeys.size !== rekeyed.length || [...newKeys].some((k) => usedKeys.has(k))) {
+    return null;
+  }
+  return { code: "external-same-line-resolved", key, kept: kept.id, rekeyed };
+}
+
 export function normalizeCogicGraph(graph, { fixtureRoot, caseId }) {
   const nodesById = new Map((graph.nodes ?? []).map((n) => [n.id, n]));
   const keyById = new Map();
@@ -629,6 +669,23 @@ export function normalizeCogicGraph(graph, { fixtureRoot, caseId }) {
     if (isSyntheticCogicNode(n)) {
       frameworkByKey.set(key, inferSyntheticFramework(n, nodesById));
     }
+  }
+  // Scorer 1.2: resolve same-line external declarations; anything unresolved stays a collision below.
+  const resolvedCollisions = [];
+  for (const [key, ids] of [...idsByKey.entries()]) {
+    if (ids.length < 2) {
+      continue;
+    }
+    const plan = resolveExternalCollision(key, ids.map((id) => nodesById.get(id)), new Set(idsByKey.keys()));
+    if (!plan) {
+      continue;
+    }
+    idsByKey.set(key, [plan.kept]);
+    for (const r of plan.rekeyed) {
+      keyById.set(r.id, r.key);
+      idsByKey.set(r.key, [r.id]);
+    }
+    resolvedCollisions.push(plan);
   }
   const collisions = [...idsByKey.entries()]
     .filter(([, ids]) => ids.length > 1)
@@ -689,7 +746,7 @@ export function normalizeCogicGraph(graph, { fixtureRoot, caseId }) {
 
   const all = [...relations.values()].sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
   const duplicates = all.filter((r) => r.occurrences > 1).map((r) => ({ key: r.key, occurrences: r.occurrences }));
-  return { schema: PRED_SCHEMA, caseId, relations: all, collisions, duplicates, malformed, unknownNodes };
+  return { schema: PRED_SCHEMA, caseId, relations: all, collisions, resolvedCollisions, duplicates, malformed, unknownNodes };
 }
 
 // Fail-closed gate (P1-A-R1). Any of these makes the case SCORING_BLOCKED:

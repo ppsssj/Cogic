@@ -195,6 +195,7 @@ export function scoreCorpus({ corpus, gtVersion = 1, predictionFor, allowMissing
       status: strict.status,
       blockers: strict.blockers,
       collisions: pred.collisions,
+      resolvedCollisions: pred.resolvedCollisions ?? [],
       duplicates: pred.duplicates,
       malformed: pred.malformed,
       unknownNodes: pred.unknownNodes ?? [],

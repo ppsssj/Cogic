@@ -1,0 +1,776 @@
+{
+  "runId": "exp01-20261029-0651-43ace0f-50587",
+  "headCommit": "43ace0fdfdf442d7871c3ef4a92d73b28f1b5e77",
+  "scorer11": "exp01-scorer/1.1",
+  "scorer12": "exp01-scorer/1.2",
+  "base": "2c52de4f65770d0855275d89e5227b91f9b6acc3",
+  "unchanged": [
+    {
+      "caseId": "c01-local-direct",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 11,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "c02-methods",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 8,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "c03-imports",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 10,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "c04-barrel-alias",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 8,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "c05-optional-generic-overload",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 6,
+      "fn": 2,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "c06-jsx-dynamic-import",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 4,
+      "fn": 0,
+      "fp": 1,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "c07-lib-callback",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 1,
+      "fn": 4,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "c08-dynamic-access",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 5,
+      "fn": 5,
+      "fp": 0,
+      "excluded": 1,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "c09-recursion-callback-param",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 9,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "c10-negatives",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 4,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "d01-parameter-binding",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 18,
+      "fn": 1,
+      "fp": 0,
+      "excluded": 3,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "d02-methods-constructors",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 13,
+      "fn": 3,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "e01-inline-handlers",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 20,
+      "fn": 0,
+      "fp": 1,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "e02-named-middleware",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 22,
+      "fn": 2,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "e03-unsupported-negatives",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 27,
+      "fn": 7,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "k01-local-classes",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 6,
+      "fn": 9,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "k02-imported-ctor-body",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 3,
+      "fn": 10,
+      "fp": 6,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "k03-factories",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 6,
+      "fn": 14,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "k04-indirect-builtin",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 5,
+      "fn": 6,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "k05-field-initializers",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 9,
+      "fn": 7,
+      "fp": 1,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "k06-imported-scene",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 5,
+      "fn": 18,
+      "fp": 14,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "k07-events",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 8,
+      "fn": 7,
+      "fp": 1,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "k08-negatives",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 7,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "n01-controller",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 13,
+      "fn": 5,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "n02-namespace-negatives",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 7,
+      "fn": 2,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "n03-paths",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 15,
+      "fn": 6,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "n04-local-decorators",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 2,
+      "fn": 4,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "r01-type-references",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 8,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "r02-value-references",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 5,
+      "fn": 2,
+      "fp": 0,
+      "excluded": 2,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "r03-heritage-members",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 10,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "r04-anonymous-callback",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 9,
+      "fn": 5,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "r05-cross-file",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 2,
+      "fn": 4,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "u03-vue-ref-reactive",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 21,
+      "fn": 6,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "u04-vue-form",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 19,
+      "fn": 6,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "u05-react-negatives",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 7,
+      "fn": 4,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "u06-vue-negatives",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 8,
+      "fn": 4,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "v01-computed-watch",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 25,
+      "fn": 2,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "v02-namespace-unsupported",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 18,
+      "fn": 9,
+      "fp": 1,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    },
+    {
+      "caseId": "v03-negatives",
+      "status11": "SCORED",
+      "status12": "SCORED",
+      "rowsIdentical": true,
+      "tp": 13,
+      "fn": 0,
+      "fp": 0,
+      "excluded": 0,
+      "negativesViolated": 0,
+      "lenientRowsIdentical": true
+    }
+  ],
+  "resolved": [
+    {
+      "caseId": "h01-reducer-effect",
+      "mode": "strict",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|6",
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|6",
+          "rekeyed": [
+            "X|shims/react.d.ts|6|c95"
+          ]
+        },
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 6,
+      "tp": 16,
+      "fn": 5,
+      "fp": 6,
+      "excluded": 0,
+      "negativesViolated": 0
+    },
+    {
+      "caseId": "h01-reducer-effect",
+      "mode": "lenient",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|6",
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|6",
+          "rekeyed": [
+            "X|shims/react.d.ts|6|c95"
+          ]
+        },
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 6,
+      "tp": 16,
+      "fn": 5,
+      "fp": 6,
+      "excluded": 0,
+      "negativesViolated": 0
+    },
+    {
+      "caseId": "h02-alias-namespace-memo",
+      "mode": "strict",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 6,
+      "tp": 26,
+      "fn": 4,
+      "fp": 6,
+      "excluded": 0,
+      "negativesViolated": 0
+    },
+    {
+      "caseId": "h02-alias-namespace-memo",
+      "mode": "lenient",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 6,
+      "tp": 26,
+      "fn": 4,
+      "fp": 6,
+      "excluded": 0,
+      "negativesViolated": 0
+    },
+    {
+      "caseId": "h03-unsupported-negatives",
+      "mode": "strict",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 2,
+      "tp": 14,
+      "fn": 4,
+      "fp": 2,
+      "excluded": 0,
+      "negativesViolated": 0
+    },
+    {
+      "caseId": "h03-unsupported-negatives",
+      "mode": "lenient",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 2,
+      "tp": 14,
+      "fn": 4,
+      "fp": 2,
+      "excluded": 0,
+      "negativesViolated": 0
+    },
+    {
+      "caseId": "u01-react-usestate",
+      "mode": "strict",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 6,
+      "tp": 5,
+      "fn": 9,
+      "fp": 6,
+      "excluded": 0,
+      "negativesViolated": 0
+    },
+    {
+      "caseId": "u01-react-usestate",
+      "mode": "lenient",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 6,
+      "tp": 5,
+      "fn": 9,
+      "fp": 6,
+      "excluded": 0,
+      "negativesViolated": 0
+    },
+    {
+      "caseId": "u02-react-todo",
+      "mode": "strict",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 6,
+      "tp": 6,
+      "fn": 11,
+      "fp": 6,
+      "excluded": 0,
+      "negativesViolated": 0
+    },
+    {
+      "caseId": "u02-react-todo",
+      "mode": "lenient",
+      "status11": "SCORING_BLOCKED",
+      "status12": "SCORED",
+      "collisions11": [
+        "X|shims/react.d.ts|5"
+      ],
+      "collisions12": [],
+      "resolved": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "rekeyed": [
+            "X|shims/react.d.ts|5|c53"
+          ]
+        }
+      ],
+      "gtRowsIdenticalTo11": true,
+      "newTpVs11": [],
+      "fakeTp": [],
+      "fpOnRekeyedKeys": 6,
+      "tp": 6,
+      "fn": 11,
+      "fp": 6,
+      "excluded": 0,
+      "negativesViolated": 0
+    }
+  ],
+  "problems": [],
+  "totals": {
+    "unchangedCases": 39,
+    "unchangedRowsIdentical": 39,
+    "resolvedCases": 5,
+    "resolvedStrict": {
+      "tp": 67,
+      "fp": 26,
+      "fn": 33,
+      "fpOnRekeyedKeys": 26
+    },
+    "problems": 0
+  }
+}

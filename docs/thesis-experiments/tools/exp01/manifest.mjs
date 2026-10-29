@@ -8,6 +8,7 @@
 // Manifests:
 //   fixtures/exp-01/gt-manifest.json        pre-registration (41bbe19). Frozen; never rewritten.
 //   fixtures/exp-01/eval-manifest.r1.json   evaluation-tool baseline after P1-A-R1 (scorer fix).
+//   fixtures/exp-01/eval-manifest.r2.json   P1-G post-hoc amendment (scorer 1.2). r1 is kept as is.
 //
 // Usage:
 //   node manifest.mjs --check [--manifest <file>] [--scope all|gt]
@@ -31,6 +32,7 @@ const ROOTS = ["docs/thesis-experiments/fixtures/exp-01", "docs/thesis-experimen
 const EXCLUDE = new Set([
   "docs/thesis-experiments/fixtures/exp-01/gt-manifest.json",
   "docs/thesis-experiments/fixtures/exp-01/eval-manifest.r1.json",
+  "docs/thesis-experiments/fixtures/exp-01/eval-manifest.r2.json",
   "docs/thesis-experiments/fixtures/exp-01/validation-report.json",
 ]);
 
