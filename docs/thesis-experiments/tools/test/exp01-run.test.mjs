@@ -1,4 +1,4 @@
-// Unit tests for the EXP-01 runner (P1-B).
+// Unit tests for the EXP-01 runner (P1-B; runner 1.2 = P1-H).
 // Everything here is synthetic: temporary fixture corpora, a mock analyzer and stubbed
 // git/build checks. The real Cogic analyzer is never loaded and the EXP-01 corpus is never analyzed.
 // Run: node --test docs/thesis-experiments/tools/test/exp01-run.test.mjs
@@ -10,10 +10,20 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {
+  ANALYZER_BASELINE,
+  PROTOCOL,
+  RESEARCH_STATUS,
+  RUNNER_VERSION,
   cacheHitPathClaim,
   canonicalHashes,
+  compareAnalyzerIdentity,
+  defaultAnalyzerIdentity,
+  defaultBuildCheck,
+  defaultNpmVersion,
+  defaultProtocolCheck,
   defaultScorer,
   defaultManifestChecks,
+  environment,
   parseArgs,
   prepareCaseInput,
   runExperiment,
@@ -155,7 +165,12 @@ const MANIFEST_OK = () => [
   { command: "gt", ok: true, exitCode: 0, output: "manifest OK" },
   { command: "eval", ok: true, exitCode: 0, output: "manifest OK" },
 ];
-const SCORER_COMPLETE = () => ({ exitCode: 0, log: "", summary: { scorerVersion: "exp01-scorer/1.1", scoringStatus: "COMPLETE", blockedCases: [] } });
+const SCORER_COMPLETE = () => ({ exitCode: 0, log: "", summary: { scorerVersion: "exp01-scorer/1.2", scoringStatus: "COMPLETE", blockedCases: [] } });
+// Runner 1.2: synthetic runs use the baseline analyzer identity unless a test overrides it, and a
+// stub environment (the real environment(), npm included, is tested separately).
+const { commit: _baselineCommit, ...BASELINE_FIELDS } = ANALYZER_BASELINE;
+const IDENTITY_OK = () => compareAnalyzerIdentity({ headCommit: "f".repeat(40), ...BASELINE_FIELDS });
+const ENV_STUB = (gitInfo) => ({ stub: true, gitHead: gitInfo?.headCommit ?? null });
 
 function run(env, extra = {}) {
   const analyzer = extra.analyzer ?? mockAnalyzer(extra.behaviour);
@@ -172,9 +187,13 @@ function run(env, extra = {}) {
       return analyzer;
     },
     scorer: extra.scorer ?? SCORER_COMPLETE,
+    protocolCheck: extra.protocolCheck,
+    analyzerIdentity: extra.analyzerIdentity ?? IDENTITY_OK,
+    environment: extra.environment ?? ENV_STUB,
     protectedRoots: [env.protectedDir],
     score: extra.score,
     cases: extra.cases,
+    allowDirty: extra.allowDirty,
     bootstrap: extra.bootstrap ?? 10000,
   });
   return { ...result, analyzer, loaded: () => loaded };
@@ -231,7 +250,8 @@ test("real manifest checks pass on this checkout (no analyzer involved)", () => 
     assert.equal(c.ok, true, `${c.command}\n${c.output}`);
   }
   assert.match(checks[0].command, /--scope gt/);
-  assert.match(checks[1].command, /eval-manifest\.r1\.json/);
+  assert.match(checks[1].command, /eval-manifest\.r2\.json/);
+  assert.ok(checks.every((c) => !/eval-manifest\.r1\.json/.test(c.command)), "runner 1.2 never checks r1");
 });
 
 // --- 2. fixture input --------------------------------------------------------
@@ -304,7 +324,10 @@ test("successful cases are stored as exp01-raw/1 and are readable by score.mjs",
       assert.equal(raw.analyzerInput.cacheEnabled, false);
       assert.equal(raw.run.preregistrationCommit, "41bbe19434b4d284c6368b5fb5158cf1a5dbdf1e");
       assert.equal(raw.run.evaluationToolCommit, "ae82bfbf0e26b7cba67e40af2b1f0a1fe89b81ca");
-      assert.equal(raw.run.scorerVersion, "exp01-scorer/1.1");
+      assert.equal(raw.run.scorerVersion, "exp01-scorer/1.2");
+      assert.equal(raw.run.runnerVersion, "exp01-runner/1.2");
+      assert.equal(raw.run.evaluationProtocol, "POST_HOC_AMENDED");
+      assert.equal(raw.run.analyzerBaselineCommit, "43ace0fdfdf442d7871c3ef4a92d73b28f1b5e77");
       assert.equal(raw.run.headCommit, "f".repeat(40));
       assert.ok(raw.inputHash && raw.inputFiles["main.ts"]);
       assert.ok(Array.isArray(raw.analyzerOutput.graph.nodes));
@@ -471,7 +494,7 @@ test("a change to protected outputs during the run invalidates it", () => {
 test("BLOCKED scoring status prevents confirmatory reporting (mock scorer)", () => {
   const env = makeEnv();
   try {
-    const blocked = () => ({ exitCode: 2, log: "SCORING_BLOCKED", summary: { scorerVersion: "exp01-scorer/1.1", scoringStatus: "BLOCKED", blockedCases: ["t01-ok"] } });
+    const blocked = () => ({ exitCode: 2, log: "SCORING_BLOCKED", summary: { scorerVersion: "exp01-scorer/1.2", scoringStatus: "BLOCKED", blockedCases: ["t01-ok"] } });
     const r = run(env, { scorer: blocked });
     assert.equal(r.record.status, "completed");
     assert.equal(r.record.scoring.status, "BLOCKED");
@@ -483,6 +506,11 @@ test("BLOCKED scoring status prevents confirmatory reporting (mock scorer)", () 
     assert.ok(missing.record.confirmatory.reasons.includes("SCORING_MISSING_SUMMARY"));
     const version = run(env, { runId: "oldscorer", scorer: () => ({ exitCode: 0, log: "", summary: { scorerVersion: "exp01-scorer/1.0", scoringStatus: "COMPLETE", blockedCases: [] } }) });
     assert.ok(version.record.confirmatory.reasons.some((x) => x.startsWith("SCORER_VERSION_MISMATCH")));
+    // runner 1.2 also rejects the pre-registered scorer 1.1
+    const v11 = run(env, { runId: "scorer11", scorer: () => ({ exitCode: 0, log: "", summary: { scorerVersion: "exp01-scorer/1.1", scoringStatus: "COMPLETE", blockedCases: [] } }) });
+    assert.deepEqual(v11.record.scoring.gateFailures, ["SCORER_VERSION_MISMATCH:exp01-scorer/1.1"]);
+    assert.equal(v11.record.confirmatory.eligible, false);
+    assert.equal(v11.exitCode, 5);
   } finally {
     env.cleanup();
   }
@@ -540,16 +568,17 @@ test("CLI argument parsing", () => {
 // ===========================================================================
 
 // --- R1-1. scorer exit code and summary gate ---------------------------------
-test("R1-1 scorer gate: only exit 0 + summary + COMPLETE + exp01-scorer/1.1 is confirmatory", () => {
+test("R1-1 scorer gate: only exit 0 + summary + COMPLETE + exp01-scorer/1.2 passes (runner 1.2)", () => {
   const env = makeEnv();
   try {
-    const summary = (scoringStatus, scorerVersion = "exp01-scorer/1.1") => ({ scorerVersion, scoringStatus, blockedCases: scoringStatus === "BLOCKED" ? ["t01-ok"] : [] });
+    const summary = (scoringStatus, scorerVersion = "exp01-scorer/1.2") => ({ scorerVersion, scoringStatus, blockedCases: scoringStatus === "BLOCKED" ? ["t01-ok"] : [] });
     const cases = [
       { id: "s1", scorer: () => ({ exitCode: 0, log: "", summary: summary("COMPLETE") }), eligible: true, reasons: [] },
       { id: "s2", scorer: () => ({ exitCode: 1, log: "boom", summary: summary("COMPLETE") }), eligible: false, reasons: ["SCORER_EXIT_1"] },
       { id: "s3", scorer: () => ({ exitCode: 2, log: "SCORING_BLOCKED", summary: summary("BLOCKED") }), eligible: false, reasons: ["SCORER_EXIT_2", "SCORING_BLOCKED"] },
       { id: "s4", scorer: () => ({ exitCode: 0, log: "", summary: null }), eligible: false, reasons: ["SCORING_MISSING_SUMMARY"] },
       { id: "s6", scorer: () => ({ exitCode: null, signal: "SIGKILL", log: "", summary: null }), eligible: false, reasons: ["SCORER_EXIT_NULL", "SCORING_MISSING_SUMMARY"] },
+      { id: "s7", scorer: () => ({ exitCode: 0, log: "", summary: summary("COMPLETE", "exp01-scorer/1.1") }), eligible: false, reasons: ["SCORER_VERSION_MISMATCH:exp01-scorer/1.1"] },
     ];
     for (const c of cases) {
       const r = run(env, { runId: c.id, scorer: c.scorer });
@@ -777,6 +806,179 @@ test("R1-4 cache hit-path claim is separate from accuracy eligibility", () => {
     const broken = run(env, { runId: "broken", behaviour: { throwFor: "t02-ok" } });
     assert.equal(broken.record.cacheHitPath.status, "NOT_EVALUATED");
     assert.equal(cacheHitPathClaim([]).status, "NOT_EVALUATED");
+  } finally {
+    env.cleanup();
+  }
+});
+
+// ===========================================================================
+// P1-H runner 1.2 tests (synthetic runs; the real analyzer is never loaded)
+// ===========================================================================
+
+test("H1 protocol constants: runner 1.2, pinned scorer 1.2, r2, amended protocol, pre-registered ids kept", () => {
+  assert.equal(RUNNER_VERSION, "exp01-runner/1.2");
+  assert.equal(PROTOCOL.scorerVersion, "exp01-scorer/1.2");
+  assert.equal(PROTOCOL.gtVersion, 1);
+  assert.equal(PROTOCOL.preregistrationCommit, "41bbe19434b4d284c6368b5fb5158cf1a5dbdf1e");
+  assert.equal(PROTOCOL.evaluationToolCommit, "ae82bfbf0e26b7cba67e40af2b1f0a1fe89b81ca");
+  assert.equal(PROTOCOL.scorerAmendmentCommit, "52ff632dacd14850d835604f80f9b3b4f4b916cc");
+  assert.equal(PROTOCOL.evaluationManifest, "docs/thesis-experiments/fixtures/exp-01/eval-manifest.r2.json");
+  assert.equal(PROTOCOL.evaluationProtocol, "POST_HOC_AMENDED");
+  assert.equal(PROTOCOL.amendmentReason, "EXTERNAL_NODE_KEY_COLLISION");
+  assert.equal(PROTOCOL.bootstrapResamples, 10000);
+  assert.equal(RESEARCH_STATUS, "POST_HOC_AMENDED_EVALUATION");
+  assert.equal(ANALYZER_BASELINE.commit, "43ace0fdfdf442d7871c3ef4a92d73b28f1b5e77");
+});
+
+test("H2 the accepted scorer version is a literal in the runner, not the scorer module constant", () => {
+  const src = fs.readFileSync(path.resolve(here, "../exp01-run.mjs"), "utf8");
+  assert.match(src, /scorerVersion: "exp01-scorer\/1\.2",/);
+  assert.doesNotMatch(src, /scorerVersion: SCORER_/);
+  assert.ok(!/eval-manifest\.r1\.json/.test(src.replace(/^\s*\/\/.*$/gm, "")), "r1 is not referenced in code");
+});
+
+test("H3 real protocol check passes on this checkout: pinned r2 hash and scorer module 1.2", () => {
+  const p = defaultProtocolCheck();
+  assert.equal(p.ok, true, p.problems.join(", "));
+  assert.equal(p.evaluationManifestSha256, PROTOCOL.evaluationManifestSha256);
+  assert.equal(p.scorerModuleVersion, "exp01-scorer/1.2");
+});
+
+test("H4 protocol check failures (r2 changed, scorer module mismatch) abort before the analyzer", () => {
+  const env = makeEnv(["t01-ok"]);
+  try {
+    const failures = {
+      r2: ["EVAL_MANIFEST_HASH_MISMATCH"],
+      module: ["SCORER_MODULE_VERSION_MISMATCH:exp01-scorer/1.1"],
+      missing: ["EVAL_MANIFEST_MISSING"],
+    };
+    for (const [id, problems] of Object.entries(failures)) {
+      const r = run(env, { runId: `proto-${id}`, protocolCheck: () => ({ ok: false, problems, evaluationManifestSha256: null, scorerModuleVersion: "x" }) });
+      assert.equal(r.exitCode, 3, id);
+      assert.equal(r.record.status, "aborted", id);
+      assert.deepEqual(r.record.statusReasons, problems.map((x) => `PROTOCOL_CHECK_FAILED:${x}`), id);
+      assert.equal(r.loaded(), 0, id);
+      assert.equal(r.record.confirmatory.eligible, false, id);
+    }
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("H5 run.json records the amended protocol separately from the technical gate", () => {
+  const env = makeEnv(["t01-ok"]);
+  try {
+    const r = run(env, { runId: "protocol" });
+    assert.equal(r.exitCode, 0);
+    const saved = readJson(path.join(r.runDir, "run.json"));
+    for (const rec of [r.record, saved]) {
+      assert.equal(rec.runnerVersion, "exp01-runner/1.2");
+      assert.equal(rec.scorerVersion, "exp01-scorer/1.2");
+      assert.equal(rec.gtVersion, 1);
+      assert.equal(rec.preregistrationCommit, "41bbe19434b4d284c6368b5fb5158cf1a5dbdf1e");
+      assert.equal(rec.evaluationToolCommit, "ae82bfbf0e26b7cba67e40af2b1f0a1fe89b81ca");
+      assert.equal(rec.scorerAmendmentCommit, "52ff632dacd14850d835604f80f9b3b4f4b916cc");
+      assert.equal(rec.evaluationManifestSha256, PROTOCOL.evaluationManifestSha256);
+      assert.equal(rec.analyzerBaselineCommit, "43ace0fdfdf442d7871c3ef4a92d73b28f1b5e77");
+      assert.equal(rec.headCommit, "f".repeat(40), "the HEAD of the run, not the baseline commit");
+      assert.deepEqual(rec.analyzerSourceTrees, { "src/analyzer": ANALYZER_BASELINE.srcAnalyzerTree, "src/shared": ANALYZER_BASELINE.srcSharedTree });
+      assert.equal(rec.analyzerIdentity.identical, true);
+      assert.equal(rec.evaluationProtocol, "POST_HOC_AMENDED");
+      assert.equal(rec.amendmentReason, "EXTERNAL_NODE_KEY_COLLISION");
+      assert.equal(rec.researchStatus, "POST_HOC_AMENDED_EVALUATION");
+      assert.equal(rec.preregisteredConfirmatory, false);
+      assert.equal(rec.confirmatory.eligible, true);
+      assert.equal(rec.confirmatory.scope, "TECHNICAL_EXECUTION_GATE");
+      assert.match(rec.confirmatory.note, /not a pre-registered confirmatory result/);
+    }
+    // aborted runs carry the same protocol fields
+    const aborted = run(env, { runId: "protocol-aborted", buildCheck: () => ({ ok: false, problems: ["x"], buildHash: null }) });
+    assert.equal(aborted.record.researchStatus, "POST_HOC_AMENDED_EVALUATION");
+    assert.equal(aborted.record.confirmatory.scope, "TECHNICAL_EXECUTION_GATE");
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("H6 an analyzer that differs from the baseline cannot pass the gate (recorded, not hidden)", () => {
+  const env = makeEnv(["t01-ok"]);
+  try {
+    const changed = () => compareAnalyzerIdentity({ ...IDENTITY_OK().current, srcAnalyzerTree: "0".repeat(40), analyzerBuildHash: "c".repeat(64) });
+    const r = run(env, { runId: "identity-diff", analyzerIdentity: changed });
+    assert.equal(r.record.status, "completed");
+    assert.equal(r.record.confirmatory.eligible, false);
+    assert.ok(r.record.confirmatory.reasons.includes("ANALYZER_NOT_IDENTICAL_TO_BASELINE:srcAnalyzerTree,analyzerBuildHash"));
+    assert.equal(r.exitCode, 5);
+    assert.deepEqual(r.record.analyzerIdentity.mismatches, ["srcAnalyzerTree", "analyzerBuildHash"]);
+    const unknown = compareAnalyzerIdentity({ headCommit: null, srcAnalyzerTree: null, srcSharedTree: null, packageJsonBlob: null, packageLockBlob: null, tsconfigBlob: null, analyzerBuildHash: null, typescript: null });
+    assert.equal(unknown.identical, false, "unknown values are mismatches");
+    assert.equal(unknown.mismatches.length, 7);
+    const ts = compareAnalyzerIdentity({ ...IDENTITY_OK().current, typescript: "5.9.2" });
+    assert.deepEqual(ts.mismatches, ["typescript"]);
+    const lock = compareAnalyzerIdentity({ ...IDENTITY_OK().current, packageLockBlob: "1".repeat(40) });
+    assert.deepEqual(lock.mismatches, ["packageLockBlob"]);
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("H7 real analyzer identity of this checkout matches the baseline sources (git ids)", () => {
+  const build = defaultBuildCheck();
+  const id = defaultAnalyzerIdentity({ buildHash: build.buildHash });
+  for (const f of ["srcAnalyzerTree", "srcSharedTree", "packageJsonBlob", "packageLockBlob", "tsconfigBlob", "typescript"]) {
+    assert.equal(id.current[f], ANALYZER_BASELINE[f], f);
+  }
+  assert.notEqual(id.current.headCommit, ANALYZER_BASELINE.commit, "HEAD is not claimed to be the baseline commit");
+  if (build.ok) {
+    assert.equal(id.current.analyzerBuildHash, ANALYZER_BASELINE.analyzerBuildHash, "compiled output equals the baseline build");
+    assert.equal(id.identical, true);
+  }
+});
+
+test("H8 env.json records npm, node, TypeScript, OS, CPU, git HEAD and tool hashes; npm failure is null", () => {
+  const git = { headCommit: "a".repeat(40) };
+  const e = environment({ gitInfo: git, npmVersion: () => ({ version: "10.9.0", error: null }) });
+  assert.equal(e.npm, "10.9.0");
+  assert.equal(e.npmError, null);
+  assert.equal(e.node, process.version);
+  assert.equal(e.typescript, ANALYZER_BASELINE.typescript);
+  assert.ok(e.os.platform && e.cpu.logicalCores > 0);
+  assert.equal(e.gitHead, git.headCommit);
+  assert.equal(e.runnerVersion, "exp01-runner/1.2");
+  assert.equal(e.toolHashes[PROTOCOL.evaluationManifest], PROTOCOL.evaluationManifestSha256);
+  assert.match(e.toolHashes["docs/thesis-experiments/tools/exp01/lib.mjs"], /^[0-9a-f]{64}$/);
+  const failed = environment({ gitInfo: git, npmVersion: () => ({ version: null, error: "spawn npm ENOENT" }) });
+  assert.equal(failed.npm, null, "no guessed version");
+  assert.equal(failed.npmError, "spawn npm ENOENT");
+  const real = defaultNpmVersion();
+  assert.ok((real.version && /^\d+\.\d+\.\d+/.test(real.version) && real.error === null) || (real.version === null && real.error), JSON.stringify(real));
+  // the runner passes its git info to the environment function and stores the result as env.json
+  const env = makeEnv(["t01-ok"]);
+  try {
+    const r = run(env, { runId: "envjson", environment: (gi) => environment({ gitInfo: gi, npmVersion: () => ({ version: "10.9.0", error: null }) }) });
+    const saved = readJson(path.join(r.runDir, "env.json"));
+    assert.equal(saved.npm, "10.9.0");
+    assert.equal(saved.gitHead, "f".repeat(40));
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("H9 existing gates still hold under runner 1.2: dirty with --allow-dirty, subset, bootstrap", () => {
+  const env = makeEnv();
+  try {
+    const dirty = run(env, { runId: "allowdirty", allowDirty: true, gitInfo: () => ({ ...CLEAN_GIT(), dirty: true, porcelain: " M x", diff: "d" }) });
+    assert.equal(dirty.record.status, "completed");
+    assert.ok(dirty.record.confirmatory.reasons.includes("DIRTY_WORKING_TREE"));
+    assert.equal(dirty.exitCode, 5);
+    const subset = run(env, { runId: "subset12", cases: ["t01-ok"] });
+    assert.ok(subset.record.confirmatory.reasons.includes("CASE_SUBSET"));
+    const boot = run(env, { runId: "boot12", bootstrap: 100 });
+    assert.ok(boot.record.confirmatory.reasons.includes("BOOTSTRAP_NOT_PREREGISTERED:100"));
+    for (const r of [dirty, subset, boot]) {
+      assert.equal(r.record.confirmatory.eligible, false);
+      assert.equal(r.record.researchStatus, "POST_HOC_AMENDED_EVALUATION");
+    }
   } finally {
     env.cleanup();
   }

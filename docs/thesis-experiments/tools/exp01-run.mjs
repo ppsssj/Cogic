@@ -1,27 +1,32 @@
 #!/usr/bin/env node
-// EXP-01 runner (P1-B).
+// EXP-01 runner (P1-B; 1.2 = P1-H post-hoc amended protocol).
 //
 // Runs the compiled Cogic analyzer (out/analyzer) on every EXP-01 fixture and stores the
 // raw output as exp01-raw/1 under docs/thesis-experiments/data/exp-01/<run-id>/.
 // It never edits GT, fixtures, manifests or the scorer, and never overwrites a run.
 //
 // Order of a run (fail-closed at every step):
-//   1. preflight: both manifest checks, analyzer build freshness, git dirty state,
-//      run directory must not exist. Any failure -> analyzer is not called.
+//   1. preflight: GT manifest + evaluation manifest r2 checks, pinned r2 hash, scorer module
+//      version, analyzer build freshness, git dirty state, run directory must not exist.
+//      Any failure -> analyzer is not called.
 //   2. per case: validate fixture input, then analyze
 //        off#1..off#N  cacheEnabled: false        (determinism)
 //        on-cold, on-warm  cacheEnabled: true     (cache OFF/ON consistency, warm = hit path)
 //      validate GraphPayload structure, flag TS lib endpoints (D11), hash inputs/outputs.
 //   3. scoring with tools/exp01/score.mjs only when every case is OK.
-//   4. run.json records status and whether the result may be used as confirmatory.
+//   4. run.json records status, the technical gate result (confirmatory.eligible) and the research
+//      status. Runner 1.2 runs the POST_HOC_AMENDED protocol (scorer 1.2, P1-G): even when every
+//      technical gate passes, the result is not a pre-registered confirmatory result.
+//      Analyzer identity with the baseline commit (src trees, compiled output, TypeScript,
+//      package files) is checked; a different analyzer cannot pass the gate.
 //
 // Usage (repository root, after `npm run compile`):
 //   node docs/thesis-experiments/tools/exp01-run.mjs [--run-id <id>] [--cases <id,id>]
 //        [--repeat 2] [--bootstrap 10000] [--no-score] [--allow-dirty]
 //   --bootstrap: non-negative integer; only the pre-registered 10000 can be confirmatory.
 //
-// Exit codes: 0 confirmatory-eligible, 2 usage error, 3 preflight failed,
-//             4 run incomplete or invalid, 5 run complete but not confirmatory.
+// Exit codes: 0 all technical gates passed, 2 usage error, 3 preflight failed,
+//             4 run incomplete or invalid, 5 run complete but a technical gate failed.
 
 import crypto from "node:crypto";
 import fs from "node:fs";
@@ -30,23 +35,52 @@ import path from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
-import { SCORER_VERSION, listCaseDirs } from "./exp01/lib.mjs";
+// The scorer module version is only compared against the pinned PROTOCOL.scorerVersion; it never
+// defines what the runner accepts (runner 1.1 took it from lib.mjs, see P1-G §12).
+import { SCORER_VERSION as SCORER_MODULE_VERSION, listCaseDirs } from "./exp01/lib.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(here, "../../..");
-export const RUNNER_VERSION = "exp01-runner/1.1";
+export const RUNNER_VERSION = "exp01-runner/1.2";
 export const RAW_SCHEMA = "exp01-raw/1";
 export const RUN_SCHEMA = "exp01-run/1";
 
-// Fixed research identifiers (P1-A, P1-A-R1).
+// Fixed research identifiers. Pre-registered (P1-A, P1-A-R1) values are kept as they were; the
+// amendment (P1-G scorer 1.2, P1-H runner 1.2) is recorded next to them, never in their place.
 export const PROTOCOL = {
   experiment: "EXP-01",
+  gtVersion: 1,
   preregistrationCommit: "41bbe19434b4d284c6368b5fb5158cf1a5dbdf1e",
   evaluationToolCommit: "ae82bfbf0e26b7cba67e40af2b1f0a1fe89b81ca",
-  scorerVersion: SCORER_VERSION,
+  evaluationProtocol: "POST_HOC_AMENDED",
+  amendmentReason: "EXTERNAL_NODE_KEY_COLLISION",
+  // Pinned. A scorer reporting any other version fails the gate.
+  scorerVersion: "exp01-scorer/1.2",
+  scorerAmendmentCommit: "52ff632dacd14850d835604f80f9b3b4f4b916cc",
+  gtManifest: "docs/thesis-experiments/fixtures/exp-01/gt-manifest.json",
+  evaluationManifest: "docs/thesis-experiments/fixtures/exp-01/eval-manifest.r2.json",
+  // SHA-256 of the LF-normalized r2 file (same normalization as manifest.mjs).
+  evaluationManifestSha256: "cb7bfd62f86da7e374d1c768172386357c9838621ee71388bc4bcfddc38e72b2",
   d11Decision: "D11_KEEP_PRE_REGISTERED_SCORING",
   // P0 exp-01 §9: cluster bootstrap with 10,000 resamples. Other values are diagnostic only.
   bootstrapResamples: 10000,
+};
+
+// Research status of every runner 1.2 run. confirmatory.eligible is a technical execution gate only.
+export const RESEARCH_STATUS = "POST_HOC_AMENDED_EVALUATION";
+
+// Analyzer measured by the first EXP-01 runs (exp01-20261029-0651-43ace0f-50587 baseline,
+// exp01-20261029-0636-43ace0f replication). Git object ids at that commit, the compiled output hash
+// recorded by both runs (defaultBuildCheck) and the TypeScript version in their env.json.
+export const ANALYZER_BASELINE = {
+  commit: "43ace0fdfdf442d7871c3ef4a92d73b28f1b5e77",
+  srcAnalyzerTree: "33f97d7bb566937a0ea6e70759e1464c53bfde60",
+  srcSharedTree: "110f25582a4420b023f2a1d47cce1d3eb888ef23",
+  packageJsonBlob: "2374e831679e8b4dcc12b85c10f9d82b0bb85b08",
+  packageLockBlob: "eda5350ee58cd0689e2931e7b710da600b0ffe9d",
+  tsconfigBlob: "8f51e5eb12e5c5fe259e0db25da8675533307de4",
+  analyzerBuildHash: "958dbf677b6085ddf478265b3cc2b64c5fb1452bf28cfb4c255ed5ef00566270",
+  typescript: "5.9.3",
 };
 
 // Accepts a non-negative integer. 0 (no bootstrap CI) is allowed for diagnostic runs only.
@@ -327,11 +361,13 @@ export function tsLibRelations(output) {
 // ---------------------------------------------------------------------------
 // Preflight
 
+// Runner 1.2 checks the GT manifest and evaluation manifest r2. r1 is kept in the repository but
+// describes scorer 1.1 and is not used.
 export function defaultManifestChecks(repoRoot = REPO_ROOT) {
   const tool = path.join(repoRoot, "docs/thesis-experiments/tools/exp01/manifest.mjs");
   const commands = [
     ["--check", "--scope", "gt"],
-    ["--check", "--manifest", "docs/thesis-experiments/fixtures/exp-01/eval-manifest.r1.json"],
+    ["--check", "--manifest", PROTOCOL.evaluationManifest],
   ];
   return commands.map((args) => {
     const r = spawnSync(process.execPath, [tool, ...args], { cwd: repoRoot, encoding: "utf8" });
@@ -342,6 +378,36 @@ export function defaultManifestChecks(repoRoot = REPO_ROOT) {
       output: `${r.stdout ?? ""}${r.stderr ?? ""}`.trim(),
     };
   });
+}
+
+export function sha256Lf(file) {
+  return sha256(Buffer.from(fs.readFileSync(file, "utf8").replace(/\r\n/g, "\n"), "utf8"));
+}
+
+// Pinned protocol files (P1-H): the r2 file itself is not covered by any manifest, so its content is
+// pinned here; the scorer module must report the pinned scorer version.
+export function defaultProtocolCheck(repoRoot = REPO_ROOT) {
+  const problems = [];
+  const manifestPath = path.join(repoRoot, PROTOCOL.evaluationManifest);
+  let evaluationManifestSha256 = null;
+  try {
+    evaluationManifestSha256 = sha256Lf(manifestPath);
+  } catch {
+    problems.push("EVAL_MANIFEST_MISSING");
+  }
+  if (evaluationManifestSha256 && evaluationManifestSha256 !== PROTOCOL.evaluationManifestSha256) {
+    problems.push("EVAL_MANIFEST_HASH_MISMATCH");
+  }
+  if (SCORER_MODULE_VERSION !== PROTOCOL.scorerVersion) {
+    problems.push(`SCORER_MODULE_VERSION_MISMATCH:${SCORER_MODULE_VERSION}`);
+  }
+  return {
+    ok: problems.length === 0,
+    problems,
+    evaluationManifest: PROTOCOL.evaluationManifest,
+    evaluationManifestSha256,
+    scorerModuleVersion: SCORER_MODULE_VERSION,
+  };
 }
 
 function git(args, cwd) {
@@ -397,27 +463,96 @@ function hashTree(root) {
   return Object.fromEntries(listFiles(root).map((f) => [f, sha256(fs.readFileSync(path.join(root, f)))]));
 }
 
+function installedTypescript(repoRoot) {
+  const require = createRequire(import.meta.url);
+  try {
+    return require(path.join(repoRoot, "node_modules/typescript/package.json")).version;
+  } catch {
+    return null;
+  }
+}
+
+// Compares the analyzer of this checkout with ANALYZER_BASELINE. Git ids are taken from HEAD, so a
+// dirty tree (already non-confirmatory) is not reflected here. Unknown values count as mismatches.
+export function defaultAnalyzerIdentity({ repoRoot = REPO_ROOT, buildHash = null } = {}) {
+  const current = {
+    headCommit: git(["rev-parse", "HEAD"], repoRoot),
+    srcAnalyzerTree: git(["rev-parse", "HEAD:src/analyzer"], repoRoot),
+    srcSharedTree: git(["rev-parse", "HEAD:src/shared"], repoRoot),
+    packageJsonBlob: git(["rev-parse", "HEAD:package.json"], repoRoot),
+    packageLockBlob: git(["rev-parse", "HEAD:package-lock.json"], repoRoot),
+    tsconfigBlob: git(["rev-parse", "HEAD:tsconfig.json"], repoRoot),
+    analyzerBuildHash: buildHash,
+    typescript: installedTypescript(repoRoot),
+  };
+  return compareAnalyzerIdentity(current);
+}
+
+export function compareAnalyzerIdentity(current) {
+  const fields = ["srcAnalyzerTree", "srcSharedTree", "packageJsonBlob", "packageLockBlob", "tsconfigBlob", "analyzerBuildHash", "typescript"];
+  const mismatches = fields.filter((f) => !current[f] || current[f] !== ANALYZER_BASELINE[f]);
+  return {
+    baselineCommit: ANALYZER_BASELINE.commit,
+    baseline: { ...ANALYZER_BASELINE },
+    current,
+    mismatches,
+    identical: mismatches.length === 0,
+    note: "Same analyzer implementation as the baseline commit; the HEAD commit itself differs (runner/scorer changes).",
+  };
+}
+
+// npm is not used by the run; its version is recorded only. A failure is recorded as null, never guessed.
+export function defaultNpmVersion() {
+  // Fixed command string (no user input); a shell is needed on Windows, where npm is npm.cmd.
+  const r = spawnSync("npm --version", { encoding: "utf8", shell: true, timeout: 60000 });
+  const out = String(r.stdout ?? "").trim();
+  if (r.status === 0 && /^\d+\.\d+\.\d+\S*$/.test(out)) {
+    return { version: out, error: null };
+  }
+  return { version: null, error: r.error?.message ?? `exit ${r.status}: ${String(r.stderr ?? "").trim().slice(0, 200)}` };
+}
+
+export function toolHashes(repoRoot = REPO_ROOT) {
+  const files = [
+    "docs/thesis-experiments/tools/exp01-run.mjs",
+    "docs/thesis-experiments/tools/exp01/lib.mjs",
+    "docs/thesis-experiments/tools/exp01/score.mjs",
+    "docs/thesis-experiments/tools/exp01/manifest.mjs",
+    PROTOCOL.gtManifest,
+    PROTOCOL.evaluationManifest,
+  ];
+  return Object.fromEntries(
+    files.map((f) => {
+      try {
+        return [f, sha256Lf(path.join(repoRoot, f))];
+      } catch {
+        return [f, null];
+      }
+    }),
+  );
+}
+
 export function defaultLoadAnalyzer(repoRoot = REPO_ROOT) {
   const require = createRequire(import.meta.url);
   return require(path.join(repoRoot, "out", "analyzer"));
 }
 
-export function environment() {
-  const require = createRequire(import.meta.url);
-  let typescript = null;
-  try {
-    typescript = require(path.join(REPO_ROOT, "node_modules/typescript/package.json")).version;
-  } catch {
-    typescript = null;
-  }
+export function environment({ repoRoot = REPO_ROOT, gitInfo = null, npmVersion = defaultNpmVersion } = {}) {
+  const npm = npmVersion();
   return {
     os: { platform: process.platform, release: os.release(), version: os.version?.() ?? null, arch: process.arch },
     cpu: { model: os.cpus()[0]?.model ?? null, logicalCores: os.cpus().length },
     memory: { totalBytes: os.totalmem(), freeBytesAtStart: os.freemem() },
     node: process.version,
     v8: process.versions.v8,
-    typescript,
+    typescript: installedTypescript(repoRoot),
+    npm: npm.version,
+    npmError: npm.error,
     execArgv: process.execArgv,
+    gitHead: gitInfo?.headCommit ?? null,
+    runnerVersion: RUNNER_VERSION,
+    // SHA-256 of LF-normalized text (same as manifest.mjs).
+    toolHashes: toolHashes(repoRoot),
   };
 }
 
@@ -479,7 +614,8 @@ export function defaultScorer({ repoRoot = REPO_ROOT, corpus, predictionsDir, ou
 }
 
 // Confirmatory gate for one scorer result (P1-B-R1). All conditions must hold:
-// exit code 0, summary present, scoringStatus COMPLETE, scorerVersion exp01-scorer/1.1.
+// exit code 0, summary present, scoringStatus COMPLETE, scorerVersion equal to the pinned
+// PROTOCOL.scorerVersion (exp01-scorer/1.2 in runner 1.2).
 export function scoringGate(s) {
   const reasons = [];
   if (s.exitCode !== 0) {
@@ -522,6 +658,9 @@ export function runExperiment(options = {}) {
   const buildCheck = options.buildCheck ?? (() => defaultBuildCheck(repoRoot));
   const loadAnalyzer = options.loadAnalyzer ?? (() => defaultLoadAnalyzer(repoRoot));
   const scorer = options.scorer ?? defaultScorer;
+  const protocolCheck = options.protocolCheck ?? (() => defaultProtocolCheck(repoRoot));
+  const analyzerIdentity = options.analyzerIdentity ?? ((build) => defaultAnalyzerIdentity({ repoRoot, buildHash: build.buildHash }));
+  const environmentFn = options.environment ?? ((git) => environment({ repoRoot, gitInfo: git }));
   const now = options.now ?? (() => new Date());
   const protectedRoots = options.protectedRoots ?? [path.join(repoRoot, "docs/benchmarks")];
   const log = options.log ?? (() => {});
@@ -547,6 +686,9 @@ export function runExperiment(options = {}) {
     runId,
     runnerVersion: RUNNER_VERSION,
     ...PROTOCOL,
+    researchStatus: RESEARCH_STATUS,
+    preregisteredConfirmatory: false,
+    analyzerBaselineCommit: ANALYZER_BASELINE.commit,
     startedAt: startedAt.toISOString(),
     finishedAt: null,
     headCommit: gitInfo.headCommit,
@@ -563,8 +705,19 @@ export function runExperiment(options = {}) {
     cases: [],
     scoring: null,
     cacheHitPath: null,
+    analyzerIdentity: null,
     confirmatory: { eligible: false, reasons: [] },
   };
+  // confirmatory.eligible is kept for record compatibility; in runner 1.2 it is the technical gate.
+  const setConfirmatory = (reasons) => {
+    record.confirmatory = {
+      eligible: reasons.length === 0,
+      reasons,
+      scope: "TECHNICAL_EXECUTION_GATE",
+      note: "eligible=true means every runner gate passed under the POST_HOC_AMENDED protocol. It is not a pre-registered confirmatory result.",
+    };
+  };
+  setConfirmatory(["NOT_FINISHED"]);
   const finish = (status, exitCode) => {
     record.status = status;
     record.finishedAt = now().toISOString();
@@ -576,16 +729,27 @@ export function runExperiment(options = {}) {
 
   // 1. Preflight. Nothing below calls the analyzer unless all of it passes.
   fs.mkdirSync(runDir, { recursive: true });
-  writeNew(path.join(runDir, "env.json"), environment());
+  writeNew(path.join(runDir, "env.json"), environmentFn(gitInfo));
   const manifests = manifestChecks();
   record.preflight.manifests = manifests;
+  const protocol = protocolCheck();
+  record.preflight.protocol = protocol;
+  record.evaluationManifestSha256 = protocol.evaluationManifestSha256 ?? null;
   const build = buildCheck();
   record.preflight.build = { ok: build.ok, problems: build.problems, buildHash: build.buildHash };
   record.analyzerBuildHash = build.buildHash;
+  record.analyzerIdentity = analyzerIdentity(build);
+  record.analyzerSourceTrees = {
+    "src/analyzer": record.analyzerIdentity.current?.srcAnalyzerTree ?? null,
+    "src/shared": record.analyzerIdentity.current?.srcSharedTree ?? null,
+  };
   record.preflight.git = { dirty: gitInfo.dirty, allowDirty };
   const preflightReasons = [];
   if (manifests.length === 0 || manifests.some((m) => !m.ok)) {
     preflightReasons.push("MANIFEST_CHECK_FAILED");
+  }
+  if (!protocol.ok) {
+    preflightReasons.push(...protocol.problems.map((p) => `PROTOCOL_CHECK_FAILED:${p}`));
   }
   if (!build.ok) {
     preflightReasons.push("ANALYZER_BUILD_STALE_OR_MISSING");
@@ -601,7 +765,7 @@ export function runExperiment(options = {}) {
   }
   if (preflightReasons.length > 0) {
     record.statusReasons = preflightReasons;
-    record.confirmatory.reasons = preflightReasons;
+    setConfirmatory(preflightReasons);
     log(`preflight failed: ${preflightReasons.join(", ")}; analyzer not run`);
     return finish("aborted", 3);
   }
@@ -614,7 +778,7 @@ export function runExperiment(options = {}) {
     const unknown = [...wanted].filter((id) => !caseDirs.some((d) => path.basename(d) === id));
     if (unknown.length > 0) {
       record.statusReasons = [`UNKNOWN_CASES:${unknown.join(",")}`];
-      record.confirmatory.reasons = record.statusReasons;
+      setConfirmatory(record.statusReasons);
       return finish("invalid", 4);
     }
     caseDirs = caseDirs.filter((d) => wanted.has(path.basename(d)));
@@ -624,7 +788,7 @@ export function runExperiment(options = {}) {
     analyzer = loadAnalyzer();
   } catch (e) {
     record.statusReasons = ["ANALYZER_LOAD_FAILED"];
-    record.confirmatory.reasons = record.statusReasons;
+    setConfirmatory(record.statusReasons);
     record.analyzerLoadError = { message: e?.message ?? String(e), stack: e?.stack ?? null };
     return finish("aborted", 3);
   }
@@ -655,7 +819,7 @@ export function runExperiment(options = {}) {
   if (reasons.length > 0) {
     record.statusReasons = reasons;
     record.scoring = { status: "NOT_RUN", reason: "run incomplete or invalid; partial runs are not scored" };
-    record.confirmatory.reasons = reasons;
+    setConfirmatory(reasons);
     return finish(protectedChanged.length > 0 ? "invalid" : "incomplete", 4);
   }
 
@@ -682,6 +846,10 @@ export function runExperiment(options = {}) {
   }
   if (bootstrap !== PROTOCOL.bootstrapResamples) {
     confirmReasons.push(`BOOTSTRAP_NOT_PREREGISTERED:${bootstrap}`);
+  }
+  if (!record.analyzerIdentity?.identical) {
+    // Not the analyzer measured by the baseline run: not a valid comparison target.
+    confirmReasons.push(`ANALYZER_NOT_IDENTICAL_TO_BASELINE:${(record.analyzerIdentity?.mismatches ?? ["unknown"]).join(",")}`);
   }
   if (doScore) {
     const scoreDir = path.join(runDir, "score");
@@ -711,7 +879,7 @@ export function runExperiment(options = {}) {
     record.scoring = { status: "NOT_RUN", reason: "--no-score" };
     confirmReasons.push("NOT_SCORED");
   }
-  record.confirmatory = { eligible: confirmReasons.length === 0, reasons: confirmReasons };
+  setConfirmatory(confirmReasons);
   return finish("completed", confirmReasons.length === 0 ? 0 : 5);
 }
 
@@ -798,6 +966,8 @@ function runCaseInner({ analyzer, caseDir, corpus, runDir, repeat, record, repoR
     preregistrationCommit: PROTOCOL.preregistrationCommit,
     evaluationToolCommit: PROTOCOL.evaluationToolCommit,
     scorerVersion: PROTOCOL.scorerVersion,
+    evaluationProtocol: PROTOCOL.evaluationProtocol,
+    analyzerBaselineCommit: ANALYZER_BASELINE.commit,
     analyzerBuildHash: record.analyzerBuildHash,
     node: process.version,
     platform: process.platform,
@@ -934,9 +1104,11 @@ function main() {
   console.log(`cache hit path: ${r.cacheHitPath?.status ?? "NOT_EVALUATED"}`);
   console.log(
     r.confirmatory.eligible
-      ? "confirmatory: ELIGIBLE"
-      : `confirmatory: NOT ELIGIBLE — do not report these numbers as confirmatory (${r.confirmatory.reasons.join("; ")})`,
+      ? "technical gates: PASSED"
+      : `technical gates: NOT PASSED — do not report these numbers (${r.confirmatory.reasons.join("; ")})`,
   );
+  console.log(`research status: ${r.researchStatus} (scorer ${r.scorerVersion}); not a pre-registered confirmatory result`);
+  console.log(`analyzer identity with ${ANALYZER_BASELINE.commit.slice(0, 7)}: ${r.analyzerIdentity?.identical ? "IDENTICAL" : `NOT IDENTICAL (${(r.analyzerIdentity?.mismatches ?? []).join(", ")})`}`);
   console.log(`record: ${path.relative(REPO_ROOT, path.join(result.runDir, "run.json"))}`);
   process.exitCode = result.exitCode;
 }
