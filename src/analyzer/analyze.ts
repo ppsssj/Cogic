@@ -2122,6 +2122,34 @@ function buildActiveFileGraph(
       const ctorExpr = node.expression;
       const calleeName = `new ${normalizeCtorName(ctorExpr, sf, checker)}`;
 
+      // `new C(...)` where C names a class: the target is the class declaration and the parameters
+      // come from the constructor signature the checker selected for this call. With an explicit,
+      // inherited or overloaded constructor these are different declarations (the first construct
+      // signature is the constructor, possibly of a base class). Anything else (a variable holding a
+      // constructor, a constructor type) keeps the generic resolution below.
+      const ctorSym = checker.getSymbolAtLocation(ctorExpr);
+      const classSym =
+        ctorSym && ctorSym.flags & ts.SymbolFlags.Alias
+          ? checker.getAliasedSymbol(ctorSym)
+          : ctorSym;
+      const classDecl = classSym?.declarations?.find(ts.isClassDeclaration);
+      if (classDecl) {
+        const classLoc = declLocation(classDecl);
+        if (isTypeScriptLibFile(classLoc.fileName)) {return null;}
+        const resolvedDecl = checker.getResolvedSignature(node)?.getDeclaration();
+        const sigDecl =
+          resolvedDecl &&
+          (ts.isConstructorDeclaration(resolvedDecl) ||
+            ts.isConstructSignatureDeclaration(resolvedDecl))
+            ? resolvedDecl
+            : undefined;
+        if (classLoc.fileName === sf.fileName) {
+          const tgtId = idByDeclPos.get(classLoc.pos);
+          return tgtId ? { tgtId, sigDecl } : null;
+        }
+        return { tgtId: ensureExternalNode(calleeName, classLoc), sigDecl };
+      }
+
       const t = checker.getTypeAtLocation(ctorExpr);
       const declFromSig = t.getConstructSignatures()[0]?.getDeclaration();
 
@@ -2209,6 +2237,11 @@ function buildActiveFileGraph(
   }
 
   // walk bodies with owner tracking
+  const classOwnerId = (cls: ts.Node): string | undefined =>
+    ts.isClassDeclaration(cls) && cls.name
+      ? idByDeclPos.get(declLocation(cls).pos)
+      : undefined;
+
   const walk = (node: ts.Node, ownerId: string) => {
     // owner switches
     if (ts.isFunctionDeclaration(node) && node.name && node.body) {
@@ -2229,6 +2262,33 @@ function buildActiveFileGraph(
       const id = idByDeclPos.get(pos);
       const nextOwner = id ?? ownerId;
       walk(node.body, nextOwner);
+      return;
+    }
+
+    // Constructor bodies and instance field initializers run when an instance is created, so their
+    // owner is the class (constructors are not graph nodes). Parameters, decorators, static fields
+    // and function-valued fields keep the surrounding owner / their own node.
+    if (ts.isConstructorDeclaration(node) && node.body) {
+      const classId = classOwnerId(node.parent);
+      for (const p of node.parameters) {
+        walk(p, ownerId);
+      }
+      walk(node.body, classId ?? ownerId);
+      return;
+    }
+
+    if (
+      ts.isPropertyDeclaration(node) &&
+      node.initializer &&
+      !ts.isArrowFunction(node.initializer) &&
+      !ts.isFunctionExpression(node.initializer) &&
+      !node.modifiers?.some((m) => m.kind === ts.SyntaxKind.StaticKeyword)
+    ) {
+      const classId = classOwnerId(node.parent);
+      const initializer = node.initializer;
+      ts.forEachChild(node, (child) =>
+        walk(child, child === initializer ? (classId ?? ownerId) : ownerId),
+      );
       return;
     }
 
