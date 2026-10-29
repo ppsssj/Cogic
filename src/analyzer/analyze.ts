@@ -2122,6 +2122,34 @@ function buildActiveFileGraph(
       const ctorExpr = node.expression;
       const calleeName = `new ${normalizeCtorName(ctorExpr, sf, checker)}`;
 
+      // `new C(...)` where C names a class: the target is the class declaration and the parameters
+      // come from the constructor signature the checker selected for this call. With an explicit,
+      // inherited or overloaded constructor these are different declarations (the first construct
+      // signature is the constructor, possibly of a base class). Anything else (a variable holding a
+      // constructor, a constructor type) keeps the generic resolution below.
+      const ctorSym = checker.getSymbolAtLocation(ctorExpr);
+      const classSym =
+        ctorSym && ctorSym.flags & ts.SymbolFlags.Alias
+          ? checker.getAliasedSymbol(ctorSym)
+          : ctorSym;
+      const classDecl = classSym?.declarations?.find(ts.isClassDeclaration);
+      if (classDecl) {
+        const classLoc = declLocation(classDecl);
+        if (isTypeScriptLibFile(classLoc.fileName)) {return null;}
+        const resolvedDecl = checker.getResolvedSignature(node)?.getDeclaration();
+        const sigDecl =
+          resolvedDecl &&
+          (ts.isConstructorDeclaration(resolvedDecl) ||
+            ts.isConstructSignatureDeclaration(resolvedDecl))
+            ? resolvedDecl
+            : undefined;
+        if (classLoc.fileName === sf.fileName) {
+          const tgtId = idByDeclPos.get(classLoc.pos);
+          return tgtId ? { tgtId, sigDecl } : null;
+        }
+        return { tgtId: ensureExternalNode(calleeName, classLoc), sigDecl };
+      }
+
       const t = checker.getTypeAtLocation(ctorExpr);
       const declFromSig = t.getConstructSignatures()[0]?.getDeclaration();
 

@@ -1756,4 +1756,214 @@ export function Imports() {
     assert.deepStrictEqual(importRefs, [], "no reference to the imported declaration");
   });
 
+  // --- constructor targets and argument dataflow (EXP-01 CONS-*/DF-CONSTRUCTOR, P1-J3) ---
+  // The constructs/dataflow target of `new C(...)` is the class declaration; the argument indexes come
+  // from the constructor signature the checker selected. With an explicit constructor these differ.
+  function constructorEdges(modules: Record<string, string>, code: string, extraFiles: Record<string, string> = {}) {
+    const { result, edges } = analyzeWithModules(modules, code, extraFiles);
+    const byId = new Map(result.graph.nodes.map((n) => [n.id, n]));
+    const label = (id: string) => {
+      const n = byId.get(id);
+      return n ? `${n.kind}:${n.name.replace(/ \(.*$/, "")}@${path.basename(n.file)}:${n.range.start.line + 1}` : id;
+    };
+    const ctor = result.graph.edges
+      .filter((e) => e.kind === "constructs" || e.kind === "dataflow")
+      .map((e) => {
+        const arg = /@@arg#(\d+)$/.exec(e.id)?.[1];
+        return `${e.kind} ${(byId.get(e.source)?.name ?? e.source).replace(/ \(.*$/, "")} -> ${label(e.target)}${arg === undefined ? "" : `#${arg}`}`;
+      });
+    return { ctor, edges };
+  }
+
+  test("constructors: local explicit, implicit and nested constructors target the class line", () => {
+    const { ctor, edges } = constructorEdges(
+      {},
+      `class Point {
+  constructor(public x: number, public y: number) {}
+}
+
+class Empty {}
+
+class Line {
+  constructor(a: Point, b: Point) {
+    void a;
+    void b;
+  }
+}
+
+function scale(n: number): number {
+  return n * 2;
+}
+
+export function unit(): Line {
+  return new Line(new Point(0, scale(1)), new Point(1, 1));
+}
+
+export function blank(): Empty {
+  return new Empty();
+}
+
+export const shared = new Empty();
+`,
+    );
+    for (const e of [
+      "constructs unit -> class:Line@main.ts:7",
+      "constructs unit -> class:Point@main.ts:1",
+      "dataflow unit -> class:Line@main.ts:7#0",
+      "dataflow unit -> class:Line@main.ts:7#1",
+      "dataflow unit -> class:Point@main.ts:1#0",
+      "dataflow unit -> class:Point@main.ts:1#1",
+      "constructs blank -> class:Empty@main.ts:5",
+      "constructs main.ts -> class:Empty@main.ts:5",
+    ]) {
+      assert.ok(ctor.includes(e), `${e}\n${ctor.join("\n")}`);
+    }
+    assert.ok(!ctor.some((e) => /@main\.ts:(2|8)\b/.test(e)), "nothing targets a constructor line");
+    assert.ok(!ctor.some((e) => e.includes("Empty") && e.startsWith("dataflow")), "implicit constructor: no dataflow");
+    assert.ok(edges.includes("calls unit -> scale") && edges.includes("dataflow unit -> scale"), "nested call kept");
+  });
+
+  test("constructors: imported explicit, implicit and inherited constructors target the class declaration", () => {
+    const { ctor } = constructorEdges(
+      {},
+      `import { Admin, Registry, User } from "./models";
+
+export function bootstrap(): void {
+  void new User("u");
+  void new Admin("root");
+  void new Registry();
+}
+`,
+      {
+        "models.ts": `export class User {
+  constructor(public name: string) {}
+}
+
+export class Admin extends User {}
+
+export class Registry {}
+`,
+      },
+    );
+    for (const e of [
+      "constructs bootstrap -> external:new User@models.ts:1",
+      "dataflow bootstrap -> external:new User@models.ts:1#0",
+      "constructs bootstrap -> external:new Admin@models.ts:5",
+      "dataflow bootstrap -> external:new Admin@models.ts:5#0",
+      "constructs bootstrap -> external:new Registry@models.ts:7",
+    ]) {
+      assert.ok(ctor.includes(e), `${e}\n${ctor.join("\n")}`);
+    }
+    assert.ok(!ctor.some((e) => e.endsWith("@models.ts:2") || e.includes("@models.ts:2#")), "the User constructor line is never a target");
+    assert.ok(!ctor.some((e) => e.includes("Registry") && e.startsWith("dataflow")), "implicit constructor: no dataflow");
+    assert.strictEqual(ctor.filter((e) => e.startsWith("constructs")).length, 3, "one constructs per class");
+  });
+
+  test("constructors: overloads, generics, optional/default and rest parameters use the selected signature", () => {
+    const { ctor } = constructorEdges(
+      {},
+      `class Shape {
+  constructor(size: number);
+  constructor(name: string, size: number);
+  constructor(a: number | string, b?: number) {
+    void a;
+    void b;
+  }
+}
+
+class Box<T> {
+  constructor(public value: T) {}
+}
+
+class Options {
+  constructor(public a = 1, public b?: string) {}
+}
+
+class Bag {
+  constructor(...items: number[]) {
+    void items;
+  }
+}
+
+export function build(): void {
+  void new Shape("s", 2);
+  void new Box<string>("x");
+  void new Options();
+  void new Options(2);
+  void new Bag(1, 2, 3);
+}
+`,
+    );
+    for (const e of [
+      "constructs build -> class:Shape@main.ts:1",
+      "dataflow build -> class:Shape@main.ts:1#0",
+      "dataflow build -> class:Shape@main.ts:1#1",
+      "constructs build -> class:Box@main.ts:10",
+      "dataflow build -> class:Box@main.ts:10#0",
+      "constructs build -> class:Options@main.ts:14",
+      "dataflow build -> class:Options@main.ts:14#0",
+      "constructs build -> class:Bag@main.ts:18",
+      "dataflow build -> class:Bag@main.ts:18#0",
+    ]) {
+      assert.ok(ctor.includes(e), `${e}\n${ctor.join("\n")}`);
+    }
+    assert.ok(!ctor.includes("dataflow build -> class:Options@main.ts:14#1"), "omitted optional parameter has no dataflow");
+    assert.ok(!ctor.some((e) => /Bag@main\.ts:18#[12]/.test(e)), "rest arguments collapse to the rest parameter");
+  });
+
+  test("constructors: negatives, indirect constructor variables and built-ins create no constructs", () => {
+    const { ctor, edges } = constructorEdges(
+      {},
+      `class Widget {
+  static create(): Widget {
+    return new Widget();
+  }
+}
+
+class Gadget {}
+
+class Box<T> {
+  constructor(public value: T) {}
+}
+
+type BoxFactory = new (v: number) => Box<number>;
+
+export function check(v: unknown): boolean {
+  return v instanceof Widget;
+}
+
+export function viaFactory(): Widget {
+  return Widget.create();
+}
+
+export function typeOnly(g: Gadget): Gadget {
+  return g;
+}
+
+export function cloneLike(w: Widget): Widget {
+  return { ...w };
+}
+
+export function notConstructed(): typeof Widget {
+  return Widget;
+}
+
+export function viaVariable(): Box<number> {
+  const Ctor: BoxFactory = Box;
+  return new Ctor(1);
+}
+
+export function builtin(): Map<string, number> {
+  return new Map();
+}
+`,
+    );
+    assert.deepStrictEqual(
+      ctor.filter((e) => e.startsWith("constructs")),
+      ["constructs Widget.create -> class:Widget@main.ts:1"],
+      "only the real instantiation inside create()",
+    );
+    assert.ok(edges.includes("calls viaFactory -> Widget.create"), "static factory stays a call");
+  });
+
 });
