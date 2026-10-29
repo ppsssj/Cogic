@@ -24,7 +24,9 @@ import {
   parseCsv,
   readJson,
   relativeFixturePath,
+  resolveExternalCollision,
   resolveGt,
+  SCORER_VERSION,
   scoreCase,
   toCsv,
   validateGtStructure,
@@ -852,4 +854,171 @@ test("R2 corpus run with one blocked case: summary BLOCKED, diagnostics kept, ot
   const diag = readJson(path.join(tmp, "diagnostics.json"));
   assert.equal(diag.find((x) => x.caseId === victim).blockers[0].code, "node-key-collision");
   fs.rmSync(tmp, { recursive: true, force: true });
+});
+
+// --- R3 (P1-G, scorer 1.2): same-line external declarations -----------------
+// Shapes taken from the first EXP-01 run (P1-F): a .d.ts line holding `useState` and the setter
+// function type of its return tuple, or `useReducer` and its dispatch type. Synthetic data only.
+function extNode(rel, line, startChar, endChar, name, pos) {
+  return {
+    id: `external:${abs(rel)}:${pos}`,
+    kind: "external",
+    name,
+    file: abs(rel),
+    range: { start: { line: line - 1, character: startChar }, end: { line: line - 1, character: endChar } },
+  };
+}
+
+function hookGt(hookLine, hookName) {
+  return {
+    schema: "exp01-gt/1",
+    caseId: "t01",
+    gtVersion: 1,
+    activeFile: "main.ts",
+    nodes: [
+      { id: "file", type: "file", file: "main.ts" },
+      { id: "Comp", type: "callable", file: "main.ts", line: 3, name: "Comp" },
+      { id: "inc", type: "callable", file: "main.ts", line: 5, name: "inc" },
+      { id: "hook", type: "external", file: "shims/react.d.ts", line: hookLine, name: hookName },
+    ],
+    relations: [
+      { id: "R1", kind: "calls", source: "Comp", target: "hook", pattern: "CALL-IMPORT-NAMED", gtStatus: "determinate", evidence: ["main.ts:4"] },
+      { id: "R2", kind: "dataflow", source: "Comp", target: "hook", argIndex: 0, pattern: "DF-POSITIONAL", gtStatus: "determinate", evidence: ["main.ts:4"] },
+    ],
+    negatives: [],
+    excludedSites: [],
+  };
+}
+
+function hookGraph(decl, inner, { ownerAlsoCallsInner = false } = {}) {
+  const file = cnode("file", "main.ts", 1, "main.ts", { pos: 0 });
+  const Comp = cnode("function", "main.ts", 3, "Comp");
+  const inc = cnode("function", "main.ts", 5, "inc");
+  const edges = [
+    cedge("calls", Comp, decl),
+    cedge("dataflow", Comp, decl, { arg: 0 }),
+    cedge("calls", inc, inner),
+    cedge("dataflow", inc, inner, { arg: 0 }),
+    ...(ownerAlsoCallsInner ? [cedge("calls", Comp, inner)] : []),
+  ];
+  return { nodes: [file, Comp, inc, decl, inner], edges };
+}
+
+const verdicts = (rows) => rows.map((r) => `${r.verdict} ${r.key}`).sort();
+
+test("R3 scorer version is 1.2", () => {
+  assert.equal(SCORER_VERSION, "exp01-scorer/1.2");
+});
+
+test("R3 useState declaration and setter function type on one line: resolved, setter relations are FP", () => {
+  const decl = extNode("shims/react.d.ts", 5, 0, 91, "useState (react.d.ts)", 131);
+  const setter = extNode("shims/react.d.ts", 5, 53, 89, "setCount (react.d.ts)", 184);
+  const graph = hookGraph(decl, setter);
+  const before = JSON.stringify(graph);
+  const pred = normalize(graph);
+  assert.deepEqual(pred.collisions, []);
+  assert.equal(pred.resolvedCollisions.length, 1);
+  assert.equal(pred.resolvedCollisions[0].key, "X|shims/react.d.ts|5");
+  assert.equal(pred.resolvedCollisions[0].kept, decl.id);
+  assert.deepEqual(pred.resolvedCollisions[0].rekeyed, [{ id: setter.id, key: "X|shims/react.d.ts|5|c53" }]);
+  const r = scoreCase(resolveGt(hookGt(5, "useState"), catalog), pred, "strict");
+  assert.equal(r.status, "SCORED");
+  assert.deepEqual(r.gtRows.map((g) => g.verdict), ["TP", "TP"]);
+  assert.deepEqual(verdicts(r.predRows), [
+    "FP calls|D|main.ts|5|callable|X|shims/react.d.ts|5|c53",
+    "FP dataflow|D|main.ts|5|callable|X|shims/react.d.ts|5|c53|0",
+    "TP calls|D|main.ts|3|callable|X|shims/react.d.ts|5",
+    "TP dataflow|D|main.ts|3|callable|X|shims/react.d.ts|5|0",
+  ]);
+  assert.equal(JSON.stringify(graph), before, "GraphPayload not modified");
+});
+
+test("R3 useReducer declaration and dispatch function type on one line: resolved", () => {
+  const decl = extNode("shims/react.d.ts", 6, 0, 116, "useReducer (react.d.ts)", 224);
+  const dispatch = extNode("shims/react.d.ts", 6, 95, 114, "dispatch (react.d.ts)", 319);
+  const pred = normalize(hookGraph(decl, dispatch));
+  assert.deepEqual(pred.collisions, []);
+  assert.deepEqual(pred.resolvedCollisions[0].rekeyed, [{ id: dispatch.id, key: "X|shims/react.d.ts|6|c95" }]);
+  const r = scoreCase(resolveGt(hookGt(6, "useReducer"), catalog), pred, "strict");
+  assert.equal(r.status, "SCORED");
+  assert.equal(r.gtRows.filter((g) => g.verdict === "TP").length, 2);
+  assert.equal(r.predRows.filter((p) => p.verdict === "FP").length, 2);
+});
+
+test("R3 unique enclosing declaration with several inner nodes: all distinct keys", () => {
+  const decl = extNode("shims/x.d.ts", 2, 0, 120, "decl (x.d.ts)", 10);
+  const i1 = extNode("shims/x.d.ts", 2, 40, 60, "i1 (x.d.ts)", 50);
+  const i2 = extNode("shims/x.d.ts", 2, 80, 100, "i2 (x.d.ts)", 90);
+  const pred = normalize({ nodes: [decl, i1, i2], edges: [] });
+  assert.deepEqual(pred.collisions, []);
+  assert.deepEqual(pred.resolvedCollisions[0].rekeyed.map((x) => x.key).sort(), ["X|shims/x.d.ts|2|c40", "X|shims/x.d.ts|2|c80"]);
+});
+
+test("R3 fail-closed: no enclosing node, equal candidates, partial overlap and missing range stay blocked", () => {
+  const groups = {
+    "no enclosing node": [extNode("shims/x.d.ts", 2, 0, 30, "a", 10), extNode("shims/x.d.ts", 2, 40, 80, "b", 50)],
+    "two equal candidates": [extNode("shims/x.d.ts", 2, 0, 30, "a", 10), extNode("shims/x.d.ts", 2, 0, 30, "b", 11)],
+    "partial overlap": [extNode("shims/x.d.ts", 2, 0, 50, "a", 10), extNode("shims/x.d.ts", 2, 40, 80, "b", 50)],
+    "missing range": [extNode("shims/x.d.ts", 2, 0, 90, "a", 10), { ...extNode("shims/x.d.ts", 2, 40, 80, "b", 50), range: { start: { line: 1, character: 40 } } }],
+  };
+  for (const [name, nodes] of Object.entries(groups)) {
+    const { pred, r } = scoreGraph({ nodes: [...Object.values(baseGraph()), ...nodes], edges: [] });
+    assert.deepEqual(pred.resolvedCollisions, [], name);
+    assert.deepEqual(pred.collisions.map((c) => c.key), ["X|shims/x.d.ts|2"], name);
+    assert.equal(r.status, "SCORING_BLOCKED", name);
+    assert.deepEqual(r.blockers.map((b) => b.code), ["node-key-collision"], name);
+  }
+});
+
+test("R3 fail-closed: non-external collisions are not resolved, even with nested ranges", () => {
+  const n = baseGraph();
+  const outer = { ...cnode("function", "main.ts", 1, "a2", { pos: 105 }), range: { start: { line: 0, character: 0 }, end: { line: 0, character: 90 } } };
+  const inner = { ...n.a, range: { start: { line: 0, character: 10 }, end: { line: 0, character: 20 } } };
+  const { pred, r } = scoreGraph({ nodes: [n.file, inner, outer, n.b, n.C, n.ext], edges: [] });
+  assert.deepEqual(pred.resolvedCollisions, []);
+  assert.deepEqual(pred.collisions.map((c) => c.key), ["D|main.ts|1|callable"]);
+  assert.equal(r.status, "SCORING_BLOCKED");
+  assert.equal(resolveExternalCollision("D|main.ts|1|callable", [outer, inner], new Set()), null);
+  const moduleNode = { ...extNode("lib.ts", 1, 0, 10, "module (lib.ts)", 0), id: `external:${abs("lib.ts")}:-1` };
+  assert.equal(resolveExternalCollision("X|lib.ts|1", [moduleNode, extNode("lib.ts", 1, 2, 5, "m", 3)], new Set()), null);
+});
+
+test("R3 re-keying never creates a duplicate key", () => {
+  const decl = extNode("shims/x.d.ts", 2, 0, 120, "decl", 10);
+  const sameColumn = [decl, extNode("shims/x.d.ts", 2, 53, 60, "i1", 60), extNode("shims/x.d.ts", 2, 53, 89, "i2", 61)];
+  const pred = normalize({ nodes: sameColumn, edges: [] });
+  assert.deepEqual(pred.resolvedCollisions, []);
+  assert.deepEqual(pred.collisions.map((c) => c.key), ["X|shims/x.d.ts|2"]);
+  const inner = extNode("shims/x.d.ts", 2, 53, 89, "i", 62);
+  assert.equal(resolveExternalCollision("X|shims/x.d.ts|2", [decl, inner], new Set(["X|shims/x.d.ts|2|c53"])), null);
+  const ok = normalize({ nodes: [decl, inner, extNode("shims/y.d.ts", 2, 0, 5, "y", 1)], edges: [] });
+  assert.deepEqual(ok.collisions, []);
+  assert.equal(ok.resolvedCollisions.length, 1);
+});
+
+test("R3 no fake TP when the same owner calls the declaration and the inner function type", () => {
+  const decl = extNode("shims/react.d.ts", 5, 0, 91, "useState (react.d.ts)", 131);
+  const setter = extNode("shims/react.d.ts", 5, 53, 89, "setCount (react.d.ts)", 184);
+  const graph = hookGraph(decl, setter, { ownerAlsoCallsInner: true });
+  const pred = normalize(graph);
+  const declCall = pred.relations.find((p) => p.key === "calls|D|main.ts|3|callable|X|shims/react.d.ts|5");
+  assert.deepEqual(declCall.cogicIds, [cedge("calls", graph.nodes[1], decl).id], "the TP relation carries only the declaration call");
+  const r = scoreCase(resolveGt(hookGt(5, "useState"), catalog), pred, "strict");
+  assert.ok(r.predRows.some((p) => p.verdict === "FP" && p.key === "calls|D|main.ts|3|callable|X|shims/react.d.ts|5|c53"));
+  assert.equal(r.gtRows.filter((g) => g.verdict === "TP").length, 2);
+});
+
+test("R3 collision-free graphs normalize exactly as before (every key is cogicNodeKey)", () => {
+  const root = "C:/synthetic/root";
+  for (const dir of listCaseDirs(corpus)) {
+    const gt = readJson(path.join(dir, "expected.json"));
+    const graph = graphFromGt(gt, root);
+    const keys = new Set(graph.nodes.map((n) => cogicNodeKey(n, root)));
+    const pred = normalizeCogicGraph(graph, { fixtureRoot: root, caseId: gt.caseId });
+    assert.deepEqual(pred.resolvedCollisions, [], gt.caseId);
+    for (const p of pred.relations) {
+      assert.ok(keys.has(p.srcKey), `${gt.caseId} ${p.key}`);
+      assert.ok(p.tgtKey === null || keys.has(p.tgtKey), `${gt.caseId} ${p.key}`);
+    }
+  }
 });
