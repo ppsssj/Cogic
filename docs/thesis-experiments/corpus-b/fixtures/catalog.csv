@@ -1,0 +1,144 @@
+patternId,category,kind,polarity,support,description,codeEvidence,p0Reference,notes
+CALL-LOCAL-FN,calls,calls,positive,supported,같은 파일 함수 선언 또는 화살표 함수 변수 직접 호출,analyze.ts:2187-2225 walk; :2020-2093 resolveCallTarget,§5.1 calls row1,
+CALL-TOPLEVEL,calls,calls,positive,supported,모듈 최상위 문장에서의 호출(owner = file),analyze.ts:2317 walk(sf fileNodeId),—,P0 카탈로그에 없음. 코드상 처리 경로 존재
+CALL-RECURSIVE,calls,calls,positive,supported,자기 자신 호출(재귀),analyze.ts:2237-2238 addEdge(owner->tgt),—,
+CALL-NESTED-LOCAL-FN,calls,calls,positive,supported,함수 내부에 선언된 지역 함수 호출,analyze.ts:1388-1445 visitDecls(parentId),—,
+CALL-METHOD-THIS,calls,calls,positive,supported,this.method() 호출,analyze.ts:2036-2038 getResolvedSignature,§5.1 calls row2,
+CALL-METHOD-STATIC,calls,calls,positive,supported,Class.staticMethod() 호출,analyze.ts:2036-2038,§5.1 calls row2,
+CALL-METHOD-INSTANCE,calls,calls,positive,supported,같은 파일 클래스 인스턴스 메서드 호출,analyze.ts:2036-2038,§5.1 calls row2,
+CALL-SUPER-METHOD,calls,calls,positive,supported,super.method() 호출,analyze.ts:2036-2038,—,P0 카탈로그에 없음. 코드상 처리 경로 존재
+CALL-OBJ-LITERAL-METHOD,calls,calls,positive,supported,객체 리터럴 메서드 호출(obj.m()),analyze.ts:1333 visitObjectLiteralMembers,—,기존 테스트 존재
+CALL-IMPORT-NAMED,calls,calls,positive,supported,named import 함수 호출 -> external,analyze.ts:2084-2088 ensureExternalNode,§5.1 calls row3,
+CALL-IMPORT-DEFAULT,calls,calls,positive,supported,default import 함수 호출 -> external,analyze.ts:2084-2088,§5.1 calls row3,
+CALL-IMPORT-NAMESPACE,calls,calls,positive,supported,namespace import 멤버 호출 -> external,analyze.ts:2084-2088,§5.1 calls row3,
+CALL-BARREL,calls,calls,positive,supported,barrel re-export 경유 호출,analyze.ts:2036-2041 (alias 해석은 TypeChecker),§5.1 calls row4,기존 테스트 존재
+CALL-PATH-ALIAS,calls,calls,positive,supported,tsconfig paths alias 경유 호출,analyze.ts:473 buildWorkspaceRoots,§5.1 calls row4,기존 테스트 존재
+CALL-OPTIONAL,calls,calls,positive,supported,optional call a?.() / obj?.m(),analyze.ts:2234 (CallExpression 공통 경로),§5.1 calls row5,P0: supported 추정 -> 검증 대상
+CALL-GENERIC,calls,calls,positive,supported,generic 함수 호출,analyze.ts:2036-2038,§5.1 calls row6,P0: supported 추정
+CALL-OVERLOAD-LOCAL,calls,calls,positive,supported,같은 파일 overload 함수 호출(정답 대상 = 구현 노드),analyze.ts:2036-2082,§5.1 calls row6,P0: supported 추정. P1-A 코드 읽기상 의문점 있음(p1a-ground-truth.md §8 D2)
+CALL-JSX-LOCAL,calls,calls,positive,supported,같은 파일 JSX 컴포넌트 사용,analyze.ts:2244-2248 (label jsx),§5.1 calls row10,
+CALL-JSX-IMPORT,calls,calls,positive,supported,import한 JSX 컴포넌트 사용 -> external,analyze.ts:1878 resolveJsxTarget,§5.1 calls row10,
+CALL-DYNAMIC-IMPORT,calls,calls,positive,supported,import("./m") -> module 노드,analyze.ts:2022-2035,§5.1 calls row11,
+CALL-DYNAMIC-MODULE-MEMBER,calls,calls,positive,supported,dynamic import 결과 모듈의 함수 호출,analyze.ts:2036-2088,—,
+CALL-METHOD-EXTERNAL,calls,calls,positive,supported,다른 파일 클래스/shim 인터페이스 메서드 호출 -> external,analyze.ts:2084-2088,—,
+CALL-IN-ANON-CALLBACK,calls,calls,positive,supported,익명 콜백 내부 호출(owner = 가장 가까운 이름 있는 owner),analyze.ts:2214-2225 (id ?? ownerId),—,
+CALL-FW-API,calls,calls,positive,supported,프레임워크 API 함수 호출(useState/ref/express()/app.get 등) -> external(shim),analyze.ts:2084-2088,—,
+CALL-DECORATOR-CLASS,calls,calls,positive,supported,클래스 데코레이터 팩토리 호출(owner = file),analyze.ts:2315 forEachChild (class 수식어 순회),—,P0 카탈로그에 없음
+CALL-LIB,calls,calls,positive,unsupported-by-design,TypeScript lib 선언 함수 호출,analyze.ts:2060 isTypeScriptLibFile,§5.1 calls row9,
+CALL-CTOR-BODY,calls,calls,positive,unsupported-by-design,생성자 본문 내부 호출(owner = class),analyze.ts:2187-2225 (constructor owner 전환 없음),—,P0 카탈로그에 없음. 코드상 class owner 경로 없음
+CALL-FIELD-INIT,calls,calls,positive,unsupported-by-design,클래스 필드 초기화식 내부 호출(owner = class),analyze.ts:2187-2225,—,P0 카탈로그에 없음
+CALL-DECORATOR-METHOD,calls,calls,positive,unsupported-by-design,메서드 데코레이터 팩토리 호출(owner = file),analyze.ts:2197-2207 (메서드는 body만 순회),—,P0 카탈로그에 없음
+CALL-ELEMENT-LITERAL,calls,calls,positive,ambiguous,obj["literal"]() 상수 키 요소 접근 호출,analyze.ts:2036-2041,§5.1 calls row7,정답은 결정 가능(determinate)
+CALL-ELEMENT-DYNAMIC,calls,calls,positive,ambiguous,obj[key]() 런타임 키 요소 접근 호출,analyze.ts:2036-2041,§5.1 calls row7,정답 결정 불가(indeterminate)
+CALL-FN-CALL-APPLY-BIND,calls,calls,positive,ambiguous,fn.call/apply/bind 경유 호출,analyze.ts:2036-2041,§5.1 calls row7,
+CALL-PARAM-CALLBACK,calls,calls,positive,ambiguous,함수 파라미터로 받은 값을 호출,analyze.ts:2036-2041,—,정답 결정 불가(indeterminate)
+CALL-INTERFACE-DISPATCH,calls,calls,positive,ambiguous,인터페이스/상위 타입을 통한 동적 디스패치 호출,analyze.ts:2036-2041,—,정답 결정 불가(indeterminate)
+CALL-VARIABLE-ALIAS,calls,calls,positive,ambiguous,함수를 담은 지역 변수/필드 경유 호출,analyze.ts:2036-2041,—,
+CONS-LOCAL-IMPLICIT-CTOR,constructs,constructs,positive,supported,new LocalClass() (명시적 constructor 없음),analyze.ts:2095-2128; :2254,§5.1 constructs,
+CONS-LOCAL-EXPLICIT-CTOR,constructs,constructs,positive,supported,new LocalClass() (명시적 constructor 있음),analyze.ts:2095-2128; :2254,§5.1 constructs,P1-A 코드 읽기상 의문점 있음(p1a-ground-truth.md §8 D3)
+CONS-IMPORTED-IMPLICIT-CTOR,constructs,constructs,positive,supported,new ImportedClass() (명시적 constructor 없음) -> external,analyze.ts:2095-2128,§5.1 constructs,
+CONS-IMPORTED-EXPLICIT-CTOR,constructs,constructs,positive,supported,new ImportedClass() (명시적 constructor 있음) -> external,analyze.ts:2095-2128,§5.1 constructs,P1-A 코드 읽기상 의문점 있음(p1a-ground-truth.md §8 D3)
+CONS-INHERITED-CTOR,constructs,constructs,positive,supported,상속받은 constructor를 쓰는 하위 클래스 생성,analyze.ts:2095-2128,§5.1 constructs,
+CONS-GENERIC,constructs,constructs,positive,supported,new Box<T>() generic 클래스 생성,analyze.ts:2095-2128,§5.1 constructs,
+CONS-TOPLEVEL,constructs,constructs,positive,supported,모듈 최상위 new(owner = file),analyze.ts:2317,—,
+CONS-IN-ANON-CALLBACK,constructs,constructs,positive,supported,익명 콜백 내부 new,analyze.ts:2214-2225,—,
+CONS-CTOR-BODY,constructs,constructs,positive,unsupported-by-design,생성자 본문 내부 new(owner = class),analyze.ts:2187-2225,—,P0 카탈로그에 없음
+CONS-FIELD-INIT,constructs,constructs,positive,unsupported-by-design,클래스 필드 초기화식 new(owner = class),analyze.ts:2187-2225,—,P0 카탈로그에 없음
+CONS-VIA-VARIABLE,constructs,constructs,positive,ambiguous,생성자를 담은 변수로 new,analyze.ts:2099-2104,—,
+CONS-LIB,constructs,constructs,positive,unsupported-by-design,TypeScript lib 클래스 생성(new Map()),analyze.ts:2110 isTypeScriptLibFile,—,
+REF-TYPE-ANNOTATION,references,references,positive,supported,파라미터/반환/변수 타입 위치에서 같은 파일 타입·클래스 사용,analyze.ts:1912-1972 addReferenceEdgesForOwner,§5.1 references row2,P0: supported 추정 -> 검증 대상
+REF-TYPE-MEMBER,references,references,positive,supported,interface/type 멤버 타입에서 다른 타입 사용,analyze.ts:1912-1972,§5.1 references row2,
+REF-HERITAGE,references,references,positive,supported,extends/implements 절,analyze.ts:1912-1972,—,
+REF-ENUM-MEMBER,references,references,positive,supported,Enum.Member 값 사용,analyze.ts:1912-1972,—,
+REF-TYPEOF-QUERY,references,references,positive,supported,typeof X 타입 쿼리,analyze.ts:1912-1972,—,
+REF-VALUE-FN,references,references,positive,supported,같은 파일 함수를 값으로 전달·반환·대입,analyze.ts:1912-1972,§5.1 references row1,기존 테스트 존재
+REF-METHOD-VALUE,references,references,positive,supported,호출하지 않는 메서드 멤버 접근(obj.m),analyze.ts:1925-1934,—,기존 테스트 존재
+REF-RECEIVER,references,references,positive,supported,멤버 접근의 수신 객체로 쓰인 같은 파일 선언(Cls.create() / fn.bind()),analyze.ts:1912-1972,—,
+REF-CLASS-VALUE,references,references,positive,supported,클래스를 값으로 사용(return Cls / instanceof Cls),analyze.ts:1912-1972,—,
+REF-FIELD-INIT,references,references,positive,supported,클래스 필드 초기화식의 같은 파일 선언 참조(owner = class),analyze.ts:1709-1717 (PropertyDeclaration은 경계 아님),—,
+REF-STATE-READ,references,references,positive,supported,상태 hook 변수 읽기 -> state-source,analyze.ts:1720-1735 resolveLocalNodeIdForDeclaration,—,
+REF-STATE-WRITE,references,references,positive,supported,상태 변수 쓰기 대상의 식별자 -> state-source,analyze.ts:1720-1735,—,
+REF-STATE-SETTER-VALUE,references,references,positive,supported,상태 setter를 호출하지 않고 값으로 사용 -> state-source,analyze.ts:1720-1735,—,
+REF-SHORTHAND-PROPERTY,references,references,positive,supported,객체 리터럴 shorthand { a } 의 값 참조,analyze.ts:1912-1972,—,supported 추정 -> 검증 대상(shorthand 심볼 해석)
+REF-TOPLEVEL,references,references,positive,unsupported-by-design,모듈 최상위 값 참조(owner = file),analyze.ts:2182 (file 노드는 ownerDeclById에 없음),—,P0 카탈로그에 없음
+REF-IN-ANON-CALLBACK,references,references,positive,unsupported-by-design,익명 콜백 내부 참조(owner = 가장 가까운 이름 있는 owner),analyze.ts:1709-1717 (모든 화살표 함수가 경계),—,P0 카탈로그에 없음
+REF-CROSS-FILE,references,references,positive,unsupported-by-design,다른 파일 심볼 참조,analyze.ts:1955,§5.1 references row3,
+REF-LIB,references,references,positive,unsupported-by-design,TypeScript lib 타입/값 참조,analyze.ts:1955,—,
+REF-UNSUPPORTED-STATE,references,references,positive,unsupported-by-design,비지원 API로 만든 상태(shallowReactive 등) 참조,adapters/vue.ts:16-21,—,
+DF-POSITIONAL,dataflow,dataflow,positive,supported,위치 인자 -> 같은 위치 파라미터,analyze.ts:1999-2017,§5.1 dataflow row1,
+DF-OPTIONAL-PARAM,dataflow,dataflow,positive,supported,선택/기본값 파라미터에 실제 전달된 인자,analyze.ts:2009 Math.min,§5.1 dataflow row2,
+DF-DESTRUCTURED-PARAM,dataflow,dataflow,positive,supported,구조분해 파라미터(파라미터 단위),analyze.ts:1999-2017,§5.1 dataflow row4,
+DF-CONSTRUCTOR,dataflow,dataflow,positive,supported,생성자 인자 -> 생성자 파라미터(대상 = 클래스),analyze.ts:2255-2260,§5.1 dataflow row5,
+DF-INHERITED-CTOR,dataflow,dataflow,positive,supported,상속받은 생성자 파라미터로 가는 인자(대상 = 하위 클래스),analyze.ts:2255-2260,—,
+DF-EXTERNAL,dataflow,dataflow,positive,supported,다른 파일/shim 함수·메서드로 가는 인자,analyze.ts:1999-2017,—,
+DF-REST-PARAM,dataflow,dataflow,positive,ambiguous,rest 파라미터로 모이는 인자,analyze.ts:2009 Math.min,§5.1 dataflow row3,P0: ambiguous/검증 대상. 정답은 결정 가능
+DF-SPREAD-TUPLE,dataflow,dataflow,positive,ambiguous,튜플 spread 인자,analyze.ts:2009,§5.1 dataflow row3,정답은 결정 가능
+DF-SPREAD-REST,dataflow,dataflow,positive,ambiguous,배열 spread -> rest 파라미터,analyze.ts:2009,§5.1 dataflow row3,정답은 결정 가능
+DF-INDIRECT,dataflow,dataflow,positive,ambiguous,요소 접근/별칭/call·apply·bind 경유 인자 전달,analyze.ts:1999-2017,—,
+DF-LIB,dataflow,dataflow,positive,unsupported-by-design,TypeScript lib 함수로 가는 인자,analyze.ts:2060,—,
+DF-CTOR-BODY,dataflow,dataflow,positive,unsupported-by-design,생성자 본문 내부 호출의 인자(owner = class),analyze.ts:2187-2225,—,
+DF-FIELD-INIT,dataflow,dataflow,positive,unsupported-by-design,클래스 필드 초기화식 호출의 인자(owner = class),analyze.ts:2187-2225,—,
+DF-DECORATOR-METHOD,dataflow,dataflow,positive,unsupported-by-design,메서드 데코레이터 팩토리 인자,analyze.ts:2197-2207,—,
+UPD-REACT-SETTER,updates,updates,positive,supported,React useState setter 호출,analyze.ts:2045-2056,§5.1 updates row1,
+UPD-REACT-SETTER-FN,updates,updates,positive,supported,React setter 함수형 업데이트 setX(prev => …),analyze.ts:2045-2056,§5.1 updates row1,
+UPD-REACT-DISPATCH,updates,updates,positive,supported,React useReducer dispatch 호출,analyze.ts:2045-2056,§5.1 updates row1,
+UPD-VUE-REF,updates,updates,positive,supported,Vue ref .value 대입/복합대입/증감,analyze.ts:2263-2310,§5.1 updates row2,
+UPD-VUE-REACTIVE-PROP,updates,updates,positive,supported,Vue reactive 객체 속성 대입,analyze.ts:2263-2310,§5.1 updates row2,
+UPD-UNSUPPORTED-STATE,updates,updates,positive,unsupported-by-design,비지원 상태 API(shallowReactive) 속성 대입,adapters/vue.ts:16-21,—,
+FW-REACT-CALLBACK-INLINE,react-hook-owner,owner,positive,supported,useEffect/useLayoutEffect/useMemo/useCallback 인라인 콜백 owner,adapters/react.ts:8-14; analyze.ts:1280-1330,§5.1 react row1,
+FW-REACT-CALLBACK-NAMED,react-hook-owner,owner,positive,supported,이름 있는 함수를 hook 인자로 전달(synthetic owner + calls),analyze.ts:1315-1327,§5.1 react row3,
+FW-REACT-NAMED-CALLBACK-CALL,react-hook-owner,calls,positive,supported,이름 있는 hook 인자 함수에 대한 synthetic owner -> 함수 calls,analyze.ts:1315-1327; :1820-1876,§5.1 react row3,
+FW-REACT-STATE-SOURCE,react-hook-owner,owner,positive,supported,useState/useReducer 상태 source 노드,adapters/react.ts:16; analyze.ts:1190-1277,§5.1 updates row1,
+FW-REACT-REDUCER-BINDING,react-hook-owner,references,positive,supported,useReducer 상태 source -> reducer 함수(references),analyze.ts:1257-1264,—,프레임워크 관계 정의는 ANNOTATION_GUIDE §5
+FW-REACT-ALIAS-IMPORT,react-hook-owner,owner,positive,supported,alias import한 React hook(useState as useLocalState),adapters/react.ts:41-97,§5.1 react row2,기존 테스트 존재
+FW-REACT-NAMESPACE-IMPORT,react-hook-owner,owner,positive,supported,namespace import한 React hook(React.useEffect),adapters/react.ts:84-94,§5.1 react row2,기존 테스트 존재
+FW-VUE-CALLBACK,vue-hook-owner,owner,positive,supported,computed/watch(2번째 인자)/watchEffect 콜백 owner,adapters/vue.ts:8-14; :112,§5.1 vue row1,
+FW-VUE-STATE-SOURCE,vue-hook-owner,owner,positive,supported,ref/shallowRef/customRef/reactive 상태 source 노드,adapters/vue.ts:16-21,§5.1 vue row1,
+FW-VUE-NAMESPACE-IMPORT,vue-hook-owner,owner,positive,supported,namespace import한 Vue API(Vue.ref / Vue.computed),adapters/vue.ts:82-95,§5.1 vue row1,
+FW-VUE-STATE-UNSUPPORTED,vue-hook-owner,owner,positive,unsupported-by-design,shallowReactive 상태 source 노드,adapters/vue.ts:16-21 (목록 밖),—,P0 카탈로그에 없음
+FW-VUE-LIFECYCLE,vue-hook-owner,owner,positive,unsupported-by-design,onMounted 등 lifecycle 콜백 owner,adapters/vue.ts:8-14 (목록 밖),—,P0 카탈로그에 없음
+FW-EXPRESS-INLINE,express-route-owner,owner,positive,supported,app.METHOD(path / inline handler) route owner,adapters/express.ts:136-165; analyze.ts:1300-1311,§5.1 express row1,
+FW-EXPRESS-NAMED,express-route-owner,owner,positive,supported,app.METHOD(path / namedHandler) route owner(+calls handler),analyze.ts:1315-1327,§5.1 express row1,
+FW-EXPRESS-HANDLER-CALL,express-route-owner,calls,positive,supported,route owner -> 첫 번째 이름 있는 handler calls,analyze.ts:1315-1327; :1820-1876,§5.1 express row1,
+FW-EXPRESS-MIDDLEWARE,express-route-owner,owner,positive,supported,app.use(fn) middleware owner,adapters/express.ts:150-157,§5.1 express row1,
+FW-EXPRESS-MOUNT,express-route-owner,owner,positive,supported,app.use(path / router) mount owner,adapters/express.ts:150-157,§5.1 express row1,
+FW-EXPRESS-ROUTER,express-route-owner,owner,positive,supported,Router() 인스턴스의 route owner,adapters/express.ts:82-93,§5.1 express row1,
+FW-EXPRESS-EXTRA-HANDLER,express-route-owner,calls,positive,unsupported-by-design,두 번째 이후 handler 호출 관계,adapters/express.ts:150-157 (callbackArgIndex 1개),§5.1 express row2,
+FW-EXPRESS-TOPLEVEL,express-route-owner,owner,positive,unsupported-by-design,모듈 최상위 route 등록,analyze.ts:1389 (visitHookCallback은 parentId 필요),§5.1 express row1,P0는 supported로 분류. 최상위 등록은 코드 경로 없음(p1a-ground-truth.md §8 D1)
+FW-EXPRESS-ROUTE-CHAIN,express-route-owner,owner,positive,unsupported-by-design,app.route(path).METHOD(handler),adapters/express.ts:95-114,§5.1 express row3,
+FW-EXPRESS-IMPORTED-APP,express-route-owner,owner,positive,unsupported-by-design,다른 모듈에서 import한 app의 route,adapters/express.ts:95-114,§5.1 express row3,
+FW-NEST-ROUTE,nest-route-owner,owner,positive,supported,@Controller 클래스의 @Get/@Post 등 route owner(+calls method),adapters/nest.ts:166-183; analyze.ts:1469-1486,§5.1 nest row1,
+FW-NEST-NAMESPACE,nest-route-owner,owner,positive,supported,namespace import 데코레이터(common.Get),adapters/nest.ts:85-92,§5.1 nest row3,
+FW-NEST-HANDLER-CALL,nest-route-owner,calls,positive,supported,Nest route owner -> 메서드 calls,analyze.ts:1482-1486; :2178-2180,§5.1 nest row1,
+FW-UNSUPPORTED-OWNER-EDGE,framework,any,positive,unsupported-by-design,비지원 framework owner 노드에서 나가는 관계(owner 자체가 비지원),—,—,끝점이 비지원 노드면 관계도 unsupported-by-design(ANNOTATION_GUIDE §6.4)
+NEG-CALLBACK-PASS,calls,calls,negative,,함수를 전달만 하고 호출하지 않음 -> calls 아님,,§5.1 calls row8,
+NEG-TYPEOF,calls,calls,negative,,typeof 타입 쿼리는 호출이 아님,,—,
+NEG-COMMENT-STRING,calls,calls,negative,,주석/문자열 안의 이름,,—,
+NEG-SHADOW,calls,calls,negative,,같은 이름의 지역 선언/파라미터가 가림,,—,
+NEG-PROPERTY-NAME,references,references,negative,,같은 이름의 객체 속성 접근,,—,
+NEG-JSX-INTRINSIC,calls,calls,negative,,div/h1 등 intrinsic JSX 요소는 컴포넌트 호출이 아님,,—,
+NEG-JSX-PROPS,dataflow,dataflow,negative,,JSX 속성은 dataflow 정의(호출 인자)에 해당하지 않음,,—,
+NEG-INSTANCEOF,constructs,constructs,negative,,instanceof 검사는 생성이 아님,,—,
+NEG-STATIC-FACTORY,constructs,constructs,negative,,정적 팩토리 호출자는 직접 생성하지 않음,,—,
+NEG-TYPE-ONLY,constructs,constructs,negative,,타입 위치 사용은 생성이 아님,,—,
+NEG-SPREAD-COPY,constructs,constructs,negative,,객체 spread 복사는 생성이 아님,,—,
+NEG-CLASS-VALUE,constructs,constructs,negative,,클래스를 값으로 반환/대입만 함,,—,
+NEG-ZERO-ARGS,dataflow,dataflow,negative,,인자 없는 호출은 dataflow 없음,,§5.1 dataflow,
+NEG-DEFAULT-OMITTED,dataflow,dataflow,negative,,생략된 기본값 파라미터로는 dataflow 없음,,§5.1 dataflow row2,
+NEG-READ-ONLY,updates,updates,negative,,상태를 읽기만 하는 owner는 updates 없음,,—,
+NEG-SHADOW-STATE,updates,updates,negative,,같은 이름 지역 변수 수정은 상태 갱신 아님,,—,
+NEG-NOT-SETTER,updates,updates,negative,,setter와 이름만 비슷한 일반 함수 호출,,—,
+NEG-SETTER-AS-VALUE,updates,updates,negative,,setter를 반환/전달만 하고 호출하지 않음,,—,
+NEG-COPY-MUTATION,updates,updates,negative,,상태의 복사본 수정은 상태 갱신 아님,,—,
+NEG-USEREF,react-hook-owner,owner,negative,,useRef는 상태 source가 아님,,§5.1 react row4,
+NEG-USECONTEXT,react-hook-owner,owner,negative,,useContext는 콜백 owner/상태 source가 아님,,§5.1 react row4,
+NEG-CUSTOM-HOOK,react-hook-owner,owner,negative,,사용자 정의 hook 호출은 React 콜백 owner가 아님,,§5.1 react row4,
+NEG-CREATECONTEXT,react-hook-owner,owner,negative,,createContext는 hook owner가 아님,,—,
+NEG-NON-FRAMEWORK-MODULE,react-hook-owner,owner,negative,,프레임워크가 아닌 모듈에서 가져온 같은 이름 함수,,—,범주는 사례의 framework 필드로 정한다
+NEG-VUE-NOT-STATE,vue-hook-owner,owner,negative,,Vue가 아닌 모듈의 ref/reactive는 상태 source가 아님,,—,
+NEG-NOT-EXPRESS,express-route-owner,owner,negative,,Express app이 아닌 객체의 get(),,—,
+NEG-EXPRESS-NONROUTE,express-route-owner,owner,negative,,listen/set/param/get(setting) 등 route가 아닌 호출,,—,
+NEG-NEST-NO-ROUTE-DECORATOR,nest-route-owner,owner,negative,,route 데코레이터 없는 메서드,,—,
+NEG-NEST-NOT-CONTROLLER,nest-route-owner,owner,negative,,@Controller 없는 클래스의 route 데코레이터,,§5.1 nest row2,
+NEG-NEST-LOCAL-DECORATOR,nest-route-owner,owner,negative,,@nestjs/common이 아닌 같은 이름 데코레이터,,—,
+VUE-SFC,vue-hook-owner,owner,excluded,unsupported-by-design,.vue Single File Component,analyzer 탐색 glob 밖,§5.1 vue row2,정량 평가에서 제외. 파일 형식 지원 범위 한계로만 기록(fixture 없음)

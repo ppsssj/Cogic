@@ -1,0 +1,78 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "bn04-file-schema",
+  "repo": "brocoders/nestjs-boilerplate",
+  "url": "https://github.com/brocoders/nestjs-boilerplate",
+  "commit": "9620f159eefe38f47747d02ab162852367c5472c",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "tsconfig.json",
+    "derivedOptions": {
+      "target": "ES2021",
+      "module": "commonjs",
+      "strictNullChecks": true,
+      "noImplicitAny": true,
+      "strictBindCallApply": false,
+      "strictPropertyInitialization": false,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "lib": [
+        "ES2021"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "module": "commonjs",
+      "declaration": true,
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "ES2021",
+      "sourceMap": true,
+      "outDir": "./dist",
+      "incremental": true,
+      "skipLibCheck": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": false,
+      "noImplicitAny": true,
+      "strictBindCallApply": false,
+      "forceConsistentCasingInFileNames": false,
+      "noFallthroughCasesInSwitch": false,
+      "esModuleInterop": true
+    }
+  },
+  "activeFile": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+  "upstreamActiveFile": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+  "files": [
+    {
+      "path": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+      "sha256": "f3e71540627003989f1b6db04838abd46eee362ec4bf583eff33f1c66c7ea3fa",
+      "bytes": 512
+    },
+    {
+      "path": "src/utils/document-entity-helper.ts",
+      "upstreamPath": "src/utils/document-entity-helper.ts",
+      "sha256": "eaa5fce9587853883028d7419d21af52f3a24aa3d9235a87deb4321f77d67f24",
+      "bytes": 392
+    }
+  ],
+  "thirdPartyModules": [
+    "@nestjs/mongoose",
+    "class-transformer",
+    "mongoose"
+  ],
+  "importEdges": [
+    {
+      "from": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+      "spec": "../../../../../utils/document-entity-helper",
+      "to": "src/utils/document-entity-helper.ts"
+    }
+  ]
+}

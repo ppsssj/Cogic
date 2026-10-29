@@ -1,0 +1,149 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "be05-usercontroller",
+  "gtVersion": 1,
+  "activeFile": "src/api/user/userController.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/api/user/userController.ts"
+    },
+    {
+      "id": "C_UserController_5",
+      "type": "class",
+      "file": "src/api/user/userController.ts",
+      "line": 5,
+      "name": "UserController"
+    },
+    {
+      "id": "F_getUsers_6",
+      "type": "callable",
+      "file": "src/api/user/userController.ts",
+      "line": 6,
+      "name": "getUsers"
+    },
+    {
+      "id": "X_findAll_userService_ts_16",
+      "type": "external",
+      "file": "src/api/user/userService.ts",
+      "line": 16,
+      "name": "findAll"
+    },
+    {
+      "id": "F_getUser_11",
+      "type": "callable",
+      "file": "src/api/user/userController.ts",
+      "line": 11,
+      "name": "getUser"
+    },
+    {
+      "id": "lib_Number_parseInt",
+      "type": "lib",
+      "symbol": "Number.parseInt"
+    },
+    {
+      "id": "X_findById_userService_ts_35",
+      "type": "external",
+      "file": "src/api/user/userService.ts",
+      "line": 35,
+      "name": "findById"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "calls",
+      "source": "F_getUsers_6",
+      "target": "X_findAll_userService_ts_16",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userController.ts:7"
+      ],
+      "note": "userService is the module-level instance new UserService() in userService.ts; findAll is its method."
+    },
+    {
+      "id": "R02",
+      "kind": "calls",
+      "source": "F_getUser_11",
+      "target": "lib_Number_parseInt",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userController.ts:12"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "dataflow",
+      "source": "F_getUser_11",
+      "target": "lib_Number_parseInt",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userController.ts:12"
+      ]
+    },
+    {
+      "id": "R04",
+      "kind": "dataflow",
+      "source": "F_getUser_11",
+      "target": "lib_Number_parseInt",
+      "argIndex": 1,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userController.ts:12"
+      ],
+      "note": "Number.parseInt(string, radix?): radix 10 is passed (index 1)."
+    },
+    {
+      "id": "R05",
+      "kind": "calls",
+      "source": "F_getUser_11",
+      "target": "X_findById_userService_ts_35",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userController.ts:13"
+      ]
+    },
+    {
+      "id": "R06",
+      "kind": "dataflow",
+      "source": "F_getUser_11",
+      "target": "X_findById_userService_ts_35",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userController.ts:13"
+      ]
+    },
+    {
+      "id": "R07",
+      "kind": "constructs",
+      "source": "file",
+      "target": "C_UserController_5",
+      "pattern": "CONS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userController.ts:18"
+      ],
+      "note": "UserController has no explicit constructor; new at module top level (EXP-01 k01 R14)."
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/api/user/userController.ts:8",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/api/user/userController.ts:14",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    }
+  ]
+}

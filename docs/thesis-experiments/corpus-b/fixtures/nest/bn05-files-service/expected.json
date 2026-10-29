@@ -1,0 +1,138 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "bn05-files-service",
+  "gtVersion": 1,
+  "activeFile": "src/files/infrastructure/uploader/local/files.service.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/files/infrastructure/uploader/local/files.service.ts"
+    },
+    {
+      "id": "C_FilesLocalService_12",
+      "type": "class",
+      "file": "src/files/infrastructure/uploader/local/files.service.ts",
+      "line": 12,
+      "name": "FilesLocalService"
+    },
+    {
+      "id": "X_AllConfigType_config_type_ts_10",
+      "type": "external",
+      "file": "src/config/config.type.ts",
+      "line": 10,
+      "name": "AllConfigType"
+    },
+    {
+      "id": "X_FileRepository_file_repository_ts_4",
+      "type": "external",
+      "file": "src/files/infrastructure/persistence/file.repository.ts",
+      "line": 4,
+      "name": "FileRepository"
+    },
+    {
+      "id": "F_create_19",
+      "type": "callable",
+      "file": "src/files/infrastructure/uploader/local/files.service.ts",
+      "line": 19,
+      "name": "create"
+    },
+    {
+      "id": "lib_Promise",
+      "type": "lib",
+      "symbol": "Promise"
+    },
+    {
+      "id": "X_FileType_file_ts_12",
+      "type": "external",
+      "file": "src/files/domain/file.ts",
+      "line": 12,
+      "name": "FileType"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "C_FilesLocalService_12",
+      "target": "X_AllConfigType_config_type_ts_10",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/files/infrastructure/uploader/local/files.service.ts:15"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "references",
+      "source": "C_FilesLocalService_12",
+      "target": "X_FileRepository_file_repository_ts_4",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/files/infrastructure/uploader/local/files.service.ts:16"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "references",
+      "source": "F_create_19",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/files/infrastructure/uploader/local/files.service.ts:19"
+      ]
+    },
+    {
+      "id": "R04",
+      "kind": "references",
+      "source": "F_create_19",
+      "target": "X_FileType_file_ts_12",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/files/infrastructure/uploader/local/files.service.ts:19"
+      ]
+    },
+    {
+      "id": "I01",
+      "kind": "calls",
+      "source": "F_create_19",
+      "candidates": "unbounded",
+      "pattern": "CALL-INTERFACE-DISPATCH",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/files/infrastructure/uploader/local/files.service.ts:30"
+      ],
+      "reason": "this.fileRepository is typed as abstract class FileRepository (abstract create, no body); the concrete repository is injected at run time."
+    },
+    {
+      "id": "I02",
+      "kind": "dataflow",
+      "source": "F_create_19",
+      "candidates": "unbounded",
+      "pattern": "DF-INDIRECT",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/files/infrastructure/uploader/local/files.service.ts:30"
+      ],
+      "reason": "call target is indeterminate, so is the receiving parameter (guide §4.5)."
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/files/infrastructure/uploader/local/files.service.ts:12",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/files/infrastructure/uploader/local/files.service.ts:21",
+      "reason": "NO_NODE_TARGET: constructed class has no declaration in the corpus"
+    },
+    {
+      "site": "src/files/infrastructure/uploader/local/files.service.ts:31",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    }
+  ]
+}

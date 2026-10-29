@@ -1,0 +1,78 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "br04-content-layout",
+  "gtVersion": 1,
+  "activeFile": "src/components/layouts/content-layout.tsx",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/components/layouts/content-layout.tsx"
+    },
+    {
+      "id": "T_ContentLayoutProps_5",
+      "type": "typeLike",
+      "file": "src/components/layouts/content-layout.tsx",
+      "line": 5,
+      "name": "ContentLayoutProps"
+    },
+    {
+      "id": "F_ContentLayout_10",
+      "type": "callable",
+      "file": "src/components/layouts/content-layout.tsx",
+      "line": 10,
+      "name": "ContentLayout"
+    },
+    {
+      "id": "X_Head_head_tsx_10",
+      "type": "external",
+      "file": "src/components/seo/head.tsx",
+      "line": 10,
+      "name": "Head"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "F_ContentLayout_10",
+      "target": "T_ContentLayoutProps_5",
+      "pattern": "REF-TYPE-ANNOTATION",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/layouts/content-layout.tsx:10"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "calls",
+      "source": "F_ContentLayout_10",
+      "target": "X_Head_head_tsx_10",
+      "pattern": "CALL-JSX-IMPORT",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/layouts/content-layout.tsx:13"
+      ],
+      "note": "Head is imported through the ../seo barrel (index.ts re-export) and declared as an arrow-function component in head.tsx."
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/components/layouts/content-layout.tsx:14",
+      "reason": "JSX_INTRINSIC: intrinsic element is not a call (guide §4.1)"
+    },
+    {
+      "site": "src/components/layouts/content-layout.tsx:15",
+      "reason": "JSX_INTRINSIC: intrinsic element is not a call (guide §4.1)"
+    },
+    {
+      "site": "src/components/layouts/content-layout.tsx:16",
+      "reason": "JSX_INTRINSIC: intrinsic element is not a call (guide §4.1)"
+    },
+    {
+      "site": "src/components/layouts/content-layout.tsx:18",
+      "reason": "JSX_INTRINSIC: intrinsic element is not a call (guide §4.1)"
+    }
+  ]
+}

@@ -1,0 +1,473 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "bn02-session-repository",
+  "repo": "brocoders/nestjs-boilerplate",
+  "url": "https://github.com/brocoders/nestjs-boilerplate",
+  "commit": "9620f159eefe38f47747d02ab162852367c5472c",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "tsconfig.json",
+    "derivedOptions": {
+      "target": "ES2021",
+      "module": "commonjs",
+      "strictNullChecks": true,
+      "noImplicitAny": true,
+      "strictBindCallApply": false,
+      "strictPropertyInitialization": false,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "lib": [
+        "ES2021"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "module": "commonjs",
+      "declaration": true,
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "ES2021",
+      "sourceMap": true,
+      "outDir": "./dist",
+      "incremental": true,
+      "skipLibCheck": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": false,
+      "noImplicitAny": true,
+      "strictBindCallApply": false,
+      "forceConsistentCasingInFileNames": false,
+      "noFallthroughCasesInSwitch": false,
+      "esModuleInterop": true
+    }
+  },
+  "activeFile": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+  "upstreamActiveFile": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+  "files": [
+    {
+      "path": "src/auth/auth-providers.enum.ts",
+      "upstreamPath": "src/auth/auth-providers.enum.ts",
+      "sha256": "b153ee494908cd801f0b1eddbc95e70f23a836dc70c120dbf4fda9b3438b72df",
+      "bytes": 124
+    },
+    {
+      "path": "src/config/app-config.type.ts",
+      "upstreamPath": "src/config/app-config.type.ts",
+      "sha256": "a3305f799a604db99ffa04bf9c3ace9fb75cd0f44646ac7d0a49a4583cfef0b8",
+      "bytes": 272
+    },
+    {
+      "path": "src/config/app.config.ts",
+      "upstreamPath": "src/config/app.config.ts",
+      "sha256": "e33365b5ce475f0db6e6cee9d0cb5e4ea95fc90dcb86b9af33b8affadf3cf511",
+      "bytes": 1957
+    },
+    {
+      "path": "src/database/config/database-config.type.ts",
+      "upstreamPath": "src/database/config/database-config.type.ts",
+      "sha256": "f2a187e20ea0fa0d60511b08c4e55d97ab0aa54e7909e37dee54262221b573eb",
+      "bytes": 363
+    },
+    {
+      "path": "src/database/config/database.config.ts",
+      "upstreamPath": "src/database/config/database.config.ts",
+      "sha256": "930b939fa9ea8504396132339b53cc42cce2eb0d18022eb210f79050ab51e6fb",
+      "bytes": 2521
+    },
+    {
+      "path": "src/files/config/file-config.type.ts",
+      "upstreamPath": "src/files/config/file-config.type.ts",
+      "sha256": "94764db3683042f0f558e4a2cb5bcbf40bc722696ef627f29fa6b78181e4ac58",
+      "bytes": 289
+    },
+    {
+      "path": "src/files/config/file.config.ts",
+      "upstreamPath": "src/files/config/file.config.ts",
+      "sha256": "243576d2aa34fae801e32823a1356232f30b87f0f045da658468dfa7f99b8f41",
+      "bytes": 1444
+    },
+    {
+      "path": "src/files/domain/file.ts",
+      "upstreamPath": "src/files/domain/file.ts",
+      "sha256": "2fbaea444b3adc55c74ca342df45df106e429bc7bd7e8462cf7ebdacdfc9f087",
+      "bytes": 1713
+    },
+    {
+      "path": "src/files/infrastructure/persistence/relational/entities/file.entity.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/relational/entities/file.entity.ts",
+      "sha256": "c46396ff5a579f1835c4882b0e8d3478520388dd8977bdf04f44cdf95eb09275",
+      "bytes": 369
+    },
+    {
+      "path": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts",
+      "sha256": "0dbea95d46a12f28257ced40991886bb03b4db2c8f23963c9404a330e5822ddf",
+      "bytes": 570
+    },
+    {
+      "path": "src/roles/domain/role.ts",
+      "upstreamPath": "src/roles/domain/role.ts",
+      "sha256": "a15d5b32ded832fb75bd27b97c47afb69f664a1ccd9535ca755375b1eb34cf9d",
+      "bytes": 582
+    },
+    {
+      "path": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts",
+      "upstreamPath": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts",
+      "sha256": "b93a65f6ea50eef673d09e107106fc14f7ad65f134a934fadb8e78ba96b2e798",
+      "bytes": 310
+    },
+    {
+      "path": "src/session/domain/session.ts",
+      "upstreamPath": "src/session/domain/session.ts",
+      "sha256": "2fbbbfbf1de55e74ebb63d94a86f94d7bec4da03b79beebfccbdce718229b0fb",
+      "bytes": 194
+    },
+    {
+      "path": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+      "sha256": "dfa9c46742d03fb0722e201d92fb748261b62e184c7bb4b2b18d0e84cedc47d7",
+      "bytes": 772
+    },
+    {
+      "path": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "sha256": "66094661fb94b921a83b46e80dca2ad30a6b963d17502c986e2886fb8e41341f",
+      "bytes": 1403
+    },
+    {
+      "path": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "sha256": "ef4c8c81dc425fd615f13078d854372ceb8d55238dab6eca8660f1b81ef1e791",
+      "bytes": 3158
+    },
+    {
+      "path": "src/session/infrastructure/persistence/session.repository.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/session.repository.ts",
+      "sha256": "32873e6dd0c154438c85f3aa4c1822b5932c5b67c5c733d28713d2c1dc60e9a6",
+      "bytes": 1089
+    },
+    {
+      "path": "src/statuses/domain/status.ts",
+      "upstreamPath": "src/statuses/domain/status.ts",
+      "sha256": "62255ce66ee56332816995dff1d4ca43365f5c4f2a12d2874e4399b35a46e2f4",
+      "bytes": 585
+    },
+    {
+      "path": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts",
+      "upstreamPath": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts",
+      "sha256": "76c9cee46f2989333afda92bbaa181f71aa287f564a5e9ef8ebe6039dc2c5649",
+      "bytes": 316
+    },
+    {
+      "path": "src/users/domain/user.ts",
+      "upstreamPath": "src/users/domain/user.ts",
+      "sha256": "4eddc78dfad4ffbe13ab759e7cfe6428c628334a7f20ba4a5a64cd95e5dc98ea",
+      "bytes": 1654
+    },
+    {
+      "path": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "sha256": "44c26316509c0be35b18bd5941f2b1cd073097a9472f333c390b51f26e0319d4",
+      "bytes": 1853
+    },
+    {
+      "path": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "sha256": "6d44bb1ad9c3cd7d6a6bcc307b4df708fb23d144df9872de34859acb67bbe55f",
+      "bytes": 2821
+    },
+    {
+      "path": "src/utils/relational-entity-helper.ts",
+      "upstreamPath": "src/utils/relational-entity-helper.ts",
+      "sha256": "474a2787911e6785d1a1c3d0d2d8c514415fc48a95fa8b9deac824dd31540784",
+      "bytes": 333
+    },
+    {
+      "path": "src/utils/types/nullable.type.ts",
+      "upstreamPath": "src/utils/types/nullable.type.ts",
+      "sha256": "14250925c5f2d082c0f4894f5ffed7448c3f25c1da30df17234ec8be75a856a6",
+      "bytes": 41
+    },
+    {
+      "path": "src/utils/validate-config.ts",
+      "upstreamPath": "src/utils/validate-config.ts",
+      "sha256": "6eb3fc134e0952c6e9d0f6422d5692a805a4b2abbf536523f307b4705429265c",
+      "bytes": 647
+    }
+  ],
+  "thirdPartyModules": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner",
+    "@nestjs/common",
+    "@nestjs/config",
+    "@nestjs/swagger",
+    "@nestjs/typeorm",
+    "class-transformer",
+    "class-transformer/types/interfaces",
+    "class-validator",
+    "typeorm"
+  ],
+  "importEdges": [
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../entities/session.entity",
+      "to": "src/session/infrastructure/persistence/relational/entities/session.entity.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../../../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../../session.repository",
+      "to": "src/session/infrastructure/persistence/session.repository.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../../../../domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../mappers/session.mapper",
+      "to": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../../../../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+      "spec": "../../../../../users/infrastructure/persistence/relational/entities/user.entity",
+      "to": "src/users/infrastructure/persistence/relational/entities/user.entity.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/session.repository.ts",
+      "spec": "../../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/session.repository.ts",
+      "spec": "../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/session.repository.ts",
+      "spec": "../../domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/domain/session.ts",
+      "spec": "../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "spec": "../../../../../users/infrastructure/persistence/relational/entities/user.entity",
+      "to": "src/users/infrastructure/persistence/relational/entities/user.entity.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "spec": "../../../../../users/infrastructure/persistence/relational/mappers/user.mapper",
+      "to": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "spec": "../../../../domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "spec": "../entities/session.entity",
+      "to": "src/session/infrastructure/persistence/relational/entities/session.entity.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../files/domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../roles/domain/role",
+      "to": "src/roles/domain/role.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../statuses/domain/status",
+      "to": "src/statuses/domain/status.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../roles/infrastructure/persistence/relational/entities/role.entity",
+      "to": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../statuses/infrastructure/persistence/relational/entities/status.entity",
+      "to": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../files/infrastructure/persistence/relational/entities/file.entity",
+      "to": "src/files/infrastructure/persistence/relational/entities/file.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../auth/auth-providers.enum",
+      "to": "src/auth/auth-providers.enum.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../../files/infrastructure/persistence/relational/entities/file.entity",
+      "to": "src/files/infrastructure/persistence/relational/entities/file.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../../files/infrastructure/persistence/relational/mappers/file.mapper",
+      "to": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../../roles/infrastructure/persistence/relational/entities/role.entity",
+      "to": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../../statuses/infrastructure/persistence/relational/entities/status.entity",
+      "to": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../entities/user.entity",
+      "to": "src/users/infrastructure/persistence/relational/entities/user.entity.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../config/file.config",
+      "to": "src/files/config/file.config.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../config/file-config.type",
+      "to": "src/files/config/file-config.type.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../../config/app-config.type",
+      "to": "src/config/app-config.type.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../../config/app.config",
+      "to": "src/config/app.config.ts"
+    },
+    {
+      "from": "src/roles/domain/role.ts",
+      "spec": "../../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/roles/domain/role.ts",
+      "spec": "../../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/statuses/domain/status.ts",
+      "spec": "../../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/statuses/domain/status.ts",
+      "spec": "../../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/database/config/database.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/database/config/database.config.ts",
+      "spec": "./database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/entities/file.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts",
+      "spec": "../../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts",
+      "spec": "../entities/file.entity",
+      "to": "src/files/infrastructure/persistence/relational/entities/file.entity.ts"
+    },
+    {
+      "from": "src/files/config/file.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/files/config/file.config.ts",
+      "spec": "./file-config.type",
+      "to": "src/files/config/file-config.type.ts"
+    },
+    {
+      "from": "src/config/app.config.ts",
+      "spec": "./app-config.type",
+      "to": "src/config/app-config.type.ts"
+    },
+    {
+      "from": "src/config/app.config.ts",
+      "spec": ".././utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    }
+  ]
+}

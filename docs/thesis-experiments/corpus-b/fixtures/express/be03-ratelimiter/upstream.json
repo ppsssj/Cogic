@@ -1,0 +1,80 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "be03-ratelimiter",
+  "repo": "edwinhern/express-typescript",
+  "url": "https://github.com/edwinhern/express-typescript",
+  "commit": "983fa0413659cd921c5754b00f7817903eb91364",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "tsconfig.json",
+    "derivedOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": [
+          "*"
+        ]
+      },
+      "strict": true,
+      "esModuleInterop": true,
+      "lib": [
+        "ESNext"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": [
+          "*"
+        ]
+      },
+      "moduleResolution": "Node",
+      "outDir": "dist",
+      "importsNotUsedAsValues": "remove",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "types": [
+        "vitest/globals"
+      ]
+    }
+  },
+  "activeFile": "src/common/middleware/rateLimiter.ts",
+  "upstreamActiveFile": "src/common/middleware/rateLimiter.ts",
+  "files": [
+    {
+      "path": "src/common/middleware/rateLimiter.ts",
+      "upstreamPath": "src/common/middleware/rateLimiter.ts",
+      "sha256": "1e85c31021adc2e35d08917592645da4dbbcb9799d9c60d7ae7c272866f6745a",
+      "bytes": 469
+    },
+    {
+      "path": "src/common/utils/envConfig.ts",
+      "upstreamPath": "src/common/utils/envConfig.ts",
+      "sha256": "26458e9d22d78c275cd7fc30067818db5da4c715093764f2ff2a19c37473bab9",
+      "bytes": 974
+    }
+  ],
+  "thirdPartyModules": [
+    "dotenv",
+    "express",
+    "express-rate-limit",
+    "zod"
+  ],
+  "importEdges": [
+    {
+      "from": "src/common/middleware/rateLimiter.ts",
+      "spec": "@/common/utils/envConfig",
+      "to": "src/common/utils/envConfig.ts"
+    }
+  ]
+}

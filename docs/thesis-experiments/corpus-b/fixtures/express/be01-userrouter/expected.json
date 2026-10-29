@@ -1,0 +1,211 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "be01-userrouter",
+  "gtVersion": 1,
+  "activeFile": "src/api/user/userRouter.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/api/user/userRouter.ts"
+    },
+    {
+      "id": "S_express_route_owner_21_1",
+      "type": "synthetic",
+      "file": "src/api/user/userRouter.ts",
+      "line": 21,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "userRouter.get"
+    },
+    {
+      "id": "S_express_route_owner_31_2",
+      "type": "synthetic",
+      "file": "src/api/user/userRouter.ts",
+      "line": 31,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "userRouter.get"
+    },
+    {
+      "id": "X_createApiResponse_openAPIResponseBuilders_ts_6",
+      "type": "external",
+      "file": "src/api-docs/openAPIResponseBuilders.ts",
+      "line": 6,
+      "name": "createApiResponse"
+    },
+    {
+      "id": "X_getUsers_userController_ts_6",
+      "type": "external",
+      "file": "src/api/user/userController.ts",
+      "line": 6,
+      "name": "getUsers"
+    },
+    {
+      "id": "X_validateRequest_httpHandlers_ts_7",
+      "type": "external",
+      "file": "src/common/utils/httpHandlers.ts",
+      "line": 7,
+      "name": "validateRequest"
+    },
+    {
+      "id": "X_getUser_userController_ts_11",
+      "type": "external",
+      "file": "src/api/user/userController.ts",
+      "line": 11,
+      "name": "getUser"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "calls",
+      "source": "file",
+      "target": "X_createApiResponse_openAPIResponseBuilders_ts_6",
+      "pattern": "CALL-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:18",
+        "src/api/user/userRouter.ts:28"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "dataflow",
+      "source": "file",
+      "target": "X_createApiResponse_openAPIResponseBuilders_ts_6",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:18",
+        "src/api/user/userRouter.ts:28"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "dataflow",
+      "source": "file",
+      "target": "X_createApiResponse_openAPIResponseBuilders_ts_6",
+      "argIndex": 1,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:18",
+        "src/api/user/userRouter.ts:28"
+      ],
+      "note": "createApiResponse(schema, description, statusCode = OK): the defaulted third parameter is never passed (no dataflow)."
+    },
+    {
+      "id": "R04",
+      "kind": "references",
+      "source": "file",
+      "target": "X_getUsers_userController_ts_6",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:21"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "calls",
+      "source": "file",
+      "target": "X_validateRequest_httpHandlers_ts_7",
+      "pattern": "CALL-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:31"
+      ]
+    },
+    {
+      "id": "R06",
+      "kind": "dataflow",
+      "source": "file",
+      "target": "X_validateRequest_httpHandlers_ts_7",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:31"
+      ]
+    },
+    {
+      "id": "R07",
+      "kind": "references",
+      "source": "file",
+      "target": "X_getUser_userController_ts_11",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:31"
+      ]
+    },
+    {
+      "id": "R08",
+      "kind": "owner",
+      "source": "S_express_route_owner_21_1",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:21"
+      ]
+    },
+    {
+      "id": "R09",
+      "kind": "calls",
+      "source": "S_express_route_owner_21_1",
+      "target": "X_getUsers_userController_ts_6",
+      "pattern": "FW-UNSUPPORTED-OWNER-EDGE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:21"
+      ]
+    },
+    {
+      "id": "R10",
+      "kind": "owner",
+      "source": "S_express_route_owner_31_2",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:31"
+      ]
+    },
+    {
+      "id": "R11",
+      "kind": "calls",
+      "source": "S_express_route_owner_31_2",
+      "target": "X_getUser_userController_ts_11",
+      "pattern": "FW-UNSUPPORTED-OWNER-EDGE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/api/user/userRouter.ts:31"
+      ],
+      "note": "Handlers are validateRequest(GetUserSchema) (its return value is an anonymous function, not a §2 node) and userController.getUser."
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/api/user/userRouter.ts:9",
+      "reason": "NO_NODE_TARGET: constructed class has no declaration in the corpus"
+    },
+    {
+      "site": "src/api/user/userRouter.ts:10",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/api/user/userRouter.ts:12",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/api/user/userRouter.ts:14",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/api/user/userRouter.ts:23",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    }
+  ]
+}

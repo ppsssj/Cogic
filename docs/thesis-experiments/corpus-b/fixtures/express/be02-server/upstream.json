@@ -1,0 +1,308 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "be02-server",
+  "repo": "edwinhern/express-typescript",
+  "url": "https://github.com/edwinhern/express-typescript",
+  "commit": "983fa0413659cd921c5754b00f7817903eb91364",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "tsconfig.json",
+    "derivedOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": [
+          "*"
+        ]
+      },
+      "strict": true,
+      "esModuleInterop": true,
+      "lib": [
+        "ESNext"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": [
+          "*"
+        ]
+      },
+      "moduleResolution": "Node",
+      "outDir": "dist",
+      "importsNotUsedAsValues": "remove",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "types": [
+        "vitest/globals"
+      ]
+    }
+  },
+  "activeFile": "src/server.ts",
+  "upstreamActiveFile": "src/server.ts",
+  "files": [
+    {
+      "path": "src/api-docs/openAPIDocumentGenerator.ts",
+      "upstreamPath": "src/api-docs/openAPIDocumentGenerator.ts",
+      "sha256": "c54cf6f4b0e2d1ecbe160edd6f3d0056b9e4026cf16a497f7953b8c0740968e0",
+      "bytes": 768
+    },
+    {
+      "path": "src/api-docs/openAPIResponseBuilders.ts",
+      "upstreamPath": "src/api-docs/openAPIResponseBuilders.ts",
+      "sha256": "1e58d186c9e919ae03ba1c1c5e66c53a7b654457297d2fb55c952d6698fcc529",
+      "bytes": 1217
+    },
+    {
+      "path": "src/api-docs/openAPIRouter.ts",
+      "upstreamPath": "src/api-docs/openAPIRouter.ts",
+      "sha256": "2d847b7aded7bf1df50a5447a2b914726d8618ecef70ce12414614e70d86910d",
+      "bytes": 554
+    },
+    {
+      "path": "src/api/healthCheck/healthCheckRouter.ts",
+      "upstreamPath": "src/api/healthCheck/healthCheckRouter.ts",
+      "sha256": "b587cf2db20264fe955296847208824d3c88ec5f5304f1f88fdcce6b48a28550",
+      "bytes": 813
+    },
+    {
+      "path": "src/api/user/userController.ts",
+      "upstreamPath": "src/api/user/userController.ts",
+      "sha256": "25fd4a46008aa1d51aa1e5c711dd5446a0e77f9dab1cfae58fc0ff5a71e2e6a7",
+      "bytes": 679
+    },
+    {
+      "path": "src/api/user/userModel.ts",
+      "upstreamPath": "src/api/user/userModel.ts",
+      "sha256": "415006b9dacad6bcd41bfbbea86edcaadd0ed578ce2d802183c142d3f6b3db38",
+      "bytes": 571
+    },
+    {
+      "path": "src/api/user/userRepository.ts",
+      "upstreamPath": "src/api/user/userRepository.ts",
+      "sha256": "1f0be9c9275d8433215d609799df75daee512296d97de393553f7eee08b875d8",
+      "bytes": 678
+    },
+    {
+      "path": "src/api/user/userRouter.ts",
+      "upstreamPath": "src/api/user/userRouter.ts",
+      "sha256": "faa542fe1858bb0f4600ac9636d4305a49073e974405fc5f830acdb412227250",
+      "bytes": 1036
+    },
+    {
+      "path": "src/api/user/userService.ts",
+      "upstreamPath": "src/api/user/userService.ts",
+      "sha256": "a13c4129678ac1d23d535790d0fc8a08deb728f1376719b9d8e369ef1b47b33b",
+      "bytes": 1773
+    },
+    {
+      "path": "src/common/middleware/errorHandler.ts",
+      "upstreamPath": "src/common/middleware/errorHandler.ts",
+      "sha256": "7e066e85ba159f124f2129848da6d420f400f149409c64aad477bd591185a7ff",
+      "bytes": 468
+    },
+    {
+      "path": "src/common/middleware/rateLimiter.ts",
+      "upstreamPath": "src/common/middleware/rateLimiter.ts",
+      "sha256": "1e85c31021adc2e35d08917592645da4dbbcb9799d9c60d7ae7c272866f6745a",
+      "bytes": 469
+    },
+    {
+      "path": "src/common/middleware/requestLogger.ts",
+      "upstreamPath": "src/common/middleware/requestLogger.ts",
+      "sha256": "b07962f30e2a3c2a1d5cdb513638035c3796e17eb31ff534c8cc9f0053739268",
+      "bytes": 1759
+    },
+    {
+      "path": "src/common/models/serviceResponse.ts",
+      "upstreamPath": "src/common/models/serviceResponse.ts",
+      "sha256": "98d404b2e9bff2e4621434224ecf2f6d001b76b3dba730095f37ffee19cac2a1",
+      "bytes": 1053
+    },
+    {
+      "path": "src/common/utils/commonValidation.ts",
+      "upstreamPath": "src/common/utils/commonValidation.ts",
+      "sha256": "18e99f18a85b7777168c9ffc62144a15fd255ae9bcb00c20f1b37ccdc49f3efa",
+      "bytes": 287
+    },
+    {
+      "path": "src/common/utils/envConfig.ts",
+      "upstreamPath": "src/common/utils/envConfig.ts",
+      "sha256": "26458e9d22d78c275cd7fc30067818db5da4c715093764f2ff2a19c37473bab9",
+      "bytes": 974
+    },
+    {
+      "path": "src/common/utils/httpHandlers.ts",
+      "upstreamPath": "src/common/utils/httpHandlers.ts",
+      "sha256": "5421a1ce00c823e492758950306cc34275e87ba74eb544241a2821ac2c7d68f7",
+      "bytes": 1013
+    },
+    {
+      "path": "src/server.ts",
+      "upstreamPath": "src/server.ts",
+      "sha256": "47ed4d12a964758f076e39193d320105d6f2585749fdcc52348a18313cdf4c99",
+      "bytes": 1179
+    }
+  ],
+  "thirdPartyModules": [
+    "@asteasolutions/zod-to-openapi",
+    "cors",
+    "dotenv",
+    "express",
+    "express-rate-limit",
+    "helmet",
+    "http-status-codes",
+    "node:crypto",
+    "pino",
+    "pino-http",
+    "swagger-ui-express",
+    "zod"
+  ],
+  "importEdges": [
+    {
+      "from": "src/server.ts",
+      "spec": "@/api/healthCheck/healthCheckRouter",
+      "to": "src/api/healthCheck/healthCheckRouter.ts"
+    },
+    {
+      "from": "src/server.ts",
+      "spec": "@/api/user/userRouter",
+      "to": "src/api/user/userRouter.ts"
+    },
+    {
+      "from": "src/server.ts",
+      "spec": "@/api-docs/openAPIRouter",
+      "to": "src/api-docs/openAPIRouter.ts"
+    },
+    {
+      "from": "src/server.ts",
+      "spec": "@/common/middleware/errorHandler",
+      "to": "src/common/middleware/errorHandler.ts"
+    },
+    {
+      "from": "src/server.ts",
+      "spec": "@/common/middleware/rateLimiter",
+      "to": "src/common/middleware/rateLimiter.ts"
+    },
+    {
+      "from": "src/server.ts",
+      "spec": "@/common/middleware/requestLogger",
+      "to": "src/common/middleware/requestLogger.ts"
+    },
+    {
+      "from": "src/server.ts",
+      "spec": "@/common/utils/envConfig",
+      "to": "src/common/utils/envConfig.ts"
+    },
+    {
+      "from": "src/api/healthCheck/healthCheckRouter.ts",
+      "spec": "@/api-docs/openAPIResponseBuilders",
+      "to": "src/api-docs/openAPIResponseBuilders.ts"
+    },
+    {
+      "from": "src/api/healthCheck/healthCheckRouter.ts",
+      "spec": "@/common/models/serviceResponse",
+      "to": "src/common/models/serviceResponse.ts"
+    },
+    {
+      "from": "src/api/user/userRouter.ts",
+      "spec": "@/api/user/userModel",
+      "to": "src/api/user/userModel.ts"
+    },
+    {
+      "from": "src/api/user/userRouter.ts",
+      "spec": "@/api-docs/openAPIResponseBuilders",
+      "to": "src/api-docs/openAPIResponseBuilders.ts"
+    },
+    {
+      "from": "src/api/user/userRouter.ts",
+      "spec": "@/common/utils/httpHandlers",
+      "to": "src/common/utils/httpHandlers.ts"
+    },
+    {
+      "from": "src/api/user/userRouter.ts",
+      "spec": "./userController",
+      "to": "src/api/user/userController.ts"
+    },
+    {
+      "from": "src/api-docs/openAPIRouter.ts",
+      "spec": "@/api-docs/openAPIDocumentGenerator",
+      "to": "src/api-docs/openAPIDocumentGenerator.ts"
+    },
+    {
+      "from": "src/common/middleware/rateLimiter.ts",
+      "spec": "@/common/utils/envConfig",
+      "to": "src/common/utils/envConfig.ts"
+    },
+    {
+      "from": "src/common/middleware/requestLogger.ts",
+      "spec": "@/common/utils/envConfig",
+      "to": "src/common/utils/envConfig.ts"
+    },
+    {
+      "from": "src/api-docs/openAPIResponseBuilders.ts",
+      "spec": "@/common/models/serviceResponse",
+      "to": "src/common/models/serviceResponse.ts"
+    },
+    {
+      "from": "src/api/user/userModel.ts",
+      "spec": "@/common/utils/commonValidation",
+      "to": "src/common/utils/commonValidation.ts"
+    },
+    {
+      "from": "src/common/utils/httpHandlers.ts",
+      "spec": "@/common/models/serviceResponse",
+      "to": "src/common/models/serviceResponse.ts"
+    },
+    {
+      "from": "src/api/user/userController.ts",
+      "spec": "@/api/user/userService",
+      "to": "src/api/user/userService.ts"
+    },
+    {
+      "from": "src/api-docs/openAPIDocumentGenerator.ts",
+      "spec": "@/api/healthCheck/healthCheckRouter",
+      "to": "src/api/healthCheck/healthCheckRouter.ts"
+    },
+    {
+      "from": "src/api-docs/openAPIDocumentGenerator.ts",
+      "spec": "@/api/user/userRouter",
+      "to": "src/api/user/userRouter.ts"
+    },
+    {
+      "from": "src/api/user/userService.ts",
+      "spec": "@/api/user/userModel",
+      "to": "src/api/user/userModel.ts"
+    },
+    {
+      "from": "src/api/user/userService.ts",
+      "spec": "@/api/user/userRepository",
+      "to": "src/api/user/userRepository.ts"
+    },
+    {
+      "from": "src/api/user/userService.ts",
+      "spec": "@/common/models/serviceResponse",
+      "to": "src/common/models/serviceResponse.ts"
+    },
+    {
+      "from": "src/api/user/userService.ts",
+      "spec": "@/server",
+      "to": "src/server.ts"
+    },
+    {
+      "from": "src/api/user/userRepository.ts",
+      "spec": "@/api/user/userModel",
+      "to": "src/api/user/userModel.ts"
+    }
+  ]
+}

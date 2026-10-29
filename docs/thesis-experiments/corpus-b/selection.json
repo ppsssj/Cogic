@@ -1,0 +1,1730 @@
+{
+  "selectionVersion": "corpus-b-selection/2",
+  "rules": {
+    "sampleSize": 5,
+    "codeLines": [
+      10,
+      120
+    ],
+    "order": "eligible paths sorted, then seededShuffle(paths, seed) from tools/exp01/lib.mjs (mulberry32), first sampleSize",
+    "exclusions": [
+      "OUTSIDE_SRC_ROOT",
+      "NOT_TS_SOURCE",
+      "TEST_OR_FIXTURE",
+      "GENERATED",
+      "NO_FRAMEWORK_IMPORT",
+      "REEXPORT_ONLY",
+      "TOO_SMALL",
+      "TOO_LARGE"
+    ]
+  },
+  "frameworks": [
+    {
+      "framework": "react",
+      "repo": "alan2207/bulletproof-react",
+      "url": "https://github.com/alan2207/bulletproof-react",
+      "sha": "9506629ed003a561c6627735480cce4994244bb4",
+      "license": "MIT",
+      "srcRoot": "apps/react-vite/src",
+      "seed": 20261030,
+      "candidates": 130,
+      "eligibleCount": 18,
+      "eligible": [
+        "apps/react-vite/src/app/provider.tsx",
+        "apps/react-vite/src/app/router.tsx",
+        "apps/react-vite/src/app/routes/auth/register.tsx",
+        "apps/react-vite/src/components/layouts/auth-layout.tsx",
+        "apps/react-vite/src/components/layouts/content-layout.tsx",
+        "apps/react-vite/src/components/ui/button/button.tsx",
+        "apps/react-vite/src/components/ui/dialog/confirmation-dialog/confirmation-dialog.tsx",
+        "apps/react-vite/src/components/ui/dialog/dialog.tsx",
+        "apps/react-vite/src/components/ui/form/field-wrapper.tsx",
+        "apps/react-vite/src/components/ui/form/form-drawer.tsx",
+        "apps/react-vite/src/components/ui/form/input.tsx",
+        "apps/react-vite/src/components/ui/form/label.tsx",
+        "apps/react-vite/src/components/ui/form/select.tsx",
+        "apps/react-vite/src/components/ui/form/switch.tsx",
+        "apps/react-vite/src/components/ui/form/textarea.tsx",
+        "apps/react-vite/src/features/auth/components/register-form.tsx",
+        "apps/react-vite/src/lib/authorization.tsx",
+        "apps/react-vite/src/main.tsx"
+      ],
+      "excluded": [
+        {
+          "file": "apps/react-vite/src/app/index.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 9
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/app/dashboard.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 33
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/app/discussions/__tests__/discussion.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 103
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/app/discussions/__tests__/discussions.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 74
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/app/discussions/discussion.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 63
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/app/discussions/discussions.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 38
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/app/profile.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 46
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/app/root.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 13
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/app/users.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 25
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/auth/login.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 24
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/landing.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 83
+        },
+        {
+          "file": "apps/react-vite/src/app/routes/not-found.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 14
+        },
+        {
+          "file": "apps/react-vite/src/assets/logo.svg",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "apps/react-vite/src/components/errors/main.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 17
+        },
+        {
+          "file": "apps/react-vite/src/components/layouts/dashboard-layout.tsx",
+          "reason": "TOO_LARGE",
+          "codeLines": 192
+        },
+        {
+          "file": "apps/react-vite/src/components/layouts/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 2
+        },
+        {
+          "file": "apps/react-vite/src/components/seo/__tests__/head.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 11
+        },
+        {
+          "file": "apps/react-vite/src/components/seo/head.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 17
+        },
+        {
+          "file": "apps/react-vite/src/components/seo/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/button/button.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 13
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/button/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/dialog/__tests__/dialog.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 56
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/dialog/confirmation-dialog/__tests__/confirmation-dialog.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 27
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/dialog/confirmation-dialog/confirmation-dialog.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 26
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/dialog/confirmation-dialog/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/dialog/dialog.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 54
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/dialog/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 2
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/drawer/__tests__/drawer.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 57
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/drawer/drawer.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 56
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/drawer/drawer.tsx",
+          "reason": "TOO_LARGE",
+          "codeLines": 125
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/drawer/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/dropdown/dropdown.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 98
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/dropdown/dropdown.tsx",
+          "reason": "TOO_LARGE",
+          "codeLines": 186
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/dropdown/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/form/__tests__/form.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 58
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/form/error.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 15
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/form/form.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 78
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/form/form.tsx",
+          "reason": "TOO_LARGE",
+          "codeLines": 191
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/form/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 7
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/link/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/link/link.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 13
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/link/link.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 12
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/md-preview/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/md-preview/md-preview.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 12
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/md-preview/md-preview.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 16
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/notifications/__tests__/notifications.test.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 20
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/notifications/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 2
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/notifications/notification.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 55
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/notifications/notification.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 49
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/notifications/notifications-store.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 29
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/notifications/notifications.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 19
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/spinner/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/spinner/spinner.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 12
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/spinner/spinner.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 46
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/table/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/table/pagination.tsx",
+          "reason": "TOO_LARGE",
+          "codeLines": 174
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/table/table.stories.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 56
+        },
+        {
+          "file": "apps/react-vite/src/components/ui/table/table.tsx",
+          "reason": "TOO_LARGE",
+          "codeLines": 162
+        },
+        {
+          "file": "apps/react-vite/src/config/env.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 35
+        },
+        {
+          "file": "apps/react-vite/src/config/paths.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 44
+        },
+        {
+          "file": "apps/react-vite/src/features/auth/components/__tests__/login-form.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 17
+        },
+        {
+          "file": "apps/react-vite/src/features/auth/components/__tests__/register-form.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 23
+        },
+        {
+          "file": "apps/react-vite/src/features/auth/components/login-form.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 61
+        },
+        {
+          "file": "apps/react-vite/src/features/comments/api/create-comment.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 39
+        },
+        {
+          "file": "apps/react-vite/src/features/comments/api/delete-comment.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 28
+        },
+        {
+          "file": "apps/react-vite/src/features/comments/api/get-comments.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 42
+        },
+        {
+          "file": "apps/react-vite/src/features/comments/components/comments-list.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 83
+        },
+        {
+          "file": "apps/react-vite/src/features/comments/components/comments.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 16
+        },
+        {
+          "file": "apps/react-vite/src/features/comments/components/create-comment.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 71
+        },
+        {
+          "file": "apps/react-vite/src/features/comments/components/delete-comment.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 50
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/api/create-discussion.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 37
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/api/delete-discussion.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 30
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/api/get-discussion.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 30
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/api/get-discussions.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 37
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/api/update-discussion.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 39
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/components/create-discussion.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 68
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/components/delete-discussion.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 48
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/components/discussion-view.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 45
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/components/discussions-list.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 81
+        },
+        {
+          "file": "apps/react-vite/src/features/discussions/components/update-discussion.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 83
+        },
+        {
+          "file": "apps/react-vite/src/features/teams/api/get-teams.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 22
+        },
+        {
+          "file": "apps/react-vite/src/features/users/api/delete-user.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 29
+        },
+        {
+          "file": "apps/react-vite/src/features/users/api/get-users.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 22
+        },
+        {
+          "file": "apps/react-vite/src/features/users/api/update-profile.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 32
+        },
+        {
+          "file": "apps/react-vite/src/features/users/components/delete-user.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 41
+        },
+        {
+          "file": "apps/react-vite/src/features/users/components/update-profile.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 86
+        },
+        {
+          "file": "apps/react-vite/src/features/users/components/users-list.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 54
+        },
+        {
+          "file": "apps/react-vite/src/hooks/__tests__/use-disclosure.test.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 38
+        },
+        {
+          "file": "apps/react-vite/src/hooks/use-disclosure.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 8
+        },
+        {
+          "file": "apps/react-vite/src/index.css",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "apps/react-vite/src/lib/__tests__/authorization.test.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 64
+        },
+        {
+          "file": "apps/react-vite/src/lib/api-client.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 35
+        },
+        {
+          "file": "apps/react-vite/src/lib/auth.tsx",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 71
+        },
+        {
+          "file": "apps/react-vite/src/lib/react-query.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 21
+        },
+        {
+          "file": "apps/react-vite/src/testing/data-generators.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 68
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/browser.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 3
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/db.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 88
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/handlers/auth.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 136
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/handlers/comments.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 119
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/handlers/discussions.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 200
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/handlers/index.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 19
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/handlers/teams.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 18
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/handlers/users.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 94
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/index.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 9
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/server.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 3
+        },
+        {
+          "file": "apps/react-vite/src/testing/mocks/utils.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 92
+        },
+        {
+          "file": "apps/react-vite/src/testing/setup-tests.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 21
+        },
+        {
+          "file": "apps/react-vite/src/testing/test-utils.tsx",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 83
+        },
+        {
+          "file": "apps/react-vite/src/types/api.ts",
+          "reason": "GENERATED",
+          "codeLines": 39
+        },
+        {
+          "file": "apps/react-vite/src/utils/cn.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 5
+        },
+        {
+          "file": "apps/react-vite/src/utils/format.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 3
+        },
+        {
+          "file": "apps/react-vite/src/vite-env.d.ts",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": 0
+        }
+      ],
+      "selected": [
+        "apps/react-vite/src/components/ui/form/form-drawer.tsx",
+        "apps/react-vite/src/components/ui/form/textarea.tsx",
+        "apps/react-vite/src/main.tsx",
+        "apps/react-vite/src/components/layouts/content-layout.tsx",
+        "apps/react-vite/src/components/ui/form/input.tsx"
+      ]
+    },
+    {
+      "framework": "vue",
+      "repo": "mutoe/vue3-realworld-example-app",
+      "url": "https://github.com/mutoe/vue3-realworld-example-app",
+      "sha": "741c215ef0f674f90fcb03c5493a1b3a3a7f1b03",
+      "license": "MIT",
+      "srcRoot": "src",
+      "seed": 20261031,
+      "candidates": 73,
+      "eligibleCount": 7,
+      "eligible": [
+        "src/composable/use-favorite-article.ts",
+        "src/composable/use-follow-profile.ts",
+        "src/composable/use-profile.ts",
+        "src/composable/use-tags.ts",
+        "src/main.ts",
+        "src/store/user.ts",
+        "src/utils/use-async.ts"
+      ],
+      "excluded": [
+        {
+          "file": "src/App.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/AppFooter.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 10
+        },
+        {
+          "file": "src/components/AppFooter.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/AppLink.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 15
+        },
+        {
+          "file": "src/components/AppLink.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/AppNavigation.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 23
+        },
+        {
+          "file": "src/components/AppNavigation.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/AppPagination.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 21
+        },
+        {
+          "file": "src/components/AppPagination.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/ArticleDetail.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 33
+        },
+        {
+          "file": "src/components/ArticleDetail.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/ArticleDetailComment.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 36
+        },
+        {
+          "file": "src/components/ArticleDetailComment.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/ArticleDetailComments.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 43
+        },
+        {
+          "file": "src/components/ArticleDetailComments.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/ArticleDetailCommentsForm.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 28
+        },
+        {
+          "file": "src/components/ArticleDetailCommentsForm.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/ArticleDetailMeta.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 93
+        },
+        {
+          "file": "src/components/ArticleDetailMeta.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/ArticlesList.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 17
+        },
+        {
+          "file": "src/components/ArticlesList.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/ArticlesListArticlePreview.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 17
+        },
+        {
+          "file": "src/components/ArticlesListArticlePreview.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/ArticlesListNavigation.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 23
+        },
+        {
+          "file": "src/components/ArticlesListNavigation.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/PopularTags.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 16
+        },
+        {
+          "file": "src/components/PopularTags.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/components/__snapshots__/ArticleDetail.spec.ts.snap",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/composable/use-articles.ts",
+          "reason": "TOO_LARGE",
+          "codeLines": 123
+        },
+        {
+          "file": "src/config.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 3
+        },
+        {
+          "file": "src/env.d.ts",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": 5
+        },
+        {
+          "file": "src/pages/Article.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 26
+        },
+        {
+          "file": "src/pages/Article.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/pages/EditArticle.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 98
+        },
+        {
+          "file": "src/pages/EditArticle.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/pages/Home.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/pages/Login.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 50
+        },
+        {
+          "file": "src/pages/Login.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/pages/NotFound.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 11
+        },
+        {
+          "file": "src/pages/NotFound.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/pages/Profile.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 45
+        },
+        {
+          "file": "src/pages/Profile.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/pages/Register.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 56
+        },
+        {
+          "file": "src/pages/Register.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/pages/Settings.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 80
+        },
+        {
+          "file": "src/pages/Settings.vue",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/plugins/global-components.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 5
+        },
+        {
+          "file": "src/plugins/marked.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 30
+        },
+        {
+          "file": "src/plugins/set-authorization-token.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 7
+        },
+        {
+          "file": "src/router.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 35
+        },
+        {
+          "file": "src/router.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 89
+        },
+        {
+          "file": "src/services/api.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 572
+        },
+        {
+          "file": "src/services/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 21
+        },
+        {
+          "file": "src/services/openapi.yml",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/setup-tests.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 15
+        },
+        {
+          "file": "src/types/global-component.d.ts",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": 8
+        },
+        {
+          "file": "src/types/global.d.ts",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": 13
+        },
+        {
+          "file": "src/utils/filters.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 9
+        },
+        {
+          "file": "src/utils/filters.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 7
+        },
+        {
+          "file": "src/utils/params-to-query.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 12
+        },
+        {
+          "file": "src/utils/params-to-query.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 3
+        },
+        {
+          "file": "src/utils/storage.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 21
+        },
+        {
+          "file": "src/utils/storage.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 28
+        },
+        {
+          "file": "src/utils/test/fixtures.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 77
+        },
+        {
+          "file": "src/utils/test/test.utils.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 161
+        },
+        {
+          "file": "src/utils/use-async.spec.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 29
+        }
+      ],
+      "selected": [
+        "src/main.ts",
+        "src/composable/use-follow-profile.ts",
+        "src/store/user.ts",
+        "src/utils/use-async.ts",
+        "src/composable/use-favorite-article.ts"
+      ]
+    },
+    {
+      "framework": "express",
+      "repo": "edwinhern/express-typescript",
+      "url": "https://github.com/edwinhern/express-typescript",
+      "sha": "983fa0413659cd921c5754b00f7817903eb91364",
+      "license": "MIT",
+      "srcRoot": "src",
+      "seed": 20261032,
+      "candidates": 24,
+      "eligibleCount": 9,
+      "eligible": [
+        "src/api-docs/openAPIRouter.ts",
+        "src/api/healthCheck/healthCheckRouter.ts",
+        "src/api/user/userController.ts",
+        "src/api/user/userRouter.ts",
+        "src/common/middleware/errorHandler.ts",
+        "src/common/middleware/rateLimiter.ts",
+        "src/common/middleware/requestLogger.ts",
+        "src/common/utils/httpHandlers.ts",
+        "src/server.ts"
+      ],
+      "excluded": [
+        {
+          "file": "src/api-docs/__tests__/openAPIRouter.test.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 20
+        },
+        {
+          "file": "src/api-docs/openAPIDocumentGenerator.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 19
+        },
+        {
+          "file": "src/api-docs/openAPIResponseBuilders.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 15
+        },
+        {
+          "file": "src/api/healthCheck/__tests__/healthCheckRouter.test.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 14
+        },
+        {
+          "file": "src/api/user/__tests__/userRouter.test.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 61
+        },
+        {
+          "file": "src/api/user/__tests__/userService.test.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 88
+        },
+        {
+          "file": "src/api/user/userModel.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 16
+        },
+        {
+          "file": "src/api/user/userRepository.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 27
+        },
+        {
+          "file": "src/api/user/userService.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 42
+        },
+        {
+          "file": "src/common/__tests__/errorHandler.test.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 30
+        },
+        {
+          "file": "src/common/__tests__/requestLogger.test.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 46
+        },
+        {
+          "file": "src/common/models/serviceResponse.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 27
+        },
+        {
+          "file": "src/common/utils/commonValidation.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 8
+        },
+        {
+          "file": "src/common/utils/envConfig.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 22
+        },
+        {
+          "file": "src/index.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 16
+        }
+      ],
+      "selected": [
+        "src/api/user/userRouter.ts",
+        "src/server.ts",
+        "src/common/middleware/rateLimiter.ts",
+        "src/common/middleware/errorHandler.ts",
+        "src/api/user/userController.ts"
+      ]
+    },
+    {
+      "framework": "nest",
+      "repo": "brocoders/nestjs-boilerplate",
+      "url": "https://github.com/brocoders/nestjs-boilerplate",
+      "sha": "9620f159eefe38f47747d02ab162852367c5472c",
+      "license": "MIT",
+      "srcRoot": "src",
+      "seed": 20261033,
+      "candidates": 188,
+      "eligibleCount": 80,
+      "eligible": [
+        "src/app.module.ts",
+        "src/auth-apple/auth-apple.controller.ts",
+        "src/auth-apple/auth-apple.module.ts",
+        "src/auth-apple/auth-apple.service.ts",
+        "src/auth-apple/config/apple.config.ts",
+        "src/auth-apple/dto/auth-apple-login.dto.ts",
+        "src/auth-facebook/auth-facebook.controller.ts",
+        "src/auth-facebook/auth-facebook.module.ts",
+        "src/auth-facebook/config/facebook.config.ts",
+        "src/auth-google/auth-google.controller.ts",
+        "src/auth-google/auth-google.module.ts",
+        "src/auth-google/auth-google.service.ts",
+        "src/auth-google/config/google.config.ts",
+        "src/auth/auth.module.ts",
+        "src/auth/config/auth.config.ts",
+        "src/auth/dto/auth-email-login.dto.ts",
+        "src/auth/dto/auth-forgot-password.dto.ts",
+        "src/auth/dto/auth-register-login.dto.ts",
+        "src/auth/dto/auth-reset-password.dto.ts",
+        "src/auth/dto/auth-update.dto.ts",
+        "src/auth/dto/login-response.dto.ts",
+        "src/auth/strategies/anonymous.strategy.ts",
+        "src/auth/strategies/jwt-refresh.strategy.ts",
+        "src/auth/strategies/jwt.strategy.ts",
+        "src/config/app.config.ts",
+        "src/database/config/database.config.ts",
+        "src/database/mongoose-config.service.ts",
+        "src/database/typeorm-config.service.ts",
+        "src/files/config/file.config.ts",
+        "src/files/domain/file.ts",
+        "src/files/files.module.ts",
+        "src/files/files.service.ts",
+        "src/files/infrastructure/persistence/document/document-persistence.module.ts",
+        "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+        "src/files/infrastructure/persistence/document/repositories/file.repository.ts",
+        "src/files/infrastructure/persistence/relational/relational-persistence.module.ts",
+        "src/files/infrastructure/persistence/relational/repositories/file.repository.ts",
+        "src/files/infrastructure/uploader/local/files.controller.ts",
+        "src/files/infrastructure/uploader/local/files.module.ts",
+        "src/files/infrastructure/uploader/local/files.service.ts",
+        "src/files/infrastructure/uploader/s3-presigned/dto/file-response.dto.ts",
+        "src/files/infrastructure/uploader/s3-presigned/dto/file.dto.ts",
+        "src/files/infrastructure/uploader/s3-presigned/files.controller.ts",
+        "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+        "src/files/infrastructure/uploader/s3-presigned/files.service.ts",
+        "src/files/infrastructure/uploader/s3/files.controller.ts",
+        "src/files/infrastructure/uploader/s3/files.module.ts",
+        "src/files/infrastructure/uploader/s3/files.service.ts",
+        "src/home/home.controller.ts",
+        "src/home/home.module.ts",
+        "src/home/home.service.ts",
+        "src/mail/config/mail.config.ts",
+        "src/mail/mail.module.ts",
+        "src/mailer/mailer.service.ts",
+        "src/main.ts",
+        "src/roles/domain/role.ts",
+        "src/roles/roles.guard.ts",
+        "src/session/infrastructure/persistence/document/document-persistence.module.ts",
+        "src/session/infrastructure/persistence/document/entities/session.schema.ts",
+        "src/session/infrastructure/persistence/document/repositories/session.repository.ts",
+        "src/session/infrastructure/persistence/relational/relational-persistence.module.ts",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+        "src/session/session.module.ts",
+        "src/session/session.service.ts",
+        "src/social/tokens.ts",
+        "src/statuses/domain/status.ts",
+        "src/users/domain/user.ts",
+        "src/users/dto/create-user.dto.ts",
+        "src/users/dto/query-user.dto.ts",
+        "src/users/dto/update-user.dto.ts",
+        "src/users/dto/user.dto.ts",
+        "src/users/infrastructure/persistence/document/document-persistence.module.ts",
+        "src/users/infrastructure/persistence/document/entities/user.schema.ts",
+        "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+        "src/users/infrastructure/persistence/relational/relational-persistence.module.ts",
+        "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+        "src/users/users.module.ts",
+        "src/utils/dto/infinity-pagination-response.dto.ts",
+        "src/utils/serializer.interceptor.ts",
+        "src/utils/validation-options.ts"
+      ],
+      "excluded": [
+        {
+          "file": "src/auth-apple/config/apple-config.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 3
+        },
+        {
+          "file": "src/auth-facebook/auth-facebook.service.ts",
+          "reason": "TOO_LARGE",
+          "codeLines": 156
+        },
+        {
+          "file": "src/auth-facebook/config/facebook-config.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 4
+        },
+        {
+          "file": "src/auth-facebook/dto/auth-facebook-login.dto.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 7
+        },
+        {
+          "file": "src/auth-facebook/interfaces/facebook.interface.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 6
+        },
+        {
+          "file": "src/auth-google/config/google-config.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 4
+        },
+        {
+          "file": "src/auth-google/dto/auth-google-login.dto.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 7
+        },
+        {
+          "file": "src/auth/auth-providers.enum.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 6
+        },
+        {
+          "file": "src/auth/auth.controller.ts",
+          "reason": "TOO_LARGE",
+          "codeLines": 151
+        },
+        {
+          "file": "src/auth/auth.service.ts",
+          "reason": "TOO_LARGE",
+          "codeLines": 549
+        },
+        {
+          "file": "src/auth/config/auth-config.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 12
+        },
+        {
+          "file": "src/auth/dto/auth-confirm-email.dto.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 7
+        },
+        {
+          "file": "src/auth/dto/refresh-response.dto.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 9
+        },
+        {
+          "file": "src/auth/strategies/types/jwt-payload.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 7
+        },
+        {
+          "file": "src/auth/strategies/types/jwt-refresh-payload.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 7
+        },
+        {
+          "file": "src/config/app-config.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 12
+        },
+        {
+          "file": "src/config/config.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 18
+        },
+        {
+          "file": "src/database/config/database-config.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 17
+        },
+        {
+          "file": "src/database/data-source.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 38
+        },
+        {
+          "file": "src/database/migrations/1715028537217-CreateUser.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 76
+        },
+        {
+          "file": "src/database/seeds/document/run-seed.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 9
+        },
+        {
+          "file": "src/database/seeds/document/seed.module.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 21
+        },
+        {
+          "file": "src/database/seeds/document/user/user-seed.module.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 20
+        },
+        {
+          "file": "src/database/seeds/document/user/user-seed.service.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 56
+        },
+        {
+          "file": "src/database/seeds/relational/role/role-seed.module.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 10
+        },
+        {
+          "file": "src/database/seeds/relational/role/role-seed.service.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 40
+        },
+        {
+          "file": "src/database/seeds/relational/run-seed.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 13
+        },
+        {
+          "file": "src/database/seeds/relational/seed.module.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 29
+        },
+        {
+          "file": "src/database/seeds/relational/status/status-seed.module.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 10
+        },
+        {
+          "file": "src/database/seeds/relational/status/status-seed.service.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 27
+        },
+        {
+          "file": "src/database/seeds/relational/user/user-seed.module.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 10
+        },
+        {
+          "file": "src/database/seeds/relational/user/user-seed.service.ts",
+          "reason": "TEST_OR_FIXTURE",
+          "codeLines": 70
+        },
+        {
+          "file": "src/files/config/file-config.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 13
+        },
+        {
+          "file": "src/files/dto/file.dto.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 9
+        },
+        {
+          "file": "src/files/infrastructure/persistence/document/mappers/file.mapper.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 18
+        },
+        {
+          "file": "src/files/infrastructure/persistence/file.repository.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 7
+        },
+        {
+          "file": "src/files/infrastructure/persistence/relational/entities/file.entity.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 13
+        },
+        {
+          "file": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 16
+        },
+        {
+          "file": "src/files/infrastructure/uploader/local/dto/file-response.dto.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 8
+        },
+        {
+          "file": "src/files/infrastructure/uploader/s3/dto/file-response.dto.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 8
+        },
+        {
+          "file": "src/i18n/ar/common.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/ar/confirm-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/ar/confirm-new-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/ar/reset-password.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/en/common.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/en/confirm-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/en/confirm-new-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/en/reset-password.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/es/common.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/es/confirm-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/es/confirm-new-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/es/reset-password.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/fr/common.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/fr/confirm-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/fr/confirm-new-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/fr/reset-password.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/hi/common.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/hi/confirm-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/hi/confirm-new-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/hi/reset-password.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/uk/common.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/uk/confirm-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/uk/confirm-new-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/uk/reset-password.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/zh/common.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/zh/confirm-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/zh/confirm-new-email.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/i18n/zh/reset-password.json",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/mail/config/mail-config.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 11
+        },
+        {
+          "file": "src/mail/interfaces/mail-data.interface.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 4
+        },
+        {
+          "file": "src/mail/mail-templates/activation.hbs",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/mail/mail-templates/confirm-new-email.hbs",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/mail/mail-templates/reset-password.hbs",
+          "reason": "NOT_TS_SOURCE",
+          "codeLines": null
+        },
+        {
+          "file": "src/mail/mail.service.ts",
+          "reason": "TOO_LARGE",
+          "codeLines": 155
+        },
+        {
+          "file": "src/mailer/mailer.module.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 7
+        },
+        {
+          "file": "src/roles/dto/role.dto.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 7
+        },
+        {
+          "file": "src/roles/infrastructure/persistence/document/entities/role.schema.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 4
+        },
+        {
+          "file": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 11
+        },
+        {
+          "file": "src/roles/roles.decorator.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 2
+        },
+        {
+          "file": "src/roles/roles.enum.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 4
+        },
+        {
+          "file": "src/session/domain/session.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 9
+        },
+        {
+          "file": "src/session/infrastructure/persistence/document/mappers/session.mapper.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 31
+        },
+        {
+          "file": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 32
+        },
+        {
+          "file": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 32
+        },
+        {
+          "file": "src/session/infrastructure/persistence/session.repository.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 27
+        },
+        {
+          "file": "src/social/interfaces/social.interface.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 7
+        },
+        {
+          "file": "src/statuses/dto/status.dto.ts",
+          "reason": "TOO_SMALL",
+          "codeLines": 7
+        },
+        {
+          "file": "src/statuses/infrastructure/persistence/document/entities/status.schema.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 4
+        },
+        {
+          "file": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 11
+        },
+        {
+          "file": "src/statuses/statuses.enum.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 4
+        },
+        {
+          "file": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 72
+        },
+        {
+          "file": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 58
+        },
+        {
+          "file": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 64
+        },
+        {
+          "file": "src/users/infrastructure/persistence/user.repository.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 34
+        },
+        {
+          "file": "src/users/users.controller.ts",
+          "reason": "TOO_LARGE",
+          "codeLines": 131
+        },
+        {
+          "file": "src/users/users.service.ts",
+          "reason": "TOO_LARGE",
+          "codeLines": 242
+        },
+        {
+          "file": "src/utils/deep-resolver.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 21
+        },
+        {
+          "file": "src/utils/document-entity-helper.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 15
+        },
+        {
+          "file": "src/utils/infinity-pagination.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 11
+        },
+        {
+          "file": "src/utils/relational-entity-helper.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 12
+        },
+        {
+          "file": "src/utils/transformers/lower-case.transformer.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 5
+        },
+        {
+          "file": "src/utils/types/deep-partial.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 3
+        },
+        {
+          "file": "src/utils/types/maybe.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "src/utils/types/nullable.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "src/utils/types/or-never.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 1
+        },
+        {
+          "file": "src/utils/types/pagination-options.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 4
+        },
+        {
+          "file": "src/utils/types/request-with-user.type.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 4
+        },
+        {
+          "file": "src/utils/validate-config.ts",
+          "reason": "NO_FRAMEWORK_IMPORT",
+          "codeLines": 19
+        }
+      ],
+      "selected": [
+        "src/auth-google/auth-google.controller.ts",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+        "src/main.ts",
+        "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+        "src/files/infrastructure/uploader/local/files.service.ts"
+      ]
+    }
+  ]
+}

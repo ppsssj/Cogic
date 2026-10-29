@@ -1,0 +1,256 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "bn01-auth-google-controller",
+  "gtVersion": 1,
+  "activeFile": "src/auth-google/auth-google.controller.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/auth-google/auth-google.controller.ts"
+    },
+    {
+      "id": "S_nest_route_owner_26_1",
+      "type": "synthetic",
+      "file": "src/auth-google/auth-google.controller.ts",
+      "line": 26,
+      "framework": "nest",
+      "role": "route-owner",
+      "anchor": "@ApiOkResponse("
+    },
+    {
+      "id": "C_AuthGoogleController_15",
+      "type": "class",
+      "file": "src/auth-google/auth-google.controller.ts",
+      "line": 15,
+      "name": "AuthGoogleController"
+    },
+    {
+      "id": "X_AuthService_auth_service_ts_32",
+      "type": "external",
+      "file": "src/auth/auth.service.ts",
+      "line": 32,
+      "name": "AuthService"
+    },
+    {
+      "id": "X_AuthGoogleService_auth_google_service_ts_12",
+      "type": "external",
+      "file": "src/auth-google/auth-google.service.ts",
+      "line": 12,
+      "name": "AuthGoogleService"
+    },
+    {
+      "id": "X_LoginResponseDto_login_response_dto_ts_4",
+      "type": "external",
+      "file": "src/auth/dto/login-response.dto.ts",
+      "line": 4,
+      "name": "LoginResponseDto"
+    },
+    {
+      "id": "F_login_26",
+      "type": "callable",
+      "file": "src/auth-google/auth-google.controller.ts",
+      "line": 26,
+      "name": "login"
+    },
+    {
+      "id": "X_AuthGoogleLoginDto_auth_google_login_dto_ts_4",
+      "type": "external",
+      "file": "src/auth-google/dto/auth-google-login.dto.ts",
+      "line": 4,
+      "name": "AuthGoogleLoginDto"
+    },
+    {
+      "id": "lib_Promise",
+      "type": "lib",
+      "symbol": "Promise"
+    },
+    {
+      "id": "X_getProfileByToken_auth_google_service_ts_23",
+      "type": "external",
+      "file": "src/auth-google/auth-google.service.ts",
+      "line": 23,
+      "name": "getProfileByToken"
+    },
+    {
+      "id": "X_validateSocialLogin_auth_service_ts_99",
+      "type": "external",
+      "file": "src/auth/auth.service.ts",
+      "line": 99,
+      "name": "validateSocialLogin"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "C_AuthGoogleController_15",
+      "target": "X_AuthService_auth_service_ts_32",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:22"
+      ],
+      "note": "Constructor parameter property types belong to the class (guide §3.2)."
+    },
+    {
+      "id": "R02",
+      "kind": "references",
+      "source": "C_AuthGoogleController_15",
+      "target": "X_AuthGoogleService_auth_google_service_ts_12",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:23"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "references",
+      "source": "file",
+      "target": "X_LoginResponseDto_login_response_dto_ts_4",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:27"
+      ],
+      "note": "Inside the @ApiOkResponse method decorator argument: decorator expressions belong to the owner of the class (the file; guide §3.4, D10)."
+    },
+    {
+      "id": "R04",
+      "kind": "references",
+      "source": "F_login_26",
+      "target": "X_AuthGoogleLoginDto_auth_google_login_dto_ts_4",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:34"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "references",
+      "source": "F_login_26",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:34"
+      ]
+    },
+    {
+      "id": "R06",
+      "kind": "references",
+      "source": "F_login_26",
+      "target": "X_LoginResponseDto_login_response_dto_ts_4",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:34"
+      ]
+    },
+    {
+      "id": "R07",
+      "kind": "calls",
+      "source": "F_login_26",
+      "target": "X_getProfileByToken_auth_google_service_ts_23",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:35"
+      ]
+    },
+    {
+      "id": "R08",
+      "kind": "dataflow",
+      "source": "F_login_26",
+      "target": "X_getProfileByToken_auth_google_service_ts_23",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:35"
+      ]
+    },
+    {
+      "id": "R09",
+      "kind": "calls",
+      "source": "F_login_26",
+      "target": "X_validateSocialLogin_auth_service_ts_99",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:37"
+      ]
+    },
+    {
+      "id": "R10",
+      "kind": "dataflow",
+      "source": "F_login_26",
+      "target": "X_validateSocialLogin_auth_service_ts_99",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:37"
+      ]
+    },
+    {
+      "id": "R11",
+      "kind": "dataflow",
+      "source": "F_login_26",
+      "target": "X_validateSocialLogin_auth_service_ts_99",
+      "argIndex": 1,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:37"
+      ]
+    },
+    {
+      "id": "R12",
+      "kind": "owner",
+      "source": "S_nest_route_owner_26_1",
+      "pattern": "FW-NEST-ROUTE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:26"
+      ],
+      "note": "@Controller (class) and @Post (method) are imported from @nestjs/common (guide §5.4). The node line is the method's start including decorators (line 26); @Post is on line 32."
+    },
+    {
+      "id": "R13",
+      "kind": "calls",
+      "source": "S_nest_route_owner_26_1",
+      "target": "F_login_26",
+      "pattern": "FW-NEST-HANDLER-CALL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/auth-google/auth-google.controller.ts:26"
+      ]
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/auth-google/auth-google.controller.ts:15",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/auth-google/auth-google.controller.ts:16",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/auth-google/auth-google.controller.ts:29",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/auth-google/auth-google.controller.ts:32",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/auth-google/auth-google.controller.ts:33",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    }
+  ]
+}

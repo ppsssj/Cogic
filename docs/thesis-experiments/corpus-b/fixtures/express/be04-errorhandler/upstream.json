@@ -1,0 +1,66 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "be04-errorhandler",
+  "repo": "edwinhern/express-typescript",
+  "url": "https://github.com/edwinhern/express-typescript",
+  "commit": "983fa0413659cd921c5754b00f7817903eb91364",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "tsconfig.json",
+    "derivedOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": [
+          "*"
+        ]
+      },
+      "strict": true,
+      "esModuleInterop": true,
+      "lib": [
+        "ESNext"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": [
+          "*"
+        ]
+      },
+      "moduleResolution": "Node",
+      "outDir": "dist",
+      "importsNotUsedAsValues": "remove",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "types": [
+        "vitest/globals"
+      ]
+    }
+  },
+  "activeFile": "src/common/middleware/errorHandler.ts",
+  "upstreamActiveFile": "src/common/middleware/errorHandler.ts",
+  "files": [
+    {
+      "path": "src/common/middleware/errorHandler.ts",
+      "upstreamPath": "src/common/middleware/errorHandler.ts",
+      "sha256": "7e066e85ba159f124f2129848da6d420f400f149409c64aad477bd591185a7ff",
+      "bytes": 468
+    }
+  ],
+  "thirdPartyModules": [
+    "express",
+    "http-status-codes"
+  ],
+  "importEdges": []
+}

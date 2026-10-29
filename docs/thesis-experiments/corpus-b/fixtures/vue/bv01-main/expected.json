@@ -1,0 +1,84 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "bv01-main",
+  "gtVersion": 1,
+  "activeFile": "src/main.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/main.ts"
+    },
+    {
+      "id": "X_setAuthorizationToken_set_authorization_token_ts_4",
+      "type": "external",
+      "file": "src/plugins/set-authorization-token.ts",
+      "line": 4,
+      "name": "setAuthorizationToken"
+    },
+    {
+      "id": "X_registerGlobalComponents_global_components_ts_4",
+      "type": "external",
+      "file": "src/plugins/global-components.ts",
+      "line": 4,
+      "name": "registerGlobalComponents"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "calls",
+      "source": "file",
+      "target": "X_setAuthorizationToken_set_authorization_token_ts_4",
+      "pattern": "CALL-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.ts:13"
+      ],
+      "note": "Module top-level call of a default import (owner file, EXP-01 e03/h03: CALL-TOPLEVEL)."
+    },
+    {
+      "id": "R02",
+      "kind": "calls",
+      "source": "file",
+      "target": "X_registerGlobalComponents_global_components_ts_4",
+      "pattern": "CALL-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.ts:14"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "dataflow",
+      "source": "file",
+      "target": "X_registerGlobalComponents_global_components_ts_4",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.ts:14"
+      ],
+      "note": "Argument `app` (local const, value of untyped createApp) flows to parameter app of registerGlobalComponents."
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/main.ts:8",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/main.ts:10",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:11",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:16",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    }
+  ]
+}

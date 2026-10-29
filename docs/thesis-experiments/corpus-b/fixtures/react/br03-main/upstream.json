@@ -1,0 +1,2066 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "br03-main",
+  "repo": "alan2207/bulletproof-react",
+  "url": "https://github.com/alan2207/bulletproof-react",
+  "commit": "9506629ed003a561c6627735480cce4994244bb4",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "apps/react-vite/tsconfig.json",
+    "derivedOptions": {
+      "target": "ESNext",
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "jsx": "react-jsx",
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "./src/*"
+        ]
+      },
+      "strict": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "allowJs": true,
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "target": "ESNext",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "resolveJsonModule": true,
+      "noEmit": true,
+      "jsx": "react-jsx",
+      "types": [
+        "vite/client",
+        "vitest/globals"
+      ],
+      "isolatedModules": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "./src/*"
+        ]
+      }
+    }
+  },
+  "activeFile": "src/main.tsx",
+  "upstreamActiveFile": "apps/react-vite/src/main.tsx",
+  "files": [
+    {
+      "path": "src/app/index.tsx",
+      "upstreamPath": "apps/react-vite/src/app/index.tsx",
+      "sha256": "c7818a637d987dcb7cf217dfcec21c9e37ca781a1913b1b32dc70afee6ff45d2",
+      "bytes": 194
+    },
+    {
+      "path": "src/app/provider.tsx",
+      "upstreamPath": "apps/react-vite/src/app/provider.tsx",
+      "sha256": "af175b9b5e1d3d56448f61849a189403dfa4f3b7a18b346cbc851215ef248d6e",
+      "bytes": 1670
+    },
+    {
+      "path": "src/app/router.tsx",
+      "upstreamPath": "apps/react-vite/src/app/router.tsx",
+      "sha256": "c0de35cde6c30ac5b29d770d7bf1430e5955935f04a837eee5c7a2b025fa230b",
+      "bytes": 2567
+    },
+    {
+      "path": "src/app/routes/app/dashboard.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/app/dashboard.tsx",
+      "sha256": "edd41e651252d30164758f9978874eb879d783b0895f4dcd7afd5b7b5ef00c4a",
+      "bytes": 1130
+    },
+    {
+      "path": "src/app/routes/app/discussions/discussion.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/app/discussions/discussion.tsx",
+      "sha256": "3708be564cce7c7a7cd9bf9eef0da09ceb8b5a1c0cd8f934646cf504ffd4bbf5",
+      "bytes": 2312
+    },
+    {
+      "path": "src/app/routes/app/discussions/discussions.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/app/discussions/discussions.tsx",
+      "sha256": "f586bc3bdd94c3fa144a9be29f35fee96688601653b17ab5b3563a242c2fe7a8",
+      "bytes": 1562
+    },
+    {
+      "path": "src/app/routes/app/profile.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/app/profile.tsx",
+      "sha256": "6fbaac742164006e6035d5c72090a22db07d59c752c01a8ebb35daab6cddc0cc",
+      "bytes": 1723
+    },
+    {
+      "path": "src/app/routes/app/root.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/app/root.tsx",
+      "sha256": "879661ef5c0853a0a81bce25293fe133fb71e48f89555b2372872395c61a8b5a",
+      "bytes": 328
+    },
+    {
+      "path": "src/app/routes/app/users.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/app/users.tsx",
+      "sha256": "4a0376c7eb4b69d15c68a4e95431361b02aa1887beb0101e731887fe1b77e7b2",
+      "bytes": 866
+    },
+    {
+      "path": "src/app/routes/auth/login.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/auth/login.tsx",
+      "sha256": "5aabd94835e34cc01e5ca004a852103545effc9a20dc2f92dca76b5f5b18ba5a",
+      "bytes": 767
+    },
+    {
+      "path": "src/app/routes/auth/register.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/auth/register.tsx",
+      "sha256": "d4ab15568e3ed3fa1f718936b1788d9b78261e6e1ed6f572cf589d57d80d3edd",
+      "bytes": 1160
+    },
+    {
+      "path": "src/app/routes/landing.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/landing.tsx",
+      "sha256": "ff84fd4bf8a4db3e9737b53427bf79c1b0ed5c4fbe431f5d5fda64fdcc3056e8",
+      "bytes": 3643
+    },
+    {
+      "path": "src/app/routes/not-found.tsx",
+      "upstreamPath": "apps/react-vite/src/app/routes/not-found.tsx",
+      "sha256": "2ff24071cbccac34c54b2c934a017a19087e6bc01cec408f5aa25a4389cc9db3",
+      "bytes": 438
+    },
+    {
+      "path": "src/components/errors/main.tsx",
+      "upstreamPath": "apps/react-vite/src/components/errors/main.tsx",
+      "sha256": "062d9126554ead16cb908d66a48a6f7349d764c9471c9123550dc0e01eb9b809",
+      "bytes": 485
+    },
+    {
+      "path": "src/components/layouts/auth-layout.tsx",
+      "upstreamPath": "apps/react-vite/src/components/layouts/auth-layout.tsx",
+      "sha256": "17938c0600f77cfa37794780d477b9699c314aa22330d5d33e04f07edbcd113b",
+      "bytes": 1731
+    },
+    {
+      "path": "src/components/layouts/content-layout.tsx",
+      "upstreamPath": "apps/react-vite/src/components/layouts/content-layout.tsx",
+      "sha256": "1d927365789af83e8d7558394e7a029b42145b5439b0014fdadf07559a7c1beb",
+      "bytes": 610
+    },
+    {
+      "path": "src/components/layouts/dashboard-layout.tsx",
+      "upstreamPath": "apps/react-vite/src/components/layouts/dashboard-layout.tsx",
+      "sha256": "c07f38cde29f0b3df94cf8a45ffa60a364dae32f18fb56bba187ceb348e5659a",
+      "bytes": 7064
+    },
+    {
+      "path": "src/components/layouts/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/layouts/index.ts",
+      "sha256": "5be669d81db59dc34cb1d587938194f78b4846ca7738af969777f2316ccd737d",
+      "bytes": 72
+    },
+    {
+      "path": "src/components/seo/head.tsx",
+      "upstreamPath": "apps/react-vite/src/components/seo/head.tsx",
+      "sha256": "4637cc5f3a7b25a8b742800f22c6bbaaea6797df404cf462076fcc1a2d0e5d34",
+      "bytes": 500
+    },
+    {
+      "path": "src/components/seo/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/seo/index.ts",
+      "sha256": "5486ef02202c224193572757e4b44ea30942ce46002249556021ed734a82ed2b",
+      "bytes": 25
+    },
+    {
+      "path": "src/components/ui/button/button.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/button/button.tsx",
+      "sha256": "dd5d72f2751fd8c7874b21553ebc82b34e7c200efd47e2059277e6a425446fdf",
+      "bytes": 2301
+    },
+    {
+      "path": "src/components/ui/button/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/button/index.ts",
+      "sha256": "6f0a2a8b6bd67f4793daf1433c9885bf2b636bea8143552ccaa43ce00b3cfeb8",
+      "bytes": 27
+    },
+    {
+      "path": "src/components/ui/dialog/confirmation-dialog/confirmation-dialog.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/dialog/confirmation-dialog/confirmation-dialog.tsx",
+      "sha256": "0a2cd1eb5c5c491b43d47f970273abd3c5aa8e80fdd9ea47fe55795a39ef4a74",
+      "bytes": 2220
+    },
+    {
+      "path": "src/components/ui/dialog/confirmation-dialog/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/dialog/confirmation-dialog/index.ts",
+      "sha256": "8e22a8eff2feeef56c662b1920387eafea4d97e7eaa0b48d92d522086470e83d",
+      "bytes": 40
+    },
+    {
+      "path": "src/components/ui/dialog/dialog.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/dialog/dialog.tsx",
+      "sha256": "b2a1ca60248f48de92ac0e5f478c153b8d2237af10b1be3d9dd61248e5294aa4",
+      "bytes": 4006
+    },
+    {
+      "path": "src/components/ui/dialog/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/dialog/index.ts",
+      "sha256": "a71b2c0377c18d549f0a194166fac9f6d61c76c33f72c47301786dff8d9611ca",
+      "bytes": 67
+    },
+    {
+      "path": "src/components/ui/drawer/drawer.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/drawer/drawer.tsx",
+      "sha256": "e1fe01d3de314411007bd50eed639fe3f41c3f25a7a3fa6e9d9f29e0d9c60020",
+      "bytes": 4505
+    },
+    {
+      "path": "src/components/ui/drawer/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/drawer/index.ts",
+      "sha256": "6f67c00f0a323a16bd60b3e5580293efe0fbf890caaebd070cd30ce46878836b",
+      "bytes": 27
+    },
+    {
+      "path": "src/components/ui/dropdown/dropdown.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/dropdown/dropdown.tsx",
+      "sha256": "76228e621d7676eb28f8b958c5aa6762d280ff834d979e322b9720ae61a43570",
+      "bytes": 7585
+    },
+    {
+      "path": "src/components/ui/dropdown/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/dropdown/index.ts",
+      "sha256": "1b64ae3ee796edd335108fd5ceb2d3657d3d646486e3580e659de4f73b9522cb",
+      "bytes": 29
+    },
+    {
+      "path": "src/components/ui/form/error.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/error.tsx",
+      "sha256": "4a6caf08ac742c2d58fed62087916e639e3588b236762e996bb893ce1542e6f4",
+      "bytes": 342
+    },
+    {
+      "path": "src/components/ui/form/field-wrapper.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/field-wrapper.tsx",
+      "sha256": "88d6f39fd1c493cf0d63db244729d04e72d42b300a6b08362eb0249b89b722b5",
+      "bytes": 698
+    },
+    {
+      "path": "src/components/ui/form/form-drawer.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/form-drawer.tsx",
+      "sha256": "e852bbf4075dc66371ae297bc579295f86f327b0c1086348a79bd169ad05df76",
+      "bytes": 1546
+    },
+    {
+      "path": "src/components/ui/form/form.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/form.tsx",
+      "sha256": "92efdbb144ce5d43550322f2d0cb5aa7de4df4bccdbc9d246d648fa599595c74",
+      "bytes": 5272
+    },
+    {
+      "path": "src/components/ui/form/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/index.ts",
+      "sha256": "797834f71dae3d55aa87f296b63a26e7eb36dc336e1ceb4b1f9ec6fa997148ba",
+      "bytes": 192
+    },
+    {
+      "path": "src/components/ui/form/input.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/input.tsx",
+      "sha256": "09d4ac6b58c5bd9c16129abd3826615567ac1c6832b6143815b70822217c8c7c",
+      "bytes": 1228
+    },
+    {
+      "path": "src/components/ui/form/label.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/label.tsx",
+      "sha256": "07e1ab500e1e03521915f60fe304e2c1ad0348e37afd5b37f7fa6f6ef8b6172f",
+      "bytes": 742
+    },
+    {
+      "path": "src/components/ui/form/select.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/select.tsx",
+      "sha256": "a4ac83f7d8c89103eb3b0cabdf0b6648e23645967afab0ec23541c61bb18ab6a",
+      "bytes": 1194
+    },
+    {
+      "path": "src/components/ui/form/switch.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/switch.tsx",
+      "sha256": "598aeb74eb4790c020ff96d39a7e18fedde330a75226ac048ba27d594f3689f1",
+      "bytes": 1182
+    },
+    {
+      "path": "src/components/ui/form/textarea.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/textarea.tsx",
+      "sha256": "0f9dac2436462b4acf044a16f4d7486a84fbc932c957fe8b1614bc37e8f05d30",
+      "bytes": 1151
+    },
+    {
+      "path": "src/components/ui/link/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/link/index.ts",
+      "sha256": "2977b1ae3aee48d152c639a944571bb6051dd3d28a8a67669a349df113593275",
+      "bytes": 25
+    },
+    {
+      "path": "src/components/ui/link/link.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/link/link.tsx",
+      "sha256": "816f5a61b1b9a9bc4dfe81f0208a0761b64c399c298934b35d92454cc3d099f1",
+      "bytes": 347
+    },
+    {
+      "path": "src/components/ui/md-preview/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/md-preview/index.ts",
+      "sha256": "2e6d72d6d5e8f9688441e079af1d313e8a345bd2f999df8de9bd84029483af00",
+      "bytes": 31
+    },
+    {
+      "path": "src/components/ui/md-preview/md-preview.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/md-preview/md-preview.tsx",
+      "sha256": "0226491c2f44375799dd410cde22a2f3c0762d4072a57d06b6f8cdd9d46633b6",
+      "bytes": 436
+    },
+    {
+      "path": "src/components/ui/notifications/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/notifications/index.ts",
+      "sha256": "0c0dfb954e4b8323fb512756c7b72ca056285647e53b7055348afbf53afb3014",
+      "bytes": 74
+    },
+    {
+      "path": "src/components/ui/notifications/notification.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/notifications/notification.tsx",
+      "sha256": "176982744e41308d6fab8b21893f082cd368fcb22e5408128b2d655b3682348f",
+      "bytes": 1926
+    },
+    {
+      "path": "src/components/ui/notifications/notifications-store.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/notifications/notifications-store.ts",
+      "sha256": "20f50e1a5b386f180a42631a29417d4ab633472ad7bd43035b206968b50e61bb",
+      "bytes": 855
+    },
+    {
+      "path": "src/components/ui/notifications/notifications.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/notifications/notifications.tsx",
+      "sha256": "4aeaf795ab721d4d320fdbd68d314a239cd7ad4e17958229801de17b65f91411",
+      "bytes": 630
+    },
+    {
+      "path": "src/components/ui/spinner/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/spinner/index.ts",
+      "sha256": "6e766c9d8ed5bddbc1c3aea0c4c7d80c3008f2bcaea9d649e21b22d28264e8f8",
+      "bytes": 28
+    },
+    {
+      "path": "src/components/ui/spinner/spinner.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/spinner/spinner.tsx",
+      "sha256": "2de3625d2e60ae2e628d102300cde403e73fd63df537c0c32c1dac24ddbbf3cc",
+      "bytes": 1014
+    },
+    {
+      "path": "src/components/ui/table/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/table/index.ts",
+      "sha256": "811d87986acd7bf48b3c76ab0ce0413837621a43ce3006fd56668df1ddb8b03d",
+      "bytes": 26
+    },
+    {
+      "path": "src/components/ui/table/pagination.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/table/pagination.tsx",
+      "sha256": "3320c1f483fc91abcd5ea343570806604db702618e29bfe9da3edc3d93ae1cf8",
+      "bytes": 4772
+    },
+    {
+      "path": "src/components/ui/table/table.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/table/table.tsx",
+      "sha256": "c29f7878cd144c6302190abfb5a27e3eae29ec2426f534e8a780cf5d3c917b2a",
+      "bytes": 4610
+    },
+    {
+      "path": "src/config/env.ts",
+      "upstreamPath": "apps/react-vite/src/config/env.ts",
+      "sha256": "784ea52f9d1e0e7426f029b2870d261c26d82f9bed655dad360141662abbbfaa",
+      "bytes": 1056
+    },
+    {
+      "path": "src/config/paths.ts",
+      "upstreamPath": "apps/react-vite/src/config/paths.ts",
+      "sha256": "64ad47d443e927d4e9d7062ebc856825a79a1b1bff7364d4e61624ab4812005f",
+      "bytes": 1081
+    },
+    {
+      "path": "src/features/auth/components/login-form.tsx",
+      "upstreamPath": "apps/react-vite/src/features/auth/components/login-form.tsx",
+      "sha256": "c30ecbb54bdf897c743f131d67d0cad27c07e5b725a40b375c6e7d9a97997039",
+      "bytes": 1775
+    },
+    {
+      "path": "src/features/auth/components/register-form.tsx",
+      "upstreamPath": "apps/react-vite/src/features/auth/components/register-form.tsx",
+      "sha256": "c4a6dec14b1cb6b293e32b119484e667b8071278fc4ddac176d5c10c93fdf7e3",
+      "bytes": 3666
+    },
+    {
+      "path": "src/features/comments/api/create-comment.ts",
+      "upstreamPath": "apps/react-vite/src/features/comments/api/create-comment.ts",
+      "sha256": "866d999cca1dc9e7025fc96f96c7a1ac08745ff8679269acbfe115b97502b960",
+      "bytes": 1293
+    },
+    {
+      "path": "src/features/comments/api/delete-comment.ts",
+      "upstreamPath": "apps/react-vite/src/features/comments/api/delete-comment.ts",
+      "sha256": "d839cfd14bebd7c8236dffc9116a79026835b6a020eb4bbf5366cb99427ea60b",
+      "bytes": 981
+    },
+    {
+      "path": "src/features/comments/api/get-comments.ts",
+      "upstreamPath": "apps/react-vite/src/features/comments/api/get-comments.ts",
+      "sha256": "0996cecbf7fffa085dbfaf22bbf4dda1b059d1239f0bd53c8f8b5bd66129f7ad",
+      "bytes": 1300
+    },
+    {
+      "path": "src/features/comments/components/comments-list.tsx",
+      "upstreamPath": "apps/react-vite/src/features/comments/components/comments-list.tsx",
+      "sha256": "38ac5c2bec5193e24c476e96499cabbf392af6bf586a12dd0170a40cdd42894e",
+      "bytes": 2896
+    },
+    {
+      "path": "src/features/comments/components/comments.tsx",
+      "upstreamPath": "apps/react-vite/src/features/comments/components/comments.tsx",
+      "sha256": "735f4c78453fbe77b7ee6e61ee810e5e8ebd9c3732feef6f20fbebea82035b76",
+      "bytes": 509
+    },
+    {
+      "path": "src/features/comments/components/create-comment.tsx",
+      "upstreamPath": "apps/react-vite/src/features/comments/components/create-comment.tsx",
+      "sha256": "306f569ae880e1aaf41df047e0a1e077bf79aba3554a1b4d41da3918d5791dc4",
+      "bytes": 1907
+    },
+    {
+      "path": "src/features/comments/components/delete-comment.tsx",
+      "upstreamPath": "apps/react-vite/src/features/comments/components/delete-comment.tsx",
+      "sha256": "7fbc7a404da932306f3ae27bf3c1bb67ab11e9a83ea5578c864fd8c577a2836c",
+      "bytes": 1452
+    },
+    {
+      "path": "src/features/discussions/api/create-discussion.ts",
+      "upstreamPath": "apps/react-vite/src/features/discussions/api/create-discussion.ts",
+      "sha256": "c126122430aac8d18a449f659b0b636c039b77d40539ef605c3864c5b357588f",
+      "bytes": 1269
+    },
+    {
+      "path": "src/features/discussions/api/delete-discussion.ts",
+      "upstreamPath": "apps/react-vite/src/features/discussions/api/delete-discussion.ts",
+      "sha256": "ce1b30720e3587728795dd3c4f78414367ba0482c0bfc7002869b545c26d025f",
+      "bytes": 965
+    },
+    {
+      "path": "src/features/discussions/api/get-discussion.ts",
+      "upstreamPath": "apps/react-vite/src/features/discussions/api/get-discussion.ts",
+      "sha256": "553214258a1e05518bd97d12e751c64e529d6ed80c74980f71c84bf678c6b142",
+      "bytes": 913
+    },
+    {
+      "path": "src/features/discussions/api/get-discussions.ts",
+      "upstreamPath": "apps/react-vite/src/features/discussions/api/get-discussions.ts",
+      "sha256": "672222fe8630862a782914536e243df51d4e56d663794d973aa797e22edd11ee",
+      "bytes": 947
+    },
+    {
+      "path": "src/features/discussions/api/update-discussion.ts",
+      "upstreamPath": "apps/react-vite/src/features/discussions/api/update-discussion.ts",
+      "sha256": "a12dc512005c5a38d7f4b3c95324a774767d96806a37988fc804f85e872f73fc",
+      "bytes": 1341
+    },
+    {
+      "path": "src/features/discussions/components/create-discussion.tsx",
+      "upstreamPath": "apps/react-vite/src/features/discussions/components/create-discussion.tsx",
+      "sha256": "61629ae7f4dbd1dd95867c124a5889db7fff82e5ed6969b4522f07a4cdfb7dcb",
+      "bytes": 2047
+    },
+    {
+      "path": "src/features/discussions/components/delete-discussion.tsx",
+      "upstreamPath": "apps/react-vite/src/features/discussions/components/delete-discussion.tsx",
+      "sha256": "3ce3f3baa0c85062e5598671bfb69181390d0a10c2e191bc84a0f28a96d131c0",
+      "bytes": 1540
+    },
+    {
+      "path": "src/features/discussions/components/discussion-view.tsx",
+      "upstreamPath": "apps/react-vite/src/features/discussions/components/discussion-view.tsx",
+      "sha256": "4a5849a9474362d4dde1f347ec25a26a722de27323875cbf7b24ed6399492920",
+      "bytes": 1563
+    },
+    {
+      "path": "src/features/discussions/components/discussions-list.tsx",
+      "upstreamPath": "apps/react-vite/src/features/discussions/components/discussions-list.tsx",
+      "sha256": "ad0bcf18ba6be8fbc28b809d17bd987ca76dd52f4c4f2bd964c26e921a6e33dc",
+      "bytes": 2484
+    },
+    {
+      "path": "src/features/discussions/components/update-discussion.tsx",
+      "upstreamPath": "apps/react-vite/src/features/discussions/components/update-discussion.tsx",
+      "sha256": "2f9c7fdda7b81b841997b806c46f04eaef1e81afcc50985c41bfdb19a606f0fb",
+      "bytes": 2545
+    },
+    {
+      "path": "src/features/teams/api/get-teams.ts",
+      "upstreamPath": "apps/react-vite/src/features/teams/api/get-teams.ts",
+      "sha256": "351a33260603412b005aab6c4c5abe1cf255c080ebfa36710c4e317a62af55a6",
+      "bytes": 684
+    },
+    {
+      "path": "src/features/users/api/delete-user.ts",
+      "upstreamPath": "apps/react-vite/src/features/users/api/delete-user.ts",
+      "sha256": "454a25e953228ef8290871686081c4903151c4534a45dd9b8794ec968c4fef0c",
+      "bytes": 928
+    },
+    {
+      "path": "src/features/users/api/get-users.ts",
+      "upstreamPath": "apps/react-vite/src/features/users/api/get-users.ts",
+      "sha256": "e5ed0c1c8ceb319d92f35d84ce4b2b6f2cdcaa0343ffb53bf8695efec79964e5",
+      "bytes": 671
+    },
+    {
+      "path": "src/features/users/api/update-profile.ts",
+      "upstreamPath": "apps/react-vite/src/features/users/api/update-profile.ts",
+      "sha256": "dba4c7a5b3d32fd69f513050820e188867df0be0139572e5f7e8e8ccffe4efde",
+      "bytes": 1136
+    },
+    {
+      "path": "src/features/users/components/delete-user.tsx",
+      "upstreamPath": "apps/react-vite/src/features/users/components/delete-user.tsx",
+      "sha256": "79a44bae2e281b48c0f6725c04e0f543345e8fc979dc1099c5d1212a0341650c",
+      "bytes": 1236
+    },
+    {
+      "path": "src/features/users/components/update-profile.tsx",
+      "upstreamPath": "apps/react-vite/src/features/users/components/update-profile.tsx",
+      "sha256": "5124d3ee7011ef9231ae7661228cdc0ade980db0cb79409bdebe463dc7bcdc41",
+      "bytes": 2489
+    },
+    {
+      "path": "src/features/users/components/users-list.tsx",
+      "upstreamPath": "apps/react-vite/src/features/users/components/users-list.tsx",
+      "sha256": "a94889fe591aad5bdfb6accade6131a757d7d99a891418e5db369ac0efcc0aa1",
+      "bytes": 1338
+    },
+    {
+      "path": "src/hooks/use-disclosure.ts",
+      "upstreamPath": "apps/react-vite/src/hooks/use-disclosure.ts",
+      "sha256": "2abfb73d0bd5816c449a182641cd4da76722e923e22181d6b42135efb31b968d",
+      "bytes": 398
+    },
+    {
+      "path": "src/lib/api-client.ts",
+      "upstreamPath": "apps/react-vite/src/lib/api-client.ts",
+      "sha256": "78d83b5c9db7a56fb0a6f6d69e902029514dbeabb50e7dca785d4797ea82a103",
+      "bytes": 1143
+    },
+    {
+      "path": "src/lib/auth.tsx",
+      "upstreamPath": "apps/react-vite/src/lib/auth.tsx",
+      "sha256": "f355726db15fb62e82088537d3aa42e8bbbf729497e9e48b65e8d900cb8cd114",
+      "bytes": 2461
+    },
+    {
+      "path": "src/lib/authorization.tsx",
+      "upstreamPath": "apps/react-vite/src/lib/authorization.tsx",
+      "sha256": "78454230e877ebbc3394ab789b1ad3fc3997c026aead264ed5893c7b6e5e1d10",
+      "bytes": 1680
+    },
+    {
+      "path": "src/lib/react-query.ts",
+      "upstreamPath": "apps/react-vite/src/lib/react-query.ts",
+      "sha256": "8c6e198a6773f8521f9747ab647e43040eb298b64a0e6b64fc1ad957cd9b9460",
+      "bytes": 693
+    },
+    {
+      "path": "src/main.tsx",
+      "upstreamPath": "apps/react-vite/src/main.tsx",
+      "sha256": "328bde1f2037465084a4d2777ec278278559b7cf34565155f87e8fbd0ac51cd0",
+      "bytes": 425
+    },
+    {
+      "path": "src/testing/mocks/browser.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/browser.ts",
+      "sha256": "af8b8ae6da49a3ffe125e06c898dbdc8b3906314ec535b038f92a4b706b6de66",
+      "bytes": 137
+    },
+    {
+      "path": "src/testing/mocks/db.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/db.ts",
+      "sha256": "c8f4b4af0dda8365063c30b9bd613acc3f8518e82d5f15745820f6a3620097ff",
+      "bytes": 2583
+    },
+    {
+      "path": "src/testing/mocks/handlers/auth.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/handlers/auth.ts",
+      "sha256": "08b0dc50a3f08069c851c8a15a283cceb665c8f56df94de62355b4cd873f1abf",
+      "bytes": 4117
+    },
+    {
+      "path": "src/testing/mocks/handlers/comments.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/handlers/comments.ts",
+      "sha256": "7bc24bc652e31bb7c7b5ce0f36e673da0e903c839b770f5a4ccc1a572777c089",
+      "bytes": 3474
+    },
+    {
+      "path": "src/testing/mocks/handlers/discussions.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/handlers/discussions.ts",
+      "sha256": "a3519635ea539260a3606952feda06ae8629e7306d55613428d7377cbf404e20",
+      "bytes": 5731
+    },
+    {
+      "path": "src/testing/mocks/handlers/index.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/handlers/index.ts",
+      "sha256": "5326fbec1f5abded2b7428fefd21eafb61558c96b6825010853498080de537cc",
+      "bytes": 635
+    },
+    {
+      "path": "src/testing/mocks/handlers/teams.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/handlers/teams.ts",
+      "sha256": "49b000b68ba7c34e8f3a9040c4cd8f059351632d7b1dfeaa9e5de3a2a4584891",
+      "bytes": 541
+    },
+    {
+      "path": "src/testing/mocks/handlers/users.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/handlers/users.ts",
+      "sha256": "1255a20ecfe25309e0f8abddc7d7fae61fee7a3aa58be3839010edb993d2d09d",
+      "bytes": 2573
+    },
+    {
+      "path": "src/testing/mocks/index.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/index.ts",
+      "sha256": "fb1a61b23630005e7e2f20158a7e79c8843746b62f8a54d9818f282e859ead8d",
+      "bytes": 283
+    },
+    {
+      "path": "src/testing/mocks/utils.ts",
+      "upstreamPath": "apps/react-vite/src/testing/mocks/utils.ts",
+      "sha256": "80020a328d668216d874c120e9b1e08f58c7a4c63c4e7793fe5913ed6eb4f1d4",
+      "bytes": 2560
+    },
+    {
+      "path": "src/types/api.ts",
+      "upstreamPath": "apps/react-vite/src/types/api.ts",
+      "sha256": "0bcf70d9de12bf06dd264bbbb14c05f7ca4c37f21d281c95c46792878b937ddc",
+      "bytes": 923
+    },
+    {
+      "path": "src/utils/cn.ts",
+      "upstreamPath": "apps/react-vite/src/utils/cn.ts",
+      "sha256": "6646b373ff8df919a16f37afaa2a1db98046ef4daaa140dc116c0d2f61b80dcc",
+      "bytes": 175
+    },
+    {
+      "path": "src/utils/format.ts",
+      "upstreamPath": "apps/react-vite/src/utils/format.ts",
+      "sha256": "6bde5d4b2d433d9f4a3055001f403e3b8ffa100db5aa9823875601dd27db5e96",
+      "bytes": 136
+    }
+  ],
+  "thirdPartyModules": [
+    "./index.css",
+    "@/assets/logo.svg",
+    "@hookform/resolvers/zod",
+    "@mswjs/data",
+    "@radix-ui/react-dialog",
+    "@radix-ui/react-dropdown-menu",
+    "@radix-ui/react-icons",
+    "@radix-ui/react-label",
+    "@radix-ui/react-slot",
+    "@radix-ui/react-switch",
+    "@tanstack/react-query",
+    "@tanstack/react-query-devtools",
+    "axios",
+    "class-variance-authority",
+    "clsx",
+    "dayjs",
+    "dompurify",
+    "fs/promises",
+    "js-cookie",
+    "lucide-react",
+    "marked",
+    "msw",
+    "msw/browser",
+    "nanoid",
+    "react",
+    "react-dom/client",
+    "react-error-boundary",
+    "react-helmet-async",
+    "react-hook-form",
+    "react-query-auth",
+    "react-router",
+    "react-router/dom",
+    "tailwind-merge",
+    "zod",
+    "zustand"
+  ],
+  "importEdges": [
+    {
+      "from": "src/main.tsx",
+      "spec": "./app",
+      "to": "src/app/index.tsx"
+    },
+    {
+      "from": "src/main.tsx",
+      "spec": "./testing/mocks",
+      "to": "src/testing/mocks/index.ts"
+    },
+    {
+      "from": "src/app/index.tsx",
+      "spec": "./provider",
+      "to": "src/app/provider.tsx"
+    },
+    {
+      "from": "src/app/index.tsx",
+      "spec": "./router",
+      "to": "src/app/router.tsx"
+    },
+    {
+      "from": "src/testing/mocks/index.ts",
+      "spec": "@/config/env",
+      "to": "src/config/env.ts"
+    },
+    {
+      "from": "src/testing/mocks/index.ts",
+      "spec": "./browser",
+      "to": "src/testing/mocks/browser.ts"
+    },
+    {
+      "from": "src/testing/mocks/index.ts",
+      "spec": "./db",
+      "to": "src/testing/mocks/db.ts"
+    },
+    {
+      "from": "src/app/provider.tsx",
+      "spec": "@/components/errors/main",
+      "to": "src/components/errors/main.tsx"
+    },
+    {
+      "from": "src/app/provider.tsx",
+      "spec": "@/components/ui/notifications",
+      "to": "src/components/ui/notifications/index.ts"
+    },
+    {
+      "from": "src/app/provider.tsx",
+      "spec": "@/components/ui/spinner",
+      "to": "src/components/ui/spinner/index.ts"
+    },
+    {
+      "from": "src/app/provider.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/app/provider.tsx",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/app/root",
+      "to": "src/app/routes/app/root.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/landing",
+      "to": "src/app/routes/landing.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/auth/register",
+      "to": "src/app/routes/auth/register.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/auth/login",
+      "to": "src/app/routes/auth/login.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/app/discussions/discussions",
+      "to": "src/app/routes/app/discussions/discussions.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/app/discussions/discussion",
+      "to": "src/app/routes/app/discussions/discussion.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/app/users",
+      "to": "src/app/routes/app/users.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/app/profile",
+      "to": "src/app/routes/app/profile.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/app/dashboard",
+      "to": "src/app/routes/app/dashboard.tsx"
+    },
+    {
+      "from": "src/app/router.tsx",
+      "spec": "./routes/not-found",
+      "to": "src/app/routes/not-found.tsx"
+    },
+    {
+      "from": "src/testing/mocks/browser.ts",
+      "spec": "./handlers",
+      "to": "src/testing/mocks/handlers/index.ts"
+    },
+    {
+      "from": "src/components/errors/main.tsx",
+      "spec": "../ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/components/ui/notifications/index.ts",
+      "spec": "./notifications",
+      "to": "src/components/ui/notifications/notifications.tsx"
+    },
+    {
+      "from": "src/components/ui/notifications/index.ts",
+      "spec": "./notifications-store",
+      "to": "src/components/ui/notifications/notifications-store.ts"
+    },
+    {
+      "from": "src/components/ui/spinner/index.ts",
+      "spec": "./spinner",
+      "to": "src/components/ui/spinner/spinner.tsx"
+    },
+    {
+      "from": "src/lib/auth.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/lib/auth.tsx",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/lib/auth.tsx",
+      "spec": "./api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/app/routes/app/root.tsx",
+      "spec": "@/components/layouts",
+      "to": "src/components/layouts/index.ts"
+    },
+    {
+      "from": "src/app/routes/landing.tsx",
+      "spec": "@/components/seo",
+      "to": "src/components/seo/index.ts"
+    },
+    {
+      "from": "src/app/routes/landing.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/app/routes/landing.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/app/routes/landing.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/app/routes/auth/register.tsx",
+      "spec": "@/components/layouts/auth-layout",
+      "to": "src/components/layouts/auth-layout.tsx"
+    },
+    {
+      "from": "src/app/routes/auth/register.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/app/routes/auth/register.tsx",
+      "spec": "@/features/auth/components/register-form",
+      "to": "src/features/auth/components/register-form.tsx"
+    },
+    {
+      "from": "src/app/routes/auth/register.tsx",
+      "spec": "@/features/teams/api/get-teams",
+      "to": "src/features/teams/api/get-teams.ts"
+    },
+    {
+      "from": "src/app/routes/auth/login.tsx",
+      "spec": "@/components/layouts/auth-layout",
+      "to": "src/components/layouts/auth-layout.tsx"
+    },
+    {
+      "from": "src/app/routes/auth/login.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/app/routes/auth/login.tsx",
+      "spec": "@/features/auth/components/login-form",
+      "to": "src/features/auth/components/login-form.tsx"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussions.tsx",
+      "spec": "@/components/layouts",
+      "to": "src/components/layouts/index.ts"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussions.tsx",
+      "spec": "@/features/comments/api/get-comments",
+      "to": "src/features/comments/api/get-comments.ts"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussions.tsx",
+      "spec": "@/features/discussions/api/get-discussions",
+      "to": "src/features/discussions/api/get-discussions.ts"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussions.tsx",
+      "spec": "@/features/discussions/components/create-discussion",
+      "to": "src/features/discussions/components/create-discussion.tsx"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussions.tsx",
+      "spec": "@/features/discussions/components/discussions-list",
+      "to": "src/features/discussions/components/discussions-list.tsx"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussion.tsx",
+      "spec": "@/components/layouts",
+      "to": "src/components/layouts/index.ts"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussion.tsx",
+      "spec": "@/components/ui/spinner",
+      "to": "src/components/ui/spinner/index.ts"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussion.tsx",
+      "spec": "@/features/comments/api/get-comments",
+      "to": "src/features/comments/api/get-comments.ts"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussion.tsx",
+      "spec": "@/features/comments/components/comments",
+      "to": "src/features/comments/components/comments.tsx"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussion.tsx",
+      "spec": "@/features/discussions/api/get-discussion",
+      "to": "src/features/discussions/api/get-discussion.ts"
+    },
+    {
+      "from": "src/app/routes/app/discussions/discussion.tsx",
+      "spec": "@/features/discussions/components/discussion-view",
+      "to": "src/features/discussions/components/discussion-view.tsx"
+    },
+    {
+      "from": "src/app/routes/app/users.tsx",
+      "spec": "@/components/layouts",
+      "to": "src/components/layouts/index.ts"
+    },
+    {
+      "from": "src/app/routes/app/users.tsx",
+      "spec": "@/features/users/api/get-users",
+      "to": "src/features/users/api/get-users.ts"
+    },
+    {
+      "from": "src/app/routes/app/users.tsx",
+      "spec": "@/features/users/components/users-list",
+      "to": "src/features/users/components/users-list.tsx"
+    },
+    {
+      "from": "src/app/routes/app/users.tsx",
+      "spec": "@/lib/authorization",
+      "to": "src/lib/authorization.tsx"
+    },
+    {
+      "from": "src/app/routes/app/profile.tsx",
+      "spec": "@/components/layouts",
+      "to": "src/components/layouts/index.ts"
+    },
+    {
+      "from": "src/app/routes/app/profile.tsx",
+      "spec": "@/features/users/components/update-profile",
+      "to": "src/features/users/components/update-profile.tsx"
+    },
+    {
+      "from": "src/app/routes/app/profile.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/app/routes/app/dashboard.tsx",
+      "spec": "@/components/layouts",
+      "to": "src/components/layouts/index.ts"
+    },
+    {
+      "from": "src/app/routes/app/dashboard.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/app/routes/app/dashboard.tsx",
+      "spec": "@/lib/authorization",
+      "to": "src/lib/authorization.tsx"
+    },
+    {
+      "from": "src/app/routes/not-found.tsx",
+      "spec": "@/components/ui/link",
+      "to": "src/components/ui/link/index.ts"
+    },
+    {
+      "from": "src/app/routes/not-found.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/index.ts",
+      "spec": "@/config/env",
+      "to": "src/config/env.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/index.ts",
+      "spec": "../utils",
+      "to": "src/testing/mocks/utils.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/index.ts",
+      "spec": "./auth",
+      "to": "src/testing/mocks/handlers/auth.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/index.ts",
+      "spec": "./comments",
+      "to": "src/testing/mocks/handlers/comments.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/index.ts",
+      "spec": "./discussions",
+      "to": "src/testing/mocks/handlers/discussions.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/index.ts",
+      "spec": "./teams",
+      "to": "src/testing/mocks/handlers/teams.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/index.ts",
+      "spec": "./users",
+      "to": "src/testing/mocks/handlers/users.ts"
+    },
+    {
+      "from": "src/components/ui/button/index.ts",
+      "spec": "./button",
+      "to": "src/components/ui/button/button.tsx"
+    },
+    {
+      "from": "src/components/ui/notifications/notifications.tsx",
+      "spec": "./notification",
+      "to": "src/components/ui/notifications/notification.tsx"
+    },
+    {
+      "from": "src/components/ui/notifications/notifications.tsx",
+      "spec": "./notifications-store",
+      "to": "src/components/ui/notifications/notifications-store.ts"
+    },
+    {
+      "from": "src/components/ui/spinner/spinner.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/lib/api-client.ts",
+      "spec": "@/components/ui/notifications",
+      "to": "src/components/ui/notifications/index.ts"
+    },
+    {
+      "from": "src/lib/api-client.ts",
+      "spec": "@/config/env",
+      "to": "src/config/env.ts"
+    },
+    {
+      "from": "src/lib/api-client.ts",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/components/layouts/index.ts",
+      "spec": "./content-layout",
+      "to": "src/components/layouts/content-layout.tsx"
+    },
+    {
+      "from": "src/components/layouts/index.ts",
+      "spec": "./dashboard-layout",
+      "to": "src/components/layouts/dashboard-layout.tsx"
+    },
+    {
+      "from": "src/components/seo/index.ts",
+      "spec": "./head",
+      "to": "src/components/seo/head.tsx"
+    },
+    {
+      "from": "src/components/layouts/auth-layout.tsx",
+      "spec": "@/components/seo",
+      "to": "src/components/seo/index.ts"
+    },
+    {
+      "from": "src/components/layouts/auth-layout.tsx",
+      "spec": "@/components/ui/link",
+      "to": "src/components/ui/link/index.ts"
+    },
+    {
+      "from": "src/components/layouts/auth-layout.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/components/layouts/auth-layout.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/features/auth/components/register-form.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/auth/components/register-form.tsx",
+      "spec": "@/components/ui/form",
+      "to": "src/components/ui/form/index.ts"
+    },
+    {
+      "from": "src/features/auth/components/register-form.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/features/auth/components/register-form.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/features/auth/components/register-form.tsx",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/teams/api/get-teams.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/teams/api/get-teams.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/teams/api/get-teams.ts",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/auth/components/login-form.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/auth/components/login-form.tsx",
+      "spec": "@/components/ui/form",
+      "to": "src/components/ui/form/index.ts"
+    },
+    {
+      "from": "src/features/auth/components/login-form.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/features/auth/components/login-form.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/features/comments/api/get-comments.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/comments/api/get-comments.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/comments/api/get-comments.ts",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/discussions/api/get-discussions.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/discussions/api/get-discussions.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/discussions/api/get-discussions.ts",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/discussions/components/create-discussion.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/create-discussion.tsx",
+      "spec": "@/components/ui/form",
+      "to": "src/components/ui/form/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/create-discussion.tsx",
+      "spec": "@/components/ui/notifications",
+      "to": "src/components/ui/notifications/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/create-discussion.tsx",
+      "spec": "@/lib/authorization",
+      "to": "src/lib/authorization.tsx"
+    },
+    {
+      "from": "src/features/discussions/components/create-discussion.tsx",
+      "spec": "../api/create-discussion",
+      "to": "src/features/discussions/api/create-discussion.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussions-list.tsx",
+      "spec": "@/components/ui/link",
+      "to": "src/components/ui/link/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussions-list.tsx",
+      "spec": "@/components/ui/spinner",
+      "to": "src/components/ui/spinner/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussions-list.tsx",
+      "spec": "@/components/ui/table",
+      "to": "src/components/ui/table/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussions-list.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussions-list.tsx",
+      "spec": "@/utils/format",
+      "to": "src/utils/format.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussions-list.tsx",
+      "spec": "../api/get-discussion",
+      "to": "src/features/discussions/api/get-discussion.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussions-list.tsx",
+      "spec": "../api/get-discussions",
+      "to": "src/features/discussions/api/get-discussions.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussions-list.tsx",
+      "spec": "./delete-discussion",
+      "to": "src/features/discussions/components/delete-discussion.tsx"
+    },
+    {
+      "from": "src/features/comments/components/comments.tsx",
+      "spec": "./comments-list",
+      "to": "src/features/comments/components/comments-list.tsx"
+    },
+    {
+      "from": "src/features/comments/components/comments.tsx",
+      "spec": "./create-comment",
+      "to": "src/features/comments/components/create-comment.tsx"
+    },
+    {
+      "from": "src/features/discussions/api/get-discussion.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/discussions/api/get-discussion.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/discussions/api/get-discussion.ts",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussion-view.tsx",
+      "spec": "@/components/ui/md-preview",
+      "to": "src/components/ui/md-preview/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussion-view.tsx",
+      "spec": "@/components/ui/spinner",
+      "to": "src/components/ui/spinner/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussion-view.tsx",
+      "spec": "@/utils/format",
+      "to": "src/utils/format.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussion-view.tsx",
+      "spec": "../api/get-discussion",
+      "to": "src/features/discussions/api/get-discussion.ts"
+    },
+    {
+      "from": "src/features/discussions/components/discussion-view.tsx",
+      "spec": "../components/update-discussion",
+      "to": "src/features/discussions/components/update-discussion.tsx"
+    },
+    {
+      "from": "src/features/users/api/get-users.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/users/api/get-users.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/users/api/get-users.ts",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/users/components/users-list.tsx",
+      "spec": "@/components/ui/spinner",
+      "to": "src/components/ui/spinner/index.ts"
+    },
+    {
+      "from": "src/features/users/components/users-list.tsx",
+      "spec": "@/components/ui/table",
+      "to": "src/components/ui/table/index.ts"
+    },
+    {
+      "from": "src/features/users/components/users-list.tsx",
+      "spec": "@/utils/format",
+      "to": "src/utils/format.ts"
+    },
+    {
+      "from": "src/features/users/components/users-list.tsx",
+      "spec": "../api/get-users",
+      "to": "src/features/users/api/get-users.ts"
+    },
+    {
+      "from": "src/features/users/components/users-list.tsx",
+      "spec": "./delete-user",
+      "to": "src/features/users/components/delete-user.tsx"
+    },
+    {
+      "from": "src/lib/authorization.tsx",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/lib/authorization.tsx",
+      "spec": "./auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/features/users/components/update-profile.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/users/components/update-profile.tsx",
+      "spec": "@/components/ui/form",
+      "to": "src/components/ui/form/index.ts"
+    },
+    {
+      "from": "src/features/users/components/update-profile.tsx",
+      "spec": "@/components/ui/notifications",
+      "to": "src/components/ui/notifications/index.ts"
+    },
+    {
+      "from": "src/features/users/components/update-profile.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/features/users/components/update-profile.tsx",
+      "spec": "../api/update-profile",
+      "to": "src/features/users/api/update-profile.ts"
+    },
+    {
+      "from": "src/components/ui/link/index.ts",
+      "spec": "./link",
+      "to": "src/components/ui/link/link.tsx"
+    },
+    {
+      "from": "src/testing/mocks/utils.ts",
+      "spec": "./db",
+      "to": "src/testing/mocks/db.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/auth.ts",
+      "spec": "@/config/env",
+      "to": "src/config/env.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/auth.ts",
+      "spec": "../db",
+      "to": "src/testing/mocks/db.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/auth.ts",
+      "spec": "../utils",
+      "to": "src/testing/mocks/utils.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/comments.ts",
+      "spec": "@/config/env",
+      "to": "src/config/env.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/comments.ts",
+      "spec": "../db",
+      "to": "src/testing/mocks/db.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/comments.ts",
+      "spec": "../utils",
+      "to": "src/testing/mocks/utils.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/discussions.ts",
+      "spec": "@/config/env",
+      "to": "src/config/env.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/discussions.ts",
+      "spec": "../db",
+      "to": "src/testing/mocks/db.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/discussions.ts",
+      "spec": "../utils",
+      "to": "src/testing/mocks/utils.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/teams.ts",
+      "spec": "@/config/env",
+      "to": "src/config/env.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/teams.ts",
+      "spec": "../db",
+      "to": "src/testing/mocks/db.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/teams.ts",
+      "spec": "../utils",
+      "to": "src/testing/mocks/utils.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/users.ts",
+      "spec": "@/config/env",
+      "to": "src/config/env.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/users.ts",
+      "spec": "../db",
+      "to": "src/testing/mocks/db.ts"
+    },
+    {
+      "from": "src/testing/mocks/handlers/users.ts",
+      "spec": "../utils",
+      "to": "src/testing/mocks/utils.ts"
+    },
+    {
+      "from": "src/components/ui/button/button.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/button/button.tsx",
+      "spec": "../spinner",
+      "to": "src/components/ui/spinner/index.ts"
+    },
+    {
+      "from": "src/components/layouts/content-layout.tsx",
+      "spec": "../seo",
+      "to": "src/components/seo/index.ts"
+    },
+    {
+      "from": "src/components/layouts/dashboard-layout.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/components/layouts/dashboard-layout.tsx",
+      "spec": "@/components/ui/drawer",
+      "to": "src/components/ui/drawer/index.ts"
+    },
+    {
+      "from": "src/components/layouts/dashboard-layout.tsx",
+      "spec": "@/config/paths",
+      "to": "src/config/paths.ts"
+    },
+    {
+      "from": "src/components/layouts/dashboard-layout.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/components/layouts/dashboard-layout.tsx",
+      "spec": "@/lib/authorization",
+      "to": "src/lib/authorization.tsx"
+    },
+    {
+      "from": "src/components/layouts/dashboard-layout.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/layouts/dashboard-layout.tsx",
+      "spec": "../ui/dropdown",
+      "to": "src/components/ui/dropdown/index.ts"
+    },
+    {
+      "from": "src/components/layouts/dashboard-layout.tsx",
+      "spec": "../ui/link",
+      "to": "src/components/ui/link/index.ts"
+    },
+    {
+      "from": "src/components/ui/form/index.ts",
+      "spec": "./form",
+      "to": "src/components/ui/form/form.tsx"
+    },
+    {
+      "from": "src/components/ui/form/index.ts",
+      "spec": "./input",
+      "to": "src/components/ui/form/input.tsx"
+    },
+    {
+      "from": "src/components/ui/form/index.ts",
+      "spec": "./select",
+      "to": "src/components/ui/form/select.tsx"
+    },
+    {
+      "from": "src/components/ui/form/index.ts",
+      "spec": "./textarea",
+      "to": "src/components/ui/form/textarea.tsx"
+    },
+    {
+      "from": "src/components/ui/form/index.ts",
+      "spec": "./form-drawer",
+      "to": "src/components/ui/form/form-drawer.tsx"
+    },
+    {
+      "from": "src/components/ui/form/index.ts",
+      "spec": "./label",
+      "to": "src/components/ui/form/label.tsx"
+    },
+    {
+      "from": "src/components/ui/form/index.ts",
+      "spec": "./switch",
+      "to": "src/components/ui/form/switch.tsx"
+    },
+    {
+      "from": "src/features/discussions/api/create-discussion.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/discussions/api/create-discussion.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/discussions/api/create-discussion.ts",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/discussions/api/create-discussion.ts",
+      "spec": "./get-discussions",
+      "to": "src/features/discussions/api/get-discussions.ts"
+    },
+    {
+      "from": "src/components/ui/table/index.ts",
+      "spec": "./table",
+      "to": "src/components/ui/table/table.tsx"
+    },
+    {
+      "from": "src/features/discussions/components/delete-discussion.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/delete-discussion.tsx",
+      "spec": "@/components/ui/dialog",
+      "to": "src/components/ui/dialog/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/delete-discussion.tsx",
+      "spec": "@/components/ui/notifications",
+      "to": "src/components/ui/notifications/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/delete-discussion.tsx",
+      "spec": "@/lib/authorization",
+      "to": "src/lib/authorization.tsx"
+    },
+    {
+      "from": "src/features/discussions/components/delete-discussion.tsx",
+      "spec": "../api/delete-discussion",
+      "to": "src/features/discussions/api/delete-discussion.ts"
+    },
+    {
+      "from": "src/features/comments/components/comments-list.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/comments/components/comments-list.tsx",
+      "spec": "@/components/ui/md-preview",
+      "to": "src/components/ui/md-preview/index.ts"
+    },
+    {
+      "from": "src/features/comments/components/comments-list.tsx",
+      "spec": "@/components/ui/spinner",
+      "to": "src/components/ui/spinner/index.ts"
+    },
+    {
+      "from": "src/features/comments/components/comments-list.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/features/comments/components/comments-list.tsx",
+      "spec": "@/lib/authorization",
+      "to": "src/lib/authorization.tsx"
+    },
+    {
+      "from": "src/features/comments/components/comments-list.tsx",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/comments/components/comments-list.tsx",
+      "spec": "@/utils/format",
+      "to": "src/utils/format.ts"
+    },
+    {
+      "from": "src/features/comments/components/comments-list.tsx",
+      "spec": "../api/get-comments",
+      "to": "src/features/comments/api/get-comments.ts"
+    },
+    {
+      "from": "src/features/comments/components/comments-list.tsx",
+      "spec": "./delete-comment",
+      "to": "src/features/comments/components/delete-comment.tsx"
+    },
+    {
+      "from": "src/features/comments/components/create-comment.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/comments/components/create-comment.tsx",
+      "spec": "@/components/ui/form",
+      "to": "src/components/ui/form/index.ts"
+    },
+    {
+      "from": "src/features/comments/components/create-comment.tsx",
+      "spec": "@/components/ui/notifications",
+      "to": "src/components/ui/notifications/index.ts"
+    },
+    {
+      "from": "src/features/comments/components/create-comment.tsx",
+      "spec": "../api/create-comment",
+      "to": "src/features/comments/api/create-comment.ts"
+    },
+    {
+      "from": "src/components/ui/md-preview/index.ts",
+      "spec": "./md-preview",
+      "to": "src/components/ui/md-preview/md-preview.tsx"
+    },
+    {
+      "from": "src/features/discussions/components/update-discussion.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/update-discussion.tsx",
+      "spec": "@/components/ui/form",
+      "to": "src/components/ui/form/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/update-discussion.tsx",
+      "spec": "@/components/ui/notifications",
+      "to": "src/components/ui/notifications/index.ts"
+    },
+    {
+      "from": "src/features/discussions/components/update-discussion.tsx",
+      "spec": "@/lib/authorization",
+      "to": "src/lib/authorization.tsx"
+    },
+    {
+      "from": "src/features/discussions/components/update-discussion.tsx",
+      "spec": "../api/get-discussion",
+      "to": "src/features/discussions/api/get-discussion.ts"
+    },
+    {
+      "from": "src/features/discussions/components/update-discussion.tsx",
+      "spec": "../api/update-discussion",
+      "to": "src/features/discussions/api/update-discussion.ts"
+    },
+    {
+      "from": "src/features/users/components/delete-user.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/users/components/delete-user.tsx",
+      "spec": "@/components/ui/dialog",
+      "to": "src/components/ui/dialog/index.ts"
+    },
+    {
+      "from": "src/features/users/components/delete-user.tsx",
+      "spec": "@/components/ui/notifications",
+      "to": "src/components/ui/notifications/index.ts"
+    },
+    {
+      "from": "src/features/users/components/delete-user.tsx",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/features/users/components/delete-user.tsx",
+      "spec": "../api/delete-user",
+      "to": "src/features/users/api/delete-user.ts"
+    },
+    {
+      "from": "src/features/users/api/update-profile.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/users/api/update-profile.ts",
+      "spec": "@/lib/auth",
+      "to": "src/lib/auth.tsx"
+    },
+    {
+      "from": "src/features/users/api/update-profile.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/components/ui/link/link.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/drawer/index.ts",
+      "spec": "./drawer",
+      "to": "src/components/ui/drawer/drawer.tsx"
+    },
+    {
+      "from": "src/components/ui/dropdown/index.ts",
+      "spec": "./dropdown",
+      "to": "src/components/ui/dropdown/dropdown.tsx"
+    },
+    {
+      "from": "src/components/ui/form/form.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/form/form.tsx",
+      "spec": "./label",
+      "to": "src/components/ui/form/label.tsx"
+    },
+    {
+      "from": "src/components/ui/form/input.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/form/input.tsx",
+      "spec": "./field-wrapper",
+      "to": "src/components/ui/form/field-wrapper.tsx"
+    },
+    {
+      "from": "src/components/ui/form/select.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/form/select.tsx",
+      "spec": "./field-wrapper",
+      "to": "src/components/ui/form/field-wrapper.tsx"
+    },
+    {
+      "from": "src/components/ui/form/textarea.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/form/textarea.tsx",
+      "spec": "./field-wrapper",
+      "to": "src/components/ui/form/field-wrapper.tsx"
+    },
+    {
+      "from": "src/components/ui/form/form-drawer.tsx",
+      "spec": "@/hooks/use-disclosure",
+      "to": "src/hooks/use-disclosure.ts"
+    },
+    {
+      "from": "src/components/ui/form/form-drawer.tsx",
+      "spec": "../button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/components/ui/form/form-drawer.tsx",
+      "spec": "../drawer",
+      "to": "src/components/ui/drawer/index.ts"
+    },
+    {
+      "from": "src/components/ui/form/label.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/form/switch.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/table/table.tsx",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/components/ui/table/table.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/table/table.tsx",
+      "spec": "./pagination",
+      "to": "src/components/ui/table/pagination.tsx"
+    },
+    {
+      "from": "src/components/ui/dialog/index.ts",
+      "spec": "./dialog",
+      "to": "src/components/ui/dialog/dialog.tsx"
+    },
+    {
+      "from": "src/components/ui/dialog/index.ts",
+      "spec": "./confirmation-dialog",
+      "to": "src/components/ui/dialog/confirmation-dialog/index.ts"
+    },
+    {
+      "from": "src/features/discussions/api/delete-discussion.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/discussions/api/delete-discussion.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/discussions/api/delete-discussion.ts",
+      "spec": "./get-discussions",
+      "to": "src/features/discussions/api/get-discussions.ts"
+    },
+    {
+      "from": "src/features/comments/components/delete-comment.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/features/comments/components/delete-comment.tsx",
+      "spec": "@/components/ui/dialog",
+      "to": "src/components/ui/dialog/index.ts"
+    },
+    {
+      "from": "src/features/comments/components/delete-comment.tsx",
+      "spec": "@/components/ui/notifications",
+      "to": "src/components/ui/notifications/index.ts"
+    },
+    {
+      "from": "src/features/comments/components/delete-comment.tsx",
+      "spec": "../api/delete-comment",
+      "to": "src/features/comments/api/delete-comment.ts"
+    },
+    {
+      "from": "src/features/comments/api/create-comment.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/comments/api/create-comment.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/comments/api/create-comment.ts",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/comments/api/create-comment.ts",
+      "spec": "./get-comments",
+      "to": "src/features/comments/api/get-comments.ts"
+    },
+    {
+      "from": "src/features/discussions/api/update-discussion.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/discussions/api/update-discussion.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/discussions/api/update-discussion.ts",
+      "spec": "@/types/api",
+      "to": "src/types/api.ts"
+    },
+    {
+      "from": "src/features/discussions/api/update-discussion.ts",
+      "spec": "./get-discussion",
+      "to": "src/features/discussions/api/get-discussion.ts"
+    },
+    {
+      "from": "src/features/users/api/delete-user.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/users/api/delete-user.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/users/api/delete-user.ts",
+      "spec": "./get-users",
+      "to": "src/features/users/api/get-users.ts"
+    },
+    {
+      "from": "src/components/ui/drawer/drawer.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/dropdown/dropdown.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/form/field-wrapper.tsx",
+      "spec": "./error",
+      "to": "src/components/ui/form/error.tsx"
+    },
+    {
+      "from": "src/components/ui/form/field-wrapper.tsx",
+      "spec": "./label",
+      "to": "src/components/ui/form/label.tsx"
+    },
+    {
+      "from": "src/components/ui/table/pagination.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/components/ui/table/pagination.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/table/pagination.tsx",
+      "spec": "../link",
+      "to": "src/components/ui/link/index.ts"
+    },
+    {
+      "from": "src/components/ui/dialog/dialog.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/dialog/confirmation-dialog/index.ts",
+      "spec": "./confirmation-dialog",
+      "to": "src/components/ui/dialog/confirmation-dialog/confirmation-dialog.tsx"
+    },
+    {
+      "from": "src/features/comments/api/delete-comment.ts",
+      "spec": "@/lib/api-client",
+      "to": "src/lib/api-client.ts"
+    },
+    {
+      "from": "src/features/comments/api/delete-comment.ts",
+      "spec": "@/lib/react-query",
+      "to": "src/lib/react-query.ts"
+    },
+    {
+      "from": "src/features/comments/api/delete-comment.ts",
+      "spec": "./get-comments",
+      "to": "src/features/comments/api/get-comments.ts"
+    },
+    {
+      "from": "src/components/ui/dialog/confirmation-dialog/confirmation-dialog.tsx",
+      "spec": "@/components/ui/button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/components/ui/dialog/confirmation-dialog/confirmation-dialog.tsx",
+      "spec": "@/hooks/use-disclosure",
+      "to": "src/hooks/use-disclosure.ts"
+    },
+    {
+      "from": "src/components/ui/dialog/confirmation-dialog/confirmation-dialog.tsx",
+      "spec": "../dialog",
+      "to": "src/components/ui/dialog/dialog.tsx"
+    }
+  ]
+}

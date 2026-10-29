@@ -1,0 +1,157 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "bn03-main",
+  "gtVersion": 1,
+  "activeFile": "src/main.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/main.ts"
+    },
+    {
+      "id": "F_bootstrap_17",
+      "type": "callable",
+      "file": "src/main.ts",
+      "line": 17,
+      "name": "bootstrap"
+    },
+    {
+      "id": "X_AppModule_app_module_ts_45",
+      "type": "external",
+      "file": "src/app.module.ts",
+      "line": 45,
+      "name": "AppModule"
+    },
+    {
+      "id": "X_AllConfigType_config_type_ts_10",
+      "type": "external",
+      "file": "src/config/config.type.ts",
+      "line": 10,
+      "name": "AllConfigType"
+    },
+    {
+      "id": "X_ResolvePromisesInterceptor_serializer_interceptor_ts_11",
+      "type": "external",
+      "file": "src/utils/serializer.interceptor.ts",
+      "line": 11,
+      "name": "ResolvePromisesInterceptor"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "F_bootstrap_17",
+      "target": "X_AppModule_app_module_ts_45",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.ts:18",
+        "src/main.ts:19"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "references",
+      "source": "F_bootstrap_17",
+      "target": "X_AllConfigType_config_type_ts_10",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.ts:20"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "constructs",
+      "source": "F_bootstrap_17",
+      "target": "X_ResolvePromisesInterceptor_serializer_interceptor_ts_11",
+      "pattern": "CONS-IMPORTED-IMPLICIT-CTOR",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.ts:50"
+      ],
+      "note": "ResolvePromisesInterceptor has no explicit constructor."
+    },
+    {
+      "id": "R04",
+      "kind": "calls",
+      "source": "file",
+      "target": "F_bootstrap_17",
+      "pattern": "CALL-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.ts:74"
+      ],
+      "note": "void bootstrap(): module top-level call. Every Nest/Express/Swagger/class-validator API in bootstrap is untyped third-party (excluded sites)."
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/main.ts:22",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:23",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/main.ts:29",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:32",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:33",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:36",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:37",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:38",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:43",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:46",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:47",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:51",
+      "reason": "NO_NODE_TARGET: constructed class has no declaration in the corpus"
+    },
+    {
+      "site": "src/main.ts:54",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:69",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:70",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.ts:72",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    }
+  ]
+}

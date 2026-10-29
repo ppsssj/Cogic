@@ -1,0 +1,310 @@
+{
+  "validator": "tools/exp01/validate-gt.mjs (unchanged)",
+  "cases": [
+    {
+      "caseId": "be01-userrouter",
+      "category": "express",
+      "gtErrors": [],
+      "environmentDiagnostics": 53,
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 11,
+        "negatives": 0,
+        "callSites": 11,
+        "tsDiagnostics": 53
+      }
+    },
+    {
+      "caseId": "be02-server",
+      "category": "express",
+      "gtErrors": [],
+      "environmentDiagnostics": 53,
+      "warnings": [
+        "relation R11: no evidence line mentions addRequestId",
+        "relation R12: no evidence line mentions captureResponseBody",
+        "relation R13: no evidence line mentions unexpectedRequest",
+        "relation R14: no evidence line mentions addErrorToRequestLog",
+        "node file is not used by any relation or negative"
+      ],
+      "stats": {
+        "nodes": 16,
+        "relations": 14,
+        "negatives": 1,
+        "callSites": 18,
+        "tsDiagnostics": 53
+      }
+    },
+    {
+      "caseId": "be03-ratelimiter",
+      "category": "express",
+      "gtErrors": [],
+      "environmentDiagnostics": 3,
+      "warnings": [
+        "node file is not used by any relation or negative"
+      ],
+      "stats": {
+        "nodes": 1,
+        "relations": 0,
+        "negatives": 0,
+        "callSites": 1,
+        "tsDiagnostics": 3
+      }
+    },
+    {
+      "caseId": "be04-errorhandler",
+      "category": "express",
+      "gtErrors": [],
+      "environmentDiagnostics": 10,
+      "warnings": [],
+      "stats": {
+        "nodes": 3,
+        "relations": 4,
+        "negatives": 0,
+        "callSites": 3,
+        "tsDiagnostics": 10
+      }
+    },
+    {
+      "caseId": "be05-usercontroller",
+      "category": "express",
+      "gtErrors": [],
+      "environmentDiagnostics": 53,
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 7,
+        "negatives": 0,
+        "callSites": 8,
+        "tsDiagnostics": 53
+      }
+    },
+    {
+      "caseId": "bn01-auth-google-controller",
+      "category": "nest",
+      "gtErrors": [],
+      "environmentDiagnostics": 79,
+      "warnings": [
+        "relation R13: no evidence line mentions login"
+      ],
+      "stats": {
+        "nodes": 11,
+        "relations": 13,
+        "negatives": 0,
+        "callSites": 9,
+        "tsDiagnostics": 79
+      }
+    },
+    {
+      "caseId": "bn02-session-repository",
+      "category": "nest",
+      "gtErrors": [],
+      "environmentDiagnostics": 59,
+      "warnings": [],
+      "stats": {
+        "nodes": 22,
+        "relations": 51,
+        "negatives": 0,
+        "callSites": 29,
+        "tsDiagnostics": 59
+      }
+    },
+    {
+      "caseId": "bn03-main",
+      "category": "nest",
+      "gtErrors": [],
+      "environmentDiagnostics": 209,
+      "warnings": [],
+      "stats": {
+        "nodes": 5,
+        "relations": 4,
+        "negatives": 0,
+        "callSites": 31,
+        "tsDiagnostics": 209
+      }
+    },
+    {
+      "caseId": "bn04-file-schema",
+      "category": "nest",
+      "gtErrors": [],
+      "environmentDiagnostics": 2,
+      "warnings": [],
+      "stats": {
+        "nodes": 4,
+        "relations": 3,
+        "negatives": 0,
+        "callSites": 3,
+        "tsDiagnostics": 2
+      }
+    },
+    {
+      "caseId": "bn05-files-service",
+      "category": "nest",
+      "gtErrors": [],
+      "environmentDiagnostics": 38,
+      "warnings": [
+        "node file is not used by any relation or negative"
+      ],
+      "stats": {
+        "nodes": 7,
+        "relations": 6,
+        "negatives": 0,
+        "callSites": 4,
+        "tsDiagnostics": 38
+      }
+    },
+    {
+      "caseId": "br01-form-drawer",
+      "category": "react",
+      "gtErrors": [],
+      "environmentDiagnostics": 62,
+      "warnings": [
+        "node file is not used by any relation or negative"
+      ],
+      "stats": {
+        "nodes": 8,
+        "relations": 5,
+        "negatives": 1,
+        "callSites": 15,
+        "tsDiagnostics": 62
+      }
+    },
+    {
+      "caseId": "br02-textarea",
+      "category": "react",
+      "gtErrors": [],
+      "environmentDiagnostics": 28,
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 8,
+        "negatives": 0,
+        "callSites": 4,
+        "tsDiagnostics": 28
+      }
+    },
+    {
+      "caseId": "br03-main",
+      "category": "react",
+      "gtErrors": [],
+      "environmentDiagnostics": 706,
+      "warnings": [],
+      "stats": {
+        "nodes": 6,
+        "relations": 8,
+        "negatives": 0,
+        "callSites": 8,
+        "tsDiagnostics": 706
+      }
+    },
+    {
+      "caseId": "br04-content-layout",
+      "category": "react",
+      "gtErrors": [],
+      "environmentDiagnostics": 12,
+      "warnings": [
+        "node file is not used by any relation or negative"
+      ],
+      "stats": {
+        "nodes": 4,
+        "relations": 2,
+        "negatives": 0,
+        "callSites": 5,
+        "tsDiagnostics": 12
+      }
+    },
+    {
+      "caseId": "br05-input",
+      "category": "react",
+      "gtErrors": [],
+      "environmentDiagnostics": 29,
+      "warnings": [],
+      "stats": {
+        "nodes": 7,
+        "relations": 8,
+        "negatives": 0,
+        "callSites": 4,
+        "tsDiagnostics": 29
+      }
+    },
+    {
+      "caseId": "bv01-main",
+      "category": "vue",
+      "gtErrors": [],
+      "environmentDiagnostics": 5,
+      "warnings": [],
+      "stats": {
+        "nodes": 3,
+        "relations": 3,
+        "negatives": 0,
+        "callSites": 7,
+        "tsDiagnostics": 5
+      }
+    },
+    {
+      "caseId": "bv02-use-follow-profile",
+      "category": "vue",
+      "gtErrors": [],
+      "environmentDiagnostics": 7,
+      "warnings": [
+        "relation I03: no evidence line mentions unfollowUserByUsername/followUserByUsername",
+        "node file is not used by any relation or negative"
+      ],
+      "stats": {
+        "nodes": 9,
+        "relations": 13,
+        "negatives": 0,
+        "callSites": 4,
+        "tsDiagnostics": 7
+      }
+    },
+    {
+      "caseId": "bv03-user",
+      "category": "vue",
+      "gtErrors": [],
+      "environmentDiagnostics": 1,
+      "warnings": [],
+      "stats": {
+        "nodes": 11,
+        "relations": 18,
+        "negatives": 0,
+        "callSites": 10,
+        "tsDiagnostics": 1
+      }
+    },
+    {
+      "caseId": "bv04-use-async",
+      "category": "vue",
+      "gtErrors": [],
+      "environmentDiagnostics": 5,
+      "warnings": [
+        "node file is not used by any relation or negative"
+      ],
+      "stats": {
+        "nodes": 12,
+        "relations": 19,
+        "negatives": 0,
+        "callSites": 6,
+        "tsDiagnostics": 5
+      }
+    },
+    {
+      "caseId": "bv05-use-favorite-article",
+      "category": "vue",
+      "gtErrors": [],
+      "environmentDiagnostics": 7,
+      "warnings": [
+        "relation I03: no evidence line mentions deleteArticleFavorite/createArticleFavorite",
+        "node file is not used by any relation or negative"
+      ],
+      "stats": {
+        "nodes": 9,
+        "relations": 13,
+        "negatives": 0,
+        "callSites": 4,
+        "tsDiagnostics": 7
+      }
+    }
+  ],
+  "gtErrorCount": 0
+}

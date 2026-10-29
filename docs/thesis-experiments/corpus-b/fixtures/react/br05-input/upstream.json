@@ -1,0 +1,137 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "br05-input",
+  "repo": "alan2207/bulletproof-react",
+  "url": "https://github.com/alan2207/bulletproof-react",
+  "commit": "9506629ed003a561c6627735480cce4994244bb4",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "apps/react-vite/tsconfig.json",
+    "derivedOptions": {
+      "target": "ESNext",
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "jsx": "react-jsx",
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "./src/*"
+        ]
+      },
+      "strict": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "allowJs": true,
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "target": "ESNext",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "resolveJsonModule": true,
+      "noEmit": true,
+      "jsx": "react-jsx",
+      "types": [
+        "vite/client",
+        "vitest/globals"
+      ],
+      "isolatedModules": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "./src/*"
+        ]
+      }
+    }
+  },
+  "activeFile": "src/components/ui/form/input.tsx",
+  "upstreamActiveFile": "apps/react-vite/src/components/ui/form/input.tsx",
+  "files": [
+    {
+      "path": "src/components/ui/form/error.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/error.tsx",
+      "sha256": "4a6caf08ac742c2d58fed62087916e639e3588b236762e996bb893ce1542e6f4",
+      "bytes": 342
+    },
+    {
+      "path": "src/components/ui/form/field-wrapper.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/field-wrapper.tsx",
+      "sha256": "88d6f39fd1c493cf0d63db244729d04e72d42b300a6b08362eb0249b89b722b5",
+      "bytes": 698
+    },
+    {
+      "path": "src/components/ui/form/input.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/input.tsx",
+      "sha256": "09d4ac6b58c5bd9c16129abd3826615567ac1c6832b6143815b70822217c8c7c",
+      "bytes": 1228
+    },
+    {
+      "path": "src/components/ui/form/label.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/label.tsx",
+      "sha256": "07e1ab500e1e03521915f60fe304e2c1ad0348e37afd5b37f7fa6f6ef8b6172f",
+      "bytes": 742
+    },
+    {
+      "path": "src/utils/cn.ts",
+      "upstreamPath": "apps/react-vite/src/utils/cn.ts",
+      "sha256": "6646b373ff8df919a16f37afaa2a1db98046ef4daaa140dc116c0d2f61b80dcc",
+      "bytes": 175
+    }
+  ],
+  "thirdPartyModules": [
+    "@radix-ui/react-label",
+    "class-variance-authority",
+    "clsx",
+    "react",
+    "react-hook-form",
+    "tailwind-merge"
+  ],
+  "importEdges": [
+    {
+      "from": "src/components/ui/form/input.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/form/input.tsx",
+      "spec": "./field-wrapper",
+      "to": "src/components/ui/form/field-wrapper.tsx"
+    },
+    {
+      "from": "src/components/ui/form/field-wrapper.tsx",
+      "spec": "./error",
+      "to": "src/components/ui/form/error.tsx"
+    },
+    {
+      "from": "src/components/ui/form/field-wrapper.tsx",
+      "spec": "./label",
+      "to": "src/components/ui/form/label.tsx"
+    },
+    {
+      "from": "src/components/ui/form/label.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    }
+  ]
+}

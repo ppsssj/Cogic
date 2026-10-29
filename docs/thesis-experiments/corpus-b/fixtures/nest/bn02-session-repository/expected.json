@@ -1,0 +1,790 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "bn02-session-repository",
+  "gtVersion": 1,
+  "activeFile": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts"
+    },
+    {
+      "id": "C_SessionRelationalRepository_13",
+      "type": "class",
+      "file": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "line": 13,
+      "name": "SessionRelationalRepository"
+    },
+    {
+      "id": "X_SessionRepository_session_repository_ts_5",
+      "type": "external",
+      "file": "src/session/infrastructure/persistence/session.repository.ts",
+      "line": 5,
+      "name": "SessionRepository"
+    },
+    {
+      "id": "X_SessionEntity_session_entity_ts_15",
+      "type": "external",
+      "file": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+      "line": 15,
+      "name": "SessionEntity"
+    },
+    {
+      "id": "F_findById_20",
+      "type": "callable",
+      "file": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "line": 20,
+      "name": "findById"
+    },
+    {
+      "id": "X_Session_session_ts_3",
+      "type": "external",
+      "file": "src/session/domain/session.ts",
+      "line": 3,
+      "name": "Session"
+    },
+    {
+      "id": "lib_Promise",
+      "type": "lib",
+      "symbol": "Promise"
+    },
+    {
+      "id": "X_NullableType_nullable_type_ts_1",
+      "type": "external",
+      "file": "src/utils/types/nullable.type.ts",
+      "line": 1,
+      "name": "NullableType"
+    },
+    {
+      "id": "lib_Number",
+      "type": "lib",
+      "symbol": "Number"
+    },
+    {
+      "id": "X_toDomain_session_mapper_ts_7",
+      "type": "external",
+      "file": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "line": 7,
+      "name": "toDomain"
+    },
+    {
+      "id": "X_SessionMapper_session_mapper_ts_6",
+      "type": "external",
+      "file": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "line": 6,
+      "name": "SessionMapper"
+    },
+    {
+      "id": "F_create_30",
+      "type": "callable",
+      "file": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "line": 30,
+      "name": "create"
+    },
+    {
+      "id": "X_toPersistence_session_mapper_ts_20",
+      "type": "external",
+      "file": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "line": 20,
+      "name": "toPersistence"
+    },
+    {
+      "id": "F_update_37",
+      "type": "callable",
+      "file": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "line": 37,
+      "name": "update"
+    },
+    {
+      "id": "lib_Partial",
+      "type": "lib",
+      "symbol": "Partial"
+    },
+    {
+      "id": "lib_Omit",
+      "type": "lib",
+      "symbol": "Omit"
+    },
+    {
+      "id": "lib_Error",
+      "type": "lib",
+      "symbol": "Error"
+    },
+    {
+      "id": "F_updateByHash_63",
+      "type": "callable",
+      "file": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "line": 63,
+      "name": "updateByHash"
+    },
+    {
+      "id": "F_deleteById_85",
+      "type": "callable",
+      "file": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "line": 85,
+      "name": "deleteById"
+    },
+    {
+      "id": "F_deleteByUserId_91",
+      "type": "callable",
+      "file": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "line": 91,
+      "name": "deleteByUserId"
+    },
+    {
+      "id": "X_User_user_ts_15",
+      "type": "external",
+      "file": "src/users/domain/user.ts",
+      "line": 15,
+      "name": "User"
+    },
+    {
+      "id": "F_deleteByUserIdWithExclude_99",
+      "type": "callable",
+      "file": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "line": 99,
+      "name": "deleteByUserIdWithExclude"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "C_SessionRelationalRepository_13",
+      "target": "X_SessionRepository_session_repository_ts_5",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:14"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "references",
+      "source": "file",
+      "target": "X_SessionEntity_session_entity_ts_15",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:16"
+      ],
+      "note": "@InjectRepository(SessionEntity) is a parameter decorator: it belongs to the owner of the class (the file; guide §3.4)."
+    },
+    {
+      "id": "R03",
+      "kind": "references",
+      "source": "C_SessionRelationalRepository_13",
+      "target": "X_SessionEntity_session_entity_ts_15",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:17"
+      ]
+    },
+    {
+      "id": "R04",
+      "kind": "references",
+      "source": "F_findById_20",
+      "target": "X_Session_session_ts_3",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:20"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "references",
+      "source": "F_findById_20",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:20"
+      ]
+    },
+    {
+      "id": "R06",
+      "kind": "references",
+      "source": "F_findById_20",
+      "target": "X_NullableType_nullable_type_ts_1",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:20"
+      ]
+    },
+    {
+      "id": "R07",
+      "kind": "calls",
+      "source": "F_findById_20",
+      "target": "lib_Number",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:23"
+      ],
+      "note": "Number(id) calls the NumberConstructor call signature (TS lib). sessionRepository is a typeorm Repository (untyped third-party): its calls are excluded sites."
+    },
+    {
+      "id": "R08",
+      "kind": "dataflow",
+      "source": "F_findById_20",
+      "target": "lib_Number",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:23"
+      ]
+    },
+    {
+      "id": "R09",
+      "kind": "calls",
+      "source": "F_findById_20",
+      "target": "X_toDomain_session_mapper_ts_7",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:27"
+      ]
+    },
+    {
+      "id": "R10",
+      "kind": "dataflow",
+      "source": "F_findById_20",
+      "target": "X_toDomain_session_mapper_ts_7",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:27"
+      ]
+    },
+    {
+      "id": "R11",
+      "kind": "references",
+      "source": "F_findById_20",
+      "target": "X_SessionMapper_session_mapper_ts_6",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:27"
+      ]
+    },
+    {
+      "id": "R12",
+      "kind": "references",
+      "source": "F_create_30",
+      "target": "X_Session_session_ts_3",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:30"
+      ]
+    },
+    {
+      "id": "R13",
+      "kind": "references",
+      "source": "F_create_30",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:30"
+      ]
+    },
+    {
+      "id": "R14",
+      "kind": "calls",
+      "source": "F_create_30",
+      "target": "X_toPersistence_session_mapper_ts_20",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:31"
+      ]
+    },
+    {
+      "id": "R15",
+      "kind": "dataflow",
+      "source": "F_create_30",
+      "target": "X_toPersistence_session_mapper_ts_20",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:31"
+      ]
+    },
+    {
+      "id": "R16",
+      "kind": "references",
+      "source": "F_create_30",
+      "target": "X_SessionMapper_session_mapper_ts_6",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:31"
+      ]
+    },
+    {
+      "id": "R17",
+      "kind": "references",
+      "source": "F_update_37",
+      "target": "X_Session_session_ts_3",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:38",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:40",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:42"
+      ]
+    },
+    {
+      "id": "R18",
+      "kind": "references",
+      "source": "F_update_37",
+      "target": "lib_Partial",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:39"
+      ]
+    },
+    {
+      "id": "R19",
+      "kind": "references",
+      "source": "F_update_37",
+      "target": "lib_Omit",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:40"
+      ]
+    },
+    {
+      "id": "R20",
+      "kind": "references",
+      "source": "F_update_37",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:42"
+      ]
+    },
+    {
+      "id": "R21",
+      "kind": "calls",
+      "source": "F_update_37",
+      "target": "lib_Number",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:44"
+      ]
+    },
+    {
+      "id": "R22",
+      "kind": "dataflow",
+      "source": "F_update_37",
+      "target": "lib_Number",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:44"
+      ]
+    },
+    {
+      "id": "R23",
+      "kind": "constructs",
+      "source": "F_update_37",
+      "target": "lib_Error",
+      "pattern": "CONS-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:48"
+      ]
+    },
+    {
+      "id": "R24",
+      "kind": "dataflow",
+      "source": "F_update_37",
+      "target": "lib_Error",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:48"
+      ]
+    },
+    {
+      "id": "R25",
+      "kind": "calls",
+      "source": "F_update_37",
+      "target": "X_toPersistence_session_mapper_ts_20",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:53"
+      ]
+    },
+    {
+      "id": "R26",
+      "kind": "dataflow",
+      "source": "F_update_37",
+      "target": "X_toPersistence_session_mapper_ts_20",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:53"
+      ]
+    },
+    {
+      "id": "R27",
+      "kind": "references",
+      "source": "F_update_37",
+      "target": "X_SessionMapper_session_mapper_ts_6",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:53",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:54",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:60"
+      ]
+    },
+    {
+      "id": "R28",
+      "kind": "calls",
+      "source": "F_update_37",
+      "target": "X_toDomain_session_mapper_ts_7",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:54",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:60"
+      ]
+    },
+    {
+      "id": "R29",
+      "kind": "dataflow",
+      "source": "F_update_37",
+      "target": "X_toDomain_session_mapper_ts_7",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:54",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:60"
+      ]
+    },
+    {
+      "id": "R30",
+      "kind": "references",
+      "source": "F_updateByHash_63",
+      "target": "X_Session_session_ts_3",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:64",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:66",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:68"
+      ]
+    },
+    {
+      "id": "R31",
+      "kind": "references",
+      "source": "F_updateByHash_63",
+      "target": "lib_Partial",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:65"
+      ]
+    },
+    {
+      "id": "R32",
+      "kind": "references",
+      "source": "F_updateByHash_63",
+      "target": "lib_Omit",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:66"
+      ]
+    },
+    {
+      "id": "R33",
+      "kind": "references",
+      "source": "F_updateByHash_63",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:68"
+      ]
+    },
+    {
+      "id": "R34",
+      "kind": "calls",
+      "source": "F_updateByHash_63",
+      "target": "lib_Number",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:70",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:79"
+      ]
+    },
+    {
+      "id": "R35",
+      "kind": "dataflow",
+      "source": "F_updateByHash_63",
+      "target": "lib_Number",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:70",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:79"
+      ]
+    },
+    {
+      "id": "R36",
+      "kind": "calls",
+      "source": "F_updateByHash_63",
+      "target": "X_toDomain_session_mapper_ts_7",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:82"
+      ]
+    },
+    {
+      "id": "R37",
+      "kind": "dataflow",
+      "source": "F_updateByHash_63",
+      "target": "X_toDomain_session_mapper_ts_7",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:82"
+      ]
+    },
+    {
+      "id": "R38",
+      "kind": "references",
+      "source": "F_updateByHash_63",
+      "target": "X_SessionMapper_session_mapper_ts_6",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:82"
+      ]
+    },
+    {
+      "id": "R39",
+      "kind": "references",
+      "source": "F_deleteById_85",
+      "target": "X_Session_session_ts_3",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:85"
+      ]
+    },
+    {
+      "id": "R40",
+      "kind": "references",
+      "source": "F_deleteById_85",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:85"
+      ]
+    },
+    {
+      "id": "R41",
+      "kind": "calls",
+      "source": "F_deleteById_85",
+      "target": "lib_Number",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:87"
+      ]
+    },
+    {
+      "id": "R42",
+      "kind": "dataflow",
+      "source": "F_deleteById_85",
+      "target": "lib_Number",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:87"
+      ]
+    },
+    {
+      "id": "R43",
+      "kind": "references",
+      "source": "F_deleteByUserId_91",
+      "target": "X_User_user_ts_15",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:91"
+      ]
+    },
+    {
+      "id": "R44",
+      "kind": "references",
+      "source": "F_deleteByUserId_91",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:91"
+      ]
+    },
+    {
+      "id": "R45",
+      "kind": "calls",
+      "source": "F_deleteByUserId_91",
+      "target": "lib_Number",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:94"
+      ]
+    },
+    {
+      "id": "R46",
+      "kind": "dataflow",
+      "source": "F_deleteByUserId_91",
+      "target": "lib_Number",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:94"
+      ]
+    },
+    {
+      "id": "R47",
+      "kind": "references",
+      "source": "F_deleteByUserIdWithExclude_99",
+      "target": "X_User_user_ts_15",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:100"
+      ]
+    },
+    {
+      "id": "R48",
+      "kind": "references",
+      "source": "F_deleteByUserIdWithExclude_99",
+      "target": "X_Session_session_ts_3",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:101"
+      ]
+    },
+    {
+      "id": "R49",
+      "kind": "references",
+      "source": "F_deleteByUserIdWithExclude_99",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:102"
+      ]
+    },
+    {
+      "id": "R50",
+      "kind": "calls",
+      "source": "F_deleteByUserIdWithExclude_99",
+      "target": "lib_Number",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:105",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:107"
+      ]
+    },
+    {
+      "id": "R51",
+      "kind": "dataflow",
+      "source": "F_deleteByUserIdWithExclude_99",
+      "target": "lib_Number",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:105",
+        "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:107"
+      ]
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:13",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:21",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:32",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:33",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:43",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:51",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:52",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:69",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:78",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:86",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:92",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts:103",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    }
+  ]
+}

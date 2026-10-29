@@ -1,0 +1,187 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "br01-form-drawer",
+  "repo": "alan2207/bulletproof-react",
+  "url": "https://github.com/alan2207/bulletproof-react",
+  "commit": "9506629ed003a561c6627735480cce4994244bb4",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "apps/react-vite/tsconfig.json",
+    "derivedOptions": {
+      "target": "ESNext",
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "jsx": "react-jsx",
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "./src/*"
+        ]
+      },
+      "strict": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "allowJs": true,
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "target": "ESNext",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "resolveJsonModule": true,
+      "noEmit": true,
+      "jsx": "react-jsx",
+      "types": [
+        "vite/client",
+        "vitest/globals"
+      ],
+      "isolatedModules": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "./src/*"
+        ]
+      }
+    }
+  },
+  "activeFile": "src/components/ui/form/form-drawer.tsx",
+  "upstreamActiveFile": "apps/react-vite/src/components/ui/form/form-drawer.tsx",
+  "files": [
+    {
+      "path": "src/components/ui/button/button.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/button/button.tsx",
+      "sha256": "dd5d72f2751fd8c7874b21553ebc82b34e7c200efd47e2059277e6a425446fdf",
+      "bytes": 2301
+    },
+    {
+      "path": "src/components/ui/button/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/button/index.ts",
+      "sha256": "6f0a2a8b6bd67f4793daf1433c9885bf2b636bea8143552ccaa43ce00b3cfeb8",
+      "bytes": 27
+    },
+    {
+      "path": "src/components/ui/drawer/drawer.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/drawer/drawer.tsx",
+      "sha256": "e1fe01d3de314411007bd50eed639fe3f41c3f25a7a3fa6e9d9f29e0d9c60020",
+      "bytes": 4505
+    },
+    {
+      "path": "src/components/ui/drawer/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/drawer/index.ts",
+      "sha256": "6f67c00f0a323a16bd60b3e5580293efe0fbf890caaebd070cd30ce46878836b",
+      "bytes": 27
+    },
+    {
+      "path": "src/components/ui/form/form-drawer.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/form/form-drawer.tsx",
+      "sha256": "e852bbf4075dc66371ae297bc579295f86f327b0c1086348a79bd169ad05df76",
+      "bytes": 1546
+    },
+    {
+      "path": "src/components/ui/spinner/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/ui/spinner/index.ts",
+      "sha256": "6e766c9d8ed5bddbc1c3aea0c4c7d80c3008f2bcaea9d649e21b22d28264e8f8",
+      "bytes": 28
+    },
+    {
+      "path": "src/components/ui/spinner/spinner.tsx",
+      "upstreamPath": "apps/react-vite/src/components/ui/spinner/spinner.tsx",
+      "sha256": "2de3625d2e60ae2e628d102300cde403e73fd63df537c0c32c1dac24ddbbf3cc",
+      "bytes": 1014
+    },
+    {
+      "path": "src/hooks/use-disclosure.ts",
+      "upstreamPath": "apps/react-vite/src/hooks/use-disclosure.ts",
+      "sha256": "2abfb73d0bd5816c449a182641cd4da76722e923e22181d6b42135efb31b968d",
+      "bytes": 398
+    },
+    {
+      "path": "src/utils/cn.ts",
+      "upstreamPath": "apps/react-vite/src/utils/cn.ts",
+      "sha256": "6646b373ff8df919a16f37afaa2a1db98046ef4daaa140dc116c0d2f61b80dcc",
+      "bytes": 175
+    }
+  ],
+  "thirdPartyModules": [
+    "@radix-ui/react-dialog",
+    "@radix-ui/react-icons",
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "clsx",
+    "react",
+    "tailwind-merge"
+  ],
+  "importEdges": [
+    {
+      "from": "src/components/ui/form/form-drawer.tsx",
+      "spec": "@/hooks/use-disclosure",
+      "to": "src/hooks/use-disclosure.ts"
+    },
+    {
+      "from": "src/components/ui/form/form-drawer.tsx",
+      "spec": "../button",
+      "to": "src/components/ui/button/index.ts"
+    },
+    {
+      "from": "src/components/ui/form/form-drawer.tsx",
+      "spec": "../drawer",
+      "to": "src/components/ui/drawer/index.ts"
+    },
+    {
+      "from": "src/components/ui/button/index.ts",
+      "spec": "./button",
+      "to": "src/components/ui/button/button.tsx"
+    },
+    {
+      "from": "src/components/ui/drawer/index.ts",
+      "spec": "./drawer",
+      "to": "src/components/ui/drawer/drawer.tsx"
+    },
+    {
+      "from": "src/components/ui/button/button.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/button/button.tsx",
+      "spec": "../spinner",
+      "to": "src/components/ui/spinner/index.ts"
+    },
+    {
+      "from": "src/components/ui/drawer/drawer.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    },
+    {
+      "from": "src/components/ui/spinner/index.ts",
+      "spec": "./spinner",
+      "to": "src/components/ui/spinner/spinner.tsx"
+    },
+    {
+      "from": "src/components/ui/spinner/spinner.tsx",
+      "spec": "@/utils/cn",
+      "to": "src/utils/cn.ts"
+    }
+  ]
+}

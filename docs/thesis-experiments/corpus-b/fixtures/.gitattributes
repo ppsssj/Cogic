@@ -1,0 +1,2 @@
+# Corpus B fixtures: vendored upstream files are kept byte-for-byte (their SHA-256 is recorded in upstream.json).
+* -text

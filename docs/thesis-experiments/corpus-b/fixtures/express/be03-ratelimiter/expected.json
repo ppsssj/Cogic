@@ -1,0 +1,21 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "be03-ratelimiter",
+  "gtVersion": 1,
+  "activeFile": "src/common/middleware/rateLimiter.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/common/middleware/rateLimiter.ts"
+    }
+  ],
+  "relations": [],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/common/middleware/rateLimiter.ts:6",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    }
+  ]
+}
