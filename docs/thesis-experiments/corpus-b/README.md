@@ -246,6 +246,7 @@ node $T/manifest.mjs --check                                      # 고정 해�
 
 - `make-gt.mjs`를 다시 실행해도 `expected.json`이 바뀌지 않아야 한다. `manifest.mjs --check`로 확인한다.
 - checkout은 저장소에 넣지 않았다. 사례 폴더에는 선정 파일과 import closure만 있다.
+- Windows 주의: 저장소 안 경로가 최대 155자다(NestJS 사례). 경로 260자 제한에 걸리면 clone 전에 `git config --global core.longpaths true`를 설정하거나 짧은 경로에 clone한다. 새 clone에서 `manifest.mjs --check`와 upstream 해시 449개가 모두 일치함을 확인했다.
 
 ## 11. MANIFEST
 
