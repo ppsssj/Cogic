@@ -1,0 +1,3 @@
+# Preserve user-provided AI review files byte-for-byte (no EOL normalization).
+cogic_exp01_ai_review_146.csv -text
+cogic_exp01_ai_review_report.md -text

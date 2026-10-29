@@ -1,0 +1,90 @@
+{
+  "reviewed": 146,
+  "unreviewed": [],
+  "invalid": [],
+  "overall": {
+    "n": 146,
+    "observed": 0.9863013698630136,
+    "expected": 0.770313379620942,
+    "kappa": 0.9403594771241828
+  },
+  "categories": [
+    {
+      "category": "calls",
+      "n": 32,
+      "observed": 1,
+      "expected": 0.826171875,
+      "kappa": 1
+    },
+    {
+      "category": "constructs",
+      "n": 9,
+      "observed": 1,
+      "expected": 0.654320987654321,
+      "kappa": 1
+    },
+    {
+      "category": "dataflow",
+      "n": 38,
+      "observed": 0.9473684210526315,
+      "expected": 0.8504155124653741,
+      "kappa": 0.6481481481481476
+    },
+    {
+      "category": "express-route-owner",
+      "n": 7,
+      "observed": 1,
+      "expected": 0.7551020408163265,
+      "kappa": 1
+    },
+    {
+      "category": "nest-route-owner",
+      "n": 5,
+      "observed": 1,
+      "expected": 0.6800000000000002,
+      "kappa": 1
+    },
+    {
+      "category": "react-hook-owner",
+      "n": 6,
+      "observed": 1,
+      "expected": 0.5,
+      "kappa": 1
+    },
+    {
+      "category": "references",
+      "n": 33,
+      "observed": 1,
+      "expected": 0.9412304866850323,
+      "kappa": 1
+    },
+    {
+      "category": "updates",
+      "n": 9,
+      "observed": 1,
+      "expected": 0.5555555555555556,
+      "kappa": 1
+    },
+    {
+      "category": "vue-hook-owner",
+      "n": 7,
+      "observed": 1,
+      "expected": 0.5918367346938775,
+      "kappa": 1
+    }
+  ],
+  "disagreements": [
+    {
+      "sampleId": "S037",
+      "category": "dataflow",
+      "gt": "exists",
+      "reviewer": "not-exists"
+    },
+    {
+      "sampleId": "S107",
+      "category": "dataflow",
+      "gt": "exists",
+      "reviewer": "not-exists"
+    }
+  ]
+}
