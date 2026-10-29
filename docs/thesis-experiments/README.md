@@ -47,6 +47,8 @@
 | [p1c-review-readiness.md](p1c-review-readiness.md) | P1-C: EXP-01 GT 사람 검토 준비(표본 감사, 검토자 절차, 검토 방식 A/B, 일치도·불일치 처리, v2 정정 절차, 남은 결정, 제5장 초안). 검토는 미수행 |
 | [p1d-ai-cross-review.md](p1d-ai-cross-review.md) | P1-D: GPT-6 AI 교차 검토(146개) 보존, GT v1과의 일치도 재계산, 불일치 S037·S107 사후 판정 초안, v2 도입 조건. 사람 검토 아님 |
 | [evidence/exp-01-ai-cross-review/](evidence/exp-01-ai-cross-review/README.md) | P1-D: AI 교차 검토 원본(사용자 제공, 바이트 보존)과 재계산 결과 |
+| [p1f-scoring-blocker-audit.md](p1f-scoring-blocker-audit.md) | P1-F: EXP-01 첫 실측의 React 5개 사례 `SCORING_BLOCKED` 원인 감사(analyzer의 타입 있는 setter·dispatch 처리 + scorer external 키), 수정안 비교, 후속 PR 계획. 첫 run은 진단 전용 |
+| [evidence/exp-01-p1f-scoring-blocker/](evidence/exp-01-p1f-scoring-blocker/README.md) | P1-F: 충돌 재현·진단 채점 스크립트와 출력, React setter 합성 입력 시험 |
 | [fixtures/exp-01/](fixtures/exp-01/README.md) | P1-A: EXP-01 코퍼스 A(fixture 44개, GT v1), 주석 지침, 패턴 카탈로그, 커버리지, 검토 표본 |
 | `tools/exp01/` | P1-A: GT 검증, 채점, 커버리지, 검토 표본, manifest 도구와 단위 테스트 |
 | `tools/exp01-run.mjs`, `tools/test/` | P1-B: EXP-01 실행 도구와 합성 입력 단위 테스트 |
@@ -79,7 +81,7 @@
 
 ## 변경 이력
 
-모든 개정은 실험을 실행하기 전에 이루어졌다. 개정 시점에 존재하는 실험 데이터는 없다(`data/exp-*` 없음). 따라서 결과를 보고 규칙을 바꾼 경우에 해당하지 않는다.
+P1-D까지의 개정은 실험을 실행하기 전에 이루어졌다. 그 시점에는 실험 데이터가 없었다(`data/exp-*` 없음). 따라서 결과를 보고 규칙을 바꾼 경우에 해당하지 않는다. P1-F는 EXP-01 첫 실측(진단 전용) **이후**의 원인 감사다. 이 단계에서 평가 규칙은 바꾸지 않았다. 이후 규칙을 개정하면 사후 개정으로 따로 표시한다.
 
 | 개정 | 날짜 | 계기 | 변경 내용 | 영향 문서 |
 |---|---|---|---|---|
@@ -91,3 +93,4 @@
 | P1-B-R1 | 2026-10-28 | PR #3 검토(실행 도구 신뢰성) | 측정 전에 실행 도구 결함을 고쳤다(`exp01-runner/1.1`). ① 채점 프로세스 종료 코드 0, `summary.json` 존재, `COMPLETE`, `exp01-scorer/1.1`을 모두 만족해야 확증 결과로 인정한다. 채점기 예외도 `run.json`에 기록한다. ② 변형별 결과를 생성 직후 저장해, 뒤 변형이 실패해도 앞 결과가 남는다. 실패 변형·오류·stack을 기록한다. ③ `--bootstrap`은 0 이상의 정수만 받고, 확증 결과는 사전 등록값 10,000에서만 인정한다. ④ 캐시 hit 경로 검증 상태(`cacheHitPath`)를 정확도 확증 판정과 분리하고 해석 규칙을 정했다([p1b-runner.md §10](p1b-runner.md#10-p1-b-r1-실행-도구-신뢰성-수정)). 실제 analyzer 실행과 정확도 측정은 하지 않았다 | README, p1b-runner, tools/exp01-run.mjs, tools/test |
 | P1-C | 2026-10-29 | EXP-01 GT 검토 준비 | 기존 검토 표본 146개(seed `20261026`)를 읽기 전용으로 감사했다(중복·caseId·층화·빈 결과 칸·재현성). 검토자용 보충 안내, 검토 방식 A(독립 사람 검토)/B(single-annotator 명시), 일치도 보고·불일치 분류, v2 도입 시 도구 제약을 정리했다([p1c-review-readiness.md](p1c-review-readiness.md)). 사람 검토, analyzer 실행, 정확도 측정은 하지 않았다. GT·표본·지침·도구·manifest는 바꾸지 않았다 | README, p1c-review-readiness |
 | P1-D | 2026-10-29 | GPT-6 AI 교차 검토 결과 수령 | 사용자가 제공한 GPT-6 판정 146개와 기록을 `evidence/exp-01-ai-cross-review/`에 바이트 그대로 보존했다. 기존 `review-agreement.mjs`로 일치도를 다시 계산했다(144/146, κ 0.940, S014·S104 제외 시 κ 0.933). 이 값은 AI 간 일치도이며 사람 검토가 아니다. 불일치 2건을 판정했다: S037은 `GUIDE-AMBIGUOUS`(사전 등록 카탈로그와 컴파일 결과상 GT 유지), S107은 `REVIEWER-DIFF`(GT 유지). 연구자 채택 전 초안이다([p1d-ai-cross-review.md](p1d-ai-cross-review.md)). GT·지침·표본·도구·manifest는 바꾸지 않았다. analyzer 실행과 정확도 측정은 하지 않았다 | README, p1d-ai-cross-review, evidence/exp-01-ai-cross-review |
+| P1-F | 2026-10-29 | EXP-01 첫 실측 채점 차단 | run `exp01-20261029-0651-43ace0f-50587`(analyzer 44/44 OK, scorer `BLOCKED`, 진단 전용)의 React 5개 사례 `node-key-collision` 6건을 원시 예측으로 추적했다. 원인은 둘이다. ① analyzer가 타입이 있는 React setter·dispatch 호출을 `updates` 대신 반환 tuple 안 함수 타입을 가리키는 external `calls`·`dataflow`로 출력한다. ② scorer 1.1의 external 키 `X\|file\|line`이 같은 줄의 두 선언을 구별하지 못한다. 충돌이 행 단위 수치를 왜곡하지는 않았다. scorer 1.2 사후 개정을 먼저 하고 analyzer 개선은 따로 하도록 제안했다([p1f-scoring-blocker-audit.md](p1f-scoring-blocker-audit.md)). GT·지침·scorer·runner·analyzer·manifest·run 결과는 바꾸지 않았다 | README, p1f-scoring-blocker-audit, evidence/exp-01-p1f-scoring-blocker |

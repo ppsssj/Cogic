@@ -1,0 +1,44 @@
+{
+  "analyzer": "out/analyzer (analyzeWorkspaceActive, cacheEnabled: false)",
+  "variants": [
+    {
+      "variant": "untyped",
+      "updatesEdges": 1,
+      "edgesFromIncrement": [
+        "updates function:increment@L5c2 -> function:Counter.useState#1@L4c28 [setCount]"
+      ],
+      "externalNodes": [
+        "external:useState (react-module.d.ts)@L1c0"
+      ],
+      "scorerCollisions": []
+    },
+    {
+      "variant": "tuple-one-line",
+      "updatesEdges": 0,
+      "edgesFromIncrement": [
+        "calls function:increment@L5c2 -> external:setCount (react.d.ts)@L1c53",
+        "dataflow function:increment@L5c2 -> external:setCount (react.d.ts)@L1c53 [next <- count + 1]"
+      ],
+      "externalNodes": [
+        "external:useState (react.d.ts)@L1c0",
+        "external:setCount (react.d.ts)@L1c53"
+      ],
+      "scorerCollisions": [
+        "X|shims/react.d.ts|1"
+      ]
+    },
+    {
+      "variant": "alias-split",
+      "updatesEdges": 0,
+      "edgesFromIncrement": [
+        "calls function:increment@L5c2 -> external:setCount (react.d.ts)@L2c26",
+        "dataflow function:increment@L5c2 -> external:setCount (react.d.ts)@L2c26 [value <- count + 1]"
+      ],
+      "externalNodes": [
+        "external:useState (react.d.ts)@L3c0",
+        "external:setCount (react.d.ts)@L2c26"
+      ],
+      "scorerCollisions": []
+    }
+  ]
+}

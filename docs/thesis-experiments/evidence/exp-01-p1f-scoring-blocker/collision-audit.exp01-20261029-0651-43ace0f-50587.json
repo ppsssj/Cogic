@@ -1,0 +1,1175 @@
+{
+  "runId": "exp01-20261029-0651-43ace0f-50587",
+  "headCommit": "43ace0fdfdf442d7871c3ef4a92d73b28f1b5e77",
+  "scorerVersion": "exp01-scorer/1.1",
+  "runStatus": "completed",
+  "scoringStatus": "BLOCKED",
+  "cases": [
+    {
+      "caseId": "h01-reducer-effect",
+      "rawSha256": "1a6caa2f4ef492e38a5438a890c08f18045b93c9995e3d4b27a486c3cac6e0b1",
+      "collisions": [
+        {
+          "key": "X|shims/react.d.ts|6",
+          "nodes": [
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:224",
+              "kind": "external",
+              "name": "useReducer (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 5,
+                  "character": 0
+                },
+                "end": {
+                  "line": 5,
+                  "character": 116
+                }
+              },
+              "signature": "<S, A>(reducer: (state: S, action: A) => S, initial: S): [S, (action: A) => void]",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:233",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:233",
+                  "label": "reducer <- reducer",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:233",
+                  "label": "initial <- 0",
+                  "argIndex": "1"
+                }
+              ]
+            },
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:319",
+              "kind": "external",
+              "name": "dispatch (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 5,
+                  "character": 95
+                },
+                "end": {
+                  "line": 5,
+                  "character": 114
+                }
+              },
+              "signature": "(action: A): void",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:383",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:383",
+                  "label": "action <- { type: \"inc\" }",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:479",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:479",
+                  "label": "action <- { type: \"dec\" }",
+                  "argIndex": "0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "X|shims/react.d.ts|5",
+          "nodes": [
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:131",
+              "kind": "external",
+              "name": "useState (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 0
+                },
+                "end": {
+                  "line": 4,
+                  "character": 91
+                }
+              },
+              "signature": "<S>(initial: S): [S, (next: S | ((prev: S) => S)) => void]",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:233",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:233",
+                  "label": "initial <- 0",
+                  "argIndex": "0"
+                }
+              ]
+            },
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:184",
+              "kind": "external",
+              "name": "setTicks (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 53
+                },
+                "end": {
+                  "line": 4,
+                  "character": 89
+                }
+              },
+              "signature": "(next: S | ((prev: S) => S)): void",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:383",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:383",
+                  "label": "next <- ticks + step",
+                  "argIndex": "0"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "cogicEdgeKinds": {
+        "references": 5,
+        "calls": 6,
+        "dataflow": 8
+      },
+      "gtRelationKinds": {
+        "owner": 3,
+        "references": 7,
+        "calls": 3,
+        "dataflow": 5,
+        "updates": 3
+      },
+      "strict": {
+        "asIs": {
+          "status": "SCORING_BLOCKED",
+          "gt": {
+            "owner": {
+              "TP": 3,
+              "FN": 0
+            },
+            "references": {
+              "TP": 5,
+              "FN": 2
+            },
+            "calls": {
+              "TP": 3,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 5,
+              "FN": 0
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 3
+            }
+          },
+          "pred": {
+            "calls": {
+              "FP": 3,
+              "TP": 3
+            },
+            "dataflow": {
+              "FP": 3,
+              "TP": 5
+            },
+            "owner": {
+              "TP": 3
+            },
+            "references": {
+              "TP": 5
+            }
+          },
+          "negativesViolated": 0
+        },
+        "diagEnclosingDecl": {
+          "status": "SCORED",
+          "unresolved": [],
+          "remainingCollisions": [],
+          "gt": {
+            "owner": {
+              "TP": 3,
+              "FN": 0
+            },
+            "references": {
+              "TP": 5,
+              "FN": 2
+            },
+            "calls": {
+              "TP": 3,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 5,
+              "FN": 0
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 3
+            }
+          },
+          "pred": {
+            "calls": {
+              "FP": 3,
+              "TP": 3
+            },
+            "dataflow": {
+              "FP": 3,
+              "TP": 5
+            },
+            "owner": {
+              "TP": 3
+            },
+            "references": {
+              "TP": 5
+            }
+          },
+          "negativesViolated": 0
+        },
+        "tpOnlyUnderCollidedKey": [],
+        "tpOnlyUnderDiagKey": [],
+        "updatesGtRows": [
+          {
+            "key": "updates|S|main.ts|13|S|main.ts|10",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|S|main.ts|13|S|main.ts|11",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|18|callable|S|main.ts|10",
+            "verdict": "FN"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "h02-alias-namespace-memo",
+      "rawSha256": "6516f3fb38f1431109b5d5de77bfac178aa8e001c517a807fb0b5763dc4b8c3c",
+      "collisions": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "nodes": [
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:131",
+              "kind": "external",
+              "name": "useLocalState (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 0
+                },
+                "end": {
+                  "line": 4,
+                  "character": 91
+                }
+              },
+              "signature": "<S>(initial: S): [S, (next: S | ((prev: S) => S)) => void]",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:189",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:189",
+                  "label": "initial <- false",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:189",
+                  "label": "initial <- seed",
+                  "argIndex": "0"
+                }
+              ]
+            },
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:184",
+              "kind": "external",
+              "name": "setOpen (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 53
+                },
+                "end": {
+                  "line": 4,
+                  "character": 89
+                }
+              },
+              "signature": "(next: S | ((prev: S) => S)): void",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:417",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:417",
+                  "label": "next <- false",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:478",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:478",
+                  "label": "next <- doubled",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:568",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:568",
+                  "label": "next <- true",
+                  "argIndex": "0"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "cogicEdgeKinds": {
+        "calls": 10,
+        "references": 3,
+        "dataflow": 14
+      },
+      "gtRelationKinds": {
+        "owner": 6,
+        "calls": 7,
+        "dataflow": 10,
+        "references": 4,
+        "updates": 3
+      },
+      "strict": {
+        "asIs": {
+          "status": "SCORING_BLOCKED",
+          "gt": {
+            "owner": {
+              "TP": 6,
+              "FN": 0
+            },
+            "calls": {
+              "TP": 7,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 10,
+              "FN": 0
+            },
+            "references": {
+              "TP": 3,
+              "FN": 1
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 3
+            }
+          },
+          "pred": {
+            "calls": {
+              "FP": 3,
+              "TP": 7
+            },
+            "dataflow": {
+              "FP": 3,
+              "TP": 10
+            },
+            "owner": {
+              "TP": 6
+            },
+            "references": {
+              "TP": 3
+            }
+          },
+          "negativesViolated": 0
+        },
+        "diagEnclosingDecl": {
+          "status": "SCORED",
+          "unresolved": [],
+          "remainingCollisions": [],
+          "gt": {
+            "owner": {
+              "TP": 6,
+              "FN": 0
+            },
+            "calls": {
+              "TP": 7,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 10,
+              "FN": 0
+            },
+            "references": {
+              "TP": 3,
+              "FN": 1
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 3
+            }
+          },
+          "pred": {
+            "calls": {
+              "FP": 3,
+              "TP": 7
+            },
+            "dataflow": {
+              "FP": 3,
+              "TP": 10
+            },
+            "owner": {
+              "TP": 6
+            },
+            "references": {
+              "TP": 3
+            }
+          },
+          "negativesViolated": 0
+        },
+        "tpOnlyUnderCollidedKey": [],
+        "tpOnlyUnderDiagKey": [],
+        "updatesGtRows": [
+          {
+            "key": "updates|S|main.ts|14|S|main.ts|9",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|S|main.ts|18|S|main.ts|10",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|24|callable|S|main.ts|9",
+            "verdict": "FN"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "h03-unsupported-negatives",
+      "rawSha256": "eabb2d65d31b012f2b91f194f41795b1ff0a0c01f0eba03dc33de6baedff0552",
+      "collisions": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "nodes": [
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:131",
+              "kind": "external",
+              "name": "useState (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 0
+                },
+                "end": {
+                  "line": 4,
+                  "character": 91
+                }
+              },
+              "signature": "<S>(initial: S): [S, (next: S | ((prev: S) => S)) => void]",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:167",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:167",
+                  "label": "initial <- initial",
+                  "argIndex": "0"
+                }
+              ]
+            },
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:184",
+              "kind": "external",
+              "name": "setOn (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 53
+                },
+                "end": {
+                  "line": 4,
+                  "character": 89
+                }
+              },
+              "signature": "(next: S | ((prev: S) => S)): void",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:264",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:264",
+                  "label": "next <- !on",
+                  "argIndex": "0"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "cogicEdgeKinds": {
+        "references": 1,
+        "calls": 7,
+        "dataflow": 7
+      },
+      "gtRelationKinds": {
+        "calls": 6,
+        "dataflow": 6,
+        "owner": 1,
+        "updates": 1,
+        "references": 4
+      },
+      "strict": {
+        "asIs": {
+          "status": "SCORING_BLOCKED",
+          "gt": {
+            "calls": {
+              "TP": 6,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 6,
+              "FN": 0
+            },
+            "owner": {
+              "TP": 1,
+              "FN": 0
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 1
+            },
+            "references": {
+              "TP": 1,
+              "FN": 3
+            }
+          },
+          "pred": {
+            "calls": {
+              "TP": 6,
+              "FP": 1
+            },
+            "dataflow": {
+              "TP": 6,
+              "FP": 1
+            },
+            "owner": {
+              "TP": 1
+            },
+            "references": {
+              "TP": 1
+            }
+          },
+          "negativesViolated": 0
+        },
+        "diagEnclosingDecl": {
+          "status": "SCORED",
+          "unresolved": [],
+          "remainingCollisions": [],
+          "gt": {
+            "calls": {
+              "TP": 6,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 6,
+              "FN": 0
+            },
+            "owner": {
+              "TP": 1,
+              "FN": 0
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 1
+            },
+            "references": {
+              "TP": 1,
+              "FN": 3
+            }
+          },
+          "pred": {
+            "calls": {
+              "TP": 6,
+              "FP": 1
+            },
+            "dataflow": {
+              "TP": 6,
+              "FP": 1
+            },
+            "owner": {
+              "TP": 1
+            },
+            "references": {
+              "TP": 1
+            }
+          },
+          "negativesViolated": 0
+        },
+        "tpOnlyUnderCollidedKey": [],
+        "tpOnlyUnderDiagKey": [],
+        "updatesGtRows": [
+          {
+            "key": "updates|D|main.ts|8|callable|S|main.ts|7",
+            "verdict": "FN"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "u01-react-usestate",
+      "rawSha256": "eb31eabfc9ae20b23e7bca3b4826098ab674d473fd3dd1951caff121fa3a53a3",
+      "collisions": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "nodes": [
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:131",
+              "kind": "external",
+              "name": "useState (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 0
+                },
+                "end": {
+                  "line": 4,
+                  "character": 91
+                }
+              },
+              "signature": "<S>(initial: S): [S, (next: S | ((prev: S) => S)) => void]",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:37",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:37",
+                  "label": "initial <- 0",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:37",
+                  "label": "initial <- \"idle\"",
+                  "argIndex": "0"
+                }
+              ]
+            },
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:184",
+              "kind": "external",
+              "name": "setCount (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 53
+                },
+                "end": {
+                  "line": 4,
+                  "character": 89
+                }
+              },
+              "signature": "(next: S | ((prev: S) => S)): void",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:159",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:159",
+                  "label": "next <- (c) => c + 1",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:159",
+                  "label": "next <- \"busy\"",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:244",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:244",
+                  "label": "next <- 0",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:244",
+                  "label": "next <- \"idle\"",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:329",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:329",
+                  "label": "next <- label === \"idle\" ? \"busy\" : \"idle\"",
+                  "argIndex": "0"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "cogicEdgeKinds": {
+        "references": 1,
+        "calls": 4,
+        "dataflow": 7
+      },
+      "gtRelationKinds": {
+        "owner": 2,
+        "calls": 1,
+        "dataflow": 1,
+        "updates": 5,
+        "references": 5
+      },
+      "strict": {
+        "asIs": {
+          "status": "SCORING_BLOCKED",
+          "gt": {
+            "owner": {
+              "TP": 2,
+              "FN": 0
+            },
+            "calls": {
+              "TP": 1,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 1,
+              "FN": 0
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 5
+            },
+            "references": {
+              "TP": 1,
+              "FN": 4
+            }
+          },
+          "pred": {
+            "calls": {
+              "FP": 3,
+              "TP": 1
+            },
+            "dataflow": {
+              "FP": 3,
+              "TP": 1
+            },
+            "owner": {
+              "TP": 2
+            },
+            "references": {
+              "TP": 1
+            }
+          },
+          "negativesViolated": 0
+        },
+        "diagEnclosingDecl": {
+          "status": "SCORED",
+          "unresolved": [],
+          "remainingCollisions": [],
+          "gt": {
+            "owner": {
+              "TP": 2,
+              "FN": 0
+            },
+            "calls": {
+              "TP": 1,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 1,
+              "FN": 0
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 5
+            },
+            "references": {
+              "TP": 1,
+              "FN": 4
+            }
+          },
+          "pred": {
+            "calls": {
+              "FP": 3,
+              "TP": 1
+            },
+            "dataflow": {
+              "FP": 3,
+              "TP": 1
+            },
+            "owner": {
+              "TP": 2
+            },
+            "references": {
+              "TP": 1
+            }
+          },
+          "negativesViolated": 0
+        },
+        "tpOnlyUnderCollidedKey": [],
+        "tpOnlyUnderDiagKey": [],
+        "updatesGtRows": [
+          {
+            "key": "updates|D|main.ts|7|callable|S|main.ts|4",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|7|callable|S|main.ts|5",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|12|callable|S|main.ts|4",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|12|callable|S|main.ts|5",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|17|callable|S|main.ts|5",
+            "verdict": "FN"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "u02-react-todo",
+      "rawSha256": "95ef0f44d6f56e2a18d2654fad1290afe34b92927ddee53f7e2a7b8e92f41c9f",
+      "collisions": [
+        {
+          "key": "X|shims/react.d.ts|5",
+          "nodes": [
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:131",
+              "kind": "external",
+              "name": "useState (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 0
+                },
+                "end": {
+                  "line": 4,
+                  "character": 91
+                }
+              },
+              "signature": "<S>(initial: S): [S, (next: S | ((prev: S) => S)) => void]",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:37",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:37",
+                  "label": "initial <- []",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:37",
+                  "label": "initial <- \"\"",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:37",
+                  "label": "initial <- null",
+                  "argIndex": "0"
+                }
+              ]
+            },
+            {
+              "id": "external:<fixtureRoot>/shims/react.d.ts:184",
+              "kind": "external",
+              "name": "setDraft (react.d.ts)",
+              "range": {
+                "start": {
+                  "line": 4,
+                  "character": 53
+                },
+                "end": {
+                  "line": 4,
+                  "character": 89
+                }
+              },
+              "signature": "(next: S | ((prev: S) => S)): void",
+              "edges": [
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:227",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:227",
+                  "label": "next <- text",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:227",
+                  "label": "next <- null",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:312",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:312",
+                  "label": "next <- \"empty\"",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:312",
+                  "label": "next <- (prev) => [...prev, draft]",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:312",
+                  "label": "next <- \"\"",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "calls",
+                  "source": "function:<fixtureRoot>/main.ts:479",
+                  "label": null,
+                  "argIndex": null
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:479",
+                  "label": "next <- []",
+                  "argIndex": "0"
+                },
+                {
+                  "kind": "dataflow",
+                  "source": "function:<fixtureRoot>/main.ts:479",
+                  "label": "next <- null",
+                  "argIndex": "0"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "cogicEdgeKinds": {
+        "references": 1,
+        "calls": 4,
+        "dataflow": 10
+      },
+      "gtRelationKinds": {
+        "owner": 3,
+        "calls": 1,
+        "dataflow": 1,
+        "updates": 7,
+        "references": 5
+      },
+      "strict": {
+        "asIs": {
+          "status": "SCORING_BLOCKED",
+          "gt": {
+            "owner": {
+              "TP": 3,
+              "FN": 0
+            },
+            "calls": {
+              "TP": 1,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 1,
+              "FN": 0
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 7
+            },
+            "references": {
+              "TP": 1,
+              "FN": 4
+            }
+          },
+          "pred": {
+            "calls": {
+              "FP": 3,
+              "TP": 1
+            },
+            "dataflow": {
+              "FP": 3,
+              "TP": 1
+            },
+            "owner": {
+              "TP": 3
+            },
+            "references": {
+              "TP": 1
+            }
+          },
+          "negativesViolated": 0
+        },
+        "diagEnclosingDecl": {
+          "status": "SCORED",
+          "unresolved": [],
+          "remainingCollisions": [],
+          "gt": {
+            "owner": {
+              "TP": 3,
+              "FN": 0
+            },
+            "calls": {
+              "TP": 1,
+              "FN": 0
+            },
+            "dataflow": {
+              "TP": 1,
+              "FN": 0
+            },
+            "updates": {
+              "TP": 0,
+              "FN": 7
+            },
+            "references": {
+              "TP": 1,
+              "FN": 4
+            }
+          },
+          "pred": {
+            "calls": {
+              "FP": 3,
+              "TP": 1
+            },
+            "dataflow": {
+              "FP": 3,
+              "TP": 1
+            },
+            "owner": {
+              "TP": 3
+            },
+            "references": {
+              "TP": 1
+            }
+          },
+          "negativesViolated": 0
+        },
+        "tpOnlyUnderCollidedKey": [],
+        "tpOnlyUnderDiagKey": [],
+        "updatesGtRows": [
+          {
+            "key": "updates|D|main.ts|8|callable|S|main.ts|5",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|8|callable|S|main.ts|6",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|13|callable|S|main.ts|6",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|13|callable|S|main.ts|4",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|13|callable|S|main.ts|5",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|22|callable|S|main.ts|4",
+            "verdict": "FN"
+          },
+          {
+            "key": "updates|D|main.ts|22|callable|S|main.ts|6",
+            "verdict": "FN"
+          }
+        ]
+      }
+    }
+  ]
+}
