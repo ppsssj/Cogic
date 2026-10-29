@@ -4,6 +4,7 @@
 // Run: node --test docs/thesis-experiments/tools/test/exp01-run.test.mjs
 
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -922,17 +923,90 @@ test("H6 an analyzer that differs from the baseline cannot pass the gate (record
   }
 });
 
-test("H7 real analyzer identity of this checkout matches the baseline sources (git ids)", () => {
+// H7 is split so that an intentional analyzer change (e.g. PR #10) does not fail the suite while every
+// baseline guarantee stays checked:
+//   H7a  the frozen baseline constants equal the git ids of the baseline commit itself
+//   H7b  the identity verdict for this checkout is exactly the set of real differences, and a checkout
+//        that differs from the baseline cannot pass the runner 1.2 technical gate
+//   H7c  compareAnalyzerIdentity accepts only the baseline and detects each kind of difference
+const gitAt = (args) => {
+  try {
+    return execFileSync("git", args, { cwd: path.resolve(here, "../../../.."), encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+  } catch {
+    return null;
+  }
+};
+const IDENTITY_FIELDS = ["srcAnalyzerTree", "srcSharedTree", "packageJsonBlob", "packageLockBlob", "tsconfigBlob", "analyzerBuildHash", "typescript"];
+
+test("H7a frozen baseline: ANALYZER_BASELINE equals the git ids of commit 43ace0f and the P1-I build evidence", () => {
+  const c = "43ace0fdfdf442d7871c3ef4a92d73b28f1b5e77";
+  assert.equal(ANALYZER_BASELINE.commit, c);
+  assert.equal(gitAt(["cat-file", "-t", c]), "commit", "baseline commit must be present in this clone (no shallow clone)");
+  const paths = { srcAnalyzerTree: "src/analyzer", srcSharedTree: "src/shared", packageJsonBlob: "package.json", packageLockBlob: "package-lock.json", tsconfigBlob: "tsconfig.json" };
+  for (const [field, p] of Object.entries(paths)) {
+    assert.equal(gitAt(["rev-parse", `${c}:${p}`]), ANALYZER_BASELINE[field], field);
+  }
+  // Compiled output hash and TypeScript version recorded by the baseline runs (0651, 0636) and the
+  // P1-I run 0802; they are not derivable from git and are pinned here as evidence values.
+  assert.equal(ANALYZER_BASELINE.analyzerBuildHash, "958dbf677b6085ddf478265b3cc2b64c5fb1452bf28cfb4c255ed5ef00566270");
+  assert.equal(ANALYZER_BASELINE.typescript, "5.9.3");
+});
+
+test("H7b this checkout: identity verdict equals the real differences; a changed analyzer cannot pass the gate", () => {
   const build = defaultBuildCheck();
   const id = defaultAnalyzerIdentity({ buildHash: build.buildHash });
-  for (const f of ["srcAnalyzerTree", "srcSharedTree", "packageJsonBlob", "packageLockBlob", "tsconfigBlob", "typescript"]) {
-    assert.equal(id.current[f], ANALYZER_BASELINE[f], f);
-  }
   assert.notEqual(id.current.headCommit, ANALYZER_BASELINE.commit, "HEAD is not claimed to be the baseline commit");
-  if (build.ok) {
-    assert.equal(id.current.analyzerBuildHash, ANALYZER_BASELINE.analyzerBuildHash, "compiled output equals the baseline build");
-    assert.equal(id.identical, true);
+  // independent recomputation of the differing fields
+  const expected = IDENTITY_FIELDS.filter((f) => !id.current[f] || id.current[f] !== ANALYZER_BASELINE[f]);
+  assert.deepEqual(id.mismatches, expected);
+  assert.equal(id.identical, expected.length === 0);
+  if (gitAt(["rev-parse", "HEAD:src/analyzer"]) !== ANALYZER_BASELINE.srcAnalyzerTree) {
+    assert.ok(id.mismatches.includes("srcAnalyzerTree"), "a changed src/analyzer tree is reported");
+    assert.equal(id.identical, false);
   }
+  if (build.ok && build.buildHash !== ANALYZER_BASELINE.analyzerBuildHash) {
+    assert.ok(id.mismatches.includes("analyzerBuildHash"), "a changed compiled output is reported");
+  }
+  // The real identity of this checkout drives a synthetic run: only an identical analyzer passes.
+  const env = makeEnv(["t01-ok"]);
+  try {
+    const r = run(env, { runId: "h7b-real-identity", analyzerIdentity: () => id });
+    assert.equal(r.record.status, "completed");
+    if (id.identical) {
+      assert.equal(r.record.confirmatory.eligible, true);
+      assert.equal(r.exitCode, 0);
+    } else {
+      assert.equal(r.record.confirmatory.eligible, false, "changed analyzer must not pass the baseline gate");
+      assert.ok(r.record.confirmatory.reasons.includes(`ANALYZER_NOT_IDENTICAL_TO_BASELINE:${id.mismatches.join(",")}`));
+      assert.equal(r.exitCode, 5);
+    }
+  } finally {
+    env.cleanup();
+  }
+});
+
+test("H7c compareAnalyzerIdentity accepts only the baseline and detects every field", () => {
+  const same = compareAnalyzerIdentity({ headCommit: "e".repeat(40), ...BASELINE_FIELDS });
+  assert.equal(same.identical, true, "baseline values are identical whatever HEAD is");
+  assert.deepEqual(same.mismatches, []);
+  const changedValue = {
+    srcAnalyzerTree: "2c9359d471b543ce0c15b5f22473cd39a9e8e269", // src/analyzer of PR #10 (4c744ad)
+    srcSharedTree: "0".repeat(40),
+    packageJsonBlob: "1".repeat(40),
+    packageLockBlob: "2".repeat(40),
+    tsconfigBlob: "3".repeat(40),
+    analyzerBuildHash: "1a78af192f1fd2b536627a4df8e87823000950242419832a5e3138146ac4b793", // build of 4c744ad
+    typescript: "5.9.2",
+  };
+  for (const field of IDENTITY_FIELDS) {
+    const one = compareAnalyzerIdentity({ ...BASELINE_FIELDS, [field]: changedValue[field] });
+    assert.deepEqual(one.mismatches, [field], field);
+    assert.equal(one.identical, false, field);
+    const missing = compareAnalyzerIdentity({ ...BASELINE_FIELDS, [field]: null });
+    assert.deepEqual(missing.mismatches, [field], `${field} unknown`);
+  }
+  const pr10 = compareAnalyzerIdentity({ ...BASELINE_FIELDS, srcAnalyzerTree: changedValue.srcAnalyzerTree, analyzerBuildHash: changedValue.analyzerBuildHash });
+  assert.deepEqual(pr10.mismatches, ["srcAnalyzerTree", "analyzerBuildHash"], "PR #10 analyzer is rejected as in run exp01-20261029-0829-4c744ad");
 });
 
 test("H8 env.json records npm, node, TypeScript, OS, CPU, git HEAD and tool hashes; npm failure is null", () => {

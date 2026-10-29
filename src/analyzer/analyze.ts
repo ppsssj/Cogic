@@ -981,6 +981,8 @@ function buildActiveFileGraph(
   const idByDeclPos = new Map<number, string>();
   const ownerDeclById = new Map<string, ts.Node>();
   const hookSourceIdByDeclPos = new Map<number, string>();
+  // Decl positions of setter/dispatch bindings of registered state hooks (subset of the map above).
+  const hookUpdaterDeclPos = new Set<number>();
   const pendingHookReferences: Array<{
     hookId: string;
     parentId: string;
@@ -1245,6 +1247,7 @@ function buildActiveFileGraph(
         hookSourceIdByDeclPos.set(declLocation(stateBinding).pos, hookId);
       }
       hookSourceIdByDeclPos.set(declLocation(setterBinding).pos, hookId);
+      hookUpdaterDeclPos.add(declLocation(setterBinding).pos);
     } else if (stateHook.bindingKind === "identifier") {
       if (!ts.isIdentifier(decl.name)) {
         return false;
@@ -2040,6 +2043,22 @@ function buildActiveFileGraph(
 
       const sym = checker.getSymbolAtLocation(node.expression);
       const declFromSym = sym ? pickBestDeclaration(sym, checker) : undefined;
+
+      // A setter/dispatch bound by a registered state hook is an update even when the hook is typed:
+      // the resolved signature then points at the function type in the hook's declaration file
+      // (e.g. `[S, (next: S) => void]` or `Dispatch<A>`), not at the binding.
+      if (declFromSym && ts.isBindingElement(declFromSym)) {
+        const pos = declLocation(declFromSym).pos;
+        const hookSourceId = hookSourceIdByDeclPos.get(pos);
+        if (hookSourceId && hookUpdaterDeclPos.has(pos)) {
+          return {
+            tgtId: hookSourceId,
+            sigDecl: undefined,
+            edgeKind: "updates" as GraphEdgeKind,
+            label: calleeName,
+          };
+        }
+      }
 
       const decl = (declFromSig ?? declFromSym) as ts.Declaration | undefined;
       if (!decl) {return null;}
