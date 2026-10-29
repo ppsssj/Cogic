@@ -177,7 +177,7 @@ npm 호출은 고정 명령 문자열(`npm --version`, 사용자 입력 없음)�
 | `eval-manifest.r2.json` | OK, 227개. runner 파일과 runner 테스트는 r2 범위(`fixtures/exp-01`, `tools/exp01`) 밖이라 영향 없음 |
 | `eval-manifest.r1.json` | DRIFT 4개(PR #8과 같음). runner 1.2는 r1을 쓰지 않는다 |
 | `npm run compile` / `npm run lint` | PASS / PASS |
-| 바뀐 파일 | `tools/exp01-run.mjs`, `tools/test/exp01-run.test.mjs`, 이 문서, README |
+| 바뀐 파일 | `tools/exp01-run.mjs`, `tools/test/exp01-run.test.mjs`, 이 문서, README, `p1b-runner.md`(runner 1.2 문서 안내 1줄) |
 | 바꾸지 않은 것 | `src/`, `tools/exp01/`(scorer 1.2), `fixtures/exp-01/`(GT, 지침, manifest r1·r2·GT), `docs/benchmarks/`, 기존 run 결과(`data/`에는 `p0`만 있음) |
 
 ## 7. 기존 run 보존 상태
