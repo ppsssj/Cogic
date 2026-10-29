@@ -1574,4 +1574,186 @@ export function Lazy() {
     assert.ok(edges.includes("calls reset -> make"), "setter argument calls are kept");
   });
 
+  // --- shorthand property references (EXP-01 REF-SHORTHAND-PROPERTY, P1-J2) ---
+  // In `{ count }` the identifier resolves to the property symbol, whose only declaration is the
+  // shorthand itself. The reference must follow the shorthand value symbol to an existing graph node
+  // (function, hook state source), and must not be guessed when there is none.
+  const VUE_SHIM = [
+    "export declare function ref<T>(value: T): { value: T };",
+    "export declare function reactive<T extends object>(value: T): T;",
+    "",
+  ].join("\n");
+
+  function analyzeWithModules(modules: Record<string, string>, code: string, extraFiles: Record<string, string> = {}) {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "codegraph-shorthand-"));
+    const mainFile = path.join(root, "main.ts");
+    const filePaths = [mainFile];
+    const paths: Record<string, string[]> = {};
+    for (const [mod, content] of Object.entries(modules)) {
+      const shim = path.join(root, "shims", `${mod}.d.ts`);
+      fs.mkdirSync(path.dirname(shim), { recursive: true });
+      fs.writeFileSync(shim, content, "utf8");
+      filePaths.push(shim);
+      paths[mod] = [`./shims/${mod}.d.ts`];
+    }
+    for (const [rel, content] of Object.entries(extraFiles)) {
+      const file = path.join(root, rel);
+      fs.writeFileSync(file, content, "utf8");
+      filePaths.push(file);
+    }
+    fs.writeFileSync(
+      path.join(root, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: { target: "ES2022", module: "ESNext", moduleResolution: "Bundler", strict: true, noEmit: true, types: [], paths },
+        include: ["**/*.ts"],
+      }),
+      "utf8",
+    );
+    fs.writeFileSync(mainFile, code, "utf8");
+    try {
+      clearAnalyzerCaches();
+      const result = analyzeWithWorkspace({
+        active: { fileName: mainFile, languageId: "typescript", code },
+        workspaceRoot: root,
+        filePaths,
+        cacheEnabled: false,
+      });
+      const byId = new Map(result.graph.nodes.map((n) => [n.id, n]));
+      const nameOf = (id: string) => (byId.get(id)?.name ?? id).replace(/ \(.*$/, "");
+      const edges = result.graph.edges.map((e) => `${e.kind} ${nameOf(e.source)} -> ${nameOf(e.target)}`);
+      return { result, edges, refs: edges.filter((e) => e.startsWith("references ")) };
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  }
+
+  test("shorthand: plain functions and arrow-function values are referenced; plain locals and self are not", () => {
+    const { refs, edges } = analyzeWithModules(
+      {},
+      `function validate(): boolean {
+  return true;
+}
+
+export function App() {
+  function increment(): void {}
+  const helper = (): number => 1;
+  const plain = 1;
+  return { validate, increment, helper, plain };
+}
+
+export function self() {
+  return { self };
+}
+`,
+    );
+    for (const target of ["validate", "increment", "helper"]) {
+      assert.ok(refs.includes(`references App -> ${target}`), `App -> ${target}\n${refs.join("\n")}`);
+    }
+    assert.ok(!refs.some((e) => e.endsWith("-> plain")), "no node, no reference");
+    assert.ok(!refs.includes("references self -> self"), "no self reference");
+    assert.ok(!edges.some((e) => e.startsWith("calls App")), "shorthand is not a call");
+  });
+
+  for (const [variant, shim] of Object.entries(REACT_SHIMS)) {
+    test(`shorthand (${variant}): React useState / useReducer values reference their state sources`, () => {
+      const { refs, edges } = analyzeWithModules(
+        { react: shim },
+        `import { useReducer, useState } from "react";
+
+function reducer(state: number, action: { type: "inc" }): number {
+  return action.type === "inc" ? state + 1 : state;
+}
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+  const [total, dispatch] = useReducer(reducer, 0);
+
+  function increment() {
+    setCount(count + 1);
+    dispatch({ type: "inc" });
+  }
+
+  return { count, total, increment, again: count, nested: { count } };
+}
+`,
+      );
+      assert.ok(refs.includes("references Counter -> Counter.useState#1"), `${variant}: count -> useState#1\n${refs.join("\n")}`);
+      assert.ok(refs.includes("references Counter -> Counter.useReducer#1"), `${variant}: total -> useReducer#1`);
+      assert.ok(refs.includes("references Counter -> increment"), `${variant}: increment`);
+      assert.strictEqual(refs.filter((e) => e === "references Counter -> Counter.useState#1").length, 1, `${variant}: shorthand, key: value and nested uses give one relation`);
+      // setter / dispatch stay updates (P1-J1)
+      assert.ok(edges.includes("updates increment -> Counter.useState#1"), `${variant}: setCount update kept`);
+      assert.ok(edges.includes("updates increment -> Counter.useReducer#1"), `${variant}: dispatch update kept`);
+      assert.ok(edges.includes("references increment -> Counter.useState#1"), `${variant}: count read in increment kept`);
+      assert.ok(edges.includes("calls Counter -> useState") && edges.includes("dataflow Counter -> useState"), `${variant}: hook call and dataflow kept`);
+    });
+  }
+
+  test("shorthand: Vue ref and reactive values reference their state sources, mixed with functions", () => {
+    const { refs, edges } = analyzeWithModules(
+      { vue: VUE_SHIM },
+      `import { reactive, ref } from "vue";
+
+export function useCart() {
+  const items = ref(0);
+  const state = reactive({ open: false });
+
+  function add() {
+    items.value++;
+  }
+
+  return { items, state, add };
+}
+`,
+    );
+    assert.ok(refs.includes("references useCart -> useCart.ref#1"), `items -> ref#1\n${refs.join("\n")}`);
+    assert.ok(refs.includes("references useCart -> useCart.reactive#1"), "state -> reactive#1");
+    assert.ok(refs.includes("references useCart -> add"), "add");
+    assert.ok(edges.includes("updates add -> useCart.ref#1"), "items.value++ update kept");
+  });
+
+  test("shorthand: same names in other scopes, key: value, destructuring and imports are not misattributed", () => {
+    const { refs } = analyzeWithModules(
+      { react: REACT_SHIMS["alias-split"] },
+      `import { useState } from "react";
+import { shared } from "./other";
+
+function validate(): boolean {
+  return true;
+}
+
+export function Outer() {
+  const [count, setCount] = useState(0);
+  return { count, setCount };
+}
+
+export function Inner() {
+  const count = 5;
+  return { count };
+}
+
+export function Flags() {
+  return { validate: true };
+}
+
+export function Picks(input: { validate: number }) {
+  const { validate } = input;
+  return { validate };
+}
+
+export function Imports() {
+  return { shared, alias: shared };
+}
+`,
+      { "other.ts": "export function shared(): number {\n  return 1;\n}\n" },
+    );
+    assert.ok(refs.includes("references Outer -> Outer.useState#1"), `Outer count\n${refs.join("\n")}`);
+    assert.ok(!refs.some((e) => e.startsWith("references Inner ")), "Inner's own count is a plain local, not Outer's state");
+    assert.ok(!refs.some((e) => e.startsWith("references Flags ")), "a property key named like a function is not a reference");
+    assert.ok(!refs.some((e) => e.startsWith("references Picks ")), "destructured local shadows the module function");
+    // imported values: shorthand behaves exactly like `alias: shared` (cross-file references are not emitted)
+    const importRefs = refs.filter((e) => e.startsWith("references Imports "));
+    assert.deepStrictEqual(importRefs, [], "no reference to the imported declaration");
+  });
+
 });

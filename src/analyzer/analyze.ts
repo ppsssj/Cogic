@@ -1947,7 +1947,13 @@ function buildActiveFileGraph(
         }
 
         try {
-          const sym = checker.getSymbolAtLocation(node);
+          // In a shorthand property `{ count }` the identifier resolves to the property symbol, whose
+          // only declaration is the shorthand itself (no graph node). The referenced value is the
+          // shorthand value symbol; if it cannot be resolved, no edge is added.
+          const sym =
+            ts.isShorthandPropertyAssignment(node.parent) && node.parent.name === node
+              ? checker.getShorthandAssignmentValueSymbol(node.parent)
+              : checker.getSymbolAtLocation(node);
           const decl = sym ? pickBestDeclaration(sym, checker) : undefined;
           if (!decl) {
             ts.forEachChild(node, visit);
