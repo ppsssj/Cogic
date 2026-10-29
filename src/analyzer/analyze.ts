@@ -2237,6 +2237,11 @@ function buildActiveFileGraph(
   }
 
   // walk bodies with owner tracking
+  const classOwnerId = (cls: ts.Node): string | undefined =>
+    ts.isClassDeclaration(cls) && cls.name
+      ? idByDeclPos.get(declLocation(cls).pos)
+      : undefined;
+
   const walk = (node: ts.Node, ownerId: string) => {
     // owner switches
     if (ts.isFunctionDeclaration(node) && node.name && node.body) {
@@ -2257,6 +2262,33 @@ function buildActiveFileGraph(
       const id = idByDeclPos.get(pos);
       const nextOwner = id ?? ownerId;
       walk(node.body, nextOwner);
+      return;
+    }
+
+    // Constructor bodies and instance field initializers run when an instance is created, so their
+    // owner is the class (constructors are not graph nodes). Parameters, decorators, static fields
+    // and function-valued fields keep the surrounding owner / their own node.
+    if (ts.isConstructorDeclaration(node) && node.body) {
+      const classId = classOwnerId(node.parent);
+      for (const p of node.parameters) {
+        walk(p, ownerId);
+      }
+      walk(node.body, classId ?? ownerId);
+      return;
+    }
+
+    if (
+      ts.isPropertyDeclaration(node) &&
+      node.initializer &&
+      !ts.isArrowFunction(node.initializer) &&
+      !ts.isFunctionExpression(node.initializer) &&
+      !node.modifiers?.some((m) => m.kind === ts.SyntaxKind.StaticKeyword)
+    ) {
+      const classId = classOwnerId(node.parent);
+      const initializer = node.initializer;
+      ts.forEachChild(node, (child) =>
+        walk(child, child === initializer ? (classId ?? ownerId) : ownerId),
+      );
       return;
     }
 

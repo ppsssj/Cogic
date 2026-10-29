@@ -1966,4 +1966,103 @@ export function builtin(): Map<string, number> {
     assert.ok(edges.includes("calls viaFactory -> Widget.create"), "static factory stays a call");
   });
 
+  // --- constructor body and field initializer owner (EXP-01 *-CTOR-BODY / *-FIELD-INIT, P1-J3) ---
+  // Constructors are not graph nodes; their body and instance field initializers belong to the class.
+  test("owner: constructor body relations belong to the class, parameters and methods keep theirs", () => {
+    const { ctor, edges } = constructorEdges(
+      {},
+      `import { User } from "./models";
+
+function normalize(name: string): string {
+  return name.trim();
+}
+
+class Session {
+  readonly user: User;
+
+  constructor(name: string, fallback = normalize("guest")) {
+    this.user = new User(normalize(name));
+    this.user.initialize();
+    [fallback].forEach((n) => normalize(n));
+  }
+
+  refresh(): User {
+    return new User("again");
+  }
+
+  static make(): Session {
+    return new Session("s");
+  }
+}
+
+export const top = new Session("top");
+`,
+      {
+        "models.ts": `export class User {
+  constructor(public name: string) {}
+  initialize(): void {}
+}
+`,
+      },
+    );
+    for (const e of [
+      "constructs Session -> external:new User@models.ts:1",
+      "dataflow Session -> external:new User@models.ts:1#0",
+      "constructs Session.refresh -> external:new User@models.ts:1",
+      "constructs Session.make -> class:Session@main.ts:7",
+      "constructs main.ts -> class:Session@main.ts:7",
+    ]) {
+      assert.ok(ctor.includes(e), `${e}\n${ctor.join("\n")}`);
+    }
+    assert.ok(edges.includes("calls Session -> normalize"), `constructor body call owned by the class\n${edges.join("\n")}`);
+    assert.ok(edges.includes("dataflow Session -> normalize"), "and its dataflow");
+    assert.ok(edges.includes("calls Session -> User.initialize"), "method call on the created instance");
+    assert.ok(edges.includes("calls main.ts -> normalize"), "parameter default is evaluated outside the body: owner unchanged");
+    assert.ok(!ctor.some((e) => e.startsWith("constructs main.ts -> external:new User")), "no constructor-body relation left on the file");
+  });
+
+  test("owner: instance field initializers belong to the class; static and function-valued fields do not", () => {
+    const { ctor, edges } = constructorEdges(
+      {},
+      `function helper(): number {
+  return 1;
+}
+
+class Timer {
+  constructor(public ms: number) {}
+}
+
+class Emitter {}
+
+export class Clock {
+  timer = new Timer(1000);
+  emitter = new Emitter();
+  static shared = new Timer(1);
+  handler = () => helper();
+}
+
+export function f() {
+  class Local {
+    constructor() {
+      void new Emitter();
+    }
+  }
+  return Local;
+}
+`,
+    );
+    for (const e of [
+      "constructs Clock -> class:Timer@main.ts:5",
+      "dataflow Clock -> class:Timer@main.ts:5#0",
+      "constructs Clock -> class:Emitter@main.ts:9",
+      "constructs main.ts -> class:Timer@main.ts:5",
+      "constructs Local -> class:Emitter@main.ts:9",
+    ]) {
+      assert.ok(ctor.includes(e), `${e}\n${ctor.join("\n")}`);
+    }
+    assert.ok(edges.includes("calls Clock.handler -> helper"), "arrow field keeps its own node as owner");
+    assert.ok(!edges.includes("calls Clock -> helper"), "arrow body is not attributed to the class");
+    assert.ok(!ctor.includes("constructs f -> class:Emitter@main.ts:9"), "nested class constructor belongs to the nested class");
+  });
+
 });
