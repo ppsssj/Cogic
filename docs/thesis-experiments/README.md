@@ -43,8 +43,10 @@
 | [reproducibility.md](reproducibility.md) | 환경 비교, 버전, 재현 명령, 과거 산출물 무결성 해시 |
 | [risks-and-limitations.md](risks-and-limitations.md) | 위험 목록(심각도·대응), P0 자체의 한계 |
 | [p1a-ground-truth.md](p1a-ground-truth.md) | P1-A: EXP-01 Ground Truth 작성 방법, 독립성·검토 상태, 채점 규칙, 사전 등록, P0와의 차이 |
+| [p1b-runner.md](p1b-runner.md) | P1-B: EXP-01 실행 도구 사용법, 사전 확인, 결과 폴더, 반복 비교 규칙, D11 결정 |
 | [fixtures/exp-01/](fixtures/exp-01/README.md) | P1-A: EXP-01 코퍼스 A(fixture 44개, GT v1), 주석 지침, 패턴 카탈로그, 커버리지, 검토 표본 |
 | `tools/exp01/` | P1-A: GT 검증, 채점, 커버리지, 검토 표본, manifest 도구와 단위 테스트 |
+| `tools/exp01-run.mjs`, `tools/test/` | P1-B: EXP-01 실행 도구와 합성 입력 단위 테스트 |
 | `tools/` | P0 읽기 전용 감사 도구 2개 |
 | `data/p0/` | P0 도구 출력(감사 결과, SourceFile 요청 probe) |
 
@@ -82,3 +84,5 @@
 | P0-R1 | 2026-10-26 | PR #1 검토 의견 | ① **선언 파일 비중 해석**: 요청 90.1%(건수, MEASURED[P0-PROBE])와 시간 기여도를 분리했다. "이득의 대부분이 선언 파일 재파싱 회피"는 INFERRED로 재분류하고 evidence C09a를 추가했다. ② **EXP-01 GT 판정**: GT 결정성 축을 추가했다. 정답이 결정 불가능한 사례는 P/R/F1 확증 평가에서 빼고 별도 보고한다. 정답이 명확한 unsupported-by-design 사례는 overall Recall에 포함한다. strict/lenient와 in-scope/overall 구분은 유지했다. ③ **EXP-02 재현 판정**: 단일 3단계 판정을 METHOD_REPRODUCED / EFFECT_DIRECTION_REPRODUCED / MAGNITUDE_COMPATIBLE 세 차원으로 바꾸었다. 과거 점추정 66.4%와 현재 CI만으로 동일 성능 재현을 확정하지 않는다 | README, existing-benchmark-audit, evidence-matrix, risks-and-limitations, reproducibility, experimental-design, exp-01, exp-02 |
 | P1-A | 2026-10-26 | EXP-01 준비 | EXP-01 GT v1(44 사례, 확증 651, 정답 불확정 8, 부정 49)과 채점 도구를 사전 등록했다. 측정은 하지 않았다. P0 문서는 고치지 않았다. P0와의 차이·의문점은 [p1a-ground-truth.md §8](p1a-ground-truth.md#8-p0-문서와의-차이와-의문점)에 보고했다 | README(문서 목록), p1a-ground-truth, fixtures/exp-01, tools/exp01 |
 | P1-A-R1 | 2026-10-27 | PR #2 코드 리뷰(채점 정확성) | 측정 전에 평가 도구 결함을 고쳤다. ① lenient에서 예측 1개가 GT 여러 개를 TP로 만들던 문제를 고쳤다. strict·lenient 모두 결정적 최대 1:1 매칭을 쓴다(`targetAlternatives` 포함). ② 노드 키 충돌, 잘못된 endpoint, 파싱 불가 dataflow 인덱스, 알 수 없는 kind가 있는 사례는 `SCORING_BLOCKED`로 두고 확증 집계에서 뺀다(fail-closed). ③ D5 부정 사례가 synthetic owner/state-source의 존재만 부정한다는 점을 명시했다. GT 데이터와 사전 등록 커밋(`41bbe19`)은 바꾸지 않았다. 채점 도구 `exp01-scorer/1.1`과 `eval-manifest.r1.json`을 새 평가 도구 기준(`ae82bfb`)으로 고정했다([p1a-ground-truth.md §12](p1a-ground-truth.md#12-p1-a-r1-채점-도구-수정)). Cogic 실행이나 정확도 측정은 하지 않았다 | README, p1a-ground-truth, fixtures/exp-01(지침·변경 기록·README), tools/exp01 |
+| P1-B | 2026-10-28 | EXP-01 실행 준비 | 실행 도구 `exp01-run.mjs`(`exp01-runner/1.0`)를 추가했다. 사전 확인(두 manifest 검사, 빌드 신선도, dirty 거부), `exp01-raw/1` 원본 저장, 덮어쓰기 금지, 결정성·캐시 OFF/ON(hit 경로 포함) 비교, GraphPayload 구조 검증, D11 TS lib 진단, `scoringStatus`에 따른 확증 판정을 넣었다. D11은 `D11_KEEP_PRE_REGISTERED_SCORING`으로 결정했다. 합성 입력 테스트만 했다. 실제 코퍼스 실행과 정확도 측정은 하지 않았다(NOT_RUN). GT·평가 도구·manifest는 바꾸지 않았다 | README, p1a-ground-truth(D11 결정 기록), p1b-runner, tools/exp01-run.mjs, tools/test |
+| P1-B-R1 | 2026-10-28 | PR #3 검토(실행 도구 신뢰성) | 측정 전에 실행 도구 결함을 고쳤다(`exp01-runner/1.1`). ① 채점 프로세스 종료 코드 0, `summary.json` 존재, `COMPLETE`, `exp01-scorer/1.1`을 모두 만족해야 확증 결과로 인정한다. 채점기 예외도 `run.json`에 기록한다. ② 변형별 결과를 생성 직후 저장해, 뒤 변형이 실패해도 앞 결과가 남는다. 실패 변형·오류·stack을 기록한다. ③ `--bootstrap`은 0 이상의 정수만 받고, 확증 결과는 사전 등록값 10,000에서만 인정한다. ④ 캐시 hit 경로 검증 상태(`cacheHitPath`)를 정확도 확증 판정과 분리하고 해석 규칙을 정했다([p1b-runner.md §10](p1b-runner.md#10-p1-b-r1-실행-도구-신뢰성-수정)). 실제 analyzer 실행과 정확도 측정은 하지 않았다 | README, p1b-runner, tools/exp01-run.mjs, tools/test |

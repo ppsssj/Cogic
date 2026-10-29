@@ -191,7 +191,7 @@ P0 문서는 고치지 않았다. 아래 항목은 P1-B 측정과 해석 때 확
 | D7 | P0 §6.3의 lenient는 "kind 무시, 끝점만 비교"다 | dataflow(argIndex)와 owner는 lenient에서도 strict와 같게 두었다. 구조 관계의 매칭은 1:1이다. 사전 등록 시점(41bbe19)의 "다대다 매칭"은 채점 결함이었고 P1-A-R1에서 고쳤다(§12) | 구체화 |
 | D8 | P0 §6.3의 "framework owner에서 나가는 관계는 별도 범주" | 범주 규칙: owner 관계와 synthetic 노드에서 나가는 관계는 framework 범주, `updates`는 항상 updates 범주(`lib.mjs` `categoryFor`) | 구체화 |
 | D9 | P0 §7은 GT 검토를 사전 등록 전에 하도록 했다 | 검토자가 없어 검토 전에 사전 등록했다(§5) | 절차 순서 차이. 논문에 명시 |
-| D11 | (P1-A-R1 검토 중 발견) GT의 TS lib 대상 노드는 `L\|<symbol>` 키다. 그러나 정규화기는 Cogic 노드로 `L\|` 키를 만들지 않는다. TS lib 파일의 노드는 `X\|<tslib>/<파일>\|<줄>`이 된다 | 고치지 않았다. lib 대상 GT 17개(`CALL-LIB`, `DF-LIB`, `REF-LIB`, `CONS-LIB`, 모두 unsupported-by-design, 5개 사례)는 항상 FN이 된다. Cogic이 lib 선언으로 edge를 만들면 그 예측은 FP가 된다. 코드상 Cogic은 lib 파일 대상을 제외하므로(`analyze.ts:1955`, `:2060`, `:2110`) 후자는 예상되지 않는다 | overall Recall에만 영향이 있고 in-scope 지표에는 없다. lib 노드 매핑 규칙(예: 심볼 이름 대조)을 추가할지는 측정 전에 결정해야 한다 |
+| D11 | (P1-A-R1 검토 중 발견) GT의 TS lib 대상 노드는 `L\|<symbol>` 키다. 그러나 정규화기는 Cogic 노드로 `L\|` 키를 만들지 않는다. TS lib 파일의 노드는 `X\|<tslib>/<파일>\|<줄>`이 된다 | 고치지 않았다. lib 대상 GT 17개(`CALL-LIB`, `DF-LIB`, `REF-LIB`, `CONS-LIB`, 모두 unsupported-by-design, 5개 사례)는 항상 FN이 된다. Cogic이 lib 선언으로 edge를 만들면 그 예측은 FP가 된다. 코드상 Cogic은 lib 파일 대상을 제외하므로(`analyze.ts:1955`, `:2060`, `:2110`) 후자는 예상되지 않는다 | overall Recall에만 영향이 있고 in-scope 지표에는 없다. lib 노드 매핑 규칙(예: 심볼 이름 대조)을 추가할지는 측정 전에 결정해야 한다. **결정(2026-10-28): `D11_KEEP_PRE_REGISTERED_SCORING`.** 분류·정규화·GT를 그대로 두고, 실제 출력에 TS lib 대상 관계가 있으면 runner가 별도 진단으로 기록해 확증 결과의 타당성을 재검토한다([p1b-runner.md §6](p1b-runner.md#6-d11-결정)) |
 | D10 | Owner 규칙. 생성자 본문과 인스턴스 필드 초기화식의 owner는 class, 데코레이터 식의 owner는 file이다(지침 §3.2, §3.4). P0에는 이 경우의 규칙이 없다. 코드상 class owner 전환 경로가 없다(`analyze.ts:2187-2225`). 메서드 데코레이터는 순회하지 않는다(`:2197-2207`) | 새 패턴 `CALL/CONS/DF-CTOR-BODY`, `*-FIELD-INIT`, `*-DECORATOR-METHOD`(unsupported-by-design)로 분리했다 | overall에만 영향 |
 
 ## 9. 사전 등록과 GT 버전 관리
@@ -243,10 +243,10 @@ node docs/thesis-experiments/tools/exp01/score.mjs --predictions docs/thesis-exp
 |---|---|
 | GT·지침·카탈로그·채점 규칙 고정 | READY(사전 등록 커밋) |
 | 채점 도구 | READY(`exp01-scorer/1.1`, 합성 데이터 테스트 44/44, §12). 실제 analyzer 출력 형식 대응은 P1-B 첫 실행에서 확인해야 한다. 특히 경로 표기, synthetic 노드 이름 규칙(`#n`), `arg#i` |
-| 실행 도구(`exp01-run.mjs`) | **없음.** 작성할 일: `analyzeWorkspaceActive({ workspaceRoot: <case dir>, filePaths, cacheEnabled: false })`를 부르고 `exp01-raw/1` 형식(`fixtureRoot` 포함)으로 저장한다. 2회 실행 해시 비교(결정성)와 캐시 OFF/ON 비교(P0 §8, §10)도 넣는다. 시작 전에 §9의 두 manifest 검사를 통과하게 한다. 결과의 `scoringStatus`가 `COMPLETE`가 아니면 확증 결과로 쓰지 않는다 |
+| 실행 도구(`exp01-run.mjs`) | **P1-B에서 구현했다([p1b-runner.md](p1b-runner.md)).** 아래는 P1-A 시점의 기록이다. 작성할 일: `analyzeWorkspaceActive({ workspaceRoot: <case dir>, filePaths, cacheEnabled: false })`를 부르고 `exp01-raw/1` 형식(`fixtureRoot` 포함)으로 저장한다. 2회 실행 해시 비교(결정성)와 캐시 OFF/ON 비교(P0 §8, §10)도 넣는다. 시작 전에 §9의 두 manifest 검사를 통과하게 한다. 결과의 `scoringStatus`가 `COMPLETE`가 아니면 확증 결과로 쓰지 않는다 |
 | 사람의 독립 검토 | **미수행.** 측정 전에 검토를 마치는 것을 권장한다. 그래야 정정이 모두 "측정 전"이 된다. 불가능하면 single-annotator를 명시하고 진행한다 |
 | D1–D5 해석 | 측정을 막지는 않는다. 결과 해석과 원인 코드 부여 때 사용한다 |
-| D11(lib 노드 매핑) | 측정을 막지는 않는다. 다만 overall Recall에 고정 FN 17개를 만든다. 매핑 규칙을 추가할지 측정 전에 결정해야 한다 |
+| D11(lib 노드 매핑) | 결정됨: `D11_KEEP_PRE_REGISTERED_SCORING`(2026-10-28). overall Recall에 고정 FN 17개가 포함되며, 이 점을 결과와 함께 보고한다 |
 | 코퍼스 B(실제 오픈소스) | 미착수(P0 §5.2, 별도 단계) |
 
 ## 12. P1-A-R1: 채점 도구 수정
