@@ -1,0 +1,147 @@
+﻿sampleId,reviewerLabel,reviewerConfidence,reviewerComment,reviewerId,reviewedAt
+S001,exists,high,makeShape 반환 타입에 Shape를 명시적으로 사용함,GPT6-AI-REVIEW,2026-10-29
+S002,exists,high,sharedApp은 Express 인스턴스이며 get에 health를 핸들러로 등록함,GPT6-AI-REVIEW,2026-10-29
+S003,exists,high,배럴 재내보내기를 거쳐 upper 함수를 직접 호출함,GPT6-AI-REVIEW,2026-10-29
+S004,exists,high,add의 첫 번째 인자로 sum 값을 전달함,GPT6-AI-REVIEW,2026-10-29
+S005,exists,high,addRect 내부에서 imported Rect를 new로 생성함,GPT6-AI-REVIEW,2026-10-29
+S006,exists,high,useCart의 반환 객체에서 items 상태 변수를 값으로 참조함,GPT6-AI-REVIEW,2026-10-29
+S007,exists,high,react 모듈의 useState 호출로 상태 source가 생성됨,GPT6-AI-REVIEW,2026-10-29
+S008,not-exists,high,helper에는 NestJS 경로 데코레이터가 없으므로 route owner가 아님,GPT6-AI-REVIEW,2026-10-29
+S009,exists,high,"new Triangle(1, 2)에서 첫 번째 생성자 파라미터에 값 전달",GPT6-AI-REVIEW,2026-10-29
+S010,exists,high,Other.reactive는 local.ts 함수이며 첫 번째 인자로 객체를 전달함,GPT6-AI-REVIEW,2026-10-29
+S011,exists,high,Express delete 라우트에 removeOrder가 세 번째 핸들러로 등록됨,GPT6-AI-REVIEW,2026-10-29
+S012,exists,high,"new Color(0, 0, 0)의 첫 번째 파라미터에 값 전달",GPT6-AI-REVIEW,2026-10-29
+S013,exists,high,TodoList의 반환 객체에 onSubmit 함수 식별자를 사용함,GPT6-AI-REVIEW,2026-10-29
+S014,undeterminable,medium,task는 외부에서 전달되는 함수 매개변수여서 호출 대상 선언을 고정할 수 없음,GPT6-AI-REVIEW,2026-10-29
+S015,exists,high,튜플 spread의 두 번째 원소가 pair의 파라미터 인덱스 1에 대응함,GPT6-AI-REVIEW,2026-10-29
+S016,exists,high,run 내부에서 double(2)를 직접 호출함,GPT6-AI-REVIEW,2026-10-29
+S017,exists,high,notify 선택적 호출에서 첫 파라미터에 문자열 전달,GPT6-AI-REVIEW,2026-10-29
+S018,exists,high,watch 콜백 owner 안의 log(next)에 첫 번째 인자를 전달함,GPT6-AI-REVIEW,2026-10-29
+S019,exists,medium,useMemo 두 번째 인자의 size가 React.useState 상태 source를 참조함,GPT6-AI-REVIEW,2026-10-29
+S020,exists,high,map 콜백에서 format(it)에 첫 인자를 전달하며 익명 콜백은 투명함,GPT6-AI-REVIEW,2026-10-29
+S021,exists,high,one 내부 load('1')에서 첫 번째 파라미터로 값 전달,GPT6-AI-REVIEW,2026-10-29
+S022,exists,high,wire가 Emitter.on 메서드를 호출함,GPT6-AI-REVIEW,2026-10-29
+S023,not-exists,high,show는 count를 읽기만 하므로 상태 변경 관계가 없음,GPT6-AI-REVIEW,2026-10-29
+S024,exists,high,vue 모듈의 ref(0) 호출로 상태 source 생성,GPT6-AI-REVIEW,2026-10-29
+S025,exists,high,Vue.computed의 getter 함수를 첫 번째 인자로 전달함,GPT6-AI-REVIEW,2026-10-29
+S026,not-exists,high,target()은 주석과 문자열에만 등장하여 실제 식별자 참조가 아님,GPT6-AI-REVIEW,2026-10-29
+S027,exists,high,find 내부에서 NotFoundError를 new로 생성함,GPT6-AI-REVIEW,2026-10-29
+S028,exists,high,convert 객체 메서드 내부 transform(v) 직접 호출,GPT6-AI-REVIEW,2026-10-29
+S029,exists,high,bootstrap 내부 new Registry() 생성,GPT6-AI-REVIEW,2026-10-29
+S030,exists,high,모듈 최상위의 @Injectable() 데코레이터 팩토리 호출,GPT6-AI-REVIEW,2026-10-29
+S031,exists,medium,router.post 인라인 핸들러 owner의 res.send 호출,GPT6-AI-REVIEW,2026-10-29
+S032,exists,high,setEmail이 reactive errors의 email 속성에 대입하며 상태 source를 사용함,GPT6-AI-REVIEW,2026-10-29
+S033,exists,high,watchEffect 콜백에서 page.value를 읽으며 ref 상태 source 참조,GPT6-AI-REVIEW,2026-10-29
+S034,exists,high,mount 내부 app.delete()는 Express Application.delete 메서드 호출,GPT6-AI-REVIEW,2026-10-29
+S035,exists,high,audit를 app.use 인자로 전달하여 함수 값 참조 발생,GPT6-AI-REVIEW,2026-10-29
+S036,exists,high,useSearch에서 vue.computed를 직접 호출,GPT6-AI-REVIEW,2026-10-29
+S037,not-exists,medium,메서드 데코레이터 @Get의 owner는 바깥 클래스이며 모듈 최상위가 아님,GPT6-AI-REVIEW,2026-10-29
+S038,exists,high,label에서 lib/numbers.ts의 clamp 직접 호출,GPT6-AI-REVIEW,2026-10-29
+S039,exists,high,"최상위 topApp.get('/health', health)의 첫 인자를 get에 전달",GPT6-AI-REVIEW,2026-10-29
+S040,exists,high,반환 객체 shorthand로 setName 함수 값 참조,GPT6-AI-REVIEW,2026-10-29
+S041,exists,high,filter 익명 콜백의 isValid(it) 첫 인자 전달,GPT6-AI-REVIEW,2026-10-29
+S042,exists,high,computed getter 함수를 computed의 첫 인자로 전달,GPT6-AI-REVIEW,2026-10-29
+S043,exists,high,show 내부 this.format('x')의 첫 인자 전달,GPT6-AI-REVIEW,2026-10-29
+S044,exists,high,"new Color(0, 0, 0)의 세 번째 생성자 파라미터로 값 전달",GPT6-AI-REVIEW,2026-10-29
+S045,exists,high,useForm에서 ref를 두 번 호출함,GPT6-AI-REVIEW,2026-10-29
+S046,not-exists,high,app.set은 설정 메서드이지 Express 라우트 등록이 아님,GPT6-AI-REVIEW,2026-10-29
+S047,exists,high,useContext는 React synthetic owner는 아니지만 일반 함수 호출임,GPT6-AI-REVIEW,2026-10-29
+S048,exists,high,BoxFactory 생성자 시그니처의 반환 타입 Box<number> 참조,GPT6-AI-REVIEW,2026-10-29
+S049,exists,high,useCart의 반환 객체에서 total 상태 변수 참조,GPT6-AI-REVIEW,2026-10-29
+S050,exists,high,toggle의 state.open 접근에서 reactive 상태 source를 참조함,GPT6-AI-REVIEW,2026-10-29
+S051,not-exists,high,peek는 state.count를 읽기만 하므로 업데이트 없음,GPT6-AI-REVIEW,2026-10-29
+S052,exists,high,total에서 외부 negate 함수를 호출,GPT6-AI-REVIEW,2026-10-29
+S053,exists,high,@Controller 클래스 메서드의 @Get 데코레이터로 Nest route owner 생성,GPT6-AI-REVIEW,2026-10-29
+S054,exists,high,viaGeneric에서 new Box<string> 실행,GPT6-AI-REVIEW,2026-10-29
+S055,exists,high,ref(0)의 인덱스 0에 값 전달,GPT6-AI-REVIEW,2026-10-29
+S056,not-exists,high,사용자 정의 useToggle 호출은 React callback-owner를 만들지 않음,GPT6-AI-REVIEW,2026-10-29
+S057,exists,high,반환 객체 shorthand로 validate 함수 값 참조,GPT6-AI-REVIEW,2026-10-29
+S058,exists,high,클래스 @Controller 팩토리 호출은 모듈 최상위 소유,GPT6-AI-REVIEW,2026-10-29
+S059,exists,high,@common.Controller()는 네임스페이스를 통한 데코레이터 팩토리 호출,GPT6-AI-REVIEW,2026-10-29
+S060,exists,high,"transfer 함수 내부 fee(amount, 0.01) 호출",GPT6-AI-REVIEW,2026-10-29
+S061,exists,high,useSearch가 ref()를 두 차례 호출,GPT6-AI-REVIEW,2026-10-29
+S062,exists,high,onSubmit에서 setError('empty')로 React 상태 변경,GPT6-AI-REVIEW,2026-10-29
+S063,exists,high,from.deposit(-amount-cost)의 첫 파라미터 인덱스 0으로 값 전달,GPT6-AI-REVIEW,2026-10-29
+S064,exists,high,반환 객체에서 email 상태 변수 참조,GPT6-AI-REVIEW,2026-10-29
+S065,exists,high,auth가 get/delete의 handler 인자로 전달되므로 함수 값 참조,GPT6-AI-REVIEW,2026-10-29
+S066,exists,high,new Admin('root')의 첫 번째 생성자 인자로 값 전달,GPT6-AI-REVIEW,2026-10-29
+S067,not-exists,high,typeOnly에서 Gadget은 타입 위치에만 있어 객체 생성이 없음,GPT6-AI-REVIEW,2026-10-29
+S068,not-exists,high,typeof target은 타입 참조일 뿐 함수 호출이 아님,GPT6-AI-REVIEW,2026-10-29
+S069,exists,high,dispatch의 매개변수 타입 HandlerName을 명시적으로 참조,GPT6-AI-REVIEW,2026-10-29
+S070,exists,high,"point({x:1,y:2})의 구조분해 파라미터 인덱스 0으로 객체 전달",GPT6-AI-REVIEW,2026-10-29
+S071,exists,high,nested에서 express.Router() 함수를 호출함,GPT6-AI-REVIEW,2026-10-29
+S072,exists,high,@Controller 클래스의 @Delete 메서드에 Nest route owner 생성,GPT6-AI-REVIEW,2026-10-29
+S073,exists,high,watchEffect 콜백 내부 log 호출의 첫 파라미터에 값 전달,GPT6-AI-REVIEW,2026-10-29
+S074,exists,medium,Express get 콜백 owner의 res.send(loadUsers())에 첫 인자 전달,GPT6-AI-REVIEW,2026-10-29
+S075,not-exists,high,connect의 secure 파라미터 인덱스 2는 기본값 사용으로 인자 생략,GPT6-AI-REVIEW,2026-10-29
+S076,exists,high,computed getter에서 query.value를 사용하여 ref 상태 source 참조,GPT6-AI-REVIEW,2026-10-29
+S077,exists,high,transfer 내부 from.deposit 메서드를 호출,GPT6-AI-REVIEW,2026-10-29
+S078,exists,high,TodoList 반환 객체의 items가 useState 상태를 참조,GPT6-AI-REVIEW,2026-10-29
+S079,exists,high,add에서 total.value를 복합 대입하며 상태 source 참조,GPT6-AI-REVIEW,2026-10-29
+S080,exists,high,"compute에서 helper(n), helper(b) 양쪽 모두 첫 인자를 전달",GPT6-AI-REVIEW,2026-10-29
+S081,exists,high,mount 안에서 app.use(audit) 호출,GPT6-AI-REVIEW,2026-10-29
+S082,not-exists,high,React useContext는 callback-owner나 state-source로 정의되지 않음,GPT6-AI-REVIEW,2026-10-29
+S083,exists,high,"e.on('tick', ...)의 첫 번째 이벤트 이름 인자를 전달",GPT6-AI-REVIEW,2026-10-29
+S084,exists,high,"new Account(owner, 0)의 두 번째 파라미터로 0 전달",GPT6-AI-REVIEW,2026-10-29
+S085,not-exists,high,h1은 JSX intrinsic 태그로 호출 관계의 대상 함수가 아님,GPT6-AI-REVIEW,2026-10-29
+S086,exists,high,update 내부 this.one()으로 one 메서드 호출,GPT6-AI-REVIEW,2026-10-29
+S087,exists,high,Scene 필드 items: Rect[]에서 Rect 타입을 참조,GPT6-AI-REVIEW,2026-10-29
+S088,exists,high,@Patch 장식된 Controller 메서드에 Nest route owner 존재,GPT6-AI-REVIEW,2026-10-29
+S089,exists,high,모듈 최상위의 express() 직접 호출,GPT6-AI-REVIEW,2026-10-29
+S090,exists,high,"notExpress.get('/fake', health)의 첫 파라미터에 문자열 전달",GPT6-AI-REVIEW,2026-10-29
+S091,exists,high,validate에서 reactive errors.name/email에 대입하여 상태 변경,GPT6-AI-REVIEW,2026-10-29
+S092,exists,high,setEmail에서 email.value에 대입하여 ref 상태 변경,GPT6-AI-REVIEW,2026-10-29
+S093,exists,high,CachedRepo의 extends FileRepo에서 상속 대상 클래스 참조,GPT6-AI-REVIEW,2026-10-29
+S094,exists,high,viaFactory에서 Widget.create() 정적 메서드 호출,GPT6-AI-REVIEW,2026-10-29
+S095,exists,high,find 내부에서 new ValidationError('id') 생성,GPT6-AI-REVIEW,2026-10-29
+S096,exists,high,useSearch가 반환 객체에 nextPage 함수를 참조,GPT6-AI-REVIEW,2026-10-29
+S097,exists,high,TodoList 반환 객체에 onInput 함수 참조,GPT6-AI-REVIEW,2026-10-29
+S098,exists,high,"Other.watch(a, callback)에 콜백을 인덱스 1로 전달함",GPT6-AI-REVIEW,2026-10-29
+S099,exists,high,app.route('/legacy').get(legacy)에서 IRoute.get 호출,GPT6-AI-REVIEW,2026-10-29
+S100,exists,high,"acc.deposit(10, 'welcome')의 파라미터 인덱스 1로 값 전달",GPT6-AI-REVIEW,2026-10-29
+S101,exists,high,Nest @Put 라우트 owner가 replace 메서드를 handler로 호출,GPT6-AI-REVIEW,2026-10-29
+S102,exists,high,"new Triangle(size, size)에서 두 번째 생성자 파라미터로 값 전달",GPT6-AI-REVIEW,2026-10-29
+S103,exists,high,app.listen(3000)의 첫 번째 인자로 포트 번호 전달,GPT6-AI-REVIEW,2026-10-29
+S104,undeterminable,medium,Form.validator는 외부에서 변경 가능한 필드로 fn(v) 대상은 고정할 수 없음,GPT6-AI-REVIEW,2026-10-29
+S105,exists,high,makeLogger 화살표 함수에서 new Logger() 생성,GPT6-AI-REVIEW,2026-10-29
+S106,exists,high,onSubmit에서 draft 상태 값을 읽어 useState source를 참조,GPT6-AI-REVIEW,2026-10-29
+S107,not-exists,low,가이드에서 fn.call은 실호출 함수 greet를 대상으로 보므로 Function.call로 향하는 dataflow는 불일치 가능성,GPT6-AI-REVIEW,2026-10-29
+S108,exists,high,Session 생성자 본문에서 User 객체를 생성하며 owner는 클래스 Session,GPT6-AI-REVIEW,2026-10-29
+S109,exists,high,handle의 createRepo().find(id)에서 Repo.find 메서드 호출,GPT6-AI-REVIEW,2026-10-29
+S110,exists,high,useToggle에서 React useState(initial) 호출,GPT6-AI-REVIEW,2026-10-29
+S111,exists,high,new Circle(size)의 첫 생성자 파라미터에 값 전달,GPT6-AI-REVIEW,2026-10-29
+S112,not-exists,high,return Box는 클래스 값 참조일 뿐 new 생성이 아님,GPT6-AI-REVIEW,2026-10-29
+S113,exists,high,"acc.deposit(10, 'welcome')의 인덱스 0으로 값 전달",GPT6-AI-REVIEW,2026-10-29
+S114,exists,high,demo 반환 타입 Scene을 선언에서 참조,GPT6-AI-REVIEW,2026-10-29
+S115,exists,high,onInput의 setError(null)이 React 상태 source를 변경함,GPT6-AI-REVIEW,2026-10-29
+S116,exists,high,Get 함수 반환 타입인 TS lib MethodDecorator를 참조,GPT6-AI-REVIEW,2026-10-29
+S117,not-exists,high,shadow 내부의 지역 count만 증가하고 React 상태 count는 변경하지 않음,GPT6-AI-REVIEW,2026-10-29
+S118,not-exists,high,Other.ref는 vue 모듈이 아닌 local.ts 함수로 Vue source가 아님,GPT6-AI-REVIEW,2026-10-29
+S119,exists,high,countdown(step(n))에서 재귀 호출의 첫 인자를 전달,GPT6-AI-REVIEW,2026-10-29
+S120,exists,high,React useMemo의 인라인 getter가 callback-owner를 형성함,GPT6-AI-REVIEW,2026-10-29
+S121,exists,high,validate에서 email.value로 ref source를 읽음,GPT6-AI-REVIEW,2026-10-29
+S122,exists,high,shallowRef(0)에 첫 번째 인자를 전달함,GPT6-AI-REVIEW,2026-10-29
+S123,exists,high,useToggle 반환 객체의 on이 useState 상태 source를 참조함,GPT6-AI-REVIEW,2026-10-29
+S124,exists,high,Viewer 반환 객체에서 rename 함수를 참조함,GPT6-AI-REVIEW,2026-10-29
+S125,exists,high,restart 반환 타입 Timer를 참조함,GPT6-AI-REVIEW,2026-10-29
+S126,exists,high,Express app.route(path).get(handler)에서 route-owner 등록됨,GPT6-AI-REVIEW,2026-10-29
+S127,exists,high,mount에서 express() 함수를 호출,GPT6-AI-REVIEW,2026-10-29
+S128,not-exists,high,createContext는 React 상태 source나 callback-owner가 아님,GPT6-AI-REVIEW,2026-10-29
+S129,exists,high,모듈 최상위에서 countdown(3) 함수 호출,GPT6-AI-REVIEW,2026-10-29
+S130,exists,high,makeRepo 반환 타입에서 Repository 인터페이스 참조,GPT6-AI-REVIEW,2026-10-29
+S131,exists,high,useMemo getter에서 size를 읽어 React.useState source를 참조,GPT6-AI-REVIEW,2026-10-29
+S132,exists,high,Account의 owner 필드 타입에 Person 인터페이스 사용,GPT6-AI-REVIEW,2026-10-29
+S133,exists,high,local.computed 별칭 derive의 첫 파라미터에 getter 전달,GPT6-AI-REVIEW,2026-10-29
+S134,not-exists,high,Other.reactive는 vue에서 가져온 함수가 아니므로 Vue source가 아님,GPT6-AI-REVIEW,2026-10-29
+S135,exists,medium,useEffect의 두 번째 인자 deps 배열을 파라미터 인덱스 1에 전달,GPT6-AI-REVIEW,2026-10-29
+S136,exists,high,Other.ref는 Vue source는 아니지만 local.ts 함수 호출 관계는 존재,GPT6-AI-REVIEW,2026-10-29
+S137,exists,high,Widget.create 정적 호출의 수신자 Widget 및 반환 타입에서 클래스 참조,GPT6-AI-REVIEW,2026-10-29
+S138,exists,high,app.route('/legacy')의 첫 파라미터에 경로 문자열 전달,GPT6-AI-REVIEW,2026-10-29
+S139,exists,high,add에서 reactive state.count 속성에 대입해 상태 변경,GPT6-AI-REVIEW,2026-10-29
+S140,exists,high,useCounter에서 Counter.create() 정적 메서드 호출,GPT6-AI-REVIEW,2026-10-29
+S141,exists,high,JSX에서 외부 Card 컴포넌트를 사용함,GPT6-AI-REVIEW,2026-10-29
+S142,exists,high,identity를 두 차례 호출하며 모두 인덱스 0 파라미터에 값 전달,GPT6-AI-REVIEW,2026-10-29
+S143,exists,high,clear에서 state.count와 state.open을 변경함,GPT6-AI-REVIEW,2026-10-29
+S144,exists,high,wire 반환 타입 Emitter에서 클래스 참조,GPT6-AI-REVIEW,2026-10-29
+S145,exists,high,Express app.use(audit) 등록으로 route-owner 생성,GPT6-AI-REVIEW,2026-10-29
+S146,exists,high,class Circle implements Shape에 Shape 타입 참조,GPT6-AI-REVIEW,2026-10-29
