@@ -1,0 +1,14 @@
+{
+  "schema": "corpus-b-scoring-protocol-freeze/1",
+  "files": {
+    "docs/thesis-experiments/corpus-b/review-preparation/EVALUATION_PROTOCOL.v2.md": "2dd976a43bd69b1b7a866079e16fc60f2274515d8375980d80804c249d441cc5",
+    "docs/thesis-experiments/corpus-b/EVALUATION_PROTOCOL.md": "38f2c767f2a5f4212bb3acdd1c81c8cf3d324afd81fc9bdaed4cb82ed6d4f918",
+    "docs/thesis-experiments/corpus-b/MANIFEST.json": "e57c1493f51865afdcf77cc616f5fcf7a5727498976d6874f97031b62ccd9856",
+    "docs/thesis-experiments/tools/exp01/score.mjs": "5f86d5eac630c2ef20d9a8e34e8bf421ad1733b138a833e3354cb8cd68550500",
+    "docs/thesis-experiments/tools/exp01/lib.mjs": "a6b8253a838b5dcfa872f195ada88c569a3e492d232f4c47cb6c12d6d6f577b3",
+    "docs/thesis-experiments/tools/corpus-b-scoring/scope-v2.mjs": "6e92480d43a99bfac396e2eacf441b301d522d22fa91c6efb07d984926487d36",
+    "docs/thesis-experiments/tools/corpus-b-scoring/synthetic-scenarios.mjs": "90d9510bb341647474a2a79b1c0c2e37b624f57b5a2ebc4609681b4e3a4f47d2",
+    "docs/thesis-experiments/tools/corpus-b-scoring/protocol-freeze.mjs": "96ffb0211ea2c8632db2e139c77f8f76e8692a9d6b9d3074f5ef1a308667d026",
+    "docs/thesis-experiments/tools/corpus-b-scoring/test/scope-v2.test.mjs": "d3b9b60c9f769f1cf086cefc52f438fb29084b247fc766c95267cbf4e5a0bfe6"
+  }
+}
