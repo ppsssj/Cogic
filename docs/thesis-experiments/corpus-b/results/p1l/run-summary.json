@@ -1,0 +1,763 @@
+{
+  "schema": "corpus-b-run-summary/1",
+  "researchStatus": "PROVISIONAL_HOLDOUT_DIAGNOSTIC",
+  "note": "Path-free summary of the two run.json records. Raw predictions are kept outside the repository (ZIP SHA-256 below).",
+  "zip": {
+    "name": "p1l-corpusb-20261030.zip",
+    "sha256": "836c761171b0e673706c6abddb21c02cfd669ad2c20ca26299def21e479eb006",
+    "files": 193
+  },
+  "runs": {
+    "ORIGINAL": {
+      "runId": "corpusb-20261030-original",
+      "status": "COMPLETE",
+      "runnerVersion": "corpus-b-runner/1",
+      "runnerCommit": "4529a4192a04ce21b0ec2ad699731ebdb6d0e169",
+      "analyzer": {
+        "commit": "43ace0fdfdf442d7871c3ef4a92d73b28f1b5e77",
+        "head": "43ace0fdfdf442d7871c3ef4a92d73b28f1b5e77",
+        "buildHash": "958dbf677b6085ddf478265b3cc2b64c5fb1452bf28cfb4c255ed5ef00566270",
+        "identicalToExp01Baseline": true,
+        "mismatchesVsExp01Baseline": [],
+        "srcAnalyzerTree": "33f97d7bb566937a0ea6e70759e1464c53bfde60",
+        "typescript": "5.9.3"
+      },
+      "environment": {
+        "node": "v24.12.0",
+        "platform": "win32",
+        "arch": "x64"
+      },
+      "startedAt": "2026-10-30T09:21:14.000Z",
+      "finishedAt": "2026-10-30T09:23:02.065Z",
+      "gtStatus": {
+        "version": "v1",
+        "reviewStatus": "REVIEW_PENDING",
+        "humanReviewed": false
+      },
+      "preflight": {
+        "corpusBManifest": {
+          "ok": true,
+          "out": "corpus-b manifest OK (601 files)"
+        },
+        "gtValidator": {
+          "ok": true,
+          "out": "GT errors: 0"
+        },
+        "exp01GtManifest": {
+          "ok": true,
+          "out": "manifest OK (214 files; docs/thesis-experiments/fixtures/exp-01/gt-manifest.json, scope gt)"
+        },
+        "exp01EvalManifest": {
+          "ok": true,
+          "out": "manifest OK (227 files; docs/thesis-experiments/fixtures/exp-01/eval-manifest.r2.json, scope all)"
+        },
+        "baselineHashes": {
+          "ok": true,
+          "out": "baseline OK ({\"corpusBManifest\":1,\"expectedJson\":20,\"caseJson\":20,\"tsconfigJson\":20,\"shims\":20,\"scorer\":3,\"runner\":1,\"analyzer\":8,\"shared\":1})"
+        },
+        "protocolFreeze": {
+          "ok": true,
+          "out": "protocol freeze OK (9 files)"
+        },
+        "runnerRepoClean": {
+          "ok": true,
+          "out": "clean"
+        },
+        "scorerVersion": {
+          "ok": true,
+          "out": "exp01-scorer/1.2"
+        }
+      },
+      "corpusUnchanged": true,
+      "summary": {
+        "cases": 20,
+        "ok": 20,
+        "failed": [],
+        "deterministic": true,
+        "orderStable": true,
+        "cacheConsistent": true,
+        "cacheHitPathExercised": 20,
+        "tsLibRelations": 0
+      },
+      "cases": [
+        {
+          "caseId": "be01-userrouter",
+          "status": "OK",
+          "inputHash": "aef5e8505a45857ffd0ddaf65e4adf8b29c527aa7de896e05b1b96b0649adf82",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 97
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "8d4154dc7ac3ce5d52286b67a71dbde4907633189b8fb0ca40fb710ff95a20ab"
+        },
+        {
+          "caseId": "be02-server",
+          "status": "OK",
+          "inputHash": "81562d7b70d1514a3d89dade53ac6a03ca6b659b19e0950662b0137468abee0d",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 97
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "0e25a72e86ae54086420b4c8db48e1bac89f3e5fe82868d9bbc9b03ed9ee2111"
+        },
+        {
+          "caseId": "be03-ratelimiter",
+          "status": "OK",
+          "inputHash": "29e8dbe940d6455640a69c55b1821d521d364af443502dcaeb700ec17d09e9f2",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 82
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "ffffd39afde624caad15f283bd1ca0d1008af8808f90fb26d5aa95ddcda280db"
+        },
+        {
+          "caseId": "be04-errorhandler",
+          "status": "OK",
+          "inputHash": "b0ca4440a8e6a78c3bc26ee6bb7039e04879fd8cadbeaf50a0c365841864b1d8",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 81
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "688657247babf12e74f0908a025e9121a360ac10d3d21b306e49a0c9dc55f397"
+        },
+        {
+          "caseId": "be05-usercontroller",
+          "status": "OK",
+          "inputHash": "7f35b6befdef9c801fe98672f56ae79b3498e8823d93027a3d4471a0b85d2aa7",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 97
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "5c9441699fa1b13876c38859c67029be5ee1b45baab55b1b762a27eafeae89f3"
+        },
+        {
+          "caseId": "bn01-auth-google-controller",
+          "status": "OK",
+          "inputHash": "814248e86dd220e07280006db43bd9aaa21b7c09e5131f59c63bd0f6e920a375",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 102
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "591433e66898c2762e3086f7e281a0f20bd9f7d867cbbff3e27e63449d94e5f9"
+        },
+        {
+          "caseId": "bn02-session-repository",
+          "status": "OK",
+          "inputHash": "5c173f626c8957951e4cc5ceeb818df4079dd781741593531790da61ab7c9c2b",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 75
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "fd03fe2ec1df979ac3db7a449c080515c4dc928749e677bd29166c5d0da07182"
+        },
+        {
+          "caseId": "bn03-main",
+          "status": "OK",
+          "inputHash": "25fedba89485d45e37fdd0b23a4d52e45e001ff8fde8f0699a985f39f5220d86",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 191
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "67ab8d4beb65370615141788c775f847aa749fed5b066aa92f9d029f7a370e6c"
+        },
+        {
+          "caseId": "bn04-file-schema",
+          "status": "OK",
+          "inputHash": "8712c82ac565bc5e9c20bf96cf476f3fbec46bd234d26a0220d9ef5db6f4afab",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 52
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "2b59090c343133e9f439a9149ddbea7ba869848565a1f3c841e367bb4c5aa305"
+        },
+        {
+          "caseId": "bn05-files-service",
+          "status": "OK",
+          "inputHash": "9ea5c01e171949221ea2719907b8d2951e3faabd6d588d104260f3816f9ec8a1",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 66
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "c9c48c403edc77558090b42b0a3f71faecace87382fe25af7923e6cee1e3defe"
+        },
+        {
+          "caseId": "br01-form-drawer",
+          "status": "OK",
+          "inputHash": "1210dff3740157f487a4b19c7a3b24b31081a17d07f98d34002fad888e69b58e",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 91
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "0c38a76dee388e581c158ab014fe6b57b9c8d19221c47ae77ec665c6e08dda55"
+        },
+        {
+          "caseId": "br02-textarea",
+          "status": "OK",
+          "inputHash": "ec72ecdec37fa0ba1246b2b4e968151da18172fe0652375e2078cce47cb51b4a",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 87
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "72ad31f3f072d747cc05312e860e056e9fd90667f54820c840a9800192681d4c"
+        },
+        {
+          "caseId": "br03-main",
+          "status": "OK",
+          "inputHash": "ca40b8e00babe303c53bf30412e029d58d7a3756f5e1b14d6dcc2c4628340a1c",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 182
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "7a140a98c91f364e0e073f8a3cf535bfb484a55627567ec2bf9c6f6cb4fd8f31"
+        },
+        {
+          "caseId": "br04-content-layout",
+          "status": "OK",
+          "inputHash": "acaf29e76f21b35443a8e41b37fa6cfc4bad16b1d19ce45bc105d21b1f95fc54",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 85
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "72e43669613a3b2487f65c5996ea7ce60478a7d28f2af2097c554a9a7be3e7e3"
+        },
+        {
+          "caseId": "br05-input",
+          "status": "OK",
+          "inputHash": "b375d649bda6c433abe7a53324042ee42a391b1eb7290cb60cf13ab318bdda41",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 87
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "e04fdab6445268c4fbc300c37a616653baff1af48a7bfa5ae9b3150a633d138a"
+        },
+        {
+          "caseId": "bv01-main",
+          "status": "OK",
+          "inputHash": "c0a72a7731977012e630295f91e4d2907b64a6c7cd4ab18a0dcdfa1c37b31624",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 61
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "719b53863368e6f0578c6a9f73083ec3e97a214402a68f89f8817c54b076a60a"
+        },
+        {
+          "caseId": "bv02-use-follow-profile",
+          "status": "OK",
+          "inputHash": "154ad6180f3f0660dee482028d721f3072a52767720a91b27c4074fc2c704674",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 60
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "f60496ed55ec4a760e95609c6542bcdbf1a3f4f0f8f4317aa040fb5078427b71"
+        },
+        {
+          "caseId": "bv03-user",
+          "status": "OK",
+          "inputHash": "b78c24177d364a90b8a669f1baabc8346d92347066800dd85c6f36ff0156c47f",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 57
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "552a07c427884bdf3fd52a580946c93fa46fbe85a2c6d237151de51ff529ed89"
+        },
+        {
+          "caseId": "bv04-use-async",
+          "status": "OK",
+          "inputHash": "cdedf1ac0160f577f55de452c9bc72e0a77fdb8404776fecfef30474b823d1a8",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 59
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "a11b6acf678437ffa21e7bc8f9da6619ccfd78ad741250776eb6db4f0d4941bc"
+        },
+        {
+          "caseId": "bv05-use-favorite-article",
+          "status": "OK",
+          "inputHash": "3dd5f5f643bef3fae1e33bf07de71eb9b695101800697992b3f630f60bf6f810",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 60
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "23e55c1ef42969ec7da146c29f9fdd817d3a2aa11ef8f45df3722a58234694ae"
+        }
+      ]
+    },
+    "IMPROVED": {
+      "runId": "corpusb-20261030-improved",
+      "status": "COMPLETE",
+      "runnerVersion": "corpus-b-runner/1",
+      "runnerCommit": "4529a4192a04ce21b0ec2ad699731ebdb6d0e169",
+      "analyzer": {
+        "commit": "bbe4cbf5b1f784d9223ca3d46d96058617687b12",
+        "head": "bbe4cbf5b1f784d9223ca3d46d96058617687b12",
+        "buildHash": "2423b0d471b6e622a40b33695e2608503264ac0d06695c50284d0ed5e466ac36",
+        "identicalToExp01Baseline": false,
+        "mismatchesVsExp01Baseline": [
+          "srcAnalyzerTree",
+          "analyzerBuildHash"
+        ],
+        "srcAnalyzerTree": "a2202f4a32a7515be37bdfe2334cde7b2a7f1fea",
+        "typescript": "5.9.3"
+      },
+      "environment": {
+        "node": "v24.12.0",
+        "platform": "win32",
+        "arch": "x64"
+      },
+      "startedAt": "2026-10-30T09:23:02.289Z",
+      "finishedAt": "2026-10-30T09:23:34.094Z",
+      "gtStatus": {
+        "version": "v1",
+        "reviewStatus": "REVIEW_PENDING",
+        "humanReviewed": false
+      },
+      "preflight": {
+        "corpusBManifest": {
+          "ok": true,
+          "out": "corpus-b manifest OK (601 files)"
+        },
+        "gtValidator": {
+          "ok": true,
+          "out": "GT errors: 0"
+        },
+        "exp01GtManifest": {
+          "ok": true,
+          "out": "manifest OK (214 files; docs/thesis-experiments/fixtures/exp-01/gt-manifest.json, scope gt)"
+        },
+        "exp01EvalManifest": {
+          "ok": true,
+          "out": "manifest OK (227 files; docs/thesis-experiments/fixtures/exp-01/eval-manifest.r2.json, scope all)"
+        },
+        "baselineHashes": {
+          "ok": true,
+          "out": "baseline OK ({\"corpusBManifest\":1,\"expectedJson\":20,\"caseJson\":20,\"tsconfigJson\":20,\"shims\":20,\"scorer\":3,\"runner\":1,\"analyzer\":8,\"shared\":1})"
+        },
+        "protocolFreeze": {
+          "ok": true,
+          "out": "protocol freeze OK (9 files)"
+        },
+        "runnerRepoClean": {
+          "ok": true,
+          "out": "clean"
+        },
+        "scorerVersion": {
+          "ok": true,
+          "out": "exp01-scorer/1.2"
+        }
+      },
+      "corpusUnchanged": true,
+      "summary": {
+        "cases": 20,
+        "ok": 20,
+        "failed": [],
+        "deterministic": true,
+        "orderStable": true,
+        "cacheConsistent": true,
+        "cacheHitPathExercised": 20,
+        "tsLibRelations": 0
+      },
+      "cases": [
+        {
+          "caseId": "be01-userrouter",
+          "status": "OK",
+          "inputHash": "aef5e8505a45857ffd0ddaf65e4adf8b29c527aa7de896e05b1b96b0649adf82",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 97
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "ad98366005197369d6b15998ad9450379acff27b91b5f7308e3169057ca1bb62"
+        },
+        {
+          "caseId": "be02-server",
+          "status": "OK",
+          "inputHash": "81562d7b70d1514a3d89dade53ac6a03ca6b659b19e0950662b0137468abee0d",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 97
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "125418486a12e731fe5411e5f7720c4cd7177babab39d0f0e9b32bc47228f8bc"
+        },
+        {
+          "caseId": "be03-ratelimiter",
+          "status": "OK",
+          "inputHash": "29e8dbe940d6455640a69c55b1821d521d364af443502dcaeb700ec17d09e9f2",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 82
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "b17ff6fb080efb3e0188eeceee14668de2ae294767417bd9cde9def4ac6e353d"
+        },
+        {
+          "caseId": "be04-errorhandler",
+          "status": "OK",
+          "inputHash": "b0ca4440a8e6a78c3bc26ee6bb7039e04879fd8cadbeaf50a0c365841864b1d8",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 81
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "c1088893369649cc7dff8e4cae2d31915aaf985263d0fc7781c8f39e7c93bce7"
+        },
+        {
+          "caseId": "be05-usercontroller",
+          "status": "OK",
+          "inputHash": "7f35b6befdef9c801fe98672f56ae79b3498e8823d93027a3d4471a0b85d2aa7",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 97
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "5917cede64590089e6d36f2adcd391dce816497e38a162c7714cb8660a6f79d5"
+        },
+        {
+          "caseId": "bn01-auth-google-controller",
+          "status": "OK",
+          "inputHash": "814248e86dd220e07280006db43bd9aaa21b7c09e5131f59c63bd0f6e920a375",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 102
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "93ee8dd7c6286241c2b3b2f2595e4fc42344ac5fcf2bdb5d3223aca4517067f4"
+        },
+        {
+          "caseId": "bn02-session-repository",
+          "status": "OK",
+          "inputHash": "5c173f626c8957951e4cc5ceeb818df4079dd781741593531790da61ab7c9c2b",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 75
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "8934e97cdb30040450364d43570456de099e91227b822f25f7896c24557b9afc"
+        },
+        {
+          "caseId": "bn03-main",
+          "status": "OK",
+          "inputHash": "25fedba89485d45e37fdd0b23a4d52e45e001ff8fde8f0699a985f39f5220d86",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 191
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "166795c383d0fb4be613041d42b62ee516916e154f4ef76e393824572d2500e8"
+        },
+        {
+          "caseId": "bn04-file-schema",
+          "status": "OK",
+          "inputHash": "8712c82ac565bc5e9c20bf96cf476f3fbec46bd234d26a0220d9ef5db6f4afab",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 52
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "2dadb7ce92df9e1e57d5b26fbd97940d7d8120322c8825ceae3f4ac29a20a102"
+        },
+        {
+          "caseId": "bn05-files-service",
+          "status": "OK",
+          "inputHash": "9ea5c01e171949221ea2719907b8d2951e3faabd6d588d104260f3816f9ec8a1",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 66
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "c82b83b5d8cc7540e8cd01e9f0022d8e37107a2128da0c32298d0f3739958fed"
+        },
+        {
+          "caseId": "br01-form-drawer",
+          "status": "OK",
+          "inputHash": "1210dff3740157f487a4b19c7a3b24b31081a17d07f98d34002fad888e69b58e",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 91
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "4fe2854ef4cc3bf3c54f53a5e6b3218d2c68dd13ca1c313358227a3f598dec3f"
+        },
+        {
+          "caseId": "br02-textarea",
+          "status": "OK",
+          "inputHash": "ec72ecdec37fa0ba1246b2b4e968151da18172fe0652375e2078cce47cb51b4a",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 87
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "dbfc6e66abfcd75d2fa77d2c5a1a8edfc5f81cdd521b0f01e28dec113359764b"
+        },
+        {
+          "caseId": "br03-main",
+          "status": "OK",
+          "inputHash": "ca40b8e00babe303c53bf30412e029d58d7a3756f5e1b14d6dcc2c4628340a1c",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 182
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "61d14d4127f1fd67caecf4a763a832551e0ef4b55b02de739da7fb12d7b6b889"
+        },
+        {
+          "caseId": "br04-content-layout",
+          "status": "OK",
+          "inputHash": "acaf29e76f21b35443a8e41b37fa6cfc4bad16b1d19ce45bc105d21b1f95fc54",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 85
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "2fb03722e6469403358734b90c54e9be0a571167a0df40ac2a0e543dea8db771"
+        },
+        {
+          "caseId": "br05-input",
+          "status": "OK",
+          "inputHash": "b375d649bda6c433abe7a53324042ee42a391b1eb7290cb60cf13ab318bdda41",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 87
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "92484beb354f79cbd5b08e182f84cd2dde92b652a3e6484488457a5af6dcc3e5"
+        },
+        {
+          "caseId": "bv01-main",
+          "status": "OK",
+          "inputHash": "c0a72a7731977012e630295f91e4d2907b64a6c7cd4ab18a0dcdfa1c37b31624",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 61
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "4e8c8fe9f1ab7ae725ae325b33103dbe01c33ac745780271528928e7811dc861"
+        },
+        {
+          "caseId": "bv02-use-follow-profile",
+          "status": "OK",
+          "inputHash": "154ad6180f3f0660dee482028d721f3072a52767720a91b27c4074fc2c704674",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 60
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "0b41276bb27a389b937441aba64c76559e9001828d590993eb9a710b31a7ff2e"
+        },
+        {
+          "caseId": "bv03-user",
+          "status": "OK",
+          "inputHash": "b78c24177d364a90b8a669f1baabc8346d92347066800dd85c6f36ff0156c47f",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 57
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "ffab7c6733f67556ae21bc22d7adb60c1b0593c0ff0c5165fc4e1ac3dc27093a"
+        },
+        {
+          "caseId": "bv04-use-async",
+          "status": "OK",
+          "inputHash": "cdedf1ac0160f577f55de452c9bc72e0a77fdb8404776fecfef30474b823d1a8",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 59
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "e14d2dc7dd64c048004834b43cc51f49d929958ab554a3c267a6e04556348cca"
+        },
+        {
+          "caseId": "bv05-use-favorite-article",
+          "status": "OK",
+          "inputHash": "3dd5f5f643bef3fae1e33bf07de71eb9b695101800697992b3f630f60bf6f810",
+          "checks": {
+            "deterministic": true,
+            "orderStable": true,
+            "cacheConsistent": true,
+            "cacheHitPathExercised": true,
+            "warmSourceFileCacheHits": 60
+          },
+          "tsLibRelations": 0,
+          "warnings": [],
+          "rawSha256": "42269183c8aa438dd00c0ae7687aa846f071b6e0ee3373a7496a01012f919d59"
+        }
+      ]
+    }
+  }
+}
