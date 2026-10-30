@@ -4,7 +4,7 @@
 - 대상: `exp01-scorer/1.2`(수정 없음), Corpus B GT v1, `corpus-b/EVALUATION_PROTOCOL.md`(수정 없음)
 - 방법
   - scorer 코드를 읽었다.
-  - scorer 함수를 그대로 import해 **합성 예측**으로 시나리오 12개를 채점했다([scoring-scope-probe.mjs](../../tools/corpus-b-review/scoring-scope-probe.mjs)).
+  - scorer 함수를 그대로 import해 **합성 예측**으로 시나리오 11개를 채점했다(정정 P1-K4: 처음에 "12개"로 잘못 적었다)([scoring-scope-probe.mjs](../../tools/corpus-b-review/scoring-scope-probe.mjs)).
   - Cogic 예측은 쓰지 않았다. 합성 예측은 GT와 `excludedSites`로만 만들었다.
 - 이 문서의 수치는 도구 검증용 가상 상황이다. Cogic 정확도가 아니다.
 

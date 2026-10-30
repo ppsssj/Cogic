@@ -22,7 +22,7 @@
 | [blind-addendum.md](blind-addendum.md) | 보충 규칙 A1–A10 블라인드판(사례 예시 삭제, [검토 대상] 표시) | 예 |
 | [review-checklist.csv](review-checklist.csv) | 체크 항목 30개(BLIND 24, RECONCILIATION 6). GT 입장 열 없음 | BLIND 행만 |
 | [reconciliation-template.csv](reconciliation-template.csv) | 대조표 양식(29열) | 아니오 |
-| [scoring-scope-audit.md](scoring-scope-audit.md) | scorer 1.2 채점 범위·FP 정책 감사, 합성 예측 12개 시나리오, v2 프로토콜 초안 | 아니오 |
+| [scoring-scope-audit.md](scoring-scope-audit.md) | scorer 1.2 채점 범위·FP 정책 감사, 합성 예측 11개 시나리오(정정 P1-K4), v2 프로토콜 초안. 확정 전 초안은 [EVALUATION_PROTOCOL.v2.md](EVALUATION_PROTOCOL.v2.md) | 아니오 |
 | [corpus-c-proposal.md](corpus-c-proposal.md) | 층화 외부 검증 코퍼스 설계안 | 아니오 |
 | [open-decisions.md](open-decisions.md) | 미결정 사항 D-1–D-9 | 아니오 |
 | [review-status.json](review-status.json) | 사례별 검토 상태 기록 | 아니오 |
