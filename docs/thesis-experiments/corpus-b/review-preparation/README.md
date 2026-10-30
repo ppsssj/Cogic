@@ -161,4 +161,15 @@ node --test $T/test/review.test.mjs                           # 도구 테스트
 
 ## 6. 배포용 패킷
 
-- PACKET_SECTION_PLACEHOLDER
+| 항목 | 값 |
+|---|---|
+| 생성 commit | `a65ed56d1f4c162235ef13726a5e9b831e334157` |
+| packetSha256 | `d279f24a2c81131fd6e50bfcd4db475bfcd33abd4bbff918f303d52c1952415c` |
+| 파일 | 616개(사례 20개, active file 725줄, 호출 지점 184개, 선언 79개) |
+| 누출 검사 | 금지 문자열 188개, 걸린 파일 0, 걸린 문자열 0 |
+| 결정성 | 같은 checkout에서 다시 빌드하면 같은 packetSha256 |
+
+- 파일별 SHA-256은 [blind-packet-manifest.json](blind-packet-manifest.json)에 있다. 패킷 안의 `PACKET_MANIFEST.json`도 같은 내용이다.
+- 패킷은 저장소에 넣지 않았다. 배포할 때 위 commit에서 다시 만들고 packetSha256이 같은지 확인한다.
+- 다른 checkout에서 만들면 결과가 다를 수 있다. Markdown·CSV 문서의 줄바꿈이 git 설정(`core.autocrlf`)에 따라 달라지면 해시가 달라진다. 사례 소스(`source/`)는 `-text`라 바이트가 같다.
+- 실제로 배포한 패킷의 해시를 `review-status.json`의 `packetSha256`에 적는다.
