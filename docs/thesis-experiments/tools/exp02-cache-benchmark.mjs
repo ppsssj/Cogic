@@ -25,7 +25,7 @@ import { execFileSync, spawnSync } from "node:child_process";
 import { performance } from "node:perf_hooks";
 import { fileURLToPath } from "node:url";
 
-export const TOOL_VERSION = "exp02-cache-benchmark/1";
+export const TOOL_VERSION = "exp02-cache-benchmark/1.1";
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(here, "../../..");
 const isWin = process.platform === "win32";
@@ -295,7 +295,7 @@ function getGitSha(dir) {
 // Section B — additions (outside the timed region)
 
 const SF_EVENTS = ["hit", "miss", "stale", "bypass", "disabled"].map((k) => `analyzer.sourceFileCache.${k}`);
-export const SAMPLE_COLUMNS = ["group", "target", "scenario", "mode", "process", "block", "iteration", "isWarmup", "elapsedMs", "sfHit", "sfMiss", "sfStale", "sfBypass", "sfDisabled", "resultHit", "resultMiss", "heapUsed", "rss", "resultHash", "variantReflected", "timestamp"];
+export const SAMPLE_COLUMNS = ["group", "target", "scenario", "mode", "process", "block", "iteration", "isWarmup", "elapsedMs", "sfHit", "sfMiss", "sfStale", "sfBypass", "sfDisabled", "resultHit", "resultMiss", "heapUsed", "rss", "freeMem", "resultHash", "variantReflected", "timestamp"];
 
 function countEvents(events) {
   const c = Object.fromEntries(SF_EVENTS.map((e) => [e, 0]));
@@ -349,7 +349,8 @@ export function runScenarioSamples(target, scenario, { warmupRuns, measuredRuns,
         resultMiss: counts.resultMiss,
         heapUsed: mem.heapUsed,
         rss: mem.rss,
-        resultHash: hashIterations ? fastNormalizedHash(result).hash : "",
+        resultHash: hashIterations ? canonicalHash(result).hash : "",
+        freeMem: os.freemem(),
         variantReflected: variantReflected(result, scenario.id, iteration),
         timestamp: new Date().toISOString(),
       });
@@ -368,6 +369,15 @@ export function fastNormalizedHash(result) {
   return { hash: hashText(text), edgeHash: hashText(edges), counts: { nodes: (result.graph?.nodes ?? []).length, edges: (result.graph?.edges ?? []).length } };
 }
 
+// Result-cache hits return JSON clones (cloneAnalysisResult), which drop properties whose value is
+// undefined (e.g. graph.edges[].label, graph.nodes[].sig). normalizeAnalysisResult serializes such a
+// property as the text "undefined", so a clone and the analyzer output never hash alike. Comparisons
+// across modes therefore use this canonical form: the same JSON round trip the result cache applies.
+// (1.1; found in the Phase A pilot run with 1.0)
+export function canonicalHash(result) {
+  return fastNormalizedHash(cloneAnalysisResult(result));
+}
+
 // Phase D hit-path correctness (outside any measurement)
 export function correctnessChecks(target) {
   const out = [];
@@ -378,7 +388,7 @@ export function correctnessChecks(target) {
   const run = (mode, cache, events) => analyzePanelEquivalent({ target, activeCode: code0, mode, resultCache: cache, debug: (e) => events.push({ event: e }) });
   clearAnalyzerCaches();
   const e0 = [];
-  const h0 = fastNormalizedHash(run(off, new PanelEquivalentResultCache(), e0).result);
+  const h0 = canonicalHash(run(off, new PanelEquivalentResultCache(), e0).result);
   const W = countEvents(e0).sfDisabled;
   // SourceFile only: second run must hit and match
   clearAnalyzerCaches();
@@ -388,7 +398,7 @@ export function correctnessChecks(target) {
   const e2 = [];
   const r2 = run(sf, sfCache, e2);
   const c2 = countEvents(e2);
-  const h2 = fastNormalizedHash(r2.result);
+  const h2 = canonicalHash(r2.result);
   out.push({ target: target.id, check: "sourcefile-second-run", requests: W, sfHit: c2.sfHit, sfMiss: c2.sfMiss, sfStale: c2.sfStale, sfBypass: c2.sfBypass, resultHit: r2.cacheHit ? 1 : 0, hashEqualsOff: h2.hash === h0.hash ? 1 : 0, edgesEqualOff: h2.edgeHash === h0.edgeHash ? 1 : 0, invariant: c2.sfHit + c2.sfMiss + c2.sfStale + c2.sfBypass === W ? 1 : 0, pass: c2.sfHit > 0 && h2.hash === h0.hash && c2.sfHit + c2.sfMiss + c2.sfStale + c2.sfBypass === W ? 1 : 0, offHash: h0.hash, candidateHash: h2.hash, nodes: h0.counts.nodes, edges: h0.counts.edges });
   // Full result: second run must be a result hit and match
   clearAnalyzerCaches();
@@ -396,7 +406,7 @@ export function correctnessChecks(target) {
   run(full, fullCache, []);
   const e4 = [];
   const r4 = run(full, fullCache, e4);
-  const h4 = fastNormalizedHash(r4.result);
+  const h4 = canonicalHash(r4.result);
   out.push({ target: target.id, check: "full-second-run", requests: W, sfHit: countEvents(e4).sfHit, sfMiss: countEvents(e4).sfMiss, sfStale: countEvents(e4).sfStale, sfBypass: countEvents(e4).sfBypass, resultHit: r4.cacheHit ? 1 : 0, hashEqualsOff: h4.hash === h0.hash ? 1 : 0, edgesEqualOff: h4.edgeHash === h0.edgeHash ? 1 : 0, invariant: "", pass: r4.cacheHit && h4.hash === h0.hash ? 1 : 0, offHash: h0.hash, candidateHash: h4.hash, nodes: h0.counts.nodes, edges: h0.counts.edges });
   // variant reflected in the active-edit code
   out.push({ target: target.id, check: "active-edit-variant-reflected", requests: W, sfHit: "", sfMiss: "", sfStale: "", sfBypass: "", resultHit: "", hashEqualsOff: "", edgesEqualOff: "", invariant: "", pass: variantReflected(run(off, new PanelEquivalentResultCache(), []).result, "active-edit", 0) === "1" ? 1 : 0, offHash: "", candidateHash: "", nodes: "", edges: "" });

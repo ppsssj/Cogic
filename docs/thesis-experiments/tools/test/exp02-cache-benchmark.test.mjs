@@ -121,6 +121,14 @@ test("fast per-iteration hash equals the original normalization hash", () => {
   }
 });
 
+test("canonical hash: a result-cache clone hashes like the analyzer output (undefined properties)", () => {
+  const raw = { graph: { nodes: [{ id: "a", sig: undefined }], edges: [{ id: "e", label: undefined, kind: "calls" }] }, imports: [], exports: [], calls: [], diagnostics: [] };
+  const clone = JSON.parse(JSON.stringify(raw));
+  assert.notEqual(T.normalizeAnalysisResult(raw).hash, T.normalizeAnalysisResult(clone).hash);
+  assert.equal(T.canonicalHash(raw).hash, T.canonicalHash(clone).hash);
+  assert.notEqual(T.canonicalHash(raw).hash, T.canonicalHash({ ...clone, graph: { ...clone.graph, edges: [] } }).hash);
+});
+
 test("measurement loop: same events and result hits as the original loop; samples recorded per iteration", () => {
   const fake = fakeAnalyzer();
   const target = fakeTarget(fake, 8);

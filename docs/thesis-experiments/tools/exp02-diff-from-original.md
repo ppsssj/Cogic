@@ -67,3 +67,10 @@
 - EXP-02 계획서 §7 Phase E는 P-robust 주 조건을 "6 대상 × active-edit × 3 mode, cogic·synthetic-500 × repeated × 3 mode, cogic × cold × 3 mode = 30 조건"이라고 적었다.
 - 그런데 나열된 집합을 세면 18 + 6 + 3 = **27**이다.
 - 도구는 나열된 27개를 쓴다. 30이라는 합계는 계획서의 계산 오류로 기록한다.
+
+## 6. 버전 이력
+
+| 버전 | 변경 | 계기 |
+|---|---|---|
+| 1 (`0e89756`) | 최초 | — |
+| 1.1 | ① 모드 간 결과 비교(Phase D, 반복별 해시)를 `canonicalHash`(결과 캐시와 같은 JSON 왕복 뒤 정규화 해시)로 바꿨다. ② 반복마다 OS 가용 메모리(`freeMem`)를 기록한다 | Phase A 파일럿(1.0)에서 Full result 2회차(result hit) 해시가 OFF와 달랐다. 원인: 결과 캐시 clone(`JSON.parse(JSON.stringify())`)이 값이 `undefined`인 속성을 지운다(Cogic 결과의 `graph.edges[].label` 234개, `graph.nodes[].sig`·`signature` 13개와 `trace`의 같은 항목). 원본 `normalizeAnalysisResult`는 이 속성을 `"undefined"`로 직렬화한다. 구조 비교에서는 차이가 0이다. 시간 측정 로직은 바뀌지 않았다. 파일럿은 최종 통계에 넣지 않는다 |
