@@ -74,3 +74,4 @@
 |---|---|---|
 | 1 (`0e89756`) | 최초 | — |
 | 1.1 | ① 모드 간 결과 비교(Phase D, 반복별 해시)를 `canonicalHash`(결과 캐시와 같은 JSON 왕복 뒤 정규화 해시)로 바꿨다. ② 반복마다 OS 가용 메모리(`freeMem`)를 기록한다 | Phase A 파일럿(1.0)에서 Full result 2회차(result hit) 해시가 OFF와 달랐다. 원인: 결과 캐시 clone(`JSON.parse(JSON.stringify())`)이 값이 `undefined`인 속성을 지운다(Cogic 결과의 `graph.edges[].label` 234개, `graph.nodes[].sig`·`signature` 13개와 `trace`의 같은 항목). 원본 `normalizeAnalysisResult`는 이 속성을 `"undefined"`로 직렬화한다. 구조 비교에서는 차이가 0이다. 시간 측정 로직은 바뀌지 않았다. 파일럿은 최종 통계에 넣지 않는다 |
+| 1.2 | Phase D "SourceFile 2회차 hit > 0" 조건을 분석 1회 요청 수 W ≤ 800(SourceFile 캐시 용량, 두 analyzer 모두 `MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 800`)일 때만 적용한다. `hitExpected` 열을 추가했다 | 두 번째 파일럿(1.1)에서 Synthetic-1000·2000(W = 1159·2159)의 2회차 hit가 0이라 실패로 나왔다. 해시 일치·불변식은 성립했고, hit 0은 계획서 H2-4가 예상한 동작이다 |

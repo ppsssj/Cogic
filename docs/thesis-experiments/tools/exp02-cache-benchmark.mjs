@@ -25,7 +25,7 @@ import { execFileSync, spawnSync } from "node:child_process";
 import { performance } from "node:perf_hooks";
 import { fileURLToPath } from "node:url";
 
-export const TOOL_VERSION = "exp02-cache-benchmark/1.1";
+export const TOOL_VERSION = "exp02-cache-benchmark/1.2";
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(here, "../../..");
 const isWin = process.platform === "win32";
@@ -378,6 +378,11 @@ export function canonicalHash(result) {
   return fastNormalizedHash(cloneAnalysisResult(result));
 }
 
+// MAX_DISK_SOURCE_FILE_CACHE_ENTRIES in src/analyzer/analyze.ts (same in 43ace0f and bbe4cbf). When one
+// analysis requests more files than this, the LRU evicts before reuse and a second run cannot hit; the
+// hit requirement then does not apply (EXP-02 H2-4: synthetic-1000/2000 have SF hit 0). (1.2)
+export const SOURCE_FILE_CACHE_CAPACITY = 800;
+
 // Phase D hit-path correctness (outside any measurement)
 export function correctnessChecks(target) {
   const out = [];
@@ -399,7 +404,7 @@ export function correctnessChecks(target) {
   const r2 = run(sf, sfCache, e2);
   const c2 = countEvents(e2);
   const h2 = canonicalHash(r2.result);
-  out.push({ target: target.id, check: "sourcefile-second-run", requests: W, sfHit: c2.sfHit, sfMiss: c2.sfMiss, sfStale: c2.sfStale, sfBypass: c2.sfBypass, resultHit: r2.cacheHit ? 1 : 0, hashEqualsOff: h2.hash === h0.hash ? 1 : 0, edgesEqualOff: h2.edgeHash === h0.edgeHash ? 1 : 0, invariant: c2.sfHit + c2.sfMiss + c2.sfStale + c2.sfBypass === W ? 1 : 0, pass: c2.sfHit > 0 && h2.hash === h0.hash && c2.sfHit + c2.sfMiss + c2.sfStale + c2.sfBypass === W ? 1 : 0, offHash: h0.hash, candidateHash: h2.hash, nodes: h0.counts.nodes, edges: h0.counts.edges });
+  out.push({ target: target.id, check: "sourcefile-second-run", requests: W, sfHit: c2.sfHit, sfMiss: c2.sfMiss, sfStale: c2.sfStale, sfBypass: c2.sfBypass, resultHit: r2.cacheHit ? 1 : 0, hashEqualsOff: h2.hash === h0.hash ? 1 : 0, edgesEqualOff: h2.edgeHash === h0.edgeHash ? 1 : 0, invariant: c2.sfHit + c2.sfMiss + c2.sfStale + c2.sfBypass === W ? 1 : 0, hitExpected: W <= SOURCE_FILE_CACHE_CAPACITY ? 1 : 0, pass: (c2.sfHit > 0 || W > SOURCE_FILE_CACHE_CAPACITY) && h2.hash === h0.hash && c2.sfHit + c2.sfMiss + c2.sfStale + c2.sfBypass === W ? 1 : 0, offHash: h0.hash, candidateHash: h2.hash, nodes: h0.counts.nodes, edges: h0.counts.edges });
   // Full result: second run must be a result hit and match
   clearAnalyzerCaches();
   const fullCache = new PanelEquivalentResultCache();
@@ -413,7 +418,7 @@ export function correctnessChecks(target) {
   clearAnalyzerCaches();
   return { rows: out, requestsPerAnalysis: W, offCounts: h0.counts };
 }
-export const CORRECTNESS_COLUMNS = ["target", "check", "requests", "sfHit", "sfMiss", "sfStale", "sfBypass", "resultHit", "hashEqualsOff", "edgesEqualOff", "invariant", "pass", "offHash", "candidateHash", "nodes", "edges"];
+export const CORRECTNESS_COLUMNS = ["target", "check", "requests", "hitExpected", "sfHit", "sfMiss", "sfStale", "sfBypass", "resultHit", "hashEqualsOff", "edgesEqualOff", "invariant", "pass", "offHash", "candidateHash", "nodes", "edges"];
 
 // ---------------------------------------------------------------------------
 // Statistics (computed after the run from samples.csv rows)
