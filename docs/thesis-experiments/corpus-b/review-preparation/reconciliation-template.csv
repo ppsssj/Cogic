@@ -1,0 +1,1 @@
+reconId,caseId,itemType,gtItemId,reviewerItemId,kind,source,target,argIndex,gtStatusGt,gtStatusReviewer,candidatesGt,candidatesReviewer,patternGt,patternReviewer,supportGt,supportReviewer,evidenceGt,evidenceReviewer,matchStatus,diffFields,causeCode,proposedChange,finalDecision,decisionRationale,guideClause,sourceCodeEvidence,adjudicator,decidedAt
