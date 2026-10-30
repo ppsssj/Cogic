@@ -1,0 +1,127 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "bv03-user",
+  "repo": "mutoe/vue3-realworld-example-app",
+  "url": "https://github.com/mutoe/vue3-realworld-example-app",
+  "commit": "741c215ef0f674f90fcb03c5493a1b3a3a7f1b03",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "tsconfig.json",
+    "derivedOptions": {
+      "target": "ES2020",
+      "module": "ESNext",
+      "moduleResolution": "bundler",
+      "jsx": "preserve",
+      "paths": {
+        "src/*": [
+          "./src/*"
+        ]
+      },
+      "strict": true,
+      "useDefineForClassFields": true,
+      "resolveJsonModule": true,
+      "lib": [
+        "ES2021",
+        "DOM",
+        "DOM.Iterable"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "target": "ES2020",
+      "jsx": "preserve",
+      "lib": [
+        "ES2021",
+        "DOM",
+        "DOM.Iterable"
+      ],
+      "useDefineForClassFields": true,
+      "module": "ESNext",
+      "moduleResolution": "bundler",
+      "paths": {
+        "src/*": [
+          "./src/*"
+        ]
+      },
+      "resolveJsonModule": true,
+      "types": [
+        "@testing-library/jest-dom"
+      ],
+      "strict": true,
+      "noFallthroughCasesInSwitch": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noEmit": true,
+      "isolatedModules": true,
+      "skipLibCheck": true
+    }
+  },
+  "activeFile": "src/store/user.ts",
+  "upstreamActiveFile": "src/store/user.ts",
+  "files": [
+    {
+      "path": "src/config.ts",
+      "upstreamPath": "src/config.ts",
+      "sha256": "f6acc4f776d91e8659677e3279ad42cb237499e806b05529e9394608a570882d",
+      "bytes": 86
+    },
+    {
+      "path": "src/services/api.ts",
+      "upstreamPath": "src/services/api.ts",
+      "sha256": "552fddf1d8308e95e958b331af49277f9b81015a56c0e94f7f32824bf62b8eb8",
+      "bytes": 21468
+    },
+    {
+      "path": "src/services/index.ts",
+      "upstreamPath": "src/services/index.ts",
+      "sha256": "f224257760702ac57ca29317a900de545383a4362b0b37ee243c4e8b51f56418",
+      "bytes": 816
+    },
+    {
+      "path": "src/store/user.ts",
+      "upstreamPath": "src/store/user.ts",
+      "sha256": "bb23a724e163903e17109bacaf0e062fff55d7b3373902fd8c50e7ab5a85caf1",
+      "bytes": 834
+    },
+    {
+      "path": "src/utils/storage.ts",
+      "upstreamPath": "src/utils/storage.ts",
+      "sha256": "838f706241711ba42ede15302d9cb6854ce90032b2f81d78a2e3c34c2c8f8aeb",
+      "bytes": 748
+    }
+  ],
+  "thirdPartyModules": [
+    "pinia",
+    "vue"
+  ],
+  "importEdges": [
+    {
+      "from": "src/store/user.ts",
+      "spec": "src/services",
+      "to": "src/services/index.ts"
+    },
+    {
+      "from": "src/store/user.ts",
+      "spec": "src/services/api",
+      "to": "src/services/api.ts"
+    },
+    {
+      "from": "src/store/user.ts",
+      "spec": "src/utils/storage",
+      "to": "src/utils/storage.ts"
+    },
+    {
+      "from": "src/services/index.ts",
+      "spec": "src/config",
+      "to": "src/config.ts"
+    },
+    {
+      "from": "src/services/index.ts",
+      "spec": "src/services/api",
+      "to": "src/services/api.ts"
+    }
+  ]
+}

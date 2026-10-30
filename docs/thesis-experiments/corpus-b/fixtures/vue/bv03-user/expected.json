@@ -1,0 +1,302 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "bv03-user",
+  "gtVersion": 1,
+  "activeFile": "src/store/user.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/store/user.ts"
+    },
+    {
+      "id": "S_vue_state_source_12_1",
+      "type": "synthetic",
+      "file": "src/store/user.ts",
+      "line": 12,
+      "framework": "vue",
+      "role": "state-source",
+      "anchor": "ref"
+    },
+    {
+      "id": "S_vue_callback_owner_13_2",
+      "type": "synthetic",
+      "file": "src/store/user.ts",
+      "line": 13,
+      "framework": "vue",
+      "role": "callback-owner",
+      "anchor": "() => !!user"
+    },
+    {
+      "id": "X_Storage_storage_ts_3",
+      "type": "external",
+      "file": "src/utils/storage.ts",
+      "line": 3,
+      "name": "Storage"
+    },
+    {
+      "id": "X_User_api_ts_26",
+      "type": "external",
+      "file": "src/services/api.ts",
+      "line": 26,
+      "name": "User"
+    },
+    {
+      "id": "F_isAuthorized_9",
+      "type": "callable",
+      "file": "src/store/user.ts",
+      "line": 9,
+      "name": "isAuthorized"
+    },
+    {
+      "id": "X_get_storage_ts_16",
+      "type": "external",
+      "file": "src/utils/storage.ts",
+      "line": 16,
+      "name": "get"
+    },
+    {
+      "id": "F_updateUser_15",
+      "type": "callable",
+      "file": "src/store/user.ts",
+      "line": 15,
+      "name": "updateUser"
+    },
+    {
+      "id": "X_set_storage_ts_26",
+      "type": "external",
+      "file": "src/utils/storage.ts",
+      "line": 26,
+      "name": "set"
+    },
+    {
+      "id": "X_setSecurityData_api_ts_168",
+      "type": "external",
+      "file": "src/services/api.ts",
+      "line": 168,
+      "name": "setSecurityData"
+    },
+    {
+      "id": "X_remove_storage_ts_31",
+      "type": "external",
+      "file": "src/utils/storage.ts",
+      "line": 31,
+      "name": "remove"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "constructs",
+      "source": "file",
+      "target": "X_Storage_storage_ts_3",
+      "pattern": "CONS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:7"
+      ],
+      "note": "Storage (default export class of src/utils/storage.ts) has an explicit constructor(key, storageType = 'localStorage'); only key is passed."
+    },
+    {
+      "id": "R02",
+      "kind": "dataflow",
+      "source": "file",
+      "target": "X_Storage_storage_ts_3",
+      "argIndex": 0,
+      "pattern": "DF-CONSTRUCTOR",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:7"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "references",
+      "source": "file",
+      "target": "X_User_api_ts_26",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:7"
+      ]
+    },
+    {
+      "id": "R04",
+      "kind": "calls",
+      "source": "F_isAuthorized_9",
+      "target": "X_get_storage_ts_16",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:9"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "calls",
+      "source": "file",
+      "target": "X_get_storage_ts_16",
+      "pattern": "CALL-IN-ANON-CALLBACK",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:12"
+      ],
+      "note": "Inside the anonymous setup callback passed to pinia defineStore (third-party): the callback is not a node, so the owner is the file (guide §3.3)."
+    },
+    {
+      "id": "R06",
+      "kind": "references",
+      "source": "S_vue_callback_owner_13_2",
+      "target": "S_vue_state_source_12_1",
+      "pattern": "REF-STATE-READ",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:13"
+      ]
+    },
+    {
+      "id": "R07",
+      "kind": "references",
+      "source": "F_updateUser_15",
+      "target": "X_User_api_ts_26",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:15"
+      ]
+    },
+    {
+      "id": "R08",
+      "kind": "calls",
+      "source": "F_updateUser_15",
+      "target": "X_set_storage_ts_26",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:17"
+      ]
+    },
+    {
+      "id": "R09",
+      "kind": "dataflow",
+      "source": "F_updateUser_15",
+      "target": "X_set_storage_ts_26",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:17"
+      ]
+    },
+    {
+      "id": "R10",
+      "kind": "calls",
+      "source": "F_updateUser_15",
+      "target": "X_setSecurityData_api_ts_168",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:18",
+        "src/store/user.ts:23"
+      ]
+    },
+    {
+      "id": "R11",
+      "kind": "dataflow",
+      "source": "F_updateUser_15",
+      "target": "X_setSecurityData_api_ts_168",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:18",
+        "src/store/user.ts:23"
+      ]
+    },
+    {
+      "id": "R12",
+      "kind": "references",
+      "source": "F_updateUser_15",
+      "target": "S_vue_state_source_12_1",
+      "pattern": "REF-STATE-WRITE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:19",
+        "src/store/user.ts:24"
+      ]
+    },
+    {
+      "id": "R13",
+      "kind": "updates",
+      "source": "F_updateUser_15",
+      "target": "S_vue_state_source_12_1",
+      "pattern": "UPD-VUE-REF",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:19",
+        "src/store/user.ts:24"
+      ]
+    },
+    {
+      "id": "R14",
+      "kind": "calls",
+      "source": "F_updateUser_15",
+      "target": "X_remove_storage_ts_31",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:22"
+      ]
+    },
+    {
+      "id": "R15",
+      "kind": "references",
+      "source": "file",
+      "target": "S_vue_state_source_12_1",
+      "pattern": "REF-IN-ANON-CALLBACK",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:29"
+      ]
+    },
+    {
+      "id": "R16",
+      "kind": "references",
+      "source": "file",
+      "target": "F_updateUser_15",
+      "pattern": "REF-IN-ANON-CALLBACK",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:31"
+      ]
+    },
+    {
+      "id": "R17",
+      "kind": "owner",
+      "source": "S_vue_state_source_12_1",
+      "pattern": "FW-VUE-STATE-SOURCE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:12"
+      ]
+    },
+    {
+      "id": "R18",
+      "kind": "owner",
+      "source": "S_vue_callback_owner_13_2",
+      "pattern": "FW-VUE-CALLBACK",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/store/user.ts:13"
+      ],
+      "note": "computed getter (guide §5.2). The local const isAuthorized (computed value) shadows the module-level isAuthorized arrow function, so the shorthand isAuthorized on line 30 refers to no §2 node."
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/store/user.ts:11",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    }
+  ]
+}

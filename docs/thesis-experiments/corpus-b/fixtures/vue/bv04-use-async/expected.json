@@ -1,0 +1,307 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "bv04-use-async",
+  "gtVersion": 1,
+  "activeFile": "src/utils/use-async.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/utils/use-async.ts"
+    },
+    {
+      "id": "S_vue_state_source_13_1",
+      "type": "synthetic",
+      "file": "src/utils/use-async.ts",
+      "line": 13,
+      "framework": "vue",
+      "role": "state-source",
+      "anchor": "ref"
+    },
+    {
+      "id": "T_UseAsync_7",
+      "type": "typeLike",
+      "file": "src/utils/use-async.ts",
+      "line": 7,
+      "name": "UseAsync"
+    },
+    {
+      "id": "lib_Parameters",
+      "type": "lib",
+      "symbol": "Parameters"
+    },
+    {
+      "id": "lib_Promise",
+      "type": "lib",
+      "symbol": "Promise"
+    },
+    {
+      "id": "lib_ReturnType",
+      "type": "lib",
+      "symbol": "ReturnType"
+    },
+    {
+      "id": "F_useAsync_12",
+      "type": "callable",
+      "file": "src/utils/use-async.ts",
+      "line": 12,
+      "name": "useAsync"
+    },
+    {
+      "id": "F_run_15",
+      "type": "callable",
+      "file": "src/utils/use-async.ts",
+      "line": 15,
+      "name": "run"
+    },
+    {
+      "id": "X_isFetchError_index_ts_23",
+      "type": "external",
+      "file": "src/services/index.ts",
+      "line": 23,
+      "name": "isFetchError"
+    },
+    {
+      "id": "X_remove_storage_ts_31",
+      "type": "external",
+      "file": "src/utils/storage.ts",
+      "line": 31,
+      "name": "remove"
+    },
+    {
+      "id": "X_routerPush_router_ts_88",
+      "type": "external",
+      "file": "src/router.ts",
+      "line": 88,
+      "name": "routerPush"
+    },
+    {
+      "id": "lib_Error",
+      "type": "lib",
+      "symbol": "Error"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "T_UseAsync_7",
+      "target": "lib_Parameters",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:9"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "references",
+      "source": "T_UseAsync_7",
+      "target": "lib_Promise",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:9"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "references",
+      "source": "T_UseAsync_7",
+      "target": "lib_ReturnType",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:9"
+      ]
+    },
+    {
+      "id": "R04",
+      "kind": "references",
+      "source": "F_useAsync_12",
+      "target": "T_UseAsync_7",
+      "pattern": "REF-TYPE-ANNOTATION",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:12",
+        "src/utils/use-async.ts:13",
+        "src/utils/use-async.ts:15"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "references",
+      "source": "F_run_15",
+      "target": "S_vue_state_source_13_1",
+      "pattern": "REF-STATE-WRITE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:16",
+        "src/utils/use-async.ts:30"
+      ]
+    },
+    {
+      "id": "R06",
+      "kind": "updates",
+      "source": "F_run_15",
+      "target": "S_vue_state_source_13_1",
+      "pattern": "UPD-VUE-REF",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:16",
+        "src/utils/use-async.ts:30"
+      ]
+    },
+    {
+      "id": "I01",
+      "kind": "calls",
+      "source": "F_run_15",
+      "candidates": "unbounded",
+      "pattern": "CALL-PARAM-CALLBACK",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/utils/use-async.ts:18"
+      ],
+      "reason": "callee is a parameter: any caller-supplied function (unbounded)",
+      "note": "fn is the generic parameter of the exported useAsync (guide §6.2 unbounded); its arguments are a spread of run's rest parameter."
+    },
+    {
+      "id": "I02",
+      "kind": "dataflow",
+      "source": "F_run_15",
+      "candidates": "unbounded",
+      "pattern": "DF-INDIRECT",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/utils/use-async.ts:18"
+      ],
+      "reason": "call target is indeterminate, so is the receiving parameter (guide §4.5)"
+    },
+    {
+      "id": "R07",
+      "kind": "references",
+      "source": "F_run_15",
+      "target": "lib_ReturnType",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:19"
+      ]
+    },
+    {
+      "id": "R08",
+      "kind": "calls",
+      "source": "F_run_15",
+      "target": "X_isFetchError_index_ts_23",
+      "pattern": "CALL-IMPORT-NAMED",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:22"
+      ]
+    },
+    {
+      "id": "R09",
+      "kind": "dataflow",
+      "source": "F_run_15",
+      "target": "X_isFetchError_index_ts_23",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:22"
+      ]
+    },
+    {
+      "id": "R10",
+      "kind": "calls",
+      "source": "F_run_15",
+      "target": "X_remove_storage_ts_31",
+      "pattern": "CALL-METHOD-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:23"
+      ],
+      "note": "userStorage is the module-level Storage instance exported from src/store/user.ts."
+    },
+    {
+      "id": "R11",
+      "kind": "calls",
+      "source": "F_run_15",
+      "target": "X_routerPush_router_ts_88",
+      "pattern": "CALL-IMPORT-NAMED",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:24"
+      ]
+    },
+    {
+      "id": "R12",
+      "kind": "dataflow",
+      "source": "F_run_15",
+      "target": "X_routerPush_router_ts_88",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:24"
+      ]
+    },
+    {
+      "id": "R13",
+      "kind": "constructs",
+      "source": "F_run_15",
+      "target": "lib_Error",
+      "pattern": "CONS-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:25"
+      ]
+    },
+    {
+      "id": "R14",
+      "kind": "dataflow",
+      "source": "F_run_15",
+      "target": "lib_Error",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:25"
+      ]
+    },
+    {
+      "id": "R15",
+      "kind": "references",
+      "source": "F_useAsync_12",
+      "target": "S_vue_state_source_13_1",
+      "pattern": "REF-SHORTHAND-PROPERTY",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:34"
+      ]
+    },
+    {
+      "id": "R16",
+      "kind": "references",
+      "source": "F_useAsync_12",
+      "target": "F_run_15",
+      "pattern": "REF-SHORTHAND-PROPERTY",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:34"
+      ]
+    },
+    {
+      "id": "R17",
+      "kind": "owner",
+      "source": "S_vue_state_source_13_1",
+      "pattern": "FW-VUE-STATE-SOURCE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/utils/use-async.ts:13"
+      ]
+    }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

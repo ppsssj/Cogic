@@ -1,0 +1,84 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "be04-errorhandler",
+  "gtVersion": 1,
+  "activeFile": "src/common/middleware/errorHandler.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/common/middleware/errorHandler.ts"
+    },
+    {
+      "id": "F_unexpectedRequest_4",
+      "type": "callable",
+      "file": "src/common/middleware/errorHandler.ts",
+      "line": 4,
+      "name": "unexpectedRequest"
+    },
+    {
+      "id": "F_addErrorToRequestLog_8",
+      "type": "callable",
+      "file": "src/common/middleware/errorHandler.ts",
+      "line": 8,
+      "name": "addErrorToRequestLog"
+    }
+  ],
+  "relations": [
+    {
+      "id": "I01",
+      "kind": "calls",
+      "source": "F_addErrorToRequestLog_8",
+      "candidates": "unbounded",
+      "pattern": "CALL-PARAM-CALLBACK",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/common/middleware/errorHandler.ts:10"
+      ],
+      "reason": "callee is a parameter: any caller-supplied function (unbounded)",
+      "note": "next is the Express-supplied NextFunction parameter (guide §6.2 unbounded)."
+    },
+    {
+      "id": "I02",
+      "kind": "dataflow",
+      "source": "F_addErrorToRequestLog_8",
+      "candidates": "unbounded",
+      "pattern": "DF-INDIRECT",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/common/middleware/errorHandler.ts:10"
+      ],
+      "reason": "call target is indeterminate, so is the receiving parameter (guide §4.5)"
+    },
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "file",
+      "target": "F_unexpectedRequest_4",
+      "pattern": "REF-IN-ANON-CALLBACK",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/common/middleware/errorHandler.ts:13"
+      ],
+      "note": "Owner is the file: the default export is an anonymous arrow function (guide §2, not a node; §3.5)."
+    },
+    {
+      "id": "R02",
+      "kind": "references",
+      "source": "file",
+      "target": "F_addErrorToRequestLog_8",
+      "pattern": "REF-IN-ANON-CALLBACK",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/common/middleware/errorHandler.ts:13"
+      ]
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/common/middleware/errorHandler.ts:5",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    }
+  ]
+}

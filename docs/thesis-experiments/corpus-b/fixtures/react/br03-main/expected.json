@@ -1,0 +1,147 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "br03-main",
+  "gtVersion": 1,
+  "activeFile": "src/main.tsx",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/main.tsx"
+    },
+    {
+      "id": "lib_Document_getElementById",
+      "type": "lib",
+      "symbol": "Document.getElementById"
+    },
+    {
+      "id": "lib_Error",
+      "type": "lib",
+      "symbol": "Error"
+    },
+    {
+      "id": "lib_Promise_then",
+      "type": "lib",
+      "symbol": "Promise.then"
+    },
+    {
+      "id": "X_enableMocking_index_ts_3",
+      "type": "external",
+      "file": "src/testing/mocks/index.ts",
+      "line": 3,
+      "name": "enableMocking"
+    },
+    {
+      "id": "X_App_index_tsx_4",
+      "type": "external",
+      "file": "src/app/index.tsx",
+      "line": 4,
+      "name": "App"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "calls",
+      "source": "file",
+      "target": "lib_Document_getElementById",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.tsx:8"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "dataflow",
+      "source": "file",
+      "target": "lib_Document_getElementById",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.tsx:8"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "constructs",
+      "source": "file",
+      "target": "lib_Error",
+      "pattern": "CONS-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.tsx:9"
+      ]
+    },
+    {
+      "id": "R04",
+      "kind": "dataflow",
+      "source": "file",
+      "target": "lib_Error",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.tsx:9"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "calls",
+      "source": "file",
+      "target": "lib_Promise_then",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.tsx:11"
+      ]
+    },
+    {
+      "id": "R06",
+      "kind": "dataflow",
+      "source": "file",
+      "target": "lib_Promise_then",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.tsx:11"
+      ]
+    },
+    {
+      "id": "R07",
+      "kind": "calls",
+      "source": "file",
+      "target": "X_enableMocking_index_ts_3",
+      "pattern": "CALL-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.tsx:11"
+      ]
+    },
+    {
+      "id": "R08",
+      "kind": "calls",
+      "source": "file",
+      "target": "X_App_index_tsx_4",
+      "pattern": "CALL-IN-ANON-CALLBACK",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/main.tsx:14"
+      ],
+      "note": "Inside the anonymous then() callback at module top level (owner file). createRoot (react-dom/client) and React.StrictMode are untyped third-party."
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/main.tsx:12",
+      "reason": "NO_NODE_TARGET: callee has no declaration in the corpus (third-party untyped or any)"
+    },
+    {
+      "site": "src/main.tsx:13",
+      "reason": "NO_NODE_TARGET: JSX component has no declaration in the corpus (third-party untyped) or is not a §2 node"
+    }
+  ]
+}

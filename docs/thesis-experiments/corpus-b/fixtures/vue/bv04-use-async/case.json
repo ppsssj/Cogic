@@ -1,0 +1,18 @@
+{
+  "schema": "exp01-case/1",
+  "caseId": "bv04-use-async",
+  "category": "vue",
+  "title": "mutoe/vue3-realworld-example-app src/utils/use-async.ts",
+  "activeFile": "src/utils/use-async.ts",
+  "description": "Corpus B (P1-K1) real-code case: src/utils/use-async.ts at mutoe/vue3-realworld-example-app@741c215ef0f6 (MIT). Local import closure vendored verbatim; third-party modules are untyped shorthand ambient modules.",
+  "authoring": {
+    "author": "Claude Code (generative AI, model claude-opus-5-5)",
+    "date": "2026-10-29",
+    "method": "TypeScript checker-assisted draft (tools/corpus-b/annotate-assist.mjs) reviewed by hand against the source and ANNOTATION_GUIDE v1 + corpus-b/ANNOTATION_ADDENDUM.md. Cogic was not run on this case.",
+    "cogicOutputUsed": false,
+    "implementationKnowledge": "The author has read the Cogic analyzer source (EXP-01, P1-J1-J3). Relations follow the guide definitions, not analyzer behaviour.",
+    "humanReviewed": false
+  },
+  "reviewStatus": "REVIEW_PENDING",
+  "reviewNotes": []
+}

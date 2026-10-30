@@ -1,0 +1,150 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "br05-input",
+  "gtVersion": 1,
+  "activeFile": "src/components/ui/form/input.tsx",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/components/ui/form/input.tsx"
+    },
+    {
+      "id": "T_InputProps_8",
+      "type": "typeLike",
+      "file": "src/components/ui/form/input.tsx",
+      "line": 8,
+      "name": "InputProps"
+    },
+    {
+      "id": "lib_HTMLInputElement",
+      "type": "lib",
+      "symbol": "HTMLInputElement"
+    },
+    {
+      "id": "X_FieldWrapperPassThroughProps_field_wrapper_tsx_14",
+      "type": "external",
+      "file": "src/components/ui/form/field-wrapper.tsx",
+      "line": 14,
+      "name": "FieldWrapperPassThroughProps"
+    },
+    {
+      "id": "lib_Partial",
+      "type": "lib",
+      "symbol": "Partial"
+    },
+    {
+      "id": "X_FieldWrapper_field_wrapper_tsx_19",
+      "type": "external",
+      "file": "src/components/ui/form/field-wrapper.tsx",
+      "line": 19,
+      "name": "FieldWrapper"
+    },
+    {
+      "id": "X_cn_cn_ts_4",
+      "type": "external",
+      "file": "src/utils/cn.ts",
+      "line": 4,
+      "name": "cn"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "T_InputProps_8",
+      "target": "lib_HTMLInputElement",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/input.tsx:8"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "references",
+      "source": "T_InputProps_8",
+      "target": "X_FieldWrapperPassThroughProps_field_wrapper_tsx_14",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/input.tsx:9"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "references",
+      "source": "T_InputProps_8",
+      "target": "lib_Partial",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/input.tsx:11"
+      ]
+    },
+    {
+      "id": "R04",
+      "kind": "references",
+      "source": "file",
+      "target": "lib_HTMLInputElement",
+      "pattern": "REF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/input.tsx:14"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "references",
+      "source": "file",
+      "target": "T_InputProps_8",
+      "pattern": "REF-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/input.tsx:14"
+      ]
+    },
+    {
+      "id": "R06",
+      "kind": "calls",
+      "source": "file",
+      "target": "X_FieldWrapper_field_wrapper_tsx_19",
+      "pattern": "CALL-IN-ANON-CALLBACK",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/input.tsx:17"
+      ]
+    },
+    {
+      "id": "R07",
+      "kind": "calls",
+      "source": "file",
+      "target": "X_cn_cn_ts_4",
+      "pattern": "CALL-IN-ANON-CALLBACK",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/input.tsx:20"
+      ],
+      "note": "Inside the anonymous render function passed to React.forwardRef; cn(...inputs) has a rest parameter, so both arguments go to index 0."
+    },
+    {
+      "id": "R08",
+      "kind": "dataflow",
+      "source": "file",
+      "target": "X_cn_cn_ts_4",
+      "argIndex": 0,
+      "pattern": "DF-REST-PARAM",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/input.tsx:20"
+      ]
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/components/ui/form/input.tsx:18",
+      "reason": "JSX_INTRINSIC: intrinsic element is not a call (guide §4.1)"
+    }
+  ]
+}

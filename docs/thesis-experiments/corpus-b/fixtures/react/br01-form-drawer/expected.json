@@ -1,0 +1,183 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "br01-form-drawer",
+  "gtVersion": 1,
+  "activeFile": "src/components/ui/form/form-drawer.tsx",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/components/ui/form/form-drawer.tsx"
+    },
+    {
+      "id": "S_react_callback_owner_33_1",
+      "type": "synthetic",
+      "file": "src/components/ui/form/form-drawer.tsx",
+      "line": 33,
+      "framework": "react",
+      "role": "callback-owner",
+      "anchor": "React.useEffect"
+    },
+    {
+      "id": "T_FormDrawerProps_16",
+      "type": "typeLike",
+      "file": "src/components/ui/form/form-drawer.tsx",
+      "line": 16,
+      "name": "FormDrawerProps"
+    },
+    {
+      "id": "F_FormDrawer_24",
+      "type": "callable",
+      "file": "src/components/ui/form/form-drawer.tsx",
+      "line": 24,
+      "name": "FormDrawer"
+    },
+    {
+      "id": "X_useDisclosure_use_disclosure_ts_3",
+      "type": "external",
+      "file": "src/hooks/use-disclosure.ts",
+      "line": 3,
+      "name": "useDisclosure"
+    },
+    {
+      "id": "X_DrawerHeader_drawer_tsx_76",
+      "type": "external",
+      "file": "src/components/ui/drawer/drawer.tsx",
+      "line": 76,
+      "name": "DrawerHeader"
+    },
+    {
+      "id": "X_DrawerFooter_drawer_tsx_90",
+      "type": "external",
+      "file": "src/components/ui/drawer/drawer.tsx",
+      "line": 90,
+      "name": "DrawerFooter"
+    },
+    {
+      "id": "S_react_customhook_31",
+      "type": "synthetic",
+      "file": "src/components/ui/form/form-drawer.tsx",
+      "line": 31,
+      "framework": "react",
+      "role": "callback-owner",
+      "anchor": "useDisclosure"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "F_FormDrawer_24",
+      "target": "T_FormDrawerProps_16",
+      "pattern": "REF-TYPE-ANNOTATION",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/form-drawer.tsx:30"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "calls",
+      "source": "F_FormDrawer_24",
+      "target": "X_useDisclosure_use_disclosure_ts_3",
+      "pattern": "CALL-PATH-ALIAS",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/form-drawer.tsx:31"
+      ],
+      "note": "Custom hook imported through the @/ path alias: an ordinary call, not a framework owner (guide §5.1)."
+    },
+    {
+      "id": "R03",
+      "kind": "calls",
+      "source": "F_FormDrawer_24",
+      "target": "X_DrawerHeader_drawer_tsx_76",
+      "pattern": "CALL-JSX-IMPORT",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/form-drawer.tsx:53"
+      ],
+      "note": "DrawerHeader/DrawerFooter are arrow-function components in drawer.tsx. Drawer, DrawerTrigger, DrawerContent, DrawerTitle, DrawerClose and Button are values of third-party primitives or React.forwardRef(...) calls: not §2 nodes (excluded sites)."
+    },
+    {
+      "id": "R04",
+      "kind": "calls",
+      "source": "F_FormDrawer_24",
+      "target": "X_DrawerFooter_drawer_tsx_90",
+      "pattern": "CALL-JSX-IMPORT",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/form-drawer.tsx:58"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "owner",
+      "source": "S_react_callback_owner_33_1",
+      "pattern": "FW-REACT-NAMESPACE-IMPORT",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/components/ui/form/form-drawer.tsx:33"
+      ],
+      "note": "Inline useEffect callback through the namespace import React from react (guide §5.1)."
+    }
+  ],
+  "negatives": [
+    {
+      "id": "N01",
+      "kind": "owner",
+      "source": "S_react_customhook_31",
+      "pattern": "NEG-CUSTOM-HOOK",
+      "evidence": [
+        "src/components/ui/form/form-drawer.tsx:31"
+      ],
+      "rationale": "useDisclosure is a user function; the call is a calls relation and creates no React owner (guide §5.1)"
+    }
+  ],
+  "excludedSites": [
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:35",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (BindingElement)"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:40",
+      "reason": "NO_NODE_TARGET: JSX component has no declaration in the corpus (third-party untyped) or is not a §2 node"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:44",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (BindingElement)"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:46",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (BindingElement)"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:50",
+      "reason": "NO_NODE_TARGET: JSX component has no declaration in the corpus (third-party untyped) or is not a §2 node"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:51",
+      "reason": "NO_NODE_TARGET: JSX component has no declaration in the corpus (third-party untyped) or is not a §2 node"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:52",
+      "reason": "JSX_INTRINSIC: intrinsic element is not a call (guide §4.1)"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:54",
+      "reason": "NO_NODE_TARGET: JSX component has no declaration in the corpus (third-party untyped) or is not a §2 node"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:56",
+      "reason": "JSX_INTRINSIC: intrinsic element is not a call (guide §4.1)"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:59",
+      "reason": "NO_NODE_TARGET: JSX component has no declaration in the corpus (third-party untyped) or is not a §2 node"
+    },
+    {
+      "site": "src/components/ui/form/form-drawer.tsx:60",
+      "reason": "NO_NODE_TARGET: JSX component has no declaration in the corpus (third-party untyped) or is not a §2 node"
+    }
+  ]
+}

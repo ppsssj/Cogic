@@ -1,0 +1,237 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "bv02-use-follow-profile",
+  "gtVersion": 1,
+  "activeFile": "src/composable/use-follow-profile.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/composable/use-follow-profile.ts"
+    },
+    {
+      "id": "T_UseFollowProps_6",
+      "type": "typeLike",
+      "file": "src/composable/use-follow-profile.ts",
+      "line": 6,
+      "name": "UseFollowProps"
+    },
+    {
+      "id": "X_Profile_api_ts_42",
+      "type": "external",
+      "file": "src/services/api.ts",
+      "line": 42,
+      "name": "Profile"
+    },
+    {
+      "id": "F_useFollow_12",
+      "type": "callable",
+      "file": "src/composable/use-follow-profile.ts",
+      "line": 12,
+      "name": "useFollow"
+    },
+    {
+      "id": "F_toggleFollow_13",
+      "type": "callable",
+      "file": "src/composable/use-follow-profile.ts",
+      "line": 13,
+      "name": "toggleFollow"
+    },
+    {
+      "id": "X_unfollowUserByUsername_api_ts_519",
+      "type": "external",
+      "file": "src/services/api.ts",
+      "line": 519,
+      "name": "unfollowUserByUsername"
+    },
+    {
+      "id": "X_followUserByUsername_api_ts_497",
+      "type": "external",
+      "file": "src/services/api.ts",
+      "line": 497,
+      "name": "followUserByUsername"
+    },
+    {
+      "id": "lib_Promise_then",
+      "type": "lib",
+      "symbol": "Promise.then"
+    },
+    {
+      "id": "X_useAsync_use_async_ts_12",
+      "type": "external",
+      "file": "src/utils/use-async.ts",
+      "line": 12,
+      "name": "useAsync"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "T_UseFollowProps_6",
+      "target": "X_Profile_api_ts_42",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:9"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "references",
+      "source": "F_useFollow_12",
+      "target": "T_UseFollowProps_6",
+      "pattern": "REF-TYPE-ANNOTATION",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:12"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "references",
+      "source": "F_toggleFollow_13",
+      "target": "X_unfollowUserByUsername_api_ts_519",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:14"
+      ],
+      "note": "method value read without a call in the conditional expression (line 14)."
+    },
+    {
+      "id": "R04",
+      "kind": "references",
+      "source": "F_toggleFollow_13",
+      "target": "X_followUserByUsername_api_ts_497",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:14"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "calls",
+      "source": "F_toggleFollow_13",
+      "target": "lib_Promise_then",
+      "pattern": "CALL-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:15"
+      ]
+    },
+    {
+      "id": "R06",
+      "kind": "dataflow",
+      "source": "F_toggleFollow_13",
+      "target": "lib_Promise_then",
+      "argIndex": 0,
+      "pattern": "DF-LIB",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:15"
+      ]
+    },
+    {
+      "id": "I01",
+      "kind": "calls",
+      "source": "F_toggleFollow_13",
+      "candidates": "unbounded",
+      "pattern": "CALL-PARAM-CALLBACK",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:16"
+      ],
+      "reason": "callee is a parameter: any caller-supplied function (unbounded)"
+    },
+    {
+      "id": "I02",
+      "kind": "dataflow",
+      "source": "F_toggleFollow_13",
+      "candidates": "unbounded",
+      "pattern": "DF-INDIRECT",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:16"
+      ],
+      "reason": "call target is indeterminate, so is the receiving parameter (guide §4.5)"
+    },
+    {
+      "id": "R09",
+      "kind": "calls",
+      "source": "F_useFollow_12",
+      "target": "X_useAsync_use_async_ts_12",
+      "pattern": "CALL-IMPORT-DEFAULT",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:19"
+      ]
+    },
+    {
+      "id": "R10",
+      "kind": "dataflow",
+      "source": "F_useFollow_12",
+      "target": "X_useAsync_use_async_ts_12",
+      "argIndex": 0,
+      "pattern": "DF-EXTERNAL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:19"
+      ]
+    },
+    {
+      "id": "R11",
+      "kind": "references",
+      "source": "F_useFollow_12",
+      "target": "F_toggleFollow_13",
+      "pattern": "REF-VALUE-FN",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:19"
+      ]
+    },
+    {
+      "id": "I03",
+      "kind": "calls",
+      "source": "F_toggleFollow_13",
+      "candidates": [
+        {
+          "target": "X_unfollowUserByUsername_api_ts_519"
+        },
+        {
+          "target": "X_followUserByUsername_api_ts_497"
+        }
+      ],
+      "pattern": "CALL-VARIABLE-ALIAS",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:15"
+      ],
+      "reason": "requester = isX.value ? api.<one> : api.<other>; which method runs depends on a run-time ComputedRef value."
+    },
+    {
+      "id": "I04",
+      "kind": "dataflow",
+      "source": "F_toggleFollow_13",
+      "candidates": [
+        {
+          "target": "X_unfollowUserByUsername_api_ts_519",
+          "argIndex": 0
+        },
+        {
+          "target": "X_followUserByUsername_api_ts_497",
+          "argIndex": 0
+        }
+      ],
+      "pattern": "DF-INDIRECT",
+      "gtStatus": "indeterminate",
+      "evidence": [
+        "src/composable/use-follow-profile.ts:15"
+      ],
+      "reason": "the argument goes to parameter 0 of whichever method requester holds."
+    }
+  ],
+  "negatives": [],
+  "excludedSites": []
+}

@@ -1,0 +1,2841 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "bn03-main",
+  "repo": "brocoders/nestjs-boilerplate",
+  "url": "https://github.com/brocoders/nestjs-boilerplate",
+  "commit": "9620f159eefe38f47747d02ab162852367c5472c",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "tsconfig.json",
+    "derivedOptions": {
+      "target": "ES2021",
+      "module": "commonjs",
+      "strictNullChecks": true,
+      "noImplicitAny": true,
+      "strictBindCallApply": false,
+      "strictPropertyInitialization": false,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "lib": [
+        "ES2021"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "module": "commonjs",
+      "declaration": true,
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "ES2021",
+      "sourceMap": true,
+      "outDir": "./dist",
+      "incremental": true,
+      "skipLibCheck": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": false,
+      "noImplicitAny": true,
+      "strictBindCallApply": false,
+      "forceConsistentCasingInFileNames": false,
+      "noFallthroughCasesInSwitch": false,
+      "esModuleInterop": true
+    }
+  },
+  "activeFile": "src/main.ts",
+  "upstreamActiveFile": "src/main.ts",
+  "files": [
+    {
+      "path": "src/app.module.ts",
+      "upstreamPath": "src/app.module.ts",
+      "sha256": "8f9b520143be73d5444b4009cffd669092e958b8d4b7406be25365a00fd420d8",
+      "bytes": 3440
+    },
+    {
+      "path": "src/auth-apple/auth-apple.controller.ts",
+      "upstreamPath": "src/auth-apple/auth-apple.controller.ts",
+      "sha256": "87c4e3dd79771eb4c211842c4131405ebbf9afdbeaeeb21fb784654003b13d19",
+      "bytes": 1062
+    },
+    {
+      "path": "src/auth-apple/auth-apple.module.ts",
+      "upstreamPath": "src/auth-apple/auth-apple.module.ts",
+      "sha256": "bd2cd039960959259424d35f53feb4c956a5f15df464809e89d4c2a88f6026bf",
+      "bytes": 458
+    },
+    {
+      "path": "src/auth-apple/auth-apple.service.ts",
+      "upstreamPath": "src/auth-apple/auth-apple.service.ts",
+      "sha256": "2ad35e8d7aaa0813805740be4df480ff999b6218821ce07c74f97b22334d4edb",
+      "bytes": 1582
+    },
+    {
+      "path": "src/auth-apple/config/apple-config.type.ts",
+      "upstreamPath": "src/auth-apple/config/apple-config.type.ts",
+      "sha256": "f96a7e9d6c86269f1fbc4d8b509fa915e7ab42564247faccd1af7e429b845621",
+      "bytes": 59
+    },
+    {
+      "path": "src/auth-apple/config/apple.config.ts",
+      "upstreamPath": "src/auth-apple/config/apple.config.ts",
+      "sha256": "a5c0abb5b725b74e10cc0d95d44611e9baae75473bda225225a7738b4d56930f",
+      "bytes": 536
+    },
+    {
+      "path": "src/auth-apple/dto/auth-apple-login.dto.ts",
+      "upstreamPath": "src/auth-apple/dto/auth-apple-login.dto.ts",
+      "sha256": "bf0c89d1fbb0635fef268b108c51e8ac30b8030b80509f2f8daa26dbd8874874",
+      "bytes": 360
+    },
+    {
+      "path": "src/auth-facebook/auth-facebook.controller.ts",
+      "upstreamPath": "src/auth-facebook/auth-facebook.controller.ts",
+      "sha256": "5f98f9b90bc4fc605231c5921833f341af3aab128598e9c10671e192c3e21f9d",
+      "bytes": 1113
+    },
+    {
+      "path": "src/auth-facebook/auth-facebook.module.ts",
+      "upstreamPath": "src/auth-facebook/auth-facebook.module.ts",
+      "sha256": "67b7ef5e7c3ce4a6c3903a35e3ed3fc9e63340f84275d1ee8791f7845760df1b",
+      "bytes": 482
+    },
+    {
+      "path": "src/auth-facebook/auth-facebook.service.ts",
+      "upstreamPath": "src/auth-facebook/auth-facebook.service.ts",
+      "sha256": "2b05edec6910460e42b02545502f18b197b914b376472ccfece13fdea0edac4a",
+      "bytes": 7030
+    },
+    {
+      "path": "src/auth-facebook/config/facebook-config.type.ts",
+      "upstreamPath": "src/auth-facebook/config/facebook-config.type.ts",
+      "sha256": "ec98b403be5255c8ace5339fe87ff15851ef572aa878b101db9506a12489ff60",
+      "bytes": 78
+    },
+    {
+      "path": "src/auth-facebook/config/facebook.config.ts",
+      "upstreamPath": "src/auth-facebook/config/facebook.config.ts",
+      "sha256": "e915d5262b18383e372afa247ad1daeb14617dc9e4a6e4271d0b58dec23ebc98",
+      "bytes": 635
+    },
+    {
+      "path": "src/auth-facebook/dto/auth-facebook-login.dto.ts",
+      "upstreamPath": "src/auth-facebook/dto/auth-facebook-login.dto.ts",
+      "sha256": "e07d104032bf0386fb3240b2d9421547d283875303ed446f41a292e1f0c5b508",
+      "bytes": 214
+    },
+    {
+      "path": "src/auth-facebook/interfaces/facebook.interface.ts",
+      "upstreamPath": "src/auth-facebook/interfaces/facebook.interface.ts",
+      "sha256": "0209be7ff0de1ca528d5965b12f75164d830eb146c53741ec7d356299351207c",
+      "bytes": 122
+    },
+    {
+      "path": "src/auth-google/auth-google.controller.ts",
+      "upstreamPath": "src/auth-google/auth-google.controller.ts",
+      "sha256": "1812fd805bf300297d0905d57ca0307052f2ced15d4ebf242fe75d1a6d6eb241",
+      "bytes": 1073
+    },
+    {
+      "path": "src/auth-google/auth-google.module.ts",
+      "upstreamPath": "src/auth-google/auth-google.module.ts",
+      "sha256": "2187d66ca1c0bee9cb02027440caff68ff2dae056ac92876a02a0c3ea535ac45",
+      "bytes": 466
+    },
+    {
+      "path": "src/auth-google/auth-google.service.ts",
+      "upstreamPath": "src/auth-google/auth-google.service.ts",
+      "sha256": "c7d5e541a50a7ff81da46d2f7543515b904ebb8ae0f110697b9fe418def94085",
+      "bytes": 1738
+    },
+    {
+      "path": "src/auth-google/config/google-config.type.ts",
+      "upstreamPath": "src/auth-google/config/google-config.type.ts",
+      "sha256": "539d822db5ff9df8b70c18b7d7cf7fd732554d54071e368699c2327215f9a10e",
+      "bytes": 82
+    },
+    {
+      "path": "src/auth-google/config/google.config.ts",
+      "upstreamPath": "src/auth-google/config/google.config.ts",
+      "sha256": "4f1255aadb0b1177b3efc4989b52d53d957f6a1508e4a431bcb43450ccb75674",
+      "bytes": 637
+    },
+    {
+      "path": "src/auth-google/dto/auth-google-login.dto.ts",
+      "upstreamPath": "src/auth-google/dto/auth-google-login.dto.ts",
+      "sha256": "2633a8452b07bc0abd0d82fa3d304c563a2973dea91f2a79b8e97dd1ccc7c170",
+      "bytes": 208
+    },
+    {
+      "path": "src/auth/auth-providers.enum.ts",
+      "upstreamPath": "src/auth/auth-providers.enum.ts",
+      "sha256": "b153ee494908cd801f0b1eddbc95e70f23a836dc70c120dbf4fda9b3438b72df",
+      "bytes": 124
+    },
+    {
+      "path": "src/auth/auth.controller.ts",
+      "upstreamPath": "src/auth/auth.controller.ts",
+      "sha256": "5dc757c7bb4f7f3f6a84feca494b24f11a76bee47405d250a84630a70bb91e21",
+      "bytes": 4633
+    },
+    {
+      "path": "src/auth/auth.module.ts",
+      "upstreamPath": "src/auth/auth.module.ts",
+      "sha256": "b1474dfc4f92024a033c6cd3d035ab60be3f026b4a3b6c2d654a8a809e936277",
+      "bytes": 914
+    },
+    {
+      "path": "src/auth/auth.service.ts",
+      "upstreamPath": "src/auth/auth.service.ts",
+      "sha256": "991bbf5fdb3216a6d1db8d91b9294848b4a08a4a0d1d1cced30aa0f9963ea36e",
+      "bytes": 16981
+    },
+    {
+      "path": "src/auth/config/auth-config.type.ts",
+      "upstreamPath": "src/auth/config/auth-config.type.ts",
+      "sha256": "10476153617fe732c82efaaa5fb23bcbde28549becb8149b8b7fa3139c2296d6",
+      "bytes": 329
+    },
+    {
+      "path": "src/auth/config/auth.config.ts",
+      "upstreamPath": "src/auth/config/auth.config.ts",
+      "sha256": "e2ae80632afba5cb26af45c0257a4918b3a58a9991d39250382b7f62e3232e35",
+      "bytes": 2440
+    },
+    {
+      "path": "src/auth/dto/auth-confirm-email.dto.ts",
+      "upstreamPath": "src/auth/dto/auth-confirm-email.dto.ts",
+      "sha256": "207c89181057d6e7f3e9edb0ad4f4ff983dea8d2d2095cfe02937292d808b96e",
+      "bytes": 188
+    },
+    {
+      "path": "src/auth/dto/auth-email-login.dto.ts",
+      "upstreamPath": "src/auth/dto/auth-email-login.dto.ts",
+      "sha256": "43ad4e925446e9001a402788e647e62ee9407acb5bc86ffe57f41139482b4a57",
+      "bytes": 487
+    },
+    {
+      "path": "src/auth/dto/auth-forgot-password.dto.ts",
+      "upstreamPath": "src/auth/dto/auth-forgot-password.dto.ts",
+      "sha256": "4673a25b3f2f2eb60ce9e0abc4c3229052caa672101f94f8855dcf09de9b80cd",
+      "bytes": 404
+    },
+    {
+      "path": "src/auth/dto/auth-register-login.dto.ts",
+      "upstreamPath": "src/auth/dto/auth-register-login.dto.ts",
+      "sha256": "f2c2cadfea8c9bb42d4aa9658ceff81dec2ad120efbd596d01a4def43168569f",
+      "bytes": 638
+    },
+    {
+      "path": "src/auth/dto/auth-reset-password.dto.ts",
+      "upstreamPath": "src/auth/dto/auth-reset-password.dto.ts",
+      "sha256": "9b51bd1c0edb7fae14c621224110dd53d2138ed7e1ef072b80700cfd924ff519",
+      "bytes": 247
+    },
+    {
+      "path": "src/auth/dto/auth-update.dto.ts",
+      "upstreamPath": "src/auth/dto/auth-update.dto.ts",
+      "sha256": "bc2faff199ef0c0101d778c2c1b9696a00e3cfc1f343456f642f720da7e27940",
+      "bytes": 1101
+    },
+    {
+      "path": "src/auth/dto/login-response.dto.ts",
+      "upstreamPath": "src/auth/dto/login-response.dto.ts",
+      "sha256": "8a9dd39d2e4359e8d6c2bd2fc7c21ce08030fcfdadaaca7f41552e039fa33e57",
+      "bytes": 325
+    },
+    {
+      "path": "src/auth/dto/refresh-response.dto.ts",
+      "upstreamPath": "src/auth/dto/refresh-response.dto.ts",
+      "sha256": "62e7c3389d3ec922f22b54a4bce9e9762596855214d2d2e02f0ec0a4590c1221",
+      "bytes": 214
+    },
+    {
+      "path": "src/auth/strategies/anonymous.strategy.ts",
+      "upstreamPath": "src/auth/strategies/anonymous.strategy.ts",
+      "sha256": "0ebdea76c38b26e087487370c35ba21d90c80cabce4526bc800dc3c00c38a686",
+      "bytes": 369
+    },
+    {
+      "path": "src/auth/strategies/jwt-refresh.strategy.ts",
+      "upstreamPath": "src/auth/strategies/jwt-refresh.strategy.ts",
+      "sha256": "45bafbc755cdff18dbffd5d13741f484429c7a8ca7ce2b1299b3b8c4f6f50181",
+      "bytes": 1035
+    },
+    {
+      "path": "src/auth/strategies/jwt.strategy.ts",
+      "upstreamPath": "src/auth/strategies/jwt.strategy.ts",
+      "sha256": "52edcc42f5a0c103a960f27bdc58a47468af875df8061b5d2d5edcfda9ac3ec0",
+      "bytes": 1096
+    },
+    {
+      "path": "src/auth/strategies/types/jwt-payload.type.ts",
+      "upstreamPath": "src/auth/strategies/types/jwt-payload.type.ts",
+      "sha256": "0993a3fe73766696237c9673ce949bcfe4fda15c286a749c8d1f9f89f4b1408e",
+      "bytes": 239
+    },
+    {
+      "path": "src/auth/strategies/types/jwt-refresh-payload.type.ts",
+      "upstreamPath": "src/auth/strategies/types/jwt-refresh-payload.type.ts",
+      "sha256": "20c0260914bb9d396b8d227a440c20794e130992d864badb79202c2470733b03",
+      "bytes": 192
+    },
+    {
+      "path": "src/config/app-config.type.ts",
+      "upstreamPath": "src/config/app-config.type.ts",
+      "sha256": "a3305f799a604db99ffa04bf9c3ace9fb75cd0f44646ac7d0a49a4583cfef0b8",
+      "bytes": 272
+    },
+    {
+      "path": "src/config/app.config.ts",
+      "upstreamPath": "src/config/app.config.ts",
+      "sha256": "e33365b5ce475f0db6e6cee9d0cb5e4ea95fc90dcb86b9af33b8affadf3cf511",
+      "bytes": 1957
+    },
+    {
+      "path": "src/config/config.type.ts",
+      "upstreamPath": "src/config/config.type.ts",
+      "sha256": "d1acc1c19fd2ec0670a56bf02e16bc81e8459a728d7cb49d99b44050944c4f47",
+      "bytes": 763
+    },
+    {
+      "path": "src/database/config/database-config.type.ts",
+      "upstreamPath": "src/database/config/database-config.type.ts",
+      "sha256": "f2a187e20ea0fa0d60511b08c4e55d97ab0aa54e7909e37dee54262221b573eb",
+      "bytes": 363
+    },
+    {
+      "path": "src/database/config/database.config.ts",
+      "upstreamPath": "src/database/config/database.config.ts",
+      "sha256": "930b939fa9ea8504396132339b53cc42cce2eb0d18022eb210f79050ab51e6fb",
+      "bytes": 2521
+    },
+    {
+      "path": "src/database/mongoose-config.service.ts",
+      "upstreamPath": "src/database/mongoose-config.service.ts",
+      "sha256": "6bbcf44a71aad9fe1ca063ce0fdd6d6640084f0e360a3143a44f9b7355101aac",
+      "bytes": 973
+    },
+    {
+      "path": "src/database/typeorm-config.service.ts",
+      "upstreamPath": "src/database/typeorm-config.service.ts",
+      "sha256": "63b038004d146278a46f7589efda3ae3b2adbb3856f0de52ef48674a44c9d01f",
+      "bytes": 2358
+    },
+    {
+      "path": "src/files/config/file-config.type.ts",
+      "upstreamPath": "src/files/config/file-config.type.ts",
+      "sha256": "94764db3683042f0f558e4a2cb5bcbf40bc722696ef627f29fa6b78181e4ac58",
+      "bytes": 289
+    },
+    {
+      "path": "src/files/config/file.config.ts",
+      "upstreamPath": "src/files/config/file.config.ts",
+      "sha256": "243576d2aa34fae801e32823a1356232f30b87f0f045da658468dfa7f99b8f41",
+      "bytes": 1444
+    },
+    {
+      "path": "src/files/domain/file.ts",
+      "upstreamPath": "src/files/domain/file.ts",
+      "sha256": "2fbaea444b3adc55c74ca342df45df106e429bc7bd7e8462cf7ebdacdfc9f087",
+      "bytes": 1713
+    },
+    {
+      "path": "src/files/dto/file.dto.ts",
+      "upstreamPath": "src/files/dto/file.dto.ts",
+      "sha256": "8e2b59cc50496cf3bc3cabb80c46bfe64c1d0c21a248fea4969c739173855915",
+      "bytes": 218
+    },
+    {
+      "path": "src/files/files.module.ts",
+      "upstreamPath": "src/files/files.module.ts",
+      "sha256": "2a51e226388182ee3ff6fd17134d34f203789a7e8863c64856eed780230cda1b",
+      "bytes": 1579
+    },
+    {
+      "path": "src/files/files.service.ts",
+      "upstreamPath": "src/files/files.service.ts",
+      "sha256": "81d7d1ff4c624cf7221821dbe2370798325b9a53e7712d8422d7f5a957a7d4ef",
+      "bytes": 583
+    },
+    {
+      "path": "src/files/infrastructure/persistence/document/document-persistence.module.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/document/document-persistence.module.ts",
+      "sha256": "ccd8bcdb0c2c04791b83b61bf6d441d00c2d806cca6c6648ae549da2795977a0",
+      "bytes": 618
+    },
+    {
+      "path": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+      "sha256": "f3e71540627003989f1b6db04838abd46eee362ec4bf583eff33f1c66c7ea3fa",
+      "bytes": 512
+    },
+    {
+      "path": "src/files/infrastructure/persistence/document/mappers/file.mapper.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/document/mappers/file.mapper.ts",
+      "sha256": "23d9ee1ad8ec9f3fc06a952b20667b2a50361abb6df77267fb0660f3a802a023",
+      "bytes": 638
+    },
+    {
+      "path": "src/files/infrastructure/persistence/document/repositories/file.repository.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/document/repositories/file.repository.ts",
+      "sha256": "92a6af75690dd642a21067ac61f6882ec306e62be0403a273bcb4cba09033f77",
+      "bytes": 1285
+    },
+    {
+      "path": "src/files/infrastructure/persistence/file.repository.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/file.repository.ts",
+      "sha256": "ab46ab5d036396d55f850c1cc35c64a8d43f3b87b3b5b6ecf06774a1a40f310b",
+      "bytes": 373
+    },
+    {
+      "path": "src/files/infrastructure/persistence/relational/entities/file.entity.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/relational/entities/file.entity.ts",
+      "sha256": "c46396ff5a579f1835c4882b0e8d3478520388dd8977bdf04f44cdf95eb09275",
+      "bytes": 369
+    },
+    {
+      "path": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts",
+      "sha256": "0dbea95d46a12f28257ced40991886bb03b4db2c8f23963c9404a330e5822ddf",
+      "bytes": 570
+    },
+    {
+      "path": "src/files/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "sha256": "2cc434c60c1dec5b63980fb7b1db641a25a6654e393c618f9f4b14e6eaa6fe13",
+      "bytes": 538
+    },
+    {
+      "path": "src/files/infrastructure/persistence/relational/repositories/file.repository.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/relational/repositories/file.repository.ts",
+      "sha256": "2481f33c884d6ebfceaade71b66b0eba54d3430e4af5133d235c3b650fd3eded",
+      "bytes": 1423
+    },
+    {
+      "path": "src/files/infrastructure/uploader/local/dto/file-response.dto.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/local/dto/file-response.dto.ts",
+      "sha256": "89d2e1355e76d4a977cef4b444f11a52288736b78eb41f908fa734b8148d7e72",
+      "bytes": 208
+    },
+    {
+      "path": "src/files/infrastructure/uploader/local/files.controller.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/local/files.controller.ts",
+      "sha256": "9045ef71c7d3dbfe70eca5a9daa58fd65d5c05a975cde431f7ede7eaf95e8d36",
+      "bytes": 1487
+    },
+    {
+      "path": "src/files/infrastructure/uploader/local/files.module.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/local/files.module.ts",
+      "sha256": "1ea1f64cc03cf33ca3afff5660af51552289afda5d2d0ead2592e031f7c24a41",
+      "bytes": 2581
+    },
+    {
+      "path": "src/files/infrastructure/uploader/local/files.service.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/local/files.service.ts",
+      "sha256": "e142159debfeeed446eed85f45b5bc4627f5518c114e3988639779ea737e0563",
+      "bytes": 1009
+    },
+    {
+      "path": "src/files/infrastructure/uploader/s3-presigned/dto/file-response.dto.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/s3-presigned/dto/file-response.dto.ts",
+      "sha256": "369ba9ab279f18bf2fc6ae4ede97cf92d2fe3b8a995dcb4e85ad8079f7f8b39e",
+      "bytes": 281
+    },
+    {
+      "path": "src/files/infrastructure/uploader/s3-presigned/dto/file.dto.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/s3-presigned/dto/file.dto.ts",
+      "sha256": "482fdc3bbbdfab8636ce2c7fcd9a9dd0aa7ae2489c02eb404164a1c5c5e06597",
+      "bytes": 291
+    },
+    {
+      "path": "src/files/infrastructure/uploader/s3-presigned/files.controller.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/s3-presigned/files.controller.ts",
+      "sha256": "09c9c064315f077594c7e61a7c4e288832ef69ed5a4b1cff882efd1f6362e5df",
+      "bytes": 791
+    },
+    {
+      "path": "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+      "sha256": "6005c928792e4037c10af98d72a152f72a304fdd29c5151c259dce7984e3f9e8",
+      "bytes": 3158
+    },
+    {
+      "path": "src/files/infrastructure/uploader/s3-presigned/files.service.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/s3-presigned/files.service.ts",
+      "sha256": "50c480be709ad88543d8d9f9a1ae5858fddc0f59b93a67b6773861a6a8340f0c",
+      "bytes": 2684
+    },
+    {
+      "path": "src/files/infrastructure/uploader/s3/dto/file-response.dto.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/s3/dto/file-response.dto.ts",
+      "sha256": "89d2e1355e76d4a977cef4b444f11a52288736b78eb41f908fa734b8148d7e72",
+      "bytes": 208
+    },
+    {
+      "path": "src/files/infrastructure/uploader/s3/files.controller.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/s3/files.controller.ts",
+      "sha256": "41b56abdf59cf30c5ccdee7f84e7b057a3c5bd5bf24445d820ebc04610ebc4a1",
+      "bytes": 1176
+    },
+    {
+      "path": "src/files/infrastructure/uploader/s3/files.module.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/s3/files.module.ts",
+      "sha256": "90ebd74c6dd5edf947c5290b53f6aa2791f5d9f1bca3ede0639945b16599e027",
+      "bytes": 3137
+    },
+    {
+      "path": "src/files/infrastructure/uploader/s3/files.service.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/s3/files.service.ts",
+      "sha256": "b198a44d82b70b6499958fef9d181fefd2ba31cb1eda2c7f9b3e4176666204ee",
+      "bytes": 723
+    },
+    {
+      "path": "src/home/home.controller.ts",
+      "upstreamPath": "src/home/home.controller.ts",
+      "sha256": "b1b964aec12136587163a72f48117dd3e6cc8adad4d7735949eaf19450fae3b3",
+      "bytes": 338
+    },
+    {
+      "path": "src/home/home.module.ts",
+      "upstreamPath": "src/home/home.module.ts",
+      "sha256": "9a8ac0713ddf11dee743abde5eedb86a92fcf8a64bbfec78a678c8276fe17417",
+      "bytes": 326
+    },
+    {
+      "path": "src/home/home.service.ts",
+      "upstreamPath": "src/home/home.service.ts",
+      "sha256": "ce20bb15e11deaeffd34461253f1c819e3591261ff77f1edf83302b44a6ffa01",
+      "bytes": 376
+    },
+    {
+      "path": "src/mail/config/mail-config.type.ts",
+      "upstreamPath": "src/mail/config/mail-config.type.ts",
+      "sha256": "cb499589c5c1056b81d421231a67bc274b2b24d1fe4fae38c8cd326eb5c35a5d",
+      "bytes": 225
+    },
+    {
+      "path": "src/mail/config/mail.config.ts",
+      "upstreamPath": "src/mail/config/mail.config.ts",
+      "sha256": "f11573d20dc6caeb64e41a1946dd6817816a39720c3697d6bfd9e0ee27cc43bb",
+      "bytes": 1378
+    },
+    {
+      "path": "src/mail/interfaces/mail-data.interface.ts",
+      "upstreamPath": "src/mail/interfaces/mail-data.interface.ts",
+      "sha256": "9286f1b635ca507ae7fac174f0c4d81592421209ef35d6abf041971ba7347c99",
+      "bytes": 70
+    },
+    {
+      "path": "src/mail/mail.module.ts",
+      "upstreamPath": "src/mail/mail.module.ts",
+      "sha256": "7648a12a9457742ec48578dce08fcbdfc4a824579237b713cc92723efcb0ec24",
+      "bytes": 337
+    },
+    {
+      "path": "src/mail/mail.service.ts",
+      "upstreamPath": "src/mail/mail.service.ts",
+      "sha256": "95b366b729d4455878fa626190b4bff98901c7741e67e5bf0567275165685eff",
+      "bytes": 5060
+    },
+    {
+      "path": "src/mailer/mailer.module.ts",
+      "upstreamPath": "src/mailer/mailer.module.ts",
+      "sha256": "becc58f7002ca4fbad8d7f8df4185f0a271fa8b627fb39766e4c2bca16d35bc6",
+      "bytes": 200
+    },
+    {
+      "path": "src/mailer/mailer.service.ts",
+      "upstreamPath": "src/mailer/mailer.service.ts",
+      "sha256": "aca1636f72fd219b6d12d0f8534d998a0de4d6fcee97b9e321ff64d51fa3365b",
+      "bytes": 1819
+    },
+    {
+      "path": "src/main.ts",
+      "upstreamPath": "src/main.ts",
+      "sha256": "bec0f90129d6d8c30a95dbefca51eddc0dbb34ab4c4686188e16b7b82ec87e50",
+      "bytes": 2331
+    },
+    {
+      "path": "src/roles/domain/role.ts",
+      "upstreamPath": "src/roles/domain/role.ts",
+      "sha256": "a15d5b32ded832fb75bd27b97c47afb69f664a1ccd9535ca755375b1eb34cf9d",
+      "bytes": 582
+    },
+    {
+      "path": "src/roles/dto/role.dto.ts",
+      "upstreamPath": "src/roles/dto/role.dto.ts",
+      "sha256": "aa4cdc90e338afcac9f04fe67f93cdb2de80f8fb0b844b907f7ff3c757390611",
+      "bytes": 179
+    },
+    {
+      "path": "src/roles/infrastructure/persistence/document/entities/role.schema.ts",
+      "upstreamPath": "src/roles/infrastructure/persistence/document/entities/role.schema.ts",
+      "sha256": "f567367ac5ab4ff407c6553e47bb993c0ef9dee27e13c7acb367f7a001b3e48e",
+      "bytes": 66
+    },
+    {
+      "path": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts",
+      "upstreamPath": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts",
+      "sha256": "b93a65f6ea50eef673d09e107106fc14f7ad65f134a934fadb8e78ba96b2e798",
+      "bytes": 310
+    },
+    {
+      "path": "src/roles/roles.decorator.ts",
+      "upstreamPath": "src/roles/roles.decorator.ts",
+      "sha256": "a609a256d77151007b2b85cb4d8c309e28225644cee6938802912417ed65a020",
+      "bytes": 124
+    },
+    {
+      "path": "src/roles/roles.enum.ts",
+      "upstreamPath": "src/roles/roles.enum.ts",
+      "sha256": "b92ba4a3dcb3afb18937f9d02bada250d4bc7967c5850a5c331a9b8c6036d313",
+      "bytes": 58
+    },
+    {
+      "path": "src/roles/roles.guard.ts",
+      "upstreamPath": "src/roles/roles.guard.ts",
+      "sha256": "8674e3b8f7262db43aafed52b9c95f57d25a6fd2d398a37f9fb56befaa67fd64",
+      "bytes": 868
+    },
+    {
+      "path": "src/session/domain/session.ts",
+      "upstreamPath": "src/session/domain/session.ts",
+      "sha256": "2fbbbfbf1de55e74ebb63d94a86f94d7bec4da03b79beebfccbdce718229b0fb",
+      "bytes": 194
+    },
+    {
+      "path": "src/session/infrastructure/persistence/document/document-persistence.module.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/document/document-persistence.module.ts",
+      "sha256": "28afc582095c943962aada8eab7d322bc4a707f26faac89eedb9e1026b4bf9d2",
+      "bytes": 657
+    },
+    {
+      "path": "src/session/infrastructure/persistence/document/entities/session.schema.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/document/entities/session.schema.ts",
+      "sha256": "b5be558fbaf27eb2aaf8720d5fc154fcfa3ad08f998397c93b7d6c5c3cc8326a",
+      "bytes": 825
+    },
+    {
+      "path": "src/session/infrastructure/persistence/document/mappers/session.mapper.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/document/mappers/session.mapper.ts",
+      "sha256": "3b3a6b6f4d240a082e56f12834e720e053e17ff4f7a06327682528707d7dc472",
+      "bytes": 1232
+    },
+    {
+      "path": "src/session/infrastructure/persistence/document/repositories/session.repository.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/document/repositories/session.repository.ts",
+      "sha256": "40b4fef8fed914f8eae8ed7a14260157a6470de8d6cc11160281d7860c263bbb",
+      "bytes": 3103
+    },
+    {
+      "path": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+      "sha256": "dfa9c46742d03fb0722e201d92fb748261b62e184c7bb4b2b18d0e84cedc47d7",
+      "bytes": 772
+    },
+    {
+      "path": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "sha256": "66094661fb94b921a83b46e80dca2ad30a6b963d17502c986e2886fb8e41341f",
+      "bytes": 1403
+    },
+    {
+      "path": "src/session/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "sha256": "aff5d2520d8f9253b349ae48b1116f9e3bf300544d1883ec37046b446b777453",
+      "bytes": 571
+    },
+    {
+      "path": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "sha256": "ef4c8c81dc425fd615f13078d854372ceb8d55238dab6eca8660f1b81ef1e791",
+      "bytes": 3158
+    },
+    {
+      "path": "src/session/infrastructure/persistence/session.repository.ts",
+      "upstreamPath": "src/session/infrastructure/persistence/session.repository.ts",
+      "sha256": "32873e6dd0c154438c85f3aa4c1822b5932c5b67c5c733d28713d2c1dc60e9a6",
+      "bytes": 1089
+    },
+    {
+      "path": "src/session/session.module.ts",
+      "upstreamPath": "src/session/session.module.ts",
+      "sha256": "db4f5790cc67a74a51a7bc8f242283bd598dcd824a6e4fdf3c107cdac3dd5148",
+      "bytes": 915
+    },
+    {
+      "path": "src/session/session.service.ts",
+      "upstreamPath": "src/session/session.service.ts",
+      "sha256": "cce86d9fd37837e39db8dd1c2cd1f2bb53afade75a78fc134b96a5125d4940eb",
+      "bytes": 1676
+    },
+    {
+      "path": "src/social/interfaces/social.interface.ts",
+      "upstreamPath": "src/social/interfaces/social.interface.ts",
+      "sha256": "4dd4753c8291eb77876d651e2aad7a9a03357160ef1e58ff651425d79d5ba2b5",
+      "bytes": 145
+    },
+    {
+      "path": "src/statuses/domain/status.ts",
+      "upstreamPath": "src/statuses/domain/status.ts",
+      "sha256": "62255ce66ee56332816995dff1d4ca43365f5c4f2a12d2874e4399b35a46e2f4",
+      "bytes": 585
+    },
+    {
+      "path": "src/statuses/dto/status.dto.ts",
+      "upstreamPath": "src/statuses/dto/status.dto.ts",
+      "sha256": "5676131ee9b2f71ddbc2066e7ce694db23c7d11a3a741295bc2c4e457ed2880b",
+      "bytes": 181
+    },
+    {
+      "path": "src/statuses/infrastructure/persistence/document/entities/status.schema.ts",
+      "upstreamPath": "src/statuses/infrastructure/persistence/document/entities/status.schema.ts",
+      "sha256": "54f8131743c3e8eae633a78d038192ba06bc1c538fde98e0c139867dcc063b66",
+      "bytes": 68
+    },
+    {
+      "path": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts",
+      "upstreamPath": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts",
+      "sha256": "76c9cee46f2989333afda92bbaa181f71aa287f564a5e9ef8ebe6039dc2c5649",
+      "bytes": 316
+    },
+    {
+      "path": "src/statuses/statuses.enum.ts",
+      "upstreamPath": "src/statuses/statuses.enum.ts",
+      "sha256": "09f9f8e7869ad70cb7f84dfafdef84005eea3091dab147d740507909a76229d0",
+      "bytes": 65
+    },
+    {
+      "path": "src/users/domain/user.ts",
+      "upstreamPath": "src/users/domain/user.ts",
+      "sha256": "4eddc78dfad4ffbe13ab759e7cfe6428c628334a7f20ba4a5a64cd95e5dc98ea",
+      "bytes": 1654
+    },
+    {
+      "path": "src/users/dto/create-user.dto.ts",
+      "upstreamPath": "src/users/dto/create-user.dto.ts",
+      "sha256": "65e46aa903c66ecf4828bd2fe98d43d4bf99b99655a968d2757396bdf963cb0e",
+      "bytes": 1344
+    },
+    {
+      "path": "src/users/dto/query-user.dto.ts",
+      "upstreamPath": "src/users/dto/query-user.dto.ts",
+      "sha256": "1ef4c2766c9579b82df146d5ae1032d6717908a1afd8462858db7aa94d7142e0",
+      "bytes": 1516
+    },
+    {
+      "path": "src/users/dto/update-user.dto.ts",
+      "upstreamPath": "src/users/dto/update-user.dto.ts",
+      "sha256": "3ccc4a189a89cffe3a5f5a3d2a72fc3bca19092e07376cf54949480d4c8d4ff1",
+      "bytes": 1419
+    },
+    {
+      "path": "src/users/infrastructure/persistence/document/document-persistence.module.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/document/document-persistence.module.ts",
+      "sha256": "3f11f07a6df953327eb9ce9b16d062c3d1d8b1474f03c4dee6791ad159d5f951",
+      "bytes": 620
+    },
+    {
+      "path": "src/users/infrastructure/persistence/document/entities/user.schema.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/document/entities/user.schema.ts",
+      "sha256": "6f926ac52f3fcf2ef050650b84fbd75282bc1a6e12dcf41f7bdd587fa6a61646",
+      "bytes": 1737
+    },
+    {
+      "path": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "sha256": "5071b80c53d13f981c65cc93e0563d8dec4fcdf04aa53017cb92b1323c7015a0",
+      "bytes": 3156
+    },
+    {
+      "path": "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+      "sha256": "a2ddfa31c054384dc7bd778df64ce30a2dfa85574c0bd0355055d1a9e94b07be",
+      "bytes": 3924
+    },
+    {
+      "path": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "sha256": "44c26316509c0be35b18bd5941f2b1cd073097a9472f333c390b51f26e0319d4",
+      "bytes": 1853
+    },
+    {
+      "path": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "sha256": "6d44bb1ad9c3cd7d6a6bcc307b4df708fb23d144df9872de34859acb67bbe55f",
+      "bytes": 2821
+    },
+    {
+      "path": "src/users/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "sha256": "19f1253afc038f6330b788c332080f27925a53a3ace6d5d8f49ffe6067dee009",
+      "bytes": 540
+    },
+    {
+      "path": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+      "sha256": "c2445e933f47ae9cbeed5c11077660fa9ce9c0b87858121af0bfb0516a6d66de",
+      "bytes": 3747
+    },
+    {
+      "path": "src/users/infrastructure/persistence/user.repository.ts",
+      "upstreamPath": "src/users/infrastructure/persistence/user.repository.ts",
+      "sha256": "5018a5d5f3fd810aa78ba4237036fc55a404726eb5f9e3a5e75205e98556c35d",
+      "bytes": 1294
+    },
+    {
+      "path": "src/users/users.controller.ts",
+      "upstreamPath": "src/users/users.controller.ts",
+      "sha256": "f2cffd8a5b24cd0477fb1da5415f62bb6cd3ba48a217de512dcbb99ce932c4ef",
+      "bytes": 3216
+    },
+    {
+      "path": "src/users/users.module.ts",
+      "upstreamPath": "src/users/users.module.ts",
+      "sha256": "c5ca3dc033970b78837ab23a4417dea3fee29c36c2d61f95c0da76e61f8ff008",
+      "bytes": 1097
+    },
+    {
+      "path": "src/users/users.service.ts",
+      "upstreamPath": "src/users/users.service.ts",
+      "sha256": "4df72cea509f95f4f59edba81c1d591c5ffedecb2fcdd2d6cc1fbe1de2cb4229",
+      "bytes": 8046
+    },
+    {
+      "path": "src/utils/deep-resolver.ts",
+      "upstreamPath": "src/utils/deep-resolver.ts",
+      "sha256": "9cd255907bf113ec4f539bb7d67c058f9c97c0acd3f8cd315e1cdd5883c52a08",
+      "bytes": 676
+    },
+    {
+      "path": "src/utils/document-entity-helper.ts",
+      "upstreamPath": "src/utils/document-entity-helper.ts",
+      "sha256": "eaa5fce9587853883028d7419d21af52f3a24aa3d9235a87deb4321f77d67f24",
+      "bytes": 392
+    },
+    {
+      "path": "src/utils/dto/infinity-pagination-response.dto.ts",
+      "upstreamPath": "src/utils/dto/infinity-pagination-response.dto.ts",
+      "sha256": "773640c88529b7b27db4831fe423bd98c0b8463c105453c0cc7466a893b3a6c8",
+      "bytes": 629
+    },
+    {
+      "path": "src/utils/infinity-pagination.ts",
+      "upstreamPath": "src/utils/infinity-pagination.ts",
+      "sha256": "80541f6a5ddc09003f037722c5db9f06fd6801440b2e07f8927f93a0e7a690e1",
+      "bytes": 367
+    },
+    {
+      "path": "src/utils/relational-entity-helper.ts",
+      "upstreamPath": "src/utils/relational-entity-helper.ts",
+      "sha256": "474a2787911e6785d1a1c3d0d2d8c514415fc48a95fa8b9deac824dd31540784",
+      "bytes": 333
+    },
+    {
+      "path": "src/utils/serializer.interceptor.ts",
+      "upstreamPath": "src/utils/serializer.interceptor.ts",
+      "sha256": "e6fa92993bc2887a6ddfa8f5fa4ea7a4519b7e725c3f73867a51d71cf0835d9d",
+      "bytes": 496
+    },
+    {
+      "path": "src/utils/transformers/lower-case.transformer.ts",
+      "upstreamPath": "src/utils/transformers/lower-case.transformer.ts",
+      "sha256": "af149b8967d59f72a7daf165cab28ebec06d1358f0848bc9b8d3d6e89df15a97",
+      "bytes": 255
+    },
+    {
+      "path": "src/utils/types/deep-partial.type.ts",
+      "upstreamPath": "src/utils/types/deep-partial.type.ts",
+      "sha256": "1ff50aecd5de5386b75c51e1aec02539235b53b697e4989244eed713604ecf57",
+      "bytes": 75
+    },
+    {
+      "path": "src/utils/types/maybe.type.ts",
+      "upstreamPath": "src/utils/types/maybe.type.ts",
+      "sha256": "7e55c7d32c4be2779034eac21cb318607dbc320e4ad7125e62879d9eb810ce72",
+      "bytes": 43
+    },
+    {
+      "path": "src/utils/types/nullable.type.ts",
+      "upstreamPath": "src/utils/types/nullable.type.ts",
+      "sha256": "14250925c5f2d082c0f4894f5ffed7448c3f25c1da30df17234ec8be75a856a6",
+      "bytes": 41
+    },
+    {
+      "path": "src/utils/types/or-never.type.ts",
+      "upstreamPath": "src/utils/types/or-never.type.ts",
+      "sha256": "c9ef53ba024549d223abab47d37757bdb20b4b06aeabb4edf97ef5797c5ba6db",
+      "bytes": 41
+    },
+    {
+      "path": "src/utils/types/pagination-options.ts",
+      "upstreamPath": "src/utils/types/pagination-options.ts",
+      "sha256": "8f185586dd739c6d93087b0b9a4edd0066f8172b55bb0aec22c5fee83ef67a92",
+      "bytes": 77
+    },
+    {
+      "path": "src/utils/types/request-with-user.type.ts",
+      "upstreamPath": "src/utils/types/request-with-user.type.ts",
+      "sha256": "c9174399f9b8ca8a3fafbae03db680327fa79b4179dcf659fe98079a9a4dccc9",
+      "bytes": 113
+    },
+    {
+      "path": "src/utils/validate-config.ts",
+      "upstreamPath": "src/utils/validate-config.ts",
+      "sha256": "6eb3fc134e0952c6e9d0f6422d5692a805a4b2abbf536523f307b4705429265c",
+      "bytes": 647
+    },
+    {
+      "path": "src/utils/validation-options.ts",
+      "upstreamPath": "src/utils/validation-options.ts",
+      "sha256": "b10d77fda78e4d72375de0e0ac5f48b95a0a3a9b1b42e7b42d07cea9a15fba39",
+      "bytes": 1035
+    }
+  ],
+  "thirdPartyModules": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner",
+    "@nestjs/common",
+    "@nestjs/common/utils/random-string-generator.util",
+    "@nestjs/config",
+    "@nestjs/core",
+    "@nestjs/jwt",
+    "@nestjs/mongoose",
+    "@nestjs/passport",
+    "@nestjs/platform-express",
+    "@nestjs/swagger",
+    "@nestjs/typeorm",
+    "apple-signin-auth",
+    "bcryptjs",
+    "class-transformer",
+    "class-transformer/types/interfaces",
+    "class-validator",
+    "crypto",
+    "dotenv/config",
+    "express",
+    "google-auth-library",
+    "handlebars",
+    "helmet",
+    "mongoose",
+    "mongoose-autopopulate",
+    "ms",
+    "multer",
+    "multer-s3",
+    "nestjs-i18n",
+    "node:fs/promises",
+    "nodemailer",
+    "passport-anonymous",
+    "passport-jwt",
+    "path",
+    "rxjs",
+    "rxjs/operators",
+    "typeorm"
+  ],
+  "importEdges": [
+    {
+      "from": "src/main.ts",
+      "spec": "./app.module",
+      "to": "src/app.module.ts"
+    },
+    {
+      "from": "src/main.ts",
+      "spec": "./utils/validation-options",
+      "to": "src/utils/validation-options.ts"
+    },
+    {
+      "from": "src/main.ts",
+      "spec": "./config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/main.ts",
+      "spec": "./utils/serializer.interceptor",
+      "to": "src/utils/serializer.interceptor.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./users/users.module",
+      "to": "src/users/users.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./files/files.module",
+      "to": "src/files/files.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./auth/auth.module",
+      "to": "src/auth/auth.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./auth/config/auth.config",
+      "to": "src/auth/config/auth.config.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./config/app.config",
+      "to": "src/config/app.config.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./mail/config/mail.config",
+      "to": "src/mail/config/mail.config.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./files/config/file.config",
+      "to": "src/files/config/file.config.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./auth-facebook/config/facebook.config",
+      "to": "src/auth-facebook/config/facebook.config.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./auth-google/config/google.config",
+      "to": "src/auth-google/config/google.config.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./auth-apple/config/apple.config",
+      "to": "src/auth-apple/config/apple.config.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./auth-apple/auth-apple.module",
+      "to": "src/auth-apple/auth-apple.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./auth-facebook/auth-facebook.module",
+      "to": "src/auth-facebook/auth-facebook.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./auth-google/auth-google.module",
+      "to": "src/auth-google/auth-google.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./database/typeorm-config.service",
+      "to": "src/database/typeorm-config.service.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./mail/mail.module",
+      "to": "src/mail/mail.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./home/home.module",
+      "to": "src/home/home.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./session/session.module",
+      "to": "src/session/session.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./mailer/mailer.module",
+      "to": "src/mailer/mailer.module.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./database/mongoose-config.service",
+      "to": "src/database/mongoose-config.service.ts"
+    },
+    {
+      "from": "src/app.module.ts",
+      "spec": "./database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "./app-config.type",
+      "to": "src/config/app-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../auth-apple/config/apple-config.type",
+      "to": "src/auth-apple/config/apple-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../auth/config/auth-config.type",
+      "to": "src/auth/config/auth-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../auth-facebook/config/facebook-config.type",
+      "to": "src/auth-facebook/config/facebook-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../files/config/file-config.type",
+      "to": "src/files/config/file-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../auth-google/config/google-config.type",
+      "to": "src/auth-google/config/google-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../mail/config/mail-config.type",
+      "to": "src/mail/config/mail-config.type.ts"
+    },
+    {
+      "from": "src/utils/serializer.interceptor.ts",
+      "spec": "./deep-resolver",
+      "to": "src/utils/deep-resolver.ts"
+    },
+    {
+      "from": "src/users/users.module.ts",
+      "spec": "./users.controller",
+      "to": "src/users/users.controller.ts"
+    },
+    {
+      "from": "src/users/users.module.ts",
+      "spec": "./users.service",
+      "to": "src/users/users.service.ts"
+    },
+    {
+      "from": "src/users/users.module.ts",
+      "spec": "./infrastructure/persistence/document/document-persistence.module",
+      "to": "src/users/infrastructure/persistence/document/document-persistence.module.ts"
+    },
+    {
+      "from": "src/users/users.module.ts",
+      "spec": "./infrastructure/persistence/relational/relational-persistence.module",
+      "to": "src/users/infrastructure/persistence/relational/relational-persistence.module.ts"
+    },
+    {
+      "from": "src/users/users.module.ts",
+      "spec": "../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/users/users.module.ts",
+      "spec": "../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/users/users.module.ts",
+      "spec": "../files/files.module",
+      "to": "src/files/files.module.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "./infrastructure/persistence/document/document-persistence.module",
+      "to": "src/files/infrastructure/persistence/document/document-persistence.module.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "./infrastructure/persistence/relational/relational-persistence.module",
+      "to": "src/files/infrastructure/persistence/relational/relational-persistence.module.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "./files.service",
+      "to": "src/files/files.service.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "./config/file.config",
+      "to": "src/files/config/file.config.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "./config/file-config.type",
+      "to": "src/files/config/file-config.type.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "./infrastructure/uploader/local/files.module",
+      "to": "src/files/infrastructure/uploader/local/files.module.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "./infrastructure/uploader/s3/files.module",
+      "to": "src/files/infrastructure/uploader/s3/files.module.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "./infrastructure/uploader/s3-presigned/files.module",
+      "to": "src/files/infrastructure/uploader/s3-presigned/files.module.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/files/files.module.ts",
+      "spec": "../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/auth/auth.module.ts",
+      "spec": "./auth.controller",
+      "to": "src/auth/auth.controller.ts"
+    },
+    {
+      "from": "src/auth/auth.module.ts",
+      "spec": "./auth.service",
+      "to": "src/auth/auth.service.ts"
+    },
+    {
+      "from": "src/auth/auth.module.ts",
+      "spec": "./strategies/jwt.strategy",
+      "to": "src/auth/strategies/jwt.strategy.ts"
+    },
+    {
+      "from": "src/auth/auth.module.ts",
+      "spec": "./strategies/anonymous.strategy",
+      "to": "src/auth/strategies/anonymous.strategy.ts"
+    },
+    {
+      "from": "src/auth/auth.module.ts",
+      "spec": "./strategies/jwt-refresh.strategy",
+      "to": "src/auth/strategies/jwt-refresh.strategy.ts"
+    },
+    {
+      "from": "src/auth/auth.module.ts",
+      "spec": "../mail/mail.module",
+      "to": "src/mail/mail.module.ts"
+    },
+    {
+      "from": "src/auth/auth.module.ts",
+      "spec": "../session/session.module",
+      "to": "src/session/session.module.ts"
+    },
+    {
+      "from": "src/auth/auth.module.ts",
+      "spec": "../users/users.module",
+      "to": "src/users/users.module.ts"
+    },
+    {
+      "from": "src/database/config/database.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/database/config/database.config.ts",
+      "spec": "./database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/auth/config/auth.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/auth/config/auth.config.ts",
+      "spec": "./auth-config.type",
+      "to": "src/auth/config/auth-config.type.ts"
+    },
+    {
+      "from": "src/config/app.config.ts",
+      "spec": "./app-config.type",
+      "to": "src/config/app-config.type.ts"
+    },
+    {
+      "from": "src/config/app.config.ts",
+      "spec": ".././utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/mail/config/mail.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/mail/config/mail.config.ts",
+      "spec": "./mail-config.type",
+      "to": "src/mail/config/mail-config.type.ts"
+    },
+    {
+      "from": "src/files/config/file.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/files/config/file.config.ts",
+      "spec": "./file-config.type",
+      "to": "src/files/config/file-config.type.ts"
+    },
+    {
+      "from": "src/auth-facebook/config/facebook.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/auth-facebook/config/facebook.config.ts",
+      "spec": "./facebook-config.type",
+      "to": "src/auth-facebook/config/facebook-config.type.ts"
+    },
+    {
+      "from": "src/auth-google/config/google.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/auth-google/config/google.config.ts",
+      "spec": "./google-config.type",
+      "to": "src/auth-google/config/google-config.type.ts"
+    },
+    {
+      "from": "src/auth-apple/config/apple.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/auth-apple/config/apple.config.ts",
+      "spec": "./apple-config.type",
+      "to": "src/auth-apple/config/apple-config.type.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.module.ts",
+      "spec": "./auth-apple.service",
+      "to": "src/auth-apple/auth-apple.service.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.module.ts",
+      "spec": "./auth-apple.controller",
+      "to": "src/auth-apple/auth-apple.controller.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.module.ts",
+      "spec": "../auth/auth.module",
+      "to": "src/auth/auth.module.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.module.ts",
+      "spec": "./auth-facebook.service",
+      "to": "src/auth-facebook/auth-facebook.service.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.module.ts",
+      "spec": "./auth-facebook.controller",
+      "to": "src/auth-facebook/auth-facebook.controller.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.module.ts",
+      "spec": "../auth/auth.module",
+      "to": "src/auth/auth.module.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.module.ts",
+      "spec": "./auth-google.service",
+      "to": "src/auth-google/auth-google.service.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.module.ts",
+      "spec": "./auth-google.controller",
+      "to": "src/auth-google/auth-google.controller.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.module.ts",
+      "spec": "../auth/auth.module",
+      "to": "src/auth/auth.module.ts"
+    },
+    {
+      "from": "src/database/typeorm-config.service.ts",
+      "spec": "../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/mail/mail.module.ts",
+      "spec": "./mail.service",
+      "to": "src/mail/mail.service.ts"
+    },
+    {
+      "from": "src/mail/mail.module.ts",
+      "spec": "../mailer/mailer.module",
+      "to": "src/mailer/mailer.module.ts"
+    },
+    {
+      "from": "src/home/home.module.ts",
+      "spec": "./home.service",
+      "to": "src/home/home.service.ts"
+    },
+    {
+      "from": "src/home/home.module.ts",
+      "spec": "./home.controller",
+      "to": "src/home/home.controller.ts"
+    },
+    {
+      "from": "src/session/session.module.ts",
+      "spec": "./infrastructure/persistence/document/document-persistence.module",
+      "to": "src/session/infrastructure/persistence/document/document-persistence.module.ts"
+    },
+    {
+      "from": "src/session/session.module.ts",
+      "spec": "./infrastructure/persistence/relational/relational-persistence.module",
+      "to": "src/session/infrastructure/persistence/relational/relational-persistence.module.ts"
+    },
+    {
+      "from": "src/session/session.module.ts",
+      "spec": "./session.service",
+      "to": "src/session/session.service.ts"
+    },
+    {
+      "from": "src/session/session.module.ts",
+      "spec": "../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/session/session.module.ts",
+      "spec": "../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/mailer/mailer.module.ts",
+      "spec": "./mailer.service",
+      "to": "src/mailer/mailer.service.ts"
+    },
+    {
+      "from": "src/database/mongoose-config.service.ts",
+      "spec": "../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "./dto/create-user.dto",
+      "to": "src/users/dto/create-user.dto.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "./dto/update-user.dto",
+      "to": "src/users/dto/update-user.dto.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "../roles/roles.decorator",
+      "to": "src/roles/roles.decorator.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "../roles/roles.enum",
+      "to": "src/roles/roles.enum.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "../utils/dto/infinity-pagination-response.dto",
+      "to": "src/utils/dto/infinity-pagination-response.dto.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "./dto/query-user.dto",
+      "to": "src/users/dto/query-user.dto.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "./domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "./users.service",
+      "to": "src/users/users.service.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "../roles/roles.guard",
+      "to": "src/roles/roles.guard.ts"
+    },
+    {
+      "from": "src/users/users.controller.ts",
+      "spec": "../utils/infinity-pagination",
+      "to": "src/utils/infinity-pagination.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "./dto/create-user.dto",
+      "to": "src/users/dto/create-user.dto.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "./dto/query-user.dto",
+      "to": "src/users/dto/query-user.dto.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "./infrastructure/persistence/user.repository",
+      "to": "src/users/infrastructure/persistence/user.repository.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "./domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "../auth/auth-providers.enum",
+      "to": "src/auth/auth-providers.enum.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "../files/files.service",
+      "to": "src/files/files.service.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "../roles/roles.enum",
+      "to": "src/roles/roles.enum.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "../statuses/statuses.enum",
+      "to": "src/statuses/statuses.enum.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "../utils/types/pagination-options",
+      "to": "src/utils/types/pagination-options.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "../files/domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "../roles/domain/role",
+      "to": "src/roles/domain/role.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "../statuses/domain/status",
+      "to": "src/statuses/domain/status.ts"
+    },
+    {
+      "from": "src/users/users.service.ts",
+      "spec": "./dto/update-user.dto",
+      "to": "src/users/dto/update-user.dto.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/document-persistence.module.ts",
+      "spec": "./entities/user.schema",
+      "to": "src/users/infrastructure/persistence/document/entities/user.schema.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/document-persistence.module.ts",
+      "spec": "../user.repository",
+      "to": "src/users/infrastructure/persistence/user.repository.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/document-persistence.module.ts",
+      "spec": "./repositories/user.repository",
+      "to": "src/users/infrastructure/persistence/document/repositories/user.repository.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "spec": "../user.repository",
+      "to": "src/users/infrastructure/persistence/user.repository.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "spec": "./repositories/user.repository",
+      "to": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "spec": "./entities/user.entity",
+      "to": "src/users/infrastructure/persistence/relational/entities/user.entity.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/document-persistence.module.ts",
+      "spec": "./entities/file.schema",
+      "to": "src/files/infrastructure/persistence/document/entities/file.schema.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/document-persistence.module.ts",
+      "spec": "../file.repository",
+      "to": "src/files/infrastructure/persistence/file.repository.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/document-persistence.module.ts",
+      "spec": "./repositories/file.repository",
+      "to": "src/files/infrastructure/persistence/document/repositories/file.repository.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "spec": "./entities/file.entity",
+      "to": "src/files/infrastructure/persistence/relational/entities/file.entity.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "spec": "../file.repository",
+      "to": "src/files/infrastructure/persistence/file.repository.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "spec": "./repositories/file.repository",
+      "to": "src/files/infrastructure/persistence/relational/repositories/file.repository.ts"
+    },
+    {
+      "from": "src/files/files.service.ts",
+      "spec": "./infrastructure/persistence/file.repository",
+      "to": "src/files/infrastructure/persistence/file.repository.ts"
+    },
+    {
+      "from": "src/files/files.service.ts",
+      "spec": "./domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/files.service.ts",
+      "spec": "../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.module.ts",
+      "spec": "./files.controller",
+      "to": "src/files/infrastructure/uploader/local/files.controller.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.module.ts",
+      "spec": "./files.service",
+      "to": "src/files/infrastructure/uploader/local/files.service.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.module.ts",
+      "spec": "../../persistence/document/document-persistence.module",
+      "to": "src/files/infrastructure/persistence/document/document-persistence.module.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.module.ts",
+      "spec": "../../persistence/relational/relational-persistence.module",
+      "to": "src/files/infrastructure/persistence/relational/relational-persistence.module.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.module.ts",
+      "spec": "../../../../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.module.ts",
+      "spec": "../../../../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.module.ts",
+      "spec": "../../../../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.module.ts",
+      "spec": "./files.controller",
+      "to": "src/files/infrastructure/uploader/s3/files.controller.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.module.ts",
+      "spec": "./files.service",
+      "to": "src/files/infrastructure/uploader/s3/files.service.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.module.ts",
+      "spec": "../../persistence/document/document-persistence.module",
+      "to": "src/files/infrastructure/persistence/document/document-persistence.module.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.module.ts",
+      "spec": "../../persistence/relational/relational-persistence.module",
+      "to": "src/files/infrastructure/persistence/relational/relational-persistence.module.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.module.ts",
+      "spec": "../../../../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.module.ts",
+      "spec": "../../../../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.module.ts",
+      "spec": "../../../../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+      "spec": "./files.controller",
+      "to": "src/files/infrastructure/uploader/s3-presigned/files.controller.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+      "spec": "./files.service",
+      "to": "src/files/infrastructure/uploader/s3-presigned/files.service.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+      "spec": "../../persistence/document/document-persistence.module",
+      "to": "src/files/infrastructure/persistence/document/document-persistence.module.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+      "spec": "../../persistence/relational/relational-persistence.module",
+      "to": "src/files/infrastructure/persistence/relational/relational-persistence.module.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+      "spec": "../../../../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+      "spec": "../../../../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.module.ts",
+      "spec": "../../../../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./auth.service",
+      "to": "src/auth/auth.service.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./dto/auth-email-login.dto",
+      "to": "src/auth/dto/auth-email-login.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./dto/auth-forgot-password.dto",
+      "to": "src/auth/dto/auth-forgot-password.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./dto/auth-confirm-email.dto",
+      "to": "src/auth/dto/auth-confirm-email.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./dto/auth-reset-password.dto",
+      "to": "src/auth/dto/auth-reset-password.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./dto/auth-update.dto",
+      "to": "src/auth/dto/auth-update.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./dto/auth-register-login.dto",
+      "to": "src/auth/dto/auth-register-login.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./dto/login-response.dto",
+      "to": "src/auth/dto/login-response.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./dto/refresh-response.dto",
+      "to": "src/auth/dto/refresh-response.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "../utils/types/request-with-user.type",
+      "to": "src/utils/types/request-with-user.type.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./strategies/types/jwt-payload.type",
+      "to": "src/auth/strategies/types/jwt-payload.type.ts"
+    },
+    {
+      "from": "src/auth/auth.controller.ts",
+      "spec": "./strategies/types/jwt-refresh-payload.type",
+      "to": "src/auth/strategies/types/jwt-refresh-payload.type.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "./dto/auth-email-login.dto",
+      "to": "src/auth/dto/auth-email-login.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "./dto/auth-update.dto",
+      "to": "src/auth/dto/auth-update.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "./auth-providers.enum",
+      "to": "src/auth/auth-providers.enum.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../social/interfaces/social.interface",
+      "to": "src/social/interfaces/social.interface.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "./dto/auth-register-login.dto",
+      "to": "src/auth/dto/auth-register-login.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "./dto/login-response.dto",
+      "to": "src/auth/dto/login-response.dto.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "./strategies/types/jwt-refresh-payload.type",
+      "to": "src/auth/strategies/types/jwt-refresh-payload.type.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "./strategies/types/jwt-payload.type",
+      "to": "src/auth/strategies/types/jwt-payload.type.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../users/users.service",
+      "to": "src/users/users.service.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../mail/mail.service",
+      "to": "src/mail/mail.service.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../roles/roles.enum",
+      "to": "src/roles/roles.enum.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../session/domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../session/session.service",
+      "to": "src/session/session.service.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../statuses/statuses.enum",
+      "to": "src/statuses/statuses.enum.ts"
+    },
+    {
+      "from": "src/auth/auth.service.ts",
+      "spec": "../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/auth/strategies/jwt.strategy.ts",
+      "spec": "../../utils/types/or-never.type",
+      "to": "src/utils/types/or-never.type.ts"
+    },
+    {
+      "from": "src/auth/strategies/jwt.strategy.ts",
+      "spec": "./types/jwt-payload.type",
+      "to": "src/auth/strategies/types/jwt-payload.type.ts"
+    },
+    {
+      "from": "src/auth/strategies/jwt.strategy.ts",
+      "spec": "../../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/auth/strategies/jwt-refresh.strategy.ts",
+      "spec": "./types/jwt-refresh-payload.type",
+      "to": "src/auth/strategies/types/jwt-refresh-payload.type.ts"
+    },
+    {
+      "from": "src/auth/strategies/jwt-refresh.strategy.ts",
+      "spec": "../../utils/types/or-never.type",
+      "to": "src/utils/types/or-never.type.ts"
+    },
+    {
+      "from": "src/auth/strategies/jwt-refresh.strategy.ts",
+      "spec": "../../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.service.ts",
+      "spec": "../social/interfaces/social.interface",
+      "to": "src/social/interfaces/social.interface.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.service.ts",
+      "spec": "./dto/auth-apple-login.dto",
+      "to": "src/auth-apple/dto/auth-apple-login.dto.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.service.ts",
+      "spec": "../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.controller.ts",
+      "spec": "../auth/auth.service",
+      "to": "src/auth/auth.service.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.controller.ts",
+      "spec": "./auth-apple.service",
+      "to": "src/auth-apple/auth-apple.service.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.controller.ts",
+      "spec": "./dto/auth-apple-login.dto",
+      "to": "src/auth-apple/dto/auth-apple-login.dto.ts"
+    },
+    {
+      "from": "src/auth-apple/auth-apple.controller.ts",
+      "spec": "../auth/dto/login-response.dto",
+      "to": "src/auth/dto/login-response.dto.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.service.ts",
+      "spec": "../social/interfaces/social.interface",
+      "to": "src/social/interfaces/social.interface.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.service.ts",
+      "spec": "./interfaces/facebook.interface",
+      "to": "src/auth-facebook/interfaces/facebook.interface.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.service.ts",
+      "spec": "./dto/auth-facebook-login.dto",
+      "to": "src/auth-facebook/dto/auth-facebook-login.dto.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.service.ts",
+      "spec": "../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.controller.ts",
+      "spec": "../auth/auth.service",
+      "to": "src/auth/auth.service.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.controller.ts",
+      "spec": "./auth-facebook.service",
+      "to": "src/auth-facebook/auth-facebook.service.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.controller.ts",
+      "spec": "./dto/auth-facebook-login.dto",
+      "to": "src/auth-facebook/dto/auth-facebook-login.dto.ts"
+    },
+    {
+      "from": "src/auth-facebook/auth-facebook.controller.ts",
+      "spec": "../auth/dto/login-response.dto",
+      "to": "src/auth/dto/login-response.dto.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.service.ts",
+      "spec": "../social/interfaces/social.interface",
+      "to": "src/social/interfaces/social.interface.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.service.ts",
+      "spec": "./dto/auth-google-login.dto",
+      "to": "src/auth-google/dto/auth-google-login.dto.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.service.ts",
+      "spec": "../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.controller.ts",
+      "spec": "../auth/auth.service",
+      "to": "src/auth/auth.service.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.controller.ts",
+      "spec": "./auth-google.service",
+      "to": "src/auth-google/auth-google.service.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.controller.ts",
+      "spec": "./dto/auth-google-login.dto",
+      "to": "src/auth-google/dto/auth-google-login.dto.ts"
+    },
+    {
+      "from": "src/auth-google/auth-google.controller.ts",
+      "spec": "../auth/dto/login-response.dto",
+      "to": "src/auth/dto/login-response.dto.ts"
+    },
+    {
+      "from": "src/mail/mail.service.ts",
+      "spec": "./interfaces/mail-data.interface",
+      "to": "src/mail/interfaces/mail-data.interface.ts"
+    },
+    {
+      "from": "src/mail/mail.service.ts",
+      "spec": "../utils/types/maybe.type",
+      "to": "src/utils/types/maybe.type.ts"
+    },
+    {
+      "from": "src/mail/mail.service.ts",
+      "spec": "../mailer/mailer.service",
+      "to": "src/mailer/mailer.service.ts"
+    },
+    {
+      "from": "src/mail/mail.service.ts",
+      "spec": "../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/home/home.service.ts",
+      "spec": "../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/home/home.controller.ts",
+      "spec": "./home.service",
+      "to": "src/home/home.service.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/document-persistence.module.ts",
+      "spec": "./entities/session.schema",
+      "to": "src/session/infrastructure/persistence/document/entities/session.schema.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/document-persistence.module.ts",
+      "spec": "../session.repository",
+      "to": "src/session/infrastructure/persistence/session.repository.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/document-persistence.module.ts",
+      "spec": "./repositories/session.repository",
+      "to": "src/session/infrastructure/persistence/document/repositories/session.repository.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "spec": "../session.repository",
+      "to": "src/session/infrastructure/persistence/session.repository.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "spec": "./repositories/session.repository",
+      "to": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/relational-persistence.module.ts",
+      "spec": "./entities/session.entity",
+      "to": "src/session/infrastructure/persistence/relational/entities/session.entity.ts"
+    },
+    {
+      "from": "src/session/session.service.ts",
+      "spec": "./infrastructure/persistence/session.repository",
+      "to": "src/session/infrastructure/persistence/session.repository.ts"
+    },
+    {
+      "from": "src/session/session.service.ts",
+      "spec": "./domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/session.service.ts",
+      "spec": "../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/session/session.service.ts",
+      "spec": "../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/mailer/mailer.service.ts",
+      "spec": "../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/users/dto/create-user.dto.ts",
+      "spec": "../../files/dto/file.dto",
+      "to": "src/files/dto/file.dto.ts"
+    },
+    {
+      "from": "src/users/dto/create-user.dto.ts",
+      "spec": "../../roles/dto/role.dto",
+      "to": "src/roles/dto/role.dto.ts"
+    },
+    {
+      "from": "src/users/dto/create-user.dto.ts",
+      "spec": "../../statuses/dto/status.dto",
+      "to": "src/statuses/dto/status.dto.ts"
+    },
+    {
+      "from": "src/users/dto/create-user.dto.ts",
+      "spec": "../../utils/transformers/lower-case.transformer",
+      "to": "src/utils/transformers/lower-case.transformer.ts"
+    },
+    {
+      "from": "src/users/dto/update-user.dto.ts",
+      "spec": "./create-user.dto",
+      "to": "src/users/dto/create-user.dto.ts"
+    },
+    {
+      "from": "src/users/dto/update-user.dto.ts",
+      "spec": "../../files/dto/file.dto",
+      "to": "src/files/dto/file.dto.ts"
+    },
+    {
+      "from": "src/users/dto/update-user.dto.ts",
+      "spec": "../../roles/dto/role.dto",
+      "to": "src/roles/dto/role.dto.ts"
+    },
+    {
+      "from": "src/users/dto/update-user.dto.ts",
+      "spec": "../../statuses/dto/status.dto",
+      "to": "src/statuses/dto/status.dto.ts"
+    },
+    {
+      "from": "src/users/dto/update-user.dto.ts",
+      "spec": "../../utils/transformers/lower-case.transformer",
+      "to": "src/utils/transformers/lower-case.transformer.ts"
+    },
+    {
+      "from": "src/users/dto/query-user.dto.ts",
+      "spec": "../domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/users/dto/query-user.dto.ts",
+      "spec": "../../roles/dto/role.dto",
+      "to": "src/roles/dto/role.dto.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../files/domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../roles/domain/role",
+      "to": "src/roles/domain/role.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../statuses/domain/status",
+      "to": "src/statuses/domain/status.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/users/domain/user.ts",
+      "spec": "../../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/roles/roles.guard.ts",
+      "spec": "../auth/strategies/types/jwt-payload.type",
+      "to": "src/auth/strategies/types/jwt-payload.type.ts"
+    },
+    {
+      "from": "src/roles/roles.guard.ts",
+      "spec": "../utils/types/request-with-user.type",
+      "to": "src/utils/types/request-with-user.type.ts"
+    },
+    {
+      "from": "src/utils/infinity-pagination.ts",
+      "spec": "./types/pagination-options",
+      "to": "src/utils/types/pagination-options.ts"
+    },
+    {
+      "from": "src/utils/infinity-pagination.ts",
+      "spec": "./dto/infinity-pagination-response.dto",
+      "to": "src/utils/dto/infinity-pagination-response.dto.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/user.repository.ts",
+      "spec": "../../../utils/types/deep-partial.type",
+      "to": "src/utils/types/deep-partial.type.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/user.repository.ts",
+      "spec": "../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/user.repository.ts",
+      "spec": "../../../utils/types/pagination-options",
+      "to": "src/utils/types/pagination-options.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/user.repository.ts",
+      "spec": "../../domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/user.repository.ts",
+      "spec": "../../dto/query-user.dto",
+      "to": "src/users/dto/query-user.dto.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../config/file.config",
+      "to": "src/files/config/file.config.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../config/file-config.type",
+      "to": "src/files/config/file-config.type.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../../config/app-config.type",
+      "to": "src/config/app-config.type.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../../config/app.config",
+      "to": "src/config/app.config.ts"
+    },
+    {
+      "from": "src/roles/domain/role.ts",
+      "spec": "../../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/roles/domain/role.ts",
+      "spec": "../../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/statuses/domain/status.ts",
+      "spec": "../../database/config/database.config",
+      "to": "src/database/config/database.config.ts"
+    },
+    {
+      "from": "src/statuses/domain/status.ts",
+      "spec": "../../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/entities/user.schema.ts",
+      "spec": "../../../../../auth/auth-providers.enum",
+      "to": "src/auth/auth-providers.enum.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/entities/user.schema.ts",
+      "spec": "../../../../../files/infrastructure/persistence/document/entities/file.schema",
+      "to": "src/files/infrastructure/persistence/document/entities/file.schema.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/entities/user.schema.ts",
+      "spec": "../../../../../utils/document-entity-helper",
+      "to": "src/utils/document-entity-helper.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/entities/user.schema.ts",
+      "spec": "../../../../../statuses/infrastructure/persistence/document/entities/status.schema",
+      "to": "src/statuses/infrastructure/persistence/document/entities/status.schema.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/entities/user.schema.ts",
+      "spec": "../../../../../roles/infrastructure/persistence/document/entities/role.schema",
+      "to": "src/roles/infrastructure/persistence/document/entities/role.schema.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+      "spec": "../../../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+      "spec": "../../../../dto/query-user.dto",
+      "to": "src/users/dto/query-user.dto.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+      "spec": "../../../../domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+      "spec": "../../user.repository",
+      "to": "src/users/infrastructure/persistence/user.repository.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+      "spec": "../entities/user.schema",
+      "to": "src/users/infrastructure/persistence/document/entities/user.schema.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+      "spec": "../mappers/user.mapper",
+      "to": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/repositories/user.repository.ts",
+      "spec": "../../../../../utils/types/pagination-options",
+      "to": "src/utils/types/pagination-options.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+      "spec": "../entities/user.entity",
+      "to": "src/users/infrastructure/persistence/relational/entities/user.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+      "spec": "../../../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+      "spec": "../../../../dto/query-user.dto",
+      "to": "src/users/dto/query-user.dto.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+      "spec": "../../../../domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+      "spec": "../../user.repository",
+      "to": "src/users/infrastructure/persistence/user.repository.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+      "spec": "../mappers/user.mapper",
+      "to": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/repositories/user.repository.ts",
+      "spec": "../../../../../utils/types/pagination-options",
+      "to": "src/utils/types/pagination-options.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../roles/infrastructure/persistence/relational/entities/role.entity",
+      "to": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../statuses/infrastructure/persistence/relational/entities/status.entity",
+      "to": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../files/infrastructure/persistence/relational/entities/file.entity",
+      "to": "src/files/infrastructure/persistence/relational/entities/file.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../auth/auth-providers.enum",
+      "to": "src/auth/auth-providers.enum.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/entities/user.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+      "spec": "../../../../../utils/document-entity-helper",
+      "to": "src/utils/document-entity-helper.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/file.repository.ts",
+      "spec": "../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/file.repository.ts",
+      "spec": "../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/repositories/file.repository.ts",
+      "spec": "../../file.repository",
+      "to": "src/files/infrastructure/persistence/file.repository.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/repositories/file.repository.ts",
+      "spec": "../entities/file.schema",
+      "to": "src/files/infrastructure/persistence/document/entities/file.schema.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/repositories/file.repository.ts",
+      "spec": "../../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/repositories/file.repository.ts",
+      "spec": "../mappers/file.mapper",
+      "to": "src/files/infrastructure/persistence/document/mappers/file.mapper.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/repositories/file.repository.ts",
+      "spec": "../../../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/entities/file.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/repositories/file.repository.ts",
+      "spec": "../entities/file.entity",
+      "to": "src/files/infrastructure/persistence/relational/entities/file.entity.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/repositories/file.repository.ts",
+      "spec": "../../file.repository",
+      "to": "src/files/infrastructure/persistence/file.repository.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/repositories/file.repository.ts",
+      "spec": "../mappers/file.mapper",
+      "to": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/repositories/file.repository.ts",
+      "spec": "../../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/repositories/file.repository.ts",
+      "spec": "../../../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.controller.ts",
+      "spec": "./files.service",
+      "to": "src/files/infrastructure/uploader/local/files.service.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.controller.ts",
+      "spec": "./dto/file-response.dto",
+      "to": "src/files/infrastructure/uploader/local/dto/file-response.dto.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.service.ts",
+      "spec": "../../persistence/file.repository",
+      "to": "src/files/infrastructure/persistence/file.repository.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.service.ts",
+      "spec": "../../../../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.service.ts",
+      "spec": "../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.controller.ts",
+      "spec": "./files.service",
+      "to": "src/files/infrastructure/uploader/s3/files.service.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.controller.ts",
+      "spec": "./dto/file-response.dto",
+      "to": "src/files/infrastructure/uploader/s3/dto/file-response.dto.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.service.ts",
+      "spec": "../../persistence/file.repository",
+      "to": "src/files/infrastructure/persistence/file.repository.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/files.service.ts",
+      "spec": "../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.controller.ts",
+      "spec": "./files.service",
+      "to": "src/files/infrastructure/uploader/s3-presigned/files.service.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.controller.ts",
+      "spec": "./dto/file.dto",
+      "to": "src/files/infrastructure/uploader/s3-presigned/dto/file.dto.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.controller.ts",
+      "spec": "./dto/file-response.dto",
+      "to": "src/files/infrastructure/uploader/s3-presigned/dto/file-response.dto.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.service.ts",
+      "spec": "../../persistence/file.repository",
+      "to": "src/files/infrastructure/persistence/file.repository.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.service.ts",
+      "spec": "./dto/file.dto",
+      "to": "src/files/infrastructure/uploader/s3-presigned/dto/file.dto.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.service.ts",
+      "spec": "../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/files.service.ts",
+      "spec": "../../../../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/auth/dto/auth-email-login.dto.ts",
+      "spec": "../../utils/transformers/lower-case.transformer",
+      "to": "src/utils/transformers/lower-case.transformer.ts"
+    },
+    {
+      "from": "src/auth/dto/auth-forgot-password.dto.ts",
+      "spec": "../../utils/transformers/lower-case.transformer",
+      "to": "src/utils/transformers/lower-case.transformer.ts"
+    },
+    {
+      "from": "src/auth/dto/auth-update.dto.ts",
+      "spec": "../../files/dto/file.dto",
+      "to": "src/files/dto/file.dto.ts"
+    },
+    {
+      "from": "src/auth/dto/auth-update.dto.ts",
+      "spec": "../../utils/transformers/lower-case.transformer",
+      "to": "src/utils/transformers/lower-case.transformer.ts"
+    },
+    {
+      "from": "src/auth/dto/auth-register-login.dto.ts",
+      "spec": "../../utils/transformers/lower-case.transformer",
+      "to": "src/utils/transformers/lower-case.transformer.ts"
+    },
+    {
+      "from": "src/auth/dto/login-response.dto.ts",
+      "spec": "../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/auth/strategies/types/jwt-payload.type.ts",
+      "spec": "../../../session/domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/auth/strategies/types/jwt-payload.type.ts",
+      "spec": "../../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/auth/strategies/types/jwt-refresh-payload.type.ts",
+      "spec": "../../../session/domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/domain/session.ts",
+      "spec": "../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/entities/session.schema.ts",
+      "spec": "../../../../../utils/document-entity-helper",
+      "to": "src/utils/document-entity-helper.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/session.repository.ts",
+      "spec": "../../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/session.repository.ts",
+      "spec": "../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/session.repository.ts",
+      "spec": "../../domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/repositories/session.repository.ts",
+      "spec": "../../../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/repositories/session.repository.ts",
+      "spec": "../../session.repository",
+      "to": "src/session/infrastructure/persistence/session.repository.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/repositories/session.repository.ts",
+      "spec": "../../../../domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/repositories/session.repository.ts",
+      "spec": "../entities/session.schema",
+      "to": "src/session/infrastructure/persistence/document/entities/session.schema.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/repositories/session.repository.ts",
+      "spec": "../mappers/session.mapper",
+      "to": "src/session/infrastructure/persistence/document/mappers/session.mapper.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/repositories/session.repository.ts",
+      "spec": "../../../../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../entities/session.entity",
+      "to": "src/session/infrastructure/persistence/relational/entities/session.entity.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../../../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../../session.repository",
+      "to": "src/session/infrastructure/persistence/session.repository.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../../../../domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../mappers/session.mapper",
+      "to": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/repositories/session.repository.ts",
+      "spec": "../../../../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+      "spec": "../../../../../users/infrastructure/persistence/relational/entities/user.entity",
+      "to": "src/users/infrastructure/persistence/relational/entities/user.entity.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/entities/session.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/utils/transformers/lower-case.transformer.ts",
+      "spec": "../types/maybe.type",
+      "to": "src/utils/types/maybe.type.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "spec": "../../../../domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "spec": "../entities/user.schema",
+      "to": "src/users/infrastructure/persistence/document/entities/user.schema.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "spec": "../../../../../files/infrastructure/persistence/document/entities/file.schema",
+      "to": "src/files/infrastructure/persistence/document/entities/file.schema.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "spec": "../../../../../files/infrastructure/persistence/document/mappers/file.mapper",
+      "to": "src/files/infrastructure/persistence/document/mappers/file.mapper.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "spec": "../../../../../roles/domain/role",
+      "to": "src/roles/domain/role.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "spec": "../../../../../statuses/domain/status",
+      "to": "src/statuses/domain/status.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "spec": "../../../../../roles/infrastructure/persistence/document/entities/role.schema",
+      "to": "src/roles/infrastructure/persistence/document/entities/role.schema.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/document/mappers/user.mapper.ts",
+      "spec": "../../../../../statuses/infrastructure/persistence/document/entities/status.schema",
+      "to": "src/statuses/infrastructure/persistence/document/entities/status.schema.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../../files/infrastructure/persistence/relational/entities/file.entity",
+      "to": "src/files/infrastructure/persistence/relational/entities/file.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../../files/infrastructure/persistence/relational/mappers/file.mapper",
+      "to": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../../roles/infrastructure/persistence/relational/entities/role.entity",
+      "to": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../../statuses/infrastructure/persistence/relational/entities/status.entity",
+      "to": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../../../../domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts",
+      "spec": "../entities/user.entity",
+      "to": "src/users/infrastructure/persistence/relational/entities/user.entity.ts"
+    },
+    {
+      "from": "src/roles/infrastructure/persistence/relational/entities/role.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/statuses/infrastructure/persistence/relational/entities/status.entity.ts",
+      "spec": "../../../../../utils/relational-entity-helper",
+      "to": "src/utils/relational-entity-helper.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/mappers/file.mapper.ts",
+      "spec": "../../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/document/mappers/file.mapper.ts",
+      "spec": "../entities/file.schema",
+      "to": "src/files/infrastructure/persistence/document/entities/file.schema.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts",
+      "spec": "../../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/relational/mappers/file.mapper.ts",
+      "spec": "../entities/file.entity",
+      "to": "src/files/infrastructure/persistence/relational/entities/file.entity.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/dto/file-response.dto.ts",
+      "spec": "../../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3/dto/file-response.dto.ts",
+      "spec": "../../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/s3-presigned/dto/file-response.dto.ts",
+      "spec": "../../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/mappers/session.mapper.ts",
+      "spec": "../../../../../users/domain/user",
+      "to": "src/users/domain/user.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/mappers/session.mapper.ts",
+      "spec": "../../../../domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/document/mappers/session.mapper.ts",
+      "spec": "../entities/session.schema",
+      "to": "src/session/infrastructure/persistence/document/entities/session.schema.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "spec": "../../../../../users/infrastructure/persistence/relational/entities/user.entity",
+      "to": "src/users/infrastructure/persistence/relational/entities/user.entity.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "spec": "../../../../../users/infrastructure/persistence/relational/mappers/user.mapper",
+      "to": "src/users/infrastructure/persistence/relational/mappers/user.mapper.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "spec": "../../../../domain/session",
+      "to": "src/session/domain/session.ts"
+    },
+    {
+      "from": "src/session/infrastructure/persistence/relational/mappers/session.mapper.ts",
+      "spec": "../entities/session.entity",
+      "to": "src/session/infrastructure/persistence/relational/entities/session.entity.ts"
+    }
+  ]
+}

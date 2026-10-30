@@ -1,0 +1,315 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "be02-server",
+  "gtVersion": 1,
+  "activeFile": "src/server.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/server.ts"
+    },
+    {
+      "id": "S_express_route_owner_20_1",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 20,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "S_express_route_owner_21_2",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 21,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "S_express_route_owner_22_3",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 22,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "S_express_route_owner_23_4",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 23,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "S_express_route_owner_24_5",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 24,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "S_express_route_owner_27_6",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 27,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "S_express_route_owner_30_7",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 30,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "S_express_route_owner_31_8",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 31,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "S_express_route_owner_34_9",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 34,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "S_express_route_owner_37_10",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 37,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.use"
+    },
+    {
+      "id": "X_addRequestId_requestLogger_ts_20",
+      "type": "external",
+      "file": "src/common/middleware/requestLogger.ts",
+      "line": 20,
+      "name": "addRequestId"
+    },
+    {
+      "id": "X_captureResponseBody_requestLogger_ts_47",
+      "type": "external",
+      "file": "src/common/middleware/requestLogger.ts",
+      "line": 47,
+      "name": "captureResponseBody"
+    },
+    {
+      "id": "X_unexpectedRequest_errorHandler_ts_4",
+      "type": "external",
+      "file": "src/common/middleware/errorHandler.ts",
+      "line": 4,
+      "name": "unexpectedRequest"
+    },
+    {
+      "id": "X_addErrorToRequestLog_errorHandler_ts_8",
+      "type": "external",
+      "file": "src/common/middleware/errorHandler.ts",
+      "line": 8,
+      "name": "addErrorToRequestLog"
+    },
+    {
+      "id": "S_express_set_17",
+      "type": "synthetic",
+      "file": "src/server.ts",
+      "line": 17,
+      "framework": "express",
+      "role": "route-owner",
+      "anchor": "app.set"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "owner",
+      "source": "S_express_route_owner_20_1",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:20"
+      ],
+      "note": "Top-level app.use registrations on app = express() (EXP-01 e03 R01). Handlers returned by third-party calls (express.json(), urlencoded, cors(), helmet()) have no §2 node."
+    },
+    {
+      "id": "R02",
+      "kind": "owner",
+      "source": "S_express_route_owner_21_2",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:21"
+      ]
+    },
+    {
+      "id": "R03",
+      "kind": "owner",
+      "source": "S_express_route_owner_22_3",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:22"
+      ]
+    },
+    {
+      "id": "R04",
+      "kind": "owner",
+      "source": "S_express_route_owner_23_4",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:23"
+      ]
+    },
+    {
+      "id": "R05",
+      "kind": "owner",
+      "source": "S_express_route_owner_24_5",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:24"
+      ],
+      "note": "rateLimiter is the value of rateLimit({...}) (third-party), not a §2 node: owner without calls."
+    },
+    {
+      "id": "R06",
+      "kind": "owner",
+      "source": "S_express_route_owner_27_6",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:27"
+      ]
+    },
+    {
+      "id": "R07",
+      "kind": "owner",
+      "source": "S_express_route_owner_30_7",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:30"
+      ],
+      "note": "Router mount (healthCheckRouter = express.Router()): owner without calls (guide §5.3)."
+    },
+    {
+      "id": "R08",
+      "kind": "owner",
+      "source": "S_express_route_owner_31_8",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:31"
+      ],
+      "note": "Router mount (userRouter): owner without calls (guide §5.3)."
+    },
+    {
+      "id": "R09",
+      "kind": "owner",
+      "source": "S_express_route_owner_34_9",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:34"
+      ],
+      "note": "Router mount (openAPIRouter): owner without calls (guide §5.3)."
+    },
+    {
+      "id": "R10",
+      "kind": "owner",
+      "source": "S_express_route_owner_37_10",
+      "pattern": "FW-EXPRESS-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:37"
+      ]
+    },
+    {
+      "id": "R11",
+      "kind": "calls",
+      "source": "S_express_route_owner_27_6",
+      "target": "X_addRequestId_requestLogger_ts_20",
+      "pattern": "FW-UNSUPPORTED-OWNER-EDGE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:27"
+      ],
+      "note": "requestLogger (default export) is the array literal [addRequestId, captureResponseBody, httpLogger]; httpLogger = pinoHttp(...) is not a §2 node."
+    },
+    {
+      "id": "R12",
+      "kind": "calls",
+      "source": "S_express_route_owner_27_6",
+      "target": "X_captureResponseBody_requestLogger_ts_47",
+      "pattern": "FW-UNSUPPORTED-OWNER-EDGE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:27"
+      ]
+    },
+    {
+      "id": "R13",
+      "kind": "calls",
+      "source": "S_express_route_owner_37_10",
+      "target": "X_unexpectedRequest_errorHandler_ts_4",
+      "pattern": "FW-UNSUPPORTED-OWNER-EDGE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:37"
+      ],
+      "note": "errorHandler() (anonymous default-export arrow, not a §2 node) returns the array literal [unexpectedRequest, addErrorToRequestLog]; both are registered handlers."
+    },
+    {
+      "id": "R14",
+      "kind": "calls",
+      "source": "S_express_route_owner_37_10",
+      "target": "X_addErrorToRequestLog_errorHandler_ts_8",
+      "pattern": "FW-UNSUPPORTED-OWNER-EDGE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/server.ts:37"
+      ]
+    }
+  ],
+  "negatives": [
+    {
+      "id": "N01",
+      "kind": "owner",
+      "source": "S_express_set_17",
+      "pattern": "NEG-EXPRESS-NONROUTE",
+      "evidence": [
+        "src/server.ts:17"
+      ],
+      "rationale": "app.set is a setting, not a route registration (guide §5.3)"
+    }
+  ],
+  "excludedSites": [
+    {
+      "site": "src/server.ts:13",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/server.ts:14",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    }
+  ]
+}

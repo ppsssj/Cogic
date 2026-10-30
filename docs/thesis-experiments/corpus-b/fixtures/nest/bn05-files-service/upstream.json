@@ -1,0 +1,268 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "bn05-files-service",
+  "repo": "brocoders/nestjs-boilerplate",
+  "url": "https://github.com/brocoders/nestjs-boilerplate",
+  "commit": "9620f159eefe38f47747d02ab162852367c5472c",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "tsconfig.json",
+    "derivedOptions": {
+      "target": "ES2021",
+      "module": "commonjs",
+      "strictNullChecks": true,
+      "noImplicitAny": true,
+      "strictBindCallApply": false,
+      "strictPropertyInitialization": false,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "lib": [
+        "ES2021"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "module": "commonjs",
+      "declaration": true,
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "ES2021",
+      "sourceMap": true,
+      "outDir": "./dist",
+      "incremental": true,
+      "skipLibCheck": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": false,
+      "noImplicitAny": true,
+      "strictBindCallApply": false,
+      "forceConsistentCasingInFileNames": false,
+      "noFallthroughCasesInSwitch": false,
+      "esModuleInterop": true
+    }
+  },
+  "activeFile": "src/files/infrastructure/uploader/local/files.service.ts",
+  "upstreamActiveFile": "src/files/infrastructure/uploader/local/files.service.ts",
+  "files": [
+    {
+      "path": "src/auth-apple/config/apple-config.type.ts",
+      "upstreamPath": "src/auth-apple/config/apple-config.type.ts",
+      "sha256": "f96a7e9d6c86269f1fbc4d8b509fa915e7ab42564247faccd1af7e429b845621",
+      "bytes": 59
+    },
+    {
+      "path": "src/auth-facebook/config/facebook-config.type.ts",
+      "upstreamPath": "src/auth-facebook/config/facebook-config.type.ts",
+      "sha256": "ec98b403be5255c8ace5339fe87ff15851ef572aa878b101db9506a12489ff60",
+      "bytes": 78
+    },
+    {
+      "path": "src/auth-google/config/google-config.type.ts",
+      "upstreamPath": "src/auth-google/config/google-config.type.ts",
+      "sha256": "539d822db5ff9df8b70c18b7d7cf7fd732554d54071e368699c2327215f9a10e",
+      "bytes": 82
+    },
+    {
+      "path": "src/auth/config/auth-config.type.ts",
+      "upstreamPath": "src/auth/config/auth-config.type.ts",
+      "sha256": "10476153617fe732c82efaaa5fb23bcbde28549becb8149b8b7fa3139c2296d6",
+      "bytes": 329
+    },
+    {
+      "path": "src/config/app-config.type.ts",
+      "upstreamPath": "src/config/app-config.type.ts",
+      "sha256": "a3305f799a604db99ffa04bf9c3ace9fb75cd0f44646ac7d0a49a4583cfef0b8",
+      "bytes": 272
+    },
+    {
+      "path": "src/config/app.config.ts",
+      "upstreamPath": "src/config/app.config.ts",
+      "sha256": "e33365b5ce475f0db6e6cee9d0cb5e4ea95fc90dcb86b9af33b8affadf3cf511",
+      "bytes": 1957
+    },
+    {
+      "path": "src/config/config.type.ts",
+      "upstreamPath": "src/config/config.type.ts",
+      "sha256": "d1acc1c19fd2ec0670a56bf02e16bc81e8459a728d7cb49d99b44050944c4f47",
+      "bytes": 763
+    },
+    {
+      "path": "src/database/config/database-config.type.ts",
+      "upstreamPath": "src/database/config/database-config.type.ts",
+      "sha256": "f2a187e20ea0fa0d60511b08c4e55d97ab0aa54e7909e37dee54262221b573eb",
+      "bytes": 363
+    },
+    {
+      "path": "src/files/config/file-config.type.ts",
+      "upstreamPath": "src/files/config/file-config.type.ts",
+      "sha256": "94764db3683042f0f558e4a2cb5bcbf40bc722696ef627f29fa6b78181e4ac58",
+      "bytes": 289
+    },
+    {
+      "path": "src/files/config/file.config.ts",
+      "upstreamPath": "src/files/config/file.config.ts",
+      "sha256": "243576d2aa34fae801e32823a1356232f30b87f0f045da658468dfa7f99b8f41",
+      "bytes": 1444
+    },
+    {
+      "path": "src/files/domain/file.ts",
+      "upstreamPath": "src/files/domain/file.ts",
+      "sha256": "2fbaea444b3adc55c74ca342df45df106e429bc7bd7e8462cf7ebdacdfc9f087",
+      "bytes": 1713
+    },
+    {
+      "path": "src/files/infrastructure/persistence/file.repository.ts",
+      "upstreamPath": "src/files/infrastructure/persistence/file.repository.ts",
+      "sha256": "ab46ab5d036396d55f850c1cc35c64a8d43f3b87b3b5b6ecf06774a1a40f310b",
+      "bytes": 373
+    },
+    {
+      "path": "src/files/infrastructure/uploader/local/files.service.ts",
+      "upstreamPath": "src/files/infrastructure/uploader/local/files.service.ts",
+      "sha256": "e142159debfeeed446eed85f45b5bc4627f5518c114e3988639779ea737e0563",
+      "bytes": 1009
+    },
+    {
+      "path": "src/mail/config/mail-config.type.ts",
+      "upstreamPath": "src/mail/config/mail-config.type.ts",
+      "sha256": "cb499589c5c1056b81d421231a67bc274b2b24d1fe4fae38c8cd326eb5c35a5d",
+      "bytes": 225
+    },
+    {
+      "path": "src/utils/types/nullable.type.ts",
+      "upstreamPath": "src/utils/types/nullable.type.ts",
+      "sha256": "14250925c5f2d082c0f4894f5ffed7448c3f25c1da30df17234ec8be75a856a6",
+      "bytes": 41
+    },
+    {
+      "path": "src/utils/validate-config.ts",
+      "upstreamPath": "src/utils/validate-config.ts",
+      "sha256": "6eb3fc134e0952c6e9d0f6422d5692a805a4b2abbf536523f307b4705429265c",
+      "bytes": 647
+    }
+  ],
+  "thirdPartyModules": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner",
+    "@nestjs/common",
+    "@nestjs/config",
+    "@nestjs/swagger",
+    "class-transformer",
+    "class-transformer/types/interfaces",
+    "class-validator",
+    "ms"
+  ],
+  "importEdges": [
+    {
+      "from": "src/files/infrastructure/uploader/local/files.service.ts",
+      "spec": "../../persistence/file.repository",
+      "to": "src/files/infrastructure/persistence/file.repository.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.service.ts",
+      "spec": "../../../../config/config.type",
+      "to": "src/config/config.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/uploader/local/files.service.ts",
+      "spec": "../../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/file.repository.ts",
+      "spec": "../../../utils/types/nullable.type",
+      "to": "src/utils/types/nullable.type.ts"
+    },
+    {
+      "from": "src/files/infrastructure/persistence/file.repository.ts",
+      "spec": "../../domain/file",
+      "to": "src/files/domain/file.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "./app-config.type",
+      "to": "src/config/app-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../auth-apple/config/apple-config.type",
+      "to": "src/auth-apple/config/apple-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../auth/config/auth-config.type",
+      "to": "src/auth/config/auth-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../database/config/database-config.type",
+      "to": "src/database/config/database-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../auth-facebook/config/facebook-config.type",
+      "to": "src/auth-facebook/config/facebook-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../files/config/file-config.type",
+      "to": "src/files/config/file-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../auth-google/config/google-config.type",
+      "to": "src/auth-google/config/google-config.type.ts"
+    },
+    {
+      "from": "src/config/config.type.ts",
+      "spec": "../mail/config/mail-config.type",
+      "to": "src/mail/config/mail-config.type.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../config/file.config",
+      "to": "src/files/config/file.config.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../config/file-config.type",
+      "to": "src/files/config/file-config.type.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../../config/app-config.type",
+      "to": "src/config/app-config.type.ts"
+    },
+    {
+      "from": "src/files/domain/file.ts",
+      "spec": "../../config/app.config",
+      "to": "src/config/app.config.ts"
+    },
+    {
+      "from": "src/files/config/file.config.ts",
+      "spec": "../../utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    },
+    {
+      "from": "src/files/config/file.config.ts",
+      "spec": "./file-config.type",
+      "to": "src/files/config/file-config.type.ts"
+    },
+    {
+      "from": "src/config/app.config.ts",
+      "spec": "./app-config.type",
+      "to": "src/config/app-config.type.ts"
+    },
+    {
+      "from": "src/config/app.config.ts",
+      "spec": ".././utils/validate-config",
+      "to": "src/utils/validate-config.ts"
+    }
+  ]
+}

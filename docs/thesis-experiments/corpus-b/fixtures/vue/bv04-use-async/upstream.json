@@ -1,0 +1,168 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "bv04-use-async",
+  "repo": "mutoe/vue3-realworld-example-app",
+  "url": "https://github.com/mutoe/vue3-realworld-example-app",
+  "commit": "741c215ef0f674f90fcb03c5493a1b3a3a7f1b03",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "tsconfig.json",
+    "derivedOptions": {
+      "target": "ES2020",
+      "module": "ESNext",
+      "moduleResolution": "bundler",
+      "jsx": "preserve",
+      "paths": {
+        "src/*": [
+          "./src/*"
+        ]
+      },
+      "strict": true,
+      "useDefineForClassFields": true,
+      "resolveJsonModule": true,
+      "lib": [
+        "ES2021",
+        "DOM",
+        "DOM.Iterable"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "target": "ES2020",
+      "jsx": "preserve",
+      "lib": [
+        "ES2021",
+        "DOM",
+        "DOM.Iterable"
+      ],
+      "useDefineForClassFields": true,
+      "module": "ESNext",
+      "moduleResolution": "bundler",
+      "paths": {
+        "src/*": [
+          "./src/*"
+        ]
+      },
+      "resolveJsonModule": true,
+      "types": [
+        "@testing-library/jest-dom"
+      ],
+      "strict": true,
+      "noFallthroughCasesInSwitch": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noEmit": true,
+      "isolatedModules": true,
+      "skipLibCheck": true
+    }
+  },
+  "activeFile": "src/utils/use-async.ts",
+  "upstreamActiveFile": "src/utils/use-async.ts",
+  "files": [
+    {
+      "path": "src/config.ts",
+      "upstreamPath": "src/config.ts",
+      "sha256": "f6acc4f776d91e8659677e3279ad42cb237499e806b05529e9394608a570882d",
+      "bytes": 86
+    },
+    {
+      "path": "src/router.ts",
+      "upstreamPath": "src/router.ts",
+      "sha256": "5a2baf47952892dd7671b4e5e4463294c5358eaafc2998ebd22ca661c5a83618",
+      "bytes": 2345
+    },
+    {
+      "path": "src/services/api.ts",
+      "upstreamPath": "src/services/api.ts",
+      "sha256": "552fddf1d8308e95e958b331af49277f9b81015a56c0e94f7f32824bf62b8eb8",
+      "bytes": 21468
+    },
+    {
+      "path": "src/services/index.ts",
+      "upstreamPath": "src/services/index.ts",
+      "sha256": "f224257760702ac57ca29317a900de545383a4362b0b37ee243c4e8b51f56418",
+      "bytes": 816
+    },
+    {
+      "path": "src/store/user.ts",
+      "upstreamPath": "src/store/user.ts",
+      "sha256": "bb23a724e163903e17109bacaf0e062fff55d7b3373902fd8c50e7ab5a85caf1",
+      "bytes": 834
+    },
+    {
+      "path": "src/utils/storage.ts",
+      "upstreamPath": "src/utils/storage.ts",
+      "sha256": "838f706241711ba42ede15302d9cb6854ce90032b2f81d78a2e3c34c2c8f8aeb",
+      "bytes": 748
+    },
+    {
+      "path": "src/utils/use-async.ts",
+      "upstreamPath": "src/utils/use-async.ts",
+      "sha256": "4219aa4d8c8ce213aa845c843e6f3f907a87de189b535e17f0208f67e023dde0",
+      "bytes": 999
+    }
+  ],
+  "thirdPartyModules": [
+    "./pages/Article.vue",
+    "./pages/EditArticle.vue",
+    "./pages/Home.vue",
+    "./pages/Login.vue",
+    "./pages/NotFound.vue",
+    "./pages/Profile.vue",
+    "./pages/Register.vue",
+    "./pages/Settings.vue",
+    "pinia",
+    "vue",
+    "vue-router"
+  ],
+  "importEdges": [
+    {
+      "from": "src/utils/use-async.ts",
+      "spec": "src/router",
+      "to": "src/router.ts"
+    },
+    {
+      "from": "src/utils/use-async.ts",
+      "spec": "src/services",
+      "to": "src/services/index.ts"
+    },
+    {
+      "from": "src/utils/use-async.ts",
+      "spec": "src/store/user",
+      "to": "src/store/user.ts"
+    },
+    {
+      "from": "src/router.ts",
+      "spec": "./store/user",
+      "to": "src/store/user.ts"
+    },
+    {
+      "from": "src/services/index.ts",
+      "spec": "src/config",
+      "to": "src/config.ts"
+    },
+    {
+      "from": "src/services/index.ts",
+      "spec": "src/services/api",
+      "to": "src/services/api.ts"
+    },
+    {
+      "from": "src/store/user.ts",
+      "spec": "src/services",
+      "to": "src/services/index.ts"
+    },
+    {
+      "from": "src/store/user.ts",
+      "spec": "src/services/api",
+      "to": "src/services/api.ts"
+    },
+    {
+      "from": "src/store/user.ts",
+      "spec": "src/utils/storage",
+      "to": "src/utils/storage.ts"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "exp01-gt/1",
+  "caseId": "bn04-file-schema",
+  "gtVersion": 1,
+  "activeFile": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "file",
+      "file": "src/files/infrastructure/persistence/document/entities/file.schema.ts"
+    },
+    {
+      "id": "T_FileSchemaDocument_5",
+      "type": "typeLike",
+      "file": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+      "line": 5,
+      "name": "FileSchemaDocument"
+    },
+    {
+      "id": "C_FileSchemaClass_7",
+      "type": "class",
+      "file": "src/files/infrastructure/persistence/document/entities/file.schema.ts",
+      "line": 7,
+      "name": "FileSchemaClass"
+    },
+    {
+      "id": "X_EntityDocumentHelper_document_entity_helper_ts_3",
+      "type": "external",
+      "file": "src/utils/document-entity-helper.ts",
+      "line": 3,
+      "name": "EntityDocumentHelper"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "kind": "references",
+      "source": "T_FileSchemaDocument_5",
+      "target": "C_FileSchemaClass_7",
+      "pattern": "REF-TYPE-ANNOTATION",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/files/infrastructure/persistence/document/entities/file.schema.ts:5"
+      ]
+    },
+    {
+      "id": "R02",
+      "kind": "references",
+      "source": "C_FileSchemaClass_7",
+      "target": "X_EntityDocumentHelper_document_entity_helper_ts_3",
+      "pattern": "REF-CROSS-FILE",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/files/infrastructure/persistence/document/entities/file.schema.ts:13"
+      ],
+      "note": "extends clause (heritage) of the decorated class; the class line is the @Schema decorator line 7."
+    },
+    {
+      "id": "R03",
+      "kind": "references",
+      "source": "file",
+      "target": "C_FileSchemaClass_7",
+      "pattern": "REF-TOPLEVEL",
+      "gtStatus": "determinate",
+      "evidence": [
+        "src/files/infrastructure/persistence/document/entities/file.schema.ts:18"
+      ]
+    }
+  ],
+  "negatives": [],
+  "excludedSites": [
+    {
+      "site": "src/files/infrastructure/persistence/document/entities/file.schema.ts:7",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    },
+    {
+      "site": "src/files/infrastructure/persistence/document/entities/file.schema.ts:14",
+      "reason": "NO_NODE_TARGET: callee declaration is not a §2 node (ModuleDeclaration)"
+    }
+  ]
+}

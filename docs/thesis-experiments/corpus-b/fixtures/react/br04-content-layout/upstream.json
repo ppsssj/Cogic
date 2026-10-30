@@ -1,0 +1,106 @@
+{
+  "schema": "corpus-b-upstream/1",
+  "caseId": "br04-content-layout",
+  "repo": "alan2207/bulletproof-react",
+  "url": "https://github.com/alan2207/bulletproof-react",
+  "commit": "9506629ed003a561c6627735480cce4994244bb4",
+  "license": "MIT",
+  "licenseFile": "LICENSE.upstream (verbatim copy of the repository LICENSE)",
+  "tsconfig": {
+    "upstream": "apps/react-vite/tsconfig.json",
+    "derivedOptions": {
+      "target": "ESNext",
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "jsx": "react-jsx",
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "./src/*"
+        ]
+      },
+      "strict": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "allowJs": true,
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "noEmit": true,
+      "skipLibCheck": true,
+      "types": []
+    },
+    "upstreamOptions": {
+      "target": "ESNext",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "resolveJsonModule": true,
+      "noEmit": true,
+      "jsx": "react-jsx",
+      "types": [
+        "vite/client",
+        "vitest/globals"
+      ],
+      "isolatedModules": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "./src/*"
+        ]
+      }
+    }
+  },
+  "activeFile": "src/components/layouts/content-layout.tsx",
+  "upstreamActiveFile": "apps/react-vite/src/components/layouts/content-layout.tsx",
+  "files": [
+    {
+      "path": "src/components/layouts/content-layout.tsx",
+      "upstreamPath": "apps/react-vite/src/components/layouts/content-layout.tsx",
+      "sha256": "1d927365789af83e8d7558394e7a029b42145b5439b0014fdadf07559a7c1beb",
+      "bytes": 610
+    },
+    {
+      "path": "src/components/seo/head.tsx",
+      "upstreamPath": "apps/react-vite/src/components/seo/head.tsx",
+      "sha256": "4637cc5f3a7b25a8b742800f22c6bbaaea6797df404cf462076fcc1a2d0e5d34",
+      "bytes": 500
+    },
+    {
+      "path": "src/components/seo/index.ts",
+      "upstreamPath": "apps/react-vite/src/components/seo/index.ts",
+      "sha256": "5486ef02202c224193572757e4b44ea30942ce46002249556021ed734a82ed2b",
+      "bytes": 25
+    }
+  ],
+  "thirdPartyModules": [
+    "react",
+    "react-helmet-async"
+  ],
+  "importEdges": [
+    {
+      "from": "src/components/layouts/content-layout.tsx",
+      "spec": "../seo",
+      "to": "src/components/seo/index.ts"
+    },
+    {
+      "from": "src/components/seo/index.ts",
+      "spec": "./head",
+      "to": "src/components/seo/head.tsx"
+    }
+  ]
+}
