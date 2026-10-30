@@ -1,0 +1,133 @@
+{
+  "schema": "corpus-b-env-baseline/1",
+  "note": "SHA-256 of LF-normalized UTF-8 text",
+  "gitTrees": {
+    "src/analyzer": "a2202f4a32a7515be37bdfe2334cde7b2a7f1fea",
+    "src/shared": "110f25582a4420b023f2a1d47cce1d3eb888ef23"
+  },
+  "counts": {
+    "corpusBManifest": 1,
+    "expectedJson": 20,
+    "caseJson": 20,
+    "tsconfigJson": 20,
+    "shims": 20,
+    "scorer": 3,
+    "runner": 1,
+    "analyzer": 8,
+    "shared": 1
+  },
+  "files": {
+    "corpusBManifest": {
+      "docs/thesis-experiments/corpus-b/MANIFEST.json": "e57c1493f51865afdcf77cc616f5fcf7a5727498976d6874f97031b62ccd9856"
+    },
+    "expectedJson": {
+      "docs/thesis-experiments/corpus-b/fixtures/express/be01-userrouter/expected.json": "211026c6d9559c9ece88aa5e6d04f123e4a72150c3792ac9710b878c761d89de",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be02-server/expected.json": "a818dc368120c7fafde7abb0898bef059fc1e5b1cc9b083d2dfde3f2338d3f0d",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be03-ratelimiter/expected.json": "098fbdee3b2d23a6c582cc467244358bb622a2228e9d70a7c73dc749faf94de1",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be04-errorhandler/expected.json": "72d7f32e2fe21d64ede46cb6337e5cf8dfdcd5a2d11229be1c88f7b01e15ee61",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be05-usercontroller/expected.json": "2e52ea00b8ca2a9cf00b186b6963a2772354ecf08de18c82c6dc462f6b65c1c0",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn01-auth-google-controller/expected.json": "535e0e13bd87991a628c72e9792f95bc96a5206ea34c800dc57fb7f7d3e9f7c1",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn02-session-repository/expected.json": "f21be2dbc0b9acf80efd80980ff3730197480107cde35381ad3c85f52c096eb1",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn03-main/expected.json": "9271ee713fe6c68d7da710e6208d02687219a20ed31b013519af56fc86e10170",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn04-file-schema/expected.json": "c69200b5c4ef4e9d68eaf5d7f47fad34e1690f8b8c4f1e0bd7a4a944a1714de2",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn05-files-service/expected.json": "1b1434c16634be730a985e99c4169d48ca81a8ab45d3fbcc7d6b009b4eb9899e",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br01-form-drawer/expected.json": "defddde93588282b1d652af32daf445ea085ca4d66c9b0107f366fac4e5b3fb2",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br02-textarea/expected.json": "1fb0555bdba6d3018b783a9d356b07c29d27e2dbb255440bfc0f0c74e17f8fad",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br03-main/expected.json": "691a5b79b550cd4abfea159c3ed20efca4d6397a425a91dbe8e2aa57e6cecc5f",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br04-content-layout/expected.json": "602110b137f0e4519243150c97d77255ca4749f43158194a77be9da41f9dab4c",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br05-input/expected.json": "a5dfe1cd4c0a29106e92b390310bb2569d971546a92737dc31932bfafff379b6",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv01-main/expected.json": "12819c5b6f25c0af2f76689b16b4094b3a48d9be61a43d32b0b4491740d01375",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv02-use-follow-profile/expected.json": "720561ef94fa0f88d217db38d7b770615763d3547c8708e95c11a840b2a93e90",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv03-user/expected.json": "779869fb8d33e140a16a2466db36dbcbf1e1a7bbea2d245d3c5973c41681bfaf",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv04-use-async/expected.json": "4b76f4d5c976f2baa174854160bf231e5e154c53088b3732017a536963a060ab",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv05-use-favorite-article/expected.json": "7362db4ac6bb28721ef76f072a479cabad91b88630c0ee28cf00ccfbbd24da45"
+    },
+    "caseJson": {
+      "docs/thesis-experiments/corpus-b/fixtures/express/be01-userrouter/case.json": "a93c8f1b8aaf79fb50fd8afd4757703453cdb5733357b883d08039f522ffa60b",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be02-server/case.json": "2541e78dd0d84243423c13d797bf6f08dba023965a06e765853594b358c41794",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be03-ratelimiter/case.json": "12f6c2031a9585d6909d4eba0a6728d0089601cfbeb977ffdc53630baaf23d12",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be04-errorhandler/case.json": "1e0296867355dc095a8e554f6285eff2117c98d5ac32eeed94c6a9f45af9c98a",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be05-usercontroller/case.json": "492496cf9abff65873353a9dbd6b4161d7f67c19924e9cf686166c499755e45d",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn01-auth-google-controller/case.json": "86404ee23289e354de96ea4efd80667017209ae1d33a407459d2ea0de6f75f73",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn02-session-repository/case.json": "1f87dcb3c7b946d7361946ad0b3a6cd8544ce499cf71b10796ad68afd0c3195d",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn03-main/case.json": "c2879ae6c2f6b6b9dd72d7cc89204149a3f8454de828019b4df59f8a0f9339a1",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn04-file-schema/case.json": "0d6266988d4398514eddf8755677ee5829d392edd459e87fd00f251b9c23b31f",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn05-files-service/case.json": "8368345827326872c68d53eb6a8a67be43fb7644b3780d69f3b868e5e6743bea",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br01-form-drawer/case.json": "bd3c2b22d7a9e53d574a7e608737afb224a41297c1084cc07923171483bcf75f",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br02-textarea/case.json": "1862861990b7cd7a53ada8d267f3c1ee02473f7226136508fa7680566009f353",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br03-main/case.json": "e7415518b6209bf820d8b948a26e654145ccf54961f605c8754e0c7cbe2a1009",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br04-content-layout/case.json": "8c480d8dfdd4bd88ca9f362068c279c1a1a00230a623cc6c26eaee5d2a8a922d",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br05-input/case.json": "75166e78fcfd6374aec723e6541c97ce1b3289798dcd86ca89bfa33d3b656b1a",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv01-main/case.json": "2ded32c1855c9f5bb111b3c994b712dd8d1bb53f04db870ef8e2ee256fc4b742",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv02-use-follow-profile/case.json": "576554647a6b5b825317b4e5d5d41b305e912af033ae6b85bd853f7842418c10",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv03-user/case.json": "ef8c5f9f62996dcf3b4f92776d3da5b59b52c25892a104f708001e52985d1874",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv04-use-async/case.json": "fb58d9db2b7a589a0a94c2fb9cef94d26d558b12b78eeefa4ac66e4dc4230997",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv05-use-favorite-article/case.json": "16154b9d2b681708407ffd3145f55409cfd050a589b0ccd126847f467b61894c"
+    },
+    "tsconfigJson": {
+      "docs/thesis-experiments/corpus-b/fixtures/express/be01-userrouter/tsconfig.json": "ae1a0aea081103fd0903d526cc47fa1195c8542deaf0d4019a99d8abc32ce528",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be02-server/tsconfig.json": "ae1a0aea081103fd0903d526cc47fa1195c8542deaf0d4019a99d8abc32ce528",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be03-ratelimiter/tsconfig.json": "ae1a0aea081103fd0903d526cc47fa1195c8542deaf0d4019a99d8abc32ce528",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be04-errorhandler/tsconfig.json": "ae1a0aea081103fd0903d526cc47fa1195c8542deaf0d4019a99d8abc32ce528",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be05-usercontroller/tsconfig.json": "ae1a0aea081103fd0903d526cc47fa1195c8542deaf0d4019a99d8abc32ce528",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn01-auth-google-controller/tsconfig.json": "72c312a10dd3b472b823f38686d8cb742b3e414fa71b5686a0c48e28b9eef793",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn02-session-repository/tsconfig.json": "72c312a10dd3b472b823f38686d8cb742b3e414fa71b5686a0c48e28b9eef793",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn03-main/tsconfig.json": "72c312a10dd3b472b823f38686d8cb742b3e414fa71b5686a0c48e28b9eef793",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn04-file-schema/tsconfig.json": "72c312a10dd3b472b823f38686d8cb742b3e414fa71b5686a0c48e28b9eef793",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn05-files-service/tsconfig.json": "72c312a10dd3b472b823f38686d8cb742b3e414fa71b5686a0c48e28b9eef793",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br01-form-drawer/tsconfig.json": "58e4cc08024de2290c58fc56111f38f0b3a1b37f62b8956fbd178fd25214ec34",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br02-textarea/tsconfig.json": "58e4cc08024de2290c58fc56111f38f0b3a1b37f62b8956fbd178fd25214ec34",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br03-main/tsconfig.json": "58e4cc08024de2290c58fc56111f38f0b3a1b37f62b8956fbd178fd25214ec34",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br04-content-layout/tsconfig.json": "58e4cc08024de2290c58fc56111f38f0b3a1b37f62b8956fbd178fd25214ec34",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br05-input/tsconfig.json": "58e4cc08024de2290c58fc56111f38f0b3a1b37f62b8956fbd178fd25214ec34",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv01-main/tsconfig.json": "6a4a4eb6fbb9ba3d96d0b9416f74002423e7063602113a664b58e9bdb1b62873",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv02-use-follow-profile/tsconfig.json": "6a4a4eb6fbb9ba3d96d0b9416f74002423e7063602113a664b58e9bdb1b62873",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv03-user/tsconfig.json": "6a4a4eb6fbb9ba3d96d0b9416f74002423e7063602113a664b58e9bdb1b62873",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv04-use-async/tsconfig.json": "6a4a4eb6fbb9ba3d96d0b9416f74002423e7063602113a664b58e9bdb1b62873",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv05-use-favorite-article/tsconfig.json": "6a4a4eb6fbb9ba3d96d0b9416f74002423e7063602113a664b58e9bdb1b62873"
+    },
+    "shims": {
+      "docs/thesis-experiments/corpus-b/fixtures/express/be01-userrouter/shims/third-party.d.ts": "b1a10ce0ab9937c32439855fc823d8594de18a0d509855ff20d27926ff05b20b",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be02-server/shims/third-party.d.ts": "b1a10ce0ab9937c32439855fc823d8594de18a0d509855ff20d27926ff05b20b",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be03-ratelimiter/shims/third-party.d.ts": "77927d00827fef6c23c9988267ae80db829d3020bb7890127d6011b466a12afe",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be04-errorhandler/shims/third-party.d.ts": "3a6e1d5646d9f9a831d29aa30eba7e4061b728d28fa42d5c09fe2b9a68acf3d0",
+      "docs/thesis-experiments/corpus-b/fixtures/express/be05-usercontroller/shims/third-party.d.ts": "b1a10ce0ab9937c32439855fc823d8594de18a0d509855ff20d27926ff05b20b",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn01-auth-google-controller/shims/third-party.d.ts": "153e38ec71e55e063f64f41942c7be5b729df8b7474f165b2d9aa83f2f2d79ca",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn02-session-repository/shims/third-party.d.ts": "275135192fc5cb66ab4115965db18a9d46c6c054076921854a2e785b47ad194d",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn03-main/shims/third-party.d.ts": "8a4e90532ee966f1b21367315f524da159d40c7299a13cb691b5ec7c0586c245",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn04-file-schema/shims/third-party.d.ts": "1f6e00c5a5de6fc957fd9d86859baa573a1aebc915e9a31c78bc6130e2883f97",
+      "docs/thesis-experiments/corpus-b/fixtures/nest/bn05-files-service/shims/third-party.d.ts": "a70b5b971da6f16d1b8478ec567d6f6400bebc145ed155c830766c36d805a0bb",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br01-form-drawer/shims/third-party.d.ts": "9225d9b29e132710b348b3f02748aff9ca0db20fe2daba0d637b2c6e6bf7c701",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br02-textarea/shims/third-party.d.ts": "a2f340fc6d56a29b2a54d86fae3489b45523ba116dfaf23b98003387afa077c8",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br03-main/shims/third-party.d.ts": "f0c6e0cbcdca5c866247adc8aad39f4b3662be4830e90babc24d7f6956ea3c90",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br04-content-layout/shims/third-party.d.ts": "7fad6d55f404463d7b500f1ea167bc4b9ab433feac7a7333bc7c37bf0080e351",
+      "docs/thesis-experiments/corpus-b/fixtures/react/br05-input/shims/third-party.d.ts": "a2f340fc6d56a29b2a54d86fae3489b45523ba116dfaf23b98003387afa077c8",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv01-main/shims/third-party.d.ts": "2358121673e46751d499c92d833ef027691fe78616f0afa45c40fe2215407c7a",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv02-use-follow-profile/shims/third-party.d.ts": "2358121673e46751d499c92d833ef027691fe78616f0afa45c40fe2215407c7a",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv03-user/shims/third-party.d.ts": "fac867f3f3ffbdbe572fd971219db01d603a205f6068f530c10ec9478f1b7df9",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv04-use-async/shims/third-party.d.ts": "2358121673e46751d499c92d833ef027691fe78616f0afa45c40fe2215407c7a",
+      "docs/thesis-experiments/corpus-b/fixtures/vue/bv05-use-favorite-article/shims/third-party.d.ts": "2358121673e46751d499c92d833ef027691fe78616f0afa45c40fe2215407c7a"
+    },
+    "scorer": {
+      "docs/thesis-experiments/tools/exp01/score.mjs": "5f86d5eac630c2ef20d9a8e34e8bf421ad1733b138a833e3354cb8cd68550500",
+      "docs/thesis-experiments/tools/exp01/lib.mjs": "a6b8253a838b5dcfa872f195ada88c569a3e492d232f4c47cb6c12d6d6f577b3",
+      "docs/thesis-experiments/tools/exp01/validate-gt.mjs": "fe897d45a412341179150b89b040089d8f9b7ab004a13225dbac0d4cbdda472f"
+    },
+    "runner": {
+      "docs/thesis-experiments/tools/exp01-run.mjs": "046200e7a940616e95a154497648c4d1097bf2b09ba6b15a075ac75a72a43171"
+    },
+    "analyzer": {
+      "src/analyzer/adapters/express.ts": "3d73335f250a545898f0dd7cd289327f205ca760053101b70ca7464d9e5b9e11",
+      "src/analyzer/adapters/index.ts": "0e85818a6b6450ccd6b0e15af01ee1f3de89ddcef9efe10bd748f44a05f1c0d7",
+      "src/analyzer/adapters/nest.ts": "d18cad59dbd090a1a570afe016daf3bc2392c7213660082a34ae6d7ccdb95d1f",
+      "src/analyzer/adapters/react.ts": "0ff29b648618fcdedddd5a4a34a0cd71a4cffc24aaf25b26e2249c6f7fb2694d",
+      "src/analyzer/adapters/types.ts": "52b0a40fdc7b79f95716d2f1a086c82efc69de812381905d423eaba5c1974b40",
+      "src/analyzer/adapters/vue.ts": "7f21eb84868cb926b3c734aa04c0fc9ff561d6c81f4582d780c64610493a94ce",
+      "src/analyzer/analyze.ts": "de700121c542ac3c213745741de1008cf27a5ca21568b16b9715c9f42a4ed847",
+      "src/analyzer/index.ts": "053f9ad85e2b34a0d0959c0bc11e421218f5b79c57a08a7287aa40efc533e0f6"
+    },
+    "shared": {
+      "src/shared/protocol.ts": "a5abbc10cc853bf7c2d4c8c22e72abd87142c6fd2bb53bcb9f3e1a3652845c1f"
+    }
+  }
+}

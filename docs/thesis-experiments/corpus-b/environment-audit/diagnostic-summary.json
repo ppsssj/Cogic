@@ -1,0 +1,560 @@
+{
+  "schema": "corpus-b-env-diagnostic-summary/1",
+  "classifier": "corpus-b-env-diagnostics/1",
+  "typescript": "5.9.3",
+  "construction": "parseJsonConfigFileContent(case tsconfig.json) + createProgram + getPreEmitDiagnostics (as tools/exp01/validate-gt.mjs)",
+  "totals": {
+    "cases": 20,
+    "diagnostics": 1421,
+    "uniqueDiagnostics": 978,
+    "duplicateOccurrences": 443,
+    "duplicateRatio": 0.3118,
+    "validationReportTotal": 1421,
+    "reproducedPerCase": true
+  },
+  "byCategory": {
+    "Error": 1421
+  },
+  "byCode": {
+    "TS7026": 362,
+    "TS2709": 226,
+    "TS7006": 203,
+    "TS2591": 181,
+    "TS2694": 141,
+    "TS7031": 120,
+    "TS2875": 70,
+    "TS2347": 64,
+    "TS2304": 17,
+    "TS2503": 9,
+    "TS2339": 8,
+    "TS7019": 7,
+    "TS2584": 5,
+    "TS1064": 4,
+    "TS2322": 2,
+    "TS18046": 1,
+    "TS2635": 1
+  },
+  "byCodeUnique": {
+    "TS7026": 322,
+    "TS2709": 126,
+    "TS7006": 119,
+    "TS2694": 101,
+    "TS7031": 91,
+    "TS2591": 76,
+    "TS2875": 56,
+    "TS2347": 47,
+    "TS2304": 14,
+    "TS2503": 8,
+    "TS7019": 7,
+    "TS2339": 4,
+    "TS2322": 2,
+    "TS2584": 2,
+    "TS1064": 1,
+    "TS18046": 1,
+    "TS2635": 1
+  },
+  "byCause": {
+    "UNTYPED_EXTERNAL_DEPENDENCY": 759,
+    "MISSING_GLOBAL_TYPE": 573,
+    "UNRESOLVED_MODULE": 70,
+    "TSCONFIG_MISMATCH": 19
+  },
+  "byCauseUnique": {
+    "UNTYPED_EXTERNAL_DEPENDENCY": 492,
+    "MISSING_GLOBAL_TYPE": 417,
+    "UNRESOLVED_MODULE": 56,
+    "TSCONFIG_MISMATCH": 13
+  },
+  "byFramework": {
+    "react": 837,
+    "nest": 387,
+    "express": 172,
+    "vue": 25
+  },
+  "byFrameworkUnique": {
+    "react": 706,
+    "vue": 10,
+    "express": 53,
+    "nest": 209
+  },
+  "byCase": [
+    {
+      "caseId": "be01-userrouter",
+      "framework": "express",
+      "recollected": 53,
+      "validationReport": 53,
+      "same": true
+    },
+    {
+      "caseId": "be02-server",
+      "framework": "express",
+      "recollected": 53,
+      "validationReport": 53,
+      "same": true
+    },
+    {
+      "caseId": "be03-ratelimiter",
+      "framework": "express",
+      "recollected": 3,
+      "validationReport": 3,
+      "same": true
+    },
+    {
+      "caseId": "be04-errorhandler",
+      "framework": "express",
+      "recollected": 10,
+      "validationReport": 10,
+      "same": true
+    },
+    {
+      "caseId": "be05-usercontroller",
+      "framework": "express",
+      "recollected": 53,
+      "validationReport": 53,
+      "same": true
+    },
+    {
+      "caseId": "bn01-auth-google-controller",
+      "framework": "nest",
+      "recollected": 79,
+      "validationReport": 79,
+      "same": true
+    },
+    {
+      "caseId": "bn02-session-repository",
+      "framework": "nest",
+      "recollected": 59,
+      "validationReport": 59,
+      "same": true
+    },
+    {
+      "caseId": "bn03-main",
+      "framework": "nest",
+      "recollected": 209,
+      "validationReport": 209,
+      "same": true
+    },
+    {
+      "caseId": "bn04-file-schema",
+      "framework": "nest",
+      "recollected": 2,
+      "validationReport": 2,
+      "same": true
+    },
+    {
+      "caseId": "bn05-files-service",
+      "framework": "nest",
+      "recollected": 38,
+      "validationReport": 38,
+      "same": true
+    },
+    {
+      "caseId": "br01-form-drawer",
+      "framework": "react",
+      "recollected": 62,
+      "validationReport": 62,
+      "same": true
+    },
+    {
+      "caseId": "br02-textarea",
+      "framework": "react",
+      "recollected": 28,
+      "validationReport": 28,
+      "same": true
+    },
+    {
+      "caseId": "br03-main",
+      "framework": "react",
+      "recollected": 706,
+      "validationReport": 706,
+      "same": true
+    },
+    {
+      "caseId": "br04-content-layout",
+      "framework": "react",
+      "recollected": 12,
+      "validationReport": 12,
+      "same": true
+    },
+    {
+      "caseId": "br05-input",
+      "framework": "react",
+      "recollected": 29,
+      "validationReport": 29,
+      "same": true
+    },
+    {
+      "caseId": "bv01-main",
+      "framework": "vue",
+      "recollected": 5,
+      "validationReport": 5,
+      "same": true
+    },
+    {
+      "caseId": "bv02-use-follow-profile",
+      "framework": "vue",
+      "recollected": 7,
+      "validationReport": 7,
+      "same": true
+    },
+    {
+      "caseId": "bv03-user",
+      "framework": "vue",
+      "recollected": 1,
+      "validationReport": 1,
+      "same": true
+    },
+    {
+      "caseId": "bv04-use-async",
+      "framework": "vue",
+      "recollected": 5,
+      "validationReport": 5,
+      "same": true
+    },
+    {
+      "caseId": "bv05-use-favorite-article",
+      "framework": "vue",
+      "recollected": 7,
+      "validationReport": 7,
+      "same": true
+    }
+  ],
+  "byLocation": {
+    "DEPENDENCY_FILE": 1350,
+    "ACTIVE_FILE": 71
+  },
+  "byImpact": {
+    "DEPENDENCY_FILE_ONLY": 937,
+    "NONE": 432,
+    "EXTERNAL_OR_GLOBAL_TYPE_ONLY": 34,
+    "LOCAL_VALUE_TYPE_DEGRADED": 18
+  },
+  "activeFile": {
+    "diagnostics": 71,
+    "byCase": {
+      "br05-input": 11,
+      "be04-errorhandler": 10,
+      "br02-textarea": 10,
+      "br04-content-layout": 10,
+      "br01-form-drawer": 9,
+      "be05-usercontroller": 6,
+      "bn03-main": 2,
+      "bn05-files-service": 2,
+      "bv02-use-follow-profile": 2,
+      "bv05-use-favorite-article": 2,
+      "be01-userrouter": 1,
+      "be02-server": 1,
+      "be03-ratelimiter": 1,
+      "bn02-session-repository": 1,
+      "bn04-file-schema": 1,
+      "br03-main": 1,
+      "bv04-use-async": 1
+    },
+    "byCode": {
+      "TS2709": 23,
+      "TS7026": 14,
+      "TS7006": 9,
+      "TS7031": 9,
+      "TS2694": 6,
+      "TS2875": 5,
+      "TS2347": 2,
+      "TS2503": 1,
+      "TS2591": 1,
+      "TS2635": 1
+    },
+    "byCause": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 50,
+      "MISSING_GLOBAL_TYPE": 16,
+      "UNRESOLVED_MODULE": 5
+    },
+    "byImpact": {
+      "EXTERNAL_OR_GLOBAL_TYPE_ONLY": 34,
+      "NONE": 19,
+      "LOCAL_VALUE_TYPE_DEGRADED": 18
+    }
+  },
+  "causeByFramework": {
+    "react": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 393,
+      "MISSING_GLOBAL_TYPE": 374,
+      "UNRESOLVED_MODULE": 70
+    },
+    "vue": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 20,
+      "MISSING_GLOBAL_TYPE": 5
+    },
+    "express": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 164,
+      "MISSING_GLOBAL_TYPE": 4,
+      "TSCONFIG_MISMATCH": 4
+    },
+    "nest": {
+      "MISSING_GLOBAL_TYPE": 190,
+      "UNTYPED_EXTERNAL_DEPENDENCY": 182,
+      "TSCONFIG_MISMATCH": 15
+    }
+  },
+  "causeByCode": {
+    "TS7026": {
+      "MISSING_GLOBAL_TYPE": 362
+    },
+    "TS2709": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 226
+    },
+    "TS7006": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 195,
+      "MISSING_GLOBAL_TYPE": 8
+    },
+    "TS2591": {
+      "MISSING_GLOBAL_TYPE": 181
+    },
+    "TS2694": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 141
+    },
+    "TS7031": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 120
+    },
+    "TS2875": {
+      "UNRESOLVED_MODULE": 70
+    },
+    "TS2347": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 64
+    },
+    "TS2304": {
+      "TSCONFIG_MISMATCH": 14,
+      "MISSING_GLOBAL_TYPE": 3
+    },
+    "TS2503": {
+      "MISSING_GLOBAL_TYPE": 9
+    },
+    "TS2339": {
+      "MISSING_GLOBAL_TYPE": 8
+    },
+    "TS7019": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 7
+    },
+    "TS2584": {
+      "TSCONFIG_MISMATCH": 5
+    },
+    "TS1064": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 4
+    },
+    "TS2322": {
+      "MISSING_GLOBAL_TYPE": 2
+    },
+    "TS18046": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 1
+    },
+    "TS2635": {
+      "UNTYPED_EXTERNAL_DEPENDENCY": 1
+    }
+  },
+  "topUpstreamFiles": [
+    {
+      "file": "src/database/config/database.config.ts",
+      "occurrences": 78,
+      "unique": 26,
+      "cases": 3
+    },
+    {
+      "file": "src/config/app.config.ts",
+      "occurrences": 76,
+      "unique": 19,
+      "cases": 4
+    },
+    {
+      "file": "apps/react-vite/src/components/ui/drawer/drawer.tsx",
+      "occurrences": 58,
+      "unique": 29,
+      "cases": 2
+    },
+    {
+      "file": "apps/react-vite/src/components/ui/dropdown/dropdown.tsx",
+      "occurrences": 54,
+      "unique": 54,
+      "cases": 1
+    },
+    {
+      "file": "apps/react-vite/src/components/ui/table/table.tsx",
+      "occurrences": 48,
+      "unique": 48,
+      "cases": 1
+    },
+    {
+      "file": "apps/react-vite/src/components/ui/form/form.tsx",
+      "occurrences": 47,
+      "unique": 47,
+      "cases": 1
+    },
+    {
+      "file": "src/files/config/file.config.ts",
+      "occurrences": 44,
+      "unique": 11,
+      "cases": 4
+    },
+    {
+      "file": "src/common/middleware/requestLogger.ts",
+      "occurrences": 42,
+      "unique": 14,
+      "cases": 3
+    },
+    {
+      "file": "src/common/middleware/errorHandler.ts",
+      "occurrences": 40,
+      "unique": 10,
+      "cases": 4
+    },
+    {
+      "file": "apps/react-vite/src/components/layouts/dashboard-layout.tsx",
+      "occurrences": 34,
+      "unique": 34,
+      "cases": 1
+    },
+    {
+      "file": "apps/react-vite/src/components/ui/button/button.tsx",
+      "occurrences": 32,
+      "unique": 16,
+      "cases": 2
+    },
+    {
+      "file": "apps/react-vite/src/app/routes/app/dashboard.tsx",
+      "occurrences": 29,
+      "unique": 29,
+      "cases": 1
+    },
+    {
+      "file": "apps/react-vite/src/components/ui/dialog/dialog.tsx",
+      "occurrences": 28,
+      "unique": 28,
+      "cases": 1
+    },
+    {
+      "file": "apps/react-vite/src/app/routes/landing.tsx",
+      "occurrences": 26,
+      "unique": 26,
+      "cases": 1
+    },
+    {
+      "file": "apps/react-vite/src/components/ui/table/pagination.tsx",
+      "occurrences": 25,
+      "unique": 25,
+      "cases": 1
+    }
+  ],
+  "tsconfigMismatchVerification": [
+    {
+      "caseId": "be01-userrouter",
+      "tsconfigMismatchDiagnostics": 1,
+      "goneWithUpstreamLib": 1,
+      "otherDiagnosticsGone": 15,
+      "newDiagnosticsWithUpstreamLib": 16,
+      "newDiagnosticCodes": {
+        "2339": 10,
+        "2349": 4,
+        "7052": 2
+      }
+    },
+    {
+      "caseId": "be02-server",
+      "tsconfigMismatchDiagnostics": 1,
+      "goneWithUpstreamLib": 1,
+      "otherDiagnosticsGone": 15,
+      "newDiagnosticsWithUpstreamLib": 16,
+      "newDiagnosticCodes": {
+        "2339": 10,
+        "2349": 4,
+        "7052": 2
+      }
+    },
+    {
+      "caseId": "be03-ratelimiter",
+      "tsconfigMismatchDiagnostics": 1,
+      "goneWithUpstreamLib": 1,
+      "otherDiagnosticsGone": 1,
+      "newDiagnosticsWithUpstreamLib": 1,
+      "newDiagnosticCodes": {
+        "2339": 1
+      }
+    },
+    {
+      "caseId": "be04-errorhandler",
+      "tsconfigMismatchDiagnostics": 0,
+      "goneWithUpstreamLib": 0,
+      "otherDiagnosticsGone": 0,
+      "newDiagnosticsWithUpstreamLib": 0,
+      "newDiagnosticCodes": {}
+    },
+    {
+      "caseId": "be05-usercontroller",
+      "tsconfigMismatchDiagnostics": 1,
+      "goneWithUpstreamLib": 1,
+      "otherDiagnosticsGone": 15,
+      "newDiagnosticsWithUpstreamLib": 16,
+      "newDiagnosticCodes": {
+        "2339": 10,
+        "2349": 4,
+        "7052": 2
+      }
+    },
+    {
+      "caseId": "bn01-auth-google-controller",
+      "tsconfigMismatchDiagnostics": 3,
+      "goneWithUpstreamLib": 3,
+      "otherDiagnosticsGone": 0,
+      "newDiagnosticsWithUpstreamLib": 0,
+      "newDiagnosticCodes": {}
+    },
+    {
+      "caseId": "bn02-session-repository",
+      "tsconfigMismatchDiagnostics": 0,
+      "goneWithUpstreamLib": 0,
+      "otherDiagnosticsGone": 0,
+      "newDiagnosticsWithUpstreamLib": 0,
+      "newDiagnosticCodes": {}
+    },
+    {
+      "caseId": "bn03-main",
+      "tsconfigMismatchDiagnostics": 12,
+      "goneWithUpstreamLib": 12,
+      "otherDiagnosticsGone": 1,
+      "newDiagnosticsWithUpstreamLib": 0,
+      "newDiagnosticCodes": {}
+    },
+    {
+      "caseId": "bn04-file-schema",
+      "tsconfigMismatchDiagnostics": 0,
+      "goneWithUpstreamLib": 0,
+      "otherDiagnosticsGone": 0,
+      "newDiagnosticsWithUpstreamLib": 0,
+      "newDiagnosticCodes": {}
+    },
+    {
+      "caseId": "bn05-files-service",
+      "tsconfigMismatchDiagnostics": 0,
+      "goneWithUpstreamLib": 0,
+      "otherDiagnosticsGone": 0,
+      "newDiagnosticsWithUpstreamLib": 0,
+      "newDiagnosticCodes": {}
+    }
+  ],
+  "unknown": [],
+  "causeCriteria": {
+    "UNRESOLVED_MODULE": "A module specifier (relative, bare or implied such as react/jsx-runtime) resolves to no file and no ambient declaration (TS2307, TS2792, TS2875) and is not a path-alias specifier.",
+    "MISSING_EXPORT": "A name is imported from or qualified through a corpus-local module that does not export it (TS2305, TS2614, TS2724, or TS2694 on a local module).",
+    "UNTYPED_EXTERNAL_DEPENDENCY": "The diagnostic exists because a third-party module is a shorthand ambient module (`declare module \"x\";`): a namespace/type taken from it (TS2709, TS2694), type arguments or signatures on its `any` values (TS2347, TS2635), an implicit-any parameter whose contextual type is lost because the enclosing call, JSX tag or annotation comes from it (TS7006, TS7031, TS7019), or a type error whose operand is traced to it.",
+    "TYPE_ASSIGNMENT_ERROR": "An assignability error (TS2322, TS2345 ...) whose operands are not traced to the environment: a candidate genuine type error of the vendored code.",
+    "INVALID_CALL_SIGNATURE": "A call does not match any signature of a corpus-declared callee (TS2554, TS2555, TS2556, TS2769) and is not traced to the environment.",
+    "MISSING_GLOBAL_TYPE": "A global name, namespace or interface member that upstream gets from a declaration package (@types/node, @types/react JSX namespace, @types/express global Express, vite/client ImportMeta.env) is absent because Corpus B installs no packages (types: []).",
+    "TSCONFIG_MISMATCH": "The name would resolve from TypeScript's own lib files if the derived tsconfig used the upstream compiler options (here: the DOM-less `lib` override for Express/NestJS); verified by the lib-override variant run.",
+    "PATH_ALIAS_RESOLUTION": "A specifier that matches a `paths` alias of the case tsconfig does not resolve.",
+    "DECORATOR_CONFIGURATION": "Decorator syntax/semantics errors caused by decorator compiler options (TS1206, TS1219, TS1238-1241, TS1270, TS1271).",
+    "OTHER": "Cause identified but outside the categories above.",
+    "UNKNOWN": "Cause not established by the rules or the manual adjudication table."
+  },
+  "impactCriteria": {
+    "NONE": "No effect on symbol resolution: the construct is still parsed and its tag/callee identifiers resolve as before (JSX runtime module, intrinsic JSX element types).",
+    "EXTERNAL_OR_GLOBAL_TYPE_ONLY": "Only the type of a third-party or global entity is missing (it is `any` or unresolved). Such entities have no §2 node in Corpus B (ANNOTATION_ADDENDUM A2); corpus-local declarations resolve as before.",
+    "LOCAL_VALUE_TYPE_DEGRADED": "A corpus-local value or parameter gets type `any`/`unknown`. Member accesses on it cannot resolve; if its upstream type is a corpus-local type, a relation could be hidden. Checked empirically by the resolution comparison (gt-impact-report.md).",
+    "DEPENDENCY_FILE_ONLY": "Located in a vendored dependency file. The GT covers only the active file, so the diagnostic can matter only through the types the active file imports (covered by the resolution comparison)."
+  }
+}
