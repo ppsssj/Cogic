@@ -1,0 +1,212 @@
+{
+  "schema": "exp03-capacity-injection/1",
+  "method": "B (experimental-design.md §5): copy of compiled out/analyzer, one numeric literal replaced",
+  "tool": "exp03-cache-scalability/1",
+  "analyzer": {
+    "head": "bbe4cbf5b1f784d9223ca3d46d96058617687b12",
+    "buildHash": "2423b0d471b6e622a40b33695e2608503264ac0d06695c50284d0ed5e466ac36",
+    "typescript": "5.9.3",
+    "srcAnalyzerTree": "a2202f4a32a7515be37bdfe2334cde7b2a7f1fea"
+  },
+  "sourceDir": "<analyzer-root>/out/analyzer",
+  "originalFiles": {
+    "adapters/express.js": "744ad8e913aa53409c6ed6e70245ab9b56ba7fc003d9b02aff596d031fd29d01",
+    "adapters/express.js.map": "f9e7cdfe546780b89337c8187f2ecbac2b01e30314d099f46a5ed9502cf7f5ac",
+    "adapters/index.js": "f155d506d41461310379eba36d0708588423c011349f99eb103580dbfdecaca0",
+    "adapters/index.js.map": "214498ab52d86f1d29b543abcd706fcf475c6d0ab083a2ac6bee1c278acb8741",
+    "adapters/nest.js": "abd63e2bc3b3da28e2e617f45638f60c6455ca85c41261bb78b3ce776a430286",
+    "adapters/nest.js.map": "b4764a46eb089f5dc239ba33a3b14f6f0ff21fc3e7ac7a050e8b70f877932dfc",
+    "adapters/react.js": "c20a10ad8c66afd38cb1411aea1eb4674434ab738e030793212dda3c4924fe8e",
+    "adapters/react.js.map": "c387cc8096b1a08fa214d622e2671117b0a41e8a30b709a503642f079228b343",
+    "adapters/types.js": "273755bcf5b4fbe04560f2ac784987305f5a33240d7aa9a30420a02a06644c1f",
+    "adapters/types.js.map": "179fbcba09083148335fde550c650f6cc770e6a6a9ffba7d52d70cd59f1c821d",
+    "adapters/vue.js": "ee5d6efad6c32b2ef76b28a3e9b8cf1d2938d4d1305244c2a890d086b24aac45",
+    "adapters/vue.js.map": "29e3d7dd8ffde3aeea3abc68ac7f559b75d0ab43a95c99e3a21589721ed79fd8",
+    "analyze.js": "2e5fb47ddb55d6654629a1ffaae8038bd9caaf3624bc1842e67915ccd6004dbb",
+    "analyze.js.map": "4dd960959805bed92f446be9c168ee4d8d666c64c2c0f87acd6161a09c3fd4f2",
+    "index.js": "ba29afee867f2942951bce1f464632e61f2f8015e5293d52b5e1448a7689442e",
+    "index.js.map": "9c845b960e41cbc08320e154e5ce4bbb74eb15b4c6779aebc85efba8052c2987"
+  },
+  "constant": {
+    "file": "out/analyzer/analyze.js",
+    "line": 12,
+    "declaration": "const MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 800;",
+    "identifierOccurrences": 3
+  },
+  "builds": [
+    {
+      "id": "c400",
+      "capacity": 400,
+      "dir": "builds/c400",
+      "files": {
+        "adapters/express.js": "744ad8e913aa53409c6ed6e70245ab9b56ba7fc003d9b02aff596d031fd29d01",
+        "adapters/express.js.map": "f9e7cdfe546780b89337c8187f2ecbac2b01e30314d099f46a5ed9502cf7f5ac",
+        "adapters/index.js": "f155d506d41461310379eba36d0708588423c011349f99eb103580dbfdecaca0",
+        "adapters/index.js.map": "214498ab52d86f1d29b543abcd706fcf475c6d0ab083a2ac6bee1c278acb8741",
+        "adapters/nest.js": "abd63e2bc3b3da28e2e617f45638f60c6455ca85c41261bb78b3ce776a430286",
+        "adapters/nest.js.map": "b4764a46eb089f5dc239ba33a3b14f6f0ff21fc3e7ac7a050e8b70f877932dfc",
+        "adapters/react.js": "c20a10ad8c66afd38cb1411aea1eb4674434ab738e030793212dda3c4924fe8e",
+        "adapters/react.js.map": "c387cc8096b1a08fa214d622e2671117b0a41e8a30b709a503642f079228b343",
+        "adapters/types.js": "273755bcf5b4fbe04560f2ac784987305f5a33240d7aa9a30420a02a06644c1f",
+        "adapters/types.js.map": "179fbcba09083148335fde550c650f6cc770e6a6a9ffba7d52d70cd59f1c821d",
+        "adapters/vue.js": "ee5d6efad6c32b2ef76b28a3e9b8cf1d2938d4d1305244c2a890d086b24aac45",
+        "adapters/vue.js.map": "29e3d7dd8ffde3aeea3abc68ac7f559b75d0ab43a95c99e3a21589721ed79fd8",
+        "analyze.js": "a8cdc07eb9ecbbf0c695ab8b543315e25e2f200bb36742ef1c70e860b40ce5fd",
+        "analyze.js.map": "4dd960959805bed92f446be9c168ee4d8d666c64c2c0f87acd6161a09c3fd4f2",
+        "index.js": "ba29afee867f2942951bce1f464632e61f2f8015e5293d52b5e1448a7689442e",
+        "index.js.map": "9c845b960e41cbc08320e154e5ce4bbb74eb15b4c6779aebc85efba8052c2987"
+      },
+      "changedFiles": [
+        "analyze.js"
+      ],
+      "changedLines": [
+        {
+          "line": 12,
+          "before": "const MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 800;",
+          "after": "const MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 400;"
+        }
+      ],
+      "checks": {
+        "sameLineCount": true,
+        "changedLineCount": true,
+        "identifierOccurrencesUnchanged": true,
+        "roundTripRestoresOriginal": true,
+        "byteLengthDelta": true
+      },
+      "diffFile": "builds/c400.diff",
+      "diffSha256": "7578ee7cc59416524a5cff4b483afa5144f0c942e3623463e8d2d369e945d5b8",
+      "nodeModules": "junction -> <analyzer-root>/node_modules",
+      "load": {
+        "ok": true,
+        "exports": [
+          "analyzeActiveFile",
+          "analyzeWorkspaceActive",
+          "clearAnalyzerCaches",
+          "defaultFrameworkSemanticAdapters",
+          "invalidateAnalyzerFileCaches",
+          "resolveFrameworkCallbackHook",
+          "resolveFrameworkDecoratedMethodOwner",
+          "resolveFrameworkStateHook"
+        ],
+        "typescriptSameAsAnalyzerRoot": true,
+        "typescriptVersion": "5.9.3",
+        "analyzeJsLoadedFromBuild": true
+      },
+      "ok": true
+    },
+    {
+      "id": "c800",
+      "capacity": 800,
+      "dir": "builds/c800",
+      "files": {
+        "adapters/express.js": "744ad8e913aa53409c6ed6e70245ab9b56ba7fc003d9b02aff596d031fd29d01",
+        "adapters/express.js.map": "f9e7cdfe546780b89337c8187f2ecbac2b01e30314d099f46a5ed9502cf7f5ac",
+        "adapters/index.js": "f155d506d41461310379eba36d0708588423c011349f99eb103580dbfdecaca0",
+        "adapters/index.js.map": "214498ab52d86f1d29b543abcd706fcf475c6d0ab083a2ac6bee1c278acb8741",
+        "adapters/nest.js": "abd63e2bc3b3da28e2e617f45638f60c6455ca85c41261bb78b3ce776a430286",
+        "adapters/nest.js.map": "b4764a46eb089f5dc239ba33a3b14f6f0ff21fc3e7ac7a050e8b70f877932dfc",
+        "adapters/react.js": "c20a10ad8c66afd38cb1411aea1eb4674434ab738e030793212dda3c4924fe8e",
+        "adapters/react.js.map": "c387cc8096b1a08fa214d622e2671117b0a41e8a30b709a503642f079228b343",
+        "adapters/types.js": "273755bcf5b4fbe04560f2ac784987305f5a33240d7aa9a30420a02a06644c1f",
+        "adapters/types.js.map": "179fbcba09083148335fde550c650f6cc770e6a6a9ffba7d52d70cd59f1c821d",
+        "adapters/vue.js": "ee5d6efad6c32b2ef76b28a3e9b8cf1d2938d4d1305244c2a890d086b24aac45",
+        "adapters/vue.js.map": "29e3d7dd8ffde3aeea3abc68ac7f559b75d0ab43a95c99e3a21589721ed79fd8",
+        "analyze.js": "2e5fb47ddb55d6654629a1ffaae8038bd9caaf3624bc1842e67915ccd6004dbb",
+        "analyze.js.map": "4dd960959805bed92f446be9c168ee4d8d666c64c2c0f87acd6161a09c3fd4f2",
+        "index.js": "ba29afee867f2942951bce1f464632e61f2f8015e5293d52b5e1448a7689442e",
+        "index.js.map": "9c845b960e41cbc08320e154e5ce4bbb74eb15b4c6779aebc85efba8052c2987"
+      },
+      "changedFiles": [],
+      "changedLines": [],
+      "checks": {
+        "sameLineCount": true,
+        "changedLineCount": true,
+        "identifierOccurrencesUnchanged": true,
+        "roundTripRestoresOriginal": true,
+        "byteLengthDelta": true
+      },
+      "diffFile": "builds/c800.diff",
+      "diffSha256": "56842d7830cdfc727e62417a6b61870a22e432b05487ed296329d890e4b2ba1a",
+      "nodeModules": "junction -> <analyzer-root>/node_modules",
+      "load": {
+        "ok": true,
+        "exports": [
+          "analyzeActiveFile",
+          "analyzeWorkspaceActive",
+          "clearAnalyzerCaches",
+          "defaultFrameworkSemanticAdapters",
+          "invalidateAnalyzerFileCaches",
+          "resolveFrameworkCallbackHook",
+          "resolveFrameworkDecoratedMethodOwner",
+          "resolveFrameworkStateHook"
+        ],
+        "typescriptSameAsAnalyzerRoot": true,
+        "typescriptVersion": "5.9.3",
+        "analyzeJsLoadedFromBuild": true
+      },
+      "ok": true
+    },
+    {
+      "id": "c1600",
+      "capacity": 1600,
+      "dir": "builds/c1600",
+      "files": {
+        "adapters/express.js": "744ad8e913aa53409c6ed6e70245ab9b56ba7fc003d9b02aff596d031fd29d01",
+        "adapters/express.js.map": "f9e7cdfe546780b89337c8187f2ecbac2b01e30314d099f46a5ed9502cf7f5ac",
+        "adapters/index.js": "f155d506d41461310379eba36d0708588423c011349f99eb103580dbfdecaca0",
+        "adapters/index.js.map": "214498ab52d86f1d29b543abcd706fcf475c6d0ab083a2ac6bee1c278acb8741",
+        "adapters/nest.js": "abd63e2bc3b3da28e2e617f45638f60c6455ca85c41261bb78b3ce776a430286",
+        "adapters/nest.js.map": "b4764a46eb089f5dc239ba33a3b14f6f0ff21fc3e7ac7a050e8b70f877932dfc",
+        "adapters/react.js": "c20a10ad8c66afd38cb1411aea1eb4674434ab738e030793212dda3c4924fe8e",
+        "adapters/react.js.map": "c387cc8096b1a08fa214d622e2671117b0a41e8a30b709a503642f079228b343",
+        "adapters/types.js": "273755bcf5b4fbe04560f2ac784987305f5a33240d7aa9a30420a02a06644c1f",
+        "adapters/types.js.map": "179fbcba09083148335fde550c650f6cc770e6a6a9ffba7d52d70cd59f1c821d",
+        "adapters/vue.js": "ee5d6efad6c32b2ef76b28a3e9b8cf1d2938d4d1305244c2a890d086b24aac45",
+        "adapters/vue.js.map": "29e3d7dd8ffde3aeea3abc68ac7f559b75d0ab43a95c99e3a21589721ed79fd8",
+        "analyze.js": "7887e1fa3e9a54d0ec7a4979a6efc8979d4024dcaa2234f0f774d728ebe1c890",
+        "analyze.js.map": "4dd960959805bed92f446be9c168ee4d8d666c64c2c0f87acd6161a09c3fd4f2",
+        "index.js": "ba29afee867f2942951bce1f464632e61f2f8015e5293d52b5e1448a7689442e",
+        "index.js.map": "9c845b960e41cbc08320e154e5ce4bbb74eb15b4c6779aebc85efba8052c2987"
+      },
+      "changedFiles": [
+        "analyze.js"
+      ],
+      "changedLines": [
+        {
+          "line": 12,
+          "before": "const MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 800;",
+          "after": "const MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 1600;"
+        }
+      ],
+      "checks": {
+        "sameLineCount": true,
+        "changedLineCount": true,
+        "identifierOccurrencesUnchanged": true,
+        "roundTripRestoresOriginal": true,
+        "byteLengthDelta": true
+      },
+      "diffFile": "builds/c1600.diff",
+      "diffSha256": "f840d88a3b4b58105311d220b9234a5dac6f1a791a392c4d41f3471bc6d1ed5f",
+      "nodeModules": "junction -> <analyzer-root>/node_modules",
+      "load": {
+        "ok": true,
+        "exports": [
+          "analyzeActiveFile",
+          "analyzeWorkspaceActive",
+          "clearAnalyzerCaches",
+          "defaultFrameworkSemanticAdapters",
+          "invalidateAnalyzerFileCaches",
+          "resolveFrameworkCallbackHook",
+          "resolveFrameworkDecoratedMethodOwner",
+          "resolveFrameworkStateHook"
+        ],
+        "typescriptSameAsAnalyzerRoot": true,
+        "typescriptVersion": "5.9.3",
+        "analyzeJsLoadedFromBuild": true
+      },
+      "ok": true
+    }
+  ],
+  "status": "OK",
+  "preparedAt": "2026-10-31T07:51:11.640Z"
+}

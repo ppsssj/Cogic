@@ -1,0 +1,5 @@
+--- original/out/analyzer/analyze.js
++++ c400/out/analyzer/analyze.js
+@@ -12,1 +12,1 @@
+-const MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 800;
++const MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 400;

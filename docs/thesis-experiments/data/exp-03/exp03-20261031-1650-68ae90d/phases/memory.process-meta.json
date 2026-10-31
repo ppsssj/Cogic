@@ -1,0 +1,338 @@
+[
+  {
+    "file": "blocks/b1/n100.c1600.sourcefile.active-edit.meta.json",
+    "workload": "n100",
+    "build": "c1600",
+    "capacity": 1600,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 259,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 128660616,
+      "heapUsedAfterClearGc": 29892056,
+      "rssAfterClearGc": 228868096,
+      "cacheRetainedEstimate": 98768560
+    },
+    "gcEntries": 67,
+    "pid": 1536,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n100.c400.sourcefile.active-edit.meta.json",
+    "workload": "n100",
+    "build": "c400",
+    "capacity": 400,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 259,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 128668184,
+      "heapUsedAfterClearGc": 29898784,
+      "rssAfterClearGc": 229736448,
+      "cacheRetainedEstimate": 98769400
+    },
+    "gcEntries": 66,
+    "pid": 22472,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n100.c800.sourcefile.active-edit.meta.json",
+    "workload": "n100",
+    "build": "c800",
+    "capacity": 800,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 259,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 128669752,
+      "heapUsedAfterClearGc": 29901280,
+      "rssAfterClearGc": 232849408,
+      "cacheRetainedEstimate": 98768472
+    },
+    "gcEntries": 67,
+    "pid": 26548,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n100.original.off.active-edit.meta.json",
+    "workload": "n100",
+    "build": "original",
+    "capacity": 800,
+    "mode": "off",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 0,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 30077056,
+      "heapUsedAfterClearGc": 30079400,
+      "rssAfterClearGc": 231751680,
+      "cacheRetainedEstimate": -2344
+    },
+    "gcEntries": 343,
+    "pid": 7268,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n1000.c1600.sourcefile.active-edit.meta.json",
+    "workload": "n1000",
+    "build": "c1600",
+    "capacity": 1600,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 1159,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 154002688,
+      "heapUsedAfterClearGc": 30998872,
+      "rssAfterClearGc": 239472640,
+      "cacheRetainedEstimate": 123003816
+    },
+    "gcEntries": 100,
+    "pid": 8212,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n1000.c400.sourcefile.active-edit.meta.json",
+    "workload": "n1000",
+    "build": "c400",
+    "capacity": 400,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 400,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 134324480,
+      "heapUsedAfterClearGc": 33226664,
+      "rssAfterClearGc": 332034048,
+      "cacheRetainedEstimate": 101097816
+    },
+    "gcEntries": 475,
+    "pid": 25056,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n1000.c800.sourcefile.active-edit.meta.json",
+    "workload": "n1000",
+    "build": "c800",
+    "capacity": 800,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 800,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 145140000,
+      "heapUsedAfterClearGc": 33182496,
+      "rssAfterClearGc": 340791296,
+      "cacheRetainedEstimate": 111957504
+    },
+    "gcEntries": 523,
+    "pid": 22256,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n1000.original.off.active-edit.meta.json",
+    "workload": "n1000",
+    "build": "original",
+    "capacity": 800,
+    "mode": "off",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 0,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 30820616,
+      "heapUsedAfterClearGc": 30822960,
+      "rssAfterClearGc": 240013312,
+      "cacheRetainedEstimate": -2344
+    },
+    "gcEntries": 432,
+    "pid": 15896,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n2000.c1600.sourcefile.active-edit.meta.json",
+    "workload": "n2000",
+    "build": "c1600",
+    "capacity": 1600,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 1600,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 167302544,
+      "heapUsedAfterClearGc": 33641904,
+      "rssAfterClearGc": 422965248,
+      "cacheRetainedEstimate": 133660640
+    },
+    "gcEntries": 892,
+    "pid": 7180,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n2000.c400.sourcefile.active-edit.meta.json",
+    "workload": "n2000",
+    "build": "c400",
+    "capacity": 400,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 400,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 134777952,
+      "heapUsedAfterClearGc": 33658784,
+      "rssAfterClearGc": 423772160,
+      "cacheRetainedEstimate": 101119168
+    },
+    "gcEntries": 615,
+    "pid": 19600,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n2000.c800.sourcefile.active-edit.meta.json",
+    "workload": "n2000",
+    "build": "c800",
+    "capacity": 800,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 800,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 145634976,
+      "heapUsedAfterClearGc": 33648536,
+      "rssAfterClearGc": 423219200,
+      "cacheRetainedEstimate": 111986440
+    },
+    "gcEntries": 726,
+    "pid": 21424,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n2000.original.off.active-edit.meta.json",
+    "workload": "n2000",
+    "build": "original",
+    "capacity": 800,
+    "mode": "off",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 0,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 31230928,
+      "heapUsedAfterClearGc": 31233272,
+      "rssAfterClearGc": 422469632,
+      "cacheRetainedEstimate": -2344
+    },
+    "gcEntries": 524,
+    "pid": 9156,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n500.c1600.sourcefile.active-edit.meta.json",
+    "workload": "n500",
+    "build": "c1600",
+    "capacity": 1600,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 659,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 139991728,
+      "heapUsedAfterClearGc": 30464048,
+      "rssAfterClearGc": 237182976,
+      "cacheRetainedEstimate": 109527680
+    },
+    "gcEntries": 82,
+    "pid": 19260,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n500.c400.sourcefile.active-edit.meta.json",
+    "workload": "n500",
+    "build": "c400",
+    "capacity": 400,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 400,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 134105392,
+      "heapUsedAfterClearGc": 32999784,
+      "rssAfterClearGc": 314638336,
+      "cacheRetainedEstimate": 101105608
+    },
+    "gcEntries": 395,
+    "pid": 1392,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n500.c800.sourcefile.active-edit.meta.json",
+    "workload": "n500",
+    "build": "c800",
+    "capacity": 800,
+    "mode": "sourcefile",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 659,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 139987248,
+      "heapUsedAfterClearGc": 30461200,
+      "rssAfterClearGc": 236601344,
+      "cacheRetainedEstimate": 109526048
+    },
+    "gcEntries": 82,
+    "pid": 24100,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  },
+  {
+    "file": "blocks/b1/n500.original.off.active-edit.meta.json",
+    "workload": "n500",
+    "build": "original",
+    "capacity": 800,
+    "mode": "off",
+    "scenario": "active-edit",
+    "kind": "memory",
+    "occupancyDirectAtEnd": 0,
+    "memoryTail": {
+      "heapUsedAfterGcWithCache": 30566448,
+      "heapUsedAfterClearGc": 30568792,
+      "rssAfterClearGc": 242929664,
+      "cacheRetainedEstimate": -2344
+    },
+    "gcEntries": 382,
+    "pid": 10080,
+    "execArgv": [
+      "--expose-gc"
+    ]
+  }
+]
