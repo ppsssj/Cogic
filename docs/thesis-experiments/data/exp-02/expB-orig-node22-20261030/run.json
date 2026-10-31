@@ -1,0 +1,45 @@
+{
+  "schema": "exp02-run/1",
+  "tool": "exp02-cache-benchmark/1.2",
+  "toolCommit": "5855704f04b8d45358ff62322126f4deaa2828bc",
+  "toolSha256": "92a868460d3308d31bace961722ac7cccdbcd849ccbe186348630dab1d86fd07",
+  "originalScriptSha256": "4495a5964ef8a824d72b07c9095ba0a4aadb1228f1ca050a925286475ab87c5e",
+  "runId": "expB-orig-node22-20261030",
+  "group": "B",
+  "groupName": "CURRENT_ANALYZER_EVALUATION",
+  "pilot": false,
+  "protocol": "orig",
+  "nodeLabel": "v22.16.0",
+  "seed": 20261102,
+  "warmupRuns": 5,
+  "measuredRuns": 30,
+  "blocks": null,
+  "filters": {
+    "targets": null,
+    "scenarios": null,
+    "modes": null
+  },
+  "analyzer": {
+    "ok": true,
+    "problems": [],
+    "group": "B",
+    "groupName": "CURRENT_ANALYZER_EVALUATION",
+    "head": "bbe4cbf5b1f784d9223ca3d46d96058617687b12",
+    "srcAnalyzerTree": "a2202f4a32a7515be37bdfe2334cde7b2a7f1fea",
+    "srcTree": "1426710189f973f0b1b524fb86bdee1e412cb285",
+    "buildHash": "2423b0d471b6e622a40b33695e2608503264ac0d06695c50284d0ed5e466ac36",
+    "typescript": "5.9.3",
+    "srcEqualsHistoricalD9faa02": false
+  },
+  "workloads": {
+    "cogicCommit": "d9faa0221760f6d1b345ae067a3b37362562e1a0",
+    "zodCommit": "e6b6ab347675cd2bd54b1bdbed16f98c59be82a9",
+    "historicalCommit": "d9faa0221760f6d1b345ae067a3b37362562e1a0"
+  },
+  "command": "node docs/thesis-experiments/tools/exp02-cache-benchmark.mjs run --group B --analyzer-root <path> --cogic-workload <path> --work-dir <path> --out-root <path> --run-id expB-orig-node22-20261030 --protocol orig --node-label v22.16.0",
+  "startedAt": "2026-10-30T10:50:48.070Z",
+  "status": "COMPLETE",
+  "failures": [],
+  "finishedAt": "2026-10-30T11:14:34.692Z",
+  "conditionsMeasured": 54
+}

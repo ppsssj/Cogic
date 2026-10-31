@@ -1,0 +1,119 @@
+{
+  "schema": "exp02-integrity/1",
+  "before": {
+    "ok": true,
+    "files": [
+      {
+        "file": "docs/benchmarks/analysis-cache/README.md",
+        "expected": "c4985f69e37f45f871d0b180c6a0b5be87ccbc5c5dafda2205121be5f660057b",
+        "actual": "c4985f69e37f45f871d0b180c6a0b5be87ccbc5c5dafda2205121be5f660057b",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/future-work.md",
+        "expected": "7a1de248f5a45260b0265f176f12db4aee0f00678ab7029bd8edd6c3a44dcec6",
+        "actual": "7a1de248f5a45260b0265f176f12db4aee0f00678ab7029bd8edd6c3a44dcec6",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/limitations.md",
+        "expected": "ef3ba5e7d322c62853e64ed05c3a0e0b4ecbf55c1651acbc040486c3acee6f9a",
+        "actual": "ef3ba5e7d322c62853e64ed05c3a0e0b4ecbf55c1651acbc040486c3acee6f9a",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/methodology.md",
+        "expected": "5d334de85a68cd9ad3a99772d955178c2da938371925f44c734c09884d3c5004",
+        "actual": "5d334de85a68cd9ad3a99772d955178c2da938371925f44c734c09884d3c5004",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/raw/analysis-cache-results.csv",
+        "expected": "ad9a6b61e74c7030822a644cc1c03d04c830e9270c5e4da37ca7e9283f39ddc8",
+        "actual": "ad9a6b61e74c7030822a644cc1c03d04c830e9270c5e4da37ca7e9283f39ddc8",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/raw/analysis-cache-results.json",
+        "expected": "15b6b4a54999348fc09b4b956e09e6743fb27d1dd64b2b0076ad39b160cf6d37",
+        "actual": "15b6b4a54999348fc09b4b956e09e6743fb27d1dd64b2b0076ad39b160cf6d37",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/results.md",
+        "expected": "dd0c5e4a9941743e044a88609e6a070521ff96570f0a4a4f64142d226ee42281",
+        "actual": "dd0c5e4a9941743e044a88609e6a070521ff96570f0a4a4f64142d226ee42281",
+        "ok": true
+      },
+      {
+        "file": "scripts/benchmark-analysis-cache.mjs",
+        "expected": "4495a5964ef8a824d72b07c9095ba0a4aadb1228f1ca050a925286475ab87c5e",
+        "actual": "4495a5964ef8a824d72b07c9095ba0a4aadb1228f1ca050a925286475ab87c5e",
+        "ok": true
+      }
+    ]
+  },
+  "after": {
+    "ok": true,
+    "files": [
+      {
+        "file": "docs/benchmarks/analysis-cache/README.md",
+        "expected": "c4985f69e37f45f871d0b180c6a0b5be87ccbc5c5dafda2205121be5f660057b",
+        "actual": "c4985f69e37f45f871d0b180c6a0b5be87ccbc5c5dafda2205121be5f660057b",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/future-work.md",
+        "expected": "7a1de248f5a45260b0265f176f12db4aee0f00678ab7029bd8edd6c3a44dcec6",
+        "actual": "7a1de248f5a45260b0265f176f12db4aee0f00678ab7029bd8edd6c3a44dcec6",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/limitations.md",
+        "expected": "ef3ba5e7d322c62853e64ed05c3a0e0b4ecbf55c1651acbc040486c3acee6f9a",
+        "actual": "ef3ba5e7d322c62853e64ed05c3a0e0b4ecbf55c1651acbc040486c3acee6f9a",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/methodology.md",
+        "expected": "5d334de85a68cd9ad3a99772d955178c2da938371925f44c734c09884d3c5004",
+        "actual": "5d334de85a68cd9ad3a99772d955178c2da938371925f44c734c09884d3c5004",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/raw/analysis-cache-results.csv",
+        "expected": "ad9a6b61e74c7030822a644cc1c03d04c830e9270c5e4da37ca7e9283f39ddc8",
+        "actual": "ad9a6b61e74c7030822a644cc1c03d04c830e9270c5e4da37ca7e9283f39ddc8",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/raw/analysis-cache-results.json",
+        "expected": "15b6b4a54999348fc09b4b956e09e6743fb27d1dd64b2b0076ad39b160cf6d37",
+        "actual": "15b6b4a54999348fc09b4b956e09e6743fb27d1dd64b2b0076ad39b160cf6d37",
+        "ok": true
+      },
+      {
+        "file": "docs/benchmarks/analysis-cache/results.md",
+        "expected": "dd0c5e4a9941743e044a88609e6a070521ff96570f0a4a4f64142d226ee42281",
+        "actual": "dd0c5e4a9941743e044a88609e6a070521ff96570f0a4a4f64142d226ee42281",
+        "ok": true
+      },
+      {
+        "file": "scripts/benchmark-analysis-cache.mjs",
+        "expected": "4495a5964ef8a824d72b07c9095ba0a4aadb1228f1ca050a925286475ab87c5e",
+        "actual": "4495a5964ef8a824d72b07c9095ba0a4aadb1228f1ca050a925286475ab87c5e",
+        "ok": true
+      }
+    ]
+  },
+  "sampleInvariants": {
+    "problems": [],
+    "hashCompared": 1890,
+    "hashMismatch": 0,
+    "fullRepeatedAllResultHit": true,
+    "fullActiveEditResultHits": 0,
+    "problemCount": 0
+  },
+  "correctnessPass": true,
+  "conditions": 27
+}
