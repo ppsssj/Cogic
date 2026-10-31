@@ -1,0 +1,739 @@
+{
+  "schema": "exp03-phase/1",
+  "tool": "exp03-cache-scalability/1",
+  "toolCommit": "68ae90da6353814493a4cd4d1a547987bbe86983",
+  "toolSha256": "dbc00d5ed731286975435e069101aac69459ca0978c88af7caf5733b16c9a3b4",
+  "exp02ToolSha256": "92a868460d3308d31bace961722ac7cccdbcd849ccbe186348630dab1d86fd07",
+  "name": "time",
+  "label": null,
+  "pilot": false,
+  "seed": 20261103,
+  "startedAt": "2026-10-31T07:58:53.042Z",
+  "envStart": {
+    "os": "Windows_NT 10.0.26100 x64",
+    "osVersion": "Windows 11 Pro",
+    "cpu": "Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz",
+    "logicalCpus": 6,
+    "totalMemBytes": 8531333120,
+    "freeMemBytes": 3248291840,
+    "node": "v22.16.0",
+    "v8": "12.4.254.21-node.26",
+    "npm": "10.9.2",
+    "execArgv": [],
+    "nodeOptions": null,
+    "powerScheme": "���� ����ǥ GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (���� ����)"
+  },
+  "nodeExeSha256": "c5ff4c736112dd483c750fd4149d30c8a116db1a49b8b3ec88be4b65e6c86c19",
+  "cwd": "<analyzer-root>",
+  "analyzerBefore": {
+    "ok": true,
+    "identity": {
+      "head": "bbe4cbf5b1f784d9223ca3d46d96058617687b12",
+      "buildHash": "2423b0d471b6e622a40b33695e2608503264ac0d06695c50284d0ed5e466ac36",
+      "srcAnalyzerTree": "a2202f4a32a7515be37bdfe2334cde7b2a7f1fea",
+      "typescript": "5.9.3",
+      "problems": []
+    },
+    "builds": [
+      {
+        "id": "original",
+        "ok": true
+      },
+      {
+        "id": "c400",
+        "ok": true
+      },
+      {
+        "id": "c800",
+        "ok": true
+      },
+      {
+        "id": "c1600",
+        "ok": true
+      }
+    ]
+  },
+  "integrityBefore": {
+    "ok": true,
+    "trackedFiles": 276,
+    "trackedManifestSha256": "2172d11ffad930e4041289c02348f0ea90f11045946bfe34cc5c31f03008e88c",
+    "workingTreeEqualsHead": true,
+    "historicalBenchmark": {
+      "ok": true,
+      "files": [
+        {
+          "file": "docs/benchmarks/analysis-cache/README.md",
+          "expected": "c4985f69e37f45f871d0b180c6a0b5be87ccbc5c5dafda2205121be5f660057b",
+          "actual": "c4985f69e37f45f871d0b180c6a0b5be87ccbc5c5dafda2205121be5f660057b",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/future-work.md",
+          "expected": "7a1de248f5a45260b0265f176f12db4aee0f00678ab7029bd8edd6c3a44dcec6",
+          "actual": "7a1de248f5a45260b0265f176f12db4aee0f00678ab7029bd8edd6c3a44dcec6",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/limitations.md",
+          "expected": "ef3ba5e7d322c62853e64ed05c3a0e0b4ecbf55c1651acbc040486c3acee6f9a",
+          "actual": "ef3ba5e7d322c62853e64ed05c3a0e0b4ecbf55c1651acbc040486c3acee6f9a",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/methodology.md",
+          "expected": "5d334de85a68cd9ad3a99772d955178c2da938371925f44c734c09884d3c5004",
+          "actual": "5d334de85a68cd9ad3a99772d955178c2da938371925f44c734c09884d3c5004",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/raw/analysis-cache-results.csv",
+          "expected": "ad9a6b61e74c7030822a644cc1c03d04c830e9270c5e4da37ca7e9283f39ddc8",
+          "actual": "ad9a6b61e74c7030822a644cc1c03d04c830e9270c5e4da37ca7e9283f39ddc8",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/raw/analysis-cache-results.json",
+          "expected": "15b6b4a54999348fc09b4b956e09e6743fb27d1dd64b2b0076ad39b160cf6d37",
+          "actual": "15b6b4a54999348fc09b4b956e09e6743fb27d1dd64b2b0076ad39b160cf6d37",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/results.md",
+          "expected": "dd0c5e4a9941743e044a88609e6a070521ff96570f0a4a4f64142d226ee42281",
+          "actual": "dd0c5e4a9941743e044a88609e6a070521ff96570f0a4a4f64142d226ee42281",
+          "ok": true
+        },
+        {
+          "file": "scripts/benchmark-analysis-cache.mjs",
+          "expected": "4495a5964ef8a824d72b07c9095ba0a4aadb1228f1ca050a925286475ab87c5e",
+          "actual": "4495a5964ef8a824d72b07c9095ba0a4aadb1228f1ca050a925286475ab87c5e",
+          "ok": true
+        }
+      ]
+    },
+    "exp02RawZip": {
+      "file": "exp02-runs-20261030.zip",
+      "expected": "fea7da4646e16c9d97aded527c8efa43c2dcaca25df08afd60bdb2d9f46d02dc",
+      "actual": "fea7da4646e16c9d97aded527c8efa43c2dcaca25df08afd60bdb2d9f46d02dc",
+      "ok": true
+    }
+  },
+  "command": "node docs/thesis-experiments/tools/exp03-cache-scalability.mjs phase --name time --analyzer-root . --run-root <path> --work-dir <path> --exp02-zip <path>",
+  "status": "COMPLETE",
+  "failures": [],
+  "processes": [
+    {
+      "block": 1,
+      "process": "b1-01",
+      "condition": "n2000:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 65712,
+      "freeMemBefore": 3168333824,
+      "freeMemAfter": 3149885440
+    },
+    {
+      "block": 1,
+      "process": "b1-02",
+      "condition": "n2000:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 57913,
+      "freeMemBefore": 3167248384,
+      "freeMemAfter": 3236814848
+    },
+    {
+      "block": 1,
+      "process": "b1-03",
+      "condition": "n100:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 5433,
+      "freeMemBefore": 3236814848,
+      "freeMemAfter": 3517747200
+    },
+    {
+      "block": 1,
+      "process": "b1-04",
+      "condition": "n500:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 7877,
+      "freeMemBefore": 3517747200,
+      "freeMemAfter": 3516149760
+    },
+    {
+      "block": 1,
+      "process": "b1-05",
+      "condition": "n2000:original:off:active-edit",
+      "status": 0,
+      "wallMs": 53358,
+      "freeMemBefore": 3516133376,
+      "freeMemAfter": 3503202304
+    },
+    {
+      "block": 1,
+      "process": "b1-06",
+      "condition": "n100:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 5501,
+      "freeMemBefore": 3503202304,
+      "freeMemAfter": 3515604992
+    },
+    {
+      "block": 1,
+      "process": "b1-07",
+      "condition": "n500:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 30611,
+      "freeMemBefore": 3515596800,
+      "freeMemAfter": 3516198912
+    },
+    {
+      "block": 1,
+      "process": "b1-08",
+      "condition": "n500:original:off:active-edit",
+      "status": 0,
+      "wallMs": 29158,
+      "freeMemBefore": 3516198912,
+      "freeMemAfter": 3495350272
+    },
+    {
+      "block": 1,
+      "process": "b1-09",
+      "condition": "n1000:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 10659,
+      "freeMemBefore": 3495350272,
+      "freeMemAfter": 3491278848
+    },
+    {
+      "block": 1,
+      "process": "b1-10",
+      "condition": "n2000:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 60950,
+      "freeMemBefore": 3491278848,
+      "freeMemAfter": 3364290560
+    },
+    {
+      "block": 1,
+      "process": "b1-11",
+      "condition": "n1000:original:off:active-edit",
+      "status": 0,
+      "wallMs": 37516,
+      "freeMemBefore": 3364290560,
+      "freeMemAfter": 3203829760
+    },
+    {
+      "block": 1,
+      "process": "b1-12",
+      "condition": "n100:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 5444,
+      "freeMemBefore": 3202977792,
+      "freeMemAfter": 3185381376
+    },
+    {
+      "block": 1,
+      "process": "b1-13",
+      "condition": "n1000:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 41423,
+      "freeMemBefore": 3185393664,
+      "freeMemAfter": 3185668096
+    },
+    {
+      "block": 1,
+      "process": "b1-14",
+      "condition": "n500:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 7801,
+      "freeMemBefore": 3185651712,
+      "freeMemAfter": 3186311168
+    },
+    {
+      "block": 1,
+      "process": "b1-15",
+      "condition": "n100:original:off:active-edit",
+      "status": 0,
+      "wallMs": 22989,
+      "freeMemBefore": 3186311168,
+      "freeMemAfter": 3153555456
+    },
+    {
+      "block": 1,
+      "process": "b1-16",
+      "condition": "n1000:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 40070,
+      "freeMemBefore": 3153555456,
+      "freeMemAfter": 3178438656
+    },
+    {
+      "block": 2,
+      "process": "b2-01",
+      "condition": "n1000:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 41532,
+      "freeMemBefore": 3178438656,
+      "freeMemAfter": 3146956800
+    },
+    {
+      "block": 2,
+      "process": "b2-02",
+      "condition": "n1000:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 39848,
+      "freeMemBefore": 3146956800,
+      "freeMemAfter": 3098722304
+    },
+    {
+      "block": 2,
+      "process": "b2-03",
+      "condition": "n100:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 5354,
+      "freeMemBefore": 3098722304,
+      "freeMemAfter": 3097227264
+    },
+    {
+      "block": 2,
+      "process": "b2-04",
+      "condition": "n2000:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 60606,
+      "freeMemBefore": 3097227264,
+      "freeMemAfter": 3088711680
+    },
+    {
+      "block": 2,
+      "process": "b2-05",
+      "condition": "n100:original:off:active-edit",
+      "status": 0,
+      "wallMs": 23138,
+      "freeMemBefore": 3088711680,
+      "freeMemAfter": 3082178560
+    },
+    {
+      "block": 2,
+      "process": "b2-06",
+      "condition": "n1000:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 10680,
+      "freeMemBefore": 3082178560,
+      "freeMemAfter": 3096813568
+    },
+    {
+      "block": 2,
+      "process": "b2-07",
+      "condition": "n500:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 30943,
+      "freeMemBefore": 3096813568,
+      "freeMemAfter": 3074416640
+    },
+    {
+      "block": 2,
+      "process": "b2-08",
+      "condition": "n2000:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 65844,
+      "freeMemBefore": 3074383872,
+      "freeMemAfter": 3095711744
+    },
+    {
+      "block": 2,
+      "process": "b2-09",
+      "condition": "n500:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 7950,
+      "freeMemBefore": 3095711744,
+      "freeMemAfter": 3084574720
+    },
+    {
+      "block": 2,
+      "process": "b2-10",
+      "condition": "n1000:original:off:active-edit",
+      "status": 0,
+      "wallMs": 38396,
+      "freeMemBefore": 3084730368,
+      "freeMemAfter": 3056418816
+    },
+    {
+      "block": 2,
+      "process": "b2-11",
+      "condition": "n100:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 5423,
+      "freeMemBefore": 3056418816,
+      "freeMemAfter": 3063558144
+    },
+    {
+      "block": 2,
+      "process": "b2-12",
+      "condition": "n2000:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 58178,
+      "freeMemBefore": 3063558144,
+      "freeMemAfter": 3054632960
+    },
+    {
+      "block": 2,
+      "process": "b2-13",
+      "condition": "n100:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 5434,
+      "freeMemBefore": 3054628864,
+      "freeMemAfter": 3131772928
+    },
+    {
+      "block": 2,
+      "process": "b2-14",
+      "condition": "n2000:original:off:active-edit",
+      "status": 0,
+      "wallMs": 53766,
+      "freeMemBefore": 3131707392,
+      "freeMemAfter": 3082203136
+    },
+    {
+      "block": 2,
+      "process": "b2-15",
+      "condition": "n500:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 7892,
+      "freeMemBefore": 3082203136,
+      "freeMemAfter": 3082387456
+    },
+    {
+      "block": 2,
+      "process": "b2-16",
+      "condition": "n500:original:off:active-edit",
+      "status": 0,
+      "wallMs": 29379,
+      "freeMemBefore": 3082690560,
+      "freeMemAfter": 3071455232
+    },
+    {
+      "block": 3,
+      "process": "b3-01",
+      "condition": "n100:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 5482,
+      "freeMemBefore": 3071455232,
+      "freeMemAfter": 3085099008
+    },
+    {
+      "block": 3,
+      "process": "b3-02",
+      "condition": "n500:original:off:active-edit",
+      "status": 0,
+      "wallMs": 29410,
+      "freeMemBefore": 3085086720,
+      "freeMemAfter": 3053375488
+    },
+    {
+      "block": 3,
+      "process": "b3-03",
+      "condition": "n100:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 5609,
+      "freeMemBefore": 3053375488,
+      "freeMemAfter": 3040743424
+    },
+    {
+      "block": 3,
+      "process": "b3-04",
+      "condition": "n1000:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 41498,
+      "freeMemBefore": 3040743424,
+      "freeMemAfter": 3020791808
+    },
+    {
+      "block": 3,
+      "process": "b3-05",
+      "condition": "n500:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 30743,
+      "freeMemBefore": 3020722176,
+      "freeMemAfter": 3039227904
+    },
+    {
+      "block": 3,
+      "process": "b3-06",
+      "condition": "n500:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 7798,
+      "freeMemBefore": 3039219712,
+      "freeMemAfter": 3041738752
+    },
+    {
+      "block": 3,
+      "process": "b3-07",
+      "condition": "n1000:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 10786,
+      "freeMemBefore": 3041718272,
+      "freeMemAfter": 3022049280
+    },
+    {
+      "block": 3,
+      "process": "b3-08",
+      "condition": "n2000:c800:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 61740,
+      "freeMemBefore": 3022041088,
+      "freeMemAfter": 3054190592
+    },
+    {
+      "block": 3,
+      "process": "b3-09",
+      "condition": "n2000:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 66265,
+      "freeMemBefore": 3054190592,
+      "freeMemAfter": 3031482368
+    },
+    {
+      "block": 3,
+      "process": "b3-10",
+      "condition": "n100:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 5416,
+      "freeMemBefore": 3031482368,
+      "freeMemAfter": 3029213184
+    },
+    {
+      "block": 3,
+      "process": "b3-11",
+      "condition": "n2000:original:off:active-edit",
+      "status": 0,
+      "wallMs": 53500,
+      "freeMemBefore": 3029213184,
+      "freeMemAfter": 2979717120
+    },
+    {
+      "block": 3,
+      "process": "b3-12",
+      "condition": "n1000:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 39972,
+      "freeMemBefore": 2979717120,
+      "freeMemAfter": 3011883008
+    },
+    {
+      "block": 3,
+      "process": "b3-13",
+      "condition": "n1000:original:off:active-edit",
+      "status": 0,
+      "wallMs": 36965,
+      "freeMemBefore": 3011883008,
+      "freeMemAfter": 3020894208
+    },
+    {
+      "block": 3,
+      "process": "b3-14",
+      "condition": "n500:c1600:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 7836,
+      "freeMemBefore": 3020898304,
+      "freeMemAfter": 3027394560
+    },
+    {
+      "block": 3,
+      "process": "b3-15",
+      "condition": "n2000:c400:sourcefile:active-edit",
+      "status": 0,
+      "wallMs": 56794,
+      "freeMemBefore": 3027394560,
+      "freeMemAfter": 3013746688
+    },
+    {
+      "block": 3,
+      "process": "b3-16",
+      "condition": "n100:original:off:active-edit",
+      "status": 0,
+      "wallMs": 22941,
+      "freeMemBefore": 3013750784,
+      "freeMemAfter": 3015643136
+    }
+  ],
+  "kind": "time",
+  "warmupRuns": 5,
+  "measuredRuns": 30,
+  "blocks": 3,
+  "conditions": 16,
+  "order": [
+    {
+      "block": 1,
+      "conditions": [
+        "n2000:c1600:sourcefile:active-edit",
+        "n2000:c400:sourcefile:active-edit",
+        "n100:c400:sourcefile:active-edit",
+        "n500:c800:sourcefile:active-edit",
+        "n2000:original:off:active-edit",
+        "n100:c1600:sourcefile:active-edit",
+        "n500:c400:sourcefile:active-edit",
+        "n500:original:off:active-edit",
+        "n1000:c1600:sourcefile:active-edit",
+        "n2000:c800:sourcefile:active-edit",
+        "n1000:original:off:active-edit",
+        "n100:c800:sourcefile:active-edit",
+        "n1000:c800:sourcefile:active-edit",
+        "n500:c1600:sourcefile:active-edit",
+        "n100:original:off:active-edit",
+        "n1000:c400:sourcefile:active-edit"
+      ],
+      "freeMemAfterBlock": 3178438656
+    },
+    {
+      "block": 2,
+      "conditions": [
+        "n1000:c800:sourcefile:active-edit",
+        "n1000:c400:sourcefile:active-edit",
+        "n100:c400:sourcefile:active-edit",
+        "n2000:c800:sourcefile:active-edit",
+        "n100:original:off:active-edit",
+        "n1000:c1600:sourcefile:active-edit",
+        "n500:c400:sourcefile:active-edit",
+        "n2000:c1600:sourcefile:active-edit",
+        "n500:c800:sourcefile:active-edit",
+        "n1000:original:off:active-edit",
+        "n100:c1600:sourcefile:active-edit",
+        "n2000:c400:sourcefile:active-edit",
+        "n100:c800:sourcefile:active-edit",
+        "n2000:original:off:active-edit",
+        "n500:c1600:sourcefile:active-edit",
+        "n500:original:off:active-edit"
+      ],
+      "freeMemAfterBlock": 3071455232
+    },
+    {
+      "block": 3,
+      "conditions": [
+        "n100:c1600:sourcefile:active-edit",
+        "n500:original:off:active-edit",
+        "n100:c800:sourcefile:active-edit",
+        "n1000:c800:sourcefile:active-edit",
+        "n500:c400:sourcefile:active-edit",
+        "n500:c800:sourcefile:active-edit",
+        "n1000:c1600:sourcefile:active-edit",
+        "n2000:c800:sourcefile:active-edit",
+        "n2000:c1600:sourcefile:active-edit",
+        "n100:c400:sourcefile:active-edit",
+        "n2000:original:off:active-edit",
+        "n1000:c400:sourcefile:active-edit",
+        "n1000:original:off:active-edit",
+        "n500:c1600:sourcefile:active-edit",
+        "n2000:c400:sourcefile:active-edit",
+        "n100:original:off:active-edit"
+      ],
+      "freeMemAfterBlock": 3015643136
+    }
+  ],
+  "envEnd": {
+    "os": "Windows_NT 10.0.26100 x64",
+    "osVersion": "Windows 11 Pro",
+    "cpu": "Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz",
+    "logicalCpus": 6,
+    "totalMemBytes": 8531333120,
+    "freeMemBytes": 3007787008,
+    "node": "v22.16.0",
+    "v8": "12.4.254.21-node.26",
+    "npm": "10.9.2",
+    "execArgv": [],
+    "nodeOptions": null,
+    "powerScheme": "���� ����ǥ GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (���� ����)"
+  },
+  "analyzerAfter": {
+    "ok": true,
+    "identity": {
+      "head": "bbe4cbf5b1f784d9223ca3d46d96058617687b12",
+      "buildHash": "2423b0d471b6e622a40b33695e2608503264ac0d06695c50284d0ed5e466ac36",
+      "srcAnalyzerTree": "a2202f4a32a7515be37bdfe2334cde7b2a7f1fea",
+      "typescript": "5.9.3",
+      "problems": []
+    },
+    "builds": [
+      {
+        "id": "original",
+        "ok": true
+      },
+      {
+        "id": "c400",
+        "ok": true
+      },
+      {
+        "id": "c800",
+        "ok": true
+      },
+      {
+        "id": "c1600",
+        "ok": true
+      }
+    ]
+  },
+  "integrityAfter": {
+    "ok": true,
+    "trackedFiles": 276,
+    "trackedManifestSha256": "2172d11ffad930e4041289c02348f0ea90f11045946bfe34cc5c31f03008e88c",
+    "workingTreeEqualsHead": true,
+    "historicalBenchmark": {
+      "ok": true,
+      "files": [
+        {
+          "file": "docs/benchmarks/analysis-cache/README.md",
+          "expected": "c4985f69e37f45f871d0b180c6a0b5be87ccbc5c5dafda2205121be5f660057b",
+          "actual": "c4985f69e37f45f871d0b180c6a0b5be87ccbc5c5dafda2205121be5f660057b",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/future-work.md",
+          "expected": "7a1de248f5a45260b0265f176f12db4aee0f00678ab7029bd8edd6c3a44dcec6",
+          "actual": "7a1de248f5a45260b0265f176f12db4aee0f00678ab7029bd8edd6c3a44dcec6",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/limitations.md",
+          "expected": "ef3ba5e7d322c62853e64ed05c3a0e0b4ecbf55c1651acbc040486c3acee6f9a",
+          "actual": "ef3ba5e7d322c62853e64ed05c3a0e0b4ecbf55c1651acbc040486c3acee6f9a",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/methodology.md",
+          "expected": "5d334de85a68cd9ad3a99772d955178c2da938371925f44c734c09884d3c5004",
+          "actual": "5d334de85a68cd9ad3a99772d955178c2da938371925f44c734c09884d3c5004",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/raw/analysis-cache-results.csv",
+          "expected": "ad9a6b61e74c7030822a644cc1c03d04c830e9270c5e4da37ca7e9283f39ddc8",
+          "actual": "ad9a6b61e74c7030822a644cc1c03d04c830e9270c5e4da37ca7e9283f39ddc8",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/raw/analysis-cache-results.json",
+          "expected": "15b6b4a54999348fc09b4b956e09e6743fb27d1dd64b2b0076ad39b160cf6d37",
+          "actual": "15b6b4a54999348fc09b4b956e09e6743fb27d1dd64b2b0076ad39b160cf6d37",
+          "ok": true
+        },
+        {
+          "file": "docs/benchmarks/analysis-cache/results.md",
+          "expected": "dd0c5e4a9941743e044a88609e6a070521ff96570f0a4a4f64142d226ee42281",
+          "actual": "dd0c5e4a9941743e044a88609e6a070521ff96570f0a4a4f64142d226ee42281",
+          "ok": true
+        },
+        {
+          "file": "scripts/benchmark-analysis-cache.mjs",
+          "expected": "4495a5964ef8a824d72b07c9095ba0a4aadb1228f1ca050a925286475ab87c5e",
+          "actual": "4495a5964ef8a824d72b07c9095ba0a4aadb1228f1ca050a925286475ab87c5e",
+          "ok": true
+        }
+      ]
+    },
+    "exp02RawZip": {
+      "file": "exp02-runs-20261030.zip",
+      "expected": "fea7da4646e16c9d97aded527c8efa43c2dcaca25df08afd60bdb2d9f46d02dc",
+      "actual": "fea7da4646e16c9d97aded527c8efa43c2dcaca25df08afd60bdb2d9f46d02dc",
+      "ok": true
+    }
+  },
+  "finishedAt": "2026-10-31T08:23:04.137Z"
+}

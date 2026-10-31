@@ -227,3 +227,4 @@ node <repo>\docs\thesis-experiments\tools\exp03-report.mjs --run-root <run-root>
 | 버전 | 내용 |
 |---|---|
 | 1 | 최초(측정 전) |
+| 1 (측정 후 추가) | 규칙과 절차는 바꾸지 않았다. 측정 run `exp03-20261031-1650-68ae90d`의 관찰을 기록한다<br>- time phase 시작 가용 메모리 3.03 GB(§6 표의 "파일럿 때 1.3–1.9 GB"는 파일럿 값이다)<br>- repeated phase 처음 약 35초에 페이징이 몰렸다(최대 81,825 pages/s). [../exp03-results.md](../exp03-results.md) §10 |

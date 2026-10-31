@@ -1,0 +1,777 @@
+{
+  "schema": "exp03-workloads/1",
+  "tool": "exp03-cache-scalability/1",
+  "fixedAt": "2026-10-31T07:52:02.507Z",
+  "cwd": "<analyzer-root>",
+  "cwdNodeModules": {
+    "typesPackages": [
+      {
+        "name": "@types/estree",
+        "version": "1.0.8"
+      },
+      {
+        "name": "@types/istanbul-lib-coverage",
+        "version": "2.0.6"
+      },
+      {
+        "name": "@types/json-schema",
+        "version": "7.0.15"
+      },
+      {
+        "name": "@types/mocha",
+        "version": "10.0.10"
+      },
+      {
+        "name": "@types/node",
+        "version": "22.19.8"
+      },
+      {
+        "name": "@types/vscode",
+        "version": "1.108.1"
+      }
+    ],
+    "undiciTypes": "6.21.0",
+    "typescript": "5.9.3"
+  },
+  "generator": "exp02-cache-benchmark.mjs generateSyntheticWorkspace (copy of scripts/benchmark-analysis-cache.mjs fed34a0); notypes variant adds compilerOptions.types = []",
+  "probes": [
+    {
+      "id": "probe-n100",
+      "n": 100,
+      "types": "default",
+      "W": 259,
+      "L": 159
+    },
+    {
+      "id": "probe-n100-notypes",
+      "n": 100,
+      "types": "none",
+      "W": 150,
+      "L": 50
+    }
+  ],
+  "L": 159,
+  "Lnotypes": 50,
+  "boundaryRule": "N = C - L - 1, C - L, C - L + 1 (W = N + L)",
+  "priorTable": {
+    "L": 159,
+    "W": {
+      "100": 259,
+      "500": 659,
+      "1000": 1159,
+      "2000": 2159
+    }
+  },
+  "workloads": [
+    {
+      "id": "n100",
+      "n": 100,
+      "types": "default",
+      "roles": [
+        "main"
+      ],
+      "fileCount": 100,
+      "W": 259,
+      "L": 159,
+      "predictedW": 259,
+      "distinctRequests": 259,
+      "requestsByCategory": {
+        "workspace": 99,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "302038490ba384c8b8c8169cb8fff425a568be6500e71e541a4024d85e221935",
+      "requestsFile": "workloads/requests-n100.txt",
+      "contentSha256": "a2f60e4084069569e1e83af9584c5ecb6a96a6dd7600f5353e5bf5edc49b3766",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 100,
+      "activeFile": "entry.ts",
+      "offResultHash": "5a38dfec6778e7ef2265e54208d46938d3b96e30eb3343c8d60e79c7572c8458",
+      "offCounts": {
+        "nodes": 12,
+        "edges": 19,
+        "imports": 9,
+        "exports": 2,
+        "calls": 9,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "hit",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n500",
+      "n": 500,
+      "types": "default",
+      "roles": [
+        "main"
+      ],
+      "fileCount": 500,
+      "W": 659,
+      "L": 159,
+      "predictedW": 659,
+      "distinctRequests": 659,
+      "requestsByCategory": {
+        "workspace": 499,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "159d4ff867a6ad749b78294000eb83c68fdbf92bd1b1b713f953c9d7729ec0d4",
+      "requestsFile": "workloads/requests-n500.txt",
+      "contentSha256": "c9bc3bedb55d9245884de74abdff0ee2f9312a27dfd98e1d5a0eaa97fe1a061b",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 500,
+      "activeFile": "entry.ts",
+      "offResultHash": "3fbe911cba80d16df0c213afc20b872d2f0e3fa1a1d7ed8c7b37651531958921",
+      "offCounts": {
+        "nodes": 48,
+        "edges": 91,
+        "imports": 45,
+        "exports": 2,
+        "calls": 45,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n1000",
+      "n": 1000,
+      "types": "default",
+      "roles": [
+        "main"
+      ],
+      "fileCount": 1000,
+      "W": 1159,
+      "L": 159,
+      "predictedW": 1159,
+      "distinctRequests": 1159,
+      "requestsByCategory": {
+        "workspace": 999,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "9a67a8cda34fe837453ded69563972ebbc39d013fc3a992e8ab374b404c7777c",
+      "requestsFile": "workloads/requests-n1000.txt",
+      "contentSha256": "1ace3e97c08860ba4376b1057e3591751ca1223edf14c3ca15149bc6d011cc31",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 1000,
+      "activeFile": "entry.ts",
+      "offResultHash": "85edb6aebd588aec2d0a1ba65d2a6f5ed3d9e5c2e3b50b0df89a7b746bec088c",
+      "offCounts": {
+        "nodes": 92,
+        "edges": 179,
+        "imports": 89,
+        "exports": 2,
+        "calls": 60,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "miss",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n2000",
+      "n": 2000,
+      "types": "default",
+      "roles": [
+        "main"
+      ],
+      "fileCount": 2000,
+      "W": 2159,
+      "L": 159,
+      "predictedW": 2159,
+      "distinctRequests": 2159,
+      "requestsByCategory": {
+        "workspace": 1999,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "65d57aabe9fe174919703646b396a5fcef14d5bb4f3daf4c3b9a88b28bce717e",
+      "requestsFile": "workloads/requests-n2000.txt",
+      "contentSha256": "96a02e4f073fc422a1c45b1de6a58b8987f04792824ac4643fdf6d6ef76041a5",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 2000,
+      "activeFile": "entry.ts",
+      "offResultHash": "a05076ff8944d3884793a10d79fd2610fa10d439365ab052f36a42f20a0385ca",
+      "offCounts": {
+        "nodes": 183,
+        "edges": 361,
+        "imports": 180,
+        "exports": 2,
+        "calls": 60,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "miss",
+        "C1600": "miss"
+      }
+    },
+    {
+      "id": "n240",
+      "n": 240,
+      "types": "default",
+      "roles": [
+        "boundary:C400:C-1"
+      ],
+      "fileCount": 240,
+      "W": 399,
+      "L": 159,
+      "predictedW": 399,
+      "distinctRequests": 399,
+      "requestsByCategory": {
+        "workspace": 239,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "c019dda453f881c7e3a8abcadb43f58acd912e784674187b7e3128d4c7a06d81",
+      "requestsFile": "workloads/requests-n240.txt",
+      "contentSha256": "5c4e8f2c8ef8888ca4112c474a9f35d49b640cee54cdbed5230bddfc83a774d6",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 240,
+      "activeFile": "entry.ts",
+      "offResultHash": "26ede7cf6aff5e854e4d30e8cdc480c8b22d2d7c5de7062aec9970d00d0def06",
+      "offCounts": {
+        "nodes": 25,
+        "edges": 45,
+        "imports": 22,
+        "exports": 2,
+        "calls": 22,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "hit",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n241",
+      "n": 241,
+      "types": "default",
+      "roles": [
+        "boundary:C400:C"
+      ],
+      "fileCount": 241,
+      "W": 400,
+      "L": 159,
+      "predictedW": 400,
+      "distinctRequests": 400,
+      "requestsByCategory": {
+        "workspace": 240,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "ae567ca1827e327b1b22914fe2bc74fd4a3f35d3699e942574ed8fc0cdd881eb",
+      "requestsFile": "workloads/requests-n241.txt",
+      "contentSha256": "5f23a2f4895fa66fe673f4924b2270783bbb1dc4d53f437685cb5b95a068a624",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 241,
+      "activeFile": "entry.ts",
+      "offResultHash": "5d5465c6c68038ce32e889d1f34ea08c4326bad6a01f01bd90532d1a482646a5",
+      "offCounts": {
+        "nodes": 25,
+        "edges": 45,
+        "imports": 22,
+        "exports": 2,
+        "calls": 22,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "hit",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n242",
+      "n": 242,
+      "types": "default",
+      "roles": [
+        "boundary:C400:C+1"
+      ],
+      "fileCount": 242,
+      "W": 401,
+      "L": 159,
+      "predictedW": 401,
+      "distinctRequests": 401,
+      "requestsByCategory": {
+        "workspace": 241,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "e2d4598b55723817973cd2c3499e4b24d15212692ef7c708ada060c1db2caf8b",
+      "requestsFile": "workloads/requests-n242.txt",
+      "contentSha256": "83c3d89e812fae491ed615c8ed80be9879a10b5ce83f22418bfd233dff77b251",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 242,
+      "activeFile": "entry.ts",
+      "offResultHash": "c6b41911212fec43d7ab836c20611c9ed9c4898c2034a279285248bf63fcb0b5",
+      "offCounts": {
+        "nodes": 25,
+        "edges": 45,
+        "imports": 22,
+        "exports": 2,
+        "calls": 22,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n640",
+      "n": 640,
+      "types": "default",
+      "roles": [
+        "boundary:C800:C-1"
+      ],
+      "fileCount": 640,
+      "W": 799,
+      "L": 159,
+      "predictedW": 799,
+      "distinctRequests": 799,
+      "requestsByCategory": {
+        "workspace": 639,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "71db05c712ca4a466366ec9165b8535686ed75180b837b5639795fb7d376cd1c",
+      "requestsFile": "workloads/requests-n640.txt",
+      "contentSha256": "d3b4efc1dea29ce43616ea3e4256fade64b5351652cabad110b47a761b0a041c",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 640,
+      "activeFile": "entry.ts",
+      "offResultHash": "f6e6172f535dd11b6239b32e911ce862708cdb04f1f70ab6ff604b45d69daecf",
+      "offCounts": {
+        "nodes": 60,
+        "edges": 115,
+        "imports": 57,
+        "exports": 2,
+        "calls": 57,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n641",
+      "n": 641,
+      "types": "default",
+      "roles": [
+        "boundary:C800:C"
+      ],
+      "fileCount": 641,
+      "W": 800,
+      "L": 159,
+      "predictedW": 800,
+      "distinctRequests": 800,
+      "requestsByCategory": {
+        "workspace": 640,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "1f90163d5e8ef29069a383528e7ef2a9456813890bc194aa7d0c9f3a1e3d7459",
+      "requestsFile": "workloads/requests-n641.txt",
+      "contentSha256": "120a89ff18d7e9e1a55d65fb020abc08f8aab893a34c3c10eb69895cc1511165",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 641,
+      "activeFile": "entry.ts",
+      "offResultHash": "35c657046a1ddba536db66ad3cf7c53c3638c7268a6fbf93112473f37a189ed0",
+      "offCounts": {
+        "nodes": 61,
+        "edges": 117,
+        "imports": 58,
+        "exports": 2,
+        "calls": 58,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n642",
+      "n": 642,
+      "types": "default",
+      "roles": [
+        "boundary:C800:C+1"
+      ],
+      "fileCount": 642,
+      "W": 801,
+      "L": 159,
+      "predictedW": 801,
+      "distinctRequests": 801,
+      "requestsByCategory": {
+        "workspace": 641,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "aaf5fb14200401a0c74771fa3a5d92a49984b317377817d1d44c6f5709416647",
+      "requestsFile": "workloads/requests-n642.txt",
+      "contentSha256": "e74007cdcd05b11ab79bd63519665db1ed1e71824315358887fd763d038d14fb",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 642,
+      "activeFile": "entry.ts",
+      "offResultHash": "5bc2a50bfbb46999cefd8e29fad3ae83fdd0cd302a2be1898b78c61494435a0b",
+      "offCounts": {
+        "nodes": 61,
+        "edges": 117,
+        "imports": 58,
+        "exports": 2,
+        "calls": 58,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "miss",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n1440",
+      "n": 1440,
+      "types": "default",
+      "roles": [
+        "boundary:C1600:C-1"
+      ],
+      "fileCount": 1440,
+      "W": 1599,
+      "L": 159,
+      "predictedW": 1599,
+      "distinctRequests": 1599,
+      "requestsByCategory": {
+        "workspace": 1439,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "9be09ef8a7b893cf94b5d614b98ce5ed06942a47ccbf48db1be80a4cf3d7c39b",
+      "requestsFile": "workloads/requests-n1440.txt",
+      "contentSha256": "40e9216e2842ca05c6bc6b829fe0556b90e5d34ded85b3758fa6c4af087b30da",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 1440,
+      "activeFile": "entry.ts",
+      "offResultHash": "bc18d21bf516c70eda9d4b5adcd63d0048fe0470c3fc4eabf1905db48f963137",
+      "offCounts": {
+        "nodes": 132,
+        "edges": 259,
+        "imports": 129,
+        "exports": 2,
+        "calls": 60,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "miss",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n1441",
+      "n": 1441,
+      "types": "default",
+      "roles": [
+        "boundary:C1600:C"
+      ],
+      "fileCount": 1441,
+      "W": 1600,
+      "L": 159,
+      "predictedW": 1600,
+      "distinctRequests": 1600,
+      "requestsByCategory": {
+        "workspace": 1440,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "25c407f73dd6d1dd2aceb76a5c6df982d506a8ac253ef569faa13c92062489f4",
+      "requestsFile": "workloads/requests-n1441.txt",
+      "contentSha256": "67fc19c85deeed40c9339b0ff9456b0504bf346c7b23ef2c654acc1ea999e8ad",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 1441,
+      "activeFile": "entry.ts",
+      "offResultHash": "8ca19731fc39bf2f7efcbca33f0b68602c53e22e6fad12c28becc0366df359f3",
+      "offCounts": {
+        "nodes": 133,
+        "edges": 261,
+        "imports": 130,
+        "exports": 2,
+        "calls": 60,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "miss",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n1442",
+      "n": 1442,
+      "types": "default",
+      "roles": [
+        "boundary:C1600:C+1"
+      ],
+      "fileCount": 1442,
+      "W": 1601,
+      "L": 159,
+      "predictedW": 1601,
+      "distinctRequests": 1601,
+      "requestsByCategory": {
+        "workspace": 1441,
+        "@types": 72,
+        "other-node_modules": 37,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "ea32e337f716a1fac9c45506d1ca8afab3688311292adac233b24674d85b1889",
+      "requestsFile": "workloads/requests-n1442.txt",
+      "contentSha256": "8b287a03bb658cb2cb0b0d60de77fe694aee9511e278bacb8f0398756e3a3fc3",
+      "tsconfigSha256": "dbcb01b11307a37529eebe9f134eb19fb013dc9ee80f128614735b9969a9d259",
+      "usedTsconfig": true,
+      "programRootFiles": 1442,
+      "activeFile": "entry.ts",
+      "offResultHash": "32531e0bc8846379a664f16bc7b44948329432ebc918f499f0f17fcc3678aa7a",
+      "offCounts": {
+        "nodes": 133,
+        "edges": 261,
+        "imports": 130,
+        "exports": 2,
+        "calls": 60,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "miss",
+        "C1600": "miss"
+      }
+    },
+    {
+      "id": "n749-notypes",
+      "n": 749,
+      "types": "none",
+      "roles": [
+        "h3-4:C800:C-1"
+      ],
+      "fileCount": 749,
+      "W": 799,
+      "L": 50,
+      "predictedW": 799,
+      "distinctRequests": 799,
+      "requestsByCategory": {
+        "workspace": 748,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "1b55d3340232ff2e824405d6720d0da24dba73363af4441449d9c0cf487d3d59",
+      "requestsFile": "workloads/requests-n749-notypes.txt",
+      "contentSha256": "f4ca47dfee7f27824469e0ac41c48c78eef13bec16e49a2f9e81b7391e86175c",
+      "tsconfigSha256": "15270284f7a8543bd7161ac44f295adb6853e09515141b0989fe59c1709ac2cd",
+      "usedTsconfig": true,
+      "programRootFiles": 749,
+      "activeFile": "entry.ts",
+      "offResultHash": "0b03da22f8b292b43322d00862a04002a70bf7d9432b11f1ffe2da851f94e29b",
+      "offCounts": {
+        "nodes": 70,
+        "edges": 135,
+        "imports": 67,
+        "exports": 2,
+        "calls": 60,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n750-notypes",
+      "n": 750,
+      "types": "none",
+      "roles": [
+        "h3-4:C800:C"
+      ],
+      "fileCount": 750,
+      "W": 800,
+      "L": 50,
+      "predictedW": 800,
+      "distinctRequests": 800,
+      "requestsByCategory": {
+        "workspace": 749,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "c2c8eec938bac58ffe174e87e4c4cf2afc581db2c775a4d4a7ffb85099473631",
+      "requestsFile": "workloads/requests-n750-notypes.txt",
+      "contentSha256": "16a8dae0abe9afd7b1527a9538cde317605f155d4e98ed85cab8e398fcfd7db8",
+      "tsconfigSha256": "15270284f7a8543bd7161ac44f295adb6853e09515141b0989fe59c1709ac2cd",
+      "usedTsconfig": true,
+      "programRootFiles": 750,
+      "activeFile": "entry.ts",
+      "offResultHash": "b69eac76e41611821f5dedc4133f77a3cdeeeeb2bc6d3d1a442070b47a102c36",
+      "offCounts": {
+        "nodes": 70,
+        "edges": 135,
+        "imports": 67,
+        "exports": 2,
+        "calls": 60,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n751-notypes",
+      "n": 751,
+      "types": "none",
+      "roles": [
+        "h3-4:C800:C+1"
+      ],
+      "fileCount": 751,
+      "W": 801,
+      "L": 50,
+      "predictedW": 801,
+      "distinctRequests": 801,
+      "requestsByCategory": {
+        "workspace": 750,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "ac9abe6f2a73e025fe96f6ed7d8f29be5cb4c88dd5e2e41d1a2600b398b4276d",
+      "requestsFile": "workloads/requests-n751-notypes.txt",
+      "contentSha256": "bd9468e34799fe768ca1871f1aa966ec6d09894aedd9ac8605c3cc1df26f02f7",
+      "tsconfigSha256": "15270284f7a8543bd7161ac44f295adb6853e09515141b0989fe59c1709ac2cd",
+      "usedTsconfig": true,
+      "programRootFiles": 751,
+      "activeFile": "entry.ts",
+      "offResultHash": "dfb03be7c0d1a49884154304b01b2faf1ae389b39782ea4b3cf34eaeb07d0753",
+      "offCounts": {
+        "nodes": 70,
+        "edges": 135,
+        "imports": 67,
+        "exports": 2,
+        "calls": 60,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "miss",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n641-notypes",
+      "n": 641,
+      "types": "none",
+      "roles": [
+        "h3-4:sameN:C"
+      ],
+      "fileCount": 641,
+      "W": 691,
+      "L": 50,
+      "predictedW": 691,
+      "distinctRequests": 691,
+      "requestsByCategory": {
+        "workspace": 640,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "afd2a9824f640d21f1731ea1158e303f2d5e42cea09f465ed9fadf95395bdb73",
+      "requestsFile": "workloads/requests-n641-notypes.txt",
+      "contentSha256": "24f48ad189fa29a92a246eb55762508cdfe67034ea5c1ab505caf843ffbb8633",
+      "tsconfigSha256": "15270284f7a8543bd7161ac44f295adb6853e09515141b0989fe59c1709ac2cd",
+      "usedTsconfig": true,
+      "programRootFiles": 641,
+      "activeFile": "entry.ts",
+      "offResultHash": "a4fcbbcee35a260e69095af6b03111771ea240d2817aa4841eda8b0c77feec3d",
+      "offCounts": {
+        "nodes": 61,
+        "edges": 117,
+        "imports": 58,
+        "exports": 2,
+        "calls": 58,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    },
+    {
+      "id": "n642-notypes",
+      "n": 642,
+      "types": "none",
+      "roles": [
+        "h3-4:sameN:C+1"
+      ],
+      "fileCount": 642,
+      "W": 692,
+      "L": 50,
+      "predictedW": 692,
+      "distinctRequests": 692,
+      "requestsByCategory": {
+        "workspace": 641,
+        "typescript-lib": 51
+      },
+      "requestOrderSha256": "e27f9edc0d83ee160e2d3a03b44729e0aa98d27917af9f5f79f623de7b973cb3",
+      "requestsFile": "workloads/requests-n642-notypes.txt",
+      "contentSha256": "d36b2304234a272c784e1fc59ac5514c04a73f3ac0fd6827f62bdb83411ed4d5",
+      "tsconfigSha256": "15270284f7a8543bd7161ac44f295adb6853e09515141b0989fe59c1709ac2cd",
+      "usedTsconfig": true,
+      "programRootFiles": 642,
+      "activeFile": "entry.ts",
+      "offResultHash": "acd1189a8db1385e27ecadad966898b85cd6f9fb58971f5d7a56898f80d5aadd",
+      "offCounts": {
+        "nodes": 61,
+        "edges": 117,
+        "imports": 58,
+        "exports": 2,
+        "calls": 58,
+        "diagnostics": 0
+      },
+      "hitPrediction": {
+        "C400": "miss",
+        "C800": "hit",
+        "C1600": "hit"
+      }
+    }
+  ]
+}

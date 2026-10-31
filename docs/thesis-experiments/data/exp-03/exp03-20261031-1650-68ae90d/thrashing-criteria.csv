@@ -1,0 +1,11 @@
+workload,role,N,W,C,c1HitRatioBelow1pct,hitRatio,c2EvictEqualsMiss,evictToMiss,c3OccupancySaturated,occupancyEnd,c4AllReuseAtLeastC,reuseMin,c5Counterfactual,counterfactualSource,verdict
+n500,main,500,659,400,1,0,1,1,1,400-400,1,658,1,capacity 1600/800 > W (correctness phase),THRASHING_OBSERVED
+n1000,main,1000,1159,400,1,0,1,1,1,400-400,1,1158,1,capacity 1600 > W (correctness phase),THRASHING_OBSERVED
+n1000,main,1000,1159,800,1,0,1,1,1,800-800,1,1158,1,capacity 1600 > W (correctness phase),THRASHING_OBSERVED
+n2000,main,2000,2159,400,1,0,1,1,1,400-400,1,2158,NOT_TESTABLE,none (no measured C > W),PARTIAL_EVIDENCE
+n2000,main,2000,2159,800,1,0,1,1,1,800-800,1,2158,NOT_TESTABLE,none (no measured C > W),PARTIAL_EVIDENCE
+n2000,main,2000,2159,1600,1,0,1,1,1,1600-1600,1,2158,NOT_TESTABLE,none (no measured C > W),PARTIAL_EVIDENCE
+n242,boundary:C400:C+1,242,401,400,1,0,1,1,1,400-400,1,400,1,capacity 1600/800 > W (correctness phase),THRASHING_OBSERVED
+n642,boundary:C800:C+1,642,801,800,1,0,1,1,1,800-800,1,800,1,capacity 1600 > W (correctness phase); n642-notypes W=692 (H3-4),THRASHING_OBSERVED
+n1442,boundary:C1600:C+1,1442,1601,1600,1,0,1,1,1,1600-1600,1,1600,NOT_TESTABLE,none (no measured C > W),PARTIAL_EVIDENCE
+n751-notypes,h3-4:C800:C+1,751,801,800,1,0,1,1,1,800-800,1,800,1,capacity 1600 > W (correctness phase),THRASHING_OBSERVED
