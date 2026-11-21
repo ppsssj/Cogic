@@ -2011,6 +2011,7 @@ export const CanvasPane = memo(function CanvasPane({
   traceActiveNodeId,
   runtimeActiveNodeId,
   runtimeFocusRequest,
+  runtimeSessionActive,
   inspectorFocusRequest,
   notice,
   traceVisible,
@@ -2026,6 +2027,7 @@ export const CanvasPane = memo(function CanvasPane({
   onRegisterSnapshotExporter,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
+  const explorationViewportRef = useRef<{ x: number; y: number; zoom: number } | null>(null);
   const canvasFlowRef = useRef<HTMLDivElement | null>(null);
   const lastVisibleHasDataRef = useRef<boolean | null>(null);
   const lastRecoveryAtRef = useRef(0);
@@ -3197,6 +3199,17 @@ export const CanvasPane = memo(function CanvasPane({
   }, [inspectorFocusRequest, visibleInspectorFocusNodeId]);
 
   useEffect(() => {
+    const inst = rfRef.current;
+    if (!inst) return;
+    if (runtimeSessionActive) {
+      explorationViewportRef.current ??= inst.getViewport();
+    } else if (explorationViewportRef.current) {
+      void inst.setViewport(explorationViewportRef.current);
+      explorationViewportRef.current = null;
+    }
+  }, [runtimeSessionActive]);
+
+  useEffect(() => {
     if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     const inst = rfRef.current;
     if (!inst || !visibleRuntimeActiveNodeId || !runtimeFocusRequest) return;
@@ -3561,6 +3574,7 @@ type Props = {
   traceActiveNodeId?: string | null;
   runtimeActiveNodeId?: string | null;
   runtimeFocusRequest?: { nodeId: string; token: number } | null;
+  runtimeSessionActive?: boolean;
   inspectorFocusRequest?: { nodeId: string; token: number } | null;
   notice?: UINotice | null;
   traceVisible: boolean;

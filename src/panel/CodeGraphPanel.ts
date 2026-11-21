@@ -23,6 +23,7 @@ import {
   pushPanelDebugEvent,
 } from "./debugLog";
 import { RuntimeDebugBridge } from "./runtimeDebug";
+import { shouldAutoAnalyzeEditorChange } from "./workflowPolicy";
 
 type DepthAnalysisResult = ReturnType<typeof analyzeWorkspaceActive>;
 
@@ -248,6 +249,7 @@ export class CodeGraphPanel {
   private lastTextEditor: vscode.TextEditor | undefined;
   private lastSelection: vscode.Selection | undefined;
   private analysisTimer: NodeJS.Timeout | undefined;
+  private debugEpoch = 0;
   private readonly suppressedAutoAnalysisUris = new Map<string, number>();
   private graphRoot:
     | {
@@ -519,6 +521,9 @@ export class CodeGraphPanel {
       }
       this.analysisTimer = setTimeout(
         () => {
+          if (vscode.debug.activeDebugSession) {
+            return;
+          }
           void this.postAnalysis(
             this.traceModeActive,
             this.traceModeActive ? "trace" : "auto",
@@ -564,7 +569,7 @@ export class CodeGraphPanel {
         return;
       }
 
-      if (!this.matchesGraphRoot(editor.document.fileName)) {
+      if (!shouldAutoAnalyzeEditorChange(Boolean(vscode.debug.activeDebugSession), this.matchesGraphRoot(editor.document.fileName))) {
         pushPanelDebugEvent("analysis.auto.skipped.graph-root-lock", {
           filePath: editor.document.fileName,
           graphRoot: this.graphRoot,
@@ -628,6 +633,13 @@ export class CodeGraphPanel {
       scheduleAnalysis(0);
     });
 
+    const subDebugStart = vscode.debug.onDidStartDebugSession(() => {
+      this.debugEpoch++;
+      if (this.analysisTimer) {
+        clearTimeout(this.analysisTimer);
+      }
+    });
+
     const subSelection = vscode.window.onDidChangeTextEditorSelection((e) => {
       this.lastTextEditor = e.textEditor;
       this.lastSelection = e.selections?.[0];
@@ -686,6 +698,7 @@ export class CodeGraphPanel {
 
     this.panel.onDidDispose(() => {
       subActive.dispose();
+      subDebugStart.dispose();
       subChange.dispose();
       subSave.dispose();
       subSelection.dispose();
@@ -1105,6 +1118,7 @@ export class CodeGraphPanel {
     reason: AnalysisRequestReason = "manual",
     traceScope: TraceScope = "single-file",
   ) {
+    const debugEpoch = this.debugEpoch;
     const request = this.beginActiveAnalysis(reason);
     pushPanelDebugEvent("analysis.active.begin", {
       requestId: request.requestId,
@@ -1168,7 +1182,8 @@ export class CodeGraphPanel {
       meta: result.meta,
     };
 
-    if (request.sequence !== this.latestActiveAnalysisSequence) {
+    if (request.sequence !== this.latestActiveAnalysisSequence ||
+        (reason === "auto" && (debugEpoch !== this.debugEpoch || Boolean(vscode.debug.activeDebugSession)))) {
       pushPanelDebugEvent("analysis.active.drop.stale", {
         requestId: request.requestId,
         generation: request.generation,

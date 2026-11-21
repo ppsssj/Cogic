@@ -1641,10 +1641,12 @@ export default function App() {
   );
   const runtimeMatch = useMemo<RuntimeNodeMatch | null>(() => {
     if (!runtimeDebug || runtimeDebug.state !== "paused") return null;
+    const match = findGraphNodeForRuntimeFrame(graph, runtimeDebug.frame);
+    if (match.node) return match;
     if (runtimeFrameOutsideRoot) {
       return { mode: "outside-root", node: null };
     }
-    return findGraphNodeForRuntimeFrame(graph, runtimeDebug.frame);
+    return match;
   }, [graph, runtimeDebug, runtimeFrameOutsideRoot]);
   const runtimeActiveNode = runtimeMatch?.node ?? null;
   const runtimeActiveNodeId = runtimeActiveNode?.id ?? null;
@@ -1704,6 +1706,7 @@ export default function App() {
   const graphFilePath =
     rootFilePath ??
     (traceMode && traceScope === "current-depth" ? traceAnchorFilePath : null) ??
+    (graph && analysis?.uri ? uriToFsPath(analysis.uri) : null) ??
     activeFilePath;
   const workspaceRoot = workspaceFiles?.rootPath ?? null;
   const scaffoldTargetFilePath =
@@ -1866,29 +1869,6 @@ export default function App() {
     });
   }, [beginAnalysisLoading, postMessage, showToast, traceMode, traceScope]);
 
-  useEffect(() => {
-    if (!runtimeDebug || runtimeDebug.state !== "paused") return;
-    if (runtimeActiveNodeId) return;
-    if (activeGraphGenerationRef.current < 0) return;
-    const filePath = runtimeDebug.frame?.filePath;
-    if (!filePath) return;
-    if (!matchesRootTarget(filePath, rootTarget)) {
-      pushWebviewDebugEvent("runtimeDebug.autoExpand.skipped.root-lock", {
-        filePath,
-        rootKind: rootTarget?.kind ?? null,
-        rootPath: rootTarget?.path ?? null,
-      });
-      return;
-    }
-    const hasAnyNodeInFile = Boolean(
-      graph?.nodes.some(
-        (node) => normalizeComparablePath(node.file) === normalizeComparablePath(filePath),
-      ),
-    );
-    if (hasAnyNodeInFile) return;
-    expandExternalFile(filePath);
-  }, [expandExternalFile, graph, rootTarget, runtimeActiveNodeId, runtimeDebug]);
-
   const openDiagnostic = (diagnostic: CodeDiagnostic) => {
     if (!diagnostic.filePath) return;
     postOpenLocation(
@@ -2049,10 +2029,10 @@ export default function App() {
     if (!folderPath) {
       return;
     }
-    syncGraphRoot({ kind: "folder", path: folderPath });
     setInspectorNotice(null);
     if (activeFilePath && normalizeComparablePath(dirName(activeFilePath)) === normalizeComparablePath(folderPath)) {
       resetGraph();
+      syncGraphRoot({ kind: "folder", path: folderPath });
       beginAnalysisLoading(
         `Locking graph to ${shortBaseName(folderPath)}...`,
         traceMode ? traceLoadingDetail : `Rebuilding the graph with ${describeDepth(graphDepth)}.`,
@@ -2065,6 +2045,8 @@ export default function App() {
           traceScope: traceMode ? traceScope : undefined,
         },
       });
+    } else {
+      syncGraphRoot({ kind: "folder", path: folderPath });
     }
   }, [
     activeFilePath,
@@ -2593,6 +2575,7 @@ export default function App() {
           traceActiveNodeId={traceActiveNodeId}
           runtimeActiveNodeId={runtimeActiveNodeId}
           runtimeFocusRequest={runtimeFocusRequest}
+          runtimeSessionActive={Boolean(runtimeDebug && runtimeDebug.state !== "inactive")}
           inspectorFocusRequest={inspectorFocusRequest}
           notice={canvasNotice}
           traceVisible={Boolean(traceEvents && traceEvents.length > 0)}
