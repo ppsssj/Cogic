@@ -15,3 +15,5 @@ vsc-extension-quickstart.md
 **/*.ts
 !node_modules/typescript/lib/**/*.d.ts
 **/.vscode-test.*
+out/test/**
+scripts/**
