@@ -2,6 +2,7 @@ import { analyzeTypeScriptWithTypes, analyzeWithWorkspace } from "./analyze";
 import type { FrameworkSemanticAdapter } from "./adapters";
 export {
   clearAnalyzerCaches,
+  getAnalyzerCacheStats,
   invalidateAnalyzerFileCaches,
 } from "./analyze";
 export {

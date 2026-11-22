@@ -32,14 +32,56 @@ type CachedDiskSourceFile = {
   languageVersionKey: string;
   sourceFile: ts.SourceFile;
   lastAccessedAt: number;
+  lastPass: number;
 };
 
 const MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 800;
+/**
+ * Disk SourceFile cache policy (P9):
+ * - Recency order is kept by Map insertion order (O(1) touch and eviction instead of sorting on every insert).
+ * - Adaptive capacity: an analysis pass of a program with N root files may keep up to max(800, 1.1N + 200)
+ *   entries (hard limit 4,400), so the whole working set fits and cyclic re-analysis does not thrash an LRU.
+ * - Memory guard: the cached source text is bounded by SOURCE_FILE_CACHE_CHAR_BUDGET. Under pressure (entry or
+ *   text budget exceeded) entries used in the current pass are never evicted; the new SourceFile is simply not
+ *   cached (scan-resistant fallback), which keeps hits for the files that are already cached.
+ */
+const ADAPTIVE_MAX_ENTRIES = 4400;
+const SOURCE_FILE_CACHE_CHAR_BUDGET = 24_000_000;
 const diskSourceFileCache = new Map<string, CachedDiskSourceFile>();
+let sourceFileCachePass = 0;
+let sourceFileCacheCapacity = MAX_DISK_SOURCE_FILE_CACHE_ENTRIES;
+let sourceFileCacheChars = 0;
+
+/** Marks the start of one analysis (one ts.Program build) for the SourceFile cache policy. */
+function beginSourceFileCachePass(rootFileCount: number) {
+  sourceFileCachePass += 1;
+  sourceFileCacheCapacity = Math.min(
+    ADAPTIVE_MAX_ENTRIES,
+    Math.max(MAX_DISK_SOURCE_FILE_CACHE_ENTRIES, Math.ceil(rootFileCount * 1.1) + 200),
+  );
+}
+
+function deleteCachedSourceFile(cacheKey: string) {
+  const entry = diskSourceFileCache.get(cacheKey);
+  if (!entry) {return false;}
+  sourceFileCacheChars -= entry.sourceFile.text.length;
+  return diskSourceFileCache.delete(cacheKey);
+}
+
+/** Test/diagnostic view of the cache state. */
+export function getAnalyzerCacheStats() {
+  return {
+    entries: diskSourceFileCache.size,
+    capacity: sourceFileCacheCapacity,
+    chars: sourceFileCacheChars,
+    charBudget: SOURCE_FILE_CACHE_CHAR_BUDGET,
+  };
+}
 
 export function clearAnalyzerCaches(debug?: AnalyzerDebugLogger) {
   const sourceFiles = diskSourceFileCache.size;
   diskSourceFileCache.clear();
+  sourceFileCacheChars = 0;
   debug?.("analyzer.sourceFileCache.clear", { sourceFiles });
 }
 
@@ -51,7 +93,7 @@ export function invalidateAnalyzerFileCaches(
 
   for (const filePath of filePaths) {
     const cacheKey = normalizeCachePath(filePath);
-    if (diskSourceFileCache.delete(cacheKey)) {
+    if (deleteCachedSourceFile(cacheKey)) {
       sourceFiles += 1;
     }
   }
@@ -145,6 +187,7 @@ export function analyzeTypeScriptWithTypes(args: {
     },
   };
 
+  beginSourceFileCachePass(1);
   const program = ts.createProgram([inMemoryFileName], compilerOptions, host);
   const checker = program.getTypeChecker();
   const sf = program.getSourceFile(inMemoryFileName);
@@ -304,6 +347,7 @@ export function analyzeWithWorkspace(args: {
     },
   };
 
+  beginSourceFileCachePass(rootNames.length);
   const program = ts.createProgram(rootNames, options, host);
   const checker = program.getTypeChecker();
   const sf = program.getSourceFile(activeFile);
@@ -644,6 +688,10 @@ function getCachedDiskSourceFile(
     cached.languageVersionKey === languageVersionKey
   ) {
     cached.lastAccessedAt = Date.now();
+    cached.lastPass = sourceFileCachePass;
+    // move to the most-recently-used end (Map keeps insertion order)
+    diskSourceFileCache.delete(cacheKey);
+    diskSourceFileCache.set(cacheKey, cached);
     debug?.("analyzer.sourceFileCache.hit", {
       filePath: requested,
       mtimeMs: stat.mtimeMs,
@@ -674,6 +722,7 @@ function getCachedDiskSourceFile(
     scriptKind,
   );
 
+  deleteCachedSourceFile(cacheKey);
   diskSourceFileCache.set(cacheKey, {
     fileName: requested,
     mtimeMs: stat.mtimeMs,
@@ -682,8 +731,10 @@ function getCachedDiskSourceFile(
     languageVersionKey,
     sourceFile,
     lastAccessedAt: Date.now(),
+    lastPass: sourceFileCachePass,
   });
-  pruneDiskSourceFileCache();
+  sourceFileCacheChars += sourceFile.text.length;
+  pruneDiskSourceFileCache(cacheKey, debug);
   debug?.("analyzer.sourceFileCache.store", {
     filePath: requested,
     entries: diskSourceFileCache.size,
@@ -707,17 +758,21 @@ function getLanguageVersionCacheKey(
   ].join("|");
 }
 
-function pruneDiskSourceFileCache() {
-  if (diskSourceFileCache.size <= MAX_DISK_SOURCE_FILE_CACHE_ENTRIES) {
-    return;
-  }
-
-  const sorted = [...diskSourceFileCache.entries()].sort(
-    (a, b) => a[1].lastAccessedAt - b[1].lastAccessedAt,
-  );
-  const removeCount = diskSourceFileCache.size - MAX_DISK_SOURCE_FILE_CACHE_ENTRIES;
-  for (const [cacheKey] of sorted.slice(0, removeCount)) {
-    diskSourceFileCache.delete(cacheKey);
+function pruneDiskSourceFileCache(insertedKey: string, debug?: AnalyzerDebugLogger) {
+  while (
+    diskSourceFileCache.size > sourceFileCacheCapacity ||
+    sourceFileCacheChars > SOURCE_FILE_CACHE_CHAR_BUDGET
+  ) {
+    const oldestKey = diskSourceFileCache.keys().next().value as string;
+    const oldest = diskSourceFileCache.get(oldestKey)!;
+    if (oldest.lastPass === sourceFileCachePass) {
+      // Every cached entry was used in this pass: keep them and do not cache the new SourceFile.
+      deleteCachedSourceFile(insertedKey);
+      debug?.("analyzer.sourceFileCache.skipFull", { entries: diskSourceFileCache.size });
+      return;
+    }
+    deleteCachedSourceFile(oldestKey);
+    debug?.("analyzer.sourceFileCache.evict", { entries: diskSourceFileCache.size });
   }
 }
 
