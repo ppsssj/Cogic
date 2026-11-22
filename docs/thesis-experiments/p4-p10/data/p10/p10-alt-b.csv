@@ -1,0 +1,81 @@
+size,state,op,metric,S,B,B_vs_S,correct_S,correct_B
+1000,collapsed,"pan","FPS",114.9,103.3,악화,3/3,3/3
+1000,collapsed,"pan","P95 ms",15.4,18.0,=,3/3,3/3
+1000,collapsed,"pan",">33.3ms %",0.0,1.8,악화,3/3,3/3
+1000,collapsed,"pan","≥50ms %",0.0,0.7,악화,3/3,3/3
+1000,collapsed,"pan","입력→rAF P95",15.1,26.2,악화,3/3,3/3
+1000,collapsed,"zoom","FPS",119.2,107.4,악화,3/3,3/3
+1000,collapsed,"zoom","P95 ms",10.5,12.9,악화,3/3,3/3
+1000,collapsed,"zoom",">33.3ms %",0.0,1.5,악화,3/3,3/3
+1000,collapsed,"zoom","≥50ms %",0.0,1.5,=,3/3,3/3
+1000,collapsed,"zoom","입력→rAF P95",14.7,25.4,악화,3/3,3/3
+1000,collapsed,"group toggle (2 clicks)","FPS",32.3,40.6,=,3/3,3/3
+1000,collapsed,"group toggle (2 clicks)","P95 ms",111.2,81.8,=,3/3,3/3
+1000,collapsed,"group toggle (2 clicks)",">33.3ms %",19.7,17.6,=,3/3,3/3
+1000,collapsed,"group toggle (2 clicks)","≥50ms %",11.8,10.6,=,3/3,3/3
+1000,collapsed,"group toggle (2 clicks)","입력→rAF P95",37.5,18.4,=,3/3,3/3
+1000,collapsed,"node selection","FPS",18.1,33.3,개선,3/3,3/3
+1000,collapsed,"node selection","P95 ms",438.9,134.0,개선,3/3,3/3
+1000,collapsed,"node selection",">33.3ms %",20.0,20.0,=,3/3,3/3
+1000,collapsed,"node selection","≥50ms %",20.0,17.6,=,3/3,3/3
+1000,collapsed,"node selection","입력→rAF P95",7.3,7.3,=,3/3,3/3
+1000,expanded,"pan","FPS",53.6,37.9,악화,3/3,3/3
+1000,expanded,"pan","P95 ms",60.7,140.5,악화,3/3,3/3
+1000,expanded,"pan",">33.3ms %",9.8,12.4,=,3/3,3/3
+1000,expanded,"pan","≥50ms %",7.4,11.2,악화,3/3,3/3
+1000,expanded,"pan","입력→rAF P95",78.1,184.5,악화,3/3,3/3
+1000,expanded,"zoom","FPS",105.4,5.0,악화,3/3,3/3
+1000,expanded,"zoom","P95 ms",13.3,762.2,악화,3/3,3/3
+1000,expanded,"zoom",">33.3ms %",2.1,50.0,악화,3/3,3/3
+1000,expanded,"zoom","≥50ms %",1.1,38.5,악화,3/3,3/3
+1000,expanded,"zoom","입력→rAF P95",19.3,612.8,악화,3/3,3/3
+1000,expanded,"group toggle (2 clicks)","FPS",13.5,10.0,악화,3/3,3/3
+1000,expanded,"group toggle (2 clicks)","P95 ms",481.9,697.7,악화,3/3,3/3
+1000,expanded,"group toggle (2 clicks)",">33.3ms %",32.4,33.3,=,3/3,3/3
+1000,expanded,"group toggle (2 clicks)","≥50ms %",25.8,33.3,악화,3/3,3/3
+1000,expanded,"group toggle (2 clicks)","입력→rAF P95",612.3,301.7,개선,3/3,3/3
+1000,expanded,"node selection","FPS",29.6,45.8,개선,3/3,3/3
+1000,expanded,"node selection","P95 ms",191.7,66.5,개선,3/3,3/3
+1000,expanded,"node selection",">33.3ms %",21.1,8.3,개선,3/3,3/3
+1000,expanded,"node selection","≥50ms %",15.8,8.3,개선,3/3,3/3
+1000,expanded,"node selection","입력→rAF P95",11.9,7.9,=,3/3,3/3
+2000,collapsed,"pan","FPS",105.4,94.1,악화,3/3,3/3
+2000,collapsed,"pan","P95 ms",22.2,20.6,개선,3/3,3/3
+2000,collapsed,"pan",">33.3ms %",1.1,3.2,악화,3/3,3/3
+2000,collapsed,"pan","≥50ms %",0.7,1.4,악화,3/3,3/3
+2000,collapsed,"pan","입력→rAF P95",25.1,39.9,악화,3/3,3/3
+2000,collapsed,"zoom","FPS",108.1,51.5,악화,3/3,3/3
+2000,collapsed,"zoom","P95 ms",12.2,97.9,악화,3/3,3/3
+2000,collapsed,"zoom",">33.3ms %",1.5,14.6,악화,3/3,3/3
+2000,collapsed,"zoom","≥50ms %",0.8,9.8,악화,3/3,3/3
+2000,collapsed,"zoom","입력→rAF P95",21.2,125.2,악화,3/3,3/3
+2000,collapsed,"group toggle (2 clicks)","FPS",32.0,44.2,=,3/3,3/3
+2000,collapsed,"group toggle (2 clicks)","P95 ms",184.8,149.3,개선,3/3,3/3
+2000,collapsed,"group toggle (2 clicks)",">33.3ms %",16.0,12.1,개선,3/3,3/3
+2000,collapsed,"group toggle (2 clicks)","≥50ms %",12.0,9.1,개선,3/3,3/3
+2000,collapsed,"group toggle (2 clicks)","입력→rAF P95",9.8,37.4,악화,3/3,3/3
+2000,collapsed,"node selection","FPS",12.8,6.9,=,3/3,3/3
+2000,collapsed,"node selection","P95 ms",454.9,319.1,=,3/3,3/3
+2000,collapsed,"node selection",">33.3ms %",37.5,27.3,=,3/3,3/3
+2000,collapsed,"node selection","≥50ms %",25.0,22.7,=,3/3,3/3
+2000,collapsed,"node selection","입력→rAF P95",46.4,2070.7,=,3/3,3/3
+2000,expanded,"pan","FPS",47.1,19.7,악화,3/3,3/3
+2000,expanded,"pan","P95 ms",60.9,183.8,악화,3/3,3/3
+2000,expanded,"pan",">33.3ms %",8.3,10.8,=,3/3,3/3
+2000,expanded,"pan","≥50ms %",6.8,9.0,=,3/3,3/3
+2000,expanded,"pan","입력→rAF P95",72.9,447.7,악화,3/3,3/3
+2000,expanded,"zoom","FPS",47.3,3.6,악화,3/3,3/3
+2000,expanded,"zoom","P95 ms",15.6,1894.1,악화,3/3,3/3
+2000,expanded,"zoom",">33.3ms %",3.3,34.8,악화,3/3,3/3
+2000,expanded,"zoom","≥50ms %",3.3,30.4,악화,3/3,3/3
+2000,expanded,"zoom","입력→rAF P95",1043.5,2424.0,악화,3/3,3/3
+2000,expanded,"group toggle (2 clicks)","FPS",21.0,4.8,악화,3/3,3/3
+2000,expanded,"group toggle (2 clicks)","P95 ms",198.6,1048.5,=,3/3,3/3
+2000,expanded,"group toggle (2 clicks)",">33.3ms %",27.3,42.9,=,3/3,3/3
+2000,expanded,"group toggle (2 clicks)","≥50ms %",18.2,41.7,악화,3/3,3/3
+2000,expanded,"group toggle (2 clicks)","입력→rAF P95",22.8,510.1,악화,3/3,3/3
+2000,expanded,"node selection","FPS",12.0,10.0,=,3/3,3/3
+2000,expanded,"node selection","P95 ms",382.2,354.4,=,3/3,3/3
+2000,expanded,"node selection",">33.3ms %",14.3,42.9,=,3/3,3/3
+2000,expanded,"node selection","≥50ms %",14.3,42.9,=,3/3,3/3
+2000,expanded,"node selection","입력→rAF P95",9.4,48.0,=,3/3,3/3

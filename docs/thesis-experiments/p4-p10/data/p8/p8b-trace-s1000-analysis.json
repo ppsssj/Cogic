@@ -1,0 +1,158 @@
+[
+  {
+    "file": "trace-0.json",
+    "rendererPid": 26816,
+    "frameId": "1C17055433EA6ABFC5AB6D286596CA90",
+    "graphPaintNode": "svg class='react-flow__edges react-flow__container'",
+    "resultsAfterT0": 2,
+    "multiResult": true,
+    "frameSeq": 1953,
+    "presentedFrameSeq": 1953,
+    "nextPresented": false,
+    "reporterState": "STATE_PRESENTED_ALL",
+    "ts_us": {
+      "T0": 242773042558,
+      "T2": 242775054420,
+      "T3": 242775091300,
+      "T4": 242775111317,
+      "T5": 242775102270,
+      "T5end": 242775102982,
+      "commit": 242775105110,
+      "activate": 242775108659,
+      "draw": 242775109100,
+      "T6a": 242775109026,
+      "T6b": 242775186071
+    },
+    "ms": {
+      "T0→T2": 2011.86,
+      "T2→T3": 36.88,
+      "T3→T4(2nd rAF)": 20.02,
+      "T3→T5(graph Paint start)": 10.97,
+      "T5 Paint dur": 0.71,
+      "T5end→Commit": 2.13,
+      "Commit→Draw": 3.99,
+      "T3→T6a(submit)": 17.73,
+      "T3→T6b(presentation feedback)": 94.77,
+      "T0→T4": 2068.76,
+      "T0→T6b": 2143.51,
+      "T4 vs T6b (T6b−T4)": 74.75,
+      "T3→T6b' (first PRESENTED_ALL, upper bound)": 94.77
+    },
+    "mainThreadBetweenT3andCommit_ms": {
+      "Layout": 0.46,
+      "PrePaint": 0.75,
+      "Paint": 4.71,
+      "Layerize": 1.37
+    },
+    "checks": {
+      "orderOK": false,
+      "paintIsGraph": true,
+      "reporterFound": true,
+      "presented": true
+    }
+  },
+  {
+    "file": "trace-1.json",
+    "rendererPid": 26816,
+    "frameId": "1C17055433EA6ABFC5AB6D286596CA90",
+    "graphPaintNode": "DIV class='react-flow'",
+    "resultsAfterT0": 1,
+    "multiResult": false,
+    "frameSeq": 2612,
+    "presentedFrameSeq": 2612,
+    "nextPresented": false,
+    "reporterState": "STATE_PRESENTED_PARTIAL",
+    "ts_us": {
+      "T0": 242778346471,
+      "T2": 242780525090,
+      "T3": 242780573427,
+      "T4": 242780603077,
+      "T5": 242780584272,
+      "T5end": 242780589182,
+      "commit": 242780590779,
+      "activate": 242780595727,
+      "draw": 242780596548,
+      "T6a": 242780602713,
+      "T6b": 242780702198
+    },
+    "ms": {
+      "T0→T2": 2178.62,
+      "T2→T3": 48.34,
+      "T3→T4(2nd rAF)": 29.65,
+      "T3→T5(graph Paint start)": 10.85,
+      "T5 Paint dur": 4.91,
+      "T5end→Commit": 1.6,
+      "Commit→Draw": 5.77,
+      "T3→T6a(submit)": 29.29,
+      "T3→T6b(presentation feedback)": 128.77,
+      "T0→T4": 2256.61,
+      "T0→T6b": 2355.73,
+      "T4 vs T6b (T6b−T4)": 99.12,
+      "T3→T6b' (first PRESENTED_ALL, upper bound)": 128.77
+    },
+    "mainThreadBetweenT3andCommit_ms": {
+      "Layout": 0.49,
+      "PrePaint": 0.86,
+      "Paint": 5.58,
+      "Layerize": 1.45
+    },
+    "checks": {
+      "orderOK": true,
+      "paintIsGraph": true,
+      "reporterFound": true,
+      "presented": true
+    }
+  },
+  {
+    "file": "trace-2.json",
+    "rendererPid": 26816,
+    "frameId": "1C17055433EA6ABFC5AB6D286596CA90",
+    "graphPaintNode": "svg class='react-flow__edges react-flow__container'",
+    "resultsAfterT0": 2,
+    "multiResult": true,
+    "frameSeq": 3267,
+    "presentedFrameSeq": 3267,
+    "nextPresented": false,
+    "reporterState": "STATE_PRESENTED_ALL",
+    "ts_us": {
+      "T0": 242784079610,
+      "T2": 242785996553,
+      "T3": 242786035785,
+      "T4": 242786052743,
+      "T5": 242786046792,
+      "T5end": 242786047317,
+      "commit": 242786049358,
+      "activate": 242786054455,
+      "draw": 242786055084,
+      "T6a": 242786055005,
+      "T6b": 242786135262
+    },
+    "ms": {
+      "T0→T2": 1916.94,
+      "T2→T3": 39.23,
+      "T3→T4(2nd rAF)": 16.96,
+      "T3→T5(graph Paint start)": 11.01,
+      "T5 Paint dur": 0.53,
+      "T5end→Commit": 2.04,
+      "Commit→Draw": 5.73,
+      "T3→T6a(submit)": 19.22,
+      "T3→T6b(presentation feedback)": 99.48,
+      "T0→T4": 1973.13,
+      "T0→T6b": 2055.65,
+      "T4 vs T6b (T6b−T4)": 82.52,
+      "T3→T6b' (first PRESENTED_ALL, upper bound)": 99.48
+    },
+    "mainThreadBetweenT3andCommit_ms": {
+      "Layout": 0.51,
+      "PrePaint": 0.9,
+      "Paint": 4.45,
+      "Layerize": 1.35
+    },
+    "checks": {
+      "orderOK": false,
+      "paintIsGraph": true,
+      "reporterFound": true,
+      "presented": true
+    }
+  }
+]

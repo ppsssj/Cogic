@@ -1,0 +1,49 @@
+target,scenario,metric,off_run_medians,on_run_medians,verdict
+fixture,cold-start,inputToFrameMs,"1801.5 1620.1 1679.9","1313.0 1230.1 1187.6",ON 빠름(완전 분리)
+fixture,repeated-generate,inputToFrameMs,"721.8 415.7 681.6","164.1 198.6 201.8",ON 빠름(완전 분리)
+fixture,active-edit,inputToFrameMs,"685.5 653.3 710.1","460.5 501.1 498.0",ON 빠름(완전 분리)
+synthetic-100,cold-start,inputToFrameMs,"2487.1 2895.8 2863.3","1737.9 1614.0 1782.9",ON 빠름(완전 분리)
+synthetic-100,repeated-generate,inputToFrameMs,"691.0 699.5 666.6","141.6 163.8 141.3",ON 빠름(완전 분리)
+synthetic-100,active-edit,inputToFrameMs,"972.1 1036.4 953.7","515.3 506.3 516.8",ON 빠름(완전 분리)
+synthetic-500,cold-start,inputToFrameMs,"2966.1 3688.7 3743.8","2024.1 2171.0 1869.4",ON 빠름(완전 분리)
+synthetic-500,repeated-generate,inputToFrameMs,"857.9 990.3 906.6","182.0 158.8 166.6",ON 빠름(완전 분리)
+synthetic-500,active-edit,inputToFrameMs,"1226.6 1248.3 1327.7","575.4 573.5 560.7",ON 빠름(완전 분리)
+synthetic-1000,cold-start,inputToFrameMs,"4474.1","2105.5",실행 수 부족
+synthetic-1000,repeated-generate,inputToFrameMs,"1889.8","207.7",실행 수 부족
+synthetic-1000,active-edit,inputToFrameMs,"2074.2","1378.5",실행 수 부족
+fixture,cold-start,inputToResultMs,"1776.3 1599.6 1653.0","973.5 893.6 829.2",ON 빠름(완전 분리)
+fixture,repeated-generate,inputToResultMs,"698.3 387.1 660.7","128.6 177.9 174.6",ON 빠름(완전 분리)
+fixture,active-edit,inputToResultMs,"662.4 623.0 687.4","441.0 478.9 474.4",ON 빠름(완전 분리)
+synthetic-100,cold-start,inputToResultMs,"2467.8 2874.2 2846.7","1357.1 1251.6 1365.9",ON 빠름(완전 분리)
+synthetic-100,repeated-generate,inputToResultMs,"671.1 677.1 641.0","116.1 129.0 112.2",ON 빠름(완전 분리)
+synthetic-100,active-edit,inputToResultMs,"942.1 1003.4 918.3","488.8 478.6 491.5",ON 빠름(완전 분리)
+synthetic-500,cold-start,inputToResultMs,"2928.0 3636.8 3699.0","1689.1 1791.5 1551.8",ON 빠름(완전 분리)
+synthetic-500,repeated-generate,inputToResultMs,"812.0 943.8 862.2","115.4 104.3 118.4",ON 빠름(완전 분리)
+synthetic-500,active-edit,inputToResultMs,"1187.4 1194.8 1289.1","523.4 525.8 514.0",ON 빠름(완전 분리)
+synthetic-1000,cold-start,inputToResultMs,"4337.0","1882.1",실행 수 부족
+synthetic-1000,repeated-generate,inputToResultMs,"1840.0","137.5",실행 수 부족
+synthetic-1000,active-edit,inputToResultMs,"2014.1","1310.2",실행 수 부족
+fixture,cold-start,resultToDomSettledMs,"14.0 6.6 17.7","20.3 17.0 18.1",일관되지 않음
+fixture,repeated-generate,resultToDomSettledMs,"10.3 16.0 11.6","20.3 12.2 10.0",일관되지 않음
+fixture,active-edit,resultToDomSettledMs,"13.7 15.5 12.6","9.0 11.4 15.2",일관되지 않음
+synthetic-100,cold-start,resultToDomSettledMs,"11.8 13.7 7.8","36.1 29.1 31.5",OFF 빠름(완전 분리)
+synthetic-100,repeated-generate,resultToDomSettledMs,"13.7 11.3 14.1","15.5 20.0 17.9",OFF 빠름(완전 분리)
+synthetic-100,active-edit,resultToDomSettledMs,"17.4 18.3 17.5","13.7 17.7 13.9",일관되지 않음
+synthetic-500,cold-start,resultToDomSettledMs,"26.2 27.8 27.3","312.6 312.0 37.8",OFF 빠름(완전 분리)
+synthetic-500,repeated-generate,resultToDomSettledMs,"30.0 27.0 34.8","34.7 33.3 34.7",일관되지 않음
+synthetic-500,active-edit,resultToDomSettledMs,"29.5 32.3 30.0","30.2 28.7 29.5",일관되지 않음
+synthetic-1000,cold-start,resultToDomSettledMs,"53.9","54.0",실행 수 부족
+synthetic-1000,repeated-generate,resultToDomSettledMs,"42.9","49.0",실행 수 부족
+synthetic-1000,active-edit,resultToDomSettledMs,"37.6","42.8",실행 수 부족
+fixture,cold-start,domSettledToFrameMs,"11.2 13.9 9.2","319.2 319.5 340.3",OFF 빠름(완전 분리)
+fixture,repeated-generate,domSettledToFrameMs,"11.9 13.4 12.2","13.9 18.6 14.0",OFF 빠름(완전 분리)
+fixture,active-edit,domSettledToFrameMs,"9.4 13.9 10.1","11.4 11.3 11.3",일관되지 않음
+synthetic-100,cold-start,domSettledToFrameMs,"7.5 7.9 8.8","344.7 333.3 385.5",OFF 빠름(완전 분리)
+synthetic-100,repeated-generate,domSettledToFrameMs,"12.8 11.1 11.5","10.6 12.1 10.1",일관되지 않음
+synthetic-100,active-edit,domSettledToFrameMs,"12.5 10.7 12.2","11.8 12.2 12.4",일관되지 않음
+synthetic-500,cold-start,domSettledToFrameMs,"11.9 24.1 17.5","22.4 67.5 279.8",일관되지 않음
+synthetic-500,repeated-generate,domSettledToFrameMs,"20.8 19.2 23.3","21.4 19.2 22.0",일관되지 않음
+synthetic-500,active-edit,domSettledToFrameMs,"13.6 14.2 14.4","14.5 14.7 17.7",OFF 빠름(완전 분리)
+synthetic-1000,cold-start,domSettledToFrameMs,"83.2","169.4",실행 수 부족
+synthetic-1000,repeated-generate,domSettledToFrameMs,"27.9","27.3",실행 수 부족
+synthetic-1000,active-edit,domSettledToFrameMs,"14.3","18.7",실행 수 부족
