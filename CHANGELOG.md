@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Improve Root and Runtime Debug integration: frames are mapped to graph nodes under file and folder Roots, a frame outside the current Root is shown with an explicit "Expand frame file" action instead of rebuilding the graph, and setting a folder Root from the graph keeps the Root.
 - Improve the TypeScript `SourceFile` cache policy for large workspaces: cache capacity follows the analyzed program size (bounded by entry and source-text budgets) instead of a fixed 800-entry LRU.
 - Mitigate the analysis slowdown when a workspace exceeded the previous cache capacity: active-file edits on 1,000+ file workspaces now reuse cached files instead of re-parsing them.
+- Use a 512×512 Marketplace icon (`assets/icon.png`) to meet the Marketplace 1 MB icon size limit; the logo artwork is unchanged.
 
 ## [0.0.5] - 2026-05-24
 
