@@ -6,10 +6,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-Not yet released to the Marketplace; the published 0.0.5 build may differ from this code.
+## [0.0.6] - 2026-11-22
 
-- Preserve graph exploration during runtime debugging: debug sessions no longer replace the exploration graph, the start node, selection, and Root are kept while paused, frames outside the current root can be expanded explicitly, and setting a folder Root from the graph keeps the root.
-- Avoid TypeScript `SourceFile` cache thrash on large workspaces: the cache capacity follows the analyzed program size (bounded by entry and source-text budgets) instead of a fixed 800-entry LRU, so active-file edits on 1,000+ file workspaces reuse cached files.
+- Preserve graph exploration during runtime debugging: a debug session no longer replaces the exploration graph, and the start node, selection, and graph state are kept while paused and restored after debugging stops.
+- Improve Root and Runtime Debug integration: frames are mapped to graph nodes under file and folder Roots, a frame outside the current Root is shown with an explicit "Expand frame file" action instead of rebuilding the graph, and setting a folder Root from the graph keeps the Root.
+- Improve the TypeScript `SourceFile` cache policy for large workspaces: cache capacity follows the analyzed program size (bounded by entry and source-text budgets) instead of a fixed 800-entry LRU.
+- Mitigate the analysis slowdown when a workspace exceeded the previous cache capacity: active-file edits on 1,000+ file workspaces now reuse cached files instead of re-parsing them.
 
 ## [0.0.5] - 2026-05-24
 
