@@ -6,6 +6,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+Not yet released to the Marketplace; the published 0.0.5 build may differ from this code.
+
+- Preserve graph exploration during runtime debugging: debug sessions no longer replace the exploration graph, the start node, selection, and Root are kept while paused, frames outside the current root can be expanded explicitly, and setting a folder Root from the graph keeps the root.
+- Avoid TypeScript `SourceFile` cache thrash on large workspaces: the cache capacity follows the analyzed program size (bounded by entry and source-text budgets) instead of a fixed 800-entry LRU, so active-file edits on 1,000+ file workspaces reuse cached files.
+
 ## [0.0.5] - 2026-05-24
 
 - Add analysis cache controls for repeated graph analysis and TypeScript SourceFile parsing.
