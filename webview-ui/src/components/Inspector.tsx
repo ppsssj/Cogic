@@ -970,6 +970,12 @@ export function Inspector({
                   {runtimeMatchDetail ? ` · ${runtimeMatchDetail}` : ""}
                 </div>
               ) : null}
+              {!runtimeActiveNode && runtimeDebug.frame?.filePath &&
+              (runtimeMatch?.mode === "no-file-in-graph" || runtimeMatch?.mode === "outside-root") ? (
+                <button className="smallBtn" type="button" onClick={() => onExpandExternal(runtimeDebug.frame!.filePath!)}>
+                  Expand frame file
+                </button>
+              ) : null}
             </div>
 
             <div>
