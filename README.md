@@ -282,13 +282,13 @@ npm run publish:marketplace
 
 ---
 
-## Research Results (Unreleased Code)
+## Research Results
 
-The repository contains thesis research on Cogic's exploration workflow and performance (phases P4–P10), measured in the real VS Code UI and with a Node harness on one Windows PC. Highlights for the code on this branch, which is **not yet released** — the Marketplace 0.0.5 build may differ from the latest code here:
+The repository contains thesis research on Cogic's exploration workflow and performance (phases P4–P10), measured in the real VS Code UI and with a Node harness on one Windows PC. Changes that came out of this research and ship in 0.0.6:
 
 - Graph exploration is preserved during runtime debugging across all Root modes (no root, file root, folder root); a UI regression suite checks start node, selection, frame mapping, Step Over, and restore after debugging.
 - The TypeScript `SourceFile` cache no longer thrashes on large workspaces: on synthetic 1,000/2,000-file workspaces, the analysis after an active-file edit went from about 1.23 s / 2.10 s to 0.13 s / 0.25 s (median), and the graph update in VS Code from about 1.37 s / 1.86 s to 0.66 s / 0.81 s. Repeated and first Generate times did not change consistently.
-- Rendering and Fit changes were measured but **not adopted** because they slowed group expand/collapse or repeated Generate.
+- Fit and rendering changes for large graphs were measured but **not included**, because they slowed group expand/collapse or repeated Generate. On 1,000+ file graphs you may still need to pan to the active file after Fit.
 
 Measurements use 3 independent runs per condition and a fixed decision rule; they are not tests of statistical significance. No user study or independent ground-truth review was performed. Methods, raw summaries, tools, and limitations: [docs/thesis-experiments/p4-p10](docs/thesis-experiments/p4-p10/README.md).
 
