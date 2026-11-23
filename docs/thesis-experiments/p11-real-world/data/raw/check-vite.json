@@ -1,0 +1,9 @@
+{
+ "project": "vite",
+ "records": 45,
+ "expectedBlocks": 45,
+ "completeBlocks": 45,
+ "issues": [],
+ "fieldGaps": [],
+ "restores": 0
+}

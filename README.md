@@ -292,6 +292,8 @@ The repository contains thesis research on Cogic's exploration workflow and perf
 
 Measurements use 3 independent runs per condition and a fixed decision rule; they are not tests of statistical significance. No user study or independent ground-truth review was performed. Methods, raw summaries, tools, and limitations: [docs/thesis-experiments/p4-p10](docs/thesis-experiments/p4-p10/README.md).
 
+**Real-world validation (P11, v0.0.6).** On four open-source projects whose TypeScript Program exceeds 800 files (hono, excalidraw, vite, typeorm), the pre-0.0.6 cache re-parsed every file on each analysis. With the 0.0.6 cache, the analysis after an active-file edit took 43–81% less time (median, Node harness), and the graph update after an edit in VS Code took 31–43% less time (hono, vite; 3 runs per condition). Analysis results were identical under both cache policies. Details, including a cache-on/off type difference for imported `.json` files and the cache's memory use (up to about 0.5 GB retained heap): [docs/thesis-experiments/p11-real-world](docs/thesis-experiments/p11-real-world/README.md).
+
 ---
 
 ## Notes

@@ -1,6 +1,7 @@
 # Cogic Thesis Experiments — P0: Baseline Audit & Experimental Design
 
 > 후속 단계 P4–P10(회귀 검증, UI 응답·조작 성능, 캐시 개선)의 공개 정리는 [p4-p10/](p4-p10/README.md)에 있다.
+> 실제 오픈소스 프로젝트 검증(P11, v0.0.6 기준)은 [p11-real-world/](p11-real-world/README.md)에 있다.
 
 예상 논문 제목: **정적 분석 기반 코드 구조 시각화 도구 Cogic의 설계 및 성능 최적화**
 

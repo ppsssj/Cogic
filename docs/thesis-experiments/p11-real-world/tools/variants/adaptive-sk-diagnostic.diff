@@ -1,0 +1,13 @@
+--- a/src/analyzer/analyze.ts (v0.0.6)
++++ b/src/analyzer/analyze.ts (P11 adaptive-sk DIAGNOSTIC variant, not product code)
+@@ -676,7 +676,9 @@
+   }
+ 
+   const cacheKey = normalizeCachePath(requested);
+-  const scriptKind = pickScriptKind(requested, "");
++  // P11 DIAGNOSTIC ONLY (not product code): let TypeScript infer the script kind from the extension, like the
++  // default host used when the cache is off (.json -> JSON, .mjs/.mts -> JS/TS module kinds, .d.ts -> TS).
++  const scriptKind = undefined as unknown as ts.ScriptKind;
+   const languageVersionKey = getLanguageVersionCacheKey(languageVersion);
+   const cached = diskSourceFileCache.get(cacheKey);
+ 
