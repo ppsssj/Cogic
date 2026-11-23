@@ -42,6 +42,7 @@ import {
   pushWebviewDebugEvent,
 } from "../lib/debugLog";
 import type { ChipKey } from "./FiltersBar";
+import { pipelineEnabled, profileWebview } from "../lib/pipelineProfile";
 
 type InterfaceSubkind = "interface" | "type" | "enum";
 function getInterfaceSubkind(n: GraphNode): InterfaceSubkind | undefined {
@@ -122,6 +123,14 @@ type CollapseLayoutState = {
   collapsingFolderPaths: string[];
   expandingFolderPaths: string[];
 };
+
+function measureProfile<T>(fn: () => T, record: (duration: number) => void): T {
+  if (!pipelineEnabled) return fn();
+  const start = performance.now();
+  const result = fn();
+  record(performance.now() - start);
+  return result;
+}
 
 type NodeWithAbsolutePosition = Node<CanvasNodeData> & {
   positionAbsolute?: { x: number; y: number };
@@ -1995,6 +2004,7 @@ function toReactFlowNodes(
 }
 
 export const CanvasPane = memo(function CanvasPane({
+  profileRequestId,
   hasData,
   graph,
   loadingState,
@@ -2033,6 +2043,7 @@ export const CanvasPane = memo(function CanvasPane({
   onRegisterSnapshotExporter,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
+  const profileTimes = useRef({ nodesMs: 0, edgesMs: 0 });
   const explorationViewportRef = useRef<{ x: number; y: number; zoom: number } | null>(null);
   const canvasFlowRef = useRef<HTMLDivElement | null>(null);
   const lastVisibleHasDataRef = useRef<boolean | null>(null);
@@ -2554,7 +2565,7 @@ export const CanvasPane = memo(function CanvasPane({
 
   const nodes = useMemo<Array<Node<CanvasNodeData>>>(
     () =>
-      toReactFlowNodes(
+      measureProfile(() => toReactFlowNodes(
         filteredGraph,
         searchHitIds,
         analysisDiagnostics,
@@ -2624,7 +2635,7 @@ export const CanvasPane = memo(function CanvasPane({
         },
         handleToggleFileGroup,
         handleToggleFolderGroup,
-      ),
+      ), (duration) => { profileTimes.current.nodesMs = duration; }),
     [
       analysisDiagnostics,
       cancelCanvasFocus,
@@ -2660,14 +2671,14 @@ export const CanvasPane = memo(function CanvasPane({
 
   const edges = useMemo<Array<Edge<DataflowEdgeData>>>(
     () =>
-      toReactFlowEdges(
+      measureProfile(() => toReactFlowEdges(
         filteredGraph,
         selectedNodeIds,
         highlightedEdgeId,
         collapsedFilePathSet,
         collapsedFolderPathSet,
         workspaceRoot,
-      ),
+      ), (duration) => { profileTimes.current.edgesMs = duration; }),
     [
       collapsedFilePathSet,
       collapsedFolderPathSet,
@@ -3077,6 +3088,24 @@ export const CanvasPane = memo(function CanvasPane({
     recoveryTick,
     scheduleCanvasSnapshots,
   ]);
+
+  useEffect(() => {
+    if (!pipelineEnabled || !profileRequestId || !graph) return;
+    profileWebview("canvas.commit", profileRequestId, {
+      nodesMs: profileTimes.current.nodesMs, edgesMs: profileTimes.current.edgesMs,
+      flowNodes: nodes.length, flowEdges: edges.length,
+      graphNodes: graph.nodes.length, graphEdges: graph.edges.length,
+    });
+    let second = 0;
+    const first = requestAnimationFrame(() => {
+      second = requestAnimationFrame(() => {
+        profileWebview("canvas.twoAnimationFrames", profileRequestId, {
+          visible: document.visibilityState, domNodes: canvasFlowRef.current?.querySelectorAll(".react-flow__node").length ?? 0,
+        });
+      });
+    });
+    return () => { cancelAnimationFrame(first); cancelAnimationFrame(second); };
+  }, [profileRequestId, graph, nodes, edges]);
 
   useEffect(() => {
     return () => {
@@ -3544,6 +3573,7 @@ export const CanvasPane = memo(function CanvasPane({
 });
 
 type Props = {
+  profileRequestId: string | null;
   hasData: boolean;
   graph?: GraphPayload;
   loadingState?: {

@@ -142,6 +142,7 @@ export async function analyzeWorkspaceDepth(args: {
   /** Reads an expansion target (the panel uses `vscode.workspace.fs.readFile`). */
   readFile: (filePath: string) => Promise<string>;
   debug?: DebugLogger;
+  profile?: DebugLogger;
   /** P12-B Program session for Depth >= 2 runs. Default true; false restores the per-analysis Program path. */
   programSession?: boolean;
 }): Promise<DepthAnalysisResult> {
@@ -197,6 +198,7 @@ export async function analyzeWorkspaceDepth(args: {
       comparableWorkspacePaths,
       analyzedFiles,
     );
+    args.profile?.("depth.frontier", { hop: 0, files: frontier.length });
 
     for (let hop = 0; hop < args.graphDepth - 1; hop += 1) {
       if (frontier.length === 0) {
@@ -206,6 +208,7 @@ export async function analyzeWorkspaceDepth(args: {
       const nextFrontier = new Set<string>();
 
       for (const targetFile of frontier) {
+        const targetStart = performance.now();
         const comparable = normalizeComparablePath(targetFile);
         analyzedFiles.add(comparable);
 
@@ -224,10 +227,12 @@ export async function analyzeWorkspaceDepth(args: {
             session,
           });
 
+          const mergeStart = performance.now();
           mergedGraph = mergeGraphPayload(mergedGraph, expandedResult.graph) ?? mergedGraph;
           if (args.traceMode) {
             mergedTrace = mergeTracePayload(mergedTrace, expandedResult.trace) ?? mergedTrace;
           }
+          args.profile?.("depth.merge", { hop, durationMs: performance.now() - mergeStart });
 
           for (const discoveredFile of collectDepthExpansionFiles(
             expandedResult.graph,
@@ -236,12 +241,15 @@ export async function analyzeWorkspaceDepth(args: {
           )) {
             nextFrontier.add(discoveredFile);
           }
+          args.profile?.("depth.target.end", { hop, file: targetFile, durationMs: performance.now() - targetStart });
         } catch {
+          args.profile?.("depth.target.failed", { hop, file: targetFile, durationMs: performance.now() - targetStart });
           // ignore unreadable expansion targets
         }
       }
 
       frontier = [...nextFrontier];
+      args.profile?.("depth.frontier", { hop: hop + 1, files: frontier.length });
     }
 
     return {

@@ -1,0 +1,26 @@
+﻿{
+  "node": "v24.12.0",
+  "platform": "win32",
+  "rows": [
+    {
+      "enabled": false,
+      "events": 1000,
+      "elapsedMs": 0.7218000000000018
+    },
+    {
+      "enabled": true,
+      "events": 1000,
+      "elapsedMs": 277.76279999999997
+    },
+    {
+      "enabled": true,
+      "events": 1000,
+      "elapsedMs": 264.77909999999997
+    },
+    {
+      "enabled": false,
+      "events": 1000,
+      "elapsedMs": 0.5287000000000717
+    }
+  ]
+}
