@@ -1,0 +1,86 @@
+{
+  "note": "P13 Stage B answer key, fixed before measurement. Lines are 1-based at the pinned commits. Workspaces are the P11 work copies of the pinned commits with dependencies installed (P11 project-selection.md).",
+  "tasks": [
+    {
+      "id": "H1", "project": "hono", "commit": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+      "startFile": "src/helper/cookie/index.ts", "startSymbol": "setCookie", "startLine": 99,
+      "targetFile": "src/utils/cookie.ts", "targetSymbol": "_serialize", "targetLine": 174,
+      "path": [
+        { "fn": "setCookie", "file": "src/helper/cookie/index.ts", "line": 99 },
+        { "fn": "generateCookie", "file": "src/helper/cookie/index.ts", "line": 78 },
+        { "fn": "serialize", "file": "src/utils/cookie.ts", "line": 262 },
+        { "fn": "_serialize", "file": "src/utils/cookie.ts", "line": 174 }
+      ],
+      "calls": [
+        { "from": "setCookie", "to": "generateCookie", "at": "src/helper/cookie/index.ts:100" },
+        { "from": "generateCookie", "to": "serialize", "at": "src/helper/cookie/index.ts:85,87,94" },
+        { "from": "serialize", "to": "_serialize", "at": "src/utils/cookie.ts:268" }
+      ],
+      "flow": [
+        { "id": "S1", "arg": "value", "fromFn": "setCookie", "toFn": "generateCookie", "param": "value", "at": "src/helper/cookie/index.ts:100" },
+        { "id": "S2", "arg": "value", "fromFn": "generateCookie", "toFn": "serialize", "param": "value", "at": "src/helper/cookie/index.ts:85,87,94" },
+        { "id": "S3", "arg": "value", "fromFn": "serialize", "toFn": "_serialize", "param": "value", "at": "src/utils/cookie.ts:268", "remark": "value is re-assigned with encodeURIComponent(value) on line 267 before the call" }
+      ]
+    },
+    {
+      "id": "H2", "project": "hono", "commit": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+      "startFile": "src/hono-base.ts", "startSymbol": "request", "startLine": 518,
+      "targetFile": "src/compose.ts", "targetSymbol": "compose", "targetLine": 15,
+      "path": [
+        { "fn": "request", "file": "src/hono-base.ts", "line": 518, "kind": "class property (arrow function)" },
+        { "fn": "fetch", "file": "src/hono-base.ts", "line": 498, "kind": "class property (arrow function)" },
+        { "fn": "#dispatch", "file": "src/hono-base.ts", "line": 425, "kind": "private method" },
+        { "fn": "compose", "file": "src/compose.ts", "line": 15 }
+      ],
+      "calls": [
+        { "from": "request", "to": "fetch", "at": "src/hono-base.ts:525,528" },
+        { "from": "fetch", "to": "#dispatch", "at": "src/hono-base.ts:503" },
+        { "from": "#dispatch", "to": "compose", "at": "src/hono-base.ts:469" }
+      ],
+      "flow": [
+        { "id": "S1", "arg": "Env", "fromFn": "request", "toFn": "fetch", "param": "env (declared type) / ...rest (implementation)", "at": "src/hono-base.ts:525,528" },
+        { "id": "S2", "arg": "request", "fromFn": "fetch", "toFn": "#dispatch", "param": "request", "at": "src/hono-base.ts:503" },
+        { "id": "S3", "arg": "rest[0]", "fromFn": "fetch", "toFn": "#dispatch", "param": "env", "at": "src/hono-base.ts:503" }
+      ]
+    },
+    {
+      "id": "V1", "project": "vite", "commit": "3567471998e3da315675086f44368e266c9c0e33",
+      "startFile": "packages/vite/src/node/server/index.ts", "startSymbol": "createServer", "startLine": 506,
+      "targetFile": "packages/vite/src/node/config.ts", "targetSymbol": "resolveConfig", "targetLine": 1480,
+      "path": [
+        { "fn": "createServer", "file": "packages/vite/src/node/server/index.ts", "line": 506 },
+        { "fn": "_createServer", "file": "packages/vite/src/node/server/index.ts", "line": 512 },
+        { "fn": "resolveConfig", "file": "packages/vite/src/node/config.ts", "line": 1480 }
+      ],
+      "calls": [
+        { "from": "createServer", "to": "_createServer", "at": "packages/vite/src/node/server/index.ts:509" },
+        { "from": "_createServer", "to": "resolveConfig", "at": "packages/vite/src/node/server/index.ts:533" }
+      ],
+      "flow": [
+        { "id": "S1", "arg": "inlineConfig", "fromFn": "createServer", "toFn": "_createServer", "param": "inlineConfig", "at": "packages/vite/src/node/server/index.ts:509" },
+        { "id": "S2", "arg": "inlineConfig", "fromFn": "_createServer", "toFn": "resolveConfig", "param": "inlineConfig", "at": "packages/vite/src/node/server/index.ts:533" }
+      ]
+    },
+    {
+      "id": "V2", "project": "vite", "commit": "3567471998e3da315675086f44368e266c9c0e33",
+      "startFile": "packages/vite/src/node/build.ts", "startSymbol": "build", "startLine": 575,
+      "targetFile": "packages/vite/src/node/config.ts", "targetSymbol": "resolveConfig", "targetLine": 1480,
+      "path": [
+        { "fn": "build", "file": "packages/vite/src/node/build.ts", "line": 575 },
+        { "fn": "createBuilder", "file": "packages/vite/src/node/build.ts", "line": 1857 },
+        { "fn": "resolveConfigToBuild", "file": "packages/vite/src/node/build.ts", "line": 584 },
+        { "fn": "resolveConfig", "file": "packages/vite/src/node/config.ts", "line": 1480 }
+      ],
+      "calls": [
+        { "from": "build", "to": "createBuilder", "at": "packages/vite/src/node/build.ts:578" },
+        { "from": "createBuilder", "to": "resolveConfigToBuild", "at": "packages/vite/src/node/build.ts:1873" },
+        { "from": "resolveConfigToBuild", "to": "resolveConfig", "at": "packages/vite/src/node/build.ts:589" }
+      ],
+      "flow": [
+        { "id": "S1", "arg": "inlineConfig", "fromFn": "build", "toFn": "createBuilder", "param": "inlineConfig", "at": "packages/vite/src/node/build.ts:578" },
+        { "id": "S2", "arg": "inlineConfig", "fromFn": "createBuilder", "toFn": "resolveConfigToBuild", "param": "inlineConfig", "at": "packages/vite/src/node/build.ts:1873" },
+        { "id": "S3", "arg": "inlineConfig", "fromFn": "resolveConfigToBuild", "toFn": "resolveConfig", "param": "inlineConfig", "at": "packages/vite/src/node/build.ts:590" }
+      ]
+    }
+  ]
+}
