@@ -1,0 +1,38 @@
+[
+ {
+  "label": "off-fix",
+  "snapshot": "active-edit-off-adaptive-fix-i17.json",
+  "node": "t (i18n.ts)",
+  "signature": "(path: NestedKeyOf<{ labels: { signUp: string; signIn: string; upgrade: string; paste: string; pasteAsPlaintext: string; pasteCharts: string; chartType_bar: str"
+ },
+ {
+  "label": "off-fix",
+  "snapshot": "active-edit-off-adaptive-fix-i3.json",
+  "node": "t (i18n.ts)",
+  "signature": "(path: NestedKeyOf<{ labels: { signUp: string; signIn: string; upgrade: string; paste: string; pasteAsPlaintext: string; pasteCharts: string; chartType_bar: str"
+ },
+ {
+  "label": "on-v006",
+  "snapshot": "active-edit-on-adaptive-i17.json",
+  "node": "t (i18n.ts)",
+  "signature": "(path: any, replacement?: { [key: string]: string | number; } | null | undefined, fallback?: string | undefined): string"
+ },
+ {
+  "label": "on-v006",
+  "snapshot": "active-edit-on-adaptive-i3.json",
+  "node": "t (i18n.ts)",
+  "signature": "(path: any, replacement?: { [key: string]: string | number; } | null | undefined, fallback?: string | undefined): string"
+ },
+ {
+  "label": "on-fix",
+  "snapshot": "active-edit-on-adaptive-fix-i17.json",
+  "node": "t (i18n.ts)",
+  "signature": "(path: NestedKeyOf<{ labels: { signUp: string; signIn: string; upgrade: string; paste: string; pasteAsPlaintext: string; pasteCharts: string; chartType_bar: str"
+ },
+ {
+  "label": "on-fix",
+  "snapshot": "active-edit-on-adaptive-fix-i3.json",
+  "node": "t (i18n.ts)",
+  "signature": "(path: NestedKeyOf<{ labels: { signUp: string; signIn: string; upgrade: string; paste: string; pasteAsPlaintext: string; pasteCharts: string; chartType_bar: str"
+ }
+]
