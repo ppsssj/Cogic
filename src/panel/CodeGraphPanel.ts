@@ -3,9 +3,13 @@ import * as path from "path";
 import * as crypto from "crypto";
 import { getWebviewHtml } from "../webview/html";
 import {
-  analyzeWorkspaceActive,
+  analyzeWorkspaceDepth,
   clearAnalyzerCaches,
+  guessLanguageId,
   invalidateAnalyzerFileCaches,
+  normalizeComparablePath,
+  pruneGraphToFile,
+  type DepthAnalysisResult,
 } from "../analyzer";
 import { buildPatchPreview, type GeneratedPatchPlan } from "../codegen";
 import type {
@@ -25,8 +29,6 @@ import {
 import { RuntimeDebugBridge } from "./runtimeDebug";
 import { shouldAutoAnalyzeEditorChange } from "./workflowPolicy";
 
-type DepthAnalysisResult = ReturnType<typeof analyzeWorkspaceActive>;
-
 type AnalysisCacheEntry = {
   result: DepthAnalysisResult;
   lastAccessedAt: number;
@@ -42,10 +44,6 @@ function getGraphCounts(payload?: { nodes: unknown[]; edges: unknown[] }) {
     graphNodes: payload?.nodes.length ?? 0,
     graphEdges: payload?.edges.length ?? 0,
   };
-}
-
-function normalizeComparablePath(filePath: string) {
-  return filePath.replace(/\\/g, "/").toLowerCase();
 }
 
 function normalizeDirectoryPath(filePath: string) {
@@ -69,75 +67,6 @@ function getDefaultAnalysisCacheEnabled() {
 function clampGraphDepth(depth: number | undefined) {
   if (!Number.isFinite(depth)) {return 0;}
   return Math.max(0, Math.min(3, Math.round(depth ?? 0)));
-}
-
-function mergeGraphPayload(
-  prev: GraphPayload | undefined,
-  next: GraphPayload | undefined,
-) {
-  if (!next) {return prev;}
-  if (!prev) {return next;}
-
-  const nodeById = new Map(
-    prev.nodes.map((node) => [String((node as { id: string }).id), node]),
-  );
-  for (const node of next.nodes) {
-    nodeById.set(String((node as { id: string }).id), node);
-  }
-
-  const edgeById = new Map(
-    prev.edges.map((edge) => [String((edge as { id: string }).id), edge]),
-  );
-  for (const edge of next.edges) {
-    edgeById.set(String((edge as { id: string }).id), edge);
-  }
-
-  return {
-    nodes: [...nodeById.values()],
-    edges: [...edgeById.values()],
-  };
-}
-
-function getTraceEventKey(event: GraphTraceEvent) {
-  return event.type === "node" ? `node:${event.node.id}` : `edge:${event.edge.id}`;
-}
-
-function mergeTracePayload(
-  prev: GraphTraceEvent[] | undefined,
-  next: GraphTraceEvent[] | undefined,
-) {
-  if (!next) {return prev;}
-  if (!prev) {return next;}
-
-  const merged = [...prev];
-  const seen = new Set(prev.map(getTraceEventKey));
-
-  for (const event of next) {
-    const key = getTraceEventKey(event);
-    if (seen.has(key)) {
-      continue;
-    }
-    seen.add(key);
-    merged.push(event);
-  }
-
-  return merged;
-}
-
-function pruneGraphToFile(graph: GraphPayload, filePath: string) {
-  const comparableFilePath = normalizeComparablePath(filePath);
-  const keptNodes = graph.nodes.filter(
-    (node) => normalizeComparablePath(node.file) === comparableFilePath,
-  );
-  const keptNodeIds = new Set(keptNodes.map((node) => node.id));
-  const keptEdges = graph.edges.filter(
-    (edge) => keptNodeIds.has(edge.source) && keptNodeIds.has(edge.target),
-  );
-
-  return {
-    nodes: keptNodes,
-    edges: keptEdges,
-  };
 }
 
 function pruneTraceToGraph(
@@ -1425,134 +1354,22 @@ export class CodeGraphPanel {
       });
     }
 
-    const comparableWorkspacePaths = new Set(
-      filePaths.map((filePath) => normalizeComparablePath(filePath)),
-    );
-    const analyzedFiles = new Set<string>([
-      normalizeComparablePath(args.fileName),
-    ]);
-
-    const baseResult = analyzeWorkspaceActive({
-      active: {
-        code: args.code,
-        fileName: args.fileName,
-        languageId: args.languageId,
-      },
+    const result = await analyzeWorkspaceDepth({
+      ...args,
       workspaceRoot,
       filePaths,
-      debug: pushPanelDebugEvent,
       cacheEnabled,
+      debug: pushPanelDebugEvent,
+      readFile: async (targetFile) =>
+        new TextDecoder("utf-8").decode(
+          await vscode.workspace.fs.readFile(vscode.Uri.file(targetFile)),
+        ),
     });
-
-    let result: DepthAnalysisResult;
-
-    if (!baseResult.graph) {
-      result = baseResult;
-    } else if (args.traceMode && args.traceScope === "single-file") {
-      result = {
-        ...baseResult,
-        graph: pruneGraphToFile(baseResult.graph, args.fileName),
-      };
-    } else if (args.graphDepth <= 0) {
-      result = {
-        ...baseResult,
-        graph: pruneGraphToFile(baseResult.graph, args.fileName),
-      };
-    } else if (args.graphDepth === 1) {
-      result = baseResult;
-    } else {
-      let mergedGraph = baseResult.graph;
-      let mergedTrace = baseResult.trace;
-      let frontier = this.collectDepthExpansionFiles(
-        baseResult.graph,
-        comparableWorkspacePaths,
-        analyzedFiles,
-      );
-
-      for (let hop = 0; hop < args.graphDepth - 1; hop += 1) {
-        if (frontier.length === 0) {
-          break;
-        }
-
-        const nextFrontier = new Set<string>();
-
-        for (const targetFile of frontier) {
-          const comparable = normalizeComparablePath(targetFile);
-          analyzedFiles.add(comparable);
-
-          try {
-            const bytes = await vscode.workspace.fs.readFile(vscode.Uri.file(targetFile));
-            const code = new TextDecoder("utf-8").decode(bytes);
-            const expandedResult = analyzeWorkspaceActive({
-              active: {
-                code,
-                fileName: targetFile,
-                languageId: guessLanguageId(targetFile),
-              },
-              workspaceRoot,
-              filePaths,
-              debug: pushPanelDebugEvent,
-              cacheEnabled,
-            });
-
-            mergedGraph = mergeGraphPayload(mergedGraph, expandedResult.graph) ?? mergedGraph;
-            if (args.traceMode) {
-              mergedTrace = mergeTracePayload(mergedTrace, expandedResult.trace) ?? mergedTrace;
-            }
-
-            for (const discoveredFile of this.collectDepthExpansionFiles(
-              expandedResult.graph,
-              comparableWorkspacePaths,
-              analyzedFiles,
-            )) {
-              nextFrontier.add(discoveredFile);
-            }
-          } catch {
-            // ignore unreadable expansion targets
-          }
-        }
-
-        frontier = [...nextFrontier];
-      }
-
-      result = {
-        ...baseResult,
-        graph: mergedGraph,
-        trace: args.traceMode ? mergedTrace : baseResult.trace,
-      };
-    }
 
     if (cacheKey) {
       this.storeAnalysisResult(cacheKey, result);
     }
     return result;
-  }
-
-  private collectDepthExpansionFiles(
-    graph: NonNullable<ReturnType<typeof analyzeWorkspaceActive>["graph"]>,
-    comparableWorkspacePaths: Set<string>,
-    analyzedFiles: Set<string>,
-  ) {
-    const discovered = new Set<string>();
-
-    for (const node of graph.nodes) {
-      if (node.kind !== "external") {
-        continue;
-      }
-
-      const comparable = normalizeComparablePath(node.file);
-      if (
-        analyzedFiles.has(comparable) ||
-        !comparableWorkspacePaths.has(comparable) ||
-        comparable.endsWith(".d.ts")
-      ) {
-        continue;
-      }
-
-      discovered.add(node.file);
-    }
-
-    return [...discovered];
   }
 
   private async saveExportFile(payload: {
@@ -1873,19 +1690,3 @@ function decodeBase64(base64: string): Uint8Array {
   return new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength);
 }
 
-function guessLanguageId(filePath: string): string {
-  const lower = filePath.toLowerCase();
-  if (lower.endsWith(".tsx")) {
-    return "typescriptreact";
-  }
-  if (lower.endsWith(".ts")) {
-    return "typescript";
-  }
-  if (lower.endsWith(".jsx")) {
-    return "javascriptreact";
-  }
-  if (lower.endsWith(".js")) {
-    return "javascript";
-  }
-  return "typescript";
-}
