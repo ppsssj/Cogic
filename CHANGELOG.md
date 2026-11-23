@@ -6,6 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+- Fix analysis results differing between cache on and off: the SourceFile cache parsed imported `.json` modules and `.mjs`/`.cjs` files as TypeScript, which turned JSON-derived types into `any` and could hide CommonJS members or report a false "no default export" error. Files read from disk now get the script kind TypeScript infers from their extension.
+
 ## [0.0.6] - 2026-11-22
 
 - Preserve graph exploration during runtime debugging: a debug session no longer replaces the exploration graph, and the start node, selection, and graph state are kept while paused and restored after debugging stops.

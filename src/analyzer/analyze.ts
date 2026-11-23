@@ -676,7 +676,7 @@ function getCachedDiskSourceFile(
   }
 
   const cacheKey = normalizeCachePath(requested);
-  const scriptKind = pickScriptKind(requested, "");
+  const scriptKind = diskScriptKind(requested);
   const languageVersionKey = getLanguageVersionCacheKey(languageVersion);
   const cached = diskSourceFileCache.get(cacheKey);
 
@@ -853,13 +853,28 @@ function createModuleLocationResolver(
         sourceText,
         ts.ScriptTarget.ES2022,
         true,
-        pickScriptKind(resolved.resolvedFileName, ""),
+        diskScriptKind(resolved.resolvedFileName),
       );
       return sourceFileLocation(fallbackSourceFile);
     } catch {
       return null;
     }
   };
+}
+
+/**
+ * ScriptKind of a file read from disk, chosen from its extension the same way TypeScript's default compiler host does
+ * (createSourceFile without an explicit kind). Used for cached and fallback SourceFiles so that cache on and off parse
+ * a file identically; `pickScriptKind` treated every non-.tsx/.jsx/.js file as TS, which parsed .json modules and
+ * .mjs/.cjs files as TypeScript.
+ */
+export function diskScriptKind(fileName: string): ts.ScriptKind {
+  const lower = fileName.toLowerCase();
+  if (lower.endsWith(".json")) {return ts.ScriptKind.JSON;}
+  if (lower.endsWith(".tsx")) {return ts.ScriptKind.TSX;}
+  if (lower.endsWith(".jsx")) {return ts.ScriptKind.JSX;}
+  if (lower.endsWith(".js") || lower.endsWith(".mjs") || lower.endsWith(".cjs")) {return ts.ScriptKind.JS;}
+  return ts.ScriptKind.TS;
 }
 
 function pickScriptKind(fileName: string, languageId: string): ts.ScriptKind {
