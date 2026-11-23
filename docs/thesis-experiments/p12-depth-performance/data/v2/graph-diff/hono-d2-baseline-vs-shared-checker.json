@@ -1,0 +1,35 @@
+{
+  "labelA": "baseline",
+  "labelB": "sharedChecker",
+  "hashA": "45ea10193f03ecc826a7d6a4c53d38522f2ecb25d8b46e677e6d2a9a12ee916f",
+  "hashB": "45c635d958b1b9c0154f2dbddcdcca91ec75316c225093f1c6bfd4f5485cd6a4",
+  "identical": false,
+  "nodes": {
+    "countA": 85,
+    "countB": 85,
+    "onlyA": [],
+    "onlyB": [],
+    "changed": 1,
+    "changedFields": {
+      "signature": 1
+    },
+    "changedDetail": [
+      {
+        "id": "external:<projects>/hono/src/utils/html.ts:4219",
+        "signature": {
+          "baseline": "(str: string | Promise<string> | HtmlEscapedString, phase: 2 | 1 | 3, preserveCallbacks: boolean, context: object, buffer?: [string]): Promise<string>",
+          "sharedChecker": "(str: string | Promise<string> | HtmlEscapedString, phase: 1 | 2 | 3, preserveCallbacks: boolean, context: object, buffer?: [string]): Promise<string>"
+        }
+      }
+    ]
+  },
+  "edges": {
+    "countA": 207,
+    "countB": 207,
+    "onlyA": [],
+    "onlyB": [],
+    "changed": 0,
+    "changedFields": {},
+    "changedDetail": []
+  }
+}

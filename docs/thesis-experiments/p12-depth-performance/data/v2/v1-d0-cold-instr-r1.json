@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "tool": "profile-depth-v2",
+    "cogicRevision": "cdc3196530776ca09e57adc73cba9d61524c6ff2",
+    "revision": "3567471998e3da315675086f44368e266c9c0e33",
+    "project": "vite",
+    "activeFile": "packages/vite/src/node/server/index.ts",
+    "depth": 0,
+    "cache": "cold",
+    "instrumented": true,
+    "shareProgram": false,
+    "maxExpand": null,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceMB": 960,
+    "fileCount": 1654,
+    "fileCountTotal": 1654,
+    "capped": false,
+    "freeMBAtStart": 1592,
+    "totalMB": 8136
+  },
+  "status": "completed",
+  "records": [
+    {
+      "label": "measured",
+      "totalMs": 8307.6038,
+      "frontierCount": 34,
+      "expandedFileCount": 0,
+      "frontierCapped": false,
+      "analyses": [
+        {
+          "file": "packages/vite/src/node/server/index.ts",
+          "ms": 8303.306199999999,
+          "nodes": 153,
+          "edges": 412,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 471.5,
+            "rssMB": 617
+          }
+        }
+      ],
+      "programs": [
+        {
+          "file": "packages/vite/src/node/server/index.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 7197.8023,
+          "hostCallbacks": {
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 5067.156100000012
+            },
+            "directoryExists": {
+              "count": 27273,
+              "ms": 791.8375000000879
+            },
+            "fileExists": {
+              "count": 14311,
+              "ms": 472.56819999999794
+            },
+            "readFile": {
+              "count": 620,
+              "ms": 286.80720000000207
+            },
+            "realpath": {
+              "count": 472,
+              "ms": 86.11929999999228
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.2780000000002474
+            }
+          },
+          "hostCallbackMs": 6704.766300000092,
+          "tsInternalMs": 493.0359999999082,
+          "reused": false
+        }
+      ],
+      "programsCreated": 1,
+      "programsReused": 0,
+      "createProgramMsTotal": 7197.8023,
+      "cacheEvents": {
+        "miss": 2295,
+        "store": 2295,
+        "skipFull": 275
+      },
+      "merges": [],
+      "mergeMsTotal": 0,
+      "serializationMs": 0.2988999999997759,
+      "nodeCount": 46,
+      "edgeCount": 73,
+      "graphHash": "a8cf81c5addb93b6e6108c24db5da8ed686527b2032b21767bf6976e0d3b5e51",
+      "freeMB": 1051,
+      "heapSampleMaxMB": 471.5,
+      "rssSampleMaxMB": 617,
+      "peakRSSMB": 644.07421875
+    }
+  ],
+  "totals": {
+    "checkerAcquisition": {
+      "count": 1,
+      "ms": 622.3865000000005
+    },
+    "checker.getTypeAtLocation": {
+      "count": 333,
+      "ms": 28.44439999997485
+    },
+    "checker.getSymbolAtLocation": {
+      "count": 1797,
+      "ms": 18.229800000008254
+    },
+    "checker.getResolvedSignature": {
+      "count": 533,
+      "ms": 229.36409999996795
+    },
+    "checker.getAliasedSymbol": {
+      "count": 227,
+      "ms": 0.17749999999250576
+    },
+    "extractCalls": {
+      "count": 1,
+      "ms": 296.9449000000004
+    },
+    "diagnostics": {
+      "count": 1,
+      "ms": 91.7507999999998
+    },
+    "checker.getTypeOfSymbolAtLocation": {
+      "count": 55,
+      "ms": 0.3709000000035303
+    },
+    "graphExtraction": {
+      "count": 1,
+      "ms": 87.84850000000006
+    }
+  },
+  "cpuMs": {
+    "user": 7890,
+    "system": 1750
+  },
+  "elapsedMs": 8310.225299999998
+}

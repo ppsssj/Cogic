@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "revision": "3567471998e3da315675086f44368e266c9c0e33",
+    "project": "vite",
+    "activeFile": "packages/vite/src/node/server/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "instrumented": true,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "fileCount": 1654,
+    "fileCountTotal": 1654,
+    "capped": false
+  },
+  "status": "aborted",
+  "records": [],
+  "error": "ABORT_LOW_MEMORY:683MB",
+  "totals": {
+    "checkerAcquisition": {
+      "count": 9,
+      "ms": 1558.0480000000007
+    },
+    "checker.getTypeAtLocation": {
+      "count": 1422,
+      "ms": 91.00059999994846
+    },
+    "checker.getSymbolAtLocation": {
+      "count": 7612,
+      "ms": 64.57510000004731
+    },
+    "checker.getResolvedSignature": {
+      "count": 2045,
+      "ms": 999.8359000000764
+    },
+    "checker.getAliasedSymbol": {
+      "count": 813,
+      "ms": 0.5053999999927328
+    },
+    "extractCalls": {
+      "count": 9,
+      "ms": 1260.0650000000005
+    },
+    "diagnostics": {
+      "count": 9,
+      "ms": 244.39770000001045
+    },
+    "checker.getTypeOfSymbolAtLocation": {
+      "count": 281,
+      "ms": 0.9113000000015745
+    },
+    "graphExtraction": {
+      "count": 9,
+      "ms": 316.3735000000015
+    }
+  },
+  "elapsedMs": 36178.582
+}
