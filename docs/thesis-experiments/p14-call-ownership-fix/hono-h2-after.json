@@ -1,0 +1,2326 @@
+{
+  "revision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+  "active": "src/hono-base.ts",
+  "typescript": "5.9.3",
+  "inputFileCount": 315,
+  "meta": {
+    "mode": "workspace",
+    "usedTsconfig": true
+  },
+  "calls": [
+    {
+      "line": 469,
+      "expression": "compose",
+      "arguments": [
+        "matchResult[0]",
+        "this.errorHandler",
+        "this.#notFoundHandler"
+      ],
+      "signature": {
+        "file": "src/compose.ts",
+        "line": 15,
+        "kind": "ArrowFunction",
+        "text": ""
+      },
+      "symbols": [
+        {
+          "file": "src/hono-base.ts",
+          "line": 7,
+          "kind": "ImportSpecifier",
+          "text": "compose"
+        }
+      ]
+    },
+    {
+      "line": 503,
+      "expression": "this.#dispatch",
+      "arguments": [
+        "request",
+        "rest[1]",
+        "rest[0]",
+        "request.method"
+      ],
+      "signature": {
+        "file": "src/hono-base.ts",
+        "line": 425,
+        "kind": "MethodDeclaration",
+        "text": "#dispatch"
+      },
+      "symbols": [
+        {
+          "file": "src/hono-base.ts",
+          "line": 425,
+          "kind": "MethodDeclaration",
+          "text": "#dispatch"
+        }
+      ]
+    },
+    {
+      "line": 525,
+      "expression": "this.fetch",
+      "arguments": [
+        "requestInit ? new Request(input, requestInit) : input",
+        "Env",
+        "executionCtx"
+      ],
+      "signature": {
+        "file": "src/hono-base.ts",
+        "line": 498,
+        "kind": "FunctionType",
+        "text": ""
+      },
+      "symbols": [
+        {
+          "file": "src/hono-base.ts",
+          "line": 498,
+          "kind": "PropertyDeclaration",
+          "text": "fetch"
+        }
+      ]
+    },
+    {
+      "line": 528,
+      "expression": "this.fetch",
+      "arguments": [
+        "new Request(\r\n        /^https?:\\/\\//.test(input) ? input : `http://localhost${mergePath('/', input)}`,\r\n        requestInit\r\n      )",
+        "Env",
+        "executionCtx"
+      ],
+      "signature": {
+        "file": "src/hono-base.ts",
+        "line": 498,
+        "kind": "FunctionType",
+        "text": ""
+      },
+      "symbols": [
+        {
+          "file": "src/hono-base.ts",
+          "line": 498,
+          "kind": "PropertyDeclaration",
+          "text": "fetch"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Hono",
+      "kind": "class",
+      "file": "src/hono-base.ts",
+      "range": {
+        "start": {
+          "line": 114,
+          "character": 0
+        },
+        "end": {
+          "line": 561,
+          "character": 1
+        }
+      }
+    },
+    {
+      "name": "Hono.#dispatch",
+      "kind": "method",
+      "file": "src/hono-base.ts",
+      "range": {
+        "start": {
+          "line": 424,
+          "character": 2
+        },
+        "end": {
+          "line": 484,
+          "character": 3
+        }
+      }
+    },
+    {
+      "name": "Hono.fetch",
+      "kind": "method",
+      "file": "src/hono-base.ts",
+      "range": {
+        "start": {
+          "line": 501,
+          "character": 38
+        },
+        "end": {
+          "line": 503,
+          "character": 3
+        }
+      }
+    },
+    {
+      "name": "Hono.request",
+      "kind": "method",
+      "file": "src/hono-base.ts",
+      "range": {
+        "start": {
+          "line": 517,
+          "character": 12
+        },
+        "end": {
+          "line": 535,
+          "character": 3
+        }
+      }
+    },
+    {
+      "name": "compose (compose.ts)",
+      "kind": "external",
+      "file": "src/compose.ts",
+      "range": {
+        "start": {
+          "line": 14,
+          "character": 23
+        },
+        "end": {
+          "line": 72,
+          "character": 1
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "GetPath",
+        "kind": "interface",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 45,
+            "character": 0
+          },
+          "end": {
+            "line": 45,
+            "character": 93
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "HonoOptions",
+        "kind": "interface",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 47,
+            "character": 0
+          },
+          "end": {
+            "line": 103,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "notFoundHandler",
+        "kind": "function",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 32,
+            "character": 41
+          },
+          "end": {
+            "line": 34,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "errorHandler",
+        "kind": "function",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 36,
+            "character": 35
+          },
+          "end": {
+            "line": 43,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.#clone",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 194,
+            "character": 2
+          },
+          "end": {
+            "line": 203,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.route",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 227,
+            "character": 2
+          },
+          "end": {
+            "line": 251,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.basePath",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 266,
+            "character": 2
+          },
+          "end": {
+            "line": 272,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.onError",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 290,
+            "character": 12
+          },
+          "end": {
+            "line": 293,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.notFound",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 310,
+            "character": 13
+          },
+          "end": {
+            "line": 313,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.mount",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 351,
+            "character": 2
+          },
+          "end": {
+            "line": 402,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#addRoute",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 404,
+            "character": 2
+          },
+          "end": {
+            "line": 415,
+            "character": 3
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#addRoute",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 404,
+            "character": 2
+          },
+          "end": {
+            "line": 415,
+            "character": 3
+          }
+        }
+      },
+      "label": "method <- methodName"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#addRoute",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 404,
+            "character": 2
+          },
+          "end": {
+            "line": 415,
+            "character": 3
+          }
+        }
+      },
+      "label": "path <- this.#path"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#addRoute",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 404,
+            "character": 2
+          },
+          "end": {
+            "line": 415,
+            "character": 3
+          }
+        }
+      },
+      "label": "handler <- args1"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#addRoute",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 404,
+            "character": 2
+          },
+          "end": {
+            "line": 415,
+            "character": 3
+          }
+        }
+      },
+      "label": "handler <- handler"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#addRoute",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 404,
+            "character": 2
+          },
+          "end": {
+            "line": 415,
+            "character": 3
+          }
+        }
+      },
+      "label": "method <- METHOD_NAME_ALL"
+    },
+    {
+      "kind": "constructs",
+      "source": {
+        "name": "Hono.#clone",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 194,
+            "character": 2
+          },
+          "end": {
+            "line": 203,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#clone",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 194,
+            "character": 2
+          },
+          "end": {
+            "line": 203,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": "options <- { router: this.router, getPath: this.getPath, }"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.route",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 227,
+            "character": 2
+          },
+          "end": {
+            "line": 251,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.route",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 227,
+            "character": 2
+          },
+          "end": {
+            "line": 251,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "middleware <- []"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.route",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 227,
+            "character": 2
+          },
+          "end": {
+            "line": 251,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "onError <- app.errorHandler"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "request <- request"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "executionCtx <- executionCtx"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "env <- env"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "method <- 'GET'"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Router.match (router.ts)",
+        "kind": "external",
+        "file": "src/router.ts",
+        "range": {
+          "start": {
+            "line": 50,
+            "character": 2
+          },
+          "end": {
+            "line": 50,
+            "character": 48
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Router.match (router.ts)",
+        "kind": "external",
+        "file": "src/router.ts",
+        "range": {
+          "start": {
+            "line": 50,
+            "character": 2
+          },
+          "end": {
+            "line": 50,
+            "character": 48
+          }
+        }
+      },
+      "label": "method <- method"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Router.match (router.ts)",
+        "kind": "external",
+        "file": "src/router.ts",
+        "range": {
+          "start": {
+            "line": 50,
+            "character": 2
+          },
+          "end": {
+            "line": 50,
+            "character": 48
+          }
+        }
+      },
+      "label": "path <- path"
+    },
+    {
+      "kind": "constructs",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "new Context (context.ts)",
+        "kind": "external",
+        "file": "src/context.ts",
+        "range": {
+          "start": {
+            "line": 292,
+            "character": 0
+          },
+          "end": {
+            "line": 797,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "new Context (context.ts)",
+        "kind": "external",
+        "file": "src/context.ts",
+        "range": {
+          "start": {
+            "line": 292,
+            "character": 0
+          },
+          "end": {
+            "line": 797,
+            "character": 1
+          }
+        }
+      },
+      "label": "req <- request"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "new Context (context.ts)",
+        "kind": "external",
+        "file": "src/context.ts",
+        "range": {
+          "start": {
+            "line": 292,
+            "character": 0
+          },
+          "end": {
+            "line": 797,
+            "character": 1
+          }
+        }
+      },
+      "label": "options <- { path, matchResult, env, executionCtx, notFoundHandler: this.#notFoundHandle..."
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "RouterRoute.handler (types.ts)",
+        "kind": "external",
+        "file": "src/types.ts",
+        "range": {
+          "start": {
+            "line": 80,
+            "character": 4
+          },
+          "end": {
+            "line": 80,
+            "character": 42
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "RouterRoute.handler (types.ts)",
+        "kind": "external",
+        "file": "src/types.ts",
+        "range": {
+          "start": {
+            "line": 80,
+            "character": 4
+          },
+          "end": {
+            "line": 80,
+            "character": 42
+          }
+        }
+      },
+      "label": "c <- c"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "RouterRoute.handler (types.ts)",
+        "kind": "external",
+        "file": "src/types.ts",
+        "range": {
+          "start": {
+            "line": 80,
+            "character": 4
+          },
+          "end": {
+            "line": 80,
+            "character": 42
+          }
+        }
+      },
+      "label": "next <- async () => { c.res = await this.#notFoundHandler(c) }"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#notFoundHandler (types.ts)",
+        "kind": "external",
+        "file": "src/types.ts",
+        "range": {
+          "start": {
+            "line": 106,
+            "character": 51
+          },
+          "end": {
+            "line": 110,
+            "character": 32
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#notFoundHandler (types.ts)",
+        "kind": "external",
+        "file": "src/types.ts",
+        "range": {
+          "start": {
+            "line": 106,
+            "character": 51
+          },
+          "end": {
+            "line": 110,
+            "character": 32
+          }
+        }
+      },
+      "label": "c <- c"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#handleError",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 417,
+            "character": 2
+          },
+          "end": {
+            "line": 422,
+            "character": 3
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#handleError",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 417,
+            "character": 2
+          },
+          "end": {
+            "line": 422,
+            "character": 3
+          }
+        }
+      },
+      "label": "err <- err"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#handleError",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 417,
+            "character": 2
+          },
+          "end": {
+            "line": 422,
+            "character": 3
+          }
+        }
+      },
+      "label": "c <- c"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "middleware <- matchResult[0]"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "onError <- this.errorHandler"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "onNotFound <- this.#notFoundHandler"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose([], app.errorHandler) (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 18,
+            "character": 4
+          },
+          "end": {
+            "line": 18,
+            "character": 55
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose([], app.errorHandler) (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 18,
+            "character": 4
+          },
+          "end": {
+            "line": 18,
+            "character": 55
+          }
+        }
+      },
+      "label": "context <- c"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "request <- request"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "executionCtx <- rest[1]"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "env <- rest[0]"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "method <- request.method"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.request",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 12
+          },
+          "end": {
+            "line": 535,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.request",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 12
+          },
+          "end": {
+            "line": 535,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "label": "request <- requestInit ? new Request(input, requestInit) : input"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.request",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 12
+          },
+          "end": {
+            "line": 535,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "label": "env <- Env"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.request",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 12
+          },
+          "end": {
+            "line": 535,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "label": "executionCtx <- executionCtx"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.request",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 12
+          },
+          "end": {
+            "line": 535,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.fetch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 38
+          },
+          "end": {
+            "line": 503,
+            "character": 3
+          }
+        }
+      },
+      "label": "request <- new Request( /^https?:\\/\\//.test(input) ? input : `http://localhost${mergePat..."
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.request",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 12
+          },
+          "end": {
+            "line": 535,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "mergePath (url.ts)",
+        "kind": "external",
+        "file": "src/utils/url.ts",
+        "range": {
+          "start": {
+            "line": 186,
+            "character": 24
+          },
+          "end": {
+            "line": 186,
+            "character": 54
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.request",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 12
+          },
+          "end": {
+            "line": 535,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "mergePath (url.ts)",
+        "kind": "external",
+        "file": "src/utils/url.ts",
+        "range": {
+          "start": {
+            "line": 186,
+            "character": 24
+          },
+          "end": {
+            "line": 186,
+            "character": 54
+          }
+        }
+      },
+      "label": "...paths <- '/'"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.fire",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 554,
+            "character": 9
+          },
+          "end": {
+            "line": 560,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.fire",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 554,
+            "character": 9
+          },
+          "end": {
+            "line": 560,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "request <- event.request"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.fire",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 554,
+            "character": 9
+          },
+          "end": {
+            "line": 560,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "executionCtx <- event"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.fire",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 554,
+            "character": 9
+          },
+          "end": {
+            "line": 560,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "env <- undefined"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.fire",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 554,
+            "character": 9
+          },
+          "end": {
+            "line": 560,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono.#dispatch",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 2
+          },
+          "end": {
+            "line": 484,
+            "character": 3
+          }
+        }
+      },
+      "label": "method <- event.request.method"
+    }
+  ]
+}

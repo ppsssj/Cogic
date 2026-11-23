@@ -1,9 +1,10 @@
 // Regression characterization of the current defect, not a desired-behavior test.
-// Run after npm run compile: node --test docs/thesis-experiments/p14-accuracy/tools/hono-h2-minimal.test.cjs
+// Opt in only on the pre-fix analyzer: COGIC_P14A_HISTORICAL=1 node --test <this file>.
+// The unmodified original is preserved in p14-call-ownership-fix/ui-smoke/evidence/.
 "use strict";
 const { test } = require("node:test"), assert = require("node:assert/strict"), path = require("node:path");
-const analyzer = require(path.resolve(__dirname, "../../../../out/analyzer"));
-test("post-hoc H2 shape: typed field and private method lose their relationships", () => {
+test("historical pre-fix H2 defect characterization", { skip: process.env.COGIC_P14A_HISTORICAL === "1" ? false : "historical pre-fix evidence; not a current-product test" }, () => {
+  const analyzer = require(path.resolve(__dirname, "../../../../out/analyzer"));
   const code = `function target(x: number) { return x; }
 class Example {
   fetch: (x: number) => number = (x) => this.#dispatch(x);
