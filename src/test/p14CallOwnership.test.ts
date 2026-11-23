@@ -90,8 +90,8 @@ class Child extends Base { method(x: number) { return super.method(x); } value =
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "p14-owner-"));
     try {
       const active = path.join(root, "main.ts"), other = path.join(root, "other.ts");
-      const code = `import { helper } from './other'; class A { f: (n:number)=>number = n => helper(n); g = (n:number) => this.f(n); }`;
-      fs.writeFileSync(active, code); fs.writeFileSync(other, "export function helper(n: number) { return n; }");
+      const code = `import { helper, Other } from './other'; class A { f: (n:number)=>number = n => helper(n); g = (n:number) => this.f(n); h = (n:number) => new Other().f(n); }`;
+      fs.writeFileSync(active, code); fs.writeFileSync(other, "export function helper(n: number) { return n; } export class Other { f: (n:number)=>number = n => n; }");
       const args = { active: { code, fileName: active, languageId: "typescript" }, workspaceRoot: root, filePaths: [active, other] };
       clearAnalyzerCaches(); const off = analyzeWithWorkspace({ ...args, cacheEnabled: false });
       clearAnalyzerCaches(); const cold = analyzeWithWorkspace({ ...args, cacheEnabled: true });
@@ -100,6 +100,8 @@ class Child extends Base { method(x: number) { return super.method(x); } value =
       assert.equal(canonical(off), canonical(cold)); assert.equal(canonical(cold), canonical(warm));
       assert.ok(off.graph.nodes.some((n) => n.kind === "external" && /helper/.test(n.name) && normalize(n.file) === normalize(other)));
       assert.ok(!off.graph.nodes.some((n) => n.kind === "function" && normalize(n.file) === normalize(other)));
+      const nodes = new Map(off.graph.nodes.map((n) => [n.id, n]));
+      assert.ok(!off.graph.edges.some((e) => e.kind === "calls" && nodes.get(e.source)?.name === "A.h" && nodes.get(e.target)?.name === "A.f"));
     } finally { clearAnalyzerCaches(); fs.rmSync(root, { recursive: true, force: true }); }
   });
 });
