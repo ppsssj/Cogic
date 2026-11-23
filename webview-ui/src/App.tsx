@@ -30,9 +30,11 @@ import {
 import {
   pushWebviewDebugEvent,
 } from "./lib/debugLog";
+import { configurePipelineProfile, newProfileRequestId, pipelineEnabled, profileWebview } from "./lib/pipelineProfile";
 import "./styles/index.css";
 
 const vscode = getVSCodeApi();
+configurePipelineProfile((message) => vscode.postMessage(message));
 
 type ActiveFilePayload = Extract<
   ExtToWebviewMessage,
@@ -667,6 +669,7 @@ export default function App() {
     useState<WorkspaceFilesPayload | null>(null);
   const [selection, setSelection] = useState<SelectionPayload>(null);
   const [analysis, setAnalysis] = useState<AnalysisPayload>(null);
+  const [profileRequestId, setProfileRequestId] = useState<string | null>(null);
 
   const [graphState, setGraphState] = useState<GraphPayload | undefined>(
     undefined,
@@ -817,6 +820,11 @@ export default function App() {
     message: WebviewToExtMessage,
     detail?: Record<string, unknown>,
   ) => {
+    if (pipelineEnabled && (message.type === "analyzeActiveFile" || message.type === "analyzeWorkspace" || message.type === "selectWorkspaceFile")) {
+      const requestId = newProfileRequestId();
+      message = { ...message, payload: { ...message.payload, profileRequestId: requestId } } as WebviewToExtMessage;
+      profileWebview("request.sent", requestId, { origin, action: message.type });
+    }
     pushWebviewDebugEvent(`webview.postMessage.${message.type}`, {
       origin,
       ...detail,
@@ -1175,9 +1183,12 @@ export default function App() {
       if (msg.type === "analysisResult") {
         const request: AnalysisRequest = msg.request;
         const payload = msg.payload;
+        const receiveStart = performance.now();
+        profileWebview("result.received", request.requestId, { lane: request.lane, sequence: request.sequence, generation: request.generation });
         const diagnosticsNotice = payload?.diagnostics
           ? summarizeDiagnostics(payload.diagnostics)
           : null;
+        profileWebview("result.prepare", request.requestId, { durationMs: performance.now() - receiveStart });
 
         pushWebviewDebugEvent("analysisResult.received", {
           lane: request.lane,
@@ -1191,6 +1202,7 @@ export default function App() {
         if (request.lane === "active") {
           finishAnalysisLoading();
           if (request.sequence < latestActiveSequenceRef.current) {
+            profileWebview("result.dropped", request.requestId, { reason: "stale-sequence" });
             pushWebviewDebugEvent("analysisResult.dropped.active.stale", {
               requestId: request.requestId,
               generation: request.generation,
@@ -1202,6 +1214,7 @@ export default function App() {
 
           latestActiveSequenceRef.current = request.sequence;
           activeGraphGenerationRef.current = request.generation;
+          if (pipelineEnabled) setProfileRequestId(request.requestId);
           setAnalysis(payload);
 
           if (!payload) {
@@ -1262,12 +1275,14 @@ export default function App() {
           setTraceEvents(null);
           setTraceCursor(0);
           setGraphState(g);
+          profileWebview("state.queued", request.requestId, { nodes: g?.nodes.length ?? 0, edges: g?.edges.length ?? 0 });
           setCanvasNotice(diagnosticsNotice);
           return;
         }
 
         finishAnalysisLoading();
         if (request.generation !== activeGraphGenerationRef.current) {
+          profileWebview("result.dropped", request.requestId, { reason: "stale-generation" });
           pushWebviewDebugEvent("analysisResult.dropped.expand.stale", {
             requestId: request.requestId,
             generation: request.generation,
@@ -1277,6 +1292,7 @@ export default function App() {
         }
 
         if (payload?.graph) {
+          if (pipelineEnabled) setProfileRequestId(request.requestId);
           setGraphState((prev) => {
             const merged = mergeGraph(prev, payload.graph);
             pushWebviewDebugEvent("analysisResult.applied.expand.merge", {
@@ -2554,6 +2570,7 @@ export default function App() {
         ].join(" ")}
       >
         <CanvasPane
+          profileRequestId={profileRequestId}
           graph={graph}
           hasData={hasGraphData}
           activeFilePath={graphFilePath}

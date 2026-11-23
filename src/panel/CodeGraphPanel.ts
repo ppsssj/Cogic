@@ -28,6 +28,7 @@ import {
 } from "./debugLog";
 import { RuntimeDebugBridge } from "./runtimeDebug";
 import { shouldAutoAnalyzeEditorChange } from "./workflowPolicy";
+import { pipelineProfile, pipelineProfileEnabled } from "./pipelineProfile";
 
 type AnalysisCacheEntry = {
   result: DepthAnalysisResult;
@@ -363,13 +364,14 @@ export class CodeGraphPanel {
               Boolean(msg.payload?.traceMode),
               msg.payload?.traceMode ? "trace" : "manual",
               msg.payload?.traceScope,
+              msg.payload?.profileRequestId,
             ); // workspace-aware
           }
           if (msg.type === "analyzeWorkspace") {
             if (msg.payload?.graphDepth !== undefined) {
               this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
             }
-            return await this.postAnalysis(false, "manual"); // explicit
+            return await this.postAnalysis(false, "manual", undefined, msg.payload?.profileRequestId); // explicit
           }
           if (msg.type === "selectWorkspaceFile") {
             if (msg.payload.graphDepth !== undefined) {
@@ -388,6 +390,7 @@ export class CodeGraphPanel {
               msg.payload.filePath,
               Boolean(msg.payload.traceMode),
               msg.payload.traceScope,
+              msg.payload.profileRequestId,
             );
           }
           if (msg.type === "setGraphRoot") {
@@ -820,7 +823,7 @@ export class CodeGraphPanel {
     return {
       lane: "active",
       reason,
-      requestId: `active-${generation}-${sequence}`,
+      requestId: pipelineProfileEnabled() ? `active-${crypto.randomUUID()}` : `active-${generation}-${sequence}`,
       generation,
       sequence,
       startedAt: new Date().toISOString(),
@@ -832,7 +835,7 @@ export class CodeGraphPanel {
     return {
       lane: "expand",
       reason: "expand",
-      requestId: `expand-${generation}-${sequence}`,
+      requestId: pipelineProfileEnabled() ? `expand-${crypto.randomUUID()}` : `expand-${generation}-${sequence}`,
       generation,
       sequence,
       startedAt: new Date().toISOString(),
@@ -852,6 +855,9 @@ export class CodeGraphPanel {
     WebviewToExtMessage,
     { type: "debugEvent" }
   >["payload"]) {
+    if (payload.event.startsWith("pipeline.") && typeof payload.detail?.requestId === "string") {
+      pipelineProfile(payload.event, payload.detail.requestId, { webview: payload.detail });
+    }
     pushPanelDebugEvent("webview.debug.forwarded", {
       event: payload.event,
       recentCount: payload.recent?.length ?? 0,
@@ -1046,9 +1052,12 @@ export class CodeGraphPanel {
     traceMode = false,
     reason: AnalysisRequestReason = "manual",
     traceScope: TraceScope = "single-file",
+    profileRequestId?: string,
   ) {
     const debugEpoch = this.debugEpoch;
     const request = this.beginActiveAnalysis(reason);
+    if (pipelineProfileEnabled() && profileRequestId) {request.requestId = profileRequestId;}
+    pipelineProfile("request.begin", request.requestId, { reason, generation: request.generation, sequence: request.sequence });
     pushPanelDebugEvent("analysis.active.begin", {
       requestId: request.requestId,
       generation: request.generation,
@@ -1059,6 +1068,7 @@ export class CodeGraphPanel {
     });
     const editor = this.getEditor();
     if (!editor) {
+      pipelineProfile("request.empty", request.requestId);
       pushPanelDebugEvent("analysis.active.post.empty", {
         requestId: request.requestId,
         generation: request.generation,
@@ -1074,14 +1084,22 @@ export class CodeGraphPanel {
     const doc = editor.document;
     const text = doc.getText();
 
-    const result = await this.analyzeWorkspaceWithDepth({
-      code: text,
-      fileName: doc.fileName,
-      languageId: doc.languageId,
-      traceMode,
-      graphDepth: this.graphDepth,
-      traceScope,
-    });
+    let result: DepthAnalysisResult;
+    try {
+      result = await this.analyzeWorkspaceWithDepth({
+        code: text,
+        fileName: doc.fileName,
+        languageId: doc.languageId,
+        traceMode,
+        graphDepth: this.graphDepth,
+        traceScope,
+        profileRequestId: request.requestId,
+      });
+    } catch (error) {
+      pipelineProfile("request.failed", request.requestId);
+      throw error;
+    }
+    const payloadStart = performance.now();
     const singleFileTrace = traceMode && (
       traceScope === "single-file" || this.graphDepth <= 0
     );
@@ -1120,8 +1138,10 @@ export class CodeGraphPanel {
         latestActiveSequence: this.latestActiveAnalysisSequence,
         file: doc.fileName,
       });
+      pipelineProfile("request.dropped", request.requestId, { reason: "stale" });
       return;
     }
+    pipelineProfile("payload.ready", request.requestId, { durationMs: performance.now() - payloadStart, nodes: traceScopedGraph?.nodes.length ?? 0, edges: traceScopedGraph?.edges.length ?? 0, memory: process.memoryUsage() });
     pushPanelDebugEvent("analysis.active.post", {
       requestId: request.requestId,
       generation: request.generation,
@@ -1132,11 +1152,16 @@ export class CodeGraphPanel {
       ...getGraphCounts(traceScopedGraph),
     });
 
-    this.panel.webview.postMessage({
+    pipelineProfile("postMessage.call", request.requestId);
+    const posted = this.panel.webview.postMessage({
       type: "analysisResult",
       payload,
       request,
     } satisfies ExtToWebviewMessage);
+    void posted.then(
+      (delivered) => pipelineProfile("postMessage.resolved", request.requestId, { delivered }),
+      () => pipelineProfile("postMessage.failed", request.requestId),
+    );
   }
 
   private async postAnalysisForFile(filePath: string, generation?: number) {
@@ -1150,6 +1175,7 @@ export class CodeGraphPanel {
     }
 
     const request = this.beginExpandAnalysis(generation ?? this.analysisGeneration);
+    pipelineProfile("request.begin", request.requestId, { reason: "expand", generation: request.generation, sequence: request.sequence });
     pushPanelDebugEvent("analysis.expand.begin", {
       requestId: request.requestId,
       generation: request.generation,
@@ -1169,6 +1195,7 @@ export class CodeGraphPanel {
       graphDepth: 0,
       traceMode: false,
       traceScope: "single-file",
+      profileRequestId: request.requestId,
     });
 
     const payload: Extract<
@@ -1191,6 +1218,7 @@ export class CodeGraphPanel {
     };
 
     if (request.generation !== this.analysisGeneration) {
+      pipelineProfile("request.dropped", request.requestId, { reason: "stale-generation" });
       pushPanelDebugEvent("analysis.expand.drop.stale", {
         requestId: request.requestId,
         generation: request.generation,
@@ -1208,6 +1236,7 @@ export class CodeGraphPanel {
       diagnostics: result.diagnostics.length,
       ...getGraphCounts(result.graph),
     });
+    pipelineProfile("postMessage.call", request.requestId);
     this.panel.webview.postMessage({
       type: "analysisResult",
       payload,
@@ -1300,6 +1329,7 @@ export class CodeGraphPanel {
     filePath: string,
     traceMode = false,
     traceScope: TraceScope = "single-file",
+    profileRequestId?: string,
   ) {
     if (!filePath) {
       return;
@@ -1322,6 +1352,7 @@ export class CodeGraphPanel {
       traceMode,
       traceMode ? "trace" : "select-file",
       traceScope,
+      profileRequestId,
     );
   }
 
@@ -1332,9 +1363,14 @@ export class CodeGraphPanel {
     traceMode: boolean;
     graphDepth: number;
     traceScope: TraceScope;
+    profileRequestId?: string;
   }) {
     const workspaceRoot = this.getWorkspaceRoot();
+    const id = args.profileRequestId ?? "untracked";
+    let stageStart = performance.now();
     const filePaths = await this.getWorkspaceFilePaths();
+    pipelineProfile("workspace.ready", id, { durationMs: performance.now() - stageStart, files: filePaths.length });
+    stageStart = performance.now();
     const cacheEnabled = this.isAnalysisCacheEnabled();
     const cacheKey = cacheEnabled
       ? this.getAnalysisCacheKey(args, workspaceRoot, filePaths)
@@ -1342,10 +1378,12 @@ export class CodeGraphPanel {
 
     if (cacheKey) {
       const cached = this.getCachedAnalysisResult(cacheKey, args);
+      pipelineProfile("cache.lookup", id, { durationMs: performance.now() - stageStart, result: cached ? "hit" : "miss" });
       if (cached) {
         return cached;
       }
     } else {
+      pipelineProfile("cache.lookup", id, { durationMs: performance.now() - stageStart, result: "disabled" });
       pushPanelDebugEvent("analysis.cache.disabled", {
         filePath: args.fileName,
         graphDepth: args.graphDepth,
@@ -1354,17 +1392,26 @@ export class CodeGraphPanel {
       });
     }
 
+    stageStart = performance.now();
+    pipelineProfile("depth.begin", id);
     const result = await analyzeWorkspaceDepth({
       ...args,
       workspaceRoot,
       filePaths,
       cacheEnabled,
-      debug: pushPanelDebugEvent,
+      debug: !pipelineProfileEnabled() ? pushPanelDebugEvent : (event, detail) => {
+        pushPanelDebugEvent(event, detail);
+        if (event === "analyzer.program.created" || event.startsWith("depth.")) {
+          pipelineProfile(event, id, detail);
+        }
+      },
+      profile: pipelineProfileEnabled() ? (event, detail) => pipelineProfile(event, id, detail) : undefined,
       readFile: async (targetFile) =>
         new TextDecoder("utf-8").decode(
           await vscode.workspace.fs.readFile(vscode.Uri.file(targetFile)),
         ),
     });
+    pipelineProfile("depth.end", id, { durationMs: performance.now() - stageStart });
 
     if (cacheKey) {
       this.storeAnalysisResult(cacheKey, result);

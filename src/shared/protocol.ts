@@ -22,9 +22,9 @@ export type WebviewToExtMessage =
     }
   | {
       type: "analyzeActiveFile";
-      payload?: { traceMode?: boolean; graphDepth?: number; traceScope?: TraceScope };
+      payload?: { traceMode?: boolean; graphDepth?: number; traceScope?: TraceScope; profileRequestId?: string };
     }
-  | { type: "analyzeWorkspace"; payload?: { graphDepth?: number } }
+  | { type: "analyzeWorkspace"; payload?: { graphDepth?: number; profileRequestId?: string } }
   | {
       type: "selectWorkspaceFile";
       payload: {
@@ -32,6 +32,7 @@ export type WebviewToExtMessage =
         graphDepth?: number;
         traceMode?: boolean;
         traceScope?: TraceScope;
+        profileRequestId?: string;
       };
     }
   | {

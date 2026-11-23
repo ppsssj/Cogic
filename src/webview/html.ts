@@ -10,6 +10,9 @@ export function getWebviewHtml(
   const webviewDistPath = path.join(context.extensionPath, "media", "webview");
   const indexPath = path.join(webviewDistPath, "index.html");
   let html = fs.readFileSync(indexPath, "utf8");
+  if (process.env.COGIC_PIPELINE_PROFILE) {
+    html = html.replace("</head>", '<meta name="cogic-pipeline-profile" content="on"></head>');
+  }
 
   const assetBaseUri = webview
     .asWebviewUri(vscode.Uri.file(webviewDistPath))
