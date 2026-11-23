@@ -1,0 +1,7 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4243,,
+start-state src/hono-base.ts@request,true,2696,,p13-tff-H2/screenshots/01-start-state_src_hono-base_ts_request.png
+r1-codelens-trace,false,20112,no CodeLens  Trace Function  directly above line 518,p13-tff-H2/screenshots/02-r1-codelens-trace-FAILED.png
+r1-palette-trace,false,63431,webview frame not found,p13-tff-H2/screenshots/03-r1-palette-trace-FAILED.png
+r2-select-target,false,3,Cannot read properties of undefined (reading 'locator'),p13-tff-H2/screenshots/04-r2-select-target-FAILED.png
+r3-dblclick-target,false,0,Cannot read properties of undefined (reading 'locator'),p13-tff-H2/screenshots/05-r3-dblclick-target-FAILED.png

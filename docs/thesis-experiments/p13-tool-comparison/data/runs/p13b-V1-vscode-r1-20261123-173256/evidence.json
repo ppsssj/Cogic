@@ -1,0 +1,645 @@
+{
+  "incoming": [],
+  "outgoing": [
+    {
+      "text": "createServer",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "_createServer",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "disableCache",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "isResolvedConfig",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveConfig",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "has",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "add",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "initPublicFiles",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveHttpsConfig",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "getResolvedOutDirs",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveEmptyOutDir",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveChokidarOptions",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveHttpServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createWebSocketServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setClientErrorHandler",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "makeWatcherCloseFinal",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "watch",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "getEnvFilesForMode",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createNoopWatcher",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "onFSWatcher",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "error",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "ModuleGraph",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createPluginContainer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createServerCloseFn",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createDevHtmlTransformFn",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "addressServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "initEnvironments",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setupSIGTERMListener",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setupWatcherListeners",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "applyMiddlewares",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "bind",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "listenServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "initServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "close",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "r2": [
+    {
+      "to": "_createServer",
+      "file": "index.ts",
+      "line": 512,
+      "group": 1
+    },
+    {
+      "to": "resolveConfig",
+      "file": "config.ts",
+      "line": 1480,
+      "group": 1
+    }
+  ],
+  "r3open": {
+    "file": "config.ts",
+    "line": 1480,
+    "group": 1
+  },
+  "treeAfterOpen": [
+    {
+      "text": "createServer",
+      "level": 1,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "_createServer",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "disableCache",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "isResolvedConfig",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveConfig",
+      "level": 3,
+      "expanded": "false",
+      "selected": true
+    },
+    {
+      "text": "has",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "add",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "initPublicFiles",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveHttpsConfig",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "getResolvedOutDirs",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveEmptyOutDir",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveChokidarOptions",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveHttpServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createWebSocketServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setClientErrorHandler",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "makeWatcherCloseFinal",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "watch",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "getEnvFilesForMode",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createNoopWatcher",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "onFSWatcher",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "error",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "ModuleGraph",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createPluginContainer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createServerCloseFn",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createDevHtmlTransformFn",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "addressServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "initEnvironments",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setupSIGTERMListener",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setupWatcherListeners",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "applyMiddlewares",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "bind",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "listenServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "initServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "close",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "r3return": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+  },
+  "treeAfterReturn": [
+    {
+      "text": "createServer",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "_createServer",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "disableCache",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "isResolvedConfig",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveConfig",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "has",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "add",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "initPublicFiles",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveHttpsConfig",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "getResolvedOutDirs",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveEmptyOutDir",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveChokidarOptions",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveHttpServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createWebSocketServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setClientErrorHandler",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "makeWatcherCloseFinal",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "watch",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "getEnvFilesForMode",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createNoopWatcher",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "onFSWatcher",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "error",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "ModuleGraph",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createPluginContainer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createServerCloseFn",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "createDevHtmlTransformFn",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "addressServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "initEnvironments",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setupSIGTERMListener",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setupWatcherListeners",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "applyMiddlewares",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "bind",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "listenServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "initServer",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "close",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    }
+  ]
+}

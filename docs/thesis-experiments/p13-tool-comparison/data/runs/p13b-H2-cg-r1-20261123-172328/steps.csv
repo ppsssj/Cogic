@@ -1,0 +1,5 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4203,,
+start-state src/hono-base.ts@request,true,2921,,p13-cg-H2/screenshots/01-start-state_src_hono-base_ts_request.png
+cg-toggle-panel,true,4560,,p13-cg-H2/screenshots/02-cg-toggle-panel.png
+cg-generate,true,15416,,p13-cg-H2/screenshots/03-cg-generate.png

@@ -1,0 +1,17 @@
+﻿step,ok,ms,error,screenshot
+launch-vscode+cogic,true,4471,,
+open-demo.ts,true,2700,,p1-cogic/screenshots/01-open-demo_ts.png
+open-cogic-editor-panel,true,1627,,p1-cogic/screenshots/02-open-cogic-editor-panel.png
+filter-All+depth-1,true,25,,
+generate-depth-1,true,4474,,p1-cogic/screenshots/03-generate-depth-1.png
+change-depth-2,true,3056,,p1-cogic/screenshots/04-change-depth-2.png
+expand-receipt+money-groups,true,6936,,p1-cogic/screenshots/05-expand-receipt_money-groups.png
+select-runDemo-node,true,1743,,p1-cogic/screenshots/06-select-runDemo-node.png
+select-formatReceipt-node,true,1713,,p1-cogic/screenshots/07-select-formatReceipt-node.png
+dblclick-formatReceipt-open-source,true,2293,,p1-cogic/screenshots/08-dblclick-formatReceipt-open-source.png
+graph-state-after-source-nav,true,0,,p1-cogic/screenshots/09-graph-state-after-source-nav.png
+return-to-runDemo-via-graph,true,2016,,p1-cogic/screenshots/10-return-to-runDemo-via-graph.png
+set-breakpoint-receipt.ts:5,true,884,,p1-cogic/screenshots/11-set-breakpoint-receipt_ts_5.png
+F5-debug-paused,true,6576,,p1-cogic/screenshots/12-F5-debug-paused.png
+cogic-runtime-frame,true,46,,p1-cogic/screenshots/13-cogic-runtime-frame.png
+stop-debugging,true,8,,

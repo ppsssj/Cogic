@@ -1,0 +1,81 @@
+{
+  "run": "p13-vscode-H2",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {},
+    "task": "H2"
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T08:45:16.412Z",
+      "ms": 4275,
+      "ok": true
+    },
+    {
+      "name": "start-state src/hono-base.ts@request",
+      "startedAt": "2026-11-23T08:45:20.694Z",
+      "ms": 4473,
+      "ok": true,
+      "screenshot": "p13-vscode-H2/screenshots/01-start-state_src_hono-base_ts_request.png"
+    },
+    {
+      "name": "r1-call-hierarchy-open",
+      "startedAt": "2026-11-23T08:45:25.384Z",
+      "ms": 1535,
+      "ok": true,
+      "screenshot": "p13-vscode-H2/screenshots/02-r1-call-hierarchy-open.png"
+    },
+    {
+      "name": "r1-outgoing",
+      "startedAt": "2026-11-23T08:45:27.008Z",
+      "ms": 2134,
+      "ok": true,
+      "screenshot": "p13-vscode-H2/screenshots/03-r1-outgoing.png"
+    },
+    {
+      "name": "r1-expand-path-rows",
+      "startedAt": "2026-11-23T08:45:29.264Z",
+      "ms": 4,
+      "ok": true,
+      "screenshot": "p13-vscode-H2/screenshots/04-r1-expand-path-rows.png"
+    },
+    {
+      "name": "r2-f12-fetch",
+      "startedAt": "2026-11-23T08:45:29.365Z",
+      "ms": 330,
+      "ok": true,
+      "screenshot": "p13-vscode-H2/screenshots/05-r2-f12-fetch.png"
+    },
+    {
+      "name": "r2-f12-#dispatch",
+      "startedAt": "2026-11-23T08:45:29.780Z",
+      "ms": 497,
+      "ok": true,
+      "screenshot": "p13-vscode-H2/screenshots/06-r2-f12-_dispatch.png"
+    },
+    {
+      "name": "r2-f12-compose",
+      "startedAt": "2026-11-23T08:45:30.374Z",
+      "ms": 535,
+      "ok": true,
+      "screenshot": "p13-vscode-H2/screenshots/07-r2-f12-compose.png"
+    },
+    {
+      "name": "r3-open-target-row",
+      "startedAt": "2026-11-23T08:45:31.060Z",
+      "ms": 5,
+      "ok": false,
+      "error": "target row not in the Call Hierarchy view",
+      "screenshot": "p13-vscode-H2/screenshots/08-r3-open-target-row-FAILED.png"
+    },
+    {
+      "name": "r3-return-root-row",
+      "startedAt": "2026-11-23T08:45:31.196Z",
+      "ms": 1714,
+      "ok": true,
+      "screenshot": "p13-vscode-H2/screenshots/09-r3-return-root-row.png"
+    }
+  ],
+  "tasks": []
+}

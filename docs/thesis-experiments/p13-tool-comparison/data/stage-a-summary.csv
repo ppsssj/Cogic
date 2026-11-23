@@ -1,0 +1,17 @@
+tool,task,runs,classes,representative,ops,switches,returnOps,graphPersists,startPersists,selectionPersists,staticCalls,dataflow,debugFrame
+Context Graph,T1,3,ENVIRONMENT_BLOCKED/ENVIRONMENT_BLOCKED/ENVIRONMENT_BLOCKED,ENVIRONMENT_BLOCKED,2/2/2,0/0/0,//,,,,,,
+Context Graph,T2,3,ENVIRONMENT_BLOCKED/ENVIRONMENT_BLOCKED/ENVIRONMENT_BLOCKED,ENVIRONMENT_BLOCKED,0/0/0,0/0/0,//,,,,,,
+Context Graph,T3,3,ENVIRONMENT_BLOCKED/ENVIRONMENT_BLOCKED/ENVIRONMENT_BLOCKED,ENVIRONMENT_BLOCKED,0/0/0,0/0/0,//,,,,,,
+Context Graph,T4,3,ENVIRONMENT_BLOCKED/ENVIRONMENT_BLOCKED/ENVIRONMENT_BLOCKED,ENVIRONMENT_BLOCKED,5/5/5,1/1/1,//,no graph was generated (worker unavailable),,,,,no (no graph available on this platform)
+Cogic,T1,3,SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED,SUPPORTED_AND_VERIFIED,6/6/6,0/0/0,//,,,,"{""runDemo->CheckoutDemo.process"":true,""process->formatReceipt"":true,""formatReceipt->formatMoney"":true}",,
+Cogic,T2,3,SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED,SUPPORTED_AND_VERIFIED,2/2/2,0/0/0,//,,,,,"{""runDemo->process total<-120"":true,""process->formatReceipt total<-total"":true,""formatReceipt->formatMoney amount<-total"":true}",
+Cogic,T3,3,SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED,SUPPORTED_AND_VERIFIED,2/2/2,2/2/2,1/1/1,true,true,true,,,
+Cogic,T4,3,SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED,SUPPORTED_AND_VERIFIED,5/5/5,1/1/1,//,true,true,,,,file-root(demo.ts): Matched by exact range ; after Clear root: not tried
+Trace Function Flow,T1,3,PARTIALLY_SUPPORTED/PARTIALLY_SUPPORTED/PARTIALLY_SUPPORTED,PARTIALLY_SUPPORTED,6/6/6,1/1/1,//,,,,"{""runDemo->CheckoutDemo.process"":false,""process->formatReceipt"":false,""formatReceipt->formatMoney (separate trace from formatReceipt)"":true}",,
+Trace Function Flow,T2,3,PARTIALLY_SUPPORTED/PARTIALLY_SUPPORTED/PARTIALLY_SUPPORTED,PARTIALLY_SUPPORTED,1/1/1,0/0/0,//,,,,,call-site expression only (formatMoney(total)) for formatReceipt->formatMoney; no argument->parameter mapping; runDemo->process hop (120) not traceable,
+Trace Function Flow,T3,3,SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED,SUPPORTED_AND_VERIFIED,5/5/5,2/2/2,4/4/4,true,false,,,,
+Trace Function Flow,T4,3,UNSUPPORTED_BY_DESIGN/UNSUPPORTED_BY_DESIGN/UNSUPPORTED_BY_DESIGN,UNSUPPORTED_BY_DESIGN,5/5/5,1/1/1,//,TFF panel still open (nodes=2); no runtime highlight feature,,,,,no (TFF has no debugger integration; graph is not linked to the paused frame)
+VS Code,T1,3,SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED,SUPPORTED_AND_VERIFIED,4/4/4,0/0/0,//,,,,"{""runDemo->CheckoutDemo.process"":true,""process->formatReceipt"":true,""formatReceipt->formatMoney"":true}",,
+VS Code,T2,3,PARTIALLY_SUPPORTED/PARTIALLY_SUPPORTED/PARTIALLY_SUPPORTED,PARTIALLY_SUPPORTED,6/6/6,2/2/2,//,,,,,no (argument->parameter mapping is not displayed; user reads each signature after Go to Definition),
+VS Code,T3,3,SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED/SUPPORTED_AND_VERIFIED,SUPPORTED_AND_VERIFIED,2/2/2,2/2/2,1/1/1,true,true,true,,,
+VS Code,T4,3,UNSUPPORTED_BY_DESIGN/UNSUPPORTED_BY_DESIGN/UNSUPPORTED_BY_DESIGN,UNSUPPORTED_BY_DESIGN,5/5/5,1/1/1,//,sidebar shows Run and Debug; call hierarchy tree not visible in sidebar during debug (rows now: 12),,,,,"no (Call Hierarchy is static; Call Stack is a separate view, no link between them)"

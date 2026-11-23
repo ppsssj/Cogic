@@ -1,0 +1,16 @@
+{
+  "quickPick": [
+    "notFoundHandler()Line 33",
+    "errorHandler()Line 37",
+    "defaultReplaceRequest()Line 386",
+    "handler()Line 391"
+  ],
+  "graph": null,
+  "notifications": [],
+  "detail": "",
+  "r3open": {
+    "file": "hono-base.ts",
+    "line": 518,
+    "group": 1
+  }
+}

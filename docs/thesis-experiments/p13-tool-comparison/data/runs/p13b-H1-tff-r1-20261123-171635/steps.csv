@@ -1,0 +1,7 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4215,,
+start-state src/helper/cookie/index.ts@setCookie,true,2766,,p13-tff-H1/screenshots/01-start-state_src_helper_cookie_index_ts_setCookie.png
+r1-codelens-trace,true,8995,,p13-tff-H1/screenshots/02-r1-codelens-trace.png
+r2-select-target,true,1762,,p13-tff-H1/screenshots/03-r2-select-target.png
+r3-dblclick-target,true,553,,p13-tff-H1/screenshots/04-r3-dblclick-target.png
+r3-return,true,2062,,p13-tff-H1/screenshots/05-r3-return.png

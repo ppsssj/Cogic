@@ -1,0 +1,8 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4536,,
+start-state demo.ts@runDemo,true,3159,,p2-context-graph/screenshots/01-start-state_demo_ts_runDemo.png
+cg-open-panel,true,2662,,p2-context-graph/screenshots/02-cg-open-panel.png
+cg-click-generate-graph,true,8216,,p2-context-graph/screenshots/03-cg-click-generate-graph.png
+Context Graph-set-breakpoint-receipt.ts:5,true,844,,p2-context-graph/screenshots/04-Context_Graph-set-breakpoint-receipt_ts_5.png
+Context Graph-F5-debug-paused,true,6033,,p2-context-graph/screenshots/05-Context_Graph-F5-debug-paused.png
+Context Graph-stop-debugging,true,10,,

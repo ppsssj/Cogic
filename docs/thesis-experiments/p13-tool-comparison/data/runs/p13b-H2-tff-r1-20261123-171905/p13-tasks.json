@@ -1,0 +1,32 @@
+[
+  {
+    "tool": "Trace Function Flow",
+    "task": "H2-R1",
+    "status": "EXECUTION_FAILED",
+    "userOperations": 2,
+    "fileSwitches": 0,
+    "automationMs": 83807,
+    "pairs": {},
+    "functionsShown": [],
+    "codeLensAboveStart": false,
+    "quickPick": [
+      "notFoundHandler()Line 33",
+      "errorHandler()Line 37",
+      "defaultReplaceRequest()Line 386",
+      "handler()Line 391"
+    ],
+    "edges": 0,
+    "notifications": []
+  },
+  {
+    "tool": "Trace Function Flow",
+    "task": "H2-R2",
+    "status": "EXECUTION_FAILED",
+    "userOperations": 0,
+    "fileSwitches": 0,
+    "automationMs": 102,
+    "segmentsShown": [],
+    "callSite": "",
+    "detail": ""
+  }
+]

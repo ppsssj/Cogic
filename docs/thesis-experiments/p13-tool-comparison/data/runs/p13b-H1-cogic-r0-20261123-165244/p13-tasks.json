@@ -1,0 +1,149 @@
+[
+  {
+    "tool": "Cogic",
+    "task": "H1-R1",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 5,
+    "fileSwitches": 0,
+    "automationMs": 33190,
+    "pairs": {
+      "setCookie->generateCookie": true,
+      "generateCookie->serialize": true,
+      "serialize->_serialize": true
+    },
+    "functionsShown": [
+      "setCookie",
+      "generateCookie",
+      "serialize",
+      "_serialize"
+    ],
+    "generateMs": 18694,
+    "nodes": 43,
+    "memberRows": 0,
+    "edges": 100,
+    "callTriplesSample": [
+      "getCookie->parse",
+      "getSignedCookie->parseSigned",
+      "generateCookie->serialize",
+      "setCookie->generateCookie",
+      "generateSignedCookie->serializeSigned",
+      "setSignedCookie->generateSignedCookie",
+      "deleteCookie->setCookie",
+      "makeSignature->getCryptoKey",
+      "parse->trimCookieWhitespace",
+      "parseSigned->getCryptoKey",
+      "parseSigned->parse",
+      "parseSigned->verifySignature",
+      "serialize->_serialize",
+      "serializeSigned->makeSignature",
+      "serializeSigned->_serialize"
+    ],
+    "banner": "Root file: index.tsClear root"
+  },
+  {
+    "tool": "Cogic",
+    "task": "H1-R2",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 1,
+    "fileSwitches": 0,
+    "automationMs": 4497,
+    "segments": [
+      {
+        "id": "S1",
+        "edge": true,
+        "viaGraphEdge": true,
+        "viaParamFlowRow": false,
+        "label": "value <- value",
+        "candidates": [
+          "name <- name",
+          "value <- value",
+          "opt <- opt"
+        ]
+      },
+      {
+        "id": "S2",
+        "edge": true,
+        "viaGraphEdge": true,
+        "viaParamFlowRow": false,
+        "label": "value <- value",
+        "candidates": [
+          "name <- '__Secure-' + name",
+          "value <- value",
+          "opt <- { path: '/', ...opt, secure: true }",
+          "name <- '__Host-' + name",
+          "opt <- { ...opt, path: '/', secure: true, domain: undefined, }",
+          "name <- name"
+        ]
+      },
+      {
+        "id": "S3",
+        "edge": true,
+        "viaGraphEdge": true,
+        "viaParamFlowRow": true,
+        "label": "value <- value",
+        "candidates": [
+          "name <- name",
+          "value <- value",
+          "opt <- opt"
+        ]
+      }
+    ],
+    "dataflowEdges": 66,
+    "paramFlowRows": 6,
+    "paramFlowRowsSample": [
+      {
+        "from": "serialize",
+        "to": "_serialize",
+        "label": "name <- name"
+      },
+      {
+        "from": "serialize",
+        "to": "_serialize",
+        "label": "value <- value"
+      },
+      {
+        "from": "serialize",
+        "to": "_serialize",
+        "label": "opt <- opt"
+      },
+      {
+        "from": "serializeSigned",
+        "to": "_serialize",
+        "label": "name <- name"
+      },
+      {
+        "from": "serializeSigned",
+        "to": "_serialize",
+        "label": "value <- value"
+      },
+      {
+        "from": "serializeSigned",
+        "to": "_serialize",
+        "label": "opt <- opt"
+      }
+    ],
+    "paramFlowTarget": "PARAM FLOW serialize -> _serialize name <- name serialize -> _serialize value <- value serialize -> _serialize opt <- opt serializeSigned -> _serialize name <- name serializeSigned -> _serialize value <- value serializeSigned -> _serialize opt <- opt"
+  },
+  {
+    "tool": "Cogic",
+    "task": "H1-R3",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 2,
+    "fileSwitches": 2,
+    "automationMs": 18579,
+    "opened": {
+      "file": "cookie.ts",
+      "line": null,
+      "group": 1
+    },
+    "returned": {
+      "file": "index.ts",
+      "line": 102,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "bannerBefore": "Root file: index.tsClear root",
+    "bannerAfter": "Root file: index.tsClear root"
+  }
+]

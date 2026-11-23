@@ -1,0 +1,18 @@
+{
+  "name": "cogic-e2e-harness",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Playwright Electron harness that drives real VS Code Desktop UI against ../Cogic_Workflow_Comparison_Study (kept outside the analyzed workspace on purpose)",
+  "scripts": {
+    "setup:vscode": "node scripts/setup-vscode.js",
+    "test:p0": "playwright test e2e/p0-feasibility.spec.ts",
+    "test:p1": "playwright test e2e/p1-cogic.spec.ts",
+    "test:p2": "playwright test e2e/p2-compare.spec.ts",
+    "report": "node scripts/aggregate.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1",
+    "@vscode/test-electron": "3.1.0",
+    "@types/node": "^22.0.0"
+  }
+}

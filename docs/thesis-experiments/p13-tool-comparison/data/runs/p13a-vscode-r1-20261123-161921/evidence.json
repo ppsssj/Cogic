@@ -1,0 +1,121 @@
+{
+  "incoming": [
+    {
+      "text": "runDemo",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "runner.tssrc",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "outgoing": [
+    {
+      "text": "runDemo",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "processCheckoutDemo",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "formatReceipt",
+      "level": 3,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "formatMoney",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "t2defs": [
+    {
+      "file": "demo.ts",
+      "line": 15,
+      "group": 1
+    },
+    {
+      "file": "receipt.ts",
+      "line": 4,
+      "group": 1
+    },
+    {
+      "file": "money.ts",
+      "line": 2,
+      "group": 1
+    }
+  ],
+  "t3open": {
+    "file": "receipt.ts",
+    "line": 4,
+    "group": 1
+  },
+  "t3treeAfterOpen": [
+    {
+      "text": "runDemo",
+      "level": 1,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "processCheckoutDemo",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "formatReceipt",
+      "level": 3,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "formatMoney",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "t3return": {
+    "file": "demo.ts",
+    "line": 26,
+    "group": 1
+  },
+  "t3treeAfterReturn": [
+    {
+      "text": "runDemo",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "processCheckoutDemo",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "formatReceipt",
+      "level": 3,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "formatMoney",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "run": "p13-cg-V2",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {
+      "context-graph.context-graph": "0.10.9"
+    },
+    "task": "V2"
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T08:16:01.533Z",
+      "ms": 4361,
+      "ok": true
+    },
+    {
+      "name": "start-state packages/vite/src/node/build.ts@build",
+      "startedAt": "2026-11-23T08:16:05.900Z",
+      "ms": 5953,
+      "ok": true,
+      "screenshot": "p13-cg-V2/screenshots/01-start-state_packages_vite_src_node_build_ts_build.png"
+    },
+    {
+      "name": "cg-toggle-panel",
+      "startedAt": "2026-11-23T08:16:12.052Z",
+      "ms": 4538,
+      "ok": true,
+      "screenshot": "p13-cg-V2/screenshots/02-cg-toggle-panel.png"
+    },
+    {
+      "name": "cg-generate",
+      "startedAt": "2026-11-23T08:16:16.709Z",
+      "ms": 15423,
+      "ok": true,
+      "screenshot": "p13-cg-V2/screenshots/03-cg-generate.png"
+    }
+  ],
+  "tasks": []
+}

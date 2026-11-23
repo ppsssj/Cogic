@@ -1,0 +1,35 @@
+[
+  {
+    "tool": "Context Graph",
+    "task": "V2-R1",
+    "status": "ENVIRONMENT_BLOCKED",
+    "userOperations": 2,
+    "fileSwitches": 0,
+    "automationMs": 20372,
+    "blockedMessage": true,
+    "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+    "notifications": []
+  },
+  {
+    "tool": "Context Graph",
+    "task": "V2-R2",
+    "status": "ENVIRONMENT_BLOCKED",
+    "userOperations": 0,
+    "fileSwitches": 0,
+    "automationMs": 20373,
+    "blockedMessage": true,
+    "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+    "notifications": []
+  },
+  {
+    "tool": "Context Graph",
+    "task": "V2-R3",
+    "status": "ENVIRONMENT_BLOCKED",
+    "userOperations": 0,
+    "fileSwitches": 0,
+    "automationMs": 20373,
+    "blockedMessage": true,
+    "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+    "notifications": []
+  }
+]

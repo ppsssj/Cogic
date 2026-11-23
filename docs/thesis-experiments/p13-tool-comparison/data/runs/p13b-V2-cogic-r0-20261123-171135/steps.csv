@@ -1,0 +1,10 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4406,,
+start-state packages/vite/src/node/build.ts@build,true,5415,,p13-cogic-V2/screenshots/01-start-state_packages_vite_src_node_build_ts_build.png
+r1-open-panel,true,2175,,p13-cogic-V2/screenshots/02-r1-open-panel.png
+r1-depth-2,true,1526,,p13-cogic-V2/screenshots/03-r1-depth-2.png
+r1-generate,true,225711,,p13-cogic-V2/screenshots/04-r1-generate.png
+r1-expand-path-groups,true,5592,,p13-cogic-V2/screenshots/05-r1-expand-path-groups.png
+r2-select-target,false,841,target node not rendered,p13-cogic-V2/screenshots/06-r2-select-target-FAILED.png
+r3-dblclick-target,false,784,target node not rendered,p13-cogic-V2/screenshots/07-r3-dblclick-target-FAILED.png
+r3-return-start-node,true,1402,,p13-cogic-V2/screenshots/08-r3-return-start-node.png

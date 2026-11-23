@@ -1,0 +1,58 @@
+{
+  "run": "p13-tff-H2",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {
+      "sudopanda.trace-function-flow": "1.1.1"
+    },
+    "task": "H2"
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T08:19:07.676Z",
+      "ms": 4202,
+      "ok": true
+    },
+    {
+      "name": "start-state src/hono-base.ts@request",
+      "startedAt": "2026-11-23T08:19:11.888Z",
+      "ms": 2539,
+      "ok": true,
+      "screenshot": "p13-tff-H2/screenshots/01-start-state_src_hono-base_ts_request.png"
+    },
+    {
+      "name": "r1-codelens-trace",
+      "startedAt": "2026-11-23T08:19:14.542Z",
+      "ms": 20079,
+      "ok": false,
+      "error": "no CodeLens \"Trace Function\" directly above line 518",
+      "screenshot": "p13-tff-H2/screenshots/02-r1-codelens-trace-FAILED.png"
+    },
+    {
+      "name": "r1-palette-trace",
+      "startedAt": "2026-11-23T08:19:34.778Z",
+      "ms": 63409,
+      "ok": false,
+      "error": "webview frame not found",
+      "screenshot": "p13-tff-H2/screenshots/03-r1-palette-trace-FAILED.png"
+    },
+    {
+      "name": "r2-select-target",
+      "startedAt": "2026-11-23T08:20:38.349Z",
+      "ms": 3,
+      "ok": false,
+      "error": "Cannot read properties of undefined (reading 'locator')",
+      "screenshot": "p13-tff-H2/screenshots/04-r2-select-target-FAILED.png"
+    },
+    {
+      "name": "r3-dblclick-target",
+      "startedAt": "2026-11-23T08:20:38.452Z",
+      "ms": 0,
+      "ok": false,
+      "error": "Cannot read properties of undefined (reading 'locator')",
+      "screenshot": "p13-tff-H2/screenshots/05-r3-dblclick-target-FAILED.png"
+    }
+  ],
+  "tasks": []
+}

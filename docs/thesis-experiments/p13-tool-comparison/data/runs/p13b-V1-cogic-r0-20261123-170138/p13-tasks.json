@@ -1,0 +1,134 @@
+[
+  {
+    "tool": "Cogic",
+    "task": "V1-R1",
+    "status": "EXECUTION_FAILED",
+    "userOperations": 3,
+    "fileSwitches": 0,
+    "automationMs": 396494,
+    "pairs": {
+      "createServer->_createServer": false,
+      "_createServer->resolveConfig": false
+    },
+    "functionsShown": [],
+    "generateMs": 385285,
+    "nodes": 17,
+    "memberRows": 3,
+    "edges": 833,
+    "callTriplesSample": [],
+    "banner": "Root file: index.tsClear root"
+  },
+  {
+    "tool": "Cogic",
+    "task": "V1-R2",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 0,
+    "fileSwitches": 0,
+    "automationMs": 1138,
+    "segments": [
+      {
+        "id": "S1",
+        "edge": true,
+        "viaGraphEdge": false,
+        "viaParamFlowRow": true,
+        "label": "inlineConfig <- inlineConfig",
+        "candidates": []
+      },
+      {
+        "id": "S2",
+        "edge": true,
+        "viaGraphEdge": false,
+        "viaParamFlowRow": true,
+        "label": "inlineConfig <- inlineConfig",
+        "candidates": []
+      }
+    ],
+    "dataflowEdges": 654,
+    "paramFlowRows": 20,
+    "paramFlowRowsSample": [
+      {
+        "from": "createServer",
+        "to": "_createServer",
+        "label": "inlineConfig <- inlineConfig"
+      },
+      {
+        "from": "createServer",
+        "to": "_createServer",
+        "label": "options <- { listen: true }"
+      },
+      {
+        "from": "_createServer",
+        "to": "isResolvedConfig (config.ts)",
+        "label": "inlineConfig <- inlineConfig"
+      },
+      {
+        "from": "_createServer",
+        "to": "resolveConfig (config.ts)",
+        "label": "inlineConfig <- inlineConfig"
+      },
+      {
+        "from": "_createServer",
+        "to": "resolveConfig (config.ts)",
+        "label": "command <- 'serve'"
+      },
+      {
+        "from": "_createServer",
+        "to": "initPublicFiles (publicDir.ts)",
+        "label": "config <- config"
+      },
+      {
+        "from": "_createServer",
+        "to": "resolveHttpsConfig (http.ts)",
+        "label": "https <- config.server.https"
+      },
+      {
+        "from": "_createServer",
+        "to": "getResolvedOutDirs (watch.ts)",
+        "label": "root <- config.root"
+      },
+      {
+        "from": "_createServer",
+        "to": "getResolvedOutDirs (watch.ts)",
+        "label": "outDir <- config.build.outDir"
+      },
+      {
+        "from": "_createServer",
+        "to": "getResolvedOutDirs (watch.ts)",
+        "label": "outputOptions <- config.build.rolldownOptions.output"
+      },
+      {
+        "from": "_createServer",
+        "to": "resolveEmptyOutDir (watch.ts)",
+        "label": "emptyOutDir <- config.build.emptyOutDir"
+      },
+      {
+        "from": "_createServer",
+        "to": "resolveEmptyOutDir (watch.ts)",
+        "label": "root <- config.root"
+      }
+    ],
+    "paramFlowTarget": "PARAM FLOW createServer -> _createServer inlineConfig <- inlineConfig createServer -> _createServer options <- { listen: true } _createServer -> isResolvedConfig (config.ts) inlineConfig <- inlineConfig _createServer -> resolveConfig (config.ts) inlineConfig <- inlineConfig _createServer -> resolveConfig (config.ts) command <- 'serve' _createServer -> initPublicFiles (publicDir.ts) config <- confi"
+  },
+  {
+    "tool": "Cogic",
+    "task": "V1-R3",
+    "status": "EXECUTION_FAILED",
+    "userOperations": 0,
+    "fileSwitches": 0,
+    "automationMs": 6717,
+    "opened": {
+      "file": "index.ts",
+      "line": 506,
+      "group": 1
+    },
+    "returned": {
+      "file": "index.ts",
+      "line": 506,
+      "group": 1
+    },
+    "returnOperations": 0,
+    "viewKept": true,
+    "bannerBefore": "Root file: index.tsClear root",
+    "bannerAfter": "Root file: index.tsClear root"
+  }
+]

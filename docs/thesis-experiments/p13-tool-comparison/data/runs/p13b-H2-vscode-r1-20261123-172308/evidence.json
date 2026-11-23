@@ -1,0 +1,112 @@
+{
+  "incoming": [
+    {
+      "text": "requestHono",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "fetchRoutesContent",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "customFetch",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "outgoing": [
+    {
+      "text": "requestHono",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "test",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "mergePath",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "r2": [
+    {
+      "to": "fetch",
+      "file": "hono-base.ts",
+      "line": 498,
+      "group": 1
+    },
+    {
+      "to": "#dispatch",
+      "file": "hono-base.ts",
+      "line": 425,
+      "group": 1
+    },
+    {
+      "to": "compose",
+      "file": "compose.ts",
+      "line": 15,
+      "group": 1
+    }
+  ],
+  "r3open": {
+    "file": "compose.ts",
+    "line": 15,
+    "group": 1
+  },
+  "treeAfterOpen": [
+    {
+      "text": "requestHono",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "test",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "mergePath",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "r3return": {
+    "file": "hono-base.ts",
+    "line": 518,
+    "group": 1
+  },
+  "treeAfterReturn": [
+    {
+      "text": "requestHono",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "test",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "mergePath",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    }
+  ]
+}

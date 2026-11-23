@@ -1,0 +1,5 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4229,,
+start-state src/helper/cookie/index.ts@setCookie,true,3063,,p13-cg-H1/screenshots/01-start-state_src_helper_cookie_index_ts_setCookie.png
+cg-toggle-panel,true,4595,,p13-cg-H1/screenshots/02-cg-toggle-panel.png
+cg-generate,true,15423,,p13-cg-H1/screenshots/03-cg-generate.png

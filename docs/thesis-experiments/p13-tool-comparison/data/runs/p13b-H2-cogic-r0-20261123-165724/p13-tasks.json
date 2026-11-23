@@ -1,0 +1,105 @@
+[
+  {
+    "tool": "Cogic",
+    "task": "H2-R1",
+    "status": "PARTIALLY_SUPPORTED",
+    "userOperations": 5,
+    "fileSwitches": 0,
+    "automationMs": 49734,
+    "pairs": {
+      "request->fetch": false,
+      "fetch->#dispatch": false,
+      "#dispatch->compose": false
+    },
+    "functionsShown": [
+      "request",
+      "fetch",
+      "#dispatch",
+      "compose"
+    ],
+    "generateMs": 36468,
+    "nodes": 24,
+    "memberRows": 9,
+    "edges": 78,
+    "callTriplesSample": [
+      "route->compose"
+    ],
+    "banner": "Root file: hono-base.tsClear root"
+  },
+  {
+    "tool": "Cogic",
+    "task": "H2-R2",
+    "status": "EXECUTION_FAILED",
+    "userOperations": 2,
+    "fileSwitches": 0,
+    "automationMs": 4754,
+    "segments": [
+      {
+        "id": "S1",
+        "edge": false,
+        "viaGraphEdge": false,
+        "viaParamFlowRow": false,
+        "label": null,
+        "candidates": []
+      },
+      {
+        "id": "S2",
+        "edge": false,
+        "viaGraphEdge": false,
+        "viaParamFlowRow": false,
+        "label": null,
+        "candidates": []
+      },
+      {
+        "id": "S3",
+        "edge": false,
+        "viaGraphEdge": false,
+        "viaParamFlowRow": false,
+        "label": null,
+        "candidates": []
+      }
+    ],
+    "dataflowEdges": 44,
+    "paramFlowRows": 3,
+    "paramFlowRowsSample": [
+      {
+        "from": "Hono.route",
+        "to": "compose([], app.errorHandler) (compose.ts)",
+        "label": "context <- c"
+      },
+      {
+        "from": "Hono.route",
+        "to": "compose([], app.errorHandler) (compose.ts)",
+        "label": "next <- () => r.handler(c, next)"
+      },
+      {
+        "from": "hono-base.ts",
+        "to": "compose([], app.errorHandler) (compose.ts)",
+        "label": "context <- c"
+      }
+    ],
+    "paramFlowTarget": "PARAM FLOW Hono.route -> compose([], app.errorHandler) (compose.ts) context <- c Hono.route -> compose([], app.errorHandler) (compose.ts) next <- () => r.handler(c, next) hono-base.ts -> compose([], app.errorHandler) (compose.ts) context <- c"
+  },
+  {
+    "tool": "Cogic",
+    "task": "H2-R3",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 3,
+    "fileSwitches": 2,
+    "automationMs": 14331,
+    "opened": {
+      "file": "compose.ts",
+      "line": 19,
+      "group": 1
+    },
+    "returned": {
+      "file": "hono-base.ts",
+      "line": 536,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "bannerBefore": "Root file: hono-base.tsClear root",
+    "bannerAfter": "Root file: hono-base.tsClear root"
+  }
+]

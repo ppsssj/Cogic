@@ -1,0 +1,278 @@
+{
+  "generateMs": 41830,
+  "graph": {
+    "nodes": [
+      {
+        "id": "folder:<HARNESS_WORKDIR>/harness/node_modules/@types/node",
+        "title": "nodeC:/dev/.../@types/node1 files hidden",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "folder:<HARNESS_WORKDIR>/harness/node_modules/@types/node/compatibility",
+        "title": "compatibilityC:/dev/.../node/compatibility1 files hidden",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "folder:<WORK>/hono/src",
+        "title": "srcsrc12 files",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "folder:<WORK>/hono/src/helper",
+        "title": "helpersrc/helper1 files hidden",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "folder:<WORK>/hono/src/utils",
+        "title": "utilssrc/utils3 files hidden",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/compose.ts:0",
+        "title": "compose.tssrc3 nodes",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "external:<WORK>/hono/src/compose.ts:859",
+        "title": "compose([], app.errorHandler) (compose.ts)",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "external:<WORK>/hono/src/compose.ts:700",
+        "title": "compose (compose.ts)",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/compose.ts:700",
+        "title": "compose()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "file:<WORK>/hono/src/context.ts:0",
+        "title": "context.tssrc29 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/hono-base.ts:0",
+        "title": "hono-base.tssrc8 nodes",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "function:<WORK>/hono/src/hono-base.ts:914",
+        "title": "notFoundHandler()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/hono-base.ts:1003",
+        "title": "errorHandler()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/hono-base.ts:1204",
+        "title": "GetPath",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/hono-base.ts:1301",
+        "title": "HonoOptions",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/hono-base.ts:2967",
+        "title": "MountOptionHandler",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/hono-base.ts:3018",
+        "title": "MountReplaceRequest",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/hono-base.ts:3084",
+        "title": "MountOptions",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "class:<WORK>/hono/src/hono-base.ts:3239",
+        "title": "class Hono",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "file:<WORK>/hono/src/hono.test.ts",
+        "title": "hono.test.tssrc1 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/http-exception.ts",
+        "title": "http-exception.tssrc1 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/request.ts",
+        "title": "request.tssrc1 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/router.ts:0",
+        "title": "router.tssrc8 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/types.ts:0",
+        "title": "types.tssrc59 hidden",
+        "cls": "react-flow__node-fileGroup"
+      }
+    ],
+    "children": [
+      {
+        "parent": "function:<WORK>/hono/src/compose.ts:700",
+        "text": "dispatch()FUNCTIONfunction - compose.ts:32"
+      },
+      {
+        "parent": "class:<WORK>/hono/src/hono-base.ts:3239",
+        "text": "route()METHODmethod - hono-base.ts:228"
+      },
+      {
+        "parent": "class:<WORK>/hono/src/hono-base.ts:3239",
+        "text": "basePath()METHODmethod - hono-base.ts:267"
+      },
+      {
+        "parent": "class:<WORK>/hono/src/hono-base.ts:3239",
+        "text": "onError()METHODmethod - hono-base.ts:291"
+      },
+      {
+        "parent": "class:<WORK>/hono/src/hono-base.ts:3239",
+        "text": "notFound()METHODmethod - hono-base.ts:311"
+      },
+      {
+        "parent": "class:<WORK>/hono/src/hono-base.ts:3239",
+        "text": "mount()METHODmethod - hono-base.ts:352"
+      },
+      {
+        "parent": "class:<WORK>/hono/src/hono-base.ts:3239",
+        "text": "fetch()METHODmethod - hono-base.ts:502"
+      },
+      {
+        "parent": "class:<WORK>/hono/src/hono-base.ts:3239",
+        "text": "request()METHODmethod - hono-base.ts:518"
+      },
+      {
+        "parent": "class:<WORK>/hono/src/hono-base.ts:3239",
+        "text": "fire()METHODmethod - hono-base.ts:555"
+      }
+    ],
+    "edges": [
+      "references:interface:<WORK>/hono/src/hono-base.ts:1301->interface:<WORK>/hono/src/hono-base.ts:1204@@@@",
+      "references:interface:<WORK>/hono/src/hono-base.ts:3084->interface:<WORK>/hono/src/hono-base.ts:2967@@@@",
+      "references:interface:<WORK>/hono/src/hono-base.ts:3084->interface:<WORK>/hono/src/hono-base.ts:3018@@@@",
+      "references:class:<WORK>/hono/src/hono-base.ts:3239->interface:<WORK>/hono/src/hono-base.ts:1204@@@@",
+      "references:class:<WORK>/hono/src/hono-base.ts:3239->interface:<WORK>/hono/src/hono-base.ts:1301@@@@",
+      "references:class:<WORK>/hono/src/hono-base.ts:3239->function:<WORK>/hono/src/hono-base.ts:914@@@@",
+      "references:class:<WORK>/hono/src/hono-base.ts:3239->function:<WORK>/hono/src/hono-base.ts:1003@@@@",
+      "references:method:<WORK>/hono/src/hono-base.ts:11100->interface:<WORK>/hono/src/hono-base.ts:3084@@@@",
+      "references:method:<WORK>/hono/src/hono-base.ts:11100->interface:<WORK>/hono/src/hono-base.ts:3018@@@@",
+      "references:method:<WORK>/hono/src/hono-base.ts:11100->interface:<WORK>/hono/src/hono-base.ts:2967@@@@",
+      "calls:method:<WORK>/hono/src/hono-base.ts:7194->external:<WORK>/hono/src/compose.ts:859@@@@",
+      "calls:method:<WORK>/hono/src/hono-base.ts:7194->external:<WORK>/hono/src/compose.ts:700@@@@",
+      "calls:function:<WORK>/hono/src/hono-base.ts:914->external:<WORK>/hono/src/context.ts:4955@@@@",
+      "calls:function:<WORK>/hono/src/hono-base.ts:1003->external:<WORK>/hono/src/types.ts:3021@@@@",
+      "calls:function:<WORK>/hono/src/hono-base.ts:1003->external:<WORK>/hono/src/context.ts:3539@@@@",
+      "calls:function:<WORK>/hono/src/hono-base.ts:1003->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/console.d.ts:8257@@@@",
+      "calls:method:<WORK>/hono/src/hono-base.ts:7194->external:<WORK>/hono/src/types.ts:2023@@@@",
+      "calls:method:<WORK>/hono/src/hono-base.ts:8343->external:<WORK>/hono/src/utils/url.ts:5709@@@@",
+      "calls:method:<WORK>/hono/src/hono-base.ts:11100->external:<WORK>/hono/src/utils/url.ts:5709@@@@",
+      "calls:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/utils/url.ts:5709@@@@",
+      "calls:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/router.ts:1093@@@@",
+      "calls:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/types.ts:3088@@@@",
+      "constructs:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/context.ts:9216@@@@",
+      "calls:method:<WORK>/hono/src/hono-base.ts:16239->external:<WORK>/hono/src/utils/url.ts:5709@@@@",
+      "calls:method:<WORK>/hono/src/hono-base.ts:17470->external:<WORK>/hono/src/types.ts:92526@@@@",
+      "constructs:file:<WORK>/hono/src/context.ts:0->external:<WORK>/hono/src/request.ts:1052@@@@",
+      "calls:method:<WORK>/hono/src/context.ts:13731->external:<WORK>/hono/src/hono.test.ts:95503@@@@",
+      "calls:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@@@",
+      "calls:method:<WORK>/hono/src/context.ts:23469->external:<WORK>/hono/src/types.ts:2808@@@@",
+      "calls:function:<WORK>/hono/src/compose.ts:1227->external:<WORK>/hono/src/types.ts:3088@@@@",
+      "calls:function:<WORK>/hono/src/utils/url.ts:5133->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/compatibility/indexable.d.ts:132@@@@",
+      "calls:function:<WORK>/hono/src/helper/route/index.ts:1846->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/compatibility/indexable.d.ts:132@@@@",
+      "calls:function:<WORK>/hono/src/helper/route/index.ts:3568->external:<WORK>/hono/src/utils/url.ts:305@@@@",
+      "constructs:function:<WORK>/hono/src/utils/mount.ts:1784->external:<WORK>/hono/src/http-exception.ts:1346@@@@",
+      "dataflow:function:<WORK>/hono/src/hono-base.ts:914->external:<WORK>/hono/src/context.ts:4955@@text <- '404 Not Found'@@arg#0",
+      "dataflow:function:<WORK>/hono/src/hono-base.ts:914->external:<WORK>/hono/src/context.ts:4955@@status <- 404@@arg#1",
+      "dataflow:function:<WORK>/hono/src/hono-base.ts:1003->external:<WORK>/hono/src/context.ts:3539@@data <- res.body@@arg#0",
+      "dataflow:function:<WORK>/hono/src/hono-base.ts:1003->external:<WORK>/hono/src/context.ts:3539@@init <- res@@arg#1",
+      "dataflow:function:<WORK>/hono/src/hono-base.ts:1003->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/console.d.ts:8257@@message <- err@@arg#0",
+      "dataflow:function:<WORK>/hono/src/hono-base.ts:1003->external:<WORK>/hono/src/context.ts:4955@@text <- 'Internal Server Error'@@arg#0",
+      "dataflow:function:<WORK>/hono/src/hono-base.ts:1003->external:<WORK>/hono/src/context.ts:4955@@status <- 500@@arg#1",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:7194->external:<WORK>/hono/src/compose.ts:859@@context <- c@@arg#0",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:7194->external:<WORK>/hono/src/compose.ts:859@@next <- () => r.handler(c, next)@@arg#1",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:7194->external:<WORK>/hono/src/compose.ts:700@@middleware <- []@@arg#0",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:7194->external:<WORK>/hono/src/compose.ts:700@@onError <- app.errorHandler@@arg#1",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:7194->external:<WORK>/hono/src/types.ts:2023@@c <- c@@arg#0",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:7194->external:<WORK>/hono/src/types.ts:2023@@next <- next@@arg#1",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:8343->external:<WORK>/hono/src/utils/url.ts:5709@@...paths <- this._basePath@@arg#0",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:11100->external:<WORK>/hono/src/utils/url.ts:5709@@...paths <- path@@arg#0",
+      "dataflow:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/utils/url.ts:5709@@...paths <- this._basePath@@arg#0",
+      "dataflow:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/router.ts:1093@@method <- method@@arg#0",
+      "dataflow:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/router.ts:1093@@path <- path@@arg#1",
+      "dataflow:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/router.ts:1093@@handler <- [handler, r]@@arg#2",
+      "dataflow:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/types.ts:3088@@err <- err@@arg#0",
+      "dataflow:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/types.ts:3088@@c <- c@@arg#1",
+      "dataflow:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/context.ts:9216@@req <- request@@arg#0",
+      "dataflow:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/context.ts:9216@@options <- { path, matchResult, env, executionCtx, notFoundHandler: this.#notFoundHandle...@@arg#1",
+      "dataflow:file:<WORK>/hono/src/hono-base.ts:0->external:<WORK>/hono/src/types.ts:2023@@next <- async () => { c.res = await this.#notFoundHandler(c) }@@arg#1",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:16239->external:<WORK>/hono/src/utils/url.ts:5709@@...paths <- '/'@@arg#0",
+      "dataflow:method:<WORK>/hono/src/hono-base.ts:17470->external:<WORK>/hono/src/types.ts:92526@@promise <- this.#dispatch(event.request, event, undefined, event.request.method)@@arg#0",
+      "dataflow:file:<WORK>/hono/src/context.ts:0->external:<WORK>/hono/src/request.ts:1052@@request <- this.#rawRequest@@arg#0",
+      "dataflow:file:<WORK>/hono/src/context.ts:0->external:<WORK>/hono/src/request.ts:1052@@path <- this.#path@@arg#1",
+      "dataflow:file:<WORK>/hono/src/context.ts:0->external:<WORK>/hono/src/request.ts:1052@@matchResult <- this.#matchResult@@arg#2",
+      "dataflow:method:<WORK>/hono/src/context.ts:13731->external:<WORK>/hono/src/hono.test.ts:95503@@content <- ...args@@arg#0",
+      "dataflow:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@str <- html@@arg#0",
+      "dataflow:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@phase <- HtmlEscapedCallbackPhase.Stringify@@arg#1",
+      "dataflow:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@preserveCallbacks <- false@@arg#2",
+      "dataflow:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@context <- {}@@arg#3",
+      "dataflow:method:<WORK>/hono/src/context.ts:23469->external:<WORK>/hono/src/types.ts:2808@@c <- this@@arg#0",
+      "dataflow:function:<WORK>/hono/src/compose.ts:1227->external:<WORK>/hono/src/types.ts:3088@@err <- err@@arg#0",
+      "dataflow:function:<WORK>/hono/src/compose.ts:1227->external:<WORK>/hono/src/types.ts:3088@@c <- context@@arg#1",
+      "dataflow:function:<WORK>/hono/src/utils/url.ts:5133->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/compatibility/indexable.d.ts:132@@index <- -1@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/route/index.ts:1846->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/compatibility/indexable.d.ts:132@@index <- index ?? c.req.routeIndex@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/route/index.ts:3568->external:<WORK>/hono/src/utils/url.ts:305@@routePath <- rp@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/route/index.ts:3568->external:<WORK>/hono/src/utils/url.ts:1255@@label <- paths[i]@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/route/index.ts:3568->external:<WORK>/hono/src/utils/url.ts:1255@@next <- paths[i + 1]@@arg#1",
+      "dataflow:function:<WORK>/hono/src/utils/mount.ts:1784->external:<WORK>/hono/src/http-exception.ts:1346@@status <- 400@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/mount.ts:1784->external:<WORK>/hono/src/http-exception.ts:1346@@options <- { message: 'Invalid mounted path' }@@arg#1"
+    ],
+    "banner": "Root file: hono-base.tsClear root"
+  },
+  "callTriples": [
+    "route->compose",
+    "route->compose"
+  ],
+  "paramFlow": "PARAM FLOW Hono.route -> compose([], app.errorHandler) (compose.ts) context <- c Hono.route -> compose([], app.errorHandler) (compose.ts) next <- () => r.handler(c, next) hono-base.ts -> compose([], app.errorHandler) (compose.ts) context <- c",
+  "flowRows": [
+    {
+      "from": "Hono.route",
+      "to": "compose([], app.errorHandler) (compose.ts)",
+      "label": "context <- c"
+    },
+    {
+      "from": "Hono.route",
+      "to": "compose([], app.errorHandler) (compose.ts)",
+      "label": "next <- () => r.handler(c, next)"
+    },
+    {
+      "from": "hono-base.ts",
+      "to": "compose([], app.errorHandler) (compose.ts)",
+      "label": "context <- c"
+    }
+  ],
+  "r3open": {
+    "file": "compose.ts",
+    "line": 19,
+    "group": 1
+  },
+  "r3return": {
+    "file": "hono-base.ts",
+    "line": 536,
+    "group": 1
+  }
+}

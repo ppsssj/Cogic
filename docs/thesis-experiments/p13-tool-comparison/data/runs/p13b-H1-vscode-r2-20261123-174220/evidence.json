@@ -1,0 +1,148 @@
+{
+  "incoming": [
+    {
+      "text": "setCookie",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "deleteCookie",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "cacheLanguage",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "outgoing": [
+    {
+      "text": "setCookie",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "generateCookie",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "serialize",
+      "level": 3,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "encodeURIComponent",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "_serialize",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "r2": [
+    {
+      "to": "generateCookie",
+      "file": "index.ts",
+      "line": 78,
+      "group": 1
+    },
+    {
+      "to": "serialize",
+      "file": "cookie.ts",
+      "line": 262,
+      "group": 1
+    },
+    {
+      "to": "_serialize",
+      "file": "cookie.ts",
+      "line": 174,
+      "group": 1
+    }
+  ],
+  "r3open": {
+    "file": "cookie.ts",
+    "line": 174,
+    "group": 1
+  },
+  "treeAfterOpen": [
+    {
+      "text": "setCookie",
+      "level": 1,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "generateCookie",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "serialize",
+      "level": 3,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "encodeURIComponent",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "_serialize",
+      "level": 4,
+      "expanded": "false",
+      "selected": true
+    }
+  ],
+  "r3return": {
+    "file": "index.ts",
+    "line": 99,
+    "group": 1
+  },
+  "treeAfterReturn": [
+    {
+      "text": "setCookie",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "generateCookie",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "serialize",
+      "level": 3,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "encodeURIComponent",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "_serialize",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    }
+  ]
+}

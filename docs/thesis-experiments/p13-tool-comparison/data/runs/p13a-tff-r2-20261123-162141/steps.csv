@@ -1,0 +1,12 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4320,,
+start-state demo.ts@runDemo,true,7324,,p2-trace-function-flow/screenshots/01-start-state_demo_ts_runDemo.png
+tff-codelens-trace-runDemo,true,3695,,p2-trace-function-flow/screenshots/02-tff-codelens-trace-runDemo.png
+tff-trace-process-via-palette (supplementary),true,2341,,p2-trace-function-flow/screenshots/03-tff-trace-process-via-palette_supplementary_.png
+tff-trace-formatReceipt (supplementary),true,5131,,p2-trace-function-flow/screenshots/04-tff-trace-formatReceipt_supplementary_.png
+tff-select-node-details,true,1419,,p2-trace-function-flow/screenshots/05-tff-select-node-details.png
+tff-dblclick-formatMoney-open-source,true,399,,p2-trace-function-flow/screenshots/06-tff-dblclick-formatMoney-open-source.png
+tff-return-to-runDemo,true,2643,,p2-trace-function-flow/screenshots/07-tff-return-to-runDemo.png
+Trace Function Flow-set-breakpoint-receipt.ts:5,true,936,,p2-trace-function-flow/screenshots/08-Trace_Function_Flow-set-breakpoint-receipt_ts_5.png
+Trace Function Flow-F5-debug-paused,true,6068,,p2-trace-function-flow/screenshots/09-Trace_Function_Flow-F5-debug-paused.png
+Trace Function Flow-stop-debugging,true,8,,

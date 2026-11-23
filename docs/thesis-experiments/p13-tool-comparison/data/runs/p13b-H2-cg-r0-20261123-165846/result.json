@@ -1,0 +1,40 @@
+{
+  "run": "p13-cg-H2",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {
+      "context-graph.context-graph": "0.10.9"
+    },
+    "task": "H2"
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T07:58:49.291Z",
+      "ms": 4220,
+      "ok": true
+    },
+    {
+      "name": "start-state src/hono-base.ts@request",
+      "startedAt": "2026-11-23T07:58:53.531Z",
+      "ms": 2920,
+      "ok": true,
+      "screenshot": "p13-cg-H2/screenshots/01-start-state_src_hono-base_ts_request.png"
+    },
+    {
+      "name": "cg-toggle-panel",
+      "startedAt": "2026-11-23T07:58:56.585Z",
+      "ms": 4568,
+      "ok": true,
+      "screenshot": "p13-cg-H2/screenshots/02-cg-toggle-panel.png"
+    },
+    {
+      "name": "cg-generate",
+      "startedAt": "2026-11-23T07:59:01.248Z",
+      "ms": 15405,
+      "ok": true,
+      "screenshot": "p13-cg-H2/screenshots/03-cg-generate.png"
+    }
+  ],
+  "tasks": []
+}

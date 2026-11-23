@@ -1,0 +1,44 @@
+[2026-11-23T08:45:16.413Z] STEP launch
+[2026-11-23T08:45:20.688Z]   -> ok (4275 ms)
+[2026-11-23T08:45:20.694Z] STEP start-state src/hono-base.ts@request
+[2026-11-23T08:45:25.374Z]   screenshot: 01-start-state_src_hono-base_ts_request.png
+[2026-11-23T08:45:25.374Z]   -> ok (4473 ms)
+[2026-11-23T08:45:25.384Z] STEP r1-call-hierarchy-open
+[2026-11-23T08:45:25.384Z]   op(+1) Shift+Alt+H (Show Call Hierarchy)
+[2026-11-23T08:45:27.002Z]   screenshot: 02-r1-call-hierarchy-open.png
+[2026-11-23T08:45:27.002Z]   -> ok (1535 ms)
+[2026-11-23T08:45:27.008Z] STEP r1-outgoing
+[2026-11-23T08:45:27.009Z]   op(+1) click 'Show Outgoing Calls'
+[2026-11-23T08:45:29.263Z]   screenshot: 03-r1-outgoing.png
+[2026-11-23T08:45:29.263Z]   -> ok (2134 ms)
+[2026-11-23T08:45:29.264Z] STEP r1-expand-path-rows
+[2026-11-23T08:45:29.359Z]   screenshot: 04-r1-expand-path-rows.png
+[2026-11-23T08:45:29.359Z]   -> ok (4 ms)
+[2026-11-23T08:45:29.364Z] P13 {"tool":"VS Code","task":"H2-R1","status":"EXECUTION_FAILED","userOperations":2,"fileSwitches":0,"automationMs":3980,"pairs":{"request->fetch":false,"fetch->#dispatch":false,"#dispatch->compose":false},"rows":["requestHono","  test","  mergePath"],"incomingRows":3}
+[2026-11-23T08:45:29.365Z] STEP r2-f12-fetch
+[2026-11-23T08:45:29.378Z]   op(+1) place cursor on 'fetch' at hono-base.ts:525
+[2026-11-23T08:45:29.666Z]   op(+1) F12 Go to Definition
+[2026-11-23T08:45:29.777Z]   screenshot: 05-r2-f12-fetch.png
+[2026-11-23T08:45:29.777Z]   -> ok (330 ms)
+[2026-11-23T08:45:29.780Z] STEP r2-f12-#dispatch
+[2026-11-23T08:45:29.787Z]   op(+1) place cursor on '#dispatch' at hono-base.ts:503
+[2026-11-23T08:45:30.055Z]   op(+1) F12 Go to Definition
+[2026-11-23T08:45:30.371Z]   screenshot: 06-r2-f12-_dispatch.png
+[2026-11-23T08:45:30.371Z]   -> ok (497 ms)
+[2026-11-23T08:45:30.374Z] STEP r2-f12-compose
+[2026-11-23T08:45:30.381Z]   op(+1) place cursor on 'compose' at hono-base.ts:469
+[2026-11-23T08:45:30.665Z]   op(+1) F12 Go to Definition
+[2026-11-23T08:45:31.056Z]   screenshot: 07-r2-f12-compose.png
+[2026-11-23T08:45:31.056Z]   -> ok (535 ms)
+[2026-11-23T08:45:31.059Z]   file switch: hono-base.ts -> compose.ts
+[2026-11-23T08:45:31.060Z] P13 {"tool":"VS Code","task":"H2-R2","status":"PARTIALLY_SUPPORTED","userOperations":6,"fileSwitches":1,"automationMs":1695,"reached":[{"to":"fetch","file":"hono-base.ts","line":498,"group":1},{"to":"#dispatch","file":"hono-base.ts","line":425,"group":1},{"to":"compose","file":"compose.ts","line":15,"group":1}],"note":"no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"}
+[2026-11-23T08:45:31.060Z] STEP r3-open-target-row
+[2026-11-23T08:45:31.065Z]   FAILED: target row not in the Call Hierarchy view
+[2026-11-23T08:45:31.187Z]   screenshot: 08-r3-open-target-row-FAILED.png
+[2026-11-23T08:45:31.187Z]   -> FAIL (5 ms)
+[2026-11-23T08:45:31.196Z] STEP r3-return-root-row
+[2026-11-23T08:45:31.196Z]   op(+1) click start (root) row
+[2026-11-23T08:45:33.043Z]   screenshot: 09-r3-return-root-row.png
+[2026-11-23T08:45:33.043Z]   -> ok (1714 ms)
+[2026-11-23T08:45:33.048Z]   file switch: compose.ts -> hono-base.ts
+[2026-11-23T08:45:33.052Z] P13 {"tool":"VS Code","task":"H2-R3","status":"SUPPORTED_AND_VERIFIED","userOperations":1,"fileSwitches":1,"automationMs":1992,"opened":{"file":"compose.ts","line":15,"group":1},"returned":{"file":"hono-base.ts","line":518,"group":1},"returnOperations":1,"viewKept":true,"startKept":false}

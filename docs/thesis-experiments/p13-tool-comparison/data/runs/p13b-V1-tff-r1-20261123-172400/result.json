@@ -1,0 +1,57 @@
+{
+  "run": "p13-tff-V1",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {
+      "sudopanda.trace-function-flow": "1.1.1"
+    },
+    "task": "V1"
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T08:24:03.060Z",
+      "ms": 4160,
+      "ok": true
+    },
+    {
+      "name": "start-state packages/vite/src/node/server/index.ts@createServer",
+      "startedAt": "2026-11-23T08:24:07.225Z",
+      "ms": 2677,
+      "ok": true,
+      "screenshot": "p13-tff-V1/screenshots/01-start-state_packages_vite_src_node_server_index_ts_createServer.png"
+    },
+    {
+      "name": "r1-codelens-trace",
+      "startedAt": "2026-11-23T08:24:10.000Z",
+      "ms": 10074,
+      "ok": true,
+      "screenshot": "p13-tff-V1/screenshots/02-r1-codelens-trace.png"
+    },
+    {
+      "name": "r2-select-target",
+      "startedAt": "2026-11-23T08:24:20.306Z",
+      "ms": 30023,
+      "ok": false,
+      "error": "locator.click: Timeout 30000ms exceeded.",
+      "screenshot": "p13-tff-V1/screenshots/03-r2-select-target-FAILED.png"
+    },
+    {
+      "name": "r3-dblclick-target",
+      "startedAt": "2026-11-23T08:24:50.482Z",
+      "ms": 30027,
+      "ok": false,
+      "error": "locator.click: Timeout 30000ms exceeded.",
+      "screenshot": "p13-tff-V1/screenshots/04-r3-dblclick-target-FAILED.png"
+    },
+    {
+      "name": "r3-return",
+      "startedAt": "2026-11-23T08:25:20.706Z",
+      "ms": 30039,
+      "ok": false,
+      "error": "locator.click: Timeout 30000ms exceeded.",
+      "screenshot": "p13-tff-V1/screenshots/05-r3-return-FAILED.png"
+    }
+  ],
+  "tasks": []
+}

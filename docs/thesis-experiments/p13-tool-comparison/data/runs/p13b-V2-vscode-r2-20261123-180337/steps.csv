@@ -1,0 +1,11 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4524,,
+start-state packages/vite/src/node/build.ts@build,true,3083,,p13-vscode-V2/screenshots/01-start-state_packages_vite_src_node_build_ts_build.png
+r1-call-hierarchy-open,true,1590,,p13-vscode-V2/screenshots/02-r1-call-hierarchy-open.png
+r1-outgoing,true,2176,,p13-vscode-V2/screenshots/03-r1-outgoing.png
+r1-expand-path-rows,true,4336,,p13-vscode-V2/screenshots/04-r1-expand-path-rows.png
+r2-f12-createBuilder,true,531,,p13-vscode-V2/screenshots/05-r2-f12-createBuilder.png
+r2-f12-resolveConfigToBuild,true,513,,p13-vscode-V2/screenshots/06-r2-f12-resolveConfigToBuild.png
+r2-f12-resolveConfig,true,558,,p13-vscode-V2/screenshots/07-r2-f12-resolveConfig.png
+r3-open-target-row,true,1762,,p13-vscode-V2/screenshots/08-r3-open-target-row.png
+r3-return-root-row,true,1702,,p13-vscode-V2/screenshots/09-r3-return-root-row.png

@@ -1,0 +1,5 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4580,,
+start-state packages/vite/src/node/build.ts@build,true,6371,,p13-cg-V2/screenshots/01-start-state_packages_vite_src_node_build_ts_build.png
+cg-toggle-panel,true,4486,,p13-cg-V2/screenshots/02-cg-toggle-panel.png
+cg-generate,true,15465,,p13-cg-V2/screenshots/03-cg-generate.png

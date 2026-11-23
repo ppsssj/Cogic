@@ -1,0 +1,412 @@
+{
+  "codeLens": true,
+  "graph": {
+    "nodes": [
+      {
+        "id": "entry-1",
+        "text": "ƒFunctioncreateServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts"
+      },
+      {
+        "id": "node-2",
+        "text": "ƒFunction_createServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts"
+      },
+      {
+        "id": "node-4",
+        "text": "ƒFunction↗ importedisResolvedConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-5",
+        "text": "ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-6",
+        "text": "ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-10",
+        "text": "ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-13",
+        "text": "ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts"
+      },
+      {
+        "id": "node-21",
+        "text": "ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts"
+      },
+      {
+        "id": "node-30",
+        "text": "ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts"
+      },
+      {
+        "id": "node-34",
+        "text": "?Unresolvedconsole[method]( format(type, msg, opt"
+      },
+      {
+        "id": "node-38",
+        "text": "?Unresolvedconsole[method](format(type, msg, options))"
+      },
+      {
+        "id": "node-40",
+        "text": "?Unresolvedconsole[method](format(type, msg, options))"
+      },
+      {
+        "id": "node-42",
+        "text": "ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts"
+      },
+      {
+        "id": "node-45",
+        "text": "?Unresolvedconsole[method]( format(type, msg, opt"
+      },
+      {
+        "id": "node-49",
+        "text": "?Unresolvedconsole[method](format(type, msg, options))"
+      },
+      {
+        "id": "node-51",
+        "text": "?Unresolvedconsole[method](format(type, msg, options))"
+      },
+      {
+        "id": "node-68",
+        "text": "ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-69",
+        "text": "ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-74",
+        "text": "ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts"
+      },
+      {
+        "id": "node-75",
+        "text": "ƒFunctiongetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts"
+      },
+      {
+        "id": "node-78",
+        "text": "ƒFunction↗ importedtryStatSync()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-79",
+        "text": "ƒFunctionloadPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts"
+      },
+      {
+        "id": "node-80",
+        "text": "ƒFunctionsetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts"
+      },
+      {
+        "id": "node-83",
+        "text": "ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-86",
+        "text": "ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+      },
+      {
+        "id": "node-89",
+        "text": "ƒFunctionfindEsmSyntaxInCjs()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+      },
+      {
+        "id": "node-91",
+        "text": "ƒFunctionanalyzeConfigModuleReferences()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+      },
+      {
+        "id": "node-94",
+        "text": "ƒFunctionspecifierHasJsExtension()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+      },
+      {
+        "id": "node-96",
+        "text": "ƒFunctionclassifyImportRef()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+      },
+      {
+        "id": "node-99",
+        "text": "ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-102",
+        "text": "ƒFunction↗ importedisNodeLikeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-103",
+        "text": "ƒFunctionisBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-105",
+        "text": "ƒFunction↗ importednodeResolveWithVite()<WORK>\\vite\\packages\\vite\\src\\node\\nodeResolve.ts"
+      },
+      {
+        "id": "node-106",
+        "text": "ƒFunction↗ importedtryNodeResolve()<WORK>\\vite\\packages\\vite\\src\\node\\plugins\\resolve.ts"
+      },
+      {
+        "id": "node-117",
+        "text": "ƒFunction↗ importedcreateImportMetaResolver()<WORK>\\vite\\packages\\vite\\src\\module-runner\\importMetaResolver.ts"
+      },
+      {
+        "id": "node-123",
+        "text": "ƒFunction↗ importedgetFileStartIndex()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-135",
+        "text": "ƒFunction🔄 cyclecollectAllModules()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-143",
+        "text": "ƒFunctionloadConfigFromBundledFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-144",
+        "text": "ƒFunction↗ importedfindNearestNodeModules()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts"
+      },
+      {
+        "id": "node-172",
+        "text": "ƒFunction↗ importedformatNativeConfigIncompatWarning()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+      },
+      {
+        "id": "node-174",
+        "text": "ƒFunctiondescribeIncompatibility()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+      },
+      {
+        "id": "node-175",
+        "text": "ƒFunction↗ importednormalizePath()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-180",
+        "text": "ƒFunctionrunnerImportConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-181",
+        "text": "ƒFunction🔄 cycle↗ importedrunnerImport()<WORK>\\vite\\packages\\vite\\src\\node\\ssr\\runnerImport.ts"
+      },
+      {
+        "id": "node-184",
+        "text": "ƒFunction↗ importedmergeConfig()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-185",
+        "text": "ƒFunctionmergeConfigRecursively()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-187",
+        "text": "ƒFunction↗ importedcreateRunnableDevEnvironment()<WORK>\\vite\\packages\\vite\\src\\node\\server\\environments\\runnableEnvironment.ts"
+      },
+      {
+        "id": "node-188",
+        "text": "ƒFunction↗ importedcreateServerHotChannel()<WORK>\\vite\\packages\\vite\\src\\node\\server\\hmr.ts"
+      },
+      {
+        "id": "node-195",
+        "text": "ƒFunctionnativeImportConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-202",
+        "text": "ƒFunctiongetTime()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-206",
+        "text": "ƒFunction↗ importedisObject()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-210",
+        "text": "ƒFunctioncheckBadCharactersInPath()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-226",
+        "text": "ƒFunction🔄 cycle↗ importeddeepClone()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-232",
+        "text": "ƒFunctionloadDevToolsIntegrationPlugins()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-233",
+        "text": "ƒFunctionresolveDevToolsConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-234",
+        "text": "ƒFunctionisDevToolsOptionEnabled()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-243",
+        "text": "ƒFunctioncallbackfilterPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-245",
+        "text": "ƒFunction↗ importedasyncFlatten()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "node-249",
+        "text": "ƒFunctionsortUserPlugins()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "node-255",
+        "text": "ƒFunctionrunConfigHook()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts"
+      },
+      {
+        "id": "maxdepth-256",
+        "text": "…Max depth reached"
+      },
+      {
+        "id": "maxdepth-257",
+        "text": "…Max depth reached"
+      },
+      {
+        "id": "maxdepth-258",
+        "text": "…Max depth reached"
+      },
+      {
+        "id": "db-1",
+        "text": "🗄️Database QuerySequelizeMath.max()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-2",
+        "text": "🗄️Database QuerySequelizeMath.min()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-3",
+        "text": "🗄️Database QuerySequelizeMath.max()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-4",
+        "text": "🗄️Database QuerySequelizeMath.max()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-5",
+        "text": "🗄️Database QuerySequelizeMath.max()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-6",
+        "text": "🗄️Database QuerySequelizeMath.max()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-7",
+        "text": "🗄️Database QuerySequelizeMath.max()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-8",
+        "text": "🗄️Database QuerySequelizeMath.min()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-9",
+        "text": "🗄️Database QuerySequelizeMath.max()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-11",
+        "text": "🗄️Database QuerySequelizeMath.min()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+      },
+      {
+        "id": "db-12",
+        "text": "🗄️Database QuerySequelizeMath.max()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts"
+      },
+      {
+        "id": "db-13",
+        "text": "🗄️Database QuerySequelizeMath.max()<WORK>\\vite\\packages\\vite\\src\\node\\plugins\\resolve.ts"
+      }
+    ],
+    "edges": [
+      "edge-entry-1-node-2-2",
+      "edge-node-2-node-4-4",
+      "edge-node-2-node-5-5",
+      "edge-node-5-node-6-6",
+      "edge-node-5-node-10-10",
+      "edge-node-10-node-13-13",
+      "edge-node-13-node-21-21",
+      "edge-node-21-node-21-29",
+      "edge-node-21-node-21-29",
+      "edge-node-21-node-30-30",
+      "edge-node-13-node-30-31",
+      "edge-node-13-node-34-34",
+      "edge-node-13-node-38-38",
+      "edge-node-13-node-40-40",
+      "edge-node-13-node-42-42",
+      "edge-node-42-node-45-45",
+      "edge-node-42-node-21-46",
+      "edge-node-42-node-49-49",
+      "edge-node-42-node-51-51",
+      "edge-node-10-node-68-68",
+      "edge-node-68-node-69-69",
+      "edge-node-69-node-74-74",
+      "edge-node-74-node-75-75",
+      "edge-node-74-node-78-78",
+      "edge-node-74-node-79-79",
+      "edge-node-74-node-80-80",
+      "edge-node-68-node-83-83",
+      "edge-node-83-node-86-86",
+      "edge-node-86-node-69-87",
+      "edge-node-86-node-89-89",
+      "edge-node-86-node-91-91",
+      "edge-node-86-node-94-94",
+      "edge-node-86-node-96-96",
+      "edge-node-83-node-99-99",
+      "edge-node-83-node-102-102",
+      "edge-node-102-node-103-103",
+      "edge-node-83-node-105-105",
+      "edge-node-105-node-106-106",
+      "edge-node-83-node-117-117",
+      "edge-node-83-node-123-123",
+      "edge-node-83-node-135-135",
+      "edge-node-135-node-135-139",
+      "edge-node-135-node-135-139",
+      "edge-node-68-node-143-143",
+      "edge-node-143-node-144-144",
+      "edge-node-144-node-78-147",
+      "edge-node-68-node-13-170",
+      "edge-node-68-node-172-172",
+      "edge-node-172-node-174-174",
+      "edge-node-174-node-175-175",
+      "edge-node-10-node-180-180",
+      "edge-node-180-node-181-181",
+      "edge-node-181-node-5-183",
+      "edge-node-181-node-5-183",
+      "edge-node-181-node-184-184",
+      "edge-node-184-node-185-185",
+      "edge-node-181-node-187-187",
+      "edge-node-187-node-188-188",
+      "edge-node-10-node-195-195",
+      "edge-node-10-node-202-202",
+      "edge-node-10-node-206-206",
+      "edge-node-10-node-175-208",
+      "edge-node-10-node-210-210",
+      "edge-node-5-node-184-224",
+      "edge-node-5-node-226-226",
+      "edge-node-226-node-226-229",
+      "edge-node-226-node-226-229",
+      "edge-node-226-node-206-230",
+      "edge-node-5-node-232-232",
+      "edge-node-232-node-233-233",
+      "edge-node-233-node-234-234",
+      "edge-node-232-node-13-240",
+      "edge-node-5-node-243-243",
+      "edge-node-5-node-245-245",
+      "edge-node-5-node-249-249",
+      "edge-node-5-node-255-255",
+      "edge-node-255-maxdepth-256-256",
+      "edge-node-5-maxdepth-257-257",
+      "edge-node-2-maxdepth-258-258",
+      "edge-node-6-db-1",
+      "edge-node-6-db-2",
+      "edge-node-6-db-3",
+      "edge-node-6-db-4",
+      "edge-node-6-db-5",
+      "edge-node-6-db-6",
+      "edge-node-6-db-7",
+      "edge-node-6-db-8",
+      "edge-node-6-db-9",
+      "edge-node-6-db-11",
+      "edge-node-13-db-12",
+      "edge-node-106-db-13"
+    ]
+  },
+  "notifications": [],
+  "detail": "calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls max-depth max-depth max-depth queries queries queries queries queries queries queries queries queries queries queries queries ƒ FUNCTION createServer() <WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts ƒ FUNCTION _createServer() <WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts ƒ FUNCTION ↗ IMPORTED isResolvedConfig() <WORK>\\vite\\packages\\vite\\src\\node\\config.ts ƒ FUNCTION ↗ IMPORTED resolveConfig() <WORK>\\vite\\packages\\vite\\src\\node\\config.ts ƒ FUNCTION ↗ IMPORTED setupRollupOptionCompat() <WORK>\\vite\\packages\\vite\\src\\node\\utils.ts ƒ FUNCTION loadConfigFromFile() <WORK>\\vite\\packages\\vite\\src\\node\\config.ts ƒ FUNCTION ↗ IMPORTED createLogger() <WORK>\\vite\\packages\\vite\\src\\node\\logger.ts ƒ FUNCTION 🔄 CYCLE format() <WORK>\\vite\\packages\\vite\\src\\node\\logger.ts ƒ FUNCTION getTimeFormatter() <WORK>\\vite\\packages\\vite\\src\\node\\logger.ts ? UNRESOLVED console[method]( format(type, msg, opt ? UNRESOLVED console[method](format(type, msg, options)) ? UNRESOLVED console[method](format(type, msg, options)) ƒ FUNCTION output() <WORK>\\vite\\packages\\vite\\src\\node\\logger.ts ? UNRESOLVED console[method]( format(type, msg, opt ? UNRESOLVED console[method](format(type, msg, options)) ? UNRESOLVED console[method](format(type, msg, options)) ƒ FUNCTION bundleAndLoadConfigFile() <WORK>\\vite\\packages\\vite\\src\\node\\config.ts ƒ FUNCTION ↗ IMPORTED isFilePathESM() <WORK>\\vite\\packages\\vite\\src\\node\\utils.ts ƒ FUNCTION ↗ IMPORTED ",
+  "r3open": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+  },
+  "r3return": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+  }
+}

@@ -1,0 +1,10 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4658,,
+start-state src/hono-base.ts@request,true,2950,,p13-cogic-H2/screenshots/01-start-state_src_hono-base_ts_request.png
+r1-open-panel,true,2161,,p13-cogic-H2/screenshots/02-r1-open-panel.png
+r1-depth-2,true,1526,,p13-cogic-H2/screenshots/03-r1-depth-2.png
+r1-generate,true,36468,,p13-cogic-H2/screenshots/04-r1-generate.png
+r1-expand-path-groups,true,8252,,p13-cogic-H2/screenshots/05-r1-expand-path-groups.png
+r2-select-target,true,4562,,p13-cogic-H2/screenshots/06-r2-select-target.png
+r3-dblclick-target,true,3735,,p13-cogic-H2/screenshots/07-r3-dblclick-target.png
+r3-return-start-node,true,2321,,p13-cogic-H2/screenshots/08-r3-return-start-node.png

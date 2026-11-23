@@ -1,0 +1,386 @@
+{
+  "generateMs": 15652,
+  "graph": {
+    "nodes": [
+      {
+        "id": "folder:<HARNESS_WORKDIR>/harness/node_modules/@types/node",
+        "title": "nodeC:/dev/.../@types/node1 files hidden",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "folder:<WORK>/hono/src",
+        "title": "srcsrc8 files",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "folder:<WORK>/hono/src/helper",
+        "title": "helpersrc/helper1 files",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "folder:<WORK>/hono/src/helper/cookie",
+        "title": "cookiesrc/helper/cookie1 files",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/helper/cookie/index.ts:0",
+        "title": "index.tssrc/helper/cookie9 nodes",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/helper/cookie/index.ts:285",
+        "title": "GetCookie",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/helper/cookie/index.ts:472",
+        "title": "GetSignedCookie",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/helper/cookie/index.ts:868",
+        "title": "getCookie()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/helper/cookie/index.ts:1498",
+        "title": "getSignedCookie()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/helper/cookie/index.ts:2179",
+        "title": "generateCookie()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/helper/cookie/index.ts:3090",
+        "title": "setCookie()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/helper/cookie/index.ts:3309",
+        "title": "generateSignedCookie()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/helper/cookie/index.ts:3968",
+        "title": "setSignedCookie()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/helper/cookie/index.ts:4263",
+        "title": "deleteCookie()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "folder:<WORK>/hono/src/utils",
+        "title": "utilssrc/utils3 files",
+        "cls": "react-flow__node-folderGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/utils/cookie.ts:0",
+        "title": "cookie.tssrc/utils21 nodes",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "external:<WORK>/hono/src/utils/cookie.ts:4172",
+        "title": "parse (cookie.ts)",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "external:<WORK>/hono/src/utils/cookie.ts:5402",
+        "title": "parseSigned (cookie.ts)",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "external:<WORK>/hono/src/utils/cookie.ts:8909",
+        "title": "serialize (cookie.ts)",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "external:<WORK>/hono/src/utils/cookie.ts:9126",
+        "title": "serializeSigned (cookie.ts)",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/utils/cookie.ts:93",
+        "title": "Cookie",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/utils/cookie.ts:138",
+        "title": "SignedCookie",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/utils/cookie.ts:199",
+        "title": "PartitionedCookieConstraint",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/utils/cookie.ts:345",
+        "title": "SecureCookieConstraint",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/utils/cookie.ts:393",
+        "title": "HostCookieConstraint",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/utils/cookie.ts:472",
+        "title": "CookieOptions",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/utils/cookie.ts:844",
+        "title": "CookiePrefixOptions",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "interface:<WORK>/hono/src/utils/cookie.ts:899",
+        "title": "CookieConstraint",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/utils/cookie.ts:1246",
+        "title": "getCryptoKey()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/utils/cookie.ts:1525",
+        "title": "makeSignature()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/utils/cookie.ts:1952",
+        "title": "verifySignature()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/utils/cookie.ts:3667",
+        "title": "trimCookieWhitespace()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/utils/cookie.ts:4172",
+        "title": "parse()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/utils/cookie.ts:5402",
+        "title": "parseSigned()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/utils/cookie.ts:6209",
+        "title": "_serialize()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/utils/cookie.ts:8909",
+        "title": "serialize()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "function:<WORK>/hono/src/utils/cookie.ts:9126",
+        "title": "serializeSigned()",
+        "cls": "react-flow__node-code"
+      },
+      {
+        "id": "file:<WORK>/hono/src/utils/html.ts",
+        "title": "html.tssrc/utils1 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/utils/url.ts",
+        "title": "url.tssrc/utils1 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/context.ts:0",
+        "title": "context.tssrc28 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/hono.test.ts",
+        "title": "hono.test.tssrc1 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/request.ts",
+        "title": "request.tssrc1 hidden",
+        "cls": "react-flow__node-fileGroup"
+      },
+      {
+        "id": "file:<WORK>/hono/src/types.ts",
+        "title": "types.tssrc1 hidden",
+        "cls": "react-flow__node-fileGroup"
+      }
+    ],
+    "children": [],
+    "edges": [
+      "calls:function:<WORK>/hono/src/helper/cookie/index.ts:868->external:<WORK>/hono/src/utils/cookie.ts:4172@@@@",
+      "calls:function:<WORK>/hono/src/helper/cookie/index.ts:1498->external:<WORK>/hono/src/utils/cookie.ts:5402@@@@",
+      "calls:function:<WORK>/hono/src/helper/cookie/index.ts:2179->external:<WORK>/hono/src/utils/cookie.ts:8909@@@@",
+      "calls:function:<WORK>/hono/src/helper/cookie/index.ts:3090->function:<WORK>/hono/src/helper/cookie/index.ts:2179@@@@",
+      "calls:function:<WORK>/hono/src/helper/cookie/index.ts:3309->external:<WORK>/hono/src/utils/cookie.ts:9126@@@@",
+      "calls:function:<WORK>/hono/src/helper/cookie/index.ts:3968->function:<WORK>/hono/src/helper/cookie/index.ts:3309@@@@",
+      "calls:function:<WORK>/hono/src/helper/cookie/index.ts:4263->function:<WORK>/hono/src/helper/cookie/index.ts:3090@@@@",
+      "references:interface:<WORK>/hono/src/utils/cookie.ts:472->interface:<WORK>/hono/src/utils/cookie.ts:844@@@@",
+      "references:interface:<WORK>/hono/src/utils/cookie.ts:472->interface:<WORK>/hono/src/utils/cookie.ts:199@@@@",
+      "references:interface:<WORK>/hono/src/utils/cookie.ts:899->interface:<WORK>/hono/src/utils/cookie.ts:472@@@@",
+      "references:interface:<WORK>/hono/src/utils/cookie.ts:899->interface:<WORK>/hono/src/utils/cookie.ts:345@@@@",
+      "references:interface:<WORK>/hono/src/utils/cookie.ts:899->interface:<WORK>/hono/src/utils/cookie.ts:393@@@@",
+      "references:function:<WORK>/hono/src/utils/cookie.ts:4172->interface:<WORK>/hono/src/utils/cookie.ts:93@@@@",
+      "references:function:<WORK>/hono/src/utils/cookie.ts:5402->interface:<WORK>/hono/src/utils/cookie.ts:138@@@@",
+      "references:function:<WORK>/hono/src/utils/cookie.ts:6209->interface:<WORK>/hono/src/utils/cookie.ts:472@@@@",
+      "references:function:<WORK>/hono/src/utils/cookie.ts:8909->interface:<WORK>/hono/src/utils/cookie.ts:899@@@@",
+      "references:function:<WORK>/hono/src/utils/cookie.ts:9126->interface:<WORK>/hono/src/utils/cookie.ts:472@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:1525->function:<WORK>/hono/src/utils/cookie.ts:1246@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:4172->function:<WORK>/hono/src/utils/cookie.ts:3667@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:5402->function:<WORK>/hono/src/utils/cookie.ts:1246@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:5402->function:<WORK>/hono/src/utils/cookie.ts:4172@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:5402->function:<WORK>/hono/src/utils/cookie.ts:1952@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:8909->function:<WORK>/hono/src/utils/cookie.ts:6209@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:9126->function:<WORK>/hono/src/utils/cookie.ts:1525@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:9126->function:<WORK>/hono/src/utils/cookie.ts:6209@@@@",
+      "calls:function:<WORK>/hono/src/helper/cookie/index.ts:3090->external:<WORK>/hono/src/context.ts:8299@@@@",
+      "calls:function:<WORK>/hono/src/helper/cookie/index.ts:3968->external:<WORK>/hono/src/context.ts:8376@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:1525->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/buffer.d.ts:87398@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:1952->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/buffer.d.ts:86469@@@@",
+      "calls:function:<WORK>/hono/src/utils/cookie.ts:4172->external:<WORK>/hono/src/utils/url.ts:7159@@@@",
+      "constructs:file:<WORK>/hono/src/context.ts:0->external:<WORK>/hono/src/request.ts:1052@@@@",
+      "calls:method:<WORK>/hono/src/context.ts:13731->external:<WORK>/hono/src/hono.test.ts:95503@@@@",
+      "calls:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@@@",
+      "calls:method:<WORK>/hono/src/context.ts:23469->external:<WORK>/hono/src/types.ts:2808@@@@",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:868->external:<WORK>/hono/src/utils/cookie.ts:4172@@cookie <- cookie@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:868->external:<WORK>/hono/src/utils/cookie.ts:4172@@name <- finalKey@@arg#1",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:1498->external:<WORK>/hono/src/utils/cookie.ts:5402@@cookie <- cookie@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:1498->external:<WORK>/hono/src/utils/cookie.ts:5402@@secret <- secret@@arg#1",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:1498->external:<WORK>/hono/src/utils/cookie.ts:5402@@name <- finalKey@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:2179->external:<WORK>/hono/src/utils/cookie.ts:8909@@name <- '__Secure-' + name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:2179->external:<WORK>/hono/src/utils/cookie.ts:8909@@value <- value@@arg#1",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:2179->external:<WORK>/hono/src/utils/cookie.ts:8909@@opt <- { path: '/', ...opt, secure: true }@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:2179->external:<WORK>/hono/src/utils/cookie.ts:8909@@name <- '__Host-' + name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:2179->external:<WORK>/hono/src/utils/cookie.ts:8909@@opt <- { ...opt, path: '/', secure: true, domain: undefined, }@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:2179->external:<WORK>/hono/src/utils/cookie.ts:8909@@name <- name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:2179->external:<WORK>/hono/src/utils/cookie.ts:8909@@opt <- { path: '/', ...opt }@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3090->function:<WORK>/hono/src/helper/cookie/index.ts:2179@@name <- name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3090->function:<WORK>/hono/src/helper/cookie/index.ts:2179@@value <- value@@arg#1",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3090->function:<WORK>/hono/src/helper/cookie/index.ts:2179@@opt <- opt@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3090->external:<WORK>/hono/src/context.ts:8299@@name <- 'Set-Cookie'@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3090->external:<WORK>/hono/src/context.ts:8299@@value <- cookie@@arg#1",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3090->external:<WORK>/hono/src/context.ts:8299@@options <- { append: true }@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3309->external:<WORK>/hono/src/utils/cookie.ts:9126@@name <- '__Secure-' + name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3309->external:<WORK>/hono/src/utils/cookie.ts:9126@@value <- value@@arg#1",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3309->external:<WORK>/hono/src/utils/cookie.ts:9126@@secret <- secret@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3309->external:<WORK>/hono/src/utils/cookie.ts:9126@@opt <- { path: '/', ...opt, secure: true, }@@arg#3",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3309->external:<WORK>/hono/src/utils/cookie.ts:9126@@name <- '__Host-' + name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3309->external:<WORK>/hono/src/utils/cookie.ts:9126@@opt <- { ...opt, path: '/', secure: true, domain: undefined, }@@arg#3",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3309->external:<WORK>/hono/src/utils/cookie.ts:9126@@name <- name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3309->external:<WORK>/hono/src/utils/cookie.ts:9126@@opt <- { path: '/', ...opt }@@arg#3",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3968->function:<WORK>/hono/src/helper/cookie/index.ts:3309@@name <- name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3968->function:<WORK>/hono/src/helper/cookie/index.ts:3309@@value <- value@@arg#1",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3968->function:<WORK>/hono/src/helper/cookie/index.ts:3309@@secret <- secret@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3968->function:<WORK>/hono/src/helper/cookie/index.ts:3309@@opt <- opt@@arg#3",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3968->external:<WORK>/hono/src/context.ts:8376@@name <- 'set-cookie'@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3968->external:<WORK>/hono/src/context.ts:8376@@value <- cookie@@arg#1",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:3968->external:<WORK>/hono/src/context.ts:8376@@options <- { append: true }@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:4263->function:<WORK>/hono/src/helper/cookie/index.ts:3090@@c <- c@@arg#0",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:4263->function:<WORK>/hono/src/helper/cookie/index.ts:3090@@name <- name@@arg#1",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:4263->function:<WORK>/hono/src/helper/cookie/index.ts:3090@@value <- ''@@arg#2",
+      "dataflow:function:<WORK>/hono/src/helper/cookie/index.ts:4263->function:<WORK>/hono/src/helper/cookie/index.ts:3090@@opt <- { ...opt, maxAge: 0 }@@arg#3",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:1525->function:<WORK>/hono/src/utils/cookie.ts:1246@@secret <- secret@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:1525->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/buffer.d.ts:87398@@data <- String.fromCharCode(...new Uint8Array(signature))@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:1952->external:<HARNESS_WORKDIR>/harness/node_modules/@types/node/buffer.d.ts:86469@@data <- base64Signature@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:4172->function:<WORK>/hono/src/utils/cookie.ts:3667@@value <- pairStr.substring(0, valueStartPos)@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:4172->function:<WORK>/hono/src/utils/cookie.ts:3667@@value <- pairStr.substring(valueStartPos + 1)@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:4172->external:<WORK>/hono/src/utils/url.ts:7159@@str <- cookieValue@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:5402->function:<WORK>/hono/src/utils/cookie.ts:1246@@secret <- secret@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:5402->function:<WORK>/hono/src/utils/cookie.ts:4172@@cookie <- cookie@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:5402->function:<WORK>/hono/src/utils/cookie.ts:4172@@name <- name@@arg#1",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:5402->function:<WORK>/hono/src/utils/cookie.ts:1952@@base64Signature <- signature@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:5402->function:<WORK>/hono/src/utils/cookie.ts:1952@@value <- signedValue@@arg#1",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:5402->function:<WORK>/hono/src/utils/cookie.ts:1952@@secret <- secretKey@@arg#2",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:8909->function:<WORK>/hono/src/utils/cookie.ts:6209@@name <- name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:8909->function:<WORK>/hono/src/utils/cookie.ts:6209@@value <- value@@arg#1",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:8909->function:<WORK>/hono/src/utils/cookie.ts:6209@@opt <- opt@@arg#2",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:9126->function:<WORK>/hono/src/utils/cookie.ts:1525@@value <- value@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:9126->function:<WORK>/hono/src/utils/cookie.ts:1525@@secret <- secret@@arg#1",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:9126->function:<WORK>/hono/src/utils/cookie.ts:6209@@name <- name@@arg#0",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:9126->function:<WORK>/hono/src/utils/cookie.ts:6209@@value <- value@@arg#1",
+      "dataflow:function:<WORK>/hono/src/utils/cookie.ts:9126->function:<WORK>/hono/src/utils/cookie.ts:6209@@opt <- opt@@arg#2",
+      "dataflow:file:<WORK>/hono/src/context.ts:0->external:<WORK>/hono/src/request.ts:1052@@request <- this.#rawRequest@@arg#0",
+      "dataflow:file:<WORK>/hono/src/context.ts:0->external:<WORK>/hono/src/request.ts:1052@@path <- this.#path@@arg#1",
+      "dataflow:file:<WORK>/hono/src/context.ts:0->external:<WORK>/hono/src/request.ts:1052@@matchResult <- this.#matchResult@@arg#2",
+      "dataflow:method:<WORK>/hono/src/context.ts:13731->external:<WORK>/hono/src/hono.test.ts:95503@@content <- ...args@@arg#0",
+      "dataflow:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@str <- html@@arg#0",
+      "dataflow:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@phase <- HtmlEscapedCallbackPhase.Stringify@@arg#1",
+      "dataflow:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@preserveCallbacks <- false@@arg#2",
+      "dataflow:method:<WORK>/hono/src/context.ts:21893->external:<WORK>/hono/src/utils/html.ts:4219@@context <- {}@@arg#3",
+      "dataflow:method:<WORK>/hono/src/context.ts:23469->external:<WORK>/hono/src/types.ts:2808@@c <- this@@arg#0"
+    ],
+    "banner": "Root file: index.tsClear root"
+  },
+  "callTriples": [
+    "getCookie->parse",
+    "getSignedCookie->parseSigned",
+    "generateCookie->serialize",
+    "setCookie->generateCookie",
+    "generateSignedCookie->serializeSigned",
+    "setSignedCookie->generateSignedCookie",
+    "deleteCookie->setCookie",
+    "makeSignature->getCryptoKey",
+    "parse->trimCookieWhitespace",
+    "parseSigned->getCryptoKey",
+    "parseSigned->parse",
+    "parseSigned->verifySignature",
+    "serialize->_serialize",
+    "serializeSigned->makeSignature",
+    "serializeSigned->_serialize"
+  ],
+  "paramFlow": "PARAM FLOW serialize -> _serialize name <- name serialize -> _serialize value <- value serialize -> _serialize opt <- opt serializeSigned -> _serialize name <- name serializeSigned -> _serialize value <- value serializeSigned -> _serialize opt <- opt",
+  "flowRows": [
+    {
+      "from": "serialize",
+      "to": "_serialize",
+      "label": "name <- name"
+    },
+    {
+      "from": "serialize",
+      "to": "_serialize",
+      "label": "value <- value"
+    },
+    {
+      "from": "serialize",
+      "to": "_serialize",
+      "label": "opt <- opt"
+    },
+    {
+      "from": "serializeSigned",
+      "to": "_serialize",
+      "label": "name <- name"
+    },
+    {
+      "from": "serializeSigned",
+      "to": "_serialize",
+      "label": "value <- value"
+    },
+    {
+      "from": "serializeSigned",
+      "to": "_serialize",
+      "label": "opt <- opt"
+    }
+  ],
+  "r3open": {
+    "file": "cookie.ts",
+    "line": null,
+    "group": 1
+  },
+  "r3return": {
+    "file": "index.ts",
+    "line": 102,
+    "group": 1
+  }
+}
