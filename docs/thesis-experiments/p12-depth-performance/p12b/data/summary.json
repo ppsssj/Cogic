@@ -1,0 +1,365 @@
+{
+  "generatedBy": "p12b/tools/summarize-p12b.cjs",
+  "comparisons": [
+    {
+      "key": "hono|D0",
+      "base": {
+        "n": 1,
+        "totalMs": [
+          3625.4
+        ],
+        "medianTotalMs": 3625.4,
+        "medianCreateProgramMs": null,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          482.2
+        ],
+        "nodes": 10,
+        "edges": 14,
+        "hashes": [
+          "448c6c7ce49f6b64"
+        ]
+      },
+      "off": {
+        "n": 1,
+        "totalMs": [
+          4063.4
+        ],
+        "medianTotalMs": 4063.4,
+        "medianCreateProgramMs": 3457.9,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          511.6
+        ],
+        "nodes": 10,
+        "edges": 14,
+        "hashes": [
+          "448c6c7ce49f6b64"
+        ]
+      },
+      "on": {
+        "n": 1,
+        "totalMs": [
+          3715.5
+        ],
+        "medianTotalMs": 3715.5,
+        "medianCreateProgramMs": 3093,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          511.9
+        ],
+        "nodes": 10,
+        "edges": 14,
+        "hashes": [
+          "448c6c7ce49f6b64"
+        ]
+      },
+      "graphIdenticalAcrossConditions": true,
+      "hashes": [
+        "448c6c7ce49f6b64"
+      ],
+      "speedupOnVsBase": 1,
+      "reductionOnVsBasePct": -2.5
+    },
+    {
+      "key": "hono|D1",
+      "base": {
+        "n": 1,
+        "totalMs": [
+          3507.9
+        ],
+        "medianTotalMs": 3507.9,
+        "medianCreateProgramMs": null,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          510.9
+        ],
+        "nodes": 16,
+        "edges": 46,
+        "hashes": [
+          "eb89223a0c404744"
+        ]
+      },
+      "off": {
+        "n": 1,
+        "totalMs": [
+          3956.1
+        ],
+        "medianTotalMs": 3956.1,
+        "medianCreateProgramMs": 3323.5,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          511.8
+        ],
+        "nodes": 16,
+        "edges": 46,
+        "hashes": [
+          "eb89223a0c404744"
+        ]
+      },
+      "on": {
+        "n": 1,
+        "totalMs": [
+          3571.7
+        ],
+        "medianTotalMs": 3571.7,
+        "medianCreateProgramMs": 2938.8,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          512
+        ],
+        "nodes": 16,
+        "edges": 46,
+        "hashes": [
+          "eb89223a0c404744"
+        ]
+      },
+      "graphIdenticalAcrossConditions": true,
+      "hashes": [
+        "eb89223a0c404744"
+      ],
+      "speedupOnVsBase": 1,
+      "reductionOnVsBasePct": -1.8
+    },
+    {
+      "key": "hono|D2",
+      "base": {
+        "n": 3,
+        "totalMs": [
+          7083.5,
+          6373.3,
+          6837.8
+        ],
+        "medianTotalMs": 6837.8,
+        "medianCreateProgramMs": null,
+        "programs": 3,
+        "structureReuse": "",
+        "peakRSSMB": [
+          714.6,
+          616.9,
+          719.4
+        ],
+        "nodes": 85,
+        "edges": 207,
+        "hashes": [
+          "77d23f3c13cd5e9c"
+        ]
+      },
+      "off": {
+        "n": 3,
+        "totalMs": [
+          6643.1,
+          6408.4,
+          6592.7
+        ],
+        "medianTotalMs": 6592.7,
+        "medianCreateProgramMs": 5314.7,
+        "programs": 3,
+        "structureReuse": "none:2",
+        "peakRSSMB": [
+          619.7,
+          718.5,
+          716.8
+        ],
+        "nodes": 85,
+        "edges": 207,
+        "hashes": [
+          "77d23f3c13cd5e9c"
+        ]
+      },
+      "on": {
+        "n": 3,
+        "totalMs": [
+          3870.8,
+          4282.6,
+          3873.4
+        ],
+        "medianTotalMs": 3873.4,
+        "medianCreateProgramMs": 3007.3,
+        "programs": 3,
+        "structureReuse": "completely:2",
+        "peakRSSMB": [
+          534.2,
+          533.6,
+          533.7
+        ],
+        "nodes": 85,
+        "edges": 207,
+        "hashes": [
+          "77d23f3c13cd5e9c"
+        ]
+      },
+      "graphIdenticalAcrossConditions": true,
+      "hashes": [
+        "77d23f3c13cd5e9c"
+      ],
+      "speedupOnVsBase": 1.8,
+      "reductionOnVsBasePct": 43.4
+    },
+    {
+      "key": "vite|D0",
+      "base": {
+        "n": 1,
+        "totalMs": [
+          6398
+        ],
+        "medianTotalMs": 6398,
+        "medianCreateProgramMs": null,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          647.5
+        ],
+        "nodes": 46,
+        "edges": 73,
+        "hashes": [
+          "fac9c6342acbd154"
+        ]
+      },
+      "on": {
+        "n": 1,
+        "totalMs": [
+          6573.9
+        ],
+        "medianTotalMs": 6573.9,
+        "medianCreateProgramMs": 5470.4,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          652.5
+        ],
+        "nodes": 46,
+        "edges": 73,
+        "hashes": [
+          "fac9c6342acbd154"
+        ]
+      },
+      "graphIdenticalAcrossConditions": true,
+      "hashes": [
+        "fac9c6342acbd154"
+      ],
+      "speedupOnVsBase": 1,
+      "reductionOnVsBasePct": -2.7
+    },
+    {
+      "key": "vite|D1",
+      "base": {
+        "n": 1,
+        "totalMs": [
+          5594.9
+        ],
+        "medianTotalMs": 5594.9,
+        "medianCreateProgramMs": null,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          644.2
+        ],
+        "nodes": 153,
+        "edges": 412,
+        "hashes": [
+          "e92ad4debbcb0f31"
+        ]
+      },
+      "on": {
+        "n": 1,
+        "totalMs": [
+          5589.9
+        ],
+        "medianTotalMs": 5589.9,
+        "medianCreateProgramMs": 4508.3,
+        "programs": 1,
+        "structureReuse": "",
+        "peakRSSMB": [
+          644.7
+        ],
+        "nodes": 153,
+        "edges": 412,
+        "hashes": [
+          "e92ad4debbcb0f31"
+        ]
+      },
+      "graphIdenticalAcrossConditions": true,
+      "hashes": [
+        "e92ad4debbcb0f31"
+      ],
+      "speedupOnVsBase": 1,
+      "reductionOnVsBasePct": 0.1
+    },
+    {
+      "key": "vite|D2",
+      "base": {
+        "n": 2,
+        "totalMs": [
+          65639.8,
+          65583
+        ],
+        "medianTotalMs": 65611.4,
+        "medianCreateProgramMs": null,
+        "programs": 35,
+        "structureReuse": "",
+        "peakRSSMB": [
+          881.9,
+          882
+        ],
+        "nodes": 1078,
+        "edges": 3755,
+        "hashes": [
+          "1772aaa81b3bd363"
+        ]
+      },
+      "off": {
+        "n": 1,
+        "totalMs": [
+          65423.8
+        ],
+        "medianTotalMs": 65423.8,
+        "medianCreateProgramMs": 58766,
+        "programs": 35,
+        "structureReuse": "none:34",
+        "peakRSSMB": [
+          879.3
+        ],
+        "nodes": 1078,
+        "edges": 3755,
+        "hashes": [
+          "1772aaa81b3bd363"
+        ]
+      },
+      "on": {
+        "n": 3,
+        "totalMs": [
+          11057.4,
+          11244.9,
+          10980.5
+        ],
+        "medianTotalMs": 11057.4,
+        "medianCreateProgramMs": 7587.9,
+        "programs": 35,
+        "structureReuse": "completely:34",
+        "peakRSSMB": [
+          801.2,
+          802.7,
+          803.7
+        ],
+        "nodes": 1078,
+        "edges": 3755,
+        "hashes": [
+          "1772aaa81b3bd363"
+        ]
+      },
+      "graphIdenticalAcrossConditions": true,
+      "hashes": [
+        "1772aaa81b3bd363"
+      ],
+      "speedupOnVsBase": 5.9,
+      "reductionOnVsBasePct": 83.1
+    }
+  ]
+}

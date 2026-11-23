@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "tool": "p12b/profile-depth-product",
+    "impl": "product-analyzeWorkspaceDepth",
+    "cogicRevision": "3f033347560c00b2411ff19bb23bd21f83eb7ab0",
+    "cogicDirty": false,
+    "projectRevision": "3567471998e3da315675086f44368e266c9c0e33",
+    "project": "vite",
+    "activeFile": "packages/vite/src/node/server/index.ts",
+    "depth": 1,
+    "cache": "cold",
+    "programSession": true,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceSizeMB": 768,
+    "v8HeapSizeLimitMB": 960,
+    "fileCount": 1654,
+    "freeMBAtStart": 2039,
+    "totalMB": 8136,
+    "platform": "win32"
+  },
+  "status": "completed",
+  "error": null,
+  "totalMs": 5589.8967,
+  "cpuMs": {
+    "user": 7813,
+    "system": 1359
+  },
+  "nodes": 153,
+  "edges": 412,
+  "graphHashRaw": "a7892e4a104265100831f41146ecf0a7fd901aad17f43103d89cf53448dd509f",
+  "graphHashNormalized": "e92ad4debbcb0f310c14030e235fb3a439a720f64fa96d352e3dd27264b345e3",
+  "programsCreated": 1,
+  "programTimingSource": "product debug event analyzer.program.created",
+  "createProgramMsTotal": 4508.322700000001,
+  "firstProgramMs": 4508.322700000001,
+  "expansionProgramMedianMs": null,
+  "structureReuse": {},
+  "reusedSourceFilesTotal": 0,
+  "sessionFallbacks": [],
+  "cacheEvents": {
+    "miss": 2295,
+    "store": 2295,
+    "skipFull": 275
+  },
+  "peakRSSMB": 644.71484375,
+  "minFreeMBSeen": 1473,
+  "programs": [
+    {
+      "activeFile": "packages/vite/src/node/server/index.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 4508.322700000001,
+      "session": false,
+      "oldProgram": false,
+      "structureReuse": "none",
+      "reusedSourceFiles": 0,
+      "sessionStopReason": null
+    }
+  ],
+  "memory": [
+    {
+      "tag": "start",
+      "rssMB": 63.7,
+      "heapUsedMB": 21.7,
+      "freeMB": 2039
+    },
+    {
+      "tag": "program:1",
+      "rssMB": 504.8,
+      "heapUsedMB": 349.1,
+      "freeMB": 1574
+    },
+    {
+      "tag": "end",
+      "rssMB": 619.4,
+      "heapUsedMB": 465.9,
+      "freeMB": 1473
+    }
+  ]
+}

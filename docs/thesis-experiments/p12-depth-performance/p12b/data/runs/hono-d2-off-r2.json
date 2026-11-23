@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "tool": "p12b/profile-depth-product",
+    "impl": "product-analyzeWorkspaceDepth",
+    "cogicRevision": "3f033347560c00b2411ff19bb23bd21f83eb7ab0",
+    "cogicDirty": false,
+    "projectRevision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+    "project": "hono",
+    "activeFile": "src/helper/cookie/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "programSession": false,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceSizeMB": 768,
+    "v8HeapSizeLimitMB": 960,
+    "fileCount": 426,
+    "freeMBAtStart": 2105,
+    "totalMB": 8136,
+    "platform": "win32"
+  },
+  "status": "completed",
+  "error": null,
+  "totalMs": 6408.436,
+  "cpuMs": {
+    "user": 8297,
+    "system": 1297
+  },
+  "nodes": 85,
+  "edges": 207,
+  "graphHashRaw": "45ea10193f03ecc826a7d6a4c53d38522f2ecb25d8b46e677e6d2a9a12ee916f",
+  "graphHashNormalized": "77d23f3c13cd5e9ce5c31dd47d830167a6cbaf08e3f16d10d4cb25a08f626c6e",
+  "programsCreated": 3,
+  "programTimingSource": "product debug event analyzer.program.created",
+  "createProgramMsTotal": 5256.7647,
+  "firstProgramMs": 2883.1888,
+  "expansionProgramMedianMs": 1192.6676000000002,
+  "structureReuse": {
+    "none": 2
+  },
+  "reusedSourceFilesTotal": 0,
+  "sessionFallbacks": [],
+  "cacheEvents": {
+    "miss": 1906,
+    "store": 1906,
+    "skipFull": 1104,
+    "hit": 1598,
+    "evict": 2
+  },
+  "peakRSSMB": 718.52734375,
+  "minFreeMBSeen": 1429,
+  "programs": [
+    {
+      "activeFile": "src/helper/cookie/index.ts",
+      "rootFiles": 426,
+      "sourceFiles": 1169,
+      "createProgramMs": 2883.1888,
+      "session": false,
+      "oldProgram": false,
+      "structureReuse": "none",
+      "reusedSourceFiles": 0,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "src/utils/cookie.ts",
+      "rootFiles": 426,
+      "sourceFiles": 1169,
+      "createProgramMs": 1192.6676000000002,
+      "session": false,
+      "oldProgram": false,
+      "structureReuse": "none",
+      "reusedSourceFiles": 0,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "src/context.ts",
+      "rootFiles": 426,
+      "sourceFiles": 1169,
+      "createProgramMs": 1180.9083,
+      "session": false,
+      "oldProgram": false,
+      "structureReuse": "none",
+      "reusedSourceFiles": 0,
+      "sessionStopReason": null
+    }
+  ],
+  "memory": [
+    {
+      "tag": "start",
+      "rssMB": 59.3,
+      "heapUsedMB": 22.6,
+      "freeMB": 2105
+    },
+    {
+      "tag": "program:1",
+      "rssMB": 401.2,
+      "heapUsedMB": 282.4,
+      "freeMB": 1751
+    },
+    {
+      "tag": "program:2",
+      "rssMB": 596.9,
+      "heapUsedMB": 445.1,
+      "freeMB": 1560
+    },
+    {
+      "tag": "program:3",
+      "rssMB": 712,
+      "heapUsedMB": 535.5,
+      "freeMB": 1438
+    },
+    {
+      "tag": "end",
+      "rssMB": 718.3,
+      "heapUsedMB": 584.9,
+      "freeMB": 1429
+    }
+  ]
+}

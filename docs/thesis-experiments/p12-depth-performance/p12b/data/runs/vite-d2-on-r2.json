@@ -1,0 +1,663 @@
+{
+  "meta": {
+    "tool": "p12b/profile-depth-product",
+    "impl": "product-analyzeWorkspaceDepth",
+    "cogicRevision": "3f033347560c00b2411ff19bb23bd21f83eb7ab0",
+    "cogicDirty": false,
+    "projectRevision": "3567471998e3da315675086f44368e266c9c0e33",
+    "project": "vite",
+    "activeFile": "packages/vite/src/node/server/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "programSession": true,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceSizeMB": 768,
+    "v8HeapSizeLimitMB": 960,
+    "fileCount": 1654,
+    "freeMBAtStart": 2044,
+    "totalMB": 8136,
+    "platform": "win32"
+  },
+  "status": "completed",
+  "error": null,
+  "totalMs": 11244.938999999998,
+  "cpuMs": {
+    "user": 14312,
+    "system": 3172
+  },
+  "nodes": 1078,
+  "edges": 3755,
+  "graphHashRaw": "3f9848fc34040118af9c20fc9785f2b39bf23368ede587dd7d58d9db73c62b29",
+  "graphHashNormalized": "1772aaa81b3bd36313a44c139661e1b627530945b7528c45baabb9c7b6ea9895",
+  "programsCreated": 35,
+  "programTimingSource": "product debug event analyzer.program.created",
+  "createProgramMsTotal": 7779.351999999999,
+  "firstProgramMs": 4694.9915,
+  "expansionProgramMedianMs": 87.39429999999993,
+  "structureReuse": {
+    "completely": 34
+  },
+  "reusedSourceFilesTotal": 77996,
+  "sessionFallbacks": [],
+  "cacheEvents": {
+    "miss": 2296,
+    "store": 2296,
+    "skipFull": 275,
+    "evict": 1,
+    "hit": 33
+  },
+  "peakRSSMB": 802.71875,
+  "minFreeMBSeen": 1510,
+  "programs": [
+    {
+      "activeFile": "packages/vite/src/node/server/index.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 4694.9915,
+      "session": true,
+      "oldProgram": false,
+      "structureReuse": "none",
+      "reusedSourceFiles": 0,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/config.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 174.5713999999998,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/publicDir.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 97.86520000000019,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/http.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 89.0626000000002,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/watch.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 85.51839999999993,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/ws.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 92.51890000000003,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/env.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 86.92479999999978,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/logger.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 83.02769999999964,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/mixedModuleGraph.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 84.81970000000001,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/pluginContainer.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 96.47580000000016,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/indexHtml.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 92.75220000000081,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/utils.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 101.74519999999939,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/environment.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 94.72749999999905,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/deprecations.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 87.39429999999993,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/ssr/ssrTransform.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 93.84370000000126,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/ssr/ssrModuleLoader.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 104.95169999999962,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/ssr/ssrStacktrace.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 87.66320000000087,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/hmr.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 89.97220000000016,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/openBrowser.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 83.89619999999923,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/shortcuts.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 92.85330000000067,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/plugins/esbuild.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 85.8760000000002,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/moduleGraph.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 89.51720000000023,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/time.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 79.066499999999,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/rejectInvalidRequest.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 78.11129999999866,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/hostCheck.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 78.67799999999988,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/transform.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 85.0043999999998,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/proxy.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 85.7543999999998,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/base.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 78.98519999999917,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/static.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 82.32620000000134,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/triggerLazyBundling.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 80.26319999999942,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/memoryFiles.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 82.48309999999947,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/htmlFallback.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 94.89800000000105,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/notFound.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 101.14930000000095,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/middlewares/error.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 81.66899999999987,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    },
+    {
+      "activeFile": "packages/vite/src/node/server/searchRoot.ts",
+      "rootFiles": 1654,
+      "sourceFiles": 2296,
+      "createProgramMs": 79.99469999999928,
+      "session": true,
+      "oldProgram": true,
+      "structureReuse": "completely",
+      "reusedSourceFiles": 2294,
+      "sessionStopReason": null
+    }
+  ],
+  "memory": [
+    {
+      "tag": "start",
+      "rssMB": 63.4,
+      "heapUsedMB": 21.7,
+      "freeMB": 2044
+    },
+    {
+      "tag": "program:1",
+      "rssMB": 509.7,
+      "heapUsedMB": 369.1,
+      "freeMB": 1860
+    },
+    {
+      "tag": "program:2",
+      "rssMB": 647,
+      "heapUsedMB": 463.2,
+      "freeMB": 1677
+    },
+    {
+      "tag": "program:3",
+      "rssMB": 653,
+      "heapUsedMB": 504.2,
+      "freeMB": 1661
+    },
+    {
+      "tag": "program:4",
+      "rssMB": 654.8,
+      "heapUsedMB": 487.9,
+      "freeMB": 1660
+    },
+    {
+      "tag": "program:5",
+      "rssMB": 657.8,
+      "heapUsedMB": 499.6,
+      "freeMB": 1661
+    },
+    {
+      "tag": "program:6",
+      "rssMB": 659.4,
+      "heapUsedMB": 527.2,
+      "freeMB": 1661
+    },
+    {
+      "tag": "program:7",
+      "rssMB": 676.3,
+      "heapUsedMB": 535.3,
+      "freeMB": 1649
+    },
+    {
+      "tag": "program:8",
+      "rssMB": 683.2,
+      "heapUsedMB": 517.7,
+      "freeMB": 1641
+    },
+    {
+      "tag": "program:9",
+      "rssMB": 684,
+      "heapUsedMB": 548.9,
+      "freeMB": 1633
+    },
+    {
+      "tag": "program:10",
+      "rssMB": 695.9,
+      "heapUsedMB": 542.8,
+      "freeMB": 1624
+    },
+    {
+      "tag": "program:11",
+      "rssMB": 704.5,
+      "heapUsedMB": 555.9,
+      "freeMB": 1613
+    },
+    {
+      "tag": "program:12",
+      "rssMB": 713,
+      "heapUsedMB": 548.4,
+      "freeMB": 1605
+    },
+    {
+      "tag": "program:13",
+      "rssMB": 722.1,
+      "heapUsedMB": 575.7,
+      "freeMB": 1598
+    },
+    {
+      "tag": "program:14",
+      "rssMB": 732.5,
+      "heapUsedMB": 562.6,
+      "freeMB": 1587
+    },
+    {
+      "tag": "program:15",
+      "rssMB": 732.9,
+      "heapUsedMB": 589.2,
+      "freeMB": 1585
+    },
+    {
+      "tag": "program:16",
+      "rssMB": 738.1,
+      "heapUsedMB": 572.1,
+      "freeMB": 1576
+    },
+    {
+      "tag": "program:17",
+      "rssMB": 737.7,
+      "heapUsedMB": 557.7,
+      "freeMB": 1575
+    },
+    {
+      "tag": "program:18",
+      "rssMB": 735.7,
+      "heapUsedMB": 584.1,
+      "freeMB": 1572
+    },
+    {
+      "tag": "program:19",
+      "rssMB": 736.5,
+      "heapUsedMB": 579.1,
+      "freeMB": 1572
+    },
+    {
+      "tag": "program:20",
+      "rssMB": 747.2,
+      "heapUsedMB": 553.4,
+      "freeMB": 1560
+    },
+    {
+      "tag": "program:21",
+      "rssMB": 748.1,
+      "heapUsedMB": 588.1,
+      "freeMB": 1558
+    },
+    {
+      "tag": "program:22",
+      "rssMB": 753.9,
+      "heapUsedMB": 579.1,
+      "freeMB": 1552
+    },
+    {
+      "tag": "program:23",
+      "rssMB": 754.3,
+      "heapUsedMB": 610.9,
+      "freeMB": 1551
+    },
+    {
+      "tag": "program:24",
+      "rssMB": 762.2,
+      "heapUsedMB": 584.5,
+      "freeMB": 1544
+    },
+    {
+      "tag": "program:25",
+      "rssMB": 762.5,
+      "heapUsedMB": 607.1,
+      "freeMB": 1543
+    },
+    {
+      "tag": "program:26",
+      "rssMB": 768.4,
+      "heapUsedMB": 590.6,
+      "freeMB": 1536
+    },
+    {
+      "tag": "program:27",
+      "rssMB": 768.8,
+      "heapUsedMB": 622.6,
+      "freeMB": 1535
+    },
+    {
+      "tag": "program:28",
+      "rssMB": 773.8,
+      "heapUsedMB": 603.7,
+      "freeMB": 1530
+    },
+    {
+      "tag": "program:29",
+      "rssMB": 774.1,
+      "heapUsedMB": 627.9,
+      "freeMB": 1529
+    },
+    {
+      "tag": "program:30",
+      "rssMB": 781.3,
+      "heapUsedMB": 607.5,
+      "freeMB": 1519
+    },
+    {
+      "tag": "program:31",
+      "rssMB": 781.6,
+      "heapUsedMB": 631.6,
+      "freeMB": 1518
+    },
+    {
+      "tag": "program:32",
+      "rssMB": 788.1,
+      "heapUsedMB": 609.8,
+      "freeMB": 1513
+    },
+    {
+      "tag": "program:33",
+      "rssMB": 788.6,
+      "heapUsedMB": 598.2,
+      "freeMB": 1511
+    },
+    {
+      "tag": "program:34",
+      "rssMB": 788.9,
+      "heapUsedMB": 621.4,
+      "freeMB": 1511
+    },
+    {
+      "tag": "program:35",
+      "rssMB": 789.2,
+      "heapUsedMB": 646.9,
+      "freeMB": 1510
+    },
+    {
+      "tag": "end",
+      "rssMB": 789.2,
+      "heapUsedMB": 653,
+      "freeMB": 1510
+    }
+  ]
+}
