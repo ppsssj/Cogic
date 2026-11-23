@@ -1,0 +1,273 @@
+{
+  "generatedBy": "tools/summarize.cjs",
+  "conditions": [
+    {
+      "condition": "hono|D0|none|instr",
+      "n": 1,
+      "totalMs": [
+        4728.4
+      ],
+      "medianTotalMs": 4728.4,
+      "programsCreated": 1,
+      "medianCreateProgramMs": 3920.8,
+      "nodes": 10,
+      "edges": 14,
+      "graphHashes": [
+        "528638036df53403"
+      ],
+      "peakRSSMB": [
+        510.1
+      ]
+    },
+    {
+      "condition": "hono|D1|none|instr",
+      "n": 1,
+      "totalMs": [
+        4621.8
+      ],
+      "medianTotalMs": 4621.8,
+      "programsCreated": 1,
+      "medianCreateProgramMs": 3806,
+      "nodes": 16,
+      "edges": 46,
+      "graphHashes": [
+        "a7173a7414569400"
+      ],
+      "peakRSSMB": [
+        508.9
+      ]
+    },
+    {
+      "condition": "hono|D2|none|instr",
+      "n": 5,
+      "totalMs": [
+        7803.2,
+        7784.5,
+        7743.1,
+        9417.7,
+        4032.7
+      ],
+      "medianTotalMs": 7784.5,
+      "programsCreated": 3,
+      "medianCreateProgramMs": 6367.6,
+      "nodes": 85,
+      "edges": 207,
+      "graphHashes": [
+        "45ea10193f03ecc8"
+      ],
+      "peakRSSMB": [
+        715.3,
+        713.7,
+        616.9,
+        655.3,
+        818.8
+      ]
+    },
+    {
+      "condition": "hono|D2|oldProgram|instr",
+      "n": 1,
+      "totalMs": [
+        9761.7
+      ],
+      "medianTotalMs": 9761.7,
+      "programsCreated": 3,
+      "medianCreateProgramMs": 8254,
+      "nodes": 85,
+      "edges": 207,
+      "graphHashes": [
+        "45ea10193f03ecc8"
+      ],
+      "peakRSSMB": [
+        807.9
+      ]
+    },
+    {
+      "condition": "hono|D2|oldProgramSourceFiles|instr",
+      "n": 2,
+      "totalMs": [
+        4467.5,
+        3740.7
+      ],
+      "medianTotalMs": 4104.1,
+      "programsCreated": 3,
+      "medianCreateProgramMs": 3180.6,
+      "nodes": 85,
+      "edges": 207,
+      "graphHashes": [
+        "45ea10193f03ecc8"
+      ],
+      "peakRSSMB": [
+        533.6,
+        532.3
+      ]
+    },
+    {
+      "condition": "hono|D2|checker|instr",
+      "n": 1,
+      "totalMs": [
+        4428.7
+      ],
+      "medianTotalMs": 4428.7,
+      "programsCreated": 1,
+      "medianCreateProgramMs": 3518.8,
+      "nodes": 85,
+      "edges": 207,
+      "graphHashes": [
+        "45c635d958b1b9c0"
+      ],
+      "peakRSSMB": [
+        513.2
+      ]
+    },
+    {
+      "condition": "hono|D2|none|uninstr",
+      "n": 1,
+      "totalMs": [
+        7571.7
+      ],
+      "medianTotalMs": 7571.7,
+      "programsCreated": 0,
+      "medianCreateProgramMs": 0,
+      "nodes": 85,
+      "edges": 207,
+      "graphHashes": [
+        "45ea10193f03ecc8"
+      ],
+      "peakRSSMB": [
+        728.4
+      ]
+    },
+    {
+      "condition": "vite|D0|none|instr",
+      "n": 1,
+      "totalMs": [
+        8307.6
+      ],
+      "medianTotalMs": 8307.6,
+      "programsCreated": 1,
+      "medianCreateProgramMs": 7197.8,
+      "nodes": 46,
+      "edges": 73,
+      "graphHashes": [
+        "a8cf81c5addb93b6"
+      ],
+      "peakRSSMB": [
+        644.1
+      ]
+    },
+    {
+      "condition": "vite|D1|none|instr",
+      "n": 1,
+      "totalMs": [
+        5687.5
+      ],
+      "medianTotalMs": 5687.5,
+      "programsCreated": 1,
+      "medianCreateProgramMs": 4630.9,
+      "nodes": 153,
+      "edges": 412,
+      "graphHashes": [
+        "a7892e4a10426510"
+      ],
+      "peakRSSMB": [
+        633
+      ]
+    },
+    {
+      "condition": "vite|D2|none|instr",
+      "n": 2,
+      "totalMs": [
+        69182.4,
+        80039.2
+      ],
+      "medianTotalMs": 74610.8,
+      "programsCreated": 35,
+      "medianCreateProgramMs": 67016.1,
+      "nodes": 1078,
+      "edges": 3755,
+      "graphHashes": [
+        "3f9848fc34040118"
+      ],
+      "peakRSSMB": [
+        880.7,
+        859.2
+      ]
+    },
+    {
+      "condition": "vite|D2|oldProgram|instr",
+      "n": 1,
+      "totalMs": [
+        90453.7
+      ],
+      "medianTotalMs": 90453.7,
+      "programsCreated": 35,
+      "medianCreateProgramMs": 82769.5,
+      "nodes": 1078,
+      "edges": 3755,
+      "graphHashes": [
+        "3f9848fc34040118"
+      ],
+      "peakRSSMB": [
+        872.7
+      ]
+    },
+    {
+      "condition": "vite|D2|oldProgramSourceFiles|instr",
+      "n": 2,
+      "totalMs": [
+        12597.1,
+        12199.2
+      ],
+      "medianTotalMs": 12398.2,
+      "programsCreated": 35,
+      "medianCreateProgramMs": 7956.2,
+      "nodes": 1078,
+      "edges": 3755,
+      "graphHashes": [
+        "3f9848fc34040118"
+      ],
+      "peakRSSMB": [
+        802.7,
+        804.2
+      ]
+    },
+    {
+      "condition": "vite|D2|checker|instr",
+      "n": 2,
+      "totalMs": [
+        9561.2,
+        9155.5
+      ],
+      "medianTotalMs": 9358.4,
+      "programsCreated": 1,
+      "medianCreateProgramMs": 5982.5,
+      "nodes": 1077,
+      "edges": 3756,
+      "graphHashes": [
+        "e2c94974111b05e2"
+      ],
+      "peakRSSMB": [
+        696,
+        696
+      ]
+    },
+    {
+      "condition": "vite|D2|none|uninstr",
+      "n": 1,
+      "totalMs": [
+        66755.9
+      ],
+      "medianTotalMs": 66755.9,
+      "programsCreated": 0,
+      "medianCreateProgramMs": 0,
+      "nodes": 1078,
+      "edges": 3755,
+      "graphHashes": [
+        "3f9848fc34040118"
+      ],
+      "peakRSSMB": [
+        882.3
+      ]
+    }
+  ]
+}

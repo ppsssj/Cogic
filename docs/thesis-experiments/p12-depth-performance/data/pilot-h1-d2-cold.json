@@ -1,0 +1,173 @@
+{
+  "meta": {
+    "revision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+    "project": "hono",
+    "activeFile": "src/helper/cookie/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "instrumented": true,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "fileCount": 426,
+    "fileCountTotal": 426,
+    "capped": false
+  },
+  "status": "completed",
+  "records": [
+    {
+      "label": "measured",
+      "totalMs": 11248.560899999999,
+      "frontierCount": 2,
+      "expandedFileCount": 2,
+      "analyses": [
+        {
+          "file": "src/helper/cookie/index.ts",
+          "ms": 6622.9763,
+          "nodes": 16,
+          "edges": 46,
+          "cache": {
+            "entries": 800,
+            "capacity": 800,
+            "chars": 9606551,
+            "charBudget": 24000000
+          }
+        },
+        {
+          "file": "src/utils/cookie.ts",
+          "ms": 2858.854700000001,
+          "nodes": 21,
+          "edges": 41,
+          "cache": {
+            "entries": 800,
+            "capacity": 800,
+            "chars": 9601595,
+            "charBudget": 24000000
+          }
+        },
+        {
+          "file": "src/context.ts",
+          "ms": 1758.5296999999991,
+          "nodes": 48,
+          "edges": 120,
+          "cache": {
+            "entries": 800,
+            "capacity": 800,
+            "chars": 9587404,
+            "charBudget": 24000000
+          }
+        }
+      ],
+      "programs": [
+        {
+          "file": "src/helper/cookie/index.ts",
+          "roots": 426,
+          "sourceFiles": 1169,
+          "createProgramMs": 5709.9162
+        },
+        {
+          "file": "src/utils/cookie.ts",
+          "roots": 426,
+          "sourceFiles": 1169,
+          "createProgramMs": 2420.5154999999995
+        },
+        {
+          "file": "src/context.ts",
+          "roots": 426,
+          "sourceFiles": 1169,
+          "createProgramMs": 1468.7206000000006
+        }
+      ],
+      "cacheEvents": {
+        "miss": 1906,
+        "store": 1906,
+        "skipFull": 1104,
+        "hit": 1598,
+        "evict": 2
+      },
+      "merges": [
+        {
+          "file": "src/utils/cookie.ts",
+          "before": {
+            "nodes": 16,
+            "edges": 46
+          },
+          "next": {
+            "nodes": 21,
+            "edges": 41
+          },
+          "after": {
+            "nodes": 37,
+            "edges": 87
+          },
+          "ms": 0.14940000000024156
+        },
+        {
+          "file": "src/context.ts",
+          "before": {
+            "nodes": 37,
+            "edges": 87
+          },
+          "next": {
+            "nodes": 48,
+            "edges": 120
+          },
+          "after": {
+            "nodes": 85,
+            "edges": 207
+          },
+          "ms": 0.08680000000094878
+        }
+      ],
+      "serializationMs": 0.43219999999928405,
+      "nodeCount": 85,
+      "edgeCount": 207,
+      "graphHash": "6912d819fbfd8d188af6ca918a5bb85f0e84a6e9ccfdccd97344e83d20106399",
+      "freeMB": 894,
+      "heapSampleMaxMB": 470.4153594970703,
+      "peakRSSMB": 681.6328125
+    }
+  ],
+  "totals": {
+    "checkerAcquisition": {
+      "count": 3,
+      "ms": 1097.7303999999995
+    },
+    "checker.getTypeAtLocation": {
+      "count": 197,
+      "ms": 22.673400000014226
+    },
+    "checker.getResolvedSignature": {
+      "count": 233,
+      "ms": 240.35909999999512
+    },
+    "checker.getSymbolAtLocation": {
+      "count": 1341,
+      "ms": 19.216399999984787
+    },
+    "checker.getAliasedSymbol": {
+      "count": 122,
+      "ms": 0.15170000000307482
+    },
+    "extractCalls": {
+      "count": 3,
+      "ms": 282.9451999999992
+    },
+    "diagnostics": {
+      "count": 3,
+      "ms": 133.5159999999987
+    },
+    "checker.getTypeOfSymbolAtLocation": {
+      "count": 81,
+      "ms": 0.8852999999990061
+    },
+    "graphExtraction": {
+      "count": 3,
+      "ms": 113.83729999999923
+    }
+  },
+  "cpuMs": {
+    "user": 10109,
+    "system": 2437
+  },
+  "elapsedMs": 11255.546
+}

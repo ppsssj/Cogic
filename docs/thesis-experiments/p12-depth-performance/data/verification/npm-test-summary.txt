@@ -1,0 +1,5 @@
+# npm test (2026-11-23, cogic cdc3196 + untracked P12-A docs only)
+# pretest = npm run compile && npm run lint:all
+  52 passing (19s)
+Exit code:   0
+TEST_EXIT=0

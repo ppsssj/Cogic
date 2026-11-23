@@ -1,0 +1,2501 @@
+{
+  "meta": {
+    "tool": "profile-depth-v2",
+    "cogicRevision": "cdc3196530776ca09e57adc73cba9d61524c6ff2",
+    "revision": "3567471998e3da315675086f44368e266c9c0e33",
+    "project": "vite",
+    "activeFile": "packages/vite/src/node/server/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "instrumented": true,
+    "shareProgram": true,
+    "shareMode": "oldProgramSourceFiles",
+    "maxExpand": null,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceMB": 960,
+    "fileCount": 1654,
+    "fileCountTotal": 1654,
+    "capped": false,
+    "freeMBAtStart": 1686,
+    "totalMB": 8136
+  },
+  "status": "completed",
+  "records": [
+    {
+      "label": "measured",
+      "totalMs": 12199.159300000001,
+      "frontierCount": 34,
+      "expandedFileCount": 34,
+      "frontierCapped": false,
+      "analyses": [
+        {
+          "file": "packages/vite/src/node/server/index.ts",
+          "ms": 6868.3294,
+          "nodes": 153,
+          "edges": 412,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 496.7,
+            "rssMB": 632.1
+          }
+        },
+        {
+          "file": "packages/vite/src/node/config.ts",
+          "ms": 766.4874,
+          "nodes": 155,
+          "edges": 646,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 468.8,
+            "rssMB": 654.6
+          }
+        },
+        {
+          "file": "packages/vite/src/node/publicDir.ts",
+          "ms": 84.03559999999925,
+          "nodes": 11,
+          "edges": 15,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 491.2,
+            "rssMB": 655.7
+          }
+        },
+        {
+          "file": "packages/vite/src/node/http.ts",
+          "ms": 237.53880000000026,
+          "nodes": 33,
+          "edges": 80,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 496.6,
+            "rssMB": 665.5
+          }
+        },
+        {
+          "file": "packages/vite/src/node/watch.ts",
+          "ms": 102.39350000000013,
+          "nodes": 24,
+          "edges": 25,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 520.9,
+            "rssMB": 669.1
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/ws.ts",
+          "ms": 275.47030000000086,
+          "nodes": 45,
+          "edges": 127,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 525.7,
+            "rssMB": 672.7
+          }
+        },
+        {
+          "file": "packages/vite/src/node/env.ts",
+          "ms": 111.48100000000159,
+          "nodes": 19,
+          "edges": 35,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 504,
+            "rssMB": 676.7
+          }
+        },
+        {
+          "file": "packages/vite/src/node/logger.ts",
+          "ms": 103.27249999999913,
+          "nodes": 24,
+          "edges": 68,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 531.4,
+            "rssMB": 677.9
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/mixedModuleGraph.ts",
+          "ms": 263.84439999999995,
+          "nodes": 47,
+          "edges": 168,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 522.7,
+            "rssMB": 691.6
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/pluginContainer.ts",
+          "ms": 335.0023999999994,
+          "nodes": 101,
+          "edges": 358,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 534.3,
+            "rssMB": 697.5
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/indexHtml.ts",
+          "ms": 165.21860000000015,
+          "nodes": 78,
+          "edges": 233,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 570.1,
+            "rssMB": 698.8
+          }
+        },
+        {
+          "file": "packages/vite/src/node/utils.ts",
+          "ms": 372.52580000000125,
+          "nodes": 192,
+          "edges": 378,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 548.3,
+            "rssMB": 719.1
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/environment.ts",
+          "ms": 141.0043000000005,
+          "nodes": 61,
+          "edges": 130,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 582.3,
+            "rssMB": 720
+          }
+        },
+        {
+          "file": "packages/vite/src/node/deprecations.ts",
+          "ms": 81.5025999999998,
+          "nodes": 6,
+          "edges": 7,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 554.6,
+            "rssMB": 729.7
+          }
+        },
+        {
+          "file": "packages/vite/src/node/ssr/ssrTransform.ts",
+          "ms": 145.04019999999946,
+          "nodes": 41,
+          "edges": 164,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 587.7,
+            "rssMB": 724.4
+          }
+        },
+        {
+          "file": "packages/vite/src/node/ssr/ssrModuleLoader.ts",
+          "ms": 86.76599999999962,
+          "nodes": 15,
+          "edges": 30,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 557.6,
+            "rssMB": 730.5
+          }
+        },
+        {
+          "file": "packages/vite/src/node/ssr/ssrStacktrace.ts",
+          "ms": 78.22770000000128,
+          "nodes": 11,
+          "edges": 20,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 579.7,
+            "rssMB": 732.7
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/hmr.ts",
+          "ms": 240.6939000000002,
+          "nodes": 71,
+          "edges": 196,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 578.8,
+            "rssMB": 740.8
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/openBrowser.ts",
+          "ms": 84.40229999999974,
+          "nodes": 12,
+          "edges": 37,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 601.9,
+            "rssMB": 740.7
+          }
+        },
+        {
+          "file": "packages/vite/src/node/shortcuts.ts",
+          "ms": 131.3777000000009,
+          "nodes": 23,
+          "edges": 51,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 581.7,
+            "rssMB": 748.9
+          }
+        },
+        {
+          "file": "packages/vite/src/node/plugins/esbuild.ts",
+          "ms": 130.51760000000104,
+          "nodes": 29,
+          "edges": 62,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 612.8,
+            "rssMB": 747.6
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/moduleGraph.ts",
+          "ms": 125.90929999999935,
+          "nodes": 28,
+          "edges": 90,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 591.5,
+            "rssMB": 755.1
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/time.ts",
+          "ms": 85.85499999999956,
+          "nodes": 7,
+          "edges": 10,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 611.6,
+            "rssMB": 757.3
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/rejectInvalidRequest.ts",
+          "ms": 92.30839999999989,
+          "nodes": 2,
+          "edges": 0,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 581.4,
+            "rssMB": 762.5
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/hostCheck.ts",
+          "ms": 107.5085999999992,
+          "nodes": 3,
+          "edges": 0,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 602.4,
+            "rssMB": 765.2
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/transform.ts",
+          "ms": 121.16679999999906,
+          "nodes": 36,
+          "edges": 125,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 631.9,
+            "rssMB": 766.2
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/proxy.ts",
+          "ms": 120.10690000000068,
+          "nodes": 22,
+          "edges": 60,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 610.3,
+            "rssMB": 773.8
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/base.ts",
+          "ms": 64.05220000000008,
+          "nodes": 7,
+          "edges": 14,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 630.7,
+            "rssMB": 774.1
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/static.ts",
+          "ms": 133.57040000000052,
+          "nodes": 36,
+          "edges": 107,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 606.8,
+            "rssMB": 779.8
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/triggerLazyBundling.ts",
+          "ms": 74.2551999999996,
+          "nodes": 4,
+          "edges": 6,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 627.9,
+            "rssMB": 780.2
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/memoryFiles.ts",
+          "ms": 72.2447000000011,
+          "nodes": 5,
+          "edges": 6,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 649.8,
+            "rssMB": 780.5
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/htmlFallback.ts",
+          "ms": 72.74729999999909,
+          "nodes": 10,
+          "edges": 21,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 619.8,
+            "rssMB": 788
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/notFound.ts",
+          "ms": 62.89649999999892,
+          "nodes": 2,
+          "edges": 0,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 639.3,
+            "rssMB": 788.3
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/error.ts",
+          "ms": 86.35720000000038,
+          "nodes": 12,
+          "edges": 34,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 609.6,
+            "rssMB": 794.6
+          }
+        },
+        {
+          "file": "packages/vite/src/node/server/searchRoot.ts",
+          "ms": 66.74569999999949,
+          "nodes": 12,
+          "edges": 40,
+          "cache": {
+            "entries": 2020,
+            "capacity": 2020,
+            "chars": 16789992,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 630.6,
+            "rssMB": 794.9
+          }
+        }
+      ],
+      "programs": [
+        {
+          "file": "packages/vite/src/node/server/index.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 5614.0954,
+          "hostCallbacks": {
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 3817.6934999999935
+            },
+            "directoryExists": {
+              "count": 27273,
+              "ms": 629.4071000000104
+            },
+            "fileExists": {
+              "count": 14311,
+              "ms": 365.07659999995286
+            },
+            "readFile": {
+              "count": 620,
+              "ms": 126.7027000000013
+            },
+            "realpath": {
+              "count": 472,
+              "ms": 85.81379999999382
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.29100000000016735
+            }
+          },
+          "hostCallbackMs": 5024.984699999952,
+          "tsInternalMs": 589.1107000000484,
+          "reused": false,
+          "oldProgramPassed": false,
+          "sourceFilesFromOldProgram": 0,
+          "structureReuse": null
+        },
+        {
+          "file": "packages/vite/src/node/config.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 160.8095999999996,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 624,
+              "ms": 15.586700000001656
+            },
+            "fileExists": {
+              "count": 412,
+              "ms": 12.16330000000653
+            },
+            "readFile": {
+              "count": 153,
+              "ms": 25.98239999999987
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 30.203100000010636
+            },
+            "realpath": {
+              "count": 6,
+              "ms": 1.2667999999985113
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.3710000000000946
+            }
+          },
+          "hostCallbackMs": 85.5733000000173,
+          "tsInternalMs": 75.2362999999823,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/publicDir.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 50.5,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 287,
+              "ms": 4.93149999999514
+            },
+            "fileExists": {
+              "count": 284,
+              "ms": 4.830699999999524
+            },
+            "readFile": {
+              "count": 143,
+              "ms": 18.212499999997817
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 9.560799999982919
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.1532999999999447
+            }
+          },
+          "hostCallbackMs": 37.688799999975345,
+          "tsInternalMs": 12.811200000024655,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/http.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 57.667099999999664,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 340,
+              "ms": 6.328299999984665
+            },
+            "fileExists": {
+              "count": 294,
+              "ms": 5.593199999977514
+            },
+            "readFile": {
+              "count": 144,
+              "ms": 20.63980000000538
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 10.727099999995517
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.19609999999920547
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.1684000000004744
+            }
+          },
+          "hostCallbackMs": 43.652899999962756,
+          "tsInternalMs": 14.014200000036908,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/watch.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 62.953199999999924,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 391,
+              "ms": 7.869399999981397
+            },
+            "fileExists": {
+              "count": 312,
+              "ms": 6.224899999997433
+            },
+            "readFile": {
+              "count": 147,
+              "ms": 21.535499999998137
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 10.034999999921638
+            },
+            "realpath": {
+              "count": 3,
+              "ms": 0.4808999999986554
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.200699999999415
+            }
+          },
+          "hostCallbackMs": 46.346399999896676,
+          "tsInternalMs": 16.60680000010325,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/ws.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 70.07850000000144,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 496,
+              "ms": 9.19470000000183
+            },
+            "fileExists": {
+              "count": 336,
+              "ms": 6.346799999964787
+            },
+            "readFile": {
+              "count": 147,
+              "ms": 19.556200000013632
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 18.821000000063577
+            },
+            "realpath": {
+              "count": 3,
+              "ms": 0.43699999999807915
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.12269999999989523
+            }
+          },
+          "hostCallbackMs": 54.4784000000418,
+          "tsInternalMs": 15.600099999959639,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/env.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 57.567699999999604,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 306,
+              "ms": 6.024299999991854
+            },
+            "fileExists": {
+              "count": 298,
+              "ms": 5.562200000002122
+            },
+            "readFile": {
+              "count": 146,
+              "ms": 20.974500000000262
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 9.894399999993766
+            },
+            "realpath": {
+              "count": 3,
+              "ms": 0.5584000000017113
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.15890000000035798
+            }
+          },
+          "hostCallbackMs": 43.17269999999007,
+          "tsInternalMs": 14.395000000009532,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/logger.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 52.9419999999991,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 301,
+              "ms": 5.3760999999940395
+            },
+            "fileExists": {
+              "count": 296,
+              "ms": 5.0974999999998545
+            },
+            "readFile": {
+              "count": 145,
+              "ms": 18.35000000000582
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 11.946799999999712
+            },
+            "realpath": {
+              "count": 2,
+              "ms": 0.31860000000051514
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.11759999999958382
+            }
+          },
+          "hostCallbackMs": 41.206599999999526,
+          "tsInternalMs": 11.735399999999572,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/mixedModuleGraph.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 90.27710000000116,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 295,
+              "ms": 5.792399999992995
+            },
+            "fileExists": {
+              "count": 289,
+              "ms": 5.314400000002934
+            },
+            "readFile": {
+              "count": 144,
+              "ms": 19.51300000000265
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 12.646500000013475
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.2037000000000262
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.1548000000002503
+            }
+          },
+          "hostCallbackMs": 43.62480000001233,
+          "tsInternalMs": 46.65229999998883,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/pluginContainer.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 72.09320000000116,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 480,
+              "ms": 10.02490000002581
+            },
+            "fileExists": {
+              "count": 347,
+              "ms": 7.1810999999979686
+            },
+            "readFile": {
+              "count": 149,
+              "ms": 23.46640000000116
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 15.310599999998885
+            },
+            "realpath": {
+              "count": 5,
+              "ms": 0.7273999999997613
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.1669000000001688
+            }
+          },
+          "hostCallbackMs": 56.87730000002375,
+          "tsInternalMs": 15.21589999997741,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/indexHtml.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 61.34850000000006,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 396,
+              "ms": 6.935599999987971
+            },
+            "fileExists": {
+              "count": 321,
+              "ms": 5.647199999992154
+            },
+            "readFile": {
+              "count": 148,
+              "ms": 18.667499999995925
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 17.412100000050486
+            },
+            "realpath": {
+              "count": 4,
+              "ms": 0.5640000000003056
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.12280000000100699
+            }
+          },
+          "hostCallbackMs": 49.34920000002785,
+          "tsInternalMs": 11.999299999972209,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/utils.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 75.58569999999963,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 499,
+              "ms": 10.656200000015815
+            },
+            "fileExists": {
+              "count": 357,
+              "ms": 7.87610000001041
+            },
+            "readFile": {
+              "count": 154,
+              "ms": 20.490299999984927
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 19.57300000000032
+            },
+            "realpath": {
+              "count": 10,
+              "ms": 2.0657999999984895
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.12190000000009604
+            }
+          },
+          "hostCallbackMs": 60.78330000001006,
+          "tsInternalMs": 14.802399999989575,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/environment.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 61.420099999999366,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 436,
+              "ms": 7.975000000016735
+            },
+            "fileExists": {
+              "count": 318,
+              "ms": 5.965600000025006
+            },
+            "readFile": {
+              "count": 145,
+              "ms": 21.701699999990524
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 11.64519999998629
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.15680000000065775
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.12199999999938882
+            }
+          },
+          "hostCallbackMs": 47.5663000000186,
+          "tsInternalMs": 13.853799999980765,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/deprecations.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 56.669599999999264,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 290,
+              "ms": 5.341199999997116
+            },
+            "fileExists": {
+              "count": 287,
+              "ms": 5.180700000015349
+            },
+            "readFile": {
+              "count": 144,
+              "ms": 19.099399999991874
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 9.10299999997369
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.15960000000086438
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.12310000000070431
+            }
+          },
+          "hostCallbackMs": 39.0069999999796,
+          "tsInternalMs": 17.662600000019665,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/ssr/ssrTransform.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 67.19310000000041,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 418,
+              "ms": 9.0231999999869
+            },
+            "fileExists": {
+              "count": 335,
+              "ms": 7.149099999995087
+            },
+            "readFile": {
+              "count": 149,
+              "ms": 21.266900000000533
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 11.883599999951912
+            },
+            "realpath": {
+              "count": 5,
+              "ms": 0.7853000000031898
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.1937999999991007
+            }
+          },
+          "hostCallbackMs": 50.30189999993672,
+          "tsInternalMs": 16.89120000006369,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/ssr/ssrModuleLoader.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 60.436499999999796,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 374,
+              "ms": 6.9676999999883265
+            },
+            "fileExists": {
+              "count": 308,
+              "ms": 5.727999999993699
+            },
+            "readFile": {
+              "count": 145,
+              "ms": 19.302300000001196
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 14.91380000002755
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.1562999999987369
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.11340000000018335
+            }
+          },
+          "hostCallbackMs": 47.18150000000969,
+          "tsInternalMs": 13.254999999990105,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/ssr/ssrStacktrace.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 51.64509999999973,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 295,
+              "ms": 5.372999999974127
+            },
+            "fileExists": {
+              "count": 289,
+              "ms": 5.180000000007567
+            },
+            "readFile": {
+              "count": 144,
+              "ms": 18.06279999999606
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 10.64619999999195
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.2143000000014581
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.15960000000086438
+            }
+          },
+          "hostCallbackMs": 39.635899999972025,
+          "tsInternalMs": 12.009200000027704,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/hmr.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 80.40580000000045,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 381,
+              "ms": 8.010100000012244
+            },
+            "fileExists": {
+              "count": 314,
+              "ms": 14.635300000005373
+            },
+            "readFile": {
+              "count": 145,
+              "ms": 22.741500000009182
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 18.456299999974362
+            },
+            "realpath": {
+              "count": 2,
+              "ms": 0.32030000000122527
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.17029999999977008
+            }
+          },
+          "hostCallbackMs": 64.33380000000216,
+          "tsInternalMs": 16.071999999998297,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/openBrowser.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 57.285899999998946,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 309,
+              "ms": 6.891999999996187
+            },
+            "fileExists": {
+              "count": 300,
+              "ms": 5.841700000009951
+            },
+            "readFile": {
+              "count": 146,
+              "ms": 21.135300000001735
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 9.369500000047992
+            },
+            "realpath": {
+              "count": 3,
+              "ms": 0.49090000000251166
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.13880000000062864
+            }
+          },
+          "hostCallbackMs": 43.868200000059005,
+          "tsInternalMs": 13.417699999939941,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/shortcuts.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 58.681399999999485,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 300,
+              "ms": 5.329799999995885
+            },
+            "fileExists": {
+              "count": 294,
+              "ms": 4.95409999999174
+            },
+            "readFile": {
+              "count": 144,
+              "ms": 18.39220000000205
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 18.060700000007273
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.1760999999987689
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.11899999999877764
+            }
+          },
+          "hostCallbackMs": 47.031899999994494,
+          "tsInternalMs": 11.649500000004991,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/plugins/esbuild.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 65.1900999999998,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 500,
+              "ms": 10.790900000014517
+            },
+            "fileExists": {
+              "count": 335,
+              "ms": 7.250099999984741
+            },
+            "readFile": {
+              "count": 148,
+              "ms": 21.092899999999645
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 10.549800000009782
+            },
+            "realpath": {
+              "count": 4,
+              "ms": 0.7674000000006345
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.33580000000074506
+            }
+          },
+          "hostCallbackMs": 50.786900000010064,
+          "tsInternalMs": 14.403199999989738,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/moduleGraph.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 60.14940000000024,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 299,
+              "ms": 5.658499999988635
+            },
+            "fileExists": {
+              "count": 291,
+              "ms": 5.362999999984822
+            },
+            "readFile": {
+              "count": 144,
+              "ms": 18.517400000004272
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 18.228899999965506
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.16079999999965366
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.11440000000038708
+            }
+          },
+          "hostCallbackMs": 48.04299999994328,
+          "tsInternalMs": 12.106400000056965,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/time.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 62.23730000000069,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 327,
+              "ms": 7.694599999995262
+            },
+            "fileExists": {
+              "count": 282,
+              "ms": 6.096500000005108
+            },
+            "readFile": {
+              "count": 143,
+              "ms": 23.04250000000502
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 9.939400000013848
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.277299999999741
+            }
+          },
+          "hostCallbackMs": 47.05030000001898,
+          "tsInternalMs": 15.186999999981708,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/rejectInvalidRequest.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 71.36039999999957,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 325,
+              "ms": 8.200899999985268
+            },
+            "fileExists": {
+              "count": 281,
+              "ms": 7.437699999994948
+            },
+            "readFile": {
+              "count": 143,
+              "ms": 26.05619999997907
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 12.284299999990253
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.18119999999908032
+            }
+          },
+          "hostCallbackMs": 54.16029999994862,
+          "tsInternalMs": 17.200100000050952,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/hostCheck.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 86.01159999999982,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 377,
+              "ms": 11.18739999999707
+            },
+            "fileExists": {
+              "count": 304,
+              "ms": 9.376900000004753
+            },
+            "readFile": {
+              "count": 144,
+              "ms": 32.06380000000536
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 13.16249999998763
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.2165999999997439
+            }
+          },
+          "hostCallbackMs": 66.00719999999455,
+          "tsInternalMs": 20.004400000005262,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/transform.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 65.3062000000009,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 373,
+              "ms": 7.717600000009043
+            },
+            "fileExists": {
+              "count": 306,
+              "ms": 6.723999999976513
+            },
+            "readFile": {
+              "count": 145,
+              "ms": 23.723599999990256
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 10.92169999996986
+            },
+            "realpath": {
+              "count": 2,
+              "ms": 0.31669999999940046
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.24219999999877473
+            }
+          },
+          "hostCallbackMs": 49.64579999994385,
+          "tsInternalMs": 15.660400000057052,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/proxy.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 56.577800000000934,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 354,
+              "ms": 6.242200000022422
+            },
+            "fileExists": {
+              "count": 298,
+              "ms": 5.473400000022593
+            },
+            "readFile": {
+              "count": 145,
+              "ms": 18.564100000001417
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 14.495000000039
+            },
+            "realpath": {
+              "count": 2,
+              "ms": 0.2945999999992637
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.12199999999938882
+            }
+          },
+          "hostCallbackMs": 45.191300000084084,
+          "tsInternalMs": 11.38649999991685,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/base.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 50.2567999999992,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 343,
+              "ms": 6.092599999994491
+            },
+            "fileExists": {
+              "count": 293,
+              "ms": 5.212899999987712
+            },
+            "readFile": {
+              "count": 145,
+              "ms": 18.70810000000165
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 8.630900000025576
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.15309999999954016
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.113999999999578
+            }
+          },
+          "hostCallbackMs": 38.91160000000855,
+          "tsInternalMs": 11.345199999990655,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/static.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 72.95449999999983,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 404,
+              "ms": 8.298200000004726
+            },
+            "fileExists": {
+              "count": 306,
+              "ms": 12.33360000002358
+            },
+            "readFile": {
+              "count": 146,
+              "ms": 21.978699999994205
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 10.633499999999913
+            },
+            "realpath": {
+              "count": 2,
+              "ms": 0.49499999999898137
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.23520000000098662
+            }
+          },
+          "hostCallbackMs": 53.97420000002239,
+          "tsInternalMs": 18.980299999977433,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/triggerLazyBundling.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 58.84599999999955,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 329,
+              "ms": 6.720600000006016
+            },
+            "fileExists": {
+              "count": 283,
+              "ms": 6.487600000018574
+            },
+            "readFile": {
+              "count": 143,
+              "ms": 21.585200000008626
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 10.14779999998791
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.12480000000141445
+            }
+          },
+          "hostCallbackMs": 45.06600000002254,
+          "tsInternalMs": 13.779999999977008,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/memoryFiles.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 51.03429999999935,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 340,
+              "ms": 5.952199999999721
+            },
+            "fileExists": {
+              "count": 289,
+              "ms": 5.225600000005215
+            },
+            "readFile": {
+              "count": 144,
+              "ms": 19.194799999997485
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 8.868399999984831
+            },
+            "realpath": {
+              "count": 1,
+              "ms": 0.17930000000160362
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.13739999999961583
+            }
+          },
+          "hostCallbackMs": 39.55769999998847,
+          "tsInternalMs": 11.476600000010876,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/htmlFallback.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 46.5578000000005,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 331,
+              "ms": 5.3175999999930355
+            },
+            "fileExists": {
+              "count": 284,
+              "ms": 4.657999999983076
+            },
+            "readFile": {
+              "count": 143,
+              "ms": 17.29790000000503
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 8.568499999948472
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.13979999999901338
+            }
+          },
+          "hostCallbackMs": 35.981799999928626,
+          "tsInternalMs": 10.576000000071872,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/notFound.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 52.79650000000038,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 325,
+              "ms": 6.143599999993967
+            },
+            "fileExists": {
+              "count": 281,
+              "ms": 5.246100000014849
+            },
+            "readFile": {
+              "count": 143,
+              "ms": 19.886999999989712
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 8.918599999948128
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.1415999999990163
+            }
+          },
+          "hostCallbackMs": 40.33689999994567,
+          "tsInternalMs": 12.459600000054706,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/error.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 50.123100000000704,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 395,
+              "ms": 6.553300000017771
+            },
+            "fileExists": {
+              "count": 295,
+              "ms": 5.175900000003821
+            },
+            "readFile": {
+              "count": 145,
+              "ms": 17.687100000004648
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 8.968100000007325
+            },
+            "realpath": {
+              "count": 2,
+              "ms": 0.3041000000011991
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.1246000000010099
+            }
+          },
+          "hostCallbackMs": 38.813100000035774,
+          "tsInternalMs": 11.30999999996493,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        },
+        {
+          "file": "packages/vite/src/node/server/searchRoot.ts",
+          "roots": 1654,
+          "sourceFiles": 2296,
+          "createProgramMs": 50.44210000000021,
+          "hostCallbacks": {
+            "directoryExists": {
+              "count": 283,
+              "ms": 5.0803000000087195
+            },
+            "fileExists": {
+              "count": 282,
+              "ms": 5.108999999991283
+            },
+            "readFile": {
+              "count": 143,
+              "ms": 18.95169999999962
+            },
+            "getSourceFile": {
+              "count": 2296,
+              "ms": 9.8577999999834
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.11549999999988358
+            }
+          },
+          "hostCallbackMs": 39.114299999982904,
+          "tsInternalMs": 11.327800000017305,
+          "reused": false,
+          "oldProgramPassed": true,
+          "sourceFilesFromOldProgram": 2295,
+          "structureReuse": 2
+        }
+      ],
+      "programsCreated": 35,
+      "programsReused": 0,
+      "createProgramMsTotal": 7819.499400000001,
+      "cacheEvents": {
+        "miss": 2295,
+        "store": 2295,
+        "skipFull": 275
+      },
+      "merges": [
+        {
+          "file": "packages/vite/src/node/config.ts",
+          "before": {
+            "nodes": 153,
+            "edges": 412
+          },
+          "next": {
+            "nodes": 155,
+            "edges": 646
+          },
+          "after": {
+            "nodes": 293,
+            "edges": 1058
+          },
+          "ms": 0.39910000000054424
+        },
+        {
+          "file": "packages/vite/src/node/publicDir.ts",
+          "before": {
+            "nodes": 293,
+            "edges": 1058
+          },
+          "next": {
+            "nodes": 11,
+            "edges": 15
+          },
+          "after": {
+            "nodes": 301,
+            "edges": 1073
+          },
+          "ms": 0.3213999999998123
+        },
+        {
+          "file": "packages/vite/src/node/http.ts",
+          "before": {
+            "nodes": 301,
+            "edges": 1073
+          },
+          "next": {
+            "nodes": 33,
+            "edges": 80
+          },
+          "after": {
+            "nodes": 328,
+            "edges": 1153
+          },
+          "ms": 0.34580000000096334
+        },
+        {
+          "file": "packages/vite/src/node/watch.ts",
+          "before": {
+            "nodes": 328,
+            "edges": 1153
+          },
+          "next": {
+            "nodes": 24,
+            "edges": 25
+          },
+          "after": {
+            "nodes": 346,
+            "edges": 1178
+          },
+          "ms": 0.34360000000015134
+        },
+        {
+          "file": "packages/vite/src/node/server/ws.ts",
+          "before": {
+            "nodes": 346,
+            "edges": 1178
+          },
+          "next": {
+            "nodes": 45,
+            "edges": 127
+          },
+          "after": {
+            "nodes": 381,
+            "edges": 1305
+          },
+          "ms": 0.2536000000000058
+        },
+        {
+          "file": "packages/vite/src/node/env.ts",
+          "before": {
+            "nodes": 381,
+            "edges": 1305
+          },
+          "next": {
+            "nodes": 19,
+            "edges": 35
+          },
+          "after": {
+            "nodes": 391,
+            "edges": 1340
+          },
+          "ms": 0.2779999999984284
+        },
+        {
+          "file": "packages/vite/src/node/logger.ts",
+          "before": {
+            "nodes": 391,
+            "edges": 1340
+          },
+          "next": {
+            "nodes": 24,
+            "edges": 68
+          },
+          "after": {
+            "nodes": 414,
+            "edges": 1408
+          },
+          "ms": 0.2626000000000204
+        },
+        {
+          "file": "packages/vite/src/node/server/mixedModuleGraph.ts",
+          "before": {
+            "nodes": 414,
+            "edges": 1408
+          },
+          "next": {
+            "nodes": 47,
+            "edges": 168
+          },
+          "after": {
+            "nodes": 458,
+            "edges": 1576
+          },
+          "ms": 0.5129999999990105
+        },
+        {
+          "file": "packages/vite/src/node/server/pluginContainer.ts",
+          "before": {
+            "nodes": 458,
+            "edges": 1576
+          },
+          "next": {
+            "nodes": 101,
+            "edges": 358
+          },
+          "after": {
+            "nodes": 541,
+            "edges": 1934
+          },
+          "ms": 0.47620000000097207
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/indexHtml.ts",
+          "before": {
+            "nodes": 541,
+            "edges": 1934
+          },
+          "next": {
+            "nodes": 78,
+            "edges": 233
+          },
+          "after": {
+            "nodes": 604,
+            "edges": 2167
+          },
+          "ms": 0.4892999999992753
+        },
+        {
+          "file": "packages/vite/src/node/utils.ts",
+          "before": {
+            "nodes": 604,
+            "edges": 2167
+          },
+          "next": {
+            "nodes": 192,
+            "edges": 378
+          },
+          "after": {
+            "nodes": 777,
+            "edges": 2545
+          },
+          "ms": 0.9286000000010972
+        },
+        {
+          "file": "packages/vite/src/node/server/environment.ts",
+          "before": {
+            "nodes": 777,
+            "edges": 2545
+          },
+          "next": {
+            "nodes": 61,
+            "edges": 130
+          },
+          "after": {
+            "nodes": 824,
+            "edges": 2675
+          },
+          "ms": 0.5234999999993306
+        },
+        {
+          "file": "packages/vite/src/node/deprecations.ts",
+          "before": {
+            "nodes": 824,
+            "edges": 2675
+          },
+          "next": {
+            "nodes": 6,
+            "edges": 7
+          },
+          "after": {
+            "nodes": 828,
+            "edges": 2682
+          },
+          "ms": 0.43840000000091095
+        },
+        {
+          "file": "packages/vite/src/node/ssr/ssrTransform.ts",
+          "before": {
+            "nodes": 828,
+            "edges": 2682
+          },
+          "next": {
+            "nodes": 41,
+            "edges": 164
+          },
+          "after": {
+            "nodes": 858,
+            "edges": 2846
+          },
+          "ms": 0.548399999999674
+        },
+        {
+          "file": "packages/vite/src/node/ssr/ssrModuleLoader.ts",
+          "before": {
+            "nodes": 858,
+            "edges": 2846
+          },
+          "next": {
+            "nodes": 15,
+            "edges": 30
+          },
+          "after": {
+            "nodes": 866,
+            "edges": 2876
+          },
+          "ms": 2.008299999999508
+        },
+        {
+          "file": "packages/vite/src/node/ssr/ssrStacktrace.ts",
+          "before": {
+            "nodes": 866,
+            "edges": 2876
+          },
+          "next": {
+            "nodes": 11,
+            "edges": 20
+          },
+          "after": {
+            "nodes": 872,
+            "edges": 2896
+          },
+          "ms": 0.7378000000007887
+        },
+        {
+          "file": "packages/vite/src/node/server/hmr.ts",
+          "before": {
+            "nodes": 872,
+            "edges": 2896
+          },
+          "next": {
+            "nodes": 71,
+            "edges": 196
+          },
+          "after": {
+            "nodes": 924,
+            "edges": 3092
+          },
+          "ms": 0.904500000000553
+        },
+        {
+          "file": "packages/vite/src/node/server/openBrowser.ts",
+          "before": {
+            "nodes": 924,
+            "edges": 3092
+          },
+          "next": {
+            "nodes": 12,
+            "edges": 37
+          },
+          "after": {
+            "nodes": 933,
+            "edges": 3129
+          },
+          "ms": 0.5334999999995489
+        },
+        {
+          "file": "packages/vite/src/node/shortcuts.ts",
+          "before": {
+            "nodes": 933,
+            "edges": 3129
+          },
+          "next": {
+            "nodes": 23,
+            "edges": 51
+          },
+          "after": {
+            "nodes": 948,
+            "edges": 3180
+          },
+          "ms": 1.3125999999992928
+        },
+        {
+          "file": "packages/vite/src/node/plugins/esbuild.ts",
+          "before": {
+            "nodes": 948,
+            "edges": 3180
+          },
+          "next": {
+            "nodes": 29,
+            "edges": 62
+          },
+          "after": {
+            "nodes": 966,
+            "edges": 3242
+          },
+          "ms": 0.5600999999987835
+        },
+        {
+          "file": "packages/vite/src/node/server/moduleGraph.ts",
+          "before": {
+            "nodes": 966,
+            "edges": 3242
+          },
+          "next": {
+            "nodes": 28,
+            "edges": 90
+          },
+          "after": {
+            "nodes": 990,
+            "edges": 3332
+          },
+          "ms": 0.990300000001298
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/time.ts",
+          "before": {
+            "nodes": 990,
+            "edges": 3332
+          },
+          "next": {
+            "nodes": 7,
+            "edges": 10
+          },
+          "after": {
+            "nodes": 992,
+            "edges": 3342
+          },
+          "ms": 0.9853000000002794
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/rejectInvalidRequest.ts",
+          "before": {
+            "nodes": 992,
+            "edges": 3342
+          },
+          "next": {
+            "nodes": 2,
+            "edges": 0
+          },
+          "after": {
+            "nodes": 994,
+            "edges": 3342
+          },
+          "ms": 0.9399000000012165
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/hostCheck.ts",
+          "before": {
+            "nodes": 994,
+            "edges": 3342
+          },
+          "next": {
+            "nodes": 3,
+            "edges": 0
+          },
+          "after": {
+            "nodes": 997,
+            "edges": 3342
+          },
+          "ms": 1.5015999999995984
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/transform.ts",
+          "before": {
+            "nodes": 997,
+            "edges": 3342
+          },
+          "next": {
+            "nodes": 36,
+            "edges": 125
+          },
+          "after": {
+            "nodes": 1011,
+            "edges": 3467
+          },
+          "ms": 0.6149999999997817
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/proxy.ts",
+          "before": {
+            "nodes": 1011,
+            "edges": 3467
+          },
+          "next": {
+            "nodes": 22,
+            "edges": 60
+          },
+          "after": {
+            "nodes": 1024,
+            "edges": 3527
+          },
+          "ms": 0.6057999999993626
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/base.ts",
+          "before": {
+            "nodes": 1024,
+            "edges": 3527
+          },
+          "next": {
+            "nodes": 7,
+            "edges": 14
+          },
+          "after": {
+            "nodes": 1028,
+            "edges": 3541
+          },
+          "ms": 0.6324000000004162
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/static.ts",
+          "before": {
+            "nodes": 1028,
+            "edges": 3541
+          },
+          "next": {
+            "nodes": 36,
+            "edges": 107
+          },
+          "after": {
+            "nodes": 1051,
+            "edges": 3648
+          },
+          "ms": 0.6646999999993568
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/triggerLazyBundling.ts",
+          "before": {
+            "nodes": 1051,
+            "edges": 3648
+          },
+          "next": {
+            "nodes": 4,
+            "edges": 6
+          },
+          "after": {
+            "nodes": 1054,
+            "edges": 3654
+          },
+          "ms": 0.6120000000009895
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/memoryFiles.ts",
+          "before": {
+            "nodes": 1054,
+            "edges": 3654
+          },
+          "next": {
+            "nodes": 5,
+            "edges": 6
+          },
+          "after": {
+            "nodes": 1057,
+            "edges": 3660
+          },
+          "ms": 0.6679000000003725
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/htmlFallback.ts",
+          "before": {
+            "nodes": 1057,
+            "edges": 3660
+          },
+          "next": {
+            "nodes": 10,
+            "edges": 21
+          },
+          "after": {
+            "nodes": 1061,
+            "edges": 3681
+          },
+          "ms": 0.6669999999994616
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/notFound.ts",
+          "before": {
+            "nodes": 1061,
+            "edges": 3681
+          },
+          "next": {
+            "nodes": 2,
+            "edges": 0
+          },
+          "after": {
+            "nodes": 1063,
+            "edges": 3681
+          },
+          "ms": 0.7455000000009022
+        },
+        {
+          "file": "packages/vite/src/node/server/middlewares/error.ts",
+          "before": {
+            "nodes": 1063,
+            "edges": 3681
+          },
+          "next": {
+            "nodes": 12,
+            "edges": 34
+          },
+          "after": {
+            "nodes": 1071,
+            "edges": 3715
+          },
+          "ms": 1.066899999999805
+        },
+        {
+          "file": "packages/vite/src/node/server/searchRoot.ts",
+          "before": {
+            "nodes": 1071,
+            "edges": 3715
+          },
+          "next": {
+            "nodes": 12,
+            "edges": 40
+          },
+          "after": {
+            "nodes": 1078,
+            "edges": 3755
+          },
+          "ms": 1.5600999999987835
+        }
+      ],
+      "mergeMsTotal": 24.432700000000295,
+      "serializationMs": 13.863499999999476,
+      "nodeCount": 1078,
+      "edgeCount": 3755,
+      "graphHash": "3f9848fc34040118af9c20fc9785f2b39bf23368ede587dd7d58d9db73c62b29",
+      "freeMB": 969,
+      "heapSampleMaxMB": 649.8,
+      "rssSampleMaxMB": 794.9,
+      "peakRSSMB": 804.2265625
+    }
+  ],
+  "totals": {
+    "checkerAcquisition": {
+      "count": 35,
+      "ms": 1056.8736999999992
+    },
+    "checker.getTypeAtLocation": {
+      "count": 4042,
+      "ms": 258.80120000007173
+    },
+    "checker.getSymbolAtLocation": {
+      "count": 19909,
+      "ms": 152.2606000002088
+    },
+    "checker.getResolvedSignature": {
+      "count": 5788,
+      "ms": 1398.0023999999503
+    },
+    "checker.getAliasedSymbol": {
+      "count": 2013,
+      "ms": 1.1796000000340428
+    },
+    "extractCalls": {
+      "count": 35,
+      "ms": 1873.7015000000001
+    },
+    "diagnostics": {
+      "count": 35,
+      "ms": 523.3874000000087
+    },
+    "checker.getTypeOfSymbolAtLocation": {
+      "count": 796,
+      "ms": 2.087799999992967
+    },
+    "graphExtraction": {
+      "count": 35,
+      "ms": 635.6669000000029
+    }
+  },
+  "cpuMs": {
+    "user": 14875,
+    "system": 3125
+  },
+  "elapsedMs": 12211.1264
+}

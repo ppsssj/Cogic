@@ -1,0 +1,25 @@
+{
+  "labelA": "baseline",
+  "labelB": "oldProgramOnly",
+  "hashA": "3f9848fc34040118af9c20fc9785f2b39bf23368ede587dd7d58d9db73c62b29",
+  "hashB": "3f9848fc34040118af9c20fc9785f2b39bf23368ede587dd7d58d9db73c62b29",
+  "identical": true,
+  "nodes": {
+    "countA": 1078,
+    "countB": 1078,
+    "onlyA": [],
+    "onlyB": [],
+    "changed": 0,
+    "changedFields": {},
+    "changedDetail": []
+  },
+  "edges": {
+    "countA": 3755,
+    "countB": 3755,
+    "onlyA": [],
+    "onlyB": [],
+    "changed": 0,
+    "changedFields": {},
+    "changedDetail": []
+  }
+}

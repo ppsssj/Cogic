@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "tool": "profile-depth-v2",
+    "cogicRevision": "cdc3196530776ca09e57adc73cba9d61524c6ff2",
+    "revision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+    "project": "hono",
+    "activeFile": "src/helper/cookie/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "instrumented": true,
+    "shareProgram": true,
+    "maxExpand": null,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceMB": 960,
+    "fileCount": 426,
+    "fileCountTotal": 426,
+    "capped": false,
+    "freeMBAtStart": 1091,
+    "totalMB": 8136
+  },
+  "status": "completed",
+  "records": [
+    {
+      "label": "measured",
+      "totalMs": 4428.709000000001,
+      "frontierCount": 2,
+      "expandedFileCount": 2,
+      "frontierCapped": false,
+      "analyses": [
+        {
+          "file": "src/helper/cookie/index.ts",
+          "ms": 4192.964199999999,
+          "nodes": 16,
+          "edges": 46,
+          "cache": {
+            "entries": 800,
+            "capacity": 800,
+            "chars": 9606551,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 349,
+            "rssMB": 509.9
+          }
+        },
+        {
+          "file": "src/utils/cookie.ts",
+          "ms": 75.65710000000036,
+          "nodes": 21,
+          "edges": 41,
+          "cache": {
+            "entries": 800,
+            "capacity": 800,
+            "chars": 9606551,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 358.4,
+            "rssMB": 511
+          }
+        },
+        {
+          "file": "src/context.ts",
+          "ms": 154.20600000000013,
+          "nodes": 48,
+          "edges": 120,
+          "cache": {
+            "entries": 800,
+            "capacity": 800,
+            "chars": 9606551,
+            "charBudget": 24000000
+          },
+          "memory": {
+            "heapUsedMB": 378.4,
+            "rssMB": 513.1
+          }
+        }
+      ],
+      "programs": [
+        {
+          "file": "src/helper/cookie/index.ts",
+          "roots": 426,
+          "sourceFiles": 1169,
+          "createProgramMs": 3518.8462,
+          "hostCallbacks": {
+            "getSourceFile": {
+              "count": 1169,
+              "ms": 2747.2783999999992
+            },
+            "directoryExists": {
+              "count": 10768,
+              "ms": 270.6686999999912
+            },
+            "fileExists": {
+              "count": 5271,
+              "ms": 118.70799999999076
+            },
+            "readFile": {
+              "count": 168,
+              "ms": 36.135599999997964
+            },
+            "realpath": {
+              "count": 119,
+              "ms": 21.692199999998422
+            },
+            "getDirectories": {
+              "count": 1,
+              "ms": 0.4159999999997126
+            }
+          },
+          "hostCallbackMs": 3194.898899999977,
+          "tsInternalMs": 323.947300000023,
+          "reused": false
+        },
+        {
+          "file": "src/utils/cookie.ts",
+          "roots": 426,
+          "sourceFiles": 1169,
+          "createProgramMs": 0,
+          "reused": true
+        },
+        {
+          "file": "src/context.ts",
+          "roots": 426,
+          "sourceFiles": 1169,
+          "createProgramMs": 0,
+          "reused": true
+        }
+      ],
+      "programsCreated": 1,
+      "programsReused": 2,
+      "createProgramMsTotal": 3518.8462,
+      "cacheEvents": {
+        "miss": 1168,
+        "store": 1168,
+        "skipFull": 368
+      },
+      "merges": [
+        {
+          "file": "src/utils/cookie.ts",
+          "before": {
+            "nodes": 16,
+            "edges": 46
+          },
+          "next": {
+            "nodes": 21,
+            "edges": 41
+          },
+          "after": {
+            "nodes": 37,
+            "edges": 87
+          },
+          "ms": 0.1566000000002532
+        },
+        {
+          "file": "src/context.ts",
+          "before": {
+            "nodes": 37,
+            "edges": 87
+          },
+          "next": {
+            "nodes": 48,
+            "edges": 120
+          },
+          "after": {
+            "nodes": 85,
+            "edges": 207
+          },
+          "ms": 0.10089999999945576
+        }
+      ],
+      "mergeMsTotal": 0.25749999999970896,
+      "serializationMs": 0.4499999999998181,
+      "nodeCount": 85,
+      "edgeCount": 207,
+      "graphHash": "45c635d958b1b9c0154f2dbddcdcca91ec75316c225093f1c6bfd4f5485cd6a4",
+      "freeMB": 606,
+      "heapSampleMaxMB": 378.4,
+      "rssSampleMaxMB": 513.1,
+      "peakRSSMB": 513.21875
+    }
+  ],
+  "totals": {
+    "checkerAcquisition": {
+      "count": 3,
+      "ms": 509.2931000000003
+    },
+    "checker.getTypeAtLocation": {
+      "count": 197,
+      "ms": 19.589800000006107
+    },
+    "checker.getResolvedSignature": {
+      "count": 233,
+      "ms": 153.13660000000436
+    },
+    "checker.getSymbolAtLocation": {
+      "count": 1341,
+      "ms": 15.158600000017032
+    },
+    "checker.getAliasedSymbol": {
+      "count": 122,
+      "ms": 0.09879999999793654
+    },
+    "extractCalls": {
+      "count": 3,
+      "ms": 185.83079999999973
+    },
+    "diagnostics": {
+      "count": 3,
+      "ms": 111.48360000000048
+    },
+    "checker.getTypeOfSymbolAtLocation": {
+      "count": 81,
+      "ms": 0.6293000000005122
+    },
+    "graphExtraction": {
+      "count": 3,
+      "ms": 81.0714999999991
+    }
+  },
+  "cpuMs": {
+    "user": 5797,
+    "system": 766
+  },
+  "elapsedMs": 4431.230500000001
+}

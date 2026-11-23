@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "tool": "profile-depth-v2",
+    "cogicRevision": "cdc3196530776ca09e57adc73cba9d61524c6ff2",
+    "revision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+    "project": "hono",
+    "activeFile": "src/helper/cookie/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "instrumented": true,
+    "shareProgram": false,
+    "maxExpand": null,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceMB": 960,
+    "fileCount": 426,
+    "fileCountTotal": 426,
+    "capped": false,
+    "freeMBAtStart": 911,
+    "totalMB": 8136
+  },
+  "status": "aborted",
+  "records": [],
+  "error": "ABORT_LOW_MEMORY:469MB",
+  "partial": {
+    "label": "measured",
+    "analyses": [
+      {
+        "file": "src/helper/cookie/index.ts",
+        "ms": 4519.602599999999,
+        "nodes": 16,
+        "edges": 46,
+        "cache": {
+          "entries": 800,
+          "capacity": 800,
+          "chars": 9606551,
+          "charBudget": 24000000
+        },
+        "memory": {
+          "heapUsedMB": 353,
+          "rssMB": 505.8
+        }
+      },
+      {
+        "file": "src/utils/cookie.ts",
+        "ms": 1818.4701999999997,
+        "nodes": 21,
+        "edges": 41,
+        "cache": {
+          "entries": 800,
+          "capacity": 800,
+          "chars": 9601595,
+          "charBudget": 24000000
+        },
+        "memory": {
+          "heapUsedMB": 353.2,
+          "rssMB": 592.3
+        }
+      }
+    ],
+    "merges": [
+      {
+        "file": "src/utils/cookie.ts",
+        "before": {
+          "nodes": 16,
+          "edges": 46
+        },
+        "next": {
+          "nodes": 21,
+          "edges": 41
+        },
+        "after": {
+          "nodes": 37,
+          "edges": 87
+        },
+        "ms": 0.11779999999998836
+      }
+    ],
+    "programs": [
+      {
+        "file": "src/helper/cookie/index.ts",
+        "roots": 426,
+        "sourceFiles": 1169,
+        "createProgramMs": 3718.9067,
+        "hostCallbacks": {
+          "getSourceFile": {
+            "count": 1169,
+            "ms": 2942.8418000000047
+          },
+          "directoryExists": {
+            "count": 10768,
+            "ms": 240.9682000000157
+          },
+          "fileExists": {
+            "count": 5271,
+            "ms": 127.01169999999212
+          },
+          "readFile": {
+            "count": 168,
+            "ms": 42.984699999996565
+          },
+          "realpath": {
+            "count": 119,
+            "ms": 21.65949999999816
+          },
+          "getDirectories": {
+            "count": 1,
+            "ms": 0.3051999999997861
+          }
+        },
+        "hostCallbackMs": 3375.771100000007,
+        "tsInternalMs": 343.1355999999928,
+        "reused": false
+      },
+      {
+        "file": "src/utils/cookie.ts",
+        "roots": 426,
+        "sourceFiles": 1169,
+        "createProgramMs": 1496.1113999999998,
+        "hostCallbacks": {
+          "getSourceFile": {
+            "count": 1169,
+            "ms": 852.7382999999854
+          },
+          "directoryExists": {
+            "count": 10768,
+            "ms": 213.6197000000011
+          },
+          "fileExists": {
+            "count": 5271,
+            "ms": 113.23919999997997
+          },
+          "readFile": {
+            "count": 168,
+            "ms": 39.11730000000534
+          },
+          "realpath": {
+            "count": 119,
+            "ms": 20.683200000004945
+          },
+          "getDirectories": {
+            "count": 1,
+            "ms": 0.37489999999979773
+          }
+        },
+        "hostCallbackMs": 1239.7725999999766,
+        "tsInternalMs": 256.3388000000232,
+        "reused": false
+      }
+    ],
+    "cacheEvents": {
+      "miss": 1537,
+      "store": 1537,
+      "skipFull": 736,
+      "hit": 799,
+      "evict": 1
+    },
+    "frontierCount": 2,
+    "programsCreatedTotal": 2
+  },
+  "totals": {
+    "checkerAcquisition": {
+      "count": 2,
+      "ms": 881.2048999999997
+    },
+    "checker.getTypeAtLocation": {
+      "count": 118,
+      "ms": 18.973500000005515
+    },
+    "checker.getResolvedSignature": {
+      "count": 146,
+      "ms": 85.78089999999702
+    },
+    "checker.getSymbolAtLocation": {
+      "count": 691,
+      "ms": 13.06280000001243
+    },
+    "checker.getAliasedSymbol": {
+      "count": 42,
+      "ms": 0.2473000000072716
+    },
+    "extractCalls": {
+      "count": 2,
+      "ms": 116.11480000000029
+    },
+    "diagnostics": {
+      "count": 2,
+      "ms": 49.34929999999986
+    },
+    "checker.getTypeOfSymbolAtLocation": {
+      "count": 48,
+      "ms": 0.3577999999952226
+    },
+    "graphExtraction": {
+      "count": 2,
+      "ms": 61.695299999999406
+    }
+  },
+  "elapsedMs": 6343.6181
+}

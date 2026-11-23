@@ -1,0 +1,374 @@
+{
+  "labelA": "baseline",
+  "labelB": "sharedChecker",
+  "hashA": "3f9848fc34040118af9c20fc9785f2b39bf23368ede587dd7d58d9db73c62b29",
+  "hashB": "e2c94974111b05e202cb2738ea38ce54da920c385e70033a7297b309479e41be",
+  "identical": false,
+  "nodes": {
+    "countA": 1078,
+    "countB": 1077,
+    "onlyA": [
+      "external:<cogic>/node_modules/@types/node/console.d.ts:14401"
+    ],
+    "onlyB": [],
+    "changed": 11,
+    "changedFields": {
+      "name": 1,
+      "signature": 10,
+      "sig": 7
+    },
+    "changedDetail": [
+      {
+        "id": "external:<cogic>/node_modules/@types/node/buffer.d.ts:19134",
+        "name": {
+          "baseline": "Buffer.toString (buffer.d.ts) [lib]",
+          "sharedChecker": "string | NonSharedBuffer.toString (buffer.d.ts) [lib]"
+        }
+      },
+      {
+        "id": "external:<cogic>/node_modules/@types/node/fs.d.ts:125392",
+        "signature": {
+          "baseline": "(path: PathOrFileDescriptor, options: { encoding: BufferEncoding; flag?: string; } | BufferEncoding): string",
+          "sharedChecker": "(path: PathOrFileDescriptor, options: BufferEncoding | { encoding: BufferEncoding; flag?: string; }): string"
+        }
+      },
+      {
+        "id": "function:<projects>/vite/packages/vite/src/node/config.ts:24398",
+        "signature": {
+          "baseline": "(config: any, command: \"serve\" | \"build\"): Promise<any>",
+          "sharedChecker": "(config: any, command: \"build\" | \"serve\"): Promise<any>"
+        },
+        "sig": {
+          "baseline": {
+            "params": [
+              {
+                "name": "config",
+                "type": "any"
+              },
+              {
+                "name": "command",
+                "type": "\"serve\" | \"build\""
+              }
+            ],
+            "returnType": "Promise<any>"
+          },
+          "sharedChecker": {
+            "params": [
+              {
+                "name": "config",
+                "type": "any"
+              },
+              {
+                "name": "command",
+                "type": "\"build\" | \"serve\""
+              }
+            ],
+            "returnType": "Promise<any>"
+          }
+        }
+      },
+      {
+        "id": "function:<projects>/vite/packages/vite/src/node/config.ts:24962",
+        "signature": {
+          "baseline": "(config: UserConfig, command: \"serve\" | \"build\", options: any): Promise<DevToolsIntegrationState>",
+          "sharedChecker": "(config: UserConfig, command: \"build\" | \"serve\", options: any): Promise<DevToolsIntegrationState>"
+        },
+        "sig": {
+          "baseline": {
+            "params": [
+              {
+                "name": "config",
+                "type": "UserConfig"
+              },
+              {
+                "name": "command",
+                "type": "\"serve\" | \"build\""
+              },
+              {
+                "name": "options",
+                "type": "any"
+              }
+            ],
+            "returnType": "Promise<DevToolsIntegrationState>"
+          },
+          "sharedChecker": {
+            "params": [
+              {
+                "name": "config",
+                "type": "UserConfig"
+              },
+              {
+                "name": "command",
+                "type": "\"build\" | \"serve\""
+              },
+              {
+                "name": "options",
+                "type": "any"
+              }
+            ],
+            "returnType": "Promise<DevToolsIntegrationState>"
+          }
+        }
+      },
+      {
+        "id": "function:<projects>/vite/packages/vite/src/node/config.ts:43903",
+        "signature": {
+          "baseline": "(inlineConfig: InlineConfig, command: \"serve\" | \"build\", defaultMode?: string, defaultNodeEnv?: string, isPreview?: boolean, patchConfig?: (config: ResolvedConfig) => void, patchPlugins?: (resolvedPlugins: Plugin<...>[]) => void): Promise<...>",
+          "sharedChecker": "(inlineConfig: InlineConfig, command: \"build\" | \"serve\", defaultMode?: string, defaultNodeEnv?: string, isPreview?: boolean, patchConfig?: (config: ResolvedConfig) => void, patchPlugins?: (resolvedPlugins: Plugin<...>[]) => void): Promise<...>"
+        },
+        "sig": {
+          "baseline": {
+            "params": [
+              {
+                "name": "inlineConfig",
+                "type": "InlineConfig"
+              },
+              {
+                "name": "command",
+                "type": "\"serve\" | \"build\""
+              },
+              {
+                "name": "defaultMode",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "name": "defaultNodeEnv",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "name": "isPreview",
+                "type": "boolean",
+                "optional": true
+              },
+              {
+                "name": "patchConfig",
+                "type": "(config: ResolvedConfig) => void",
+                "optional": true
+              },
+              {
+                "name": "patchPlugins",
+                "type": "(resolvedPlugins: Plugin<any>[]) => void",
+                "optional": true
+              }
+            ],
+            "returnType": "Promise<ResolvedConfig>"
+          },
+          "sharedChecker": {
+            "params": [
+              {
+                "name": "inlineConfig",
+                "type": "InlineConfig"
+              },
+              {
+                "name": "command",
+                "type": "\"build\" | \"serve\""
+              },
+              {
+                "name": "defaultMode",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "name": "defaultNodeEnv",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "name": "isPreview",
+                "type": "boolean",
+                "optional": true
+              },
+              {
+                "name": "patchConfig",
+                "type": "(config: ResolvedConfig) => void",
+                "optional": true
+              },
+              {
+                "name": "patchPlugins",
+                "type": "(resolvedPlugins: Plugin<any>[]) => void",
+                "optional": true
+              }
+            ],
+            "returnType": "Promise<ResolvedConfig>"
+          }
+        }
+      },
+      {
+        "id": "external:<projects>/vite/packages/vite/src/node/server/middlewares/hostCheck.ts:232",
+        "signature": {
+          "baseline": "(resolvedServerOptions: Pick<ResolvedServerOptions, \"ws\" | \"origin\" | \"host\">, resolvedPreviewOptions: Pick<ResolvedPreviewOptions, \"host\">): string[]",
+          "sharedChecker": "(resolvedServerOptions: Pick<ResolvedServerOptions, \"host\" | \"ws\" | \"origin\">, resolvedPreviewOptions: Pick<ResolvedPreviewOptions, \"host\">): string[]"
+        }
+      },
+      {
+        "id": "method:<projects>/vite/packages/vite/src/node/server/pluginContainer.ts:15123",
+        "signature": {
+          "baseline": "(id: string, loadOptions?: { withMetadata: true; }): Promise<LoadResultWithMetadata | LoadResult>",
+          "sharedChecker": "(id: string, loadOptions?: { withMetadata: true; }): Promise<LoadResult | LoadResultWithMetadata>"
+        },
+        "sig": {
+          "baseline": {
+            "params": [
+              {
+                "name": "id",
+                "type": "string"
+              },
+              {
+                "name": "loadOptions",
+                "type": "{ withMetadata: true; }",
+                "optional": true
+              }
+            ],
+            "returnType": "Promise<LoadResultWithMetadata | LoadResult>"
+          },
+          "sharedChecker": {
+            "params": [
+              {
+                "name": "id",
+                "type": "string"
+              },
+              {
+                "name": "loadOptions",
+                "type": "{ withMetadata: true; }",
+                "optional": true
+              }
+            ],
+            "returnType": "Promise<LoadResult | LoadResultWithMetadata>"
+          }
+        }
+      },
+      {
+        "id": "method:<projects>/vite/packages/vite/src/node/server/pluginContainer.ts:19678",
+        "signature": {
+          "baseline": "(id: string, change: { event: \"create\" | \"update\" | \"delete\"; }): Promise<void>",
+          "sharedChecker": "(id: string, change: { event: \"create\" | \"delete\" | \"update\"; }): Promise<void>"
+        },
+        "sig": {
+          "baseline": {
+            "params": [
+              {
+                "name": "id",
+                "type": "string"
+              },
+              {
+                "name": "change",
+                "type": "{ event: \"create\" | \"update\" | \"delete\"; }"
+              }
+            ],
+            "returnType": "Promise<void>"
+          },
+          "sharedChecker": {
+            "params": [
+              {
+                "name": "id",
+                "type": "string"
+              },
+              {
+                "name": "change",
+                "type": "{ event: \"create\" | \"delete\" | \"update\"; }"
+              }
+            ],
+            "returnType": "Promise<void>"
+          }
+        }
+      },
+      {
+        "id": "method:<projects>/vite/packages/vite/src/node/server/pluginContainer.ts:38839",
+        "signature": {
+          "baseline": "(id: string, change: { event: \"create\" | \"update\" | \"delete\"; }): Promise<void>",
+          "sharedChecker": "(id: string, change: { event: \"create\" | \"delete\" | \"update\"; }): Promise<void>"
+        },
+        "sig": {
+          "baseline": {
+            "params": [
+              {
+                "name": "id",
+                "type": "string"
+              },
+              {
+                "name": "change",
+                "type": "{ event: \"create\" | \"update\" | \"delete\"; }"
+              }
+            ],
+            "returnType": "Promise<void>"
+          },
+          "sharedChecker": {
+            "params": [
+              {
+                "name": "id",
+                "type": "string"
+              },
+              {
+                "name": "change",
+                "type": "{ event: \"create\" | \"delete\" | \"update\"; }"
+              }
+            ],
+            "returnType": "Promise<void>"
+          }
+        }
+      },
+      {
+        "id": "external:<cogic>/node_modules/@types/node/fs/promises.d.ts:50374",
+        "signature": {
+          "baseline": "(path: PathLike | FileHandle, options: ({ encoding: BufferEncoding; flag?: OpenMode; } & Abortable) | BufferEncoding): Promise<...>",
+          "sharedChecker": "(path: PathLike | FileHandle, options: BufferEncoding | ({ encoding: BufferEncoding; flag?: OpenMode; } & Abortable)): Promise<...>"
+        }
+      },
+      {
+        "id": "function:<projects>/vite/packages/vite/src/node/server/hmr.ts:5908",
+        "signature": {
+          "baseline": "<T extends keyof InvokeMethods>(payload: HotPayload): Promise<{ result: void | FetchResult | ({ type: \"string\"; value: string; } | { type: \"RegExp\"; source: string; flags: string; })[]; error?: undefined; } | { ...; }>",
+          "sharedChecker": "<T extends keyof InvokeMethods>(payload: HotPayload): Promise<{ result: void | ({ type: \"string\"; value: string; } | { type: \"RegExp\"; source: string; flags: string; })[] | FetchResult; error?: undefined; } | { ...; }>"
+        },
+        "sig": {
+          "baseline": {
+            "params": [
+              {
+                "name": "payload",
+                "type": "HotPayload"
+              }
+            ],
+            "returnType": "Promise<{ result: void | FetchResult | ({ type: \"string\"; value: string; } | { type: \"RegExp\"; source: string; flags: string; })[]; error?: undefined; } | { error: any; result?: undefined; }>"
+          },
+          "sharedChecker": {
+            "params": [
+              {
+                "name": "payload",
+                "type": "HotPayload"
+              }
+            ],
+            "returnType": "Promise<{ result: void | ({ type: \"string\"; value: string; } | { type: \"RegExp\"; source: string; flags: string; })[] | FetchResult; error?: undefined; } | { error: any; result?: undefined; }>"
+          }
+        }
+      }
+    ]
+  },
+  "edges": {
+    "countA": 3755,
+    "countB": 3756,
+    "onlyA": [
+      "calls:function:<projects>/vite/packages/vite/src/node/logger.ts:2800->external:<cogic>/node_modules/@types/node/console.d.ts:10117@@@@",
+      "dataflow:function:<projects>/vite/packages/vite/src/node/logger.ts:2800->external:<cogic>/node_modules/@types/node/console.d.ts:10117@@message <- format(type, msg, options)@@arg#0",
+      "dataflow:function:<projects>/vite/packages/vite/src/node/logger.ts:2800->external:<cogic>/node_modules/@types/node/console.d.ts:10117@@...optionalParams <- colors.yellow(`(x${sameCount + 1})`)@@arg#1",
+      "calls:function:<projects>/vite/packages/vite/src/node/utils.ts:24837->function:<projects>/vite/packages/vite/src/node/utils.ts:22800@@@@",
+      "dataflow:function:<projects>/vite/packages/vite/src/node/utils.ts:24837->function:<projects>/vite/packages/vite/src/node/utils.ts:22800@@input <- input@@arg#0",
+      "calls:file:<projects>/vite/packages/vite/src/node/utils.ts:0->external:<cogic>/node_modules/@types/node/console.d.ts:14401@@@@",
+      "dataflow:file:<projects>/vite/packages/vite/src/node/utils.ts:0->external:<cogic>/node_modules/@types/node/console.d.ts:14401@@message <- '`server.hmr.protocol/host/port/path/clientPort/timeout/server` is deprecated...@@arg#0"
+    ],
+    "onlyB": [
+      "calls:function:<projects>/vite/packages/vite/src/node/logger.ts:2800->external:<cogic>/node_modules/@types/node/console.d.ts:14606@@@@",
+      "dataflow:function:<projects>/vite/packages/vite/src/node/logger.ts:2800->external:<cogic>/node_modules/@types/node/console.d.ts:14606@@message <- format(type, msg, options)@@arg#0",
+      "dataflow:function:<projects>/vite/packages/vite/src/node/logger.ts:2800->external:<cogic>/node_modules/@types/node/console.d.ts:14606@@...optionalParams <- colors.yellow(`(x${sameCount + 1})`)@@arg#1",
+      "calls:function:<projects>/vite/packages/vite/src/node/utils.ts:24837->function:<projects>/vite/packages/vite/src/node/utils.ts:24837@@@@",
+      "dataflow:function:<projects>/vite/packages/vite/src/node/utils.ts:24837->function:<projects>/vite/packages/vite/src/node/utils.ts:24837@@input <- input@@arg#0",
+      "calls:file:<projects>/vite/packages/vite/src/node/utils.ts:0->external:<cogic>/node_modules/@types/node/console.d.ts:14606@@@@",
+      "dataflow:file:<projects>/vite/packages/vite/src/node/utils.ts:0->external:<cogic>/node_modules/@types/node/console.d.ts:14606@@message <- '`server.hmr.protocol/host/port/path/clientPort/timeout/server` is deprecated...@@arg#0",
+      "calls:function:<projects>/vite/packages/vite/src/node/server/openBrowser.ts:4062->external:<cogic>/node_modules/@types/node/buffer.d.ts:19134@@@@"
+    ],
+    "changed": 0,
+    "changedFields": {},
+    "changedDetail": []
+  }
+}

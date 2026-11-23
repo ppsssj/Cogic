@@ -1,0 +1,25 @@
+{
+  "labelA": "baseline",
+  "labelB": "structureReuse",
+  "hashA": "45ea10193f03ecc826a7d6a4c53d38522f2ecb25d8b46e677e6d2a9a12ee916f",
+  "hashB": "45ea10193f03ecc826a7d6a4c53d38522f2ecb25d8b46e677e6d2a9a12ee916f",
+  "identical": true,
+  "nodes": {
+    "countA": 85,
+    "countB": 85,
+    "onlyA": [],
+    "onlyB": [],
+    "changed": 0,
+    "changedFields": {},
+    "changedDetail": []
+  },
+  "edges": {
+    "countA": 207,
+    "countB": 207,
+    "onlyA": [],
+    "onlyB": [],
+    "changed": 0,
+    "changedFields": {},
+    "changedDetail": []
+  }
+}
