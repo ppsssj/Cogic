@@ -1046,7 +1046,13 @@ function toReactFlowEdges(
       };
     })
     .filter((edge): edge is NonNullable<typeof edge> => Boolean(edge))
-    .filter((e) => e.source !== e.target);
+    // Distinct members of one class share a rendered parent node but use
+    // separate child handles. Keep those edges; suppress true self-loops and
+    // collapsed groups that map both endpoints to the same visual anchor.
+    .filter((e) => e.source !== e.target || (
+      e.originalSource !== e.originalTarget &&
+      Boolean(e.sourceHandleId?.startsWith("out-child-") && e.targetHandleId?.startsWith("in-child-"))
+    ));
 
   const dedupedEdges = new Map<string, (typeof remappedEdges)[number]>();
   for (const edge of remappedEdges) {

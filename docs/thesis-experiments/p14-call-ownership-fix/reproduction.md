@@ -11,7 +11,7 @@ node docs/thesis-experiments/tools/exp01/manifest.mjs --check --manifest docs/th
 node docs/thesis-experiments/p14-accuracy/tools/hono-h2-diagnostic.cjs <Hono-worktree>
 ```
 
-기존 P14-A `hono-h2-minimal.test.cjs`는 수정 전 결함이 있어야 통과하는 역사적 증거다. 수정 후에는 새 제품 테스트가 성공 조건이다.
+P14-A `hono-h2-minimal.test.cjs`는 수정 전 결함이 있어야 통과하는 역사적 테스트이며 기본 실행에서는 skip된다. 수정 전 `48e7058`에서 원본이 통과함을 확인했다. 수정 후에는 새 제품 테스트가 성공 조건이다. opt-in 정책과 원본 사본은 [UI smoke 실행 문서](ui-smoke/README.md)에 있다.
 
 ## 그래프와 시간 비교
 

@@ -13,5 +13,5 @@ Corpus A 비교는 **회귀 진단**이다. GT 사람 검토 전, scorer 1.2의 
 
 - Hono 그래프의 새 엣지 전체를 독립적인 사람 GT로 확인하지 않았다. Corpus A의 새 FP 0은 이 fixture의 scorer 판정 범위에서만 유효하다.
 - 함수 타입 property가 다른 파일에 선언된 경우 기존 external 해석을 유지한다. 동적 디스패치, getter/setter, 선택적·가변 tuple spread와 rest의 모든 원소 추적은 이번에 일반적으로 해결하지 않았다.
-- P14-A의 `hono-h2-minimal.test.cjs`는 **수정 전 결함이 존재한다는 역사적 characterization**이다. 원본 증거로 보존했으므로 수정 후 성공 기준으로 실행하면 실패하는 것이 정상이다. 신규 `src/test/p14CallOwnership.test.ts`가 수정 후 기대 동작을 검증한다.
-- 실제 VS Code UI smoke는 별도로 수행하지 않았다. analyzer 원출력과 제품의 VS Code 테스트를 검증했으며 P13 경쟁 도구 실험은 재실행하지 않았다.
+- P14-A의 `hono-h2-minimal.test.cjs`는 **수정 전 결함이 존재한다는 역사적 characterization**이다. 기본 실행에서는 명시적으로 skip하며 `COGIC_P14A_HISTORICAL=1`은 수정 전 analyzer에서만 사용한다. 원래 파일의 바이트 사본은 [evidence/hono-h2-minimal.original.txt](ui-smoke/evidence/hono-h2-minimal.original.txt)에 보존했다(SHA256 `270d1b091623a3cc4134ffb89d6e19a1c6d7a8409482eb10c043595d5d1b1fcd`). 원본 테스트는 수정 전 `48e7058`의 별도 checkout에서 통과했다. 수정 후 성공 기준은 `src/test/p14CallOwnership.test.ts`다.
+- 실제 VS Code 1.147.0에서 현재 개발 확장을 격리 프로필로 실행한 [UI smoke](ui-smoke/README.md)가 통과했다. P13 경쟁 도구 실험은 재실행하지 않았다.
