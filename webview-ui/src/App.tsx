@@ -31,6 +31,7 @@ import {
   pushWebviewDebugEvent,
 } from "./lib/debugLog";
 import { configurePipelineProfile, newProfileRequestId, pipelineEnabled, profileWebview } from "./lib/pipelineProfile";
+import { mayApplyActiveResult, ownsLoading } from "../../src/shared/requestOwnership";
 import "./styles/index.css";
 
 const vscode = getVSCodeApi();
@@ -814,15 +815,29 @@ export default function App() {
   );
   const [exportFormat, setExportFormat] = useState<ExportFormat | null>(null);
   const snapshotExporterRef = useRef<SnapshotExporter | null>(null);
+  const latestUserActiveRef = useRef<string | null>(null);
+  const latestUserRequestRef = useRef<string | null>(null);
+  const loadingOwnerRef = useRef<string | null>(null);
+  const activePendingRef = useRef(false);
+  const userSequenceRef = useRef<number | undefined>(undefined);
 
   const postMessage = useCallback((
     origin: string,
     message: WebviewToExtMessage,
     detail?: Record<string, unknown>,
   ) => {
-    if (pipelineEnabled && (message.type === "analyzeActiveFile" || message.type === "analyzeWorkspace" || message.type === "selectWorkspaceFile")) {
+    if (message.type === "analyzeActiveFile" || message.type === "analyzeWorkspace" || message.type === "selectWorkspaceFile" || message.type === "expandNode") {
       const requestId = newProfileRequestId();
       message = { ...message, payload: { ...message.payload, profileRequestId: requestId } } as WebviewToExtMessage;
+      if (message.type !== "expandNode" || !activePendingRef.current) {
+        latestUserRequestRef.current = requestId;
+        loadingOwnerRef.current = requestId;
+      }
+      if (message.type !== "expandNode") {
+        latestUserActiveRef.current = requestId;
+        activePendingRef.current = true;
+        userSequenceRef.current = undefined;
+      }
       profileWebview("request.sent", requestId, { origin, action: message.type });
     }
     pushWebviewDebugEvent(`webview.postMessage.${message.type}`, {
@@ -887,7 +902,9 @@ export default function App() {
     });
   }, [postMessage]);
 
-  const finishAnalysisLoading = useCallback(() => {
+  const finishAnalysisLoading = useCallback((requestId?: string) => {
+    if (requestId && !ownsLoading(loadingOwnerRef.current, requestId)) return;
+    loadingOwnerRef.current = null;
     setAnalysisLoading(null);
   }, []);
 
@@ -908,6 +925,8 @@ export default function App() {
   };
 
   const applyNotice = useEffectEvent((notice: UINotice) => {
+    if (notice.requestId && notice.requestId !== latestUserRequestRef.current) return;
+    if (notice.source === "auto-analysis" && activePendingRef.current) return;
     if (
       notice.scope === "canvas" ||
       notice.source === "analyzeActiveFile" ||
@@ -915,7 +934,8 @@ export default function App() {
       notice.source === "expandNode" ||
       notice.source === "auto-analysis"
     ) {
-      setAnalysisLoading(null);
+      if (notice.requestId) finishAnalysisLoading(notice.requestId);
+      else if (!loadingOwnerRef.current) setAnalysisLoading(null);
     }
 
     if (notice.scope === "toast") {
@@ -1180,6 +1200,18 @@ export default function App() {
         return;
       }
 
+      if (msg.type === "analysisLifecycle") {
+        if (msg.state === "running" && latestUserActiveRef.current === msg.requestId) userSequenceRef.current = msg.sequence;
+        if (["completed", "cancelled", "failed", "superseded"].includes(msg.state)) {
+          if (msg.state === "failed" && ownsLoading(loadingOwnerRef.current, msg.requestId)) {
+            setCanvasNotice({ id: msg.requestId, scope: "canvas", severity: "error", message: "Analysis failed" });
+          }
+          if (latestUserActiveRef.current === msg.requestId) activePendingRef.current = false;
+          finishAnalysisLoading(msg.requestId);
+        }
+        return;
+      }
+
       if (msg.type === "analysisResult") {
         const request: AnalysisRequest = msg.request;
         const payload = msg.payload;
@@ -1200,6 +1232,7 @@ export default function App() {
         });
 
         if (request.lane === "active") {
+          if (!mayApplyActiveResult(request.requestId, latestUserActiveRef.current, activePendingRef.current, request.sequence, userSequenceRef.current)) return;
           if (request.sequence < latestActiveSequenceRef.current) {
             profileWebview("result.dropped", request.requestId, { reason: "stale-sequence" });
             pushWebviewDebugEvent("analysisResult.dropped.active.stale", {
@@ -1211,7 +1244,8 @@ export default function App() {
             return;
           }
 
-          finishAnalysisLoading();
+          if (latestUserActiveRef.current === request.requestId) activePendingRef.current = false;
+          finishAnalysisLoading(request.requestId);
 
           latestActiveSequenceRef.current = request.sequence;
           activeGraphGenerationRef.current = request.generation;
@@ -1291,7 +1325,7 @@ export default function App() {
           return;
         }
 
-        finishAnalysisLoading();
+        finishAnalysisLoading(request.requestId);
 
         if (payload?.graph) {
           if (pipelineEnabled) setProfileRequestId(request.requestId);
@@ -1787,13 +1821,22 @@ export default function App() {
 
   const stepTracePrev = useCallback(() => stepTraceTo(traceCursor - 1), [stepTraceTo, traceCursor]);
   const stepTraceNext = useCallback(() => stepTraceTo(traceCursor + 1), [stepTraceTo, traceCursor]);
+  const cancelPendingTrace = useCallback(() => {
+    const requestId = latestUserActiveRef.current;
+    if (!requestId || !activePendingRef.current) return;
+    postMessage("trace.cancel", { type: "cancelAnalysis", payload: { requestId } });
+    activePendingRef.current = false;
+    latestUserActiveRef.current = null;
+    finishAnalysisLoading(requestId);
+  }, [finishAnalysisLoading, postMessage]);
   const finishTraceMode = useCallback(() => {
+    cancelPendingTrace();
     setTraceMode(false);
     setTraceEvents(null);
     setTraceCursor(0);
     setTraceAnchorFilePath(null);
     syncTraceState(false, traceScope);
-  }, [syncTraceState, traceScope]);
+  }, [cancelPendingTrace, syncTraceState, traceScope]);
   const toggleTraceMode = useCallback(() => {
     setTraceMode((prev) => {
       const next = !prev;
@@ -1828,6 +1871,7 @@ export default function App() {
           });
         }
       } else {
+        cancelPendingTrace();
         setTraceEvents(null);
         setTraceCursor(0);
         setTraceAnchorFilePath(null);
@@ -1837,6 +1881,7 @@ export default function App() {
   }, [
     activeFilePath,
     beginAnalysisLoading,
+    cancelPendingTrace,
     effectiveTraceDepth,
     graphFilePath,
     postMessage,
@@ -2440,6 +2485,7 @@ export default function App() {
           if (!traceMode && graphFilePath) {
             syncGraphRoot({ kind: "file", path: graphFilePath });
           }
+          if (!graphFilePath && !activeFilePath) {return;}
           beginAnalysisLoading(
             traceMode ? "Loading trace graph..." : "Rebuilding graph...",
             traceMode

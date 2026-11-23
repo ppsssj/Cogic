@@ -183,6 +183,8 @@ export class CodeGraphPanel {
   private lastSelection: vscode.Selection | undefined;
   private analysisTimer: NodeJS.Timeout | undefined;
   private readonly selectionOrder = new SelectionOrder();
+  private pendingSelectionId: string | undefined;
+  private activeRequestId: string | undefined;
   private explicitAnalysis: { sequence: number; fileName: string; requestId: string } | undefined;
   private debugEpoch = 0;
   private readonly suppressedAutoAnalysisUris = new Map<string, number>();
@@ -382,9 +384,13 @@ export class CodeGraphPanel {
           }
           if (msg.type === "selectWorkspaceFile") {
             const selectionRevision = this.selectionOrder.next();
+            this.pendingSelectionId = msg.payload.profileRequestId;
             // Invalidate in-flight work when the user chooses a file, before async open/show.
             this.latestActiveAnalysisSequence = ++this.analysisSequence;
             ++this.analysisGeneration;
+            if (msg.payload.profileRequestId) {
+              this.postAnalysisLifecycle(msg.payload.profileRequestId, "running", this.latestActiveAnalysisSequence);
+            }
             if (msg.payload.graphDepth !== undefined) {
               this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
             }
@@ -397,13 +403,17 @@ export class CodeGraphPanel {
             } else {
               this.traceAnchorFilePath = null;
             }
-            return await this.selectWorkspaceFile(
-              msg.payload.filePath,
-              Boolean(msg.payload.traceMode),
-              msg.payload.traceScope,
-              msg.payload.profileRequestId,
-              selectionRevision,
-            );
+            try {
+              return await this.selectWorkspaceFile(
+                msg.payload.filePath,
+                Boolean(msg.payload.traceMode),
+                msg.payload.traceScope,
+                msg.payload.profileRequestId,
+                selectionRevision,
+              );
+            } finally {
+              if (this.pendingSelectionId === msg.payload.profileRequestId) {this.pendingSelectionId = undefined;}
+            }
           }
           if (msg.type === "setGraphRoot") {
             this.graphRoot = msg.payload.root;
@@ -411,6 +421,18 @@ export class CodeGraphPanel {
           }
           if (msg.type === "setGraphDepth") {
             this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
+            return;
+          }
+          if (msg.type === "cancelAnalysis") {
+            if (this.pendingSelectionId === msg.payload.requestId) {
+              this.selectionOrder.next();
+              this.pendingSelectionId = undefined;
+            }
+            if (this.activeRequestId === msg.payload.requestId) {
+              this.latestActiveAnalysisSequence = ++this.analysisSequence;
+              ++this.analysisGeneration;
+            }
+            this.postAnalysisLifecycle(msg.payload.requestId, "cancelled");
             return;
           }
           if (msg.type === "setAnalysisCacheEnabled") {
@@ -423,6 +445,7 @@ export class CodeGraphPanel {
             return await this.postAnalysisForFile(
               msg.payload.filePath,
               msg.payload.generation,
+              msg.payload.profileRequestId,
             );
           }
           if (msg.type === "saveExportFile") {
@@ -438,7 +461,9 @@ export class CodeGraphPanel {
             return await this.applyPatchPreview(msg.payload);
           }
         } catch (e) {
-          this.handleRequestError(msg.type, e);
+          const requestId = "payload" in msg && msg.payload && "profileRequestId" in msg.payload ? msg.payload.profileRequestId : undefined;
+          if (typeof requestId === "string") {this.postAnalysisLifecycle(requestId, "failed");}
+          this.handleRequestError(msg.type, e, typeof requestId === "string" ? requestId : undefined);
         }
       },
       undefined,
@@ -590,6 +615,11 @@ export class CodeGraphPanel {
 
     const subDebugStart = vscode.debug.onDidStartDebugSession(() => {
       this.debugEpoch++;
+      this.selectionOrder.next();
+      if (this.pendingSelectionId) {
+        this.postAnalysisLifecycle(this.pendingSelectionId, "cancelled");
+        this.pendingSelectionId = undefined;
+      }
       if (this.analysisTimer) {
         clearTimeout(this.analysisTimer);
         this.analysisTimer = undefined;
@@ -890,12 +920,17 @@ export class CodeGraphPanel {
     });
   }
 
+  private postAnalysisLifecycle(requestId: string, state: "running" | "completed" | "cancelled" | "failed" | "superseded", sequence?: number) {
+    void this.panel.webview.postMessage({ type: "analysisLifecycle", requestId, state, sequence } satisfies ExtToWebviewMessage);
+  }
+
   private postNotice(
     scope: UINotice["scope"],
     severity: UINotice["severity"],
     message: string,
     detail?: string,
     source?: string,
+    requestId?: string,
   ) {
     this.panel.webview.postMessage({
       type: "uiNotice",
@@ -906,11 +941,12 @@ export class CodeGraphPanel {
         message,
         detail,
         source,
+        requestId,
       },
     } satisfies ExtToWebviewMessage);
   }
 
-  private handleRequestError(action: WebviewToExtMessage["type"], error: unknown) {
+  private handleRequestError(action: WebviewToExtMessage["type"], error: unknown, requestId?: string) {
     const detail = getErrorMessage(error);
 
     if (
@@ -919,7 +955,7 @@ export class CodeGraphPanel {
       action === "selectWorkspaceFile" ||
       action === "expandNode"
     ) {
-      this.postNotice("canvas", "error", "Analysis failed", detail, action);
+      this.postNotice("canvas", "error", "Analysis failed", detail, action, requestId);
       return;
     }
 
@@ -1082,7 +1118,9 @@ export class CodeGraphPanel {
   ) {
     const debugEpoch = this.debugEpoch;
     const request = this.beginActiveAnalysis(reason);
-    if (pipelineProfileEnabled() && profileRequestId) {request.requestId = profileRequestId;}
+    if (profileRequestId) {request.requestId = profileRequestId;}
+    this.activeRequestId = request.requestId;
+    this.postAnalysisLifecycle(request.requestId, "running", request.sequence);
     pipelineProfile("request.begin", request.requestId, { reason, generation: request.generation, sequence: request.sequence });
     pushPanelDebugEvent("analysis.active.begin", {
       requestId: request.requestId,
@@ -1104,6 +1142,8 @@ export class CodeGraphPanel {
         payload: null,
         request,
       } satisfies ExtToWebviewMessage);
+      this.postAnalysisLifecycle(request.requestId, "completed");
+      if (this.activeRequestId === request.requestId) {this.activeRequestId = undefined;}
       return;
     }
 
@@ -1114,7 +1154,7 @@ export class CodeGraphPanel {
     }
     try {
       const isCancelled = () => request.sequence !== this.latestActiveAnalysisSequence ||
-        (reason === "auto" && (debugEpoch !== this.debugEpoch || Boolean(vscode.debug.activeDebugSession)));
+        debugEpoch !== this.debugEpoch || (reason === "auto" && Boolean(vscode.debug.activeDebugSession));
 
       let result: DepthAnalysisResult;
       try {
@@ -1130,6 +1170,7 @@ export class CodeGraphPanel {
         });
       } catch (error) {
         if (error instanceof AnalysisCancelledError) {
+          this.postAnalysisLifecycle(request.requestId, "cancelled");
           pipelineProfile("request.cancelled", request.requestId, { reason: "superseded-or-debug" });
           pushPanelDebugEvent("analysis.active.cancelled", { requestId: request.requestId });
           return;
@@ -1167,8 +1208,7 @@ export class CodeGraphPanel {
         meta: result.meta,
       };
 
-      if (request.sequence !== this.latestActiveAnalysisSequence ||
-          (reason === "auto" && (debugEpoch !== this.debugEpoch || Boolean(vscode.debug.activeDebugSession)))) {
+      if (isCancelled()) {
         pushPanelDebugEvent("analysis.active.drop.stale", {
           requestId: request.requestId,
           generation: request.generation,
@@ -1177,6 +1217,7 @@ export class CodeGraphPanel {
           file: doc.fileName,
         });
         pipelineProfile("request.dropped", request.requestId, { reason: "stale" });
+        this.postAnalysisLifecycle(request.requestId, "superseded");
         return;
       }
       pipelineProfile("payload.ready", request.requestId, { durationMs: performance.now() - payloadStart, nodes: traceScopedGraph?.nodes.length ?? 0, edges: traceScopedGraph?.edges.length ?? 0, memory: process.memoryUsage() });
@@ -1197,16 +1238,24 @@ export class CodeGraphPanel {
         request,
       } satisfies ExtToWebviewMessage);
       void posted.then(
-        (delivered) => pipelineProfile("postMessage.resolved", request.requestId, { delivered }),
-        () => pipelineProfile("postMessage.failed", request.requestId),
+        (delivered) => {
+          pipelineProfile("postMessage.resolved", request.requestId, { delivered });
+          this.postAnalysisLifecycle(request.requestId, delivered ? "completed" : "failed");
+        },
+        () => {
+          pipelineProfile("postMessage.failed", request.requestId);
+          this.postAnalysisLifecycle(request.requestId, "failed");
+        },
       );
     } finally {
       if (this.explicitAnalysis?.sequence === request.sequence) {this.explicitAnalysis = undefined;}
+      if (this.activeRequestId === request.requestId) {this.activeRequestId = undefined;}
     }
   }
 
-  private async postAnalysisForFile(filePath: string, generation?: number) {
+  private async postAnalysisForFile(filePath: string, generation?: number, profileRequestId?: string) {
     if (generation !== undefined && generation !== this.analysisGeneration) {
+      if (profileRequestId) {this.postAnalysisLifecycle(profileRequestId, "superseded");}
       pushPanelDebugEvent("analysis.expand.skip.stale-request", {
         filePath,
         requestGeneration: generation,
@@ -1216,6 +1265,8 @@ export class CodeGraphPanel {
     }
 
     const request = this.beginExpandAnalysis(generation ?? this.analysisGeneration);
+    if (profileRequestId) {request.requestId = profileRequestId;}
+    this.postAnalysisLifecycle(request.requestId, "running", request.sequence);
     pipelineProfile("request.begin", request.requestId, { reason: "expand", generation: request.generation, sequence: request.sequence });
     pushPanelDebugEvent("analysis.expand.begin", {
       requestId: request.requestId,
@@ -1228,6 +1279,7 @@ export class CodeGraphPanel {
     const code = new TextDecoder("utf-8").decode(bytes);
     const isCancelled = () => request.generation !== this.analysisGeneration;
     if (isCancelled()) {
+      this.postAnalysisLifecycle(request.requestId, "cancelled");
       pipelineProfile("request.cancelled", request.requestId, { reason: "stale-generation" });
       return;
     }
@@ -1248,6 +1300,7 @@ export class CodeGraphPanel {
       });
     } catch (error) {
       if (error instanceof AnalysisCancelledError) {
+        this.postAnalysisLifecycle(request.requestId, "cancelled");
         pipelineProfile("request.cancelled", request.requestId, { reason: "stale-generation" });
         return;
       }
@@ -1274,6 +1327,7 @@ export class CodeGraphPanel {
     };
 
     if (request.generation !== this.analysisGeneration) {
+      this.postAnalysisLifecycle(request.requestId, "superseded");
       pipelineProfile("request.dropped", request.requestId, { reason: "stale-generation" });
       pushPanelDebugEvent("analysis.expand.drop.stale", {
         requestId: request.requestId,
@@ -1298,6 +1352,7 @@ export class CodeGraphPanel {
       payload,
       request,
     } satisfies ExtToWebviewMessage);
+    this.postAnalysisLifecycle(request.requestId, "completed");
   }
 
   private getAnalysisCacheKey(args: {
@@ -1401,6 +1456,7 @@ export class CodeGraphPanel {
       preview: true,
     }));
     if (!editor) {
+      if (profileRequestId) {this.postAnalysisLifecycle(profileRequestId, "superseded");}
       pipelineProfile("request.cancelled", profileRequestId ?? `selection-${revision}`, { reason: "superseded-selection" });
       return;
     }

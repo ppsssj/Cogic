@@ -57,6 +57,12 @@ test("P12C isolated Generate", async () => {
     const frameAck = rows.find(r => r.event === "pipeline.canvas.twoAnimationFrames").monotonicMs;
     const interveningRequests = all.filter(r => r.event === "request.begin" && r.requestId !== id && r.monotonicMs >= begin && r.monotonicMs <= frameAck).map(r => r.requestId);
     console.log(JSON.stringify({ requestId: id, generateAndStabilityMs: Date.now() - start, availableBeforeMiB: before, minimumMiB: minimum, interveningRequests, inspector: inspector.replace(/\s+/g, " ").slice(0, 1500), aborted }));
+    await frame.locator('button[title="Trace mode OFF"]').click();
+    await expect(frame.locator('button[title="Trace mode ON"]')).toBeVisible();
+    await expect.poll(() => records().some(r => r.event === "request.begin" && r.reason === "trace"), { timeout: 30_000 }).toBeTruthy();
+    await expect(frame.getByText("Loading trace graph...", { exact: true })).toHaveCount(0, { timeout: 60_000 });
+    await frame.locator('button[title="Trace mode ON"]').click();
+    await expect(frame.locator('button[title="Trace mode OFF"]')).toBeVisible();
   } finally {
     clearInterval(monitor);
     console.log(JSON.stringify({ availableBeforeMiB: before, minimumMiB: minimum, aborted }));
