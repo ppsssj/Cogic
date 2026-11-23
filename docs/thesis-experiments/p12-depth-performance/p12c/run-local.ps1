@@ -12,6 +12,7 @@ $env:COGIC_PIPELINE_PROFILE = Join-Path $Output 'pipeline.jsonl'
 $env:RUN_ID = $RunId
 Push-Location $Harness
 try {
+  $ErrorActionPreference = 'Continue'
   & npx.cmd playwright test -c playwright.p13.config.ts e2e/p13-p12c.spec.ts 2>&1 | Tee-Object -FilePath (Join-Path $Output 'harness.log')
   exit $LASTEXITCODE
 } finally { Pop-Location }

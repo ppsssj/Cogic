@@ -1,5 +1,7 @@
 # P12-C pipeline diagnostics
 
+The completed small-fixture smoke and overlap investigation are recorded in [follow-up.md](follow-up.md). The fixture Generate was a cache hit after preparation; it is not a cold Vite measurement.
+
 ## Scope and collection
 
 Opt in by setting `COGIC_PIPELINE_PROFILE` to an absolute, writable JSONL path in the VS Code process environment before launching a fresh extension host. The extension appends one JSON object per event; no telemetry is sent externally. The file may contain source paths and should be reviewed before sharing. Unset the variable to disable output. Write errors are ignored and can leave an incomplete log. The same variable injects an opt-in Webview meta tag. GraphPayload is unchanged.
