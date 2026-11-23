@@ -1,11 +1,13 @@
 # Stage B 결과 — 실제 프로젝트(hono, vite)
 
-4개 과제 × 4개 도구 × 독립 실행 3회 = 48회 모두 실행했다. 실행 순서는 사전 등록대로 회차 → 과제 → 도구 회전이다. 작업 복사본은 매 실행 후 깨끗했다. **모든 (과제, 도구, 유형)에서 3회의 분류가 같았다.**
+4개 과제 × 4개 도구 × 독립 실행 3회 = 48회 모두 시도했다. 이 중 45회는 exit 0, **TFF H2 3회는 exit 1로 비정상 종료**했다. 실행 순서는 사전 등록대로 회차 → 과제 → 도구 회전이다. 작업 복사본은 매 실행 후 깨끗했다. **정정 후 모든 (과제, 도구, 유형)에서 3회의 분류가 같았다.**
+
+TFF H2의 세 실행은 `p13b-H2-tff-r0-20261123-165448`, `p13b-H2-tff-r1-20261123-171905`, `p13b-H2-tff-r2-20261123-174535`다([종료 상태](data/run-status.json)). 각각 R1·R2는 실패로 기록됐으나 R3 판정은 기록되기 전에 스펙이 종료됐다. R3의 `EXECUTION_FAILED`는 원본 판정이 아니라 사후 정정 C2다. 따라서 48회 시도를 48회 정상 완료로 해석해서는 안 된다.
 
 원자료:
 - 요약: [data/stage-b-summary.csv](data/stage-b-summary.csv)
 - 실행별 결과: [data/stage-b-per-run.json](data/stage-b-per-run.json)
-- 실행별 증거: [data/runs/](data/runs/) (`p13-tasks.json`, `evidence.json`, `run.log`)
+- 실행별 증거: [data/runs/](data/runs/) (`p13-tasks.json`, `result.json`, `steps.csv`, `evidence.json`). `run.log`와 개별 단계 스크린샷은 Git에 포함되지 않는다([재현 한계](reproduction.md)).
 
 ## 1. 분류 (3회 대표값)
 | 과제 | 유형 | VS Code 기본 | Trace Function Flow | Context Graph | Cogic |
@@ -25,7 +27,7 @@
 | 모든 과제 | R4 디버그 연계 | NOT_TESTED (사전 결정) | NOT_TESTED | NOT_TESTED | NOT_TESTED |
 
 ### 판독 정정 C1–C3
-집계 단계에서 하네스 로그의 실패 단계 기록을 근거로 스펙 자체의 판정 오류를 정정했다. 원래 값은 `rawClasses` 열에 보존했다.
+집계 단계에서 하네스 로그의 실패 단계 기록을 근거로 스펙 자체의 판정 오류를 정정했다. Git에 포함된 각 실행의 `steps.csv`에서도 실패 단계를 확인할 수 있다. 원래 판정은 각 `p13-tasks.json`, 실행별 집계의 `rawClass`, 요약의 `rawClasses`에 보존했다. C2는 원본 R3 기록이 없으므로 `(not recorded)`로 보존한다. C1은 6개 실행, C2와 C3은 각각 3개 실행에 적용됐다.
 
 | # | 대상 | 스펙의 판정 → 정정 | 근거 |
 |---|---|---|---|
