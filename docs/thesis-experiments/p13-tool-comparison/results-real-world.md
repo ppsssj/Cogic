@@ -7,7 +7,7 @@ TFF H2의 세 실행은 `p13b-H2-tff-r0-20261123-165448`, `p13b-H2-tff-r1-202611
 원자료:
 - 요약: [data/stage-b-summary.csv](data/stage-b-summary.csv)
 - 실행별 결과: [data/stage-b-per-run.json](data/stage-b-per-run.json)
-- 실행별 증거: [data/runs/](data/runs/) (`p13-tasks.json`, `result.json`, `steps.csv`, `evidence.json`). `run.log`와 개별 단계 스크린샷은 Git에 포함되지 않는다([재현 한계](reproduction.md)).
+- 실행별 증거: [data/runs/](data/runs/) (`p13-tasks.json`, `result.json`, `steps.csv`, `evidence.json`), [정정 관련 로그 12개](data/correction-logs/). 그 밖의 로그와 개별 단계 스크린샷은 Git에 포함되지 않는다([재현 한계](reproduction.md)).
 
 ## 1. 분류 (3회 대표값)
 | 과제 | 유형 | VS Code 기본 | Trace Function Flow | Context Graph | Cogic |

@@ -1,0 +1,27 @@
+[2026-11-23T09:04:07.412Z] STEP launch
+[2026-11-23T09:04:12.377Z]   -> ok (4965 ms)
+[2026-11-23T09:04:12.387Z] STEP start-state packages/vite/src/node/build.ts@build
+[2026-11-23T09:04:15.384Z]   screenshot: 01-start-state_packages_vite_src_node_build_ts_build.png
+[2026-11-23T09:04:15.385Z]   -> ok (2898 ms)
+[2026-11-23T09:04:15.389Z] STEP r1-codelens-trace
+[2026-11-23T09:04:20.283Z]   op(+1) click CodeLens 'Trace Function' above start
+[2026-11-23T09:04:27.457Z]   screenshot: 02-r1-codelens-trace.png
+[2026-11-23T09:04:27.457Z]   -> ok (11878 ms)
+[2026-11-23T09:04:27.488Z] P13 {"tool":"Trace Function Flow","task":"V2-R1","status":"SUPPORTED_AND_VERIFIED","userOperations":1,"fileSwitches":0,"automationMs":12099,"pairs":{"build->createBuilder":true,"createBuilder->resolveConfigToBuild":true,"resolveConfigToBuild->resolveConfig":true},"functionsShown":["build","createBuilder","resolveConfigToBuild","resolveConfig"],"codeLensAboveStart":true,"quickPick":null,"nodes":["ƒFunctionbuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts","ƒFunctioncreateBuilder()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts","ƒFunctionresolveConfigToBuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts","ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts","ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts","ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts","ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts","ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts","ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts","?Unresolvedconsole[method]( format(type, msg, opt","?Unresolvedconsole[method](format(type, msg, options))","?Unresolvedconsole[method](format(type, msg, options))","ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts","?Unresolvedconsole[method]( format(type, msg, opt","?Unresolvedconsole[method](format(type, msg, options))","?Unresolvedconsole[method](format(type, msg, options))","ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts","ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts","ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts","ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts","ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts","ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts","ƒFunction↗ importedisNodeLikeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts","ƒFunction↗ importednodeResolveWithVite()<WORK>\\vite\\packages\\vite\\src\\node\\nodeResolve.ts","ƒFunction↗ importedcreateImportMetaResolver()<WORK>\\vite\\packages\\vite\\src\\module-runner\\importMetaResolver.ts","ƒFunction↗ importedgetFileStartIndex()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts","ƒFunctioncollectAllModules()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts","ƒFunctionloadConfigFromBundledFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts","ƒFunction↗ importedfindNearestNodeModules()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts","ƒFunction↗ importedformatNativeConfigIncompatWarning()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"],"edges":93,"notifications":[]}
+[2026-11-23T09:04:27.490Z] STEP r2-select-target
+[2026-11-23T09:04:27.505Z]   op(+1) click target node
+[2026-11-23T09:04:57.541Z]   FAILED: locator.click: Timeout 30000ms exceeded.
+[2026-11-23T09:04:57.709Z]   screenshot: 03-r2-select-target-FAILED.png
+[2026-11-23T09:04:57.709Z]   -> FAIL (30051 ms)
+[2026-11-23T09:04:57.719Z] P13 {"tool":"Trace Function Flow","task":"V2-R2","status":"UNSUPPORTED_BY_DESIGN","userOperations":1,"fileSwitches":0,"automationMs":30229,"segmentsShown":[],"callSite":"","detail":"calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls max-depth max-depth max-depth max-d"}
+[2026-11-23T09:04:57.720Z] STEP r3-dblclick-target
+[2026-11-23T09:04:57.728Z]   op(+1) double-click target node
+[2026-11-23T09:05:27.766Z]   FAILED: locator.click: Timeout 30000ms exceeded.
+[2026-11-23T09:05:27.899Z]   screenshot: 04-r3-dblclick-target-FAILED.png
+[2026-11-23T09:05:27.899Z]   -> FAIL (30046 ms)
+[2026-11-23T09:05:27.927Z] STEP r3-return
+[2026-11-23T09:05:27.948Z]   op(+1) double-click start node
+[2026-11-23T09:05:57.960Z]   FAILED: locator.click: Timeout 30000ms exceeded.
+[2026-11-23T09:05:58.128Z]   screenshot: 05-r3-return-FAILED.png
+[2026-11-23T09:05:58.129Z]   -> FAIL (30033 ms)
+[2026-11-23T09:05:58.142Z] P13 {"tool":"Trace Function Flow","task":"V2-R3","status":"EXECUTION_FAILED","userOperations":2,"fileSwitches":0,"automationMs":60422,"opened":{"file":"build.ts","line":575,"group":1},"returned":{"file":"build.ts","line":575,"group":1},"returnOperations":1,"viewKept":true,"startNodeInGraph":true}

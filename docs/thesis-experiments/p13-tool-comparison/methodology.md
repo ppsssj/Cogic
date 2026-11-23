@@ -10,6 +10,7 @@
 - P3/P4 하네스(`e2e/lib/vscode.ts`, `lib/cogic.ts`, `lib/recorder.ts`)를 재사용했다.
   - Stage A: P3의 `p1-cogic.spec.ts`, `p2-compare.spec.ts`를 **수정 없이** 실행했다.
   - Stage B: 새 스펙 [tools/harness/p13-real.spec.ts](tools/harness/p13-real.spec.ts)를 추가했다(기존 스펙은 변경하지 않음).
+  - 연구실 PC에 남은 공통 라이브러리와 Stage A 스펙·설정을 [tools/harness/](tools/harness/)에 복사했다. 측정 당시의 하네스 해시는 남지 않아 사본의 시점 일치 여부는 입증할 수 없다. 보존 자료의 오프라인 검증과 UI 재실행 조건은 [reproduction.md](reproduction.md)를 참조한다.
 - 격리:
   - 실행마다 새 user-data와 확장 폴더를 쓰고, 해당 도구 확장만 복사했다.
   - VS Code 1.147.0 archive, 창 1600×960.

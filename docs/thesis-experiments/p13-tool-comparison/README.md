@@ -32,4 +32,6 @@ Cogic(main `cef96eb`)을 VS Code 기본 기능, Trace Function Flow 1.1.1, Conte
 | Context Graph는 이 Windows 환경에서 실행되지 않았다 | Context Graph에 해당 기능이 없다 |
 
 ## 문서
+[오프라인 기록 검증과 재현 한계](reproduction.md): 판정·주요 집계 검증 가능, 전체 집계 재생성과 외부 PC UI 재실행은 부분 가능.
+
 [research-questions.md](research-questions.md) · [tools-and-versions.md](tools-and-versions.md) · [task-definitions.md](task-definitions.md) · [methodology.md](methodology.md) · [results-synthetic.md](results-synthetic.md) · [results-real-world.md](results-real-world.md) · [limitations.md](limitations.md) · [reproduction.md](reproduction.md) · 사전 등록: [A](preregistration-stage-a.md), [B](preregistration-stage-b.md), [B 보완](preregistration-stage-b-addendum.md)

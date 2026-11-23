@@ -1,0 +1,25 @@
+[2026-11-23T07:54:50.742Z] STEP launch
+[2026-11-23T07:54:55.084Z]   -> ok (4342 ms)
+[2026-11-23T07:54:55.089Z] STEP start-state src/hono-base.ts@request
+[2026-11-23T07:54:57.837Z]   screenshot: 01-start-state_src_hono-base_ts_request.png
+[2026-11-23T07:54:57.837Z]   -> ok (2657 ms)
+[2026-11-23T07:54:57.842Z] STEP r1-codelens-trace
+[2026-11-23T07:55:17.953Z]   FAILED: no CodeLens "Trace Function" directly above line 518
+[2026-11-23T07:55:18.094Z]   screenshot: 02-r1-codelens-trace-FAILED.png
+[2026-11-23T07:55:18.094Z]   -> FAIL (20111 ms)
+[2026-11-23T07:55:18.095Z] STEP r1-palette-trace
+[2026-11-23T07:55:18.375Z]   op(+1) command palette: Trace Function Flow: Trace Function Flow
+[2026-11-23T07:55:20.949Z]   op(+1) Escape (start not offered)
+[2026-11-23T07:56:21.271Z]   FAILED: webview frame not found
+[2026-11-23T07:56:21.394Z]   screenshot: 03-r1-palette-trace-FAILED.png
+[2026-11-23T07:56:21.394Z]   -> FAIL (63176 ms)
+[2026-11-23T07:56:21.399Z] P13 {"tool":"Trace Function Flow","task":"H2-R1","status":"EXECUTION_FAILED","userOperations":2,"fileSwitches":0,"automationMs":83557,"pairs":{},"functionsShown":[],"codeLensAboveStart":false,"quickPick":["notFoundHandler()Line 33","errorHandler()Line 37","defaultReplaceRequest()Line 386","handler()Line 391"],"edges":0,"notifications":[]}
+[2026-11-23T07:56:21.400Z] STEP r2-select-target
+[2026-11-23T07:56:21.401Z]   FAILED: Cannot read properties of undefined (reading 'locator')
+[2026-11-23T07:56:21.509Z]   screenshot: 04-r2-select-target-FAILED.png
+[2026-11-23T07:56:21.509Z]   -> FAIL (1 ms)
+[2026-11-23T07:56:21.511Z] P13 {"tool":"Trace Function Flow","task":"H2-R2","status":"EXECUTION_FAILED","userOperations":0,"fileSwitches":0,"automationMs":111,"segmentsShown":[],"callSite":"","detail":""}
+[2026-11-23T07:56:21.512Z] STEP r3-dblclick-target
+[2026-11-23T07:56:21.512Z]   FAILED: Cannot read properties of undefined (reading 'locator')
+[2026-11-23T07:56:21.650Z]   screenshot: 05-r3-dblclick-target-FAILED.png
+[2026-11-23T07:56:21.650Z]   -> FAIL (0 ms)
