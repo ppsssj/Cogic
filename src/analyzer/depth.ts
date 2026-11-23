@@ -10,6 +10,14 @@ import type { GraphPayload, GraphTraceEvent, TraceScope } from "../shared/protoc
 
 export type DepthAnalysisResult = ReturnType<typeof analyzeWithWorkspace>;
 
+export class AnalysisCancelledError extends Error {
+  constructor() { super("Analysis cancelled"); this.name = "AnalysisCancelledError"; }
+}
+
+export function throwIfAnalysisCancelled(isCancelled?: () => boolean) {
+  if (isCancelled?.()) {throw new AnalysisCancelledError();}
+}
+
 type DebugLogger = (event: string, detail?: Record<string, unknown>) => void;
 
 export function normalizeComparablePath(filePath: string) {
@@ -143,6 +151,7 @@ export async function analyzeWorkspaceDepth(args: {
   readFile: (filePath: string) => Promise<string>;
   debug?: DebugLogger;
   profile?: DebugLogger;
+  isCancelled?: () => boolean;
   /** P12-B Program session for Depth >= 2 runs. Default true; false restores the per-analysis Program path. */
   programSession?: boolean;
 }): Promise<DepthAnalysisResult> {
@@ -159,6 +168,7 @@ export async function analyzeWorkspaceDepth(args: {
     expands && cacheEnabled && args.programSession !== false ? createAnalysisSession() : undefined;
 
   try {
+    throwIfAnalysisCancelled(args.isCancelled);
     const baseResult = analyzeWithWorkspace({
       active: {
         code: args.code,
@@ -171,6 +181,7 @@ export async function analyzeWorkspaceDepth(args: {
       cacheEnabled,
       session,
     });
+    throwIfAnalysisCancelled(args.isCancelled);
 
     if (!baseResult.graph) {
       return baseResult;
@@ -208,12 +219,14 @@ export async function analyzeWorkspaceDepth(args: {
       const nextFrontier = new Set<string>();
 
       for (const targetFile of frontier) {
+        throwIfAnalysisCancelled(args.isCancelled);
         const targetStart = performance.now();
         const comparable = normalizeComparablePath(targetFile);
         analyzedFiles.add(comparable);
 
         try {
           const code = await args.readFile(targetFile);
+          throwIfAnalysisCancelled(args.isCancelled);
           const expandedResult = analyzeWithWorkspace({
             active: {
               code,
@@ -226,6 +239,7 @@ export async function analyzeWorkspaceDepth(args: {
             cacheEnabled,
             session,
           });
+          throwIfAnalysisCancelled(args.isCancelled);
 
           const mergeStart = performance.now();
           mergedGraph = mergeGraphPayload(mergedGraph, expandedResult.graph) ?? mergedGraph;
@@ -242,7 +256,8 @@ export async function analyzeWorkspaceDepth(args: {
             nextFrontier.add(discoveredFile);
           }
           args.profile?.("depth.target.end", { hop, file: targetFile, durationMs: performance.now() - targetStart });
-        } catch {
+        } catch (error) {
+          if (error instanceof AnalysisCancelledError) {throw error;}
           args.profile?.("depth.target.failed", { hop, file: targetFile, durationMs: performance.now() - targetStart });
           // ignore unreadable expansion targets
         }
@@ -251,6 +266,8 @@ export async function analyzeWorkspaceDepth(args: {
       frontier = [...nextFrontier];
       args.profile?.("depth.frontier", { hop: hop + 1, files: frontier.length });
     }
+
+    throwIfAnalysisCancelled(args.isCancelled);
 
     return {
       ...baseResult,

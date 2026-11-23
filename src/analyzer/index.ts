@@ -9,6 +9,8 @@ export {
   invalidateAnalyzerFileCaches,
 } from "./analyze";
 export {
+  AnalysisCancelledError,
+  throwIfAnalysisCancelled,
   analyzeWorkspaceDepth,
   collectDepthExpansionFiles,
   guessLanguageId,
