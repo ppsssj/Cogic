@@ -802,6 +802,7 @@ function formatSafeDataflowLabel(
   argumentSourceFile: ts.SourceFile,
   parameter: ts.ParameterDeclaration,
   argument: ts.Expression,
+  tupleIndex?: number,
 ) {
   const clampText = (value: string, max = 80) =>
     value.length <= max ? value : `${value.slice(0, max - 3)}...`;
@@ -816,7 +817,9 @@ function formatSafeDataflowLabel(
     60,
   );
   const argumentText = clampText(
-    argument.getText(argumentSourceFile).replace(/\s+/g, " ").trim(),
+    (tupleIndex !== undefined && ts.isSpreadElement(argument)
+      ? `${argument.expression.getText(argumentSourceFile)}[${tupleIndex}]`
+      : argument.getText(argumentSourceFile)).replace(/\s+/g, " ").trim(),
     80,
   );
 
@@ -1533,7 +1536,7 @@ function buildActiveFileGraph(
         if (
           ts.isMethodDeclaration(m) &&
           m.name &&
-          ts.isIdentifier(m.name) &&
+          (ts.isIdentifier(m.name) || ts.isPrivateIdentifier(m.name)) &&
           m.body
         ) {
           const methodId = pushNode(m, "method", `${className}.${m.name.text}`, {
@@ -2085,14 +2088,33 @@ function buildActiveFileGraph(
     const params = sigDecl.parameters ?? ts.factory.createNodeArray();
     const args = callArgs ?? [];
 
-    const n = Math.min(params.length, args.length);
-    for (let i = 0; i < n; i++) {
-      const p = params[i];
+    let parameterIndex = 0;
+    for (let i = 0; i < args.length && parameterIndex < params.length; i++) {
+      const p = params[parameterIndex];
       const a = args[i];
-      if (!p || !a) {continue;}
-
+      if (ts.isSpreadElement(a)) {
+        // A final spread directly into a rest parameter is an array-to-rest flow.
+        if (p.dotDotDotToken && i === args.length - 1) {
+          addEdge("dataflow", ownerId, targetId, formatSafeDataflowLabel(sf, p, a), `arg#${parameterIndex}`);
+          break;
+        }
+        // Only fixed tuples with required elements have unambiguous positions.
+        const type = checker.getTypeAtLocation(a.expression);
+        if (!checker.isTupleType(type)) {break;}
+        const flags = (type as ts.TupleTypeReference).target.elementFlags;
+        if (!flags.every((flag) => flag === ts.ElementFlags.Required) ||
+            flags.some((_, j) => !params[parameterIndex + j] || params[parameterIndex + j].dotDotDotToken)) {break;}
+        for (let j = 0; j < flags.length; j++) {
+          const label = formatSafeDataflowLabel(sf, params[parameterIndex + j], a, j);
+          addEdge("dataflow", ownerId, targetId, label, `arg#${parameterIndex + j}`);
+        }
+        parameterIndex += flags.length;
+        continue;
+      }
       const label = formatSafeDataflowLabel(sf, p, a);
-      addEdge("dataflow", ownerId, targetId, label, `arg#${i}`);
+      addEdge("dataflow", ownerId, targetId, label, `arg#${parameterIndex}`);
+      if (p.dotDotDotToken) {break;}
+      parameterIndex++;
     }
   };
 
@@ -2133,6 +2155,19 @@ function buildActiveFileGraph(
             edgeKind: "updates" as GraphEdgeKind,
             label: calleeName,
           };
+        }
+      }
+
+      // A property annotated with a function type resolves its signature to the
+      // type declaration rather than the initializer used as the graph node.
+      // Use the property symbol only for a local, function-valued field; retain
+      // the selected signature for argument mapping and overload semantics.
+      if (declFromSym && ts.isPropertyDeclaration(declFromSym) &&
+          declFromSym.getSourceFile() === sf && declFromSym.initializer &&
+          (ts.isArrowFunction(declFromSym.initializer) || ts.isFunctionExpression(declFromSym.initializer))) {
+        const targetId = resolveLocalNodeIdForDeclaration(declFromSym);
+        if (targetId) {
+          return { tgtId: targetId, sigDecl: sig?.getDeclaration() as ts.SignatureDeclaration | undefined };
         }
       }
 
@@ -2326,7 +2361,7 @@ function buildActiveFileGraph(
       ts.isMethodDeclaration(node) &&
       node.body &&
       node.name &&
-      ts.isIdentifier(node.name)
+      (ts.isIdentifier(node.name) || ts.isPrivateIdentifier(node.name))
     ) {
       const pos = node.getStart(sf, false);
       const id = idByDeclPos.get(pos);
