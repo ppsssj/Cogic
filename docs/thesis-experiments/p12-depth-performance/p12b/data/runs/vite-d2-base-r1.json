@@ -1,0 +1,418 @@
+{
+  "meta": {
+    "tool": "p12b/profile-depth-product",
+    "impl": "baseline-replica",
+    "cogicRevision": "7469bafda7af38498f9a579989a8c66aeab2afc3",
+    "cogicDirty": false,
+    "projectRevision": "3567471998e3da315675086f44368e266c9c0e33",
+    "project": "vite",
+    "activeFile": "packages/vite/src/node/server/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "programSession": null,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceSizeMB": 768,
+    "v8HeapSizeLimitMB": 960,
+    "fileCount": 1654,
+    "freeMBAtStart": 2026,
+    "totalMB": 8136,
+    "platform": "win32"
+  },
+  "status": "completed",
+  "error": null,
+  "totalMs": 65639.8313,
+  "cpuMs": {
+    "user": 55953,
+    "system": 26985
+  },
+  "nodes": 1078,
+  "edges": 3755,
+  "graphHashRaw": "3f9848fc34040118af9c20fc9785f2b39bf23368ede587dd7d58d9db73c62b29",
+  "graphHashNormalized": "1772aaa81b3bd36313a44c139661e1b627530945b7528c45baabb9c7b6ea9895",
+  "programsCreated": 35,
+  "programTimingSource": "unavailable (baseline build has no program event)",
+  "createProgramMsTotal": null,
+  "firstProgramMs": null,
+  "expansionProgramMedianMs": null,
+  "structureReuse": {},
+  "reusedSourceFilesTotal": 0,
+  "sessionFallbacks": [],
+  "cacheEvents": {
+    "miss": 12824,
+    "store": 12824,
+    "skipFull": 9625,
+    "hit": 67501,
+    "evict": 1179
+  },
+  "peakRSSMB": 881.875,
+  "minFreeMBSeen": 1231,
+  "programs": [],
+  "memory": [
+    {
+      "tag": "start",
+      "rssMB": 64,
+      "heapUsedMB": 21.6,
+      "freeMB": 2026
+    },
+    {
+      "tag": "analysis:1",
+      "rssMB": 620.1,
+      "heapUsedMB": 466,
+      "freeMB": 1478
+    },
+    {
+      "tag": "analysis:2",
+      "rssMB": 700.5,
+      "heapUsedMB": 572.5,
+      "freeMB": 1400
+    },
+    {
+      "tag": "analysis:3",
+      "rssMB": 809.2,
+      "heapUsedMB": 680.4,
+      "freeMB": 1296
+    },
+    {
+      "tag": "analysis:4",
+      "rssMB": 700.1,
+      "heapUsedMB": 472.1,
+      "freeMB": 1408
+    },
+    {
+      "tag": "analysis:5",
+      "rssMB": 766.2,
+      "heapUsedMB": 537.4,
+      "freeMB": 1337
+    },
+    {
+      "tag": "analysis:6",
+      "rssMB": 769.4,
+      "heapUsedMB": 617.3,
+      "freeMB": 1337
+    },
+    {
+      "tag": "analysis:7",
+      "rssMB": 781.9,
+      "heapUsedMB": 450,
+      "freeMB": 1320
+    },
+    {
+      "tag": "analysis:8",
+      "rssMB": 778.6,
+      "heapUsedMB": 526.7,
+      "freeMB": 1324
+    },
+    {
+      "tag": "analysis:9",
+      "rssMB": 785.1,
+      "heapUsedMB": 487.9,
+      "freeMB": 1323
+    },
+    {
+      "tag": "analysis:10",
+      "rssMB": 787.6,
+      "heapUsedMB": 528.7,
+      "freeMB": 1321
+    },
+    {
+      "tag": "analysis:11",
+      "rssMB": 806.4,
+      "heapUsedMB": 635.9,
+      "freeMB": 1304
+    },
+    {
+      "tag": "analysis:12",
+      "rssMB": 880.9,
+      "heapUsedMB": 689.6,
+      "freeMB": 1231
+    },
+    {
+      "tag": "analysis:13",
+      "rssMB": 803.1,
+      "heapUsedMB": 545.7,
+      "freeMB": 1301
+    },
+    {
+      "tag": "analysis:14",
+      "rssMB": 823.4,
+      "heapUsedMB": 595.1,
+      "freeMB": 1288
+    },
+    {
+      "tag": "analysis:15",
+      "rssMB": 849.5,
+      "heapUsedMB": 490.5,
+      "freeMB": 1269
+    },
+    {
+      "tag": "analysis:16",
+      "rssMB": 851.9,
+      "heapUsedMB": 559.6,
+      "freeMB": 1269
+    },
+    {
+      "tag": "analysis:17",
+      "rssMB": 854.2,
+      "heapUsedMB": 603.3,
+      "freeMB": 1265
+    },
+    {
+      "tag": "analysis:18",
+      "rssMB": 853.1,
+      "heapUsedMB": 480.1,
+      "freeMB": 1265
+    },
+    {
+      "tag": "analysis:19",
+      "rssMB": 854.9,
+      "heapUsedMB": 561,
+      "freeMB": 1262
+    },
+    {
+      "tag": "analysis:20",
+      "rssMB": 848.9,
+      "heapUsedMB": 461.3,
+      "freeMB": 1266
+    },
+    {
+      "tag": "analysis:21",
+      "rssMB": 851.1,
+      "heapUsedMB": 543.2,
+      "freeMB": 1263
+    },
+    {
+      "tag": "analysis:22",
+      "rssMB": 855.7,
+      "heapUsedMB": 615.3,
+      "freeMB": 1257
+    },
+    {
+      "tag": "analysis:23",
+      "rssMB": 852,
+      "heapUsedMB": 495.7,
+      "freeMB": 1258
+    },
+    {
+      "tag": "analysis:24",
+      "rssMB": 854,
+      "heapUsedMB": 575.7,
+      "freeMB": 1259
+    },
+    {
+      "tag": "analysis:25",
+      "rssMB": 851.5,
+      "heapUsedMB": 485.4,
+      "freeMB": 1257
+    },
+    {
+      "tag": "analysis:26",
+      "rssMB": 853.5,
+      "heapUsedMB": 532.7,
+      "freeMB": 1251
+    },
+    {
+      "tag": "analysis:27",
+      "rssMB": 855.8,
+      "heapUsedMB": 601.7,
+      "freeMB": 1242
+    },
+    {
+      "tag": "analysis:28",
+      "rssMB": 848.8,
+      "heapUsedMB": 452.5,
+      "freeMB": 1247
+    },
+    {
+      "tag": "analysis:29",
+      "rssMB": 851.4,
+      "heapUsedMB": 531.9,
+      "freeMB": 1246
+    },
+    {
+      "tag": "analysis:30",
+      "rssMB": 853.5,
+      "heapUsedMB": 599.5,
+      "freeMB": 1243
+    },
+    {
+      "tag": "analysis:31",
+      "rssMB": 849.5,
+      "heapUsedMB": 453.2,
+      "freeMB": 1247
+    },
+    {
+      "tag": "analysis:32",
+      "rssMB": 851.7,
+      "heapUsedMB": 525,
+      "freeMB": 1242
+    },
+    {
+      "tag": "analysis:33",
+      "rssMB": 854,
+      "heapUsedMB": 599.5,
+      "freeMB": 1242
+    },
+    {
+      "tag": "analysis:34",
+      "rssMB": 849.9,
+      "heapUsedMB": 458.1,
+      "freeMB": 1246
+    },
+    {
+      "tag": "analysis:35",
+      "rssMB": 852.7,
+      "heapUsedMB": 547.1,
+      "freeMB": 1242
+    },
+    {
+      "tag": "end",
+      "rssMB": 852.7,
+      "heapUsedMB": 547.9,
+      "freeMB": 1242
+    }
+  ],
+  "analyses": [
+    {
+      "file": "packages/vite/src/node/server/index.ts",
+      "ms": 5642.764300000001
+    },
+    {
+      "file": "packages/vite/src/node/config.ts",
+      "ms": 2114.203699999999
+    },
+    {
+      "file": "packages/vite/src/node/publicDir.ts",
+      "ms": 2007.2271
+    },
+    {
+      "file": "packages/vite/src/node/http.ts",
+      "ms": 2309.8953
+    },
+    {
+      "file": "packages/vite/src/node/watch.ts",
+      "ms": 1659.9277999999995
+    },
+    {
+      "file": "packages/vite/src/node/server/ws.ts",
+      "ms": 1801.8162999999986
+    },
+    {
+      "file": "packages/vite/src/node/env.ts",
+      "ms": 1659.8797999999988
+    },
+    {
+      "file": "packages/vite/src/node/logger.ts",
+      "ms": 1614.3473999999987
+    },
+    {
+      "file": "packages/vite/src/node/server/mixedModuleGraph.ts",
+      "ms": 2162.3745000000017
+    },
+    {
+      "file": "packages/vite/src/node/server/pluginContainer.ts",
+      "ms": 1862.5969000000005
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/indexHtml.ts",
+      "ms": 1927.0779000000002
+    },
+    {
+      "file": "packages/vite/src/node/utils.ts",
+      "ms": 1953.509399999999
+    },
+    {
+      "file": "packages/vite/src/node/server/environment.ts",
+      "ms": 1866.254100000002
+    },
+    {
+      "file": "packages/vite/src/node/deprecations.ts",
+      "ms": 1663.1491999999998
+    },
+    {
+      "file": "packages/vite/src/node/ssr/ssrTransform.ts",
+      "ms": 1970.3674999999967
+    },
+    {
+      "file": "packages/vite/src/node/ssr/ssrModuleLoader.ts",
+      "ms": 1701.1489000000038
+    },
+    {
+      "file": "packages/vite/src/node/ssr/ssrStacktrace.ts",
+      "ms": 1587.8462
+    },
+    {
+      "file": "packages/vite/src/node/server/hmr.ts",
+      "ms": 1794.8568000000014
+    },
+    {
+      "file": "packages/vite/src/node/server/openBrowser.ts",
+      "ms": 1822.7042000000001
+    },
+    {
+      "file": "packages/vite/src/node/shortcuts.ts",
+      "ms": 1693.0008000000016
+    },
+    {
+      "file": "packages/vite/src/node/plugins/esbuild.ts",
+      "ms": 1630.1533999999956
+    },
+    {
+      "file": "packages/vite/src/node/server/moduleGraph.ts",
+      "ms": 1674.0117000000027
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/time.ts",
+      "ms": 1851.4812999999995
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/rejectInvalidRequest.ts",
+      "ms": 1577.125199999995
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/hostCheck.ts",
+      "ms": 1609.115700000002
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/transform.ts",
+      "ms": 1638.8816000000006
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/proxy.ts",
+      "ms": 1715.8153999999995
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/base.ts",
+      "ms": 1633.0930999999982
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/static.ts",
+      "ms": 1627.0480000000025
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/triggerLazyBundling.ts",
+      "ms": 1677.390800000001
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/memoryFiles.ts",
+      "ms": 1631.2033999999985
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/htmlFallback.ts",
+      "ms": 1556.839700000004
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/notFound.ts",
+      "ms": 1557.0752999999968
+    },
+    {
+      "file": "packages/vite/src/node/server/middlewares/error.ts",
+      "ms": 1624.3799
+    },
+    {
+      "file": "packages/vite/src/node/server/searchRoot.ts",
+      "ms": 1677.386900000005
+    }
+  ],
+  "frontierCount": 34
+}

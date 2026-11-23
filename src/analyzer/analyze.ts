@@ -82,6 +82,9 @@ export function clearAnalyzerCaches(debug?: AnalyzerDebugLogger) {
   const sourceFiles = diskSourceFileCache.size;
   diskSourceFileCache.clear();
   sourceFileCacheChars = 0;
+  for (const session of liveAnalysisSessions) {
+    session.poison("caches-cleared");
+  }
   debug?.("analyzer.sourceFileCache.clear", { sourceFiles });
 }
 
@@ -97,11 +100,158 @@ export function invalidateAnalyzerFileCaches(
       sourceFiles += 1;
     }
   }
+  for (const session of liveAnalysisSessions) {
+    session.noteInvalidated(filePaths);
+  }
 
   debug?.("analyzer.sourceFileCache.invalidate", {
     files: filePaths.length,
     sourceFiles,
   });
+}
+
+/** A disk SourceFile served to a Program, with the file version it was read at. */
+type ServedSourceFile = {
+  sourceFile: ts.SourceFile;
+  mtimeMs: number;
+  size: number;
+  scriptKind: ts.ScriptKind;
+  languageVersionKey: string;
+};
+
+const liveAnalysisSessions = new Set<AnalysisSession>();
+
+/** Paths whose creation, deletion or change can alter Program structure or module resolution. */
+const PROGRAM_RELEVANT_PATH = /\.(?:[cm]?[jt]sx?|json)$/i;
+
+/**
+ * P12-B: Program session for one Depth run (`analyzeWorkspaceWithDepth`). Each analysis in the session still builds
+ * its own ts.Program and therefore gets a fresh TypeChecker (sharing a checker changes graph output, see
+ * docs/thesis-experiments/p12-depth-performance). What is reused is the *structure*: the previous Program is passed
+ * to ts.createProgram as `oldProgram`, and every unchanged disk SourceFile of the previous Program is handed back so
+ * TypeScript can reuse module resolution (StructureIsReused.Completely / SafeModules).
+ *
+ * Safety rules:
+ * - A SourceFile is reused only when its path was not invalidated (`invalidateAnalyzerFileCaches`) since it was
+ *   served, and its mtime, size, script kind and language-version key still match.
+ * - SourceFiles created from an editor buffer (the active file) are never reused.
+ * - `oldProgram` is passed only when root names, compiler options and the workspace root are identical.
+ * - The session stops reusing (falls back to the normal path) after `clearAnalyzerCaches`, after the invalidation of a
+ *   program-relevant path it has not served (e.g. a created file or a tsconfig), or after a failed reuse attempt.
+ * - The session holds one Program at most and is not shared between Depth runs; call `dispose()` when done.
+ */
+export class AnalysisSession {
+  private previousProgram: ts.Program | undefined;
+  private previousKey: string | undefined;
+  private served = new Map<string, ServedSourceFile>();
+  private bufferFiles = new Set<string>();
+  private invalidated = new Set<string>();
+  private poisonReason: string | undefined;
+  private disposed = false;
+
+  constructor() {
+    liveAnalysisSessions.add(this);
+  }
+
+  get isReusable() {
+    return !this.disposed && this.poisonReason === undefined;
+  }
+
+  get stopReason() {
+    return this.disposed ? "disposed" : this.poisonReason;
+  }
+
+  poison(reason: string) {
+    if (this.poisonReason === undefined) {
+      this.poisonReason = reason;
+    }
+    this.release();
+  }
+
+  noteInvalidated(filePaths: readonly string[]) {
+    for (const filePath of filePaths) {
+      const key = normalizeCachePath(filePath);
+      this.invalidated.add(key);
+      if (!this.served.has(key) && !this.bufferFiles.has(key) && PROGRAM_RELEVANT_PATH.test(filePath)) {
+        this.poison("unknown-file-invalidated");
+      }
+    }
+  }
+
+  dispose() {
+    this.disposed = true;
+    this.release();
+    liveAnalysisSessions.delete(this);
+  }
+
+  /** The previous Program, when it may be passed as `oldProgram` for a Program with this structure key. */
+  oldProgramFor(structureKey: string) {
+    return this.isReusable && this.previousKey === structureKey ? this.previousProgram : undefined;
+  }
+
+  /** The previous Program's SourceFile for `requested`, if the file is provably unchanged; otherwise undefined. */
+  reuseSourceFile(
+    requested: string,
+    languageVersion: ts.ScriptTarget | ts.CreateSourceFileOptions,
+    shouldCreateNewSourceFile: boolean | undefined,
+  ): ServedSourceFile | undefined {
+    if (shouldCreateNewSourceFile || !this.isReusable) {return undefined;}
+    const key = normalizeCachePath(requested);
+    if (this.invalidated.has(key)) {return undefined;}
+    const entry = this.served.get(key);
+    if (!entry) {return undefined;}
+    if (
+      entry.scriptKind !== diskScriptKind(requested) ||
+      entry.languageVersionKey !== getLanguageVersionCacheKey(languageVersion)
+    ) {
+      return undefined;
+    }
+    let stat: fs.Stats;
+    try {
+      stat = fs.statSync(requested);
+    } catch {
+      return undefined;
+    }
+    if (!stat.isFile() || stat.mtimeMs !== entry.mtimeMs || stat.size !== entry.size) {
+      return undefined;
+    }
+    return entry;
+  }
+
+  /** Records the Program just built so the next analysis of the session can reuse its structure. */
+  commit(
+    program: ts.Program,
+    structureKey: string,
+    served: Map<string, ServedSourceFile>,
+    bufferFile: string,
+  ) {
+    this.bufferFiles.add(normalizeCachePath(bufferFile));
+    if (!this.isReusable) {return;}
+    this.previousProgram = program;
+    this.previousKey = structureKey;
+    this.served = served;
+    // Invalidations up to now were applied while building `program` (no reuse of invalidated paths, and the disk
+    // cache entries were deleted), so the served versions are current.
+    this.invalidated.clear();
+  }
+
+  private release() {
+    this.previousProgram = undefined;
+    this.previousKey = undefined;
+    this.served = new Map();
+  }
+}
+
+export function createAnalysisSession() {
+  return new AnalysisSession();
+}
+
+const STRUCTURE_REUSE_NAMES = ["not", "safeModules", "completely"] as const;
+
+/** TypeScript's internal `structureIsReused` of a Program built with `oldProgram` (diagnostics only). */
+function structureReuseName(program: ts.Program) {
+  const value = (program as unknown as { structureIsReused?: number }).structureIsReused;
+  return typeof value === "number" ? STRUCTURE_REUSE_NAMES[value] ?? String(value) : "unknown";
 }
 
 /**
@@ -246,6 +396,8 @@ export function analyzeWithWorkspace(args: {
   adapters?: readonly FrameworkSemanticAdapter[];
   debug?: AnalyzerDebugLogger;
   cacheEnabled?: boolean;
+  /** P12-B: reuse Program structure within one Depth run. Ignored when `cacheEnabled` is false. */
+  session?: AnalysisSession;
 }): {
   imports: Array<{
     source: string;
@@ -275,6 +427,8 @@ export function analyzeWithWorkspace(args: {
     debug,
     cacheEnabled = true,
   } = args;
+  // The Program session is a cache: it is disabled together with the analysis cache setting.
+  const session = cacheEnabled ? args.session : undefined;
   const activeFile = active.fileName;
 
   // no workspace: fall back to single-file behavior
@@ -309,6 +463,18 @@ export function analyzeWithWorkspace(args: {
 
   const scriptKind = pickScriptKind(active.fileName, active.languageId);
 
+  // P12-B session: structure key of this Program, the previous Program of the session if it has the same structure,
+  // and the disk SourceFiles served to this Program (recorded for the next analysis of the session).
+  const structureKey = session
+    ? JSON.stringify({ workspaceRoot: normalizeCachePath(workspaceRoot), rootNames, options })
+    : "";
+  let oldProgram = session?.oldProgramFor(structureKey);
+  const served = new Map<string, ServedSourceFile>();
+  let reusedSourceFiles = 0;
+  const recordServed = session
+    ? (key: string, entry: ServedSourceFile) => { served.set(key, entry); }
+    : undefined;
+
   const defaultHost = ts.createCompilerHost(options, true);
   const host: ts.CompilerHost = {
     ...defaultHost,
@@ -335,6 +501,14 @@ export function analyzeWithWorkspace(args: {
           scriptKind,
         );
       }
+      if (oldProgram && session) {
+        const reused = session.reuseSourceFile(requested, languageVersion, shouldCreateNewSourceFile);
+        if (reused) {
+          reusedSourceFiles += 1;
+          served.set(normalizeCachePath(requested), reused);
+          return reused.sourceFile;
+        }
+      }
       return getCachedDiskSourceFile(
         requested,
         languageVersion,
@@ -343,12 +517,42 @@ export function analyzeWithWorkspace(args: {
         defaultHost,
         debug,
         cacheEnabled,
+        recordServed,
       );
     },
   };
 
   beginSourceFileCachePass(rootNames.length);
-  const program = ts.createProgram(rootNames, options, host);
+  const programStart = performance.now();
+  let program: ts.Program;
+  try {
+    program = ts.createProgram(rootNames, options, host, oldProgram);
+  } catch (error) {
+    if (!oldProgram || !session) {throw error;}
+    // Never let structure reuse break an analysis: drop the session and build the Program the normal way.
+    session.poison("create-program-failed");
+    debug?.("analyzer.session.fallback", {
+      reason: "create-program-failed",
+      error: error instanceof Error ? error.message : String(error),
+    });
+    oldProgram = undefined;
+    served.clear();
+    reusedSourceFiles = 0;
+    program = ts.createProgram(rootNames, options, host);
+  }
+  const createProgramMs = performance.now() - programStart;
+  session?.commit(program, structureKey, served, activeFile);
+  debug?.("analyzer.program.created", {
+    activeFile,
+    rootFiles: rootNames.length,
+    sourceFiles: program.getSourceFiles().length,
+    createProgramMs,
+    session: Boolean(session),
+    oldProgram: Boolean(oldProgram),
+    structureReuse: oldProgram ? structureReuseName(program) : "none",
+    reusedSourceFiles,
+    sessionStopReason: session?.stopReason ?? null,
+  });
   const checker = program.getTypeChecker();
   const sf = program.getSourceFile(activeFile);
   const resolveModuleLocation = createModuleLocationResolver(
@@ -628,6 +832,7 @@ function getCachedDiskSourceFile(
   defaultHost: ts.CompilerHost,
   debug?: AnalyzerDebugLogger,
   cacheEnabled = true,
+  onServed?: (cacheKey: string, entry: ServedSourceFile) => void,
 ) {
   if (!cacheEnabled) {
     debug?.("analyzer.sourceFileCache.disabled", {
@@ -698,6 +903,13 @@ function getCachedDiskSourceFile(
       size: stat.size,
       scriptKind,
     });
+    onServed?.(cacheKey, {
+      sourceFile: cached.sourceFile,
+      mtimeMs: cached.mtimeMs,
+      size: cached.size,
+      scriptKind,
+      languageVersionKey,
+    });
     return cached.sourceFile;
   }
 
@@ -738,6 +950,14 @@ function getCachedDiskSourceFile(
   debug?.("analyzer.sourceFileCache.store", {
     filePath: requested,
     entries: diskSourceFileCache.size,
+  });
+  // Served even when the cache had no room for it (skipFull): the session reuses it from the Program, not the cache.
+  onServed?.(cacheKey, {
+    sourceFile,
+    mtimeMs: stat.mtimeMs,
+    size: stat.size,
+    scriptKind,
+    languageVersionKey,
   });
 
   return sourceFile;

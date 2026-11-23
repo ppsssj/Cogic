@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "tool": "p12b/profile-depth-product",
+    "impl": "product-analyzeWorkspaceDepth",
+    "cogicRevision": "3f033347560c00b2411ff19bb23bd21f83eb7ab0",
+    "cogicDirty": false,
+    "projectRevision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+    "project": "hono",
+    "activeFile": "src/helper/cookie/index.ts",
+    "depth": 1,
+    "cache": "cold",
+    "programSession": true,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceSizeMB": 768,
+    "v8HeapSizeLimitMB": 960,
+    "fileCount": 426,
+    "freeMBAtStart": 2102,
+    "totalMB": 8136,
+    "platform": "win32"
+  },
+  "status": "completed",
+  "error": null,
+  "totalMs": 3571.694,
+  "cpuMs": {
+    "user": 5110,
+    "system": 937
+  },
+  "nodes": 16,
+  "edges": 46,
+  "graphHashRaw": "a7173a7414569400a9da9be161a7ad01727b7e6a400e54553cd766103f7f862e",
+  "graphHashNormalized": "eb89223a0c404744f4cadcf4274886b56cc27f8e863f8dcb7a13a7c2558ffe23",
+  "programsCreated": 1,
+  "programTimingSource": "product debug event analyzer.program.created",
+  "createProgramMsTotal": 2938.7837999999997,
+  "firstProgramMs": 2938.7837999999997,
+  "expansionProgramMedianMs": null,
+  "structureReuse": {},
+  "reusedSourceFilesTotal": 0,
+  "sessionFallbacks": [],
+  "cacheEvents": {
+    "miss": 1168,
+    "store": 1168,
+    "skipFull": 368
+  },
+  "peakRSSMB": 511.9765625,
+  "minFreeMBSeen": 1639,
+  "programs": [
+    {
+      "activeFile": "src/helper/cookie/index.ts",
+      "rootFiles": 426,
+      "sourceFiles": 1169,
+      "createProgramMs": 2938.7837999999997,
+      "session": false,
+      "oldProgram": false,
+      "structureReuse": "none",
+      "reusedSourceFiles": 0,
+      "sessionStopReason": null
+    }
+  ],
+  "memory": [
+    {
+      "tag": "start",
+      "rssMB": 58.7,
+      "heapUsedMB": 22.6,
+      "freeMB": 2102
+    },
+    {
+      "tag": "program:1",
+      "rssMB": 401.9,
+      "heapUsedMB": 283.5,
+      "freeMB": 1748
+    },
+    {
+      "tag": "end",
+      "rssMB": 510.2,
+      "heapUsedMB": 345.8,
+      "freeMB": 1639
+    }
+  ]
+}

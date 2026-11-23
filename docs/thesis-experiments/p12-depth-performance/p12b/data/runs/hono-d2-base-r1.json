@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "tool": "p12b/profile-depth-product",
+    "impl": "baseline-replica",
+    "cogicRevision": "7469bafda7af38498f9a579989a8c66aeab2afc3",
+    "cogicDirty": false,
+    "projectRevision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+    "project": "hono",
+    "activeFile": "src/helper/cookie/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "programSession": null,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceSizeMB": 768,
+    "v8HeapSizeLimitMB": 960,
+    "fileCount": 426,
+    "freeMBAtStart": 2098,
+    "totalMB": 8136,
+    "platform": "win32"
+  },
+  "status": "completed",
+  "error": null,
+  "totalMs": 7083.465099999999,
+  "cpuMs": {
+    "user": 8500,
+    "system": 1829
+  },
+  "nodes": 85,
+  "edges": 207,
+  "graphHashRaw": "45ea10193f03ecc826a7d6a4c53d38522f2ecb25d8b46e677e6d2a9a12ee916f",
+  "graphHashNormalized": "77d23f3c13cd5e9ce5c31dd47d830167a6cbaf08e3f16d10d4cb25a08f626c6e",
+  "programsCreated": 3,
+  "programTimingSource": "unavailable (baseline build has no program event)",
+  "createProgramMsTotal": null,
+  "firstProgramMs": null,
+  "expansionProgramMedianMs": null,
+  "structureReuse": {},
+  "reusedSourceFilesTotal": 0,
+  "sessionFallbacks": [],
+  "cacheEvents": {
+    "miss": 1906,
+    "store": 1906,
+    "skipFull": 1104,
+    "hit": 1598,
+    "evict": 2
+  },
+  "peakRSSMB": 714.640625,
+  "minFreeMBSeen": 1412,
+  "programs": [],
+  "memory": [
+    {
+      "tag": "start",
+      "rssMB": 59.3,
+      "heapUsedMB": 22.6,
+      "freeMB": 2098
+    },
+    {
+      "tag": "analysis:1",
+      "rssMB": 510.2,
+      "heapUsedMB": 345.7,
+      "freeMB": 1644
+    },
+    {
+      "tag": "analysis:2",
+      "rssMB": 617,
+      "heapUsedMB": 450.8,
+      "freeMB": 1538
+    },
+    {
+      "tag": "analysis:3",
+      "rssMB": 714.1,
+      "heapUsedMB": 586,
+      "freeMB": 1412
+    },
+    {
+      "tag": "end",
+      "rssMB": 714.1,
+      "heapUsedMB": 586.1,
+      "freeMB": 1412
+    }
+  ],
+  "analyses": [
+    {
+      "file": "src/helper/cookie/index.ts",
+      "ms": 4016.1842
+    },
+    {
+      "file": "src/utils/cookie.ts",
+      "ms": 1442.8511000000008
+    },
+    {
+      "file": "src/context.ts",
+      "ms": 1619.3778000000002
+    }
+  ],
+  "frontierCount": 2
+}

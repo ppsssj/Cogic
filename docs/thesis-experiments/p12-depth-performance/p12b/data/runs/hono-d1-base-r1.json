@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "tool": "p12b/profile-depth-product",
+    "impl": "baseline-replica",
+    "cogicRevision": "7469bafda7af38498f9a579989a8c66aeab2afc3",
+    "cogicDirty": false,
+    "projectRevision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+    "project": "hono",
+    "activeFile": "src/helper/cookie/index.ts",
+    "depth": 1,
+    "cache": "cold",
+    "programSession": null,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceSizeMB": 768,
+    "v8HeapSizeLimitMB": 960,
+    "fileCount": 426,
+    "freeMBAtStart": 2106,
+    "totalMB": 8136,
+    "platform": "win32"
+  },
+  "status": "completed",
+  "error": null,
+  "totalMs": 3507.8588,
+  "cpuMs": {
+    "user": 4781,
+    "system": 828
+  },
+  "nodes": 16,
+  "edges": 46,
+  "graphHashRaw": "a7173a7414569400a9da9be161a7ad01727b7e6a400e54553cd766103f7f862e",
+  "graphHashNormalized": "eb89223a0c404744f4cadcf4274886b56cc27f8e863f8dcb7a13a7c2558ffe23",
+  "programsCreated": 1,
+  "programTimingSource": "unavailable (baseline build has no program event)",
+  "createProgramMsTotal": null,
+  "firstProgramMs": null,
+  "expansionProgramMedianMs": null,
+  "structureReuse": {},
+  "reusedSourceFilesTotal": 0,
+  "sessionFallbacks": [],
+  "cacheEvents": {
+    "miss": 1168,
+    "store": 1168,
+    "skipFull": 368
+  },
+  "peakRSSMB": 510.9453125,
+  "minFreeMBSeen": 1652,
+  "programs": [],
+  "memory": [
+    {
+      "tag": "start",
+      "rssMB": 58.6,
+      "heapUsedMB": 22.5,
+      "freeMB": 2106
+    },
+    {
+      "tag": "analysis:1",
+      "rssMB": 510.6,
+      "heapUsedMB": 345.9,
+      "freeMB": 1652
+    },
+    {
+      "tag": "end",
+      "rssMB": 510.6,
+      "heapUsedMB": 345.9,
+      "freeMB": 1652
+    }
+  ],
+  "analyses": [
+    {
+      "file": "src/helper/cookie/index.ts",
+      "ms": 3507.5245
+    }
+  ],
+  "frontierCount": 2
+}

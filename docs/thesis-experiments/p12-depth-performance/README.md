@@ -20,6 +20,8 @@
 
 **P12-B 첫 작업 추천:** "Depth 실행 범위 Program 세션" — 한 번의 Depth 분석 동안 이전 Program을 `oldProgram`으로 넘기고, 활성 파일 외 SourceFile은 직전 Program에서 제공해 TS 구조 재사용을 보장한다. checker는 공유하지 않는다. 자세한 내용은 [architecture-proposal.md](architecture-proposal.md), [optimization-roadmap.md](optimization-roadmap.md).
 
+> **P12-B 구현 결과**: [p12b/README.md](p12b/README.md) — Program Session으로 Vite D2 65.6 s → 11.1 s, 그래프 바이트 동일.
+
 ## 문서
 
 | 문서 | 내용 |

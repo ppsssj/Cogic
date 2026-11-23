@@ -1,10 +1,23 @@
 import { analyzeTypeScriptWithTypes, analyzeWithWorkspace } from "./analyze";
+import type { AnalysisSession } from "./analyze";
 import type { FrameworkSemanticAdapter } from "./adapters";
 export {
+  AnalysisSession,
   clearAnalyzerCaches,
+  createAnalysisSession,
   getAnalyzerCacheStats,
   invalidateAnalyzerFileCaches,
 } from "./analyze";
+export {
+  analyzeWorkspaceDepth,
+  collectDepthExpansionFiles,
+  guessLanguageId,
+  mergeGraphPayload,
+  mergeTracePayload,
+  normalizeComparablePath,
+  pruneGraphToFile,
+} from "./depth";
+export type { DepthAnalysisResult } from "./depth";
 export {
   defaultFrameworkSemanticAdapters,
   resolveFrameworkCallbackHook,
@@ -43,6 +56,8 @@ export function analyzeWorkspaceActive(args: {
   adapters?: readonly FrameworkSemanticAdapter[];
   debug?: (event: string, detail?: Record<string, unknown>) => void;
   cacheEnabled?: boolean;
+  /** P12-B: Program session of a Depth run (see `analyzeWorkspaceDepth`). Optional; omit for a standalone analysis. */
+  session?: AnalysisSession;
 }) {
   return analyzeWithWorkspace(args);
 }

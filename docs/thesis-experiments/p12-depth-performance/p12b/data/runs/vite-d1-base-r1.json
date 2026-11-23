@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "tool": "p12b/profile-depth-product",
+    "impl": "baseline-replica",
+    "cogicRevision": "7469bafda7af38498f9a579989a8c66aeab2afc3",
+    "cogicDirty": false,
+    "projectRevision": "3567471998e3da315675086f44368e266c9c0e33",
+    "project": "vite",
+    "activeFile": "packages/vite/src/node/server/index.ts",
+    "depth": 1,
+    "cache": "cold",
+    "programSession": null,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceSizeMB": 768,
+    "v8HeapSizeLimitMB": 960,
+    "fileCount": 1654,
+    "freeMBAtStart": 2014,
+    "totalMB": 8136,
+    "platform": "win32"
+  },
+  "status": "completed",
+  "error": null,
+  "totalMs": 5594.861000000001,
+  "cpuMs": {
+    "user": 7500,
+    "system": 1750
+  },
+  "nodes": 153,
+  "edges": 412,
+  "graphHashRaw": "a7892e4a104265100831f41146ecf0a7fd901aad17f43103d89cf53448dd509f",
+  "graphHashNormalized": "e92ad4debbcb0f310c14030e235fb3a439a720f64fa96d352e3dd27264b345e3",
+  "programsCreated": 1,
+  "programTimingSource": "unavailable (baseline build has no program event)",
+  "createProgramMsTotal": null,
+  "firstProgramMs": null,
+  "expansionProgramMedianMs": null,
+  "structureReuse": {},
+  "reusedSourceFilesTotal": 0,
+  "sessionFallbacks": [],
+  "cacheEvents": {
+    "miss": 2295,
+    "store": 2295,
+    "skipFull": 275
+  },
+  "peakRSSMB": 644.21484375,
+  "minFreeMBSeen": 1469,
+  "programs": [],
+  "memory": [
+    {
+      "tag": "start",
+      "rssMB": 63.5,
+      "heapUsedMB": 21.7,
+      "freeMB": 2014
+    },
+    {
+      "tag": "analysis:1",
+      "rssMB": 620.7,
+      "heapUsedMB": 466.4,
+      "freeMB": 1470
+    },
+    {
+      "tag": "end",
+      "rssMB": 620.8,
+      "heapUsedMB": 467,
+      "freeMB": 1469
+    }
+  ],
+  "analyses": [
+    {
+      "file": "packages/vite/src/node/server/index.ts",
+      "ms": 5593.933400000001
+    }
+  ],
+  "frontierCount": 34
+}

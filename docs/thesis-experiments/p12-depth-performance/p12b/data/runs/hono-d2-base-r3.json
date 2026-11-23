@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "tool": "p12b/profile-depth-product",
+    "impl": "baseline-replica",
+    "cogicRevision": "7469bafda7af38498f9a579989a8c66aeab2afc3",
+    "cogicDirty": false,
+    "projectRevision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+    "project": "hono",
+    "activeFile": "src/helper/cookie/index.ts",
+    "depth": 2,
+    "cache": "cold",
+    "programSession": null,
+    "node": "v24.12.0",
+    "typescript": "5.9.3",
+    "maxOldSpaceSizeMB": 768,
+    "v8HeapSizeLimitMB": 960,
+    "fileCount": 426,
+    "freeMBAtStart": 2074,
+    "totalMB": 8136,
+    "platform": "win32"
+  },
+  "status": "completed",
+  "error": null,
+  "totalMs": 6837.7737,
+  "cpuMs": {
+    "user": 9218,
+    "system": 1328
+  },
+  "nodes": 85,
+  "edges": 207,
+  "graphHashRaw": "45ea10193f03ecc826a7d6a4c53d38522f2ecb25d8b46e677e6d2a9a12ee916f",
+  "graphHashNormalized": "77d23f3c13cd5e9ce5c31dd47d830167a6cbaf08e3f16d10d4cb25a08f626c6e",
+  "programsCreated": 3,
+  "programTimingSource": "unavailable (baseline build has no program event)",
+  "createProgramMsTotal": null,
+  "firstProgramMs": null,
+  "expansionProgramMedianMs": null,
+  "structureReuse": {},
+  "reusedSourceFilesTotal": 0,
+  "sessionFallbacks": [],
+  "cacheEvents": {
+    "miss": 1906,
+    "store": 1906,
+    "skipFull": 1104,
+    "hit": 1598,
+    "evict": 2
+  },
+  "peakRSSMB": 719.4453125,
+  "minFreeMBSeen": 1396,
+  "programs": [],
+  "memory": [
+    {
+      "tag": "start",
+      "rssMB": 58.9,
+      "heapUsedMB": 22.5,
+      "freeMB": 2074
+    },
+    {
+      "tag": "analysis:1",
+      "rssMB": 482.2,
+      "heapUsedMB": 360.9,
+      "freeMB": 1653
+    },
+    {
+      "tag": "analysis:2",
+      "rssMB": 610.1,
+      "heapUsedMB": 481,
+      "freeMB": 1512
+    },
+    {
+      "tag": "analysis:3",
+      "rssMB": 718.9,
+      "heapUsedMB": 583.3,
+      "freeMB": 1396
+    },
+    {
+      "tag": "end",
+      "rssMB": 718.9,
+      "heapUsedMB": 583.4,
+      "freeMB": 1396
+    }
+  ],
+  "analyses": [
+    {
+      "file": "src/helper/cookie/index.ts",
+      "ms": 3719.9491
+    },
+    {
+      "file": "src/utils/cookie.ts",
+      "ms": 1472.8600999999999
+    },
+    {
+      "file": "src/context.ts",
+      "ms": 1616.6851000000006
+    }
+  ],
+  "frontierCount": 2
+}
