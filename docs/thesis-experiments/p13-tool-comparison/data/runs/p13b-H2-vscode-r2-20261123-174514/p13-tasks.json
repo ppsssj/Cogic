@@ -1,0 +1,71 @@
+[
+  {
+    "tool": "VS Code",
+    "task": "H2-R1",
+    "status": "EXECUTION_FAILED",
+    "userOperations": 2,
+    "fileSwitches": 0,
+    "automationMs": 3980,
+    "pairs": {
+      "request->fetch": false,
+      "fetch->#dispatch": false,
+      "#dispatch->compose": false
+    },
+    "rows": [
+      "requestHono",
+      "  test",
+      "  mergePath"
+    ],
+    "incomingRows": 3
+  },
+  {
+    "tool": "VS Code",
+    "task": "H2-R2",
+    "status": "PARTIALLY_SUPPORTED",
+    "userOperations": 6,
+    "fileSwitches": 1,
+    "automationMs": 1695,
+    "reached": [
+      {
+        "to": "fetch",
+        "file": "hono-base.ts",
+        "line": 498,
+        "group": 1
+      },
+      {
+        "to": "#dispatch",
+        "file": "hono-base.ts",
+        "line": 425,
+        "group": 1
+      },
+      {
+        "to": "compose",
+        "file": "compose.ts",
+        "line": 15,
+        "group": 1
+      }
+    ],
+    "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  },
+  {
+    "tool": "VS Code",
+    "task": "H2-R3",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 1,
+    "fileSwitches": 1,
+    "automationMs": 1992,
+    "opened": {
+      "file": "compose.ts",
+      "line": 15,
+      "group": 1
+    },
+    "returned": {
+      "file": "hono-base.ts",
+      "line": 518,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "startKept": false
+  }
+]

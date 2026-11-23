@@ -1,0 +1,5 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4326,,
+start-state packages/vite/src/node/server/index.ts@createServer,true,5495,,p13-cg-V1/screenshots/01-start-state_packages_vite_src_node_server_index_ts_createServer.png
+cg-toggle-panel,true,4598,,p13-cg-V1/screenshots/02-cg-toggle-panel.png
+cg-generate,true,15514,,p13-cg-V1/screenshots/03-cg-generate.png

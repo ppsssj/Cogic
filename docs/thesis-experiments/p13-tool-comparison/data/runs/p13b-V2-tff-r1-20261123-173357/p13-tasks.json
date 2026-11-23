@@ -1,0 +1,89 @@
+[
+  {
+    "tool": "Trace Function Flow",
+    "task": "V2-R1",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 1,
+    "fileSwitches": 0,
+    "automationMs": 10070,
+    "pairs": {
+      "build->createBuilder": true,
+      "createBuilder->resolveConfigToBuild": true,
+      "resolveConfigToBuild->resolveConfig": true
+    },
+    "functionsShown": [
+      "build",
+      "createBuilder",
+      "resolveConfigToBuild",
+      "resolveConfig"
+    ],
+    "codeLensAboveStart": true,
+    "quickPick": null,
+    "nodes": [
+      "ƒFunctionbuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+      "ƒFunctioncreateBuilder()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+      "ƒFunctionresolveConfigToBuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+      "ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+      "ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+      "ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+      "ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+      "?Unresolvedconsole[method]( format(type, msg, opt",
+      "?Unresolvedconsole[method](format(type, msg, options))",
+      "?Unresolvedconsole[method](format(type, msg, options))",
+      "ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+      "?Unresolvedconsole[method]( format(type, msg, opt",
+      "?Unresolvedconsole[method](format(type, msg, options))",
+      "?Unresolvedconsole[method](format(type, msg, options))",
+      "ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+      "ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+      "ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+      "ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+      "ƒFunction↗ importedisNodeLikeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+      "ƒFunction↗ importednodeResolveWithVite()<WORK>\\vite\\packages\\vite\\src\\node\\nodeResolve.ts",
+      "ƒFunction↗ importedcreateImportMetaResolver()<WORK>\\vite\\packages\\vite\\src\\module-runner\\importMetaResolver.ts",
+      "ƒFunction↗ importedgetFileStartIndex()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+      "ƒFunctioncollectAllModules()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunctionloadConfigFromBundledFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedfindNearestNodeModules()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+      "ƒFunction↗ importedformatNativeConfigIncompatWarning()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+    ],
+    "edges": 93,
+    "notifications": []
+  },
+  {
+    "tool": "Trace Function Flow",
+    "task": "V2-R2",
+    "status": "UNSUPPORTED_BY_DESIGN",
+    "userOperations": 1,
+    "fileSwitches": 0,
+    "automationMs": 30179,
+    "segmentsShown": [],
+    "callSite": "",
+    "detail": "calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls max-depth max-depth max-depth max-d"
+  },
+  {
+    "tool": "Trace Function Flow",
+    "task": "V2-R3",
+    "status": "EXECUTION_FAILED",
+    "userOperations": 2,
+    "fileSwitches": 0,
+    "automationMs": 60412,
+    "opened": {
+      "file": "build.ts",
+      "line": 575,
+      "group": 1
+    },
+    "returned": {
+      "file": "build.ts",
+      "line": 575,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "startNodeInGraph": true
+  }
+]

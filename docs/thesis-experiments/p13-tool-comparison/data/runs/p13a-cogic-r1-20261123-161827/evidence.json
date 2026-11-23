@@ -1,0 +1,417 @@
+{
+  "depthDefault": "0",
+  "filterAllWasDefault": true,
+  "depth1": {
+    "nodes": [
+      {
+        "id": "folder:WS/src",
+        "kind": "folderGroup",
+        "title": "srcsrc2 files",
+        "classes": "cgFolder   "
+      },
+      {
+        "id": "file:WS/src/demo.ts:0",
+        "kind": "fileGroup",
+        "title": "demo.tssrc3 nodes",
+        "classes": "cgGroup   "
+      },
+      {
+        "id": "interface:WS/src/demo.ts:318",
+        "kind": "code",
+        "title": "OrderPreview",
+        "classes": "cgNode cgNode--interface    "
+      },
+      {
+        "id": "class:WS/src/demo.ts:385",
+        "kind": "code",
+        "title": "class CheckoutDemo",
+        "classes": "cgNode cgNode--class    "
+      },
+      {
+        "id": "function:WS/src/demo.ts:714",
+        "kind": "code",
+        "title": "runDemo()",
+        "classes": "cgNode cgNode--function    "
+      },
+      {
+        "id": "file:WS/src/receipt.ts",
+        "kind": "fileGroup",
+        "title": "receipt.tssrc1 hidden",
+        "classes": "cgGroup  cgGroup--collapsed "
+      }
+    ],
+    "childNodes": [
+      {
+        "title": "process()METHODmethod - demo.ts:15",
+        "classes": "cgChildNode  cgChildNode--interactive"
+      },
+      {
+        "title": "status()METHODmethod - demo.ts:21",
+        "classes": "cgChildNode  cgChildNode--interactive"
+      }
+    ],
+    "edges": [
+      {
+        "id": "references:method:WS/src/demo.ts:632->interface:WS/src/demo.ts:318@@@@",
+        "type": "references",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "references:function:WS/src/demo.ts:714->class:WS/src/demo.ts:385@@@@",
+        "type": "references",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "calls:function:WS/src/demo.ts:714->method:WS/src/demo.ts:415@@@@",
+        "type": "calls",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "calls:method:WS/src/demo.ts:415->external:WS/src/receipt.ts:110@@@@",
+        "type": "calls",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "dataflow:method:WS/src/demo.ts:415->external:WS/src/receipt.ts:110@@sku <- \"BOOK-01\"@@arg#0",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan"
+      },
+      {
+        "id": "dataflow:method:WS/src/demo.ts:415->external:WS/src/receipt.ts:110@@total <- total@@arg#1",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan"
+      },
+      {
+        "id": "dataflow:function:WS/src/demo.ts:714->method:WS/src/demo.ts:415@@total <- 120@@arg#0",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan animated"
+      }
+    ],
+    "rootBanner": "Root file: demo.tsClear root",
+    "depth": "1"
+  },
+  "depth2AutoRegenerated": true,
+  "depth2": {
+    "nodes": [
+      {
+        "id": "folder:WS/src",
+        "kind": "folderGroup",
+        "title": "srcsrc3 files",
+        "classes": "cgFolder   "
+      },
+      {
+        "id": "file:WS/src/demo.ts:0",
+        "kind": "fileGroup",
+        "title": "demo.tssrc3 nodes",
+        "classes": "cgGroup   "
+      },
+      {
+        "id": "interface:WS/src/demo.ts:318",
+        "kind": "code",
+        "title": "OrderPreview",
+        "classes": "cgNode cgNode--interface    "
+      },
+      {
+        "id": "class:WS/src/demo.ts:385",
+        "kind": "code",
+        "title": "class CheckoutDemo",
+        "classes": "cgNode cgNode--class    "
+      },
+      {
+        "id": "function:WS/src/demo.ts:714",
+        "kind": "code",
+        "title": "runDemo()",
+        "classes": "cgNode cgNode--function    "
+      },
+      {
+        "id": "file:WS/src/money.ts",
+        "kind": "fileGroup",
+        "title": "money.tssrc1 hidden",
+        "classes": "cgGroup  cgGroup--collapsed "
+      },
+      {
+        "id": "file:WS/src/receipt.ts:0",
+        "kind": "fileGroup",
+        "title": "receipt.tssrc2 hidden",
+        "classes": "cgGroup  cgGroup--collapsed "
+      }
+    ],
+    "childNodes": [
+      {
+        "title": "process()METHODmethod - demo.ts:15",
+        "classes": "cgChildNode  cgChildNode--interactive"
+      },
+      {
+        "title": "status()METHODmethod - demo.ts:21",
+        "classes": "cgChildNode  cgChildNode--interactive"
+      }
+    ],
+    "edges": [
+      {
+        "id": "references:method:WS/src/demo.ts:632->interface:WS/src/demo.ts:318@@@@",
+        "type": "references",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "references:function:WS/src/demo.ts:714->class:WS/src/demo.ts:385@@@@",
+        "type": "references",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "calls:function:WS/src/demo.ts:714->method:WS/src/demo.ts:415@@@@",
+        "type": "calls",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "calls:method:WS/src/demo.ts:415->external:WS/src/receipt.ts:110@@@@",
+        "type": "calls",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "calls:function:WS/src/receipt.ts:110->external:WS/src/money.ts:76@@@@",
+        "type": "calls",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "dataflow:method:WS/src/demo.ts:415->external:WS/src/receipt.ts:110@@sku <- \"BOOK-01\"@@arg#0",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan"
+      },
+      {
+        "id": "dataflow:method:WS/src/demo.ts:415->external:WS/src/receipt.ts:110@@total <- total@@arg#1",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan"
+      },
+      {
+        "id": "dataflow:function:WS/src/demo.ts:714->method:WS/src/demo.ts:415@@total <- 120@@arg#0",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan animated"
+      },
+      {
+        "id": "dataflow:function:WS/src/receipt.ts:110->external:WS/src/money.ts:76@@amount <- total@@arg#0",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan"
+      }
+    ],
+    "rootBanner": "Root file: demo.tsClear root",
+    "depth": "2"
+  },
+  "depth2Expanded": {
+    "nodes": [
+      {
+        "id": "folder:WS/src",
+        "kind": "folderGroup",
+        "title": "srcsrc3 files",
+        "classes": "cgFolder   "
+      },
+      {
+        "id": "file:WS/src/demo.ts:0",
+        "kind": "fileGroup",
+        "title": "demo.tssrc3 nodes",
+        "classes": "cgGroup   "
+      },
+      {
+        "id": "interface:WS/src/demo.ts:318",
+        "kind": "code",
+        "title": "OrderPreview",
+        "classes": "cgNode cgNode--interface    "
+      },
+      {
+        "id": "class:WS/src/demo.ts:385",
+        "kind": "code",
+        "title": "class CheckoutDemo",
+        "classes": "cgNode cgNode--class    "
+      },
+      {
+        "id": "function:WS/src/demo.ts:714",
+        "kind": "code",
+        "title": "runDemo()",
+        "classes": "cgNode cgNode--function    "
+      },
+      {
+        "id": "file:WS/src/money.ts",
+        "kind": "fileGroup",
+        "title": "money.tssrc1 nodes",
+        "classes": "cgGroup cgGroup--selected  "
+      },
+      {
+        "id": "external:WS/src/money.ts:76",
+        "kind": "code",
+        "title": "formatMoney (money.ts)",
+        "classes": "cgNode cgNode--external    "
+      },
+      {
+        "id": "file:WS/src/receipt.ts:0",
+        "kind": "fileGroup",
+        "title": "receipt.tssrc2 nodes",
+        "classes": "cgGroup   "
+      },
+      {
+        "id": "external:WS/src/receipt.ts:110",
+        "kind": "code",
+        "title": "formatReceipt (receipt.ts)",
+        "classes": "cgNode cgNode--external    "
+      },
+      {
+        "id": "function:WS/src/receipt.ts:110",
+        "kind": "code",
+        "title": "formatReceipt()",
+        "classes": "cgNode cgNode--function    "
+      }
+    ],
+    "childNodes": [
+      {
+        "title": "process()METHODmethod - demo.ts:15",
+        "classes": "cgChildNode  cgChildNode--interactive"
+      },
+      {
+        "title": "status()METHODmethod - demo.ts:21",
+        "classes": "cgChildNode  cgChildNode--interactive"
+      }
+    ],
+    "edges": [
+      {
+        "id": "references:method:WS/src/demo.ts:632->interface:WS/src/demo.ts:318@@@@",
+        "type": "references",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "references:function:WS/src/demo.ts:714->class:WS/src/demo.ts:385@@@@",
+        "type": "references",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "calls:method:WS/src/demo.ts:415->external:WS/src/receipt.ts:110@@@@",
+        "type": "calls",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "calls:function:WS/src/demo.ts:714->method:WS/src/demo.ts:415@@@@",
+        "type": "calls",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "calls:function:WS/src/receipt.ts:110->external:WS/src/money.ts:76@@@@",
+        "type": "calls",
+        "classes": "react-flow__edge react-flow__edge-default nopan"
+      },
+      {
+        "id": "dataflow:method:WS/src/demo.ts:415->external:WS/src/receipt.ts:110@@sku <- \"BOOK-01\"@@arg#0",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan"
+      },
+      {
+        "id": "dataflow:method:WS/src/demo.ts:415->external:WS/src/receipt.ts:110@@total <- total@@arg#1",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan"
+      },
+      {
+        "id": "dataflow:function:WS/src/demo.ts:714->method:WS/src/demo.ts:415@@total <- 120@@arg#0",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan"
+      },
+      {
+        "id": "dataflow:function:WS/src/receipt.ts:110->external:WS/src/money.ts:76@@amount <- total@@arg#0",
+        "type": "dataflow",
+        "classes": "react-flow__edge react-flow__edge-dataflow nopan"
+      }
+    ],
+    "rootBanner": "Root file: demo.tsClear root",
+    "depth": "2"
+  },
+  "t1": {
+    "shown": {
+      "runDemo": true,
+      "process": true,
+      "formatReceipt": true,
+      "formatMoney": true
+    },
+    "callPairs": {
+      "runDemo->CheckoutDemo.process": true,
+      "process->formatReceipt": true,
+      "formatReceipt->formatMoney": true
+    },
+    "calls": [
+      "calls:method:demo.ts:415->external:receipt.ts:110@@@@",
+      "calls:function:demo.ts:714->method:demo.ts:415@@@@",
+      "calls:function:receipt.ts:110->external:money.ts:76@@@@"
+    ],
+    "depth1Calls": [
+      "calls:function:demo.ts:714->method:demo.ts:415@@@@",
+      "calls:method:demo.ts:415->external:receipt.ts:110@@@@"
+    ]
+  },
+  "t2": {
+    "selectedRunDemo": "SELECTED NODE kind function name runDemo file demo.ts range 26:1 -> 29:2 signature (): string Analyzer Context mode Workspace language typescript root files 4 tsconfig enabled How This Node Is Connected These cards show who calls this node, what values flow into it, and what it reads or updates. Reads / Captures From Here CheckoutDemo runDemo reads from or captures CheckoutDemo. Calls From This Node CheckoutDemo.process runDemo calls CheckoutDemo.process. Arguments Passed From Here CheckoutDemo.process runDemo passes an argument into CheckoutDemo.process. Parameter mapping: total <- 120",
+    "paramFlowRunDemo": "PARAM FLOW runDemo -> CheckoutDemo.process total <- 120",
+    "selectedFormatReceipt": "SELECTED NODE kind function name formatReceipt file receipt.ts range 4:1 -> 7:2 signature (sku: string, total: number): string Analyzer Context mode Workspace language typescript root files 4 tsconfig enabled How This Node Is Connected These cards show who calls this node, what values flow into it, and what it reads or updates. Calls From This Node formatMoney (money.ts) formatReceipt calls formatMoney (money.ts). Arguments Passed From Here formatMoney (money.ts) formatReceipt passes an argument into formatMoney (money.ts). Parameter mapping: amount <- total",
+    "paramFlowFormatReceipt": "PARAM FLOW formatReceipt -> formatMoney (money.ts) amount <- total",
+    "dataflowEdges": [
+      "dataflow:method:demo.ts:415->external:receipt.ts:110@@sku <- \"BOOK-01\"@@arg#0",
+      "dataflow:method:demo.ts:415->external:receipt.ts:110@@total <- total@@arg#1",
+      "dataflow:function:demo.ts:714->method:demo.ts:415@@total <- 120@@arg#0",
+      "dataflow:function:receipt.ts:110->external:money.ts:76@@amount <- total@@arg#0"
+    ]
+  },
+  "t3Source": {
+    "file": "receipt.ts",
+    "line": 7,
+    "group": 1
+  },
+  "t3": {
+    "rootBannerBefore": "Root file: demo.tsClear root",
+    "rootBannerAfter": "Root file: demo.tsClear root",
+    "rootPanelAfter": "ROOT Clear Root mode file lock file demo.ts path <HARNESS_WORKDIR>/fixture/src/demo.ts behavior Keep the graph anchored to this file even when another file is opened.",
+    "selectedAfter": "SELECTED NODE kind function name formatReceipt file receipt.ts range 4:1 -> 7:2 signature (sku: string, total: number): string Analyzer Context mode Workspace language typescript root files 4 tsconfig",
+    "nodesBefore": [
+      "class:WS/src/demo.ts:385",
+      "external:WS/src/money.ts:76",
+      "external:WS/src/receipt.ts:110",
+      "file:WS/src/demo.ts:0",
+      "file:WS/src/money.ts",
+      "file:WS/src/receipt.ts:0",
+      "folder:WS/src",
+      "function:WS/src/demo.ts:714",
+      "function:WS/src/receipt.ts:110",
+      "interface:WS/src/demo.ts:318"
+    ],
+    "nodesAfter": [
+      "class:WS/src/demo.ts:385",
+      "external:WS/src/money.ts:76",
+      "external:WS/src/receipt.ts:110",
+      "file:WS/src/demo.ts:0",
+      "file:WS/src/money.ts",
+      "file:WS/src/receipt.ts:0",
+      "folder:WS/src",
+      "function:WS/src/demo.ts:714",
+      "function:WS/src/receipt.ts:110",
+      "interface:WS/src/demo.ts:318"
+    ],
+    "sameNodes": true
+  },
+  "t3Return": {
+    "file": "demo.ts",
+    "line": 29,
+    "group": 1
+  },
+  "callStack": [
+    "runner.js [1924] « Compare: Debug checkout flow Paused On Breakpoint",
+    "formatReceipt src/receipt.ts 5:18",
+    "CheckoutDemo.process src/demo.ts 17:25",
+    "runDemo src/demo.ts 28:23",
+    "<anonymous> src/runner.ts 5:23",
+    "Show 8 More: Skipped by skipFiles"
+  ],
+  "t4": {
+    "runtimeFileRoot": "RUNTIME FRAME paused formatReceipt (receipt.ts) formatReceipt receipt.ts:5:18 Matched by exact range Key Variables LOCAL sku 'BOOK-01' LOCAL this undefined LOCAL total 120 ARG money_1 {formatMoney: ƒ, __es...",
+    "mappedFileRoot": true,
+    "runtimeAfterClearRoot": "",
+    "mappedAfterClearRoot": false,
+    "runtimeActive": [
+      "formatReceipt (receipt.ts)"
+    ],
+    "nodesBefore": 10,
+    "nodesDuring": 3,
+    "rootDuring": "Root file: demo.tsClear root"
+  }
+}

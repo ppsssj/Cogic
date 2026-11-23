@@ -1,0 +1,14 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4265,,
+start-state demo.ts@runDemo,true,3354,,p2-vscode/screenshots/01-start-state_demo_ts_runDemo.png
+call-hierarchy-open,true,1058,,p2-vscode/screenshots/02-call-hierarchy-open.png
+call-hierarchy-outgoing,true,1354,,p2-vscode/screenshots/03-call-hierarchy-outgoing.png
+call-hierarchy-expand,true,2697,,p2-vscode/screenshots/04-call-hierarchy-expand.png
+t2-goto-def-process,true,538,,p2-vscode/screenshots/05-t2-goto-def-process.png
+t2-goto-def-formatReceipt,true,485,,p2-vscode/screenshots/06-t2-goto-def-formatReceipt.png
+t2-goto-def-formatMoney,true,485,,p2-vscode/screenshots/07-t2-goto-def-formatMoney.png
+t3-open-formatReceipt-from-call-hierarchy,true,1699,,p2-vscode/screenshots/08-t3-open-formatReceipt-from-call-hierarchy.png
+t3-return-to-runDemo-click-root-row,true,180,,p2-vscode/screenshots/09-t3-return-to-runDemo-click-root-row.png
+VS Code-set-breakpoint-receipt.ts:5,true,794,,p2-vscode/screenshots/10-VS_Code-set-breakpoint-receipt_ts_5.png
+VS Code-F5-debug-paused,true,6102,,p2-vscode/screenshots/11-VS_Code-F5-debug-paused.png
+VS Code-stop-debugging,true,8,,

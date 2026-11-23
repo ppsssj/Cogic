@@ -1,0 +1,10 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4167,,
+start-state packages/vite/src/node/server/index.ts@createServer,true,5329,,p13-vscode-V1/screenshots/01-start-state_packages_vite_src_node_server_index_ts_createServer.png
+r1-call-hierarchy-open,true,1537,,p13-vscode-V1/screenshots/02-r1-call-hierarchy-open.png
+r1-outgoing,true,2128,,p13-vscode-V1/screenshots/03-r1-outgoing.png
+r1-expand-path-rows,true,2161,,p13-vscode-V1/screenshots/04-r1-expand-path-rows.png
+r2-f12-_createServer,true,529,,p13-vscode-V1/screenshots/05-r2-f12-_createServer.png
+r2-f12-resolveConfig,true,521,,p13-vscode-V1/screenshots/06-r2-f12-resolveConfig.png
+r3-open-target-row,true,1687,,p13-vscode-V1/screenshots/07-r3-open-target-row.png
+r3-return-root-row,true,1710,,p13-vscode-V1/screenshots/08-r3-return-root-row.png

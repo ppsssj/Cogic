@@ -1,0 +1,7 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4965,,
+start-state packages/vite/src/node/build.ts@build,true,2898,,p13-tff-V2/screenshots/01-start-state_packages_vite_src_node_build_ts_build.png
+r1-codelens-trace,true,11878,,p13-tff-V2/screenshots/02-r1-codelens-trace.png
+r2-select-target,false,30051,locator.click: Timeout 30000ms exceeded.,p13-tff-V2/screenshots/03-r2-select-target-FAILED.png
+r3-dblclick-target,false,30046,locator.click: Timeout 30000ms exceeded.,p13-tff-V2/screenshots/04-r3-dblclick-target-FAILED.png
+r3-return,false,30033,locator.click: Timeout 30000ms exceeded.,p13-tff-V2/screenshots/05-r3-return-FAILED.png

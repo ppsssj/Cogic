@@ -1,0 +1,144 @@
+{
+  "run": "p2-context-graph",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {
+      "context-graph.context-graph": "0.10.9"
+    }
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T07:17:58.079Z",
+      "ms": 4597,
+      "ok": true
+    },
+    {
+      "name": "start-state demo.ts@runDemo",
+      "startedAt": "2026-11-23T07:18:02.684Z",
+      "ms": 3811,
+      "ok": true,
+      "screenshot": "p2-context-graph/screenshots/01-start-state_demo_ts_runDemo.png"
+    },
+    {
+      "name": "cg-open-panel",
+      "startedAt": "2026-11-23T07:18:06.588Z",
+      "ms": 2623,
+      "ok": true,
+      "screenshot": "p2-context-graph/screenshots/02-cg-open-panel.png"
+    },
+    {
+      "name": "cg-click-generate-graph",
+      "startedAt": "2026-11-23T07:18:09.356Z",
+      "ms": 8216,
+      "ok": true,
+      "screenshot": "p2-context-graph/screenshots/03-cg-click-generate-graph.png"
+    },
+    {
+      "name": "Context Graph-set-breakpoint-receipt.ts:5",
+      "startedAt": "2026-11-23T07:18:17.714Z",
+      "ms": 834,
+      "ok": true,
+      "screenshot": "p2-context-graph/screenshots/04-Context_Graph-set-breakpoint-receipt_ts_5.png"
+    },
+    {
+      "name": "Context Graph-F5-debug-paused",
+      "startedAt": "2026-11-23T07:18:18.735Z",
+      "ms": 6116,
+      "ok": true,
+      "screenshot": "p2-context-graph/screenshots/05-Context_Graph-F5-debug-paused.png"
+    },
+    {
+      "name": "Context Graph-stop-debugging",
+      "startedAt": "2026-11-23T07:18:24.992Z",
+      "ms": 11,
+      "ok": true
+    }
+  ],
+  "tasks": [
+    {
+      "tool": "Context Graph",
+      "task": "T1",
+      "status": "unverified",
+      "evidence": "ui+dom",
+      "userOperations": 2,
+      "fileSwitches": 0,
+      "returnOperations": null,
+      "graphPanelPersists": "",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "",
+      "dataflowShown": "",
+      "debugFrameMapped": "",
+      "automationMs": 11120,
+      "screenshots": [
+        "p2-context-graph/screenshots/02-cg-open-panel.png",
+        "p2-context-graph/screenshots/03-cg-click-generate-graph.png"
+      ],
+      "notes": "BLOCKED by environment: Marketplace package context-graph.context-graph-0.10.9 ships worker only for darwin-arm64; on win32-x64 the panel reports \"No usable worker runtime\". Graph could not be generated, so T1 could not be performed."
+    },
+    {
+      "tool": "Context Graph",
+      "task": "T2",
+      "status": "unverified",
+      "evidence": "ui+dom",
+      "userOperations": 0,
+      "fileSwitches": 0,
+      "returnOperations": null,
+      "graphPanelPersists": "",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "",
+      "dataflowShown": "",
+      "debugFrameMapped": "",
+      "automationMs": 0,
+      "screenshots": [
+        "p2-context-graph/screenshots/02-cg-open-panel.png",
+        "p2-context-graph/screenshots/03-cg-click-generate-graph.png"
+      ],
+      "notes": "BLOCKED by environment: Marketplace package context-graph.context-graph-0.10.9 ships worker only for darwin-arm64; on win32-x64 the panel reports \"No usable worker runtime\". Graph could not be generated, so T2 could not be performed."
+    },
+    {
+      "tool": "Context Graph",
+      "task": "T3",
+      "status": "unverified",
+      "evidence": "ui+dom",
+      "userOperations": 0,
+      "fileSwitches": 0,
+      "returnOperations": null,
+      "graphPanelPersists": "",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "",
+      "dataflowShown": "",
+      "debugFrameMapped": "",
+      "automationMs": 0,
+      "screenshots": [
+        "p2-context-graph/screenshots/02-cg-open-panel.png",
+        "p2-context-graph/screenshots/03-cg-click-generate-graph.png"
+      ],
+      "notes": "BLOCKED by environment: Marketplace package context-graph.context-graph-0.10.9 ships worker only for darwin-arm64; on win32-x64 the panel reports \"No usable worker runtime\". Graph could not be generated, so T3 could not be performed."
+    },
+    {
+      "evidence": "ui+dom",
+      "userOperations": 5,
+      "fileSwitches": 1,
+      "returnOperations": null,
+      "graphPanelPersists": "no graph was generated (worker unavailable)",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "",
+      "dataflowShown": "",
+      "debugFrameMapped": "no (no graph available on this platform)",
+      "notes": "debugger works independently of the tool; Context Graph mapping could not be evaluated because no graph exists. debugger paused=true; VS Code Call Stack shows dynamic chain formatReceipt<-process<-runDemo=true; stack=[\"runner.js [3176] « Compare: Debug checkout flow Paused On Breakpoint\",\"formatReceipt src/receipt.ts 5:18\",\"CheckoutDemo.process src/demo.ts 17:25\",\"runDemo src/demo.ts 28:23\",\"<anonymous> src/runner.ts 5:23\",\"Show 8 Mo",
+      "tool": "Context Graph",
+      "task": "T4",
+      "status": "unverified",
+      "automationMs": 7292,
+      "screenshots": [
+        "p2-context-graph/screenshots/04-Context_Graph-set-breakpoint-receipt_ts_5.png",
+        "p2-context-graph/screenshots/05-Context_Graph-F5-debug-paused.png"
+      ]
+    }
+  ]
+}

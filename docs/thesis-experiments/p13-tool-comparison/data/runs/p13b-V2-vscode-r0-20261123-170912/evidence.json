@@ -1,0 +1,298 @@
+{
+  "incoming": [
+    {
+      "text": "build",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    }
+  ],
+  "outgoing": [
+    {
+      "text": "build",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "createBuilder",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "resolveConfigToBuild",
+      "level": 3,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "resolveConfig",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveBuilderOptions",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setupEnvironment",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "keys",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "keys",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "push",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "all",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "all",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "map",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "values",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "build",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "r2": [
+    {
+      "to": "createBuilder",
+      "file": "build.ts",
+      "line": 1857,
+      "group": 1
+    },
+    {
+      "to": "resolveConfigToBuild",
+      "file": "build.ts",
+      "line": 584,
+      "group": 1
+    },
+    {
+      "to": "resolveConfig",
+      "file": "config.ts",
+      "line": 1480,
+      "group": 1
+    }
+  ],
+  "r3open": {
+    "file": "config.ts",
+    "line": 1480,
+    "group": 1
+  },
+  "treeAfterOpen": [
+    {
+      "text": "build",
+      "level": 1,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "createBuilder",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "resolveConfigToBuild",
+      "level": 3,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "resolveConfig",
+      "level": 4,
+      "expanded": "false",
+      "selected": true
+    },
+    {
+      "text": "resolveBuilderOptions",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setupEnvironment",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "keys",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "keys",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "push",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "all",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "all",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "map",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "values",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "build",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    }
+  ],
+  "r3return": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+  },
+  "treeAfterReturn": [
+    {
+      "text": "build",
+      "level": 1,
+      "expanded": "true",
+      "selected": true
+    },
+    {
+      "text": "createBuilder",
+      "level": 2,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "resolveConfigToBuild",
+      "level": 3,
+      "expanded": "true",
+      "selected": false
+    },
+    {
+      "text": "resolveConfig",
+      "level": 4,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "resolveBuilderOptions",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "setupEnvironment",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "keys",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "keys",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "push",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "all",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "all",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "map",
+      "level": 3,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "values",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    },
+    {
+      "text": "build",
+      "level": 2,
+      "expanded": "false",
+      "selected": false
+    }
+  ]
+}

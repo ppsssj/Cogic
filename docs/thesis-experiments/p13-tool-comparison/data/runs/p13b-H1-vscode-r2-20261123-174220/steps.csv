@@ -1,0 +1,11 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4320,,
+start-state src/helper/cookie/index.ts@setCookie,true,2912,,p13-vscode-H1/screenshots/01-start-state_src_helper_cookie_index_ts_setCookie.png
+r1-call-hierarchy-open,true,1551,,p13-vscode-H1/screenshots/02-r1-call-hierarchy-open.png
+r1-outgoing,true,2134,,p13-vscode-H1/screenshots/03-r1-outgoing.png
+r1-expand-path-rows,true,4334,,p13-vscode-H1/screenshots/04-r1-expand-path-rows.png
+r2-f12-generateCookie,true,532,,p13-vscode-H1/screenshots/05-r2-f12-generateCookie.png
+r2-f12-serialize,true,522,,p13-vscode-H1/screenshots/06-r2-f12-serialize.png
+r2-f12-_serialize,true,558,,p13-vscode-H1/screenshots/07-r2-f12-_serialize.png
+r3-open-target-row,true,1665,,p13-vscode-H1/screenshots/08-r3-open-target-row.png
+r3-return-root-row,true,1720,,p13-vscode-H1/screenshots/09-r3-return-root-row.png

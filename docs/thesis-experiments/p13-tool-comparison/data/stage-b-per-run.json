@@ -1,0 +1,6107 @@
+[
+ {
+  "run": 0,
+  "runId": "p13b-H1-cg-r0-20261123-165353",
+  "task": "H1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20336,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H1-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20336,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper accepts adapter conninfo cookie index.test.ts index.ts css dev factory html proxy route ssg streaming testing websocket jsx middleware preset request router utils validator Outline Timeline index.ts Context Graph 0 0 Line 99, column 14: export const setCookie = (c: Context, name: string, value: string, opt?: CookieOptions): void => { || GRAPH SELECTION No usable wor",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-cg-r0-20261123-165353",
+  "task": "H1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20337,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H1-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20337,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper accepts adapter conninfo cookie index.test.ts index.ts css dev factory html proxy route ssg streaming testing websocket jsx middleware preset request router utils validator Outline Timeline index.ts Context Graph 0 0 Line 99, column 14: export const setCookie = (c: Context, name: string, value: string, opt?: CookieOptions): void => { || GRAPH SELECTION No usable wor",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-cg-r0-20261123-165353",
+  "task": "H1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20337,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H1-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20337,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper accepts adapter conninfo cookie index.test.ts index.ts css dev factory html proxy route ssg streaming testing websocket jsx middleware preset request router utils validator Outline Timeline index.ts Context Graph 0 0 Line 99, column 14: export const setCookie = (c: Context, name: string, value: string, opt?: CookieOptions): void => { || GRAPH SELECTION No usable wor",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-cg-r1-20261123-171832",
+  "task": "H1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20329,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H1-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20329,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper accepts adapter conninfo cookie index.test.ts index.ts css dev factory html proxy route ssg streaming testing websocket jsx middleware preset request router utils validator Outline Timeline index.ts Context Graph 0 0 Line 99, column 14: export const setCookie = (c: Context, name: string, value: string, opt?: CookieOptions): void => { || GRAPH SELECTION No usable wor",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-cg-r1-20261123-171832",
+  "task": "H1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20329,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H1-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20329,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper accepts adapter conninfo cookie index.test.ts index.ts css dev factory html proxy route ssg streaming testing websocket jsx middleware preset request router utils validator Outline Timeline index.ts Context Graph 0 0 Line 99, column 14: export const setCookie = (c: Context, name: string, value: string, opt?: CookieOptions): void => { || GRAPH SELECTION No usable wor",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-cg-r1-20261123-171832",
+  "task": "H1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20330,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H1-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20330,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper accepts adapter conninfo cookie index.test.ts index.ts css dev factory html proxy route ssg streaming testing websocket jsx middleware preset request router utils validator Outline Timeline index.ts Context Graph 0 0 Line 99, column 14: export const setCookie = (c: Context, name: string, value: string, opt?: CookieOptions): void => { || GRAPH SELECTION No usable wor",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-cg-r2-20261123-174313",
+  "task": "H1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20312,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H1-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20312,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper accepts adapter conninfo cookie index.test.ts index.ts css dev factory html proxy route ssg streaming testing websocket jsx middleware preset request router utils validator Outline Timeline index.ts Context Graph 0 0 Line 99, column 14: export const setCookie = (c: Context, name: string, value: string, opt?: CookieOptions): void => { || GRAPH SELECTION No usable wor",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-cg-r2-20261123-174313",
+  "task": "H1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20312,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H1-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20312,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper accepts adapter conninfo cookie index.test.ts index.ts css dev factory html proxy route ssg streaming testing websocket jsx middleware preset request router utils validator Outline Timeline index.ts Context Graph 0 0 Line 99, column 14: export const setCookie = (c: Context, name: string, value: string, opt?: CookieOptions): void => { || GRAPH SELECTION No usable wor",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-cg-r2-20261123-174313",
+  "task": "H1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20313,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H1-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20313,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper accepts adapter conninfo cookie index.test.ts index.ts css dev factory html proxy route ssg streaming testing websocket jsx middleware preset request router utils validator Outline Timeline index.ts Context Graph 0 0 Line 99, column 14: export const setCookie = (c: Context, name: string, value: string, opt?: CookieOptions): void => { || GRAPH SELECTION No usable wor",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-cogic-r0-20261123-165244",
+  "task": "H1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 5,
+  "switches": 0,
+  "automationMs": 33190,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 5,
+   "fileSwitches": 0,
+   "automationMs": 33190,
+   "pairs": {
+    "setCookie->generateCookie": true,
+    "generateCookie->serialize": true,
+    "serialize->_serialize": true
+   },
+   "functionsShown": [
+    "setCookie",
+    "generateCookie",
+    "serialize",
+    "_serialize"
+   ],
+   "generateMs": 18694,
+   "nodes": 43,
+   "memberRows": 0,
+   "edges": 100,
+   "callTriplesSample": [
+    "getCookie->parse",
+    "getSignedCookie->parseSigned",
+    "generateCookie->serialize",
+    "setCookie->generateCookie",
+    "generateSignedCookie->serializeSigned",
+    "setSignedCookie->generateSignedCookie",
+    "deleteCookie->setCookie",
+    "makeSignature->getCryptoKey",
+    "parse->trimCookieWhitespace",
+    "parseSigned->getCryptoKey",
+    "parseSigned->parse",
+    "parseSigned->verifySignature",
+    "serialize->_serialize",
+    "serializeSigned->makeSignature",
+    "serializeSigned->_serialize"
+   ],
+   "banner": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-cogic-r0-20261123-165244",
+  "task": "H1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 4497,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H1-R2",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 4497,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": false,
+     "label": "value <- value",
+     "candidates": [
+      "name <- name",
+      "value <- value",
+      "opt <- opt"
+     ]
+    },
+    {
+     "id": "S2",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": false,
+     "label": "value <- value",
+     "candidates": [
+      "name <- '__Secure-' + name",
+      "value <- value",
+      "opt <- { path: '/', ...opt, secure: true }",
+      "name <- '__Host-' + name",
+      "opt <- { ...opt, path: '/', secure: true, domain: undefined, }",
+      "name <- name"
+     ]
+    },
+    {
+     "id": "S3",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": true,
+     "label": "value <- value",
+     "candidates": [
+      "name <- name",
+      "value <- value",
+      "opt <- opt"
+     ]
+    }
+   ],
+   "dataflowEdges": 66,
+   "paramFlowRows": 6,
+   "paramFlowRowsSample": [
+    {
+     "from": "serialize",
+     "to": "_serialize",
+     "label": "name <- name"
+    },
+    {
+     "from": "serialize",
+     "to": "_serialize",
+     "label": "value <- value"
+    },
+    {
+     "from": "serialize",
+     "to": "_serialize",
+     "label": "opt <- opt"
+    },
+    {
+     "from": "serializeSigned",
+     "to": "_serialize",
+     "label": "name <- name"
+    },
+    {
+     "from": "serializeSigned",
+     "to": "_serialize",
+     "label": "value <- value"
+    },
+    {
+     "from": "serializeSigned",
+     "to": "_serialize",
+     "label": "opt <- opt"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW serialize -> _serialize name <- name serialize -> _serialize value <- value serialize -> _serialize opt <- opt serializeSigned -> _serialize name <- name serializeSigned -> _serialize value <- value serializeSigned -> _serialize opt <- opt"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-cogic-r0-20261123-165244",
+  "task": "H1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 2,
+  "automationMs": 18579,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Cogic",
+   "task": "H1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 2,
+   "automationMs": 18579,
+   "opened": {
+    "file": "cookie.ts",
+    "line": null,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 102,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "bannerBefore": "Root file: index.tsClear root",
+   "bannerAfter": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-cogic-r1-20261123-171701",
+  "task": "H1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 5,
+  "switches": 0,
+  "automationMs": 30187,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 5,
+   "fileSwitches": 0,
+   "automationMs": 30187,
+   "pairs": {
+    "setCookie->generateCookie": true,
+    "generateCookie->serialize": true,
+    "serialize->_serialize": true
+   },
+   "functionsShown": [
+    "setCookie",
+    "generateCookie",
+    "serialize",
+    "_serialize"
+   ],
+   "generateMs": 15652,
+   "nodes": 43,
+   "memberRows": 0,
+   "edges": 100,
+   "callTriplesSample": [
+    "getCookie->parse",
+    "getSignedCookie->parseSigned",
+    "generateCookie->serialize",
+    "setCookie->generateCookie",
+    "generateSignedCookie->serializeSigned",
+    "setSignedCookie->generateSignedCookie",
+    "deleteCookie->setCookie",
+    "makeSignature->getCryptoKey",
+    "parse->trimCookieWhitespace",
+    "parseSigned->getCryptoKey",
+    "parseSigned->parse",
+    "parseSigned->verifySignature",
+    "serialize->_serialize",
+    "serializeSigned->makeSignature",
+    "serializeSigned->_serialize"
+   ],
+   "banner": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-cogic-r1-20261123-171701",
+  "task": "H1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 3032,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H1-R2",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 3032,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": false,
+     "label": "value <- value",
+     "candidates": [
+      "name <- name",
+      "value <- value",
+      "opt <- opt"
+     ]
+    },
+    {
+     "id": "S2",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": false,
+     "label": "value <- value",
+     "candidates": [
+      "name <- '__Secure-' + name",
+      "value <- value",
+      "opt <- { path: '/', ...opt, secure: true }",
+      "name <- '__Host-' + name",
+      "opt <- { ...opt, path: '/', secure: true, domain: undefined, }",
+      "name <- name"
+     ]
+    },
+    {
+     "id": "S3",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": true,
+     "label": "value <- value",
+     "candidates": [
+      "name <- name",
+      "value <- value",
+      "opt <- opt"
+     ]
+    }
+   ],
+   "dataflowEdges": 66,
+   "paramFlowRows": 6,
+   "paramFlowRowsSample": [
+    {
+     "from": "serialize",
+     "to": "_serialize",
+     "label": "name <- name"
+    },
+    {
+     "from": "serialize",
+     "to": "_serialize",
+     "label": "value <- value"
+    },
+    {
+     "from": "serialize",
+     "to": "_serialize",
+     "label": "opt <- opt"
+    },
+    {
+     "from": "serializeSigned",
+     "to": "_serialize",
+     "label": "name <- name"
+    },
+    {
+     "from": "serializeSigned",
+     "to": "_serialize",
+     "label": "value <- value"
+    },
+    {
+     "from": "serializeSigned",
+     "to": "_serialize",
+     "label": "opt <- opt"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW serialize -> _serialize name <- name serialize -> _serialize value <- value serialize -> _serialize opt <- opt serializeSigned -> _serialize name <- name serializeSigned -> _serialize value <- value serializeSigned -> _serialize opt <- opt"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-cogic-r1-20261123-171701",
+  "task": "H1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 2,
+  "automationMs": 18580,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Cogic",
+   "task": "H1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 2,
+   "automationMs": 18580,
+   "opened": {
+    "file": "cookie.ts",
+    "line": null,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 102,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "bannerBefore": "Root file: index.tsClear root",
+   "bannerAfter": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-cogic-r2-20261123-174110",
+  "task": "H1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 5,
+  "switches": 0,
+  "automationMs": 33404,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 5,
+   "fileSwitches": 0,
+   "automationMs": 33404,
+   "pairs": {
+    "setCookie->generateCookie": true,
+    "generateCookie->serialize": true,
+    "serialize->_serialize": true
+   },
+   "functionsShown": [
+    "setCookie",
+    "generateCookie",
+    "serialize",
+    "_serialize"
+   ],
+   "generateMs": 18824,
+   "nodes": 43,
+   "memberRows": 0,
+   "edges": 100,
+   "callTriplesSample": [
+    "getCookie->parse",
+    "getSignedCookie->parseSigned",
+    "generateCookie->serialize",
+    "setCookie->generateCookie",
+    "generateSignedCookie->serializeSigned",
+    "setSignedCookie->generateSignedCookie",
+    "deleteCookie->setCookie",
+    "makeSignature->getCryptoKey",
+    "parse->trimCookieWhitespace",
+    "parseSigned->getCryptoKey",
+    "parseSigned->parse",
+    "parseSigned->verifySignature",
+    "serialize->_serialize",
+    "serializeSigned->makeSignature",
+    "serializeSigned->_serialize"
+   ],
+   "banner": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-cogic-r2-20261123-174110",
+  "task": "H1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 3435,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H1-R2",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 3435,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": false,
+     "label": "value <- value",
+     "candidates": [
+      "name <- name",
+      "value <- value",
+      "opt <- opt"
+     ]
+    },
+    {
+     "id": "S2",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": false,
+     "label": "value <- value",
+     "candidates": [
+      "name <- '__Secure-' + name",
+      "value <- value",
+      "opt <- { path: '/', ...opt, secure: true }",
+      "name <- '__Host-' + name",
+      "opt <- { ...opt, path: '/', secure: true, domain: undefined, }",
+      "name <- name"
+     ]
+    },
+    {
+     "id": "S3",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": true,
+     "label": "value <- value",
+     "candidates": [
+      "name <- name",
+      "value <- value",
+      "opt <- opt"
+     ]
+    }
+   ],
+   "dataflowEdges": 66,
+   "paramFlowRows": 6,
+   "paramFlowRowsSample": [
+    {
+     "from": "serialize",
+     "to": "_serialize",
+     "label": "name <- name"
+    },
+    {
+     "from": "serialize",
+     "to": "_serialize",
+     "label": "value <- value"
+    },
+    {
+     "from": "serialize",
+     "to": "_serialize",
+     "label": "opt <- opt"
+    },
+    {
+     "from": "serializeSigned",
+     "to": "_serialize",
+     "label": "name <- name"
+    },
+    {
+     "from": "serializeSigned",
+     "to": "_serialize",
+     "label": "value <- value"
+    },
+    {
+     "from": "serializeSigned",
+     "to": "_serialize",
+     "label": "opt <- opt"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW serialize -> _serialize name <- name serialize -> _serialize value <- value serialize -> _serialize opt <- opt serializeSigned -> _serialize name <- name serializeSigned -> _serialize value <- value serializeSigned -> _serialize opt <- opt"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-cogic-r2-20261123-174110",
+  "task": "H1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 2,
+  "automationMs": 20269,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Cogic",
+   "task": "H1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 2,
+   "automationMs": 20269,
+   "opened": {
+    "file": "cookie.ts",
+    "line": null,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 102,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "bannerBefore": "Root file: index.tsClear root",
+   "bannerAfter": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-tff-r0-20261123-165217",
+  "task": "H1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 9252,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 9252,
+   "pairs": {
+    "setCookie->generateCookie": true,
+    "generateCookie->serialize": true,
+    "serialize->_serialize": true
+   },
+   "functionsShown": [
+    "setCookie",
+    "generateCookie",
+    "serialize",
+    "_serialize"
+   ],
+   "codeLensAboveStart": true,
+   "quickPick": null,
+   "nodes": [
+    "ƒFunctionsetCookie()<WORK>\\hono\\src\\helper\\cookie\\index.ts",
+    "ƒFunctiongenerateCookie()<WORK>\\hono\\src\\helper\\cookie\\index.ts",
+    "ƒFunction↗ importedserialize()<WORK>\\hono\\src\\utils\\cookie.ts",
+    "ƒFunction_serialize()<WORK>\\hono\\src\\utils\\cookie.ts",
+    "🗄️Database QueryMongooseObject.create()<WORK>\\hono\\src\\utils\\cookie.ts",
+    "🗄️Database QueryMongooseObject.create()<WORK>\\hono\\src\\utils\\cookie.ts"
+   ],
+   "edges": 5,
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-tff-r0-20261123-165217",
+  "task": "H1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 1845,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H1-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 1845,
+   "segmentsShown": [],
+   "callSite": "_serialize(name, value, opt)",
+   "detail": "calls calls calls queries queries ƒ FUNCTION setCookie() <WORK>\\hono\\src\\helper\\cookie\\index.ts ƒ FUNCTION generateCookie() <WORK>\\hono\\src\\helper\\cookie\\index.ts ƒ FUNCTION ↗ IMPORTED serialize() <WORK>\\hono\\src\\utils\\cookie.ts ƒ FUNCTION _serialize() <WORK>\\hono\\src\\utils\\cookie.ts 🗄️ DATABASE QUERY Mongoose Object.create() <WORK>\\hono\\src\\utils\\cookie.ts 🗄️ DATABASE QUERY Mongoose Object.create() <WORK>\\hono\\src\\utils\\cookie.ts setCookie"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-tff-r0-20261123-165217",
+  "task": "H1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 2,
+  "automationMs": 3139,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 2,
+   "automationMs": 3139,
+   "opened": {
+    "file": "cookie.ts",
+    "line": 174,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 99,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startNodeInGraph": true
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-tff-r1-20261123-171635",
+  "task": "H1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 9254,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 9254,
+   "pairs": {
+    "setCookie->generateCookie": true,
+    "generateCookie->serialize": true,
+    "serialize->_serialize": true
+   },
+   "functionsShown": [
+    "setCookie",
+    "generateCookie",
+    "serialize",
+    "_serialize"
+   ],
+   "codeLensAboveStart": true,
+   "quickPick": null,
+   "nodes": [
+    "ƒFunctionsetCookie()<WORK>\\hono\\src\\helper\\cookie\\index.ts",
+    "ƒFunctiongenerateCookie()<WORK>\\hono\\src\\helper\\cookie\\index.ts",
+    "ƒFunction↗ importedserialize()<WORK>\\hono\\src\\utils\\cookie.ts",
+    "ƒFunction_serialize()<WORK>\\hono\\src\\utils\\cookie.ts",
+    "🗄️Database QueryMongooseObject.create()<WORK>\\hono\\src\\utils\\cookie.ts",
+    "🗄️Database QueryMongooseObject.create()<WORK>\\hono\\src\\utils\\cookie.ts"
+   ],
+   "edges": 5,
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-tff-r1-20261123-171635",
+  "task": "H1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 1999,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H1-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 1999,
+   "segmentsShown": [],
+   "callSite": "_serialize(name, value, opt)",
+   "detail": "calls calls calls queries queries ƒ FUNCTION setCookie() <WORK>\\hono\\src\\helper\\cookie\\index.ts ƒ FUNCTION generateCookie() <WORK>\\hono\\src\\helper\\cookie\\index.ts ƒ FUNCTION ↗ IMPORTED serialize() <WORK>\\hono\\src\\utils\\cookie.ts ƒ FUNCTION _serialize() <WORK>\\hono\\src\\utils\\cookie.ts 🗄️ DATABASE QUERY Mongoose Object.create() <WORK>\\hono\\src\\utils\\cookie.ts 🗄️ DATABASE QUERY Mongoose Object.create() <WORK>\\hono\\src\\utils\\cookie.ts setCookie"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-tff-r1-20261123-171635",
+  "task": "H1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 2,
+  "automationMs": 3195,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 2,
+   "automationMs": 3195,
+   "opened": {
+    "file": "cookie.ts",
+    "line": 174,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 99,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startNodeInGraph": true
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-tff-r2-20261123-174246",
+  "task": "H1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 9324,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 9324,
+   "pairs": {
+    "setCookie->generateCookie": true,
+    "generateCookie->serialize": true,
+    "serialize->_serialize": true
+   },
+   "functionsShown": [
+    "setCookie",
+    "generateCookie",
+    "serialize",
+    "_serialize"
+   ],
+   "codeLensAboveStart": true,
+   "quickPick": null,
+   "nodes": [
+    "ƒFunctionsetCookie()<WORK>\\hono\\src\\helper\\cookie\\index.ts",
+    "ƒFunctiongenerateCookie()<WORK>\\hono\\src\\helper\\cookie\\index.ts",
+    "ƒFunction↗ importedserialize()<WORK>\\hono\\src\\utils\\cookie.ts",
+    "ƒFunction_serialize()<WORK>\\hono\\src\\utils\\cookie.ts",
+    "🗄️Database QueryMongooseObject.create()<WORK>\\hono\\src\\utils\\cookie.ts",
+    "🗄️Database QueryMongooseObject.create()<WORK>\\hono\\src\\utils\\cookie.ts"
+   ],
+   "edges": 5,
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-tff-r2-20261123-174246",
+  "task": "H1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 1907,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H1-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 1907,
+   "segmentsShown": [],
+   "callSite": "_serialize(name, value, opt)",
+   "detail": "calls calls calls queries queries ƒ FUNCTION setCookie() <WORK>\\hono\\src\\helper\\cookie\\index.ts ƒ FUNCTION generateCookie() <WORK>\\hono\\src\\helper\\cookie\\index.ts ƒ FUNCTION ↗ IMPORTED serialize() <WORK>\\hono\\src\\utils\\cookie.ts ƒ FUNCTION _serialize() <WORK>\\hono\\src\\utils\\cookie.ts 🗄️ DATABASE QUERY Mongoose Object.create() <WORK>\\hono\\src\\utils\\cookie.ts 🗄️ DATABASE QUERY Mongoose Object.create() <WORK>\\hono\\src\\utils\\cookie.ts setCookie"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-tff-r2-20261123-174246",
+  "task": "H1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 2,
+  "automationMs": 3066,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 2,
+   "automationMs": 3066,
+   "opened": {
+    "file": "cookie.ts",
+    "line": 174,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 99,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startNodeInGraph": true
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-vscode-r0-20261123-165150",
+  "task": "H1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 4,
+  "switches": 0,
+  "automationMs": 8368,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 4,
+   "fileSwitches": 0,
+   "automationMs": 8368,
+   "pairs": {
+    "setCookie->generateCookie": true,
+    "generateCookie->serialize": true,
+    "serialize->_serialize": true
+   },
+   "rows": [
+    "setCookie",
+    "  generateCookie",
+    "    serialize",
+    "      encodeURIComponent",
+    "      _serialize"
+   ],
+   "incomingRows": 3
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-vscode-r0-20261123-165150",
+  "task": "H1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 6,
+  "switches": 1,
+  "automationMs": 1940,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H1-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 6,
+   "fileSwitches": 1,
+   "automationMs": 1940,
+   "reached": [
+    {
+     "to": "generateCookie",
+     "file": "index.ts",
+     "line": 78,
+     "group": 1
+    },
+    {
+     "to": "serialize",
+     "file": "cookie.ts",
+     "line": 262,
+     "group": 1
+    },
+    {
+     "to": "_serialize",
+     "file": "cookie.ts",
+     "line": 174,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H1-vscode-r0-20261123-165150",
+  "task": "H1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 1,
+  "automationMs": 3704,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "H1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 1,
+   "automationMs": 3704,
+   "opened": {
+    "file": "cookie.ts",
+    "line": 174,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 99,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": true
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-vscode-r1-20261123-171806",
+  "task": "H1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 4,
+  "switches": 0,
+  "automationMs": 8305,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 4,
+   "fileSwitches": 0,
+   "automationMs": 8305,
+   "pairs": {
+    "setCookie->generateCookie": true,
+    "generateCookie->serialize": true,
+    "serialize->_serialize": true
+   },
+   "rows": [
+    "setCookie",
+    "  generateCookie",
+    "    serialize",
+    "      encodeURIComponent",
+    "      _serialize"
+   ],
+   "incomingRows": 3
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-vscode-r1-20261123-171806",
+  "task": "H1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 6,
+  "switches": 1,
+  "automationMs": 1841,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H1-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 6,
+   "fileSwitches": 1,
+   "automationMs": 1841,
+   "reached": [
+    {
+     "to": "generateCookie",
+     "file": "index.ts",
+     "line": 78,
+     "group": 1
+    },
+    {
+     "to": "serialize",
+     "file": "cookie.ts",
+     "line": 262,
+     "group": 1
+    },
+    {
+     "to": "_serialize",
+     "file": "cookie.ts",
+     "line": 174,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H1-vscode-r1-20261123-171806",
+  "task": "H1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 1,
+  "automationMs": 3604,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "H1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 1,
+   "automationMs": 3604,
+   "opened": {
+    "file": "cookie.ts",
+    "line": 174,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 99,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": true
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-vscode-r2-20261123-174220",
+  "task": "H1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 4,
+  "switches": 0,
+  "automationMs": 8378,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 4,
+   "fileSwitches": 0,
+   "automationMs": 8378,
+   "pairs": {
+    "setCookie->generateCookie": true,
+    "generateCookie->serialize": true,
+    "serialize->_serialize": true
+   },
+   "rows": [
+    "setCookie",
+    "  generateCookie",
+    "    serialize",
+    "      encodeURIComponent",
+    "      _serialize"
+   ],
+   "incomingRows": 3
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-vscode-r2-20261123-174220",
+  "task": "H1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 6,
+  "switches": 1,
+  "automationMs": 2009,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H1-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 6,
+   "fileSwitches": 1,
+   "automationMs": 2009,
+   "reached": [
+    {
+     "to": "generateCookie",
+     "file": "index.ts",
+     "line": 78,
+     "group": 1
+    },
+    {
+     "to": "serialize",
+     "file": "cookie.ts",
+     "line": 262,
+     "group": 1
+    },
+    {
+     "to": "_serialize",
+     "file": "cookie.ts",
+     "line": 174,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H1-vscode-r2-20261123-174220",
+  "task": "H1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 1,
+  "automationMs": 3670,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "H1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 1,
+   "automationMs": 3670,
+   "opened": {
+    "file": "cookie.ts",
+    "line": 174,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 99,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": true
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-cg-r0-20261123-165846",
+  "task": "H2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20234,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H2-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20234,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper jsx middleware preset request router utils validator compose.test.ts compose.ts context.test.ts context.ts hono-base.ts hono.test.ts hono.ts http-exception.test.ts http-exception.ts index.ts request.test.ts request.ts router.ts types.test.ts types.ts .editorconfig Outline Timeline hono-base.ts Context Graph 0 0 Line 518, column 3: request = ( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-cg-r0-20261123-165846",
+  "task": "H2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20235,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H2-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20235,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper jsx middleware preset request router utils validator compose.test.ts compose.ts context.test.ts context.ts hono-base.ts hono.test.ts hono.ts http-exception.test.ts http-exception.ts index.ts request.test.ts request.ts router.ts types.test.ts types.ts .editorconfig Outline Timeline hono-base.ts Context Graph 0 0 Line 518, column 3: request = ( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-cg-r0-20261123-165846",
+  "task": "H2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20235,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H2-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20235,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper jsx middleware preset request router utils validator compose.test.ts compose.ts context.test.ts context.ts hono-base.ts hono.test.ts hono.ts http-exception.test.ts http-exception.ts index.ts request.test.ts request.ts router.ts types.test.ts types.ts .editorconfig Outline Timeline hono-base.ts Context Graph 0 0 Line 518, column 3: request = ( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-cg-r1-20261123-172328",
+  "task": "H2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20291,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H2-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20291,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper jsx middleware preset request router utils validator compose.test.ts compose.ts context.test.ts context.ts hono-base.ts hono.test.ts hono.ts http-exception.test.ts http-exception.ts index.ts request.test.ts request.ts router.ts types.test.ts types.ts .editorconfig Outline Timeline hono-base.ts Context Graph 0 0 Line 518, column 3: request = ( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-cg-r1-20261123-172328",
+  "task": "H2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20291,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H2-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20291,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper jsx middleware preset request router utils validator compose.test.ts compose.ts context.test.ts context.ts hono-base.ts hono.test.ts hono.ts http-exception.test.ts http-exception.ts index.ts request.test.ts request.ts router.ts types.test.ts types.ts .editorconfig Outline Timeline hono-base.ts Context Graph 0 0 Line 518, column 3: request = ( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-cg-r1-20261123-172328",
+  "task": "H2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20292,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H2-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20292,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper jsx middleware preset request router utils validator compose.test.ts compose.ts context.test.ts context.ts hono-base.ts hono.test.ts hono.ts http-exception.test.ts http-exception.ts index.ts request.test.ts request.ts router.ts types.test.ts types.ts .editorconfig Outline Timeline hono-base.ts Context Graph 0 0 Line 518, column 3: request = ( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-cg-r2-20261123-174812",
+  "task": "H2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20322,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H2-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20322,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper jsx middleware preset request router utils validator compose.test.ts compose.ts context.test.ts context.ts hono-base.ts hono.test.ts hono.ts http-exception.test.ts http-exception.ts index.ts request.test.ts request.ts router.ts types.test.ts types.ts .editorconfig Outline Timeline hono-base.ts Context Graph 0 0 Line 518, column 3: request = ( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-cg-r2-20261123-174812",
+  "task": "H2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20323,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H2-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20323,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper jsx middleware preset request router utils validator compose.test.ts compose.ts context.test.ts context.ts hono-base.ts hono.test.ts hono.ts http-exception.test.ts http-exception.ts index.ts request.test.ts request.ts router.ts types.test.ts types.ts .editorconfig Outline Timeline hono-base.ts Context Graph 0 0 Line 518, column 3: request = ( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-cg-r2-20261123-174812",
+  "task": "H2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20324,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "H2-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20324,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - hono - Visual Studio Code [Administrator] Explorer hono .github .vscode adapters benchmarks build docs node_modules perf-measures runtime-tests src adapter client helper jsx middleware preset request router utils validator compose.test.ts compose.ts context.test.ts context.ts hono-base.ts hono.test.ts hono.ts http-exception.test.ts http-exception.ts index.ts request.test.ts request.ts router.ts types.test.ts types.ts .editorconfig Outline Timeline hono-base.ts Context Graph 0 0 Line 518, column 3: request = ( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-cogic-r0-20261123-165724",
+  "task": "H2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 5,
+  "switches": 0,
+  "automationMs": 49734,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H2-R1",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 5,
+   "fileSwitches": 0,
+   "automationMs": 49734,
+   "pairs": {
+    "request->fetch": false,
+    "fetch->#dispatch": false,
+    "#dispatch->compose": false
+   },
+   "functionsShown": [
+    "request",
+    "fetch",
+    "#dispatch",
+    "compose"
+   ],
+   "generateMs": 36468,
+   "nodes": 24,
+   "memberRows": 9,
+   "edges": 78,
+   "callTriplesSample": [
+    "route->compose"
+   ],
+   "banner": "Root file: hono-base.tsClear root"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-cogic-r0-20261123-165724",
+  "task": "H2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 4754,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H2-R2",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 4754,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": false,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": false,
+     "label": null,
+     "candidates": []
+    },
+    {
+     "id": "S2",
+     "edge": false,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": false,
+     "label": null,
+     "candidates": []
+    },
+    {
+     "id": "S3",
+     "edge": false,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": false,
+     "label": null,
+     "candidates": []
+    }
+   ],
+   "dataflowEdges": 44,
+   "paramFlowRows": 3,
+   "paramFlowRowsSample": [
+    {
+     "from": "Hono.route",
+     "to": "compose([], app.errorHandler) (compose.ts)",
+     "label": "context <- c"
+    },
+    {
+     "from": "Hono.route",
+     "to": "compose([], app.errorHandler) (compose.ts)",
+     "label": "next <- () => r.handler(c, next)"
+    },
+    {
+     "from": "hono-base.ts",
+     "to": "compose([], app.errorHandler) (compose.ts)",
+     "label": "context <- c"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW Hono.route -> compose([], app.errorHandler) (compose.ts) context <- c Hono.route -> compose([], app.errorHandler) (compose.ts) next <- () => r.handler(c, next) hono-base.ts -> compose([], app.errorHandler) (compose.ts) context <- c"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-cogic-r0-20261123-165724",
+  "task": "H2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 3,
+  "switches": 2,
+  "automationMs": 14331,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Cogic",
+   "task": "H2-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 3,
+   "fileSwitches": 2,
+   "automationMs": 14331,
+   "opened": {
+    "file": "compose.ts",
+    "line": 19,
+    "group": 1
+   },
+   "returned": {
+    "file": "hono-base.ts",
+    "line": 536,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "bannerBefore": "Root file: hono-base.tsClear root",
+   "bannerAfter": "Root file: hono-base.tsClear root"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-cogic-r1-20261123-172141",
+  "task": "H2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 5,
+  "switches": 0,
+  "automationMs": 55052,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H2-R1",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 5,
+   "fileSwitches": 0,
+   "automationMs": 55052,
+   "pairs": {
+    "request->fetch": false,
+    "fetch->#dispatch": false,
+    "#dispatch->compose": false
+   },
+   "functionsShown": [
+    "request",
+    "fetch",
+    "#dispatch",
+    "compose"
+   ],
+   "generateMs": 42000,
+   "nodes": 24,
+   "memberRows": 9,
+   "edges": 78,
+   "callTriplesSample": [
+    "route->compose"
+   ],
+   "banner": "Root file: hono-base.tsClear root"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-cogic-r1-20261123-172141",
+  "task": "H2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 4516,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H2-R2",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 4516,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": false,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": false,
+     "label": null,
+     "candidates": []
+    },
+    {
+     "id": "S2",
+     "edge": false,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": false,
+     "label": null,
+     "candidates": []
+    },
+    {
+     "id": "S3",
+     "edge": false,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": false,
+     "label": null,
+     "candidates": []
+    }
+   ],
+   "dataflowEdges": 44,
+   "paramFlowRows": 3,
+   "paramFlowRowsSample": [
+    {
+     "from": "Hono.route",
+     "to": "compose([], app.errorHandler) (compose.ts)",
+     "label": "context <- c"
+    },
+    {
+     "from": "Hono.route",
+     "to": "compose([], app.errorHandler) (compose.ts)",
+     "label": "next <- () => r.handler(c, next)"
+    },
+    {
+     "from": "hono-base.ts",
+     "to": "compose([], app.errorHandler) (compose.ts)",
+     "label": "context <- c"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW Hono.route -> compose([], app.errorHandler) (compose.ts) context <- c Hono.route -> compose([], app.errorHandler) (compose.ts) next <- () => r.handler(c, next) hono-base.ts -> compose([], app.errorHandler) (compose.ts) context <- c"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-cogic-r1-20261123-172141",
+  "task": "H2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 3,
+  "switches": 2,
+  "automationMs": 13947,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Cogic",
+   "task": "H2-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 3,
+   "fileSwitches": 2,
+   "automationMs": 13947,
+   "opened": {
+    "file": "compose.ts",
+    "line": 19,
+    "group": 1
+   },
+   "returned": {
+    "file": "hono-base.ts",
+    "line": 536,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "bannerBefore": "Root file: hono-base.tsClear root",
+   "bannerAfter": "Root file: hono-base.tsClear root"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-cogic-r2-20261123-174346",
+  "task": "H2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 5,
+  "switches": 0,
+  "automationMs": 55104,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H2-R1",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 5,
+   "fileSwitches": 0,
+   "automationMs": 55104,
+   "pairs": {
+    "request->fetch": false,
+    "fetch->#dispatch": false,
+    "#dispatch->compose": false
+   },
+   "functionsShown": [
+    "request",
+    "fetch",
+    "#dispatch",
+    "compose"
+   ],
+   "generateMs": 41830,
+   "nodes": 24,
+   "memberRows": 9,
+   "edges": 78,
+   "callTriplesSample": [
+    "route->compose"
+   ],
+   "banner": "Root file: hono-base.tsClear root"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-cogic-r2-20261123-174346",
+  "task": "H2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 4992,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "H2-R2",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 4992,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": false,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": false,
+     "label": null,
+     "candidates": []
+    },
+    {
+     "id": "S2",
+     "edge": false,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": false,
+     "label": null,
+     "candidates": []
+    },
+    {
+     "id": "S3",
+     "edge": false,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": false,
+     "label": null,
+     "candidates": []
+    }
+   ],
+   "dataflowEdges": 44,
+   "paramFlowRows": 3,
+   "paramFlowRowsSample": [
+    {
+     "from": "Hono.route",
+     "to": "compose([], app.errorHandler) (compose.ts)",
+     "label": "context <- c"
+    },
+    {
+     "from": "Hono.route",
+     "to": "compose([], app.errorHandler) (compose.ts)",
+     "label": "next <- () => r.handler(c, next)"
+    },
+    {
+     "from": "hono-base.ts",
+     "to": "compose([], app.errorHandler) (compose.ts)",
+     "label": "context <- c"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW Hono.route -> compose([], app.errorHandler) (compose.ts) context <- c Hono.route -> compose([], app.errorHandler) (compose.ts) next <- () => r.handler(c, next) hono-base.ts -> compose([], app.errorHandler) (compose.ts) context <- c"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-cogic-r2-20261123-174346",
+  "task": "H2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 3,
+  "switches": 2,
+  "automationMs": 14560,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Cogic",
+   "task": "H2-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 3,
+   "fileSwitches": 2,
+   "automationMs": 14560,
+   "opened": {
+    "file": "compose.ts",
+    "line": 19,
+    "group": 1
+   },
+   "returned": {
+    "file": "hono-base.ts",
+    "line": 536,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "bannerBefore": "Root file: hono-base.tsClear root",
+   "bannerAfter": "Root file: hono-base.tsClear root"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-tff-r0-20261123-165448",
+  "task": "H2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r1-codelens-trace r1-palette-trace r2-select-target r3-dblclick-target",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 83557,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H2-R1",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 83557,
+   "pairs": {},
+   "functionsShown": [],
+   "codeLensAboveStart": false,
+   "quickPick": [
+    "notFoundHandler()Line 33",
+    "errorHandler()Line 37",
+    "defaultReplaceRequest()Line 386",
+    "handler()Line 391"
+   ],
+   "edges": 0,
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-tff-r0-20261123-165448",
+  "task": "H2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r1-codelens-trace r1-palette-trace r2-select-target r3-dblclick-target",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 111,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H2-R2",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 111,
+   "segmentsShown": [],
+   "callSite": "",
+   "detail": ""
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-tff-r0-20261123-165448",
+  "task": "H2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "(not recorded)",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C2: the spec ended (exit 1) before recording R3; no tool view existed to perform it",
+  "failedSteps": "r1-codelens-trace r1-palette-trace r2-select-target r3-dblclick-target",
+  "ops": "",
+  "switches": "",
+  "returnOps": "",
+  "detail": {}
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-tff-r1-20261123-171905",
+  "task": "H2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r1-codelens-trace r1-palette-trace r2-select-target r3-dblclick-target",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 83807,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H2-R1",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 83807,
+   "pairs": {},
+   "functionsShown": [],
+   "codeLensAboveStart": false,
+   "quickPick": [
+    "notFoundHandler()Line 33",
+    "errorHandler()Line 37",
+    "defaultReplaceRequest()Line 386",
+    "handler()Line 391"
+   ],
+   "edges": 0,
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-tff-r1-20261123-171905",
+  "task": "H2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r1-codelens-trace r1-palette-trace r2-select-target r3-dblclick-target",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 102,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H2-R2",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 102,
+   "segmentsShown": [],
+   "callSite": "",
+   "detail": ""
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-tff-r1-20261123-171905",
+  "task": "H2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "(not recorded)",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C2: the spec ended (exit 1) before recording R3; no tool view existed to perform it",
+  "failedSteps": "r1-codelens-trace r1-palette-trace r2-select-target r3-dblclick-target",
+  "ops": "",
+  "switches": "",
+  "returnOps": "",
+  "detail": {}
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-tff-r2-20261123-174535",
+  "task": "H2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r1-codelens-trace r1-palette-trace r2-select-target r3-dblclick-target",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 83799,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H2-R1",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 83799,
+   "pairs": {},
+   "functionsShown": [],
+   "codeLensAboveStart": false,
+   "quickPick": [
+    "notFoundHandler()Line 33",
+    "errorHandler()Line 37",
+    "defaultReplaceRequest()Line 386",
+    "handler()Line 391"
+   ],
+   "edges": 0,
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-tff-r2-20261123-174535",
+  "task": "H2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r1-codelens-trace r1-palette-trace r2-select-target r3-dblclick-target",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 108,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "H2-R2",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 108,
+   "segmentsShown": [],
+   "callSite": "",
+   "detail": ""
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-tff-r2-20261123-174535",
+  "task": "H2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "(not recorded)",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C2: the spec ended (exit 1) before recording R3; no tool view existed to perform it",
+  "failedSteps": "r1-codelens-trace r1-palette-trace r2-select-target r3-dblclick-target",
+  "ops": "",
+  "switches": "",
+  "returnOps": "",
+  "detail": {}
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-vscode-r0-20261123-165426",
+  "task": "H2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r3-open-target-row",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 3987,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H2-R1",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 3987,
+   "pairs": {
+    "request->fetch": false,
+    "fetch->#dispatch": false,
+    "#dispatch->compose": false
+   },
+   "rows": [
+    "requestHono",
+    "  test",
+    "  mergePath"
+   ],
+   "incomingRows": 3
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-vscode-r0-20261123-165426",
+  "task": "H2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "r3-open-target-row",
+  "ops": 6,
+  "switches": 1,
+  "automationMs": 1656,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H2-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 6,
+   "fileSwitches": 1,
+   "automationMs": 1656,
+   "reached": [
+    {
+     "to": "fetch",
+     "file": "hono-base.ts",
+     "line": 498,
+     "group": 1
+    },
+    {
+     "to": "#dispatch",
+     "file": "hono-base.ts",
+     "line": 425,
+     "group": 1
+    },
+    {
+     "to": "compose",
+     "file": "compose.ts",
+     "line": 15,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-H2-vscode-r0-20261123-165426",
+  "task": "H2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C3: target row absent from Call Hierarchy; the editor was already on the target file from the R2 Go to Definition chain",
+  "failedSteps": "r3-open-target-row",
+  "ops": 1,
+  "switches": 1,
+  "automationMs": 1933,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "H2-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 1,
+   "automationMs": 1933,
+   "opened": {
+    "file": "compose.ts",
+    "line": 15,
+    "group": 1
+   },
+   "returned": {
+    "file": "hono-base.ts",
+    "line": 518,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": false
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-vscode-r1-20261123-172308",
+  "task": "H2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r3-open-target-row",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 4075,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H2-R1",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 4075,
+   "pairs": {
+    "request->fetch": false,
+    "fetch->#dispatch": false,
+    "#dispatch->compose": false
+   },
+   "rows": [
+    "requestHono",
+    "  test",
+    "  mergePath"
+   ],
+   "incomingRows": 3
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-vscode-r1-20261123-172308",
+  "task": "H2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "r3-open-target-row",
+  "ops": 6,
+  "switches": 1,
+  "automationMs": 1830,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H2-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 6,
+   "fileSwitches": 1,
+   "automationMs": 1830,
+   "reached": [
+    {
+     "to": "fetch",
+     "file": "hono-base.ts",
+     "line": 498,
+     "group": 1
+    },
+    {
+     "to": "#dispatch",
+     "file": "hono-base.ts",
+     "line": 425,
+     "group": 1
+    },
+    {
+     "to": "compose",
+     "file": "compose.ts",
+     "line": 15,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-H2-vscode-r1-20261123-172308",
+  "task": "H2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C3: target row absent from Call Hierarchy; the editor was already on the target file from the R2 Go to Definition chain",
+  "failedSteps": "r3-open-target-row",
+  "ops": 1,
+  "switches": 1,
+  "automationMs": 1891,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "H2-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 1,
+   "automationMs": 1891,
+   "opened": {
+    "file": "compose.ts",
+    "line": 15,
+    "group": 1
+   },
+   "returned": {
+    "file": "hono-base.ts",
+    "line": 518,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": false
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-vscode-r2-20261123-174514",
+  "task": "H2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r3-open-target-row",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 3980,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H2-R1",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 3980,
+   "pairs": {
+    "request->fetch": false,
+    "fetch->#dispatch": false,
+    "#dispatch->compose": false
+   },
+   "rows": [
+    "requestHono",
+    "  test",
+    "  mergePath"
+   ],
+   "incomingRows": 3
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-vscode-r2-20261123-174514",
+  "task": "H2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "r3-open-target-row",
+  "ops": 6,
+  "switches": 1,
+  "automationMs": 1695,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "H2-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 6,
+   "fileSwitches": 1,
+   "automationMs": 1695,
+   "reached": [
+    {
+     "to": "fetch",
+     "file": "hono-base.ts",
+     "line": 498,
+     "group": 1
+    },
+    {
+     "to": "#dispatch",
+     "file": "hono-base.ts",
+     "line": 425,
+     "group": 1
+    },
+    {
+     "to": "compose",
+     "file": "compose.ts",
+     "line": 15,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-H2-vscode-r2-20261123-174514",
+  "task": "H2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C3: target row absent from Call Hierarchy; the editor was already on the target file from the R2 Go to Definition chain",
+  "failedSteps": "r3-open-target-row",
+  "ops": 1,
+  "switches": 1,
+  "automationMs": 1992,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "H2-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 1,
+   "automationMs": 1992,
+   "opened": {
+    "file": "compose.ts",
+    "line": 15,
+    "group": 1
+   },
+   "returned": {
+    "file": "hono-base.ts",
+    "line": 518,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": false
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-cg-r0-20261123-170836",
+  "task": "V1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20218,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V1-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20218,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-cg-r0-20261123-170836",
+  "task": "V1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20218,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V1-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20218,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-cg-r0-20261123-170836",
+  "task": "V1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20219,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V1-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20219,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-cg-r1-20261123-173321",
+  "task": "V1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20429,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V1-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20429,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-cg-r1-20261123-173321",
+  "task": "V1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20430,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V1-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20430,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-cg-r1-20261123-173321",
+  "task": "V1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20430,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V1-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20430,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-cg-r2-20261123-175802",
+  "task": "V1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20316,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V1-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20316,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-cg-r2-20261123-175802",
+  "task": "V1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20316,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V1-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20316,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-cg-r2-20261123-175802",
+  "task": "V1",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20317,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V1-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20317,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-cogic-r0-20261123-170138",
+  "task": "V1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return-start-node",
+  "ops": 3,
+  "switches": 0,
+  "automationMs": 396494,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V1-R1",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 3,
+   "fileSwitches": 0,
+   "automationMs": 396494,
+   "pairs": {
+    "createServer->_createServer": false,
+    "_createServer->resolveConfig": false
+   },
+   "functionsShown": [],
+   "generateMs": 385285,
+   "nodes": 17,
+   "memberRows": 3,
+   "edges": 833,
+   "callTriplesSample": [],
+   "banner": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-cogic-r0-20261123-170138",
+  "task": "V1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return-start-node",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 1138,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V1-R2",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 1138,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    },
+    {
+     "id": "S2",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    }
+   ],
+   "dataflowEdges": 654,
+   "paramFlowRows": 20,
+   "paramFlowRowsSample": [
+    {
+     "from": "createServer",
+     "to": "_createServer",
+     "label": "inlineConfig <- inlineConfig"
+    },
+    {
+     "from": "createServer",
+     "to": "_createServer",
+     "label": "options <- { listen: true }"
+    },
+    {
+     "from": "_createServer",
+     "to": "isResolvedConfig (config.ts)",
+     "label": "inlineConfig <- inlineConfig"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveConfig (config.ts)",
+     "label": "inlineConfig <- inlineConfig"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveConfig (config.ts)",
+     "label": "command <- 'serve'"
+    },
+    {
+     "from": "_createServer",
+     "to": "initPublicFiles (publicDir.ts)",
+     "label": "config <- config"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveHttpsConfig (http.ts)",
+     "label": "https <- config.server.https"
+    },
+    {
+     "from": "_createServer",
+     "to": "getResolvedOutDirs (watch.ts)",
+     "label": "root <- config.root"
+    },
+    {
+     "from": "_createServer",
+     "to": "getResolvedOutDirs (watch.ts)",
+     "label": "outDir <- config.build.outDir"
+    },
+    {
+     "from": "_createServer",
+     "to": "getResolvedOutDirs (watch.ts)",
+     "label": "outputOptions <- config.build.rolldownOptions.output"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveEmptyOutDir (watch.ts)",
+     "label": "emptyOutDir <- config.build.emptyOutDir"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveEmptyOutDir (watch.ts)",
+     "label": "root <- config.root"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW createServer -> _createServer inlineConfig <- inlineConfig createServer -> _createServer options <- { listen: true } _createServer -> isResolvedConfig (config.ts) inlineConfig <- inlineConfig _createServer -> resolveConfig (config.ts) inlineConfig <- inlineConfig _createServer -> resolveConfig (config.ts) command <- 'serve' _createServer -> initPublicFiles (publicDir.ts) config <- confi"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-cogic-r0-20261123-170138",
+  "task": "V1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return-start-node",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 6717,
+  "returnOps": 0,
+  "detail": {
+   "tool": "Cogic",
+   "task": "V1-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 6717,
+   "opened": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returnOperations": 0,
+   "viewKept": true,
+   "bannerBefore": "Root file: index.tsClear root",
+   "bannerAfter": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-cogic-r1-20261123-172554",
+  "task": "V1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return-start-node",
+  "ops": 3,
+  "switches": 0,
+  "automationMs": 401889,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V1-R1",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 3,
+   "fileSwitches": 0,
+   "automationMs": 401889,
+   "pairs": {
+    "createServer->_createServer": false,
+    "_createServer->resolveConfig": false
+   },
+   "functionsShown": [],
+   "generateMs": 391011,
+   "nodes": 17,
+   "memberRows": 3,
+   "edges": 833,
+   "callTriplesSample": [],
+   "banner": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-cogic-r1-20261123-172554",
+  "task": "V1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return-start-node",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 1094,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V1-R2",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 1094,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    },
+    {
+     "id": "S2",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    }
+   ],
+   "dataflowEdges": 654,
+   "paramFlowRows": 20,
+   "paramFlowRowsSample": [
+    {
+     "from": "createServer",
+     "to": "_createServer",
+     "label": "inlineConfig <- inlineConfig"
+    },
+    {
+     "from": "createServer",
+     "to": "_createServer",
+     "label": "options <- { listen: true }"
+    },
+    {
+     "from": "_createServer",
+     "to": "isResolvedConfig (config.ts)",
+     "label": "inlineConfig <- inlineConfig"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveConfig (config.ts)",
+     "label": "inlineConfig <- inlineConfig"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveConfig (config.ts)",
+     "label": "command <- 'serve'"
+    },
+    {
+     "from": "_createServer",
+     "to": "initPublicFiles (publicDir.ts)",
+     "label": "config <- config"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveHttpsConfig (http.ts)",
+     "label": "https <- config.server.https"
+    },
+    {
+     "from": "_createServer",
+     "to": "getResolvedOutDirs (watch.ts)",
+     "label": "root <- config.root"
+    },
+    {
+     "from": "_createServer",
+     "to": "getResolvedOutDirs (watch.ts)",
+     "label": "outDir <- config.build.outDir"
+    },
+    {
+     "from": "_createServer",
+     "to": "getResolvedOutDirs (watch.ts)",
+     "label": "outputOptions <- config.build.rolldownOptions.output"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveEmptyOutDir (watch.ts)",
+     "label": "emptyOutDir <- config.build.emptyOutDir"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveEmptyOutDir (watch.ts)",
+     "label": "root <- config.root"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW createServer -> _createServer inlineConfig <- inlineConfig createServer -> _createServer options <- { listen: true } _createServer -> isResolvedConfig (config.ts) inlineConfig <- inlineConfig _createServer -> resolveConfig (config.ts) inlineConfig <- inlineConfig _createServer -> resolveConfig (config.ts) command <- 'serve' _createServer -> initPublicFiles (publicDir.ts) config <- confi"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-cogic-r1-20261123-172554",
+  "task": "V1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return-start-node",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 6723,
+  "returnOps": 0,
+  "detail": {
+   "tool": "Cogic",
+   "task": "V1-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 6723,
+   "opened": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returnOperations": 0,
+   "viewKept": true,
+   "bannerBefore": "Root file: index.tsClear root",
+   "bannerAfter": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-cogic-r2-20261123-174845",
+  "task": "V1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return-start-node",
+  "ops": 3,
+  "switches": 0,
+  "automationMs": 398073,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V1-R1",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 3,
+   "fileSwitches": 0,
+   "automationMs": 398073,
+   "pairs": {
+    "createServer->_createServer": false,
+    "_createServer->resolveConfig": false
+   },
+   "functionsShown": [],
+   "generateMs": 387068,
+   "nodes": 17,
+   "memberRows": 3,
+   "edges": 833,
+   "callTriplesSample": [],
+   "banner": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-cogic-r2-20261123-174845",
+  "task": "V1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return-start-node",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 1106,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V1-R2",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 1106,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    },
+    {
+     "id": "S2",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    }
+   ],
+   "dataflowEdges": 654,
+   "paramFlowRows": 20,
+   "paramFlowRowsSample": [
+    {
+     "from": "createServer",
+     "to": "_createServer",
+     "label": "inlineConfig <- inlineConfig"
+    },
+    {
+     "from": "createServer",
+     "to": "_createServer",
+     "label": "options <- { listen: true }"
+    },
+    {
+     "from": "_createServer",
+     "to": "isResolvedConfig (config.ts)",
+     "label": "inlineConfig <- inlineConfig"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveConfig (config.ts)",
+     "label": "inlineConfig <- inlineConfig"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveConfig (config.ts)",
+     "label": "command <- 'serve'"
+    },
+    {
+     "from": "_createServer",
+     "to": "initPublicFiles (publicDir.ts)",
+     "label": "config <- config"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveHttpsConfig (http.ts)",
+     "label": "https <- config.server.https"
+    },
+    {
+     "from": "_createServer",
+     "to": "getResolvedOutDirs (watch.ts)",
+     "label": "root <- config.root"
+    },
+    {
+     "from": "_createServer",
+     "to": "getResolvedOutDirs (watch.ts)",
+     "label": "outDir <- config.build.outDir"
+    },
+    {
+     "from": "_createServer",
+     "to": "getResolvedOutDirs (watch.ts)",
+     "label": "outputOptions <- config.build.rolldownOptions.output"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveEmptyOutDir (watch.ts)",
+     "label": "emptyOutDir <- config.build.emptyOutDir"
+    },
+    {
+     "from": "_createServer",
+     "to": "resolveEmptyOutDir (watch.ts)",
+     "label": "root <- config.root"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW createServer -> _createServer inlineConfig <- inlineConfig createServer -> _createServer options <- { listen: true } _createServer -> isResolvedConfig (config.ts) inlineConfig <- inlineConfig _createServer -> resolveConfig (config.ts) inlineConfig <- inlineConfig _createServer -> resolveConfig (config.ts) command <- 'serve' _createServer -> initPublicFiles (publicDir.ts) config <- confi"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-cogic-r2-20261123-174845",
+  "task": "V1",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return-start-node",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 6699,
+  "returnOps": 0,
+  "detail": {
+   "tool": "Cogic",
+   "task": "V1-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 6699,
+   "opened": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returnOperations": 0,
+   "viewKept": true,
+   "bannerBefore": "Root file: index.tsClear root",
+   "bannerAfter": "Root file: index.tsClear root"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-tff-r0-20261123-165945",
+  "task": "V1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 10381,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 10381,
+   "pairs": {
+    "createServer->_createServer": true,
+    "_createServer->resolveConfig": true
+   },
+   "functionsShown": [
+    "createServer",
+    "_createServer",
+    "resolveConfig"
+   ],
+   "codeLensAboveStart": true,
+   "quickPick": null,
+   "nodes": [
+    "ƒFunctioncreateServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts",
+    "ƒFunction_createServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts",
+    "ƒFunction↗ importedisResolvedConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctiongetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunction↗ importedtryStatSync()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctionloadPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctionsetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionfindEsmSyntaxInCjs()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionanalyzeConfigModuleReferences()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionspecifierHasJsExtension()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionclassifyImportRef()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+   ],
+   "edges": 91,
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-tff-r0-20261123-165945",
+  "task": "V1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "UNSUPPORTED_BY_DESIGN",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C1: target node could not be selected; unsupported requires the detail panel to be read after selection",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 30249,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V1-R2",
+   "status": "UNSUPPORTED_BY_DESIGN",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 30249,
+   "segmentsShown": [],
+   "callSite": "",
+   "detail": "calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls max-depth max-depth max-depth queries que"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-tff-r0-20261123-165945",
+  "task": "V1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 60368,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V1-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 60368,
+   "opened": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startNodeInGraph": true
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-tff-r1-20261123-172400",
+  "task": "V1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 10304,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 10304,
+   "pairs": {
+    "createServer->_createServer": true,
+    "_createServer->resolveConfig": true
+   },
+   "functionsShown": [
+    "createServer",
+    "_createServer",
+    "resolveConfig"
+   ],
+   "codeLensAboveStart": true,
+   "quickPick": null,
+   "nodes": [
+    "ƒFunctioncreateServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts",
+    "ƒFunction_createServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts",
+    "ƒFunction↗ importedisResolvedConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctiongetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunction↗ importedtryStatSync()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctionloadPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctionsetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionfindEsmSyntaxInCjs()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionanalyzeConfigModuleReferences()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionspecifierHasJsExtension()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionclassifyImportRef()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+   ],
+   "edges": 91,
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-tff-r1-20261123-172400",
+  "task": "V1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "UNSUPPORTED_BY_DESIGN",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C1: target node could not be selected; unsupported requires the detail panel to be read after selection",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 30175,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V1-R2",
+   "status": "UNSUPPORTED_BY_DESIGN",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 30175,
+   "segmentsShown": [],
+   "callSite": "",
+   "detail": "calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls max-depth max-depth max-depth queries que"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-tff-r1-20261123-172400",
+  "task": "V1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 60437,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V1-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 60437,
+   "opened": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startNodeInGraph": true
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-tff-r2-20261123-175608",
+  "task": "V1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 10213,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 10213,
+   "pairs": {
+    "createServer->_createServer": true,
+    "_createServer->resolveConfig": true
+   },
+   "functionsShown": [
+    "createServer",
+    "_createServer",
+    "resolveConfig"
+   ],
+   "codeLensAboveStart": true,
+   "quickPick": null,
+   "nodes": [
+    "ƒFunctioncreateServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts",
+    "ƒFunction_createServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts",
+    "ƒFunction↗ importedisResolvedConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctiongetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunction↗ importedtryStatSync()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctionloadPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctionsetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionfindEsmSyntaxInCjs()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionanalyzeConfigModuleReferences()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionspecifierHasJsExtension()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunctionclassifyImportRef()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+   ],
+   "edges": 91,
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-tff-r2-20261123-175608",
+  "task": "V1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "UNSUPPORTED_BY_DESIGN",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C1: target node could not be selected; unsupported requires the detail panel to be read after selection",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 30201,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V1-R2",
+   "status": "UNSUPPORTED_BY_DESIGN",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 30201,
+   "segmentsShown": [],
+   "callSite": "",
+   "detail": "calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls max-depth max-depth max-depth queries que"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-tff-r2-20261123-175608",
+  "task": "V1",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 60369,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V1-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 60369,
+   "opened": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startNodeInGraph": true
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-vscode-r0-20261123-165919",
+  "task": "V1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 3,
+  "switches": 0,
+  "automationMs": 6166,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 3,
+   "fileSwitches": 0,
+   "automationMs": 6166,
+   "pairs": {
+    "createServer->_createServer": true,
+    "_createServer->resolveConfig": true
+   },
+   "rows": [
+    "createServer",
+    "  _createServer",
+    "    disableCache",
+    "    isResolvedConfig",
+    "    resolveConfig",
+    "    has",
+    "    add",
+    "    initPublicFiles",
+    "    resolveHttpsConfig",
+    "    getResolvedOutDirs",
+    "    resolveEmptyOutDir",
+    "    resolveChokidarOptions",
+    "    resolveHttpServer",
+    "    createWebSocketServer",
+    "    setClientErrorHandler",
+    "    makeWatcherCloseFinal",
+    "    watch",
+    "    getEnvFilesForMode",
+    "    createNoopWatcher",
+    "    onFSWatcher",
+    "    error",
+    "    ModuleGraph",
+    "    createPluginContainer",
+    "    createServerCloseFn",
+    "    createDevHtmlTransformFn",
+    "    addressServer",
+    "    initEnvironments",
+    "    setupSIGTERMListener",
+    "    setupWatcherListeners",
+    "    applyMiddlewares",
+    "    bind",
+    "    listenServer",
+    "    initServer",
+    "    close"
+   ],
+   "incomingRows": 1
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-vscode-r0-20261123-165919",
+  "task": "V1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 4,
+  "switches": 1,
+  "automationMs": 1374,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V1-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 4,
+   "fileSwitches": 1,
+   "automationMs": 1374,
+   "reached": [
+    {
+     "to": "_createServer",
+     "file": "index.ts",
+     "line": 512,
+     "group": 1
+    },
+    {
+     "to": "resolveConfig",
+     "file": "config.ts",
+     "line": 1480,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V1-vscode-r0-20261123-165919",
+  "task": "V1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 1,
+  "automationMs": 3614,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "V1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 1,
+   "automationMs": 3614,
+   "opened": {
+    "file": "config.ts",
+    "line": 1480,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": true
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-vscode-r1-20261123-173256",
+  "task": "V1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 3,
+  "switches": 0,
+  "automationMs": 6198,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 3,
+   "fileSwitches": 0,
+   "automationMs": 6198,
+   "pairs": {
+    "createServer->_createServer": true,
+    "_createServer->resolveConfig": true
+   },
+   "rows": [
+    "createServer",
+    "  _createServer",
+    "    disableCache",
+    "    isResolvedConfig",
+    "    resolveConfig",
+    "    has",
+    "    add",
+    "    initPublicFiles",
+    "    resolveHttpsConfig",
+    "    getResolvedOutDirs",
+    "    resolveEmptyOutDir",
+    "    resolveChokidarOptions",
+    "    resolveHttpServer",
+    "    createWebSocketServer",
+    "    setClientErrorHandler",
+    "    makeWatcherCloseFinal",
+    "    watch",
+    "    getEnvFilesForMode",
+    "    createNoopWatcher",
+    "    onFSWatcher",
+    "    error",
+    "    ModuleGraph",
+    "    createPluginContainer",
+    "    createServerCloseFn",
+    "    createDevHtmlTransformFn",
+    "    addressServer",
+    "    initEnvironments",
+    "    setupSIGTERMListener",
+    "    setupWatcherListeners",
+    "    applyMiddlewares",
+    "    bind",
+    "    listenServer",
+    "    initServer",
+    "    close"
+   ],
+   "incomingRows": 0
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-vscode-r1-20261123-173256",
+  "task": "V1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 4,
+  "switches": 1,
+  "automationMs": 1428,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V1-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 4,
+   "fileSwitches": 1,
+   "automationMs": 1428,
+   "reached": [
+    {
+     "to": "_createServer",
+     "file": "index.ts",
+     "line": 512,
+     "group": 1
+    },
+    {
+     "to": "resolveConfig",
+     "file": "config.ts",
+     "line": 1480,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V1-vscode-r1-20261123-173256",
+  "task": "V1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 1,
+  "automationMs": 3785,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "V1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 1,
+   "automationMs": 3785,
+   "opened": {
+    "file": "config.ts",
+    "line": 1480,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": true
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-vscode-r2-20261123-175544",
+  "task": "V1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 3,
+  "switches": 0,
+  "automationMs": 6205,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V1-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 3,
+   "fileSwitches": 0,
+   "automationMs": 6205,
+   "pairs": {
+    "createServer->_createServer": true,
+    "_createServer->resolveConfig": true
+   },
+   "rows": [
+    "createServer",
+    "  _createServer",
+    "    disableCache",
+    "    isResolvedConfig",
+    "    resolveConfig",
+    "    has",
+    "    add",
+    "    initPublicFiles",
+    "    resolveHttpsConfig",
+    "    getResolvedOutDirs",
+    "    resolveEmptyOutDir",
+    "    resolveChokidarOptions",
+    "    resolveHttpServer",
+    "    createWebSocketServer",
+    "    setClientErrorHandler",
+    "    makeWatcherCloseFinal",
+    "    watch",
+    "    getEnvFilesForMode",
+    "    createNoopWatcher",
+    "    onFSWatcher",
+    "    error",
+    "    ModuleGraph",
+    "    createPluginContainer",
+    "    createServerCloseFn",
+    "    createDevHtmlTransformFn",
+    "    addressServer",
+    "    initEnvironments",
+    "    setupSIGTERMListener",
+    "    setupWatcherListeners",
+    "    applyMiddlewares",
+    "    bind",
+    "    listenServer",
+    "    initServer",
+    "    close"
+   ],
+   "incomingRows": 0
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-vscode-r2-20261123-175544",
+  "task": "V1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 4,
+  "switches": 1,
+  "automationMs": 1417,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V1-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 4,
+   "fileSwitches": 1,
+   "automationMs": 1417,
+   "reached": [
+    {
+     "to": "_createServer",
+     "file": "index.ts",
+     "line": 512,
+     "group": 1
+    },
+    {
+     "to": "resolveConfig",
+     "file": "config.ts",
+     "line": 1480,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V1-vscode-r2-20261123-175544",
+  "task": "V1",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 1,
+  "automationMs": 3716,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "V1-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 1,
+   "automationMs": 3716,
+   "opened": {
+    "file": "config.ts",
+    "line": 1480,
+    "group": 1
+   },
+   "returned": {
+    "file": "index.ts",
+    "line": 506,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": true
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-cg-r0-20261123-171558",
+  "task": "V2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20372,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V2-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20372,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-cg-r0-20261123-171558",
+  "task": "V2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20373,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V2-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20373,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-cg-r0-20261123-171558",
+  "task": "V2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20373,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V2-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20373,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-cg-r1-20261123-174034",
+  "task": "V2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20264,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V2-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20264,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-cg-r1-20261123-174034",
+  "task": "V2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20265,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V2-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20265,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-cg-r1-20261123-174034",
+  "task": "V2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20265,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V2-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20265,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-cg-r2-20261123-180601",
+  "task": "V2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R1",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 20258,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V2-R1",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 20258,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-cg-r2-20261123-180601",
+  "task": "V2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R2",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20259,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V2-R2",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20259,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-cg-r2-20261123-180601",
+  "task": "V2",
+  "toolKey": "cg",
+  "tool": "Context Graph",
+  "kind": "R3",
+  "rawClass": "ENVIRONMENT_BLOCKED",
+  "cls": "ENVIRONMENT_BLOCKED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 20259,
+  "returnOps": "",
+  "detail": {
+   "tool": "Context Graph",
+   "task": "V2-R3",
+   "status": "ENVIRONMENT_BLOCKED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 20259,
+   "blockedMessage": true,
+   "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server ssr assetSource.ts baseEnvironment.ts build.ts cli.ts commandLock.ts config.ts constants.ts deprecations.ts env.ts environment.ts external.ts http.ts idResolver.ts index.ts internalIndex.ts Outline Timeline build.ts Context Graph 0 0 Line 575, column 23: export async function build( || GRAPH SELECTION No u",
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-cogic-r0-20261123-171135",
+  "task": "V2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target",
+  "ops": 3,
+  "switches": 0,
+  "automationMs": 236697,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V2-R1",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 3,
+   "fileSwitches": 0,
+   "automationMs": 236697,
+   "pairs": {
+    "build->createBuilder": false,
+    "createBuilder->resolveConfigToBuild": true,
+    "resolveConfigToBuild->resolveConfig": false
+   },
+   "functionsShown": [
+    "createBuilder",
+    "resolveConfigToBuild"
+   ],
+   "generateMs": 225711,
+   "nodes": 47,
+   "memberRows": 21,
+   "edges": 703,
+   "callTriplesSample": [
+    "resolveRolldownOptions->injectEnvironmentToHooks",
+    "rolldownOptions->onRollupLog",
+    "buildOutputOptions->resolveOutputJsExtension",
+    "resolveRolldownOptions->resolveBuildOutputs",
+    "enhanceRollupError->extractStack",
+    "enhanceRollupError->normalizeCodeFrame",
+    "onRollupLog->clearLine",
+    "onRollupLog->normalizeUserOnWarn",
+    "normalizeUserOnWarn->normalizeLog",
+    "resolveUserExternal->isExternal",
+    "injectEnvironmentToHooks->wrapEnvironmentResolveId",
+    "injectEnvironmentToHooks->wrapEnvironmentLoad",
+    "injectEnvironmentToHooks->wrapEnvironmentTransform",
+    "injectEnvironmentToHooks->wrapEnvironmentHook",
+    "handler->injectEnvironmentInContext",
+    "handler->injectSsrFlag",
+    "wrapEnvironmentResolveId->wrapHookObject",
+    "wrapEnvironmentLoad->wrapHookObject",
+    "wrapEnvironmentTransform->wrapHookObject",
+    "handler->injectChunkMetadata",
+    "wrapEnvironmentHook->wrapHookObject",
+    "injectChunkMetadata->reset",
+    "injectChunkMetadata->get",
+    "createBuilder->resolveConfigToBuild",
+    "createBuilder->resolveBuilderOptions",
+    "setupEnvironment->init"
+   ],
+   "banner": "Root file: build.tsClear root"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-cogic-r0-20261123-171135",
+  "task": "V2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 1292,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V2-R2",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 1292,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    },
+    {
+     "id": "S2",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": false,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": [
+      "inlineConfig <- inlineConfig",
+      "patchConfig <- patchConfig",
+      "patchPlugins <- patchPlugins"
+     ]
+    },
+    {
+     "id": "S3",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    }
+   ],
+   "dataflowEdges": 522,
+   "paramFlowRows": 20,
+   "paramFlowRowsSample": [
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "Logger.warn (logger.ts)",
+     "label": "msg <- 'polyfillModulePreload is deprecated. Use modulePreload.polyfill instead.'"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "mergeWithDefaults (utils.ts)",
+     "label": "defaults <- { ..._buildEnvironmentOptionsDefaults, cssCodeSplit: !raw.lib, minify: consum..."
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "mergeWithDefaults (utils.ts)",
+     "label": "values <- raw"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "BuildEnvironment",
+     "label": "name <- name"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "BuildEnvironment",
+     "label": "config <- config"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "setupRollupOptionCompat (utils.ts)",
+     "label": "buildConfig <- merged"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "unique (utils.ts)",
+     "label": "arr <- merged.target"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "setupRollupOptionCompat (utils.ts)",
+     "label": "buildConfig <- resolved"
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "perEnvironmentPlugin (plugin.ts)",
+     "label": "name <- 'vite:rollup-options-plugins'"
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "perEnvironmentPlugin (plugin.ts)",
+     "label": "applyToEnvironment <- async (environment) => { if (!isBuild && !environment.config.isBundled) { ret..."
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "asyncFlatten (utils.ts)",
+     "label": "arr <- arraify(environment.config.build.rolldownOptions.plugins)"
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "arraify (utils.ts)",
+     "label": "target <- environment.config.build.rolldownOptions.plugins"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW resolveBuildEnvironmentOptions -> Logger.warn (logger.ts) msg <- 'polyfillModulePreload is deprecated. Use modulePreload.polyfill instead.' resolveBuildEnvironmentOptions -> mergeWithDefaults (utils.ts) defaults <- { ..._buildEnvironmentOptionsDefaults, cssCodeSplit: !raw.lib, minify: consum... resolveBuildEnvironmentOptions -> mergeWithDefaults (utils.ts) values <- raw resolveBuildEnvi"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-cogic-r0-20261123-171135",
+  "task": "V2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 9848,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Cogic",
+   "task": "V2-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 9848,
+   "opened": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returned": {
+    "file": "build.ts",
+    "line": 347,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "bannerBefore": "Root file: build.tsClear root",
+   "bannerAfter": "Root file: build.tsClear root"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-cogic-r1-20261123-173550",
+  "task": "V2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target",
+  "ops": 3,
+  "switches": 0,
+  "automationMs": 232004,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V2-R1",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 3,
+   "fileSwitches": 0,
+   "automationMs": 232004,
+   "pairs": {
+    "build->createBuilder": false,
+    "createBuilder->resolveConfigToBuild": true,
+    "resolveConfigToBuild->resolveConfig": false
+   },
+   "functionsShown": [
+    "createBuilder",
+    "resolveConfigToBuild"
+   ],
+   "generateMs": 221061,
+   "nodes": 47,
+   "memberRows": 21,
+   "edges": 703,
+   "callTriplesSample": [
+    "resolveRolldownOptions->injectEnvironmentToHooks",
+    "rolldownOptions->onRollupLog",
+    "buildOutputOptions->resolveOutputJsExtension",
+    "resolveRolldownOptions->resolveBuildOutputs",
+    "enhanceRollupError->extractStack",
+    "enhanceRollupError->normalizeCodeFrame",
+    "onRollupLog->clearLine",
+    "onRollupLog->normalizeUserOnWarn",
+    "normalizeUserOnWarn->normalizeLog",
+    "resolveUserExternal->isExternal",
+    "injectEnvironmentToHooks->wrapEnvironmentResolveId",
+    "injectEnvironmentToHooks->wrapEnvironmentLoad",
+    "injectEnvironmentToHooks->wrapEnvironmentTransform",
+    "injectEnvironmentToHooks->wrapEnvironmentHook",
+    "handler->injectEnvironmentInContext",
+    "handler->injectSsrFlag",
+    "wrapEnvironmentResolveId->wrapHookObject",
+    "wrapEnvironmentLoad->wrapHookObject",
+    "wrapEnvironmentTransform->wrapHookObject",
+    "handler->injectChunkMetadata",
+    "wrapEnvironmentHook->wrapHookObject",
+    "injectChunkMetadata->reset",
+    "injectChunkMetadata->get",
+    "createBuilder->resolveConfigToBuild",
+    "createBuilder->resolveBuilderOptions",
+    "setupEnvironment->init"
+   ],
+   "banner": "Root file: build.tsClear root"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-cogic-r1-20261123-173550",
+  "task": "V2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 1147,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V2-R2",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 1147,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    },
+    {
+     "id": "S2",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": false,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": [
+      "inlineConfig <- inlineConfig",
+      "patchConfig <- patchConfig",
+      "patchPlugins <- patchPlugins"
+     ]
+    },
+    {
+     "id": "S3",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    }
+   ],
+   "dataflowEdges": 522,
+   "paramFlowRows": 20,
+   "paramFlowRowsSample": [
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "Logger.warn (logger.ts)",
+     "label": "msg <- 'polyfillModulePreload is deprecated. Use modulePreload.polyfill instead.'"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "mergeWithDefaults (utils.ts)",
+     "label": "defaults <- { ..._buildEnvironmentOptionsDefaults, cssCodeSplit: !raw.lib, minify: consum..."
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "mergeWithDefaults (utils.ts)",
+     "label": "values <- raw"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "BuildEnvironment",
+     "label": "name <- name"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "BuildEnvironment",
+     "label": "config <- config"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "setupRollupOptionCompat (utils.ts)",
+     "label": "buildConfig <- merged"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "unique (utils.ts)",
+     "label": "arr <- merged.target"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "setupRollupOptionCompat (utils.ts)",
+     "label": "buildConfig <- resolved"
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "perEnvironmentPlugin (plugin.ts)",
+     "label": "name <- 'vite:rollup-options-plugins'"
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "perEnvironmentPlugin (plugin.ts)",
+     "label": "applyToEnvironment <- async (environment) => { if (!isBuild && !environment.config.isBundled) { ret..."
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "asyncFlatten (utils.ts)",
+     "label": "arr <- arraify(environment.config.build.rolldownOptions.plugins)"
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "arraify (utils.ts)",
+     "label": "target <- environment.config.build.rolldownOptions.plugins"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW resolveBuildEnvironmentOptions -> Logger.warn (logger.ts) msg <- 'polyfillModulePreload is deprecated. Use modulePreload.polyfill instead.' resolveBuildEnvironmentOptions -> mergeWithDefaults (utils.ts) defaults <- { ..._buildEnvironmentOptionsDefaults, cssCodeSplit: !raw.lib, minify: consum... resolveBuildEnvironmentOptions -> mergeWithDefaults (utils.ts) values <- raw resolveBuildEnvi"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-cogic-r1-20261123-173550",
+  "task": "V2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 8830,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Cogic",
+   "task": "V2-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 8830,
+   "opened": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returned": {
+    "file": "build.ts",
+    "line": 347,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "bannerBefore": "Root file: build.tsClear root",
+   "bannerAfter": "Root file: build.tsClear root"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-cogic-r2-20261123-175837",
+  "task": "V2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R1",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target",
+  "ops": 3,
+  "switches": 0,
+  "automationMs": 275958,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V2-R1",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 3,
+   "fileSwitches": 0,
+   "automationMs": 275958,
+   "pairs": {
+    "build->createBuilder": false,
+    "createBuilder->resolveConfigToBuild": true,
+    "resolveConfigToBuild->resolveConfig": false
+   },
+   "functionsShown": [
+    "createBuilder",
+    "resolveConfigToBuild"
+   ],
+   "generateMs": 264017,
+   "nodes": 47,
+   "memberRows": 21,
+   "edges": 703,
+   "callTriplesSample": [
+    "resolveRolldownOptions->injectEnvironmentToHooks",
+    "rolldownOptions->onRollupLog",
+    "buildOutputOptions->resolveOutputJsExtension",
+    "resolveRolldownOptions->resolveBuildOutputs",
+    "enhanceRollupError->extractStack",
+    "enhanceRollupError->normalizeCodeFrame",
+    "onRollupLog->clearLine",
+    "onRollupLog->normalizeUserOnWarn",
+    "normalizeUserOnWarn->normalizeLog",
+    "resolveUserExternal->isExternal",
+    "injectEnvironmentToHooks->wrapEnvironmentResolveId",
+    "injectEnvironmentToHooks->wrapEnvironmentLoad",
+    "injectEnvironmentToHooks->wrapEnvironmentTransform",
+    "injectEnvironmentToHooks->wrapEnvironmentHook",
+    "handler->injectEnvironmentInContext",
+    "handler->injectSsrFlag",
+    "wrapEnvironmentResolveId->wrapHookObject",
+    "wrapEnvironmentLoad->wrapHookObject",
+    "wrapEnvironmentTransform->wrapHookObject",
+    "handler->injectChunkMetadata",
+    "wrapEnvironmentHook->wrapHookObject",
+    "injectChunkMetadata->reset",
+    "injectChunkMetadata->get",
+    "createBuilder->resolveConfigToBuild",
+    "createBuilder->resolveBuilderOptions",
+    "setupEnvironment->init"
+   ],
+   "banner": "Root file: build.tsClear root"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-cogic-r2-20261123-175837",
+  "task": "V2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R2",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target",
+  "ops": 0,
+  "switches": 0,
+  "automationMs": 1201,
+  "returnOps": "",
+  "detail": {
+   "tool": "Cogic",
+   "task": "V2-R2",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 0,
+   "fileSwitches": 0,
+   "automationMs": 1201,
+   "segments": [
+    {
+     "id": "S1",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    },
+    {
+     "id": "S2",
+     "edge": true,
+     "viaGraphEdge": true,
+     "viaParamFlowRow": false,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": [
+      "inlineConfig <- inlineConfig",
+      "patchConfig <- patchConfig",
+      "patchPlugins <- patchPlugins"
+     ]
+    },
+    {
+     "id": "S3",
+     "edge": true,
+     "viaGraphEdge": false,
+     "viaParamFlowRow": true,
+     "label": "inlineConfig <- inlineConfig",
+     "candidates": []
+    }
+   ],
+   "dataflowEdges": 522,
+   "paramFlowRows": 20,
+   "paramFlowRowsSample": [
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "Logger.warn (logger.ts)",
+     "label": "msg <- 'polyfillModulePreload is deprecated. Use modulePreload.polyfill instead.'"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "mergeWithDefaults (utils.ts)",
+     "label": "defaults <- { ..._buildEnvironmentOptionsDefaults, cssCodeSplit: !raw.lib, minify: consum..."
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "mergeWithDefaults (utils.ts)",
+     "label": "values <- raw"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "BuildEnvironment",
+     "label": "name <- name"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "BuildEnvironment",
+     "label": "config <- config"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "setupRollupOptionCompat (utils.ts)",
+     "label": "buildConfig <- merged"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "unique (utils.ts)",
+     "label": "arr <- merged.target"
+    },
+    {
+     "from": "resolveBuildEnvironmentOptions",
+     "to": "setupRollupOptionCompat (utils.ts)",
+     "label": "buildConfig <- resolved"
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "perEnvironmentPlugin (plugin.ts)",
+     "label": "name <- 'vite:rollup-options-plugins'"
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "perEnvironmentPlugin (plugin.ts)",
+     "label": "applyToEnvironment <- async (environment) => { if (!isBuild && !environment.config.isBundled) { ret..."
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "asyncFlatten (utils.ts)",
+     "label": "arr <- arraify(environment.config.build.rolldownOptions.plugins)"
+    },
+    {
+     "from": "resolveBuildPlugins",
+     "to": "arraify (utils.ts)",
+     "label": "target <- environment.config.build.rolldownOptions.plugins"
+    }
+   ],
+   "paramFlowTarget": "PARAM FLOW resolveBuildEnvironmentOptions -> Logger.warn (logger.ts) msg <- 'polyfillModulePreload is deprecated. Use modulePreload.polyfill instead.' resolveBuildEnvironmentOptions -> mergeWithDefaults (utils.ts) defaults <- { ..._buildEnvironmentOptionsDefaults, cssCodeSplit: !raw.lib, minify: consum... resolveBuildEnvironmentOptions -> mergeWithDefaults (utils.ts) values <- raw resolveBuildEnvi"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-cogic-r2-20261123-175837",
+  "task": "V2",
+  "toolKey": "cogic",
+  "tool": "Cogic",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 9188,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Cogic",
+   "task": "V2-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 9188,
+   "opened": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returned": {
+    "file": "build.ts",
+    "line": 347,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "bannerBefore": "Root file: build.tsClear root",
+   "bannerAfter": "Root file: build.tsClear root"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-tff-r0-20261123-170941",
+  "task": "V2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 10834,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V2-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 10834,
+   "pairs": {
+    "build->createBuilder": true,
+    "createBuilder->resolveConfigToBuild": true,
+    "resolveConfigToBuild->resolveConfig": true
+   },
+   "functionsShown": [
+    "build",
+    "createBuilder",
+    "resolveConfigToBuild",
+    "resolveConfig"
+   ],
+   "codeLensAboveStart": true,
+   "quickPick": null,
+   "nodes": [
+    "ƒFunctionbuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+    "ƒFunctioncreateBuilder()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+    "ƒFunctionresolveConfigToBuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+    "ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importedisNodeLikeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importednodeResolveWithVite()<WORK>\\vite\\packages\\vite\\src\\node\\nodeResolve.ts",
+    "ƒFunction↗ importedcreateImportMetaResolver()<WORK>\\vite\\packages\\vite\\src\\module-runner\\importMetaResolver.ts",
+    "ƒFunction↗ importedgetFileStartIndex()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctioncollectAllModules()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunctionloadConfigFromBundledFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedfindNearestNodeModules()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunction↗ importedformatNativeConfigIncompatWarning()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+   ],
+   "edges": 93,
+   "notifications": []
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-tff-r0-20261123-170941",
+  "task": "V2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "UNSUPPORTED_BY_DESIGN",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C1: target node could not be selected; unsupported requires the detail panel to be read after selection",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 30192,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V2-R2",
+   "status": "UNSUPPORTED_BY_DESIGN",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 30192,
+   "segmentsShown": [],
+   "callSite": "",
+   "detail": "calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls max-depth max-depth max-depth max-d"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-tff-r0-20261123-170941",
+  "task": "V2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 60347,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V2-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 60347,
+   "opened": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returned": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startNodeInGraph": true
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-tff-r1-20261123-173357",
+  "task": "V2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 10070,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V2-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 10070,
+   "pairs": {
+    "build->createBuilder": true,
+    "createBuilder->resolveConfigToBuild": true,
+    "resolveConfigToBuild->resolveConfig": true
+   },
+   "functionsShown": [
+    "build",
+    "createBuilder",
+    "resolveConfigToBuild",
+    "resolveConfig"
+   ],
+   "codeLensAboveStart": true,
+   "quickPick": null,
+   "nodes": [
+    "ƒFunctionbuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+    "ƒFunctioncreateBuilder()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+    "ƒFunctionresolveConfigToBuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+    "ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importedisNodeLikeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importednodeResolveWithVite()<WORK>\\vite\\packages\\vite\\src\\node\\nodeResolve.ts",
+    "ƒFunction↗ importedcreateImportMetaResolver()<WORK>\\vite\\packages\\vite\\src\\module-runner\\importMetaResolver.ts",
+    "ƒFunction↗ importedgetFileStartIndex()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctioncollectAllModules()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunctionloadConfigFromBundledFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedfindNearestNodeModules()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunction↗ importedformatNativeConfigIncompatWarning()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+   ],
+   "edges": 93,
+   "notifications": []
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-tff-r1-20261123-173357",
+  "task": "V2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "UNSUPPORTED_BY_DESIGN",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C1: target node could not be selected; unsupported requires the detail panel to be read after selection",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 30179,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V2-R2",
+   "status": "UNSUPPORTED_BY_DESIGN",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 30179,
+   "segmentsShown": [],
+   "callSite": "",
+   "detail": "calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls max-depth max-depth max-depth max-d"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-tff-r1-20261123-173357",
+  "task": "V2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 60412,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V2-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 60412,
+   "opened": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returned": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startNodeInGraph": true
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-tff-r2-20261123-180404",
+  "task": "V2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 12099,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V2-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 12099,
+   "pairs": {
+    "build->createBuilder": true,
+    "createBuilder->resolveConfigToBuild": true,
+    "resolveConfigToBuild->resolveConfig": true
+   },
+   "functionsShown": [
+    "build",
+    "createBuilder",
+    "resolveConfigToBuild",
+    "resolveConfig"
+   ],
+   "codeLensAboveStart": true,
+   "quickPick": null,
+   "nodes": [
+    "ƒFunctionbuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+    "ƒFunctioncreateBuilder()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+    "ƒFunctionresolveConfigToBuild()<WORK>\\vite\\packages\\vite\\src\\node\\build.ts",
+    "ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+    "?Unresolvedconsole[method]( format(type, msg, opt",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "?Unresolvedconsole[method](format(type, msg, options))",
+    "ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+    "ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importedisNodeLikeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunction↗ importednodeResolveWithVite()<WORK>\\vite\\packages\\vite\\src\\node\\nodeResolve.ts",
+    "ƒFunction↗ importedcreateImportMetaResolver()<WORK>\\vite\\packages\\vite\\src\\module-runner\\importMetaResolver.ts",
+    "ƒFunction↗ importedgetFileStartIndex()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+    "ƒFunctioncollectAllModules()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunctionloadConfigFromBundledFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+    "ƒFunction↗ importedfindNearestNodeModules()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+    "ƒFunction↗ importedformatNativeConfigIncompatWarning()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts"
+   ],
+   "edges": 93,
+   "notifications": []
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-tff-r2-20261123-180404",
+  "task": "V2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R2",
+  "rawClass": "UNSUPPORTED_BY_DESIGN",
+  "cls": "EXECUTION_FAILED",
+  "correction": "C1: target node could not be selected; unsupported requires the detail panel to be read after selection",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 1,
+  "switches": 0,
+  "automationMs": 30229,
+  "returnOps": "",
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V2-R2",
+   "status": "UNSUPPORTED_BY_DESIGN",
+   "userOperations": 1,
+   "fileSwitches": 0,
+   "automationMs": 30229,
+   "segmentsShown": [],
+   "callSite": "",
+   "detail": "calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls max-depth max-depth max-depth max-d"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-tff-r2-20261123-180404",
+  "task": "V2",
+  "toolKey": "tff",
+  "tool": "Trace Function Flow",
+  "kind": "R3",
+  "rawClass": "EXECUTION_FAILED",
+  "cls": "EXECUTION_FAILED",
+  "correction": "",
+  "failedSteps": "r2-select-target r3-dblclick-target r3-return",
+  "ops": 2,
+  "switches": 0,
+  "automationMs": 60422,
+  "returnOps": 1,
+  "detail": {
+   "tool": "Trace Function Flow",
+   "task": "V2-R3",
+   "status": "EXECUTION_FAILED",
+   "userOperations": 2,
+   "fileSwitches": 0,
+   "automationMs": 60422,
+   "opened": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returned": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startNodeInGraph": true
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-vscode-r0-20261123-170912",
+  "task": "V2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 4,
+  "switches": 0,
+  "automationMs": 8350,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V2-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 4,
+   "fileSwitches": 0,
+   "automationMs": 8350,
+   "pairs": {
+    "build->createBuilder": true,
+    "createBuilder->resolveConfigToBuild": true,
+    "resolveConfigToBuild->resolveConfig": true
+   },
+   "rows": [
+    "build",
+    "  createBuilder",
+    "    resolveConfigToBuild",
+    "      resolveConfig",
+    "    resolveBuilderOptions",
+    "    setupEnvironment",
+    "    keys",
+    "    keys",
+    "    push",
+    "    all",
+    "    all",
+    "    map",
+    "  values",
+    "  build"
+   ],
+   "incomingRows": 1
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-vscode-r0-20261123-170912",
+  "task": "V2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 6,
+  "switches": 1,
+  "automationMs": 1798,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V2-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 6,
+   "fileSwitches": 1,
+   "automationMs": 1798,
+   "reached": [
+    {
+     "to": "createBuilder",
+     "file": "build.ts",
+     "line": 1857,
+     "group": 1
+    },
+    {
+     "to": "resolveConfigToBuild",
+     "file": "build.ts",
+     "line": 584,
+     "group": 1
+    },
+    {
+     "to": "resolveConfig",
+     "file": "config.ts",
+     "line": 1480,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 0,
+  "runId": "p13b-V2-vscode-r0-20261123-170912",
+  "task": "V2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 1,
+  "automationMs": 3680,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "V2-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 1,
+   "automationMs": 3680,
+   "opened": {
+    "file": "config.ts",
+    "line": 1480,
+    "group": 1
+   },
+   "returned": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": true
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-vscode-r1-20261123-174008",
+  "task": "V2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 4,
+  "switches": 0,
+  "automationMs": 8422,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V2-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 4,
+   "fileSwitches": 0,
+   "automationMs": 8422,
+   "pairs": {
+    "build->createBuilder": true,
+    "createBuilder->resolveConfigToBuild": true,
+    "resolveConfigToBuild->resolveConfig": true
+   },
+   "rows": [
+    "build",
+    "  createBuilder",
+    "    resolveConfigToBuild",
+    "      resolveConfig",
+    "    resolveBuilderOptions",
+    "    setupEnvironment",
+    "    keys",
+    "    keys",
+    "    push",
+    "    all",
+    "    all",
+    "    map",
+    "  values",
+    "  build"
+   ],
+   "incomingRows": 0
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-vscode-r1-20261123-174008",
+  "task": "V2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 6,
+  "switches": 1,
+  "automationMs": 1962,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V2-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 6,
+   "fileSwitches": 1,
+   "automationMs": 1962,
+   "reached": [
+    {
+     "to": "createBuilder",
+     "file": "build.ts",
+     "line": 1857,
+     "group": 1
+    },
+    {
+     "to": "resolveConfigToBuild",
+     "file": "build.ts",
+     "line": 584,
+     "group": 1
+    },
+    {
+     "to": "resolveConfig",
+     "file": "config.ts",
+     "line": 1480,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 1,
+  "runId": "p13b-V2-vscode-r1-20261123-174008",
+  "task": "V2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 1,
+  "automationMs": 3652,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "V2-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 1,
+   "automationMs": 3652,
+   "opened": {
+    "file": "config.ts",
+    "line": 1480,
+    "group": 1
+   },
+   "returned": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": true
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-vscode-r2-20261123-180337",
+  "task": "V2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R1",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 4,
+  "switches": 0,
+  "automationMs": 8517,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V2-R1",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 4,
+   "fileSwitches": 0,
+   "automationMs": 8517,
+   "pairs": {
+    "build->createBuilder": true,
+    "createBuilder->resolveConfigToBuild": true,
+    "resolveConfigToBuild->resolveConfig": true
+   },
+   "rows": [
+    "build",
+    "  createBuilder",
+    "    resolveConfigToBuild",
+    "      resolveConfig",
+    "    resolveBuilderOptions",
+    "    setupEnvironment",
+    "    keys",
+    "    keys",
+    "    push",
+    "    all",
+    "    all",
+    "    map",
+    "  values",
+    "  build"
+   ],
+   "incomingRows": 0
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-vscode-r2-20261123-180337",
+  "task": "V2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R2",
+  "rawClass": "PARTIALLY_SUPPORTED",
+  "cls": "PARTIALLY_SUPPORTED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 6,
+  "switches": 1,
+  "automationMs": 2097,
+  "returnOps": "",
+  "detail": {
+   "tool": "VS Code",
+   "task": "V2-R2",
+   "status": "PARTIALLY_SUPPORTED",
+   "userOperations": 6,
+   "fileSwitches": 1,
+   "automationMs": 2097,
+   "reached": [
+    {
+     "to": "createBuilder",
+     "file": "build.ts",
+     "line": 1857,
+     "group": 1
+    },
+    {
+     "to": "resolveConfigToBuild",
+     "file": "build.ts",
+     "line": 584,
+     "group": 1
+    },
+    {
+     "to": "resolveConfig",
+     "file": "config.ts",
+     "line": 1480,
+     "group": 1
+    }
+   ],
+   "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  }
+ },
+ {
+  "run": 2,
+  "runId": "p13b-V2-vscode-r2-20261123-180337",
+  "task": "V2",
+  "toolKey": "vscode",
+  "tool": "VS Code",
+  "kind": "R3",
+  "rawClass": "SUPPORTED_AND_VERIFIED",
+  "cls": "SUPPORTED_AND_VERIFIED",
+  "correction": "",
+  "failedSteps": "",
+  "ops": 2,
+  "switches": 1,
+  "automationMs": 3682,
+  "returnOps": 1,
+  "detail": {
+   "tool": "VS Code",
+   "task": "V2-R3",
+   "status": "SUPPORTED_AND_VERIFIED",
+   "userOperations": 2,
+   "fileSwitches": 1,
+   "automationMs": 3682,
+   "opened": {
+    "file": "config.ts",
+    "line": 1480,
+    "group": 1
+   },
+   "returned": {
+    "file": "build.ts",
+    "line": 575,
+    "group": 1
+   },
+   "returnOperations": 1,
+   "viewKept": true,
+   "startKept": true
+  }
+ }
+]

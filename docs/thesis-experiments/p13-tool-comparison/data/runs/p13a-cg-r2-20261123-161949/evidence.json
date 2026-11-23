@@ -1,0 +1,12 @@
+{
+  "bundledWorkers": [
+    "darwin-arm64"
+  ],
+  "panelText": "GRAPH SELECTION No usable worker runtime found for win32-x64. Worker bundle is missing at <HARNESS_WORKDIR>\\harness\\.e2e-profiles\\context-graph\\extensions\\context-graph.context-graph-0.10.9\\bin\\win32-x64\\context-graph-worker.exe. The installed extension must include a worker compiled for this platform. GRAPH VIEW Graph view preset Architecture Symbol detail Call Flow Module relationships grouped by package structure. LAYOUT Graph layout Connectivity Interactive force-directed placement for exploring connections. GRAPH CONTROLS Generate Graph Manage Graphs Reset View Disable Labels Disable Hover Previews Reload Layout SEARCH HIGHLIGHTING MODE Successor-based Predecessor-based All Connections GROUPING Show groups Method Package structure Dependency community Package + dependency hybrid EDGE TYPES Colors Imports Calls May Call Inherits Defines Resolves To Renders Invokes Callback Passes Callback Binds Callback Loads Module May Load_module Reactive Dependency Provides Data Provides Receiver NODE TYPES Module Class Function Import Callback_contract External (Raw Evidence) Unresolved Local (Raw Evidence) ANALYSIS Stats Centrality Downstream importance Dependent importance HITS",
+  "notifications": [],
+  "graph": {
+    "nodes": [],
+    "edges": []
+  },
+  "canvasNodes": 0
+}

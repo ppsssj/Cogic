@@ -1,0 +1,186 @@
+{
+  "run": "p2-vscode",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {}
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T07:14:34.337Z",
+      "ms": 4265,
+      "ok": true
+    },
+    {
+      "name": "start-state demo.ts@runDemo",
+      "startedAt": "2026-11-23T07:14:38.611Z",
+      "ms": 3354,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/01-start-state_demo_ts_runDemo.png"
+    },
+    {
+      "name": "call-hierarchy-open",
+      "startedAt": "2026-11-23T07:14:42.114Z",
+      "ms": 1058,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/02-call-hierarchy-open.png"
+    },
+    {
+      "name": "call-hierarchy-outgoing",
+      "startedAt": "2026-11-23T07:14:43.287Z",
+      "ms": 1354,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/03-call-hierarchy-outgoing.png"
+    },
+    {
+      "name": "call-hierarchy-expand",
+      "startedAt": "2026-11-23T07:14:44.731Z",
+      "ms": 2697,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/04-call-hierarchy-expand.png"
+    },
+    {
+      "name": "t2-goto-def-process",
+      "startedAt": "2026-11-23T07:14:47.521Z",
+      "ms": 538,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/05-t2-goto-def-process.png"
+    },
+    {
+      "name": "t2-goto-def-formatReceipt",
+      "startedAt": "2026-11-23T07:14:48.165Z",
+      "ms": 485,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/06-t2-goto-def-formatReceipt.png"
+    },
+    {
+      "name": "t2-goto-def-formatMoney",
+      "startedAt": "2026-11-23T07:14:48.738Z",
+      "ms": 485,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/07-t2-goto-def-formatMoney.png"
+    },
+    {
+      "name": "t3-open-formatReceipt-from-call-hierarchy",
+      "startedAt": "2026-11-23T07:14:49.387Z",
+      "ms": 1699,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/08-t3-open-formatReceipt-from-call-hierarchy.png"
+    },
+    {
+      "name": "t3-return-to-runDemo-click-root-row",
+      "startedAt": "2026-11-23T07:14:51.169Z",
+      "ms": 180,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/09-t3-return-to-runDemo-click-root-row.png"
+    },
+    {
+      "name": "VS Code-set-breakpoint-receipt.ts:5",
+      "startedAt": "2026-11-23T07:14:51.453Z",
+      "ms": 794,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/10-VS_Code-set-breakpoint-receipt_ts_5.png"
+    },
+    {
+      "name": "VS Code-F5-debug-paused",
+      "startedAt": "2026-11-23T07:14:52.345Z",
+      "ms": 6102,
+      "ok": true,
+      "screenshot": "p2-vscode/screenshots/11-VS_Code-F5-debug-paused.png"
+    },
+    {
+      "name": "VS Code-stop-debugging",
+      "startedAt": "2026-11-23T07:14:58.554Z",
+      "ms": 8,
+      "ok": true
+    }
+  ],
+  "tasks": [
+    {
+      "evidence": "ui+dom",
+      "userOperations": 4,
+      "fileSwitches": 0,
+      "returnOperations": null,
+      "graphPanelPersists": "",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "{\"runDemo->CheckoutDemo.process\":true,\"process->formatReceipt\":true,\"formatReceipt->formatMoney\":true}",
+      "dataflowShown": "",
+      "debugFrameMapped": "",
+      "notes": "Call Hierarchy (outgoing) tree rows: runDemo /   processCheckoutDemo /     formatReceipt /       formatMoney",
+      "tool": "VS Code",
+      "task": "T1",
+      "status": "pass",
+      "automationMs": 5404,
+      "screenshots": [
+        "p2-vscode/screenshots/02-call-hierarchy-open.png",
+        "p2-vscode/screenshots/03-call-hierarchy-outgoing.png",
+        "p2-vscode/screenshots/04-call-hierarchy-expand.png"
+      ]
+    },
+    {
+      "evidence": "ui+dom",
+      "userOperations": 6,
+      "fileSwitches": 2,
+      "returnOperations": null,
+      "graphPanelPersists": "",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "",
+      "dataflowShown": "no (argument->parameter mapping is not displayed; user reads each signature after Go to Definition)",
+      "debugFrameMapped": "",
+      "notes": "Go to Definition reached: [{\"file\":\"demo.ts\",\"line\":15,\"group\":1},{\"file\":\"receipt.ts\",\"line\":4,\"group\":1},{\"file\":\"money.ts\",\"line\":2,\"group\":1}]. The 120 -> total -> total -> amount chain must be inferred by reading code; the tool itself shows no data-flow view (default settings, inlay hints off).",
+      "tool": "VS Code",
+      "task": "T2",
+      "status": "partial",
+      "automationMs": 1863,
+      "screenshots": [
+        "p2-vscode/screenshots/05-t2-goto-def-process.png",
+        "p2-vscode/screenshots/06-t2-goto-def-formatReceipt.png",
+        "p2-vscode/screenshots/07-t2-goto-def-formatMoney.png"
+      ]
+    },
+    {
+      "evidence": "ui+dom",
+      "userOperations": 2,
+      "fileSwitches": 2,
+      "returnOperations": 1,
+      "graphPanelPersists": "true",
+      "startingFocusPersists": "true",
+      "selectionPersists": "true",
+      "staticCallsShown": "",
+      "dataflowShown": "",
+      "debugFrameMapped": "",
+      "notes": "opened={\"file\":\"receipt.ts\",\"line\":4,\"group\":1}; returned={\"file\":\"demo.ts\",\"line\":26,\"group\":1} (row opens the call-site/definition range); Go Back (Alt+Left) is an alternative return path",
+      "tool": "VS Code",
+      "task": "T3",
+      "status": "pass",
+      "automationMs": 2064,
+      "screenshots": [
+        "p2-vscode/screenshots/08-t3-open-formatReceipt-from-call-hierarchy.png",
+        "p2-vscode/screenshots/09-t3-return-to-runDemo-click-root-row.png"
+      ]
+    },
+    {
+      "evidence": "ui+dom",
+      "userOperations": 5,
+      "fileSwitches": 1,
+      "returnOperations": null,
+      "graphPanelPersists": "sidebar shows Run and Debug; call hierarchy tree not visible in sidebar during debug (rows now: 12)",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "",
+      "dataflowShown": "",
+      "debugFrameMapped": "no (Call Hierarchy is static; Call Stack is a separate view, no link between them)",
+      "notes": "debugger paused=true; VS Code Call Stack shows dynamic chain formatReceipt<-process<-runDemo=true; stack=[\"runner.js [21076] « Compare: Debug checkout flow Paused On Breakpoint\",\"formatReceipt src/receipt.ts 5:18\",\"CheckoutDemo.process src/demo.ts 17:25\",\"runDemo src/demo.ts 28:23\",\"<anonymous> src/runner.ts 5:23\",\"Show 8 M",
+      "tool": "VS Code",
+      "task": "T4",
+      "status": "unsupported",
+      "automationMs": 7111,
+      "screenshots": [
+        "p2-vscode/screenshots/10-VS_Code-set-breakpoint-receipt_ts_5.png",
+        "p2-vscode/screenshots/11-VS_Code-F5-debug-paused.png"
+      ]
+    }
+  ]
+}

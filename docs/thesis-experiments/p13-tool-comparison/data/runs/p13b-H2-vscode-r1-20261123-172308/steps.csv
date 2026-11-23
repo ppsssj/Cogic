@@ -1,0 +1,11 @@
+﻿step,ok,ms,error,screenshot
+launch,true,4133,,
+start-state src/hono-base.ts@request,true,2888,,p13-vscode-H2/screenshots/01-start-state_src_hono-base_ts_request.png
+r1-call-hierarchy-open,true,1539,,p13-vscode-H2/screenshots/02-r1-call-hierarchy-open.png
+r1-outgoing,true,2183,,p13-vscode-H2/screenshots/03-r1-outgoing.png
+r1-expand-path-rows,true,6,,p13-vscode-H2/screenshots/04-r1-expand-path-rows.png
+r2-f12-fetch,true,512,,p13-vscode-H2/screenshots/05-r2-f12-fetch.png
+r2-f12-#dispatch,true,481,,p13-vscode-H2/screenshots/06-r2-f12-_dispatch.png
+r2-f12-compose,true,512,,p13-vscode-H2/screenshots/07-r2-f12-compose.png
+r3-open-target-row,false,3,target row not in the Call Hierarchy view,p13-vscode-H2/screenshots/08-r3-open-target-row-FAILED.png
+r3-return-root-row,true,1697,,p13-vscode-H2/screenshots/09-r3-return-root-row.png

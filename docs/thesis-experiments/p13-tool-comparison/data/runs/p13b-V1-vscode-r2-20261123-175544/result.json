@@ -1,0 +1,73 @@
+{
+  "run": "p13-vscode-V1",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {},
+    "task": "V1"
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T08:55:46.954Z",
+      "ms": 4294,
+      "ok": true
+    },
+    {
+      "name": "start-state packages/vite/src/node/server/index.ts@createServer",
+      "startedAt": "2026-11-23T08:55:51.254Z",
+      "ms": 2906,
+      "ok": true,
+      "screenshot": "p13-vscode-V1/screenshots/01-start-state_packages_vite_src_node_server_index_ts_createServer.png"
+    },
+    {
+      "name": "r1-call-hierarchy-open",
+      "startedAt": "2026-11-23T08:55:54.315Z",
+      "ms": 1543,
+      "ok": true,
+      "screenshot": "p13-vscode-V1/screenshots/02-r1-call-hierarchy-open.png"
+    },
+    {
+      "name": "r1-outgoing",
+      "startedAt": "2026-11-23T08:55:55.965Z",
+      "ms": 2136,
+      "ok": true,
+      "screenshot": "p13-vscode-V1/screenshots/03-r1-outgoing.png"
+    },
+    {
+      "name": "r1-expand-path-rows",
+      "startedAt": "2026-11-23T08:55:58.208Z",
+      "ms": 2171,
+      "ok": true,
+      "screenshot": "p13-vscode-V1/screenshots/04-r1-expand-path-rows.png"
+    },
+    {
+      "name": "r2-f12-_createServer",
+      "startedAt": "2026-11-23T08:56:00.521Z",
+      "ms": 501,
+      "ok": true,
+      "screenshot": "p13-vscode-V1/screenshots/05-r2-f12-_createServer.png"
+    },
+    {
+      "name": "r2-f12-resolveConfig",
+      "startedAt": "2026-11-23T08:56:01.148Z",
+      "ms": 536,
+      "ok": true,
+      "screenshot": "p13-vscode-V1/screenshots/06-r2-f12-resolveConfig.png"
+    },
+    {
+      "name": "r3-open-target-row",
+      "startedAt": "2026-11-23T08:56:01.939Z",
+      "ms": 1773,
+      "ok": true,
+      "screenshot": "p13-vscode-V1/screenshots/07-r3-open-target-row.png"
+    },
+    {
+      "name": "r3-return-root-row",
+      "startedAt": "2026-11-23T08:56:03.832Z",
+      "ms": 1708,
+      "ok": true,
+      "screenshot": "p13-vscode-V1/screenshots/08-r3-return-root-row.png"
+    }
+  ],
+  "tasks": []
+}

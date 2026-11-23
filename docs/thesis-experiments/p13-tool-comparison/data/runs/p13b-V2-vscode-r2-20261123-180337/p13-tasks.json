@@ -1,0 +1,82 @@
+[
+  {
+    "tool": "VS Code",
+    "task": "V2-R1",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 4,
+    "fileSwitches": 0,
+    "automationMs": 8517,
+    "pairs": {
+      "build->createBuilder": true,
+      "createBuilder->resolveConfigToBuild": true,
+      "resolveConfigToBuild->resolveConfig": true
+    },
+    "rows": [
+      "build",
+      "  createBuilder",
+      "    resolveConfigToBuild",
+      "      resolveConfig",
+      "    resolveBuilderOptions",
+      "    setupEnvironment",
+      "    keys",
+      "    keys",
+      "    push",
+      "    all",
+      "    all",
+      "    map",
+      "  values",
+      "  build"
+    ],
+    "incomingRows": 0
+  },
+  {
+    "tool": "VS Code",
+    "task": "V2-R2",
+    "status": "PARTIALLY_SUPPORTED",
+    "userOperations": 6,
+    "fileSwitches": 1,
+    "automationMs": 2097,
+    "reached": [
+      {
+        "to": "createBuilder",
+        "file": "build.ts",
+        "line": 1857,
+        "group": 1
+      },
+      {
+        "to": "resolveConfigToBuild",
+        "file": "build.ts",
+        "line": 584,
+        "group": 1
+      },
+      {
+        "to": "resolveConfig",
+        "file": "config.ts",
+        "line": 1480,
+        "group": 1
+      }
+    ],
+    "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  },
+  {
+    "tool": "VS Code",
+    "task": "V2-R3",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 2,
+    "fileSwitches": 1,
+    "automationMs": 3682,
+    "opened": {
+      "file": "config.ts",
+      "line": 1480,
+      "group": 1
+    },
+    "returned": {
+      "file": "build.ts",
+      "line": 575,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "startKept": true
+  }
+]

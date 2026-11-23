@@ -1,0 +1,87 @@
+[
+  {
+    "tool": "Trace Function Flow",
+    "task": "V1-R1",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 1,
+    "fileSwitches": 0,
+    "automationMs": 10381,
+    "pairs": {
+      "createServer->_createServer": true,
+      "_createServer->resolveConfig": true
+    },
+    "functionsShown": [
+      "createServer",
+      "_createServer",
+      "resolveConfig"
+    ],
+    "codeLensAboveStart": true,
+    "quickPick": null,
+    "nodes": [
+      "ƒFunctioncreateServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts",
+      "ƒFunction_createServer()<WORK>\\vite\\packages\\vite\\src\\node\\server\\index.ts",
+      "ƒFunction↗ importedisResolvedConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedresolveConfig()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedsetupRollupOptionCompat()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+      "ƒFunctionloadConfigFromFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedcreateLogger()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+      "ƒFunction🔄 cycleformat()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+      "ƒFunctiongetTimeFormatter()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+      "?Unresolvedconsole[method]( format(type, msg, opt",
+      "?Unresolvedconsole[method](format(type, msg, options))",
+      "?Unresolvedconsole[method](format(type, msg, options))",
+      "ƒFunctionoutput()<WORK>\\vite\\packages\\vite\\src\\node\\logger.ts",
+      "?Unresolvedconsole[method]( format(type, msg, opt",
+      "?Unresolvedconsole[method](format(type, msg, options))",
+      "?Unresolvedconsole[method](format(type, msg, options))",
+      "ƒFunctionbundleAndLoadConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedisFilePathESM()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+      "ƒFunction↗ importedfindNearestPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+      "ƒFunctiongetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+      "ƒFunction↗ importedtryStatSync()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts",
+      "ƒFunctionloadPackageData()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+      "ƒFunctionsetFnpdCache()<WORK>\\vite\\packages\\vite\\src\\node\\packages.ts",
+      "ƒFunctionbundleConfigFile()<WORK>\\vite\\packages\\vite\\src\\node\\config.ts",
+      "ƒFunction↗ importedcreateNativeConfigCompatPlugin()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+      "ƒFunctionfindEsmSyntaxInCjs()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+      "ƒFunctionanalyzeConfigModuleReferences()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+      "ƒFunctionspecifierHasJsExtension()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+      "ƒFunctionclassifyImportRef()<WORK>\\vite\\packages\\vite\\src\\node\\nativeConfigCompat.ts",
+      "ƒFunction↗ importedisNodeBuiltin()<WORK>\\vite\\packages\\vite\\src\\node\\utils.ts"
+    ],
+    "edges": 91,
+    "notifications": []
+  },
+  {
+    "tool": "Trace Function Flow",
+    "task": "V1-R2",
+    "status": "UNSUPPORTED_BY_DESIGN",
+    "userOperations": 1,
+    "fileSwitches": 0,
+    "automationMs": 30249,
+    "segmentsShown": [],
+    "callSite": "",
+    "detail": "calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls calls calls calls calls calls calls cycle cycle calls calls calls calls calls callback calls calls calls max-depth max-depth max-depth queries que"
+  },
+  {
+    "tool": "Trace Function Flow",
+    "task": "V1-R3",
+    "status": "EXECUTION_FAILED",
+    "userOperations": 2,
+    "fileSwitches": 0,
+    "automationMs": 60368,
+    "opened": {
+      "file": "index.ts",
+      "line": 506,
+      "group": 1
+    },
+    "returned": {
+      "file": "index.ts",
+      "line": 506,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "startNodeInGraph": true
+  }
+]

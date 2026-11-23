@@ -1,0 +1,65 @@
+[
+  {
+    "tool": "Trace Function Flow",
+    "task": "H1-R1",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 1,
+    "fileSwitches": 0,
+    "automationMs": 9252,
+    "pairs": {
+      "setCookie->generateCookie": true,
+      "generateCookie->serialize": true,
+      "serialize->_serialize": true
+    },
+    "functionsShown": [
+      "setCookie",
+      "generateCookie",
+      "serialize",
+      "_serialize"
+    ],
+    "codeLensAboveStart": true,
+    "quickPick": null,
+    "nodes": [
+      "ƒFunctionsetCookie()<WORK>\\hono\\src\\helper\\cookie\\index.ts",
+      "ƒFunctiongenerateCookie()<WORK>\\hono\\src\\helper\\cookie\\index.ts",
+      "ƒFunction↗ importedserialize()<WORK>\\hono\\src\\utils\\cookie.ts",
+      "ƒFunction_serialize()<WORK>\\hono\\src\\utils\\cookie.ts",
+      "🗄️Database QueryMongooseObject.create()<WORK>\\hono\\src\\utils\\cookie.ts",
+      "🗄️Database QueryMongooseObject.create()<WORK>\\hono\\src\\utils\\cookie.ts"
+    ],
+    "edges": 5,
+    "notifications": []
+  },
+  {
+    "tool": "Trace Function Flow",
+    "task": "H1-R2",
+    "status": "PARTIALLY_SUPPORTED",
+    "userOperations": 1,
+    "fileSwitches": 0,
+    "automationMs": 1845,
+    "segmentsShown": [],
+    "callSite": "_serialize(name, value, opt)",
+    "detail": "calls calls calls queries queries ƒ FUNCTION setCookie() <WORK>\\hono\\src\\helper\\cookie\\index.ts ƒ FUNCTION generateCookie() <WORK>\\hono\\src\\helper\\cookie\\index.ts ƒ FUNCTION ↗ IMPORTED serialize() <WORK>\\hono\\src\\utils\\cookie.ts ƒ FUNCTION _serialize() <WORK>\\hono\\src\\utils\\cookie.ts 🗄️ DATABASE QUERY Mongoose Object.create() <WORK>\\hono\\src\\utils\\cookie.ts 🗄️ DATABASE QUERY Mongoose Object.create() <WORK>\\hono\\src\\utils\\cookie.ts setCookie"
+  },
+  {
+    "tool": "Trace Function Flow",
+    "task": "H1-R3",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 2,
+    "fileSwitches": 2,
+    "automationMs": 3139,
+    "opened": {
+      "file": "cookie.ts",
+      "line": 174,
+      "group": 1
+    },
+    "returned": {
+      "file": "index.ts",
+      "line": 99,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "startNodeInGraph": true
+  }
+]

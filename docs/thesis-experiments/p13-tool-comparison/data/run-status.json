@@ -1,0 +1,21 @@
+{
+ "stageA": 12,
+ "stageB": 48,
+ "nonZeroOrSkipped": [
+  {
+   "runId": "p13b-H2-tff-r0-20261123-165448",
+   "exit": 1,
+   "skipped": ""
+  },
+  {
+   "runId": "p13b-H2-tff-r1-20261123-171905",
+   "exit": 1,
+   "skipped": ""
+  },
+  {
+   "runId": "p13b-H2-tff-r2-20261123-174535",
+   "exit": 1,
+   "skipped": ""
+  }
+ ]
+}

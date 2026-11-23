@@ -1,0 +1,45 @@
+{
+  "runDemoGraph": {
+    "nodes": [
+      {
+        "id": "entry-1",
+        "text": "ƒFunctionrunDemo()<HARNESS_WORKDIR>\\fixture\\src\\demo.ts"
+      }
+    ],
+    "edges": []
+  },
+  "runDemoNotifications": [
+    "Trace Function Flow: No outgoing calls found from \"runDemo()\". Make sure it calls other imported or local functions."
+  ],
+  "codeLensAboveProcess": false,
+  "processQuickPick": [
+    "runDemo()Line 26"
+  ],
+  "processGraph": null,
+  "formatReceiptGraph": {
+    "nodes": [
+      {
+        "id": "entry-1",
+        "text": "ƒFunctionformatReceipt()<HARNESS_WORKDIR>\\fixture\\src\\receipt.ts"
+      },
+      {
+        "id": "node-2",
+        "text": "ƒFunction↗ importedformatMoney()<HARNESS_WORKDIR>\\fixture\\src\\money.ts"
+      }
+    ],
+    "edges": [
+      "edge-entry-1-node-2-2"
+    ]
+  },
+  "detailText": "calls ƒ FUNCTION formatReceipt() <HARNESS_WORKDIR>\\fixture\\src\\receipt.ts ƒ FUNCTION ↗ IMPORTED formatMoney() <HARNESS_WORKDIR>\\fixture\\src\\money.ts formatReceipt call graph Visible Nodes: 2 Reset Layout Hide Map ƒ Function ✕ NAME formatMoney LOCATION 📄 <HARNESS_WORKDIR>\\fixture\\src\\money.ts :2 DETAILS ORIGIN Cross-file import CALL SITE formatMoney(total) Open in Editor →",
+  "t3open": {
+    "file": "money.ts",
+    "line": 2,
+    "group": 1
+  },
+  "t3return": {
+    "file": "demo.ts",
+    "line": 26,
+    "group": 1
+  }
+}

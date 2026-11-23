@@ -1,0 +1,172 @@
+{
+  "run": "p2-trace-function-flow",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {
+      "sudopanda.trace-function-flow": "1.1.1"
+    }
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T07:17:13.035Z",
+      "ms": 4617,
+      "ok": true
+    },
+    {
+      "name": "start-state demo.ts@runDemo",
+      "startedAt": "2026-11-23T07:17:17.671Z",
+      "ms": 7368,
+      "ok": true,
+      "screenshot": "p2-trace-function-flow/screenshots/01-start-state_demo_ts_runDemo.png"
+    },
+    {
+      "name": "tff-codelens-trace-runDemo",
+      "startedAt": "2026-11-23T07:17:25.178Z",
+      "ms": 3710,
+      "ok": true,
+      "screenshot": "p2-trace-function-flow/screenshots/02-tff-codelens-trace-runDemo.png"
+    },
+    {
+      "name": "tff-trace-process-via-palette (supplementary)",
+      "startedAt": "2026-11-23T07:17:32.143Z",
+      "ms": 2307,
+      "ok": true,
+      "screenshot": "p2-trace-function-flow/screenshots/03-tff-trace-process-via-palette_supplementary_.png"
+    },
+    {
+      "name": "tff-trace-formatReceipt (supplementary)",
+      "startedAt": "2026-11-23T07:17:34.553Z",
+      "ms": 5155,
+      "ok": true,
+      "screenshot": "p2-trace-function-flow/screenshots/04-tff-trace-formatReceipt_supplementary_.png"
+    },
+    {
+      "name": "tff-select-node-details",
+      "startedAt": "2026-11-23T07:17:39.821Z",
+      "ms": 1465,
+      "ok": true,
+      "screenshot": "p2-trace-function-flow/screenshots/05-tff-select-node-details.png"
+    },
+    {
+      "name": "tff-dblclick-formatMoney-open-source",
+      "startedAt": "2026-11-23T07:17:41.415Z",
+      "ms": 415,
+      "ok": true,
+      "screenshot": "p2-trace-function-flow/screenshots/06-tff-dblclick-formatMoney-open-source.png"
+    },
+    {
+      "name": "tff-return-to-runDemo",
+      "startedAt": "2026-11-23T07:17:42.043Z",
+      "ms": 2650,
+      "ok": true,
+      "screenshot": "p2-trace-function-flow/screenshots/07-tff-return-to-runDemo.png"
+    },
+    {
+      "name": "Trace Function Flow-set-breakpoint-receipt.ts:5",
+      "startedAt": "2026-11-23T07:17:44.834Z",
+      "ms": 915,
+      "ok": true,
+      "screenshot": "p2-trace-function-flow/screenshots/08-Trace_Function_Flow-set-breakpoint-receipt_ts_5.png"
+    },
+    {
+      "name": "Trace Function Flow-F5-debug-paused",
+      "startedAt": "2026-11-23T07:17:45.874Z",
+      "ms": 6579,
+      "ok": true,
+      "screenshot": "p2-trace-function-flow/screenshots/09-Trace_Function_Flow-F5-debug-paused.png"
+    },
+    {
+      "name": "Trace Function Flow-stop-debugging",
+      "startedAt": "2026-11-23T07:17:52.714Z",
+      "ms": 14,
+      "ok": true
+    }
+  ],
+  "tasks": [
+    {
+      "evidence": "ui+dom",
+      "userOperations": 6,
+      "fileSwitches": 1,
+      "returnOperations": null,
+      "graphPanelPersists": "",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "{\"runDemo->CheckoutDemo.process\":false,\"process->formatReceipt\":false,\"formatReceipt->formatMoney (separate trace from formatReceipt)\":true}",
+      "dataflowShown": "",
+      "debugFrameMapped": "",
+      "notes": "from runDemo: nodes=[ƒFunctionrunDemo()<HARNESS_WORKDIR>\\fixture\\src\\demo.ts] edges=0; notification=[\"Trace Function Flow: No outgoing calls found from \\\"runDemo()\\\". Make sure it calls other imported or local functions.\"]; CodeLens above CheckoutDemo.process=false; palette quick pick with cursor on process offered=[\"runDemo()Line 26\"]; supplementary trace from formatReceipt: nodes=[ƒFunctionformatReceipt()<HARNESS_WORKDIR>\\fixture\\src\\receipt.ts | ƒFunction↗ importedformatMoney()<HARNESS_WORKDIR>\\fixture\\src\\money.ts] edges=1",
+      "tool": "Trace Function Flow",
+      "task": "T1",
+      "status": "partial",
+      "automationMs": 14640,
+      "screenshots": [
+        "p2-trace-function-flow/screenshots/02-tff-codelens-trace-runDemo.png",
+        "p2-trace-function-flow/screenshots/03-tff-trace-process-via-palette_supplementary_.png",
+        "p2-trace-function-flow/screenshots/04-tff-trace-formatReceipt_supplementary_.png"
+      ]
+    },
+    {
+      "evidence": "ui+dom",
+      "userOperations": 1,
+      "fileSwitches": 0,
+      "returnOperations": null,
+      "graphPanelPersists": "",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "",
+      "dataflowShown": "call-site expression only (formatMoney(total)) for formatReceipt->formatMoney; no argument->parameter mapping; runDemo->process hop (120) not traceable",
+      "debugFrameMapped": "",
+      "notes": "TFF detail panel after selecting formatMoney: calls ƒ FUNCTION formatReceipt() <HARNESS_WORKDIR>\\fixture\\src\\receipt.ts ƒ FUNCTION ↗ IMPORTED formatMoney() <HARNESS_WORKDIR>\\fixture\\src\\money.ts formatReceipt call graph Visible Nodes: 2 Reset Layout Hide Map ƒ Function ✕ NAME formatMoney LOCATION 📄 <HARNESS_WORKDIR>\\fixture\\src\\money.ts :2 DETAILS ORIGIN Cross-file import CALL SITE formatMoney(total) Open in ",
+      "tool": "Trace Function Flow",
+      "task": "T2",
+      "status": "partial",
+      "automationMs": 1592,
+      "screenshots": [
+        "p2-trace-function-flow/screenshots/05-tff-select-node-details.png"
+      ]
+    },
+    {
+      "evidence": "ui+dom",
+      "userOperations": 5,
+      "fileSwitches": 2,
+      "returnOperations": 4,
+      "graphPanelPersists": "true",
+      "startingFocusPersists": "false",
+      "selectionPersists": "",
+      "staticCallsShown": "",
+      "dataflowShown": "",
+      "debugFrameMapped": "",
+      "notes": "opened={\"file\":\"money.ts\",\"line\":2,\"group\":1}; returned={\"file\":\"demo.ts\",\"line\":26,\"group\":1}; graph root after opening source is the last traced function (formatReceipt), runDemo node present=false",
+      "tool": "Trace Function Flow",
+      "task": "T3",
+      "status": "pass",
+      "automationMs": 3417,
+      "screenshots": [
+        "p2-trace-function-flow/screenshots/06-tff-dblclick-formatMoney-open-source.png",
+        "p2-trace-function-flow/screenshots/07-tff-return-to-runDemo.png"
+      ]
+    },
+    {
+      "evidence": "ui+dom",
+      "userOperations": 5,
+      "fileSwitches": 1,
+      "returnOperations": null,
+      "graphPanelPersists": "TFF panel still open (nodes=2); no runtime highlight feature",
+      "startingFocusPersists": "",
+      "selectionPersists": "",
+      "staticCallsShown": "",
+      "dataflowShown": "",
+      "debugFrameMapped": "no (TFF has no debugger integration; graph is not linked to the paused frame)",
+      "notes": "debugger paused=true; VS Code Call Stack shows dynamic chain formatReceipt<-process<-runDemo=true; stack=[\"runner.js [20468] « Compare: Debug checkout flow Paused On Breakpoint\",\"formatReceipt src/receipt.ts 5:18\",\"CheckoutDemo.process src/demo.ts 17:25\",\"runDemo src/demo.ts 28:23\",\"<anonymous> src/runner.ts 5:23\",\"Show 8 M",
+      "tool": "Trace Function Flow",
+      "task": "T4",
+      "status": "unsupported",
+      "automationMs": 7897,
+      "screenshots": [
+        "p2-trace-function-flow/screenshots/08-Trace_Function_Flow-set-breakpoint-receipt_ts_5.png",
+        "p2-trace-function-flow/screenshots/09-Trace_Function_Flow-F5-debug-paused.png"
+      ]
+    }
+  ]
+}

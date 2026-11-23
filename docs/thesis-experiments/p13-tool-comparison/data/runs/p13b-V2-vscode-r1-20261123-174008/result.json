@@ -1,0 +1,80 @@
+{
+  "run": "p13-vscode-V2",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {},
+    "task": "V2"
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T08:40:10.377Z",
+      "ms": 4338,
+      "ok": true
+    },
+    {
+      "name": "start-state packages/vite/src/node/build.ts@build",
+      "startedAt": "2026-11-23T08:40:14.721Z",
+      "ms": 2995,
+      "ok": true,
+      "screenshot": "p13-vscode-V2/screenshots/01-start-state_packages_vite_src_node_build_ts_build.png"
+    },
+    {
+      "name": "r1-call-hierarchy-open",
+      "startedAt": "2026-11-23T08:40:17.991Z",
+      "ms": 1547,
+      "ok": true,
+      "screenshot": "p13-vscode-V2/screenshots/02-r1-call-hierarchy-open.png"
+    },
+    {
+      "name": "r1-outgoing",
+      "startedAt": "2026-11-23T08:40:19.666Z",
+      "ms": 2141,
+      "ok": true,
+      "screenshot": "p13-vscode-V2/screenshots/03-r1-outgoing.png"
+    },
+    {
+      "name": "r1-expand-path-rows",
+      "startedAt": "2026-11-23T08:40:21.959Z",
+      "ms": 4342,
+      "ok": true,
+      "screenshot": "p13-vscode-V2/screenshots/04-r1-expand-path-rows.png"
+    },
+    {
+      "name": "r2-f12-createBuilder",
+      "startedAt": "2026-11-23T08:40:26.414Z",
+      "ms": 525,
+      "ok": true,
+      "screenshot": "p13-vscode-V2/screenshots/05-r2-f12-createBuilder.png"
+    },
+    {
+      "name": "r2-f12-resolveConfigToBuild",
+      "startedAt": "2026-11-23T08:40:27.056Z",
+      "ms": 492,
+      "ok": true,
+      "screenshot": "p13-vscode-V2/screenshots/06-r2-f12-resolveConfigToBuild.png"
+    },
+    {
+      "name": "r2-f12-resolveConfig",
+      "startedAt": "2026-11-23T08:40:27.664Z",
+      "ms": 552,
+      "ok": true,
+      "screenshot": "p13-vscode-V2/screenshots/07-r2-f12-resolveConfig.png"
+    },
+    {
+      "name": "r3-open-target-row",
+      "startedAt": "2026-11-23T08:40:28.378Z",
+      "ms": 1684,
+      "ok": true,
+      "screenshot": "p13-vscode-V2/screenshots/08-r3-open-target-row.png"
+    },
+    {
+      "name": "r3-return-root-row",
+      "startedAt": "2026-11-23T08:40:30.173Z",
+      "ms": 1713,
+      "ok": true,
+      "screenshot": "p13-vscode-V2/screenshots/09-r3-return-root-row.png"
+    }
+  ],
+  "tasks": []
+}

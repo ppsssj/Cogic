@@ -1,0 +1,73 @@
+[
+  {
+    "tool": "VS Code",
+    "task": "H1-R1",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 4,
+    "fileSwitches": 0,
+    "automationMs": 8305,
+    "pairs": {
+      "setCookie->generateCookie": true,
+      "generateCookie->serialize": true,
+      "serialize->_serialize": true
+    },
+    "rows": [
+      "setCookie",
+      "  generateCookie",
+      "    serialize",
+      "      encodeURIComponent",
+      "      _serialize"
+    ],
+    "incomingRows": 3
+  },
+  {
+    "tool": "VS Code",
+    "task": "H1-R2",
+    "status": "PARTIALLY_SUPPORTED",
+    "userOperations": 6,
+    "fileSwitches": 1,
+    "automationMs": 1841,
+    "reached": [
+      {
+        "to": "generateCookie",
+        "file": "index.ts",
+        "line": 78,
+        "group": 1
+      },
+      {
+        "to": "serialize",
+        "file": "cookie.ts",
+        "line": 262,
+        "group": 1
+      },
+      {
+        "to": "_serialize",
+        "file": "cookie.ts",
+        "line": 174,
+        "group": 1
+      }
+    ],
+    "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  },
+  {
+    "tool": "VS Code",
+    "task": "H1-R3",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 2,
+    "fileSwitches": 1,
+    "automationMs": 3604,
+    "opened": {
+      "file": "cookie.ts",
+      "line": 174,
+      "group": 1
+    },
+    "returned": {
+      "file": "index.ts",
+      "line": 99,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "startKept": true
+  }
+]

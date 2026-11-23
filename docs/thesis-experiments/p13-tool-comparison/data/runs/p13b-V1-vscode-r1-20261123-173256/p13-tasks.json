@@ -1,0 +1,95 @@
+[
+  {
+    "tool": "VS Code",
+    "task": "V1-R1",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 3,
+    "fileSwitches": 0,
+    "automationMs": 6198,
+    "pairs": {
+      "createServer->_createServer": true,
+      "_createServer->resolveConfig": true
+    },
+    "rows": [
+      "createServer",
+      "  _createServer",
+      "    disableCache",
+      "    isResolvedConfig",
+      "    resolveConfig",
+      "    has",
+      "    add",
+      "    initPublicFiles",
+      "    resolveHttpsConfig",
+      "    getResolvedOutDirs",
+      "    resolveEmptyOutDir",
+      "    resolveChokidarOptions",
+      "    resolveHttpServer",
+      "    createWebSocketServer",
+      "    setClientErrorHandler",
+      "    makeWatcherCloseFinal",
+      "    watch",
+      "    getEnvFilesForMode",
+      "    createNoopWatcher",
+      "    onFSWatcher",
+      "    error",
+      "    ModuleGraph",
+      "    createPluginContainer",
+      "    createServerCloseFn",
+      "    createDevHtmlTransformFn",
+      "    addressServer",
+      "    initEnvironments",
+      "    setupSIGTERMListener",
+      "    setupWatcherListeners",
+      "    applyMiddlewares",
+      "    bind",
+      "    listenServer",
+      "    initServer",
+      "    close"
+    ],
+    "incomingRows": 0
+  },
+  {
+    "tool": "VS Code",
+    "task": "V1-R2",
+    "status": "PARTIALLY_SUPPORTED",
+    "userOperations": 4,
+    "fileSwitches": 1,
+    "automationMs": 1428,
+    "reached": [
+      {
+        "to": "_createServer",
+        "file": "index.ts",
+        "line": 512,
+        "group": 1
+      },
+      {
+        "to": "resolveConfig",
+        "file": "config.ts",
+        "line": 1480,
+        "group": 1
+      }
+    ],
+    "note": "no argument->parameter mapping is displayed (default settings); each hop is followed with Go to Definition and read in code"
+  },
+  {
+    "tool": "VS Code",
+    "task": "V1-R3",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 2,
+    "fileSwitches": 1,
+    "automationMs": 3785,
+    "opened": {
+      "file": "config.ts",
+      "line": 1480,
+      "group": 1
+    },
+    "returned": {
+      "file": "index.ts",
+      "line": 506,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "startKept": true
+  }
+]

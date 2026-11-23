@@ -1,0 +1,35 @@
+[
+  {
+    "tool": "Context Graph",
+    "task": "V1-R1",
+    "status": "ENVIRONMENT_BLOCKED",
+    "userOperations": 2,
+    "fileSwitches": 0,
+    "automationMs": 20218,
+    "blockedMessage": true,
+    "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+    "notifications": []
+  },
+  {
+    "tool": "Context Graph",
+    "task": "V1-R2",
+    "status": "ENVIRONMENT_BLOCKED",
+    "userOperations": 0,
+    "fileSwitches": 0,
+    "automationMs": 20218,
+    "blockedMessage": true,
+    "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+    "notifications": []
+  },
+  {
+    "tool": "Context Graph",
+    "task": "V1-R3",
+    "status": "ENVIRONMENT_BLOCKED",
+    "userOperations": 0,
+    "fileSwitches": 0,
+    "automationMs": 20219,
+    "blockedMessage": true,
+    "panelText": "File Edit Selection View Go Run Terminal Help Context Graph - vite - Visual Studio Code [Administrator] Explorer vite .github docs node_modules packages create-vite plugin-legacy vite bin misc node_modules scripts src client module-runner node __tests__ __tests_dts__ optimizer plugins server __tests__ environments middlewares bundledDev.ts environment.ts hmr.ts htmlSafeModulePaths.ts index.ts mixedModuleGraph.ts moduleGraph.ts moduleUrl.ts openBrowser.ts pluginContainer.ts safeModulePaths.ts searchRoot.ts send.ts Outline Timeline index.ts Context Graph 0 0 Line 506, column 17: export function ",
+    "notifications": []
+  }
+]

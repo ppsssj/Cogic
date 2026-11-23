@@ -1,0 +1,177 @@
+[
+  {
+    "tool": "Cogic",
+    "task": "V2-R1",
+    "status": "PARTIALLY_SUPPORTED",
+    "userOperations": 3,
+    "fileSwitches": 0,
+    "automationMs": 236697,
+    "pairs": {
+      "build->createBuilder": false,
+      "createBuilder->resolveConfigToBuild": true,
+      "resolveConfigToBuild->resolveConfig": false
+    },
+    "functionsShown": [
+      "createBuilder",
+      "resolveConfigToBuild"
+    ],
+    "generateMs": 225711,
+    "nodes": 47,
+    "memberRows": 21,
+    "edges": 703,
+    "callTriplesSample": [
+      "resolveRolldownOptions->injectEnvironmentToHooks",
+      "rolldownOptions->onRollupLog",
+      "buildOutputOptions->resolveOutputJsExtension",
+      "resolveRolldownOptions->resolveBuildOutputs",
+      "enhanceRollupError->extractStack",
+      "enhanceRollupError->normalizeCodeFrame",
+      "onRollupLog->clearLine",
+      "onRollupLog->normalizeUserOnWarn",
+      "normalizeUserOnWarn->normalizeLog",
+      "resolveUserExternal->isExternal",
+      "injectEnvironmentToHooks->wrapEnvironmentResolveId",
+      "injectEnvironmentToHooks->wrapEnvironmentLoad",
+      "injectEnvironmentToHooks->wrapEnvironmentTransform",
+      "injectEnvironmentToHooks->wrapEnvironmentHook",
+      "handler->injectEnvironmentInContext",
+      "handler->injectSsrFlag",
+      "wrapEnvironmentResolveId->wrapHookObject",
+      "wrapEnvironmentLoad->wrapHookObject",
+      "wrapEnvironmentTransform->wrapHookObject",
+      "handler->injectChunkMetadata",
+      "wrapEnvironmentHook->wrapHookObject",
+      "injectChunkMetadata->reset",
+      "injectChunkMetadata->get",
+      "createBuilder->resolveConfigToBuild",
+      "createBuilder->resolveBuilderOptions",
+      "setupEnvironment->init"
+    ],
+    "banner": "Root file: build.tsClear root"
+  },
+  {
+    "tool": "Cogic",
+    "task": "V2-R2",
+    "status": "SUPPORTED_AND_VERIFIED",
+    "userOperations": 0,
+    "fileSwitches": 0,
+    "automationMs": 1292,
+    "segments": [
+      {
+        "id": "S1",
+        "edge": true,
+        "viaGraphEdge": false,
+        "viaParamFlowRow": true,
+        "label": "inlineConfig <- inlineConfig",
+        "candidates": []
+      },
+      {
+        "id": "S2",
+        "edge": true,
+        "viaGraphEdge": true,
+        "viaParamFlowRow": false,
+        "label": "inlineConfig <- inlineConfig",
+        "candidates": [
+          "inlineConfig <- inlineConfig",
+          "patchConfig <- patchConfig",
+          "patchPlugins <- patchPlugins"
+        ]
+      },
+      {
+        "id": "S3",
+        "edge": true,
+        "viaGraphEdge": false,
+        "viaParamFlowRow": true,
+        "label": "inlineConfig <- inlineConfig",
+        "candidates": []
+      }
+    ],
+    "dataflowEdges": 522,
+    "paramFlowRows": 20,
+    "paramFlowRowsSample": [
+      {
+        "from": "resolveBuildEnvironmentOptions",
+        "to": "Logger.warn (logger.ts)",
+        "label": "msg <- 'polyfillModulePreload is deprecated. Use modulePreload.polyfill instead.'"
+      },
+      {
+        "from": "resolveBuildEnvironmentOptions",
+        "to": "mergeWithDefaults (utils.ts)",
+        "label": "defaults <- { ..._buildEnvironmentOptionsDefaults, cssCodeSplit: !raw.lib, minify: consum..."
+      },
+      {
+        "from": "resolveBuildEnvironmentOptions",
+        "to": "mergeWithDefaults (utils.ts)",
+        "label": "values <- raw"
+      },
+      {
+        "from": "resolveBuildEnvironmentOptions",
+        "to": "BuildEnvironment",
+        "label": "name <- name"
+      },
+      {
+        "from": "resolveBuildEnvironmentOptions",
+        "to": "BuildEnvironment",
+        "label": "config <- config"
+      },
+      {
+        "from": "resolveBuildEnvironmentOptions",
+        "to": "setupRollupOptionCompat (utils.ts)",
+        "label": "buildConfig <- merged"
+      },
+      {
+        "from": "resolveBuildEnvironmentOptions",
+        "to": "unique (utils.ts)",
+        "label": "arr <- merged.target"
+      },
+      {
+        "from": "resolveBuildEnvironmentOptions",
+        "to": "setupRollupOptionCompat (utils.ts)",
+        "label": "buildConfig <- resolved"
+      },
+      {
+        "from": "resolveBuildPlugins",
+        "to": "perEnvironmentPlugin (plugin.ts)",
+        "label": "name <- 'vite:rollup-options-plugins'"
+      },
+      {
+        "from": "resolveBuildPlugins",
+        "to": "perEnvironmentPlugin (plugin.ts)",
+        "label": "applyToEnvironment <- async (environment) => { if (!isBuild && !environment.config.isBundled) { ret..."
+      },
+      {
+        "from": "resolveBuildPlugins",
+        "to": "asyncFlatten (utils.ts)",
+        "label": "arr <- arraify(environment.config.build.rolldownOptions.plugins)"
+      },
+      {
+        "from": "resolveBuildPlugins",
+        "to": "arraify (utils.ts)",
+        "label": "target <- environment.config.build.rolldownOptions.plugins"
+      }
+    ],
+    "paramFlowTarget": "PARAM FLOW resolveBuildEnvironmentOptions -> Logger.warn (logger.ts) msg <- 'polyfillModulePreload is deprecated. Use modulePreload.polyfill instead.' resolveBuildEnvironmentOptions -> mergeWithDefaults (utils.ts) defaults <- { ..._buildEnvironmentOptionsDefaults, cssCodeSplit: !raw.lib, minify: consum... resolveBuildEnvironmentOptions -> mergeWithDefaults (utils.ts) values <- raw resolveBuildEnvi"
+  },
+  {
+    "tool": "Cogic",
+    "task": "V2-R3",
+    "status": "EXECUTION_FAILED",
+    "userOperations": 1,
+    "fileSwitches": 0,
+    "automationMs": 9848,
+    "opened": {
+      "file": "build.ts",
+      "line": 575,
+      "group": 1
+    },
+    "returned": {
+      "file": "build.ts",
+      "line": 347,
+      "group": 1
+    },
+    "returnOperations": 1,
+    "viewKept": true,
+    "bannerBefore": "Root file: build.tsClear root",
+    "bannerAfter": "Root file: build.tsClear root"
+  }
+]

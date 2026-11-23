@@ -1,0 +1,78 @@
+{
+  "run": "p13-cogic-V2",
+  "meta": {
+    "vscode": "1.147.0 (commit 8a14f0cc1b08d531eb83255ea3764ae22aa932b5, 2026-11-17T02:46:11Z) exe=<HARNESS_WORKDIR>\\harness\\.vscode-test\\vscode-win32-x64-archive-1.147.0\\Code.exe",
+    "extensions": {
+      "ppsssj.cogic": "0.0.6"
+    },
+    "task": "V2",
+    "analysisCache": true
+  },
+  "steps": [
+    {
+      "name": "launch",
+      "startedAt": "2026-11-23T08:35:52.819Z",
+      "ms": 4565,
+      "ok": true
+    },
+    {
+      "name": "start-state packages/vite/src/node/build.ts@build",
+      "startedAt": "2026-11-23T08:35:57.398Z",
+      "ms": 5380,
+      "ok": true,
+      "screenshot": "p13-cogic-V2/screenshots/01-start-state_packages_vite_src_node_build_ts_build.png"
+    },
+    {
+      "name": "r1-open-panel",
+      "startedAt": "2026-11-23T08:36:02.906Z",
+      "ms": 2198,
+      "ok": true,
+      "screenshot": "p13-cogic-V2/screenshots/02-r1-open-panel.png"
+    },
+    {
+      "name": "r1-depth-2",
+      "startedAt": "2026-11-23T08:36:05.267Z",
+      "ms": 1545,
+      "ok": true,
+      "screenshot": "p13-cogic-V2/screenshots/03-r1-depth-2.png"
+    },
+    {
+      "name": "r1-generate",
+      "startedAt": "2026-11-23T08:36:06.933Z",
+      "ms": 221061,
+      "ok": true,
+      "screenshot": "p13-cogic-V2/screenshots/04-r1-generate.png"
+    },
+    {
+      "name": "r1-expand-path-groups",
+      "startedAt": "2026-11-23T08:39:48.335Z",
+      "ms": 5489,
+      "ok": true,
+      "screenshot": "p13-cogic-V2/screenshots/05-r1-expand-path-groups.png"
+    },
+    {
+      "name": "r2-select-target",
+      "startedAt": "2026-11-23T08:39:54.911Z",
+      "ms": 784,
+      "ok": false,
+      "error": "target node not rendered",
+      "screenshot": "p13-cogic-V2/screenshots/06-r2-select-target-FAILED.png"
+    },
+    {
+      "name": "r3-dblclick-target",
+      "startedAt": "2026-11-23T08:39:56.862Z",
+      "ms": 791,
+      "ok": false,
+      "error": "target node not rendered",
+      "screenshot": "p13-cogic-V2/screenshots/07-r3-dblclick-target-FAILED.png"
+    },
+    {
+      "name": "r3-return-start-node",
+      "startedAt": "2026-11-23T08:40:01.724Z",
+      "ms": 1410,
+      "ok": true,
+      "screenshot": "p13-cogic-V2/screenshots/08-r3-return-start-node.png"
+    }
+  ],
+  "tasks": []
+}
