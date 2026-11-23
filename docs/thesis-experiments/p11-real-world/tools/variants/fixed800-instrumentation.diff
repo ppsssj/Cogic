@@ -1,0 +1,47 @@
+--- a/src/analyzer/analyze.ts (396923c = research 9126f35, pre-P9 cache policy)
++++ b/src/analyzer/analyze.ts (P11 fixed800 variant: instrumentation only)
+@@ -35,8 +35,16 @@
+ };
+ 
+ const MAX_DISK_SOURCE_FILE_CACHE_ENTRIES = 800;
++let p11Debug: AnalyzerDebugLogger | undefined;
+ const diskSourceFileCache = new Map<string, CachedDiskSourceFile>();
+ 
++/** P11 instrumentation: computed on demand, outside timed regions. */
++export function getAnalyzerCacheStats() {
++  let chars = 0;
++  for (const entry of diskSourceFileCache.values()) {chars += entry.sourceFile.text.length;}
++  return { entries: diskSourceFileCache.size, capacity: MAX_DISK_SOURCE_FILE_CACHE_ENTRIES, chars, charBudget: null };
++}
++
+ export function clearAnalyzerCaches(debug?: AnalyzerDebugLogger) {
+   const sourceFiles = diskSourceFileCache.size;
+   diskSourceFileCache.clear();
+@@ -683,7 +691,9 @@
+     sourceFile,
+     lastAccessedAt: Date.now(),
+   });
++  p11Debug = debug;
+   pruneDiskSourceFileCache();
++  p11Debug = undefined;
+   debug?.("analyzer.sourceFileCache.store", {
+     filePath: requested,
+     entries: diskSourceFileCache.size,
+@@ -718,6 +728,7 @@
+   const removeCount = diskSourceFileCache.size - MAX_DISK_SOURCE_FILE_CACHE_ENTRIES;
+   for (const [cacheKey] of sorted.slice(0, removeCount)) {
+     diskSourceFileCache.delete(cacheKey);
++    p11Debug?.("analyzer.sourceFileCache.evict", { entries: diskSourceFileCache.size });
+   }
+ }
+ 
+--- a/src/analyzer/index.ts (396923c)
++++ b/src/analyzer/index.ts (P11 fixed800 variant)
+@@ -2,6 +2,7 @@
+ import type { FrameworkSemanticAdapter } from "./adapters";
+ export {
+   clearAnalyzerCaches,
++  getAnalyzerCacheStats,
+   invalidateAnalyzerFileCaches,
+ } from "./analyze";
+ export {

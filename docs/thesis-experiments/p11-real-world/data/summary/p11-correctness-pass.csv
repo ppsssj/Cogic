@@ -1,0 +1,13 @@
+part,project,condition,vs,iterations,result_cache_hits,strict_equal,json_equal,graphSet_equal,ids_equal
+a-repeated,hono,fixed800,off,15,15,0,15,0,15
+a-repeated,hono,adaptive,off,15,15,0,15,0,15
+a-repeated,excalidraw,fixed800,off,15,15,0,0,0,15
+a-repeated,excalidraw,adaptive,off,15,15,0,0,0,15
+a-repeated,vite,fixed800,off,15,15,0,15,0,15
+a-repeated,vite,adaptive,off,15,15,0,15,0,15
+a-repeated,typeorm,fixed800,off,15,15,0,15,0,15
+a-repeated,typeorm,adaptive,off,15,15,0,15,0,15
+a-repeated,query,fixed800,off,15,15,0,15,0,15
+a-repeated,query,adaptive,off,15,15,0,15,0,15
+b-scriptkind,excalidraw,adaptive-sk,off,5,0,5,5,5,5
+b-scriptkind,excalidraw,adaptive,off,5,0,0,0,0,5
