@@ -1,0 +1,849 @@
+{
+  "revision": "cd50668335738d170ecd03e783f2f2d5317b95d6",
+  "active": "src/hono-base.ts",
+  "typescript": "5.9.3",
+  "inputFileCount": 315,
+  "meta": {
+    "mode": "workspace",
+    "usedTsconfig": true
+  },
+  "calls": [
+    {
+      "line": 469,
+      "expression": "compose",
+      "arguments": [
+        "matchResult[0]",
+        "this.errorHandler",
+        "this.#notFoundHandler"
+      ],
+      "signature": {
+        "file": "src/compose.ts",
+        "line": 15,
+        "kind": "ArrowFunction",
+        "text": ""
+      },
+      "symbols": [
+        {
+          "file": "src/hono-base.ts",
+          "line": 7,
+          "kind": "ImportSpecifier",
+          "text": "compose"
+        }
+      ]
+    },
+    {
+      "line": 503,
+      "expression": "this.#dispatch",
+      "arguments": [
+        "request",
+        "rest[1]",
+        "rest[0]",
+        "request.method"
+      ],
+      "signature": {
+        "file": "src/hono-base.ts",
+        "line": 425,
+        "kind": "MethodDeclaration",
+        "text": "#dispatch"
+      },
+      "symbols": [
+        {
+          "file": "src/hono-base.ts",
+          "line": 425,
+          "kind": "MethodDeclaration",
+          "text": "#dispatch"
+        }
+      ]
+    },
+    {
+      "line": 525,
+      "expression": "this.fetch",
+      "arguments": [
+        "requestInit ? new Request(input, requestInit) : input",
+        "Env",
+        "executionCtx"
+      ],
+      "signature": {
+        "file": "src/hono-base.ts",
+        "line": 498,
+        "kind": "FunctionType",
+        "text": ""
+      },
+      "symbols": [
+        {
+          "file": "src/hono-base.ts",
+          "line": 498,
+          "kind": "PropertyDeclaration",
+          "text": "fetch"
+        }
+      ]
+    },
+    {
+      "line": 528,
+      "expression": "this.fetch",
+      "arguments": [
+        "new Request(\r\n        /^https?:\\/\\//.test(input) ? input : `http://localhost${mergePath('/', input)}`,\r\n        requestInit\r\n      )",
+        "Env",
+        "executionCtx"
+      ],
+      "signature": {
+        "file": "src/hono-base.ts",
+        "line": 498,
+        "kind": "FunctionType",
+        "text": ""
+      },
+      "symbols": [
+        {
+          "file": "src/hono-base.ts",
+          "line": 498,
+          "kind": "PropertyDeclaration",
+          "text": "fetch"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Hono",
+      "kind": "class",
+      "file": "src/hono-base.ts",
+      "range": {
+        "start": {
+          "line": 114,
+          "character": 0
+        },
+        "end": {
+          "line": 561,
+          "character": 1
+        }
+      }
+    },
+    {
+      "name": "Hono.fetch",
+      "kind": "method",
+      "file": "src/hono-base.ts",
+      "range": {
+        "start": {
+          "line": 501,
+          "character": 38
+        },
+        "end": {
+          "line": 503,
+          "character": 3
+        }
+      }
+    },
+    {
+      "name": "Hono.request",
+      "kind": "method",
+      "file": "src/hono-base.ts",
+      "range": {
+        "start": {
+          "line": 517,
+          "character": 12
+        },
+        "end": {
+          "line": 535,
+          "character": 3
+        }
+      }
+    },
+    {
+      "name": "compose (compose.ts)",
+      "kind": "external",
+      "file": "src/compose.ts",
+      "range": {
+        "start": {
+          "line": 14,
+          "character": 23
+        },
+        "end": {
+          "line": 72,
+          "character": 1
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "GetPath",
+        "kind": "interface",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 45,
+            "character": 0
+          },
+          "end": {
+            "line": 45,
+            "character": 93
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "HonoOptions",
+        "kind": "interface",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 47,
+            "character": 0
+          },
+          "end": {
+            "line": 103,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "notFoundHandler",
+        "kind": "function",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 32,
+            "character": 41
+          },
+          "end": {
+            "line": 34,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "target": {
+        "name": "errorHandler",
+        "kind": "function",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 36,
+            "character": 35
+          },
+          "end": {
+            "line": 43,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.route",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 227,
+            "character": 2
+          },
+          "end": {
+            "line": 251,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.basePath",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 266,
+            "character": 2
+          },
+          "end": {
+            "line": 272,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.onError",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 290,
+            "character": 12
+          },
+          "end": {
+            "line": 293,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.notFound",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 310,
+            "character": 13
+          },
+          "end": {
+            "line": 313,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "references",
+      "source": {
+        "name": "Hono.mount",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 351,
+            "character": 2
+          },
+          "end": {
+            "line": 402,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "constructs",
+      "source": {
+        "name": "hono-base.ts",
+        "kind": "file",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 564,
+            "character": 0
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "hono-base.ts",
+        "kind": "file",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 564,
+            "character": 0
+          }
+        }
+      },
+      "target": {
+        "name": "Hono",
+        "kind": "class",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 114,
+            "character": 0
+          },
+          "end": {
+            "line": 561,
+            "character": 1
+          }
+        }
+      },
+      "label": "options <- { router: this.router, getPath: this.getPath, }"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.route",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 227,
+            "character": 2
+          },
+          "end": {
+            "line": 251,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.route",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 227,
+            "character": 2
+          },
+          "end": {
+            "line": 251,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "middleware <- []"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.route",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 227,
+            "character": 2
+          },
+          "end": {
+            "line": 251,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "onError <- app.errorHandler"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "hono-base.ts",
+        "kind": "file",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 564,
+            "character": 0
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "hono-base.ts",
+        "kind": "file",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 564,
+            "character": 0
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "middleware <- matchResult[0]"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "hono-base.ts",
+        "kind": "file",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 564,
+            "character": 0
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "onError <- this.errorHandler"
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "hono-base.ts",
+        "kind": "file",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 564,
+            "character": 0
+          }
+        }
+      },
+      "target": {
+        "name": "compose (compose.ts)",
+        "kind": "external",
+        "file": "src/compose.ts",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 23
+          },
+          "end": {
+            "line": 72,
+            "character": 1
+          }
+        }
+      },
+      "label": "onNotFound <- this.#notFoundHandler"
+    },
+    {
+      "kind": "calls",
+      "source": {
+        "name": "Hono.request",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 12
+          },
+          "end": {
+            "line": 535,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "mergePath (url.ts)",
+        "kind": "external",
+        "file": "src/utils/url.ts",
+        "range": {
+          "start": {
+            "line": 186,
+            "character": 24
+          },
+          "end": {
+            "line": 186,
+            "character": 54
+          }
+        }
+      },
+      "label": null
+    },
+    {
+      "kind": "dataflow",
+      "source": {
+        "name": "Hono.request",
+        "kind": "method",
+        "file": "src/hono-base.ts",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 12
+          },
+          "end": {
+            "line": 535,
+            "character": 3
+          }
+        }
+      },
+      "target": {
+        "name": "mergePath (url.ts)",
+        "kind": "external",
+        "file": "src/utils/url.ts",
+        "range": {
+          "start": {
+            "line": 186,
+            "character": 24
+          },
+          "end": {
+            "line": 186,
+            "character": 54
+          }
+        }
+      },
+      "label": "...paths <- '/'"
+    }
+  ]
+}
