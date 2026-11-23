@@ -1200,7 +1200,6 @@ export default function App() {
         });
 
         if (request.lane === "active") {
-          finishAnalysisLoading();
           if (request.sequence < latestActiveSequenceRef.current) {
             profileWebview("result.dropped", request.requestId, { reason: "stale-sequence" });
             pushWebviewDebugEvent("analysisResult.dropped.active.stale", {
@@ -1211,6 +1210,8 @@ export default function App() {
             });
             return;
           }
+
+          finishAnalysisLoading();
 
           latestActiveSequenceRef.current = request.sequence;
           activeGraphGenerationRef.current = request.generation;
@@ -1280,7 +1281,6 @@ export default function App() {
           return;
         }
 
-        finishAnalysisLoading();
         if (request.generation !== activeGraphGenerationRef.current) {
           profileWebview("result.dropped", request.requestId, { reason: "stale-generation" });
           pushWebviewDebugEvent("analysisResult.dropped.expand.stale", {
@@ -1290,6 +1290,8 @@ export default function App() {
           });
           return;
         }
+
+        finishAnalysisLoading();
 
         if (payload?.graph) {
           if (pipelineEnabled) setProfileRequestId(request.requestId);

@@ -31,6 +31,7 @@ import {
 import { RuntimeDebugBridge } from "./runtimeDebug";
 import { shouldAutoAnalyzeEditorChange, shouldRetainPendingChange, shouldSuppressActivationAnalysis } from "./workflowPolicy";
 import { pipelineProfile, pipelineProfileEnabled } from "./pipelineProfile";
+import { SelectionOrder } from "./selectionOrder";
 
 type AnalysisCacheEntry = {
   result: DepthAnalysisResult;
@@ -181,6 +182,7 @@ export class CodeGraphPanel {
   private lastTextEditor: vscode.TextEditor | undefined;
   private lastSelection: vscode.Selection | undefined;
   private analysisTimer: NodeJS.Timeout | undefined;
+  private readonly selectionOrder = new SelectionOrder();
   private explicitAnalysis: { sequence: number; fileName: string; requestId: string } | undefined;
   private debugEpoch = 0;
   private readonly suppressedAutoAnalysisUris = new Map<string, number>();
@@ -351,6 +353,7 @@ export class CodeGraphPanel {
             return;
           }
           if (msg.type === "analyzeActiveFile") {
+            this.selectionOrder.next();
             if (msg.payload?.graphDepth !== undefined) {
               this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
             }
@@ -371,12 +374,17 @@ export class CodeGraphPanel {
             ); // workspace-aware
           }
           if (msg.type === "analyzeWorkspace") {
+            this.selectionOrder.next();
             if (msg.payload?.graphDepth !== undefined) {
               this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
             }
             return await this.postAnalysis(false, "manual", undefined, msg.payload?.profileRequestId); // explicit
           }
           if (msg.type === "selectWorkspaceFile") {
+            const selectionRevision = this.selectionOrder.next();
+            // Invalidate in-flight work when the user chooses a file, before async open/show.
+            this.latestActiveAnalysisSequence = ++this.analysisSequence;
+            ++this.analysisGeneration;
             if (msg.payload.graphDepth !== undefined) {
               this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
             }
@@ -394,6 +402,7 @@ export class CodeGraphPanel {
               Boolean(msg.payload.traceMode),
               msg.payload.traceScope,
               msg.payload.profileRequestId,
+              selectionRevision,
             );
           }
           if (msg.type === "setGraphRoot") {
@@ -907,6 +916,7 @@ export class CodeGraphPanel {
     if (
       action === "analyzeActiveFile" ||
       action === "analyzeWorkspace" ||
+      action === "selectWorkspaceFile" ||
       action === "expandNode"
     ) {
       this.postNotice("canvas", "error", "Analysis failed", detail, action);
@@ -1376,6 +1386,7 @@ export class CodeGraphPanel {
     traceMode = false,
     traceScope: TraceScope = "single-file",
     profileRequestId?: string,
+    selectionRevision?: number,
   ) {
     if (!filePath) {
       return;
@@ -1383,11 +1394,16 @@ export class CodeGraphPanel {
 
     const uri = vscode.Uri.file(filePath);
     const doc = await vscode.workspace.openTextDocument(uri);
-    const editor = await vscode.window.showTextDocument(doc, {
+    const revision = selectionRevision ?? this.selectionOrder.next();
+    const editor = await this.selectionOrder.activate(revision, async () => vscode.window.showTextDocument(doc, {
       viewColumn: this.getPreferredEditorColumn(),
       preserveFocus: false,
       preview: true,
-    });
+    }));
+    if (!editor) {
+      pipelineProfile("request.cancelled", profileRequestId ?? `selection-${revision}`, { reason: "superseded-selection" });
+      return;
+    }
 
     this.lastTextEditor = editor;
     this.lastSelection = editor.selection;
