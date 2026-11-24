@@ -1,0 +1,10 @@
+{
+  "id": "web-38bbf964-fd75-4d17-ac75-b2777614d846",
+  "nodes": 1072,
+  "edges": 3739,
+  "sha256": "1cf5220cac8c97eb7c3d2379889fc45c01b8bb9c4a7d2b03d908b4dd62a2ab74",
+  "picker": "index.ts",
+  "inspector": "ACTIVE FILE SNAPSHOT index.ts typescript import { execSync } from 'node:child_process' import fs from 'node:fs' import { get as httpGet } from 'node:http' import type * as http from 'node:http' import type { Http2SecureServer } from 'node:http2' import { get as httpsGet } from 'node:https' import type * as net from 'node:net' import path from 'node:path' import { performance } from 'node:perf_hooks' import { disableCache, ignoreInput } from '@voidzero-dev/vite-task-client' import chokidar from 'chokidar' import connect from 'connect' import corsMiddleware from 'cors' import launchEditorMiddleware from 'launch-editor-middleware' import colors from 'picocolors' import type { SourceMap } from 'rolldown' import { detectAgent } from 'std-env' import type { ModuleRunner } from 'vite/module-runner' import type { FSWatcher } from '#dep-types/chokidar' import type { Connect } from '#dep-types/connect' import type { ForwardConsoleOptions, ResolvedForwardConsoleOptions, } from '../../shared/forwardConsole' import type { InlineConfig, ResolvedConfig } from '../config' import { isResolvedConfig, resolveConfig } from '../config' import { CLIENT_DIR, DEFAULT_DEV_PORT, defaultAllowedOrigins, } from '../constants' import { warnFutureDeprecation } from '../deprecations' import { getEnvFilesForMode } from '../env' import type { CommonServerOptions } from '../http' import { httpServerStart, resolveHttpServer, resolveHttpsConfig, setClientErrorHandler, } from '../http' import type { Logger } from '../logger' import { printServerUrls } from '../logger' import type { MinimalPluginContextWithoutEn",
+  "before": 2577,
+  "minimum": 818
+}
