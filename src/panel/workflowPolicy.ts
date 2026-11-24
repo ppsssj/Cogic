@@ -20,3 +20,21 @@ export function shouldRetainPendingChange(
 ) {
   return incoming === "activation" && pending === "change";
 }
+
+/** Suppress only activation of the selected or currently programmatically shown file. */
+export function shouldSuppressPendingSelectionActivation(origin: "activation" | "change", pendingFile: string | undefined, activeFile: string | undefined, showingFile?: string): boolean {
+  return origin === "activation" && pendingFile !== undefined && activeFile !== undefined &&
+    (activeFile === pendingFile || activeFile === showingFile);
+}
+
+/** Only an identical, still-valid delivered result can make a later activation redundant. */
+export function shouldSuppressDeliveredActivation(origin: "activation" | "change", currentKey: string | undefined, deliveredKey: string | undefined): boolean {
+  return origin === "activation" && currentKey !== undefined && currentKey === deliveredKey;
+}
+
+export function activationFingerprint(identity: {
+  file: string; languageId: string; codeHash: string; graphDepth: number;
+  traceMode: boolean; traceScope: string; cacheEpoch: number; graphRootEpoch: number;
+}): string {
+  return JSON.stringify(identity);
+}

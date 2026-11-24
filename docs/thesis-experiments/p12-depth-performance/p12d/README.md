@@ -29,3 +29,7 @@ Raw results: [baseline.json](baseline.json), [cancel.json](cancel.json). One run
 ## Verification and limitations
 
 `npm test` passed 83 tests, including a held-read cancellation and subsequent full-result equality, priority policy, pre-cancelled trace, and existing SourceFile, P12-B session, P14 and workflow tests. These are unit/integration tests; they do not simulate all VS Code event ordering. Cache-hit/miss behavior, rapid file/depth changes, unsaved edits, Trace and Runtime Debug need full VS Code end-to-end regression. In particular, an activation event arriving after explicit completion can still schedule a cache-hit analysis, and async file selection may reorder analysis start. Expansion cancellation and session invalidation due to concurrent filesystem events are not independently stress tested. No full Vite run was attempted on this 8 GB machine; no causal conclusion about its memory pressure is claimed.
+
+## Final stabilization update
+
+The original MVP observations above are historical. See [final E2E investigation](final-e2e.md) for the later activation deduplication fix, actual VS Code regression results, graph comparison, and remaining limitations.

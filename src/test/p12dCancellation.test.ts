@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
 import { AnalysisCancelledError, analyzeWorkspaceDepth, clearAnalyzerCaches } from "../analyzer";
-import { shouldRetainPendingChange, shouldSuppressActivationAnalysis } from "../panel/workflowPolicy";
+import { activationFingerprint, shouldRetainPendingChange, shouldSuppressActivationAnalysis, shouldSuppressPendingSelectionActivation, shouldSuppressDeliveredActivation } from "../panel/workflowPolicy";
 
 suite("P12-D cooperative cancellation", () => {
   test("explicit work suppresses only duplicate activation, never edits or a different file", () => {
@@ -15,6 +15,24 @@ suite("P12-D cooperative cancellation", () => {
     assert.strictEqual(shouldSuppressActivationAnalysis("activation", undefined, 5, "a.ts"), false);
     assert.strictEqual(shouldRetainPendingChange("activation", "change"), true);
     assert.strictEqual(shouldRetainPendingChange("change", "activation"), false);
+    assert.strictEqual(shouldSuppressPendingSelectionActivation("activation", "b.ts", "b.ts"), true);
+    assert.strictEqual(shouldSuppressPendingSelectionActivation("activation", "b.ts", "a.ts", "a.ts"), true);
+    assert.strictEqual(shouldSuppressPendingSelectionActivation("activation", "b.ts", "c.ts", "a.ts"), false);
+    assert.strictEqual(shouldSuppressPendingSelectionActivation("change", "b.ts", "b.ts"), false);
+    assert.strictEqual(shouldSuppressPendingSelectionActivation("activation", undefined, "a.ts"), false);
+    assert.strictEqual(shouldSuppressDeliveredActivation("activation", "same", "same"), true);
+    assert.strictEqual(shouldSuppressDeliveredActivation("activation", "changed", "same"), false);
+    assert.strictEqual(shouldSuppressDeliveredActivation("change", "same", "same"), false);
+    assert.strictEqual(shouldSuppressDeliveredActivation("activation", undefined, undefined), false);
+  });
+
+  test("activation identity changes when content, scope, root or invalidation changes", () => {
+    const base = { file: "a.ts", languageId: "typescript", codeHash: "one", graphDepth: 2, traceMode: false, traceScope: "single-file", cacheEpoch: 3, graphRootEpoch: 4 };
+    const key = activationFingerprint(base);
+    assert.strictEqual(activationFingerprint({ ...base }), key);
+    for (const changed of [{ codeHash: "two" }, { graphDepth: 1 }, { traceMode: true }, { traceScope: "current-depth" }, { cacheEpoch: 4 }, { graphRootEpoch: 5 }, { file: "b.ts" }]) {
+      assert.notStrictEqual(activationFingerprint({ ...base, ...changed }), key);
+    }
   });
 
   test("superseded analysis stops after a pending read and a later analysis remains correct", async () => {

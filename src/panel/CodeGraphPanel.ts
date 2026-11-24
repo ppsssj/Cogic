@@ -29,7 +29,7 @@ import {
   pushPanelDebugEvent,
 } from "./debugLog";
 import { RuntimeDebugBridge } from "./runtimeDebug";
-import { shouldAutoAnalyzeEditorChange, shouldRetainPendingChange, shouldSuppressActivationAnalysis } from "./workflowPolicy";
+import { activationFingerprint, shouldAutoAnalyzeEditorChange, shouldRetainPendingChange, shouldSuppressActivationAnalysis, shouldSuppressPendingSelectionActivation, shouldSuppressDeliveredActivation } from "./workflowPolicy";
 import { pipelineProfile, pipelineProfileEnabled } from "./pipelineProfile";
 import { SelectionOrder } from "./selectionOrder";
 
@@ -184,6 +184,11 @@ export class CodeGraphPanel {
   private analysisTimer: NodeJS.Timeout | undefined;
   private readonly selectionOrder = new SelectionOrder();
   private pendingSelectionId: string | undefined;
+  private pendingSelectionFile: string | undefined;
+  private showingSelectionFile: string | undefined;
+  private analysisCacheEpoch = 0;
+  private graphRootEpoch = 0;
+  private deliveredActivation: { key: string; requestId: string } | undefined;
   private activeRequestId: string | undefined;
   private explicitAnalysis: { sequence: number; fileName: string; requestId: string } | undefined;
   private debugEpoch = 0;
@@ -385,6 +390,7 @@ export class CodeGraphPanel {
           if (msg.type === "selectWorkspaceFile") {
             const selectionRevision = this.selectionOrder.next();
             this.pendingSelectionId = msg.payload.profileRequestId;
+            this.pendingSelectionFile = normalizeComparablePath(msg.payload.filePath);
             // Invalidate in-flight work when the user chooses a file, before async open/show.
             this.latestActiveAnalysisSequence = ++this.analysisSequence;
             ++this.analysisGeneration;
@@ -412,10 +418,12 @@ export class CodeGraphPanel {
                 selectionRevision,
               );
             } finally {
-              if (this.pendingSelectionId === msg.payload.profileRequestId) {this.pendingSelectionId = undefined;}
+              if (this.pendingSelectionId === msg.payload.profileRequestId) {this.pendingSelectionId = undefined; this.pendingSelectionFile = undefined;}
             }
           }
           if (msg.type === "setGraphRoot") {
+            this.graphRootEpoch++;
+            this.deliveredActivation = undefined;
             this.graphRoot = msg.payload.root;
             return;
           }
@@ -427,6 +435,7 @@ export class CodeGraphPanel {
             if (this.pendingSelectionId === msg.payload.requestId) {
               this.selectionOrder.next();
               this.pendingSelectionId = undefined;
+              this.pendingSelectionFile = undefined;
             }
             if (this.activeRequestId === msg.payload.requestId) {
               this.latestActiveAnalysisSequence = ++this.analysisSequence;
@@ -500,8 +509,18 @@ export class CodeGraphPanel {
           if (vscode.debug.activeDebugSession) {
             return;
           }
+          if (shouldSuppressPendingSelectionActivation(origin, this.pendingSelectionFile, this.getEditor() ? normalizeComparablePath(this.getEditor()!.document.fileName) : undefined, this.showingSelectionFile)) {
+            pipelineProfile("request.suppressed", this.pendingSelectionId ?? "selection-pending", { reason: "selection-pending", origin });
+            return;
+          }
           if (shouldSuppressActivationAnalysis(origin, this.explicitAnalysis, this.latestActiveAnalysisSequence, this.getEditor()?.document.fileName)) {
             pipelineProfile("request.suppressed", this.explicitAnalysis!.requestId, { reason: "explicit-analysis-active", origin });
+            return;
+          }
+          const activeDoc = origin === "activation" ? this.getEditor()?.document : undefined;
+          const activationKey = activeDoc ? this.getActivationKey(activeDoc, this.traceModeActive, this.traceScope) : undefined;
+          if (shouldSuppressDeliveredActivation(origin, activationKey, this.deliveredActivation?.key)) {
+            pipelineProfile("request.suppressed", this.deliveredActivation!.requestId, { reason: "unchanged-delivered-result", origin });
             return;
           }
           void this.postAnalysis(
@@ -619,6 +638,7 @@ export class CodeGraphPanel {
       if (this.pendingSelectionId) {
         this.postAnalysisLifecycle(this.pendingSelectionId, "cancelled");
         this.pendingSelectionId = undefined;
+        this.pendingSelectionFile = undefined;
       }
       if (this.analysisTimer) {
         clearTimeout(this.analysisTimer);
@@ -805,6 +825,24 @@ export class CodeGraphPanel {
     await vscode.commands.executeCommand("workbench.action.toggleSidebarPosition");
   }
 
+  private getActivationKey(doc: vscode.TextDocument, traceMode: boolean, traceScope: TraceScope) {
+    try {
+      return activationFingerprint({
+        file: normalizeComparablePath(doc.fileName),
+        languageId: doc.languageId,
+        codeHash: hashText(doc.getText()),
+        graphDepth: this.graphDepth,
+        traceMode,
+        traceScope,
+        cacheEpoch: this.analysisCacheEpoch,
+        graphRootEpoch: this.graphRootEpoch,
+      });
+    } catch {
+      // If an editor is disposed while we inspect it, do not suppress analysis.
+      return undefined;
+    }
+  }
+
   private invalidateWorkspaceCache() {
     this.cachedAt = 0;
     this.cachedFilePaths = [];
@@ -814,6 +852,7 @@ export class CodeGraphPanel {
     reason: string,
     filePaths: readonly string[] = [],
   ) {
+    this.analysisCacheEpoch++;
     const normalizedFilePaths = filePaths.filter((filePath) => filePath.trim());
     const analysisEntries = this.analysisResultCache.size;
 
@@ -1149,6 +1188,7 @@ export class CodeGraphPanel {
 
     const doc = editor.document;
     const text = doc.getText();
+    const activationKey = this.getActivationKey(doc, traceMode, traceScope);
     if (reason === "manual" || reason === "select-file") {
       this.explicitAnalysis = { sequence: request.sequence, fileName: doc.fileName, requestId: request.requestId };
     }
@@ -1240,6 +1280,10 @@ export class CodeGraphPanel {
       void posted.then(
         (delivered) => {
           pipelineProfile("postMessage.resolved", request.requestId, { delivered });
+          if (delivered && activationKey && !isCancelled() &&
+              this.getActivationKey(doc, traceMode, traceScope) === activationKey) {
+            this.deliveredActivation = { key: activationKey, requestId: request.requestId };
+          }
           this.postAnalysisLifecycle(request.requestId, delivered ? "completed" : "failed");
         },
         () => {
@@ -1450,11 +1494,16 @@ export class CodeGraphPanel {
     const uri = vscode.Uri.file(filePath);
     const doc = await vscode.workspace.openTextDocument(uri);
     const revision = selectionRevision ?? this.selectionOrder.next();
-    const editor = await this.selectionOrder.activate(revision, async () => vscode.window.showTextDocument(doc, {
-      viewColumn: this.getPreferredEditorColumn(),
-      preserveFocus: false,
-      preview: true,
-    }));
+    const editor = await this.selectionOrder.activate(revision, async () => {
+      this.showingSelectionFile = normalizeComparablePath(filePath);
+      try {
+        return await vscode.window.showTextDocument(doc, {
+          viewColumn: this.getPreferredEditorColumn(),
+          preserveFocus: false,
+          preview: true,
+        });
+      } finally { this.showingSelectionFile = undefined; }
+    });
     if (!editor) {
       if (profileRequestId) {this.postAnalysisLifecycle(profileRequestId, "superseded");}
       pipelineProfile("request.cancelled", profileRequestId ?? `selection-${revision}`, { reason: "superseded-selection" });
