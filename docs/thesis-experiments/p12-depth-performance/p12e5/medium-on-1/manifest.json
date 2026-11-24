@@ -1,0 +1,75 @@
+{
+  "schema": "cogic.p12e5.manifest.v1",
+  "mode": "virtual-on",
+  "workspace": "C:\\dev\\p13\\p12e5-medium",
+  "workspaceGitSha": null,
+  "lockSha256": null,
+  "nodeRuntime": "v24.12.0",
+  "os": {
+    "platform": "win32",
+    "release": "10.0.26100",
+    "totalBytes": 8531333120
+  },
+  "vscodeVersion": "1.147.0",
+  "typescriptLanguageFeatures": "ts-disabled",
+  "otherExtensionsRequested": [
+    "ppsssj.cogic"
+  ],
+  "otherExtensionActivation": "not independently enumerated",
+  "requestId": "web-8e66930c-393d-4998-95d6-0956243155b5",
+  "graph": {
+    "sha256": "e603354e5e571db31ad8d1bbb42079d8293fccd148bc21178cedd683bf22d434",
+    "nodes": 201,
+    "edges": 398,
+    "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+  },
+  "analyzer": {
+    "originalCompiledSha256": "f169001657fc741e1bb47d805f53e49789f3c440ffe294060939742f593ae668",
+    "instrumentedCompiledSha256": "a2ab4590737b0ebec7a55564e37df8d2ef11bdae70505b59f388ac7bf3c14790",
+    "typescript": {
+      "path": "C:\\dev\\p13\\p12e5-probe-extensions\\ppsssj.cogic-0.0.6\\node_modules\\typescript",
+      "realpath": "C:\\dev\\p13\\p12e5-probe-extensions\\ppsssj.cogic-0.0.6\\node_modules\\typescript",
+      "version": "5.9.3",
+      "packageJsonSha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    "hostCwd": "C:\\Users\\SCH\\AppData\\Local\\Programs\\Microsoft VS Code",
+    "tsCurrentDirectory": "C:\\Users\\SCH\\AppData\\Local\\Programs\\Microsoft VS Code",
+    "hostCurrentDirectory": "C:\\Users\\SCH\\AppData\\Local\\Programs\\Microsoft VS Code",
+    "compilerOptions": {
+      "target": 9,
+      "module": 1,
+      "strict": true,
+      "noEmit": true,
+      "skipLibCheck": true
+    },
+    "rootNames": [
+      "c:/dev/p13/p12e5-medium/src/entry.ts"
+    ],
+    "rootFileHashes": [
+      {
+        "file": "c:/dev/p13/p12e5-medium/src/entry.ts",
+        "sha256": "366b864bb484a57ba651b69d5cdae9ed021639524beff0357b84bfdee09a2de5"
+      }
+    ],
+    "resolvedNodeDeclarations": []
+  },
+  "workspaceTypesNode": null,
+  "workspaceTypescript": null,
+  "webviewBundles": [
+    {
+      "file": "/assets/index-9cP0SG9g.js",
+      "sha256": "93dd974c35746c73040f09447cb8acdf5cc320152ca27f1a4b5e44b7e3d552cd"
+    },
+    {
+      "file": "/assets/index-D6x8zjDJ.css",
+      "sha256": "3e5bff645e58736633eed8f4a252f8fad83930835cf6b0292cd7b6252ee0881e"
+    }
+  ],
+  "cacheLookup": "miss",
+  "programSession": true,
+  "memory": {
+    "before": 2465,
+    "minimum": 1247,
+    "aborted": false
+  }
+}
