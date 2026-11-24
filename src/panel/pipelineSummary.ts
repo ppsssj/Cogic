@@ -19,7 +19,7 @@ export function summarizePipeline(records: PipelineRecord[]) {
     return {
       requestId,
       duplicateBegin: begins > 1,
-      status: dropped ? "dropped" : group.some((record) => record.event === "request.failed") ? "failed" : group.some((record) => record.event === "pipeline.canvas.twoAnimationFrames") ? "frame-observed" : "incomplete",
+      status: dropped ? "dropped" : group.some((record) => record.event === "request.cancelled") ? "cancelled" : group.some((record) => record.event === "request.failed") ? "failed" : group.some((record) => record.event === "pipeline.canvas.twoAnimationFrames") ? "frame-observed" : "incomplete",
       hostRequestToPostMs: duration(host("request.begin"), host("postMessage.call")),
       hostPostToWebviewAckMs: duration(host("postMessage.call"), host("pipeline.result.received")),
       webRequestToReceiveMs: duration(web("request.sent"), web("result.received")),

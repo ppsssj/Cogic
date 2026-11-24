@@ -39,8 +39,9 @@ export type WebviewToExtMessage =
       type: "setGraphRoot";
       payload: { root: { kind: "file" | "folder"; path: string } | null };
     }
-  | { type: "expandNode"; payload: { filePath: string; generation?: number } }
+  | { type: "expandNode"; payload: { filePath: string; generation?: number; profileRequestId?: string } }
   | { type: "setGraphDepth"; payload: { graphDepth: number } }
+  | { type: "cancelAnalysis"; payload: { requestId: string } }
   | {
       type: "setAnalysisCacheEnabled";
       payload: { enabled: boolean };
@@ -269,6 +270,7 @@ export type UINoticeSeverity = "info" | "warning" | "error";
 export type UINoticeScope = "toast" | "canvas" | "inspector";
 export type UINotice = {
   id: string;
+  requestId?: string;
   scope: UINoticeScope;
   severity: UINoticeSeverity;
   message: string;
@@ -318,6 +320,7 @@ export type AnalysisRequestMeta = {
 };
 
 export type ExtToWebviewMessage =
+  | { type: "analysisLifecycle"; requestId: string; state: "running" | "completed" | "cancelled" | "failed" | "superseded"; sequence?: number }
   | {
       type: "hostState";
       payload: {

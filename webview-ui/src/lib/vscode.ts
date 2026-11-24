@@ -77,6 +77,7 @@ export function isExtToWebviewMessage(x: unknown): x is ExtToWebviewMessage {
     t === "workspaceFiles" ||
     t === "selection" ||
     t === "analysisResult" ||
+    t === "analysisLifecycle" ||
     t === "uiNotice" ||
     t === "flowExportResult" ||
     t === "runtimeDebug" ||

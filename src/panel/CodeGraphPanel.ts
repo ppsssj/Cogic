@@ -3,6 +3,8 @@ import * as path from "path";
 import * as crypto from "crypto";
 import { getWebviewHtml } from "../webview/html";
 import {
+  AnalysisCancelledError,
+  throwIfAnalysisCancelled,
   analyzeWorkspaceDepth,
   clearAnalyzerCaches,
   guessLanguageId,
@@ -27,8 +29,9 @@ import {
   pushPanelDebugEvent,
 } from "./debugLog";
 import { RuntimeDebugBridge } from "./runtimeDebug";
-import { shouldAutoAnalyzeEditorChange } from "./workflowPolicy";
+import { activationFingerprint, shouldAutoAnalyzeEditorChange, shouldRetainPendingChange, shouldSuppressActivationAnalysis, shouldSuppressPendingSelectionActivation, shouldSuppressDeliveredActivation } from "./workflowPolicy";
 import { pipelineProfile, pipelineProfileEnabled } from "./pipelineProfile";
+import { SelectionOrder } from "./selectionOrder";
 
 type AnalysisCacheEntry = {
   result: DepthAnalysisResult;
@@ -179,6 +182,15 @@ export class CodeGraphPanel {
   private lastTextEditor: vscode.TextEditor | undefined;
   private lastSelection: vscode.Selection | undefined;
   private analysisTimer: NodeJS.Timeout | undefined;
+  private readonly selectionOrder = new SelectionOrder();
+  private pendingSelectionId: string | undefined;
+  private pendingSelectionFile: string | undefined;
+  private showingSelectionFile: string | undefined;
+  private analysisCacheEpoch = 0;
+  private graphRootEpoch = 0;
+  private deliveredActivation: { key: string; requestId: string } | undefined;
+  private activeRequestId: string | undefined;
+  private explicitAnalysis: { sequence: number; fileName: string; requestId: string } | undefined;
   private debugEpoch = 0;
   private readonly suppressedAutoAnalysisUris = new Map<string, number>();
   private graphRoot:
@@ -348,6 +360,7 @@ export class CodeGraphPanel {
             return;
           }
           if (msg.type === "analyzeActiveFile") {
+            this.selectionOrder.next();
             if (msg.payload?.graphDepth !== undefined) {
               this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
             }
@@ -368,12 +381,22 @@ export class CodeGraphPanel {
             ); // workspace-aware
           }
           if (msg.type === "analyzeWorkspace") {
+            this.selectionOrder.next();
             if (msg.payload?.graphDepth !== undefined) {
               this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
             }
             return await this.postAnalysis(false, "manual", undefined, msg.payload?.profileRequestId); // explicit
           }
           if (msg.type === "selectWorkspaceFile") {
+            const selectionRevision = this.selectionOrder.next();
+            this.pendingSelectionId = msg.payload.profileRequestId;
+            this.pendingSelectionFile = normalizeComparablePath(msg.payload.filePath);
+            // Invalidate in-flight work when the user chooses a file, before async open/show.
+            this.latestActiveAnalysisSequence = ++this.analysisSequence;
+            ++this.analysisGeneration;
+            if (msg.payload.profileRequestId) {
+              this.postAnalysisLifecycle(msg.payload.profileRequestId, "running", this.latestActiveAnalysisSequence);
+            }
             if (msg.payload.graphDepth !== undefined) {
               this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
             }
@@ -386,19 +409,39 @@ export class CodeGraphPanel {
             } else {
               this.traceAnchorFilePath = null;
             }
-            return await this.selectWorkspaceFile(
-              msg.payload.filePath,
-              Boolean(msg.payload.traceMode),
-              msg.payload.traceScope,
-              msg.payload.profileRequestId,
-            );
+            try {
+              return await this.selectWorkspaceFile(
+                msg.payload.filePath,
+                Boolean(msg.payload.traceMode),
+                msg.payload.traceScope,
+                msg.payload.profileRequestId,
+                selectionRevision,
+              );
+            } finally {
+              if (this.pendingSelectionId === msg.payload.profileRequestId) {this.pendingSelectionId = undefined; this.pendingSelectionFile = undefined;}
+            }
           }
           if (msg.type === "setGraphRoot") {
+            this.graphRootEpoch++;
+            this.deliveredActivation = undefined;
             this.graphRoot = msg.payload.root;
             return;
           }
           if (msg.type === "setGraphDepth") {
             this.graphDepth = clampGraphDepth(msg.payload.graphDepth);
+            return;
+          }
+          if (msg.type === "cancelAnalysis") {
+            if (this.pendingSelectionId === msg.payload.requestId) {
+              this.selectionOrder.next();
+              this.pendingSelectionId = undefined;
+              this.pendingSelectionFile = undefined;
+            }
+            if (this.activeRequestId === msg.payload.requestId) {
+              this.latestActiveAnalysisSequence = ++this.analysisSequence;
+              ++this.analysisGeneration;
+            }
+            this.postAnalysisLifecycle(msg.payload.requestId, "cancelled");
             return;
           }
           if (msg.type === "setAnalysisCacheEnabled") {
@@ -411,6 +454,7 @@ export class CodeGraphPanel {
             return await this.postAnalysisForFile(
               msg.payload.filePath,
               msg.payload.generation,
+              msg.payload.profileRequestId,
             );
           }
           if (msg.type === "saveExportFile") {
@@ -426,7 +470,9 @@ export class CodeGraphPanel {
             return await this.applyPatchPreview(msg.payload);
           }
         } catch (e) {
-          this.handleRequestError(msg.type, e);
+          const requestId = "payload" in msg && msg.payload && "profileRequestId" in msg.payload ? msg.payload.profileRequestId : undefined;
+          if (typeof requestId === "string") {this.postAnalysisLifecycle(requestId, "failed");}
+          this.handleRequestError(msg.type, e, typeof requestId === "string" ? requestId : undefined);
         }
       },
       undefined,
@@ -447,13 +493,34 @@ export class CodeGraphPanel {
     }
 
     // ---- auto-analysis for active file changes (debounced) ----
-    const scheduleAnalysis = (delayMs: number) => {
+    let pendingAnalysisOrigin: "activation" | "change" | undefined;
+    const scheduleAnalysis = (delayMs: number, origin: "activation" | "change" = "change") => {
+      if (this.analysisTimer && shouldRetainPendingChange(origin, pendingAnalysisOrigin)) {
+        return;
+      }
       if (this.analysisTimer) {
         clearTimeout(this.analysisTimer);
       }
+      pendingAnalysisOrigin = origin;
       this.analysisTimer = setTimeout(
         () => {
+          this.analysisTimer = undefined;
+          pendingAnalysisOrigin = undefined;
           if (vscode.debug.activeDebugSession) {
+            return;
+          }
+          if (shouldSuppressPendingSelectionActivation(origin, this.pendingSelectionFile, this.getEditor() ? normalizeComparablePath(this.getEditor()!.document.fileName) : undefined, this.showingSelectionFile)) {
+            pipelineProfile("request.suppressed", this.pendingSelectionId ?? "selection-pending", { reason: "selection-pending", origin });
+            return;
+          }
+          if (shouldSuppressActivationAnalysis(origin, this.explicitAnalysis, this.latestActiveAnalysisSequence, this.getEditor()?.document.fileName)) {
+            pipelineProfile("request.suppressed", this.explicitAnalysis!.requestId, { reason: "explicit-analysis-active", origin });
+            return;
+          }
+          const activeDoc = origin === "activation" ? this.getEditor()?.document : undefined;
+          const activationKey = activeDoc ? this.getActivationKey(activeDoc, this.traceModeActive, this.traceScope) : undefined;
+          if (shouldSuppressDeliveredActivation(origin, activationKey, this.deliveredActivation?.key)) {
+            pipelineProfile("request.suppressed", this.deliveredActivation!.requestId, { reason: "unchanged-delivered-result", origin });
             return;
           }
           void this.postAnalysis(
@@ -512,7 +579,7 @@ export class CodeGraphPanel {
       pushPanelDebugEvent("analysis.auto.scheduled.from-active-editor", {
         filePath: editor.document.fileName,
       });
-      scheduleAnalysis(0);
+      scheduleAnalysis(0, "activation");
     });
 
     const subChange = vscode.workspace.onDidChangeTextDocument((e) => {
@@ -567,8 +634,16 @@ export class CodeGraphPanel {
 
     const subDebugStart = vscode.debug.onDidStartDebugSession(() => {
       this.debugEpoch++;
+      this.selectionOrder.next();
+      if (this.pendingSelectionId) {
+        this.postAnalysisLifecycle(this.pendingSelectionId, "cancelled");
+        this.pendingSelectionId = undefined;
+        this.pendingSelectionFile = undefined;
+      }
       if (this.analysisTimer) {
         clearTimeout(this.analysisTimer);
+        this.analysisTimer = undefined;
+        pendingAnalysisOrigin = undefined;
       }
     });
 
@@ -750,6 +825,24 @@ export class CodeGraphPanel {
     await vscode.commands.executeCommand("workbench.action.toggleSidebarPosition");
   }
 
+  private getActivationKey(doc: vscode.TextDocument, traceMode: boolean, traceScope: TraceScope) {
+    try {
+      return activationFingerprint({
+        file: normalizeComparablePath(doc.fileName),
+        languageId: doc.languageId,
+        codeHash: hashText(doc.getText()),
+        graphDepth: this.graphDepth,
+        traceMode,
+        traceScope,
+        cacheEpoch: this.analysisCacheEpoch,
+        graphRootEpoch: this.graphRootEpoch,
+      });
+    } catch {
+      // If an editor is disposed while we inspect it, do not suppress analysis.
+      return undefined;
+    }
+  }
+
   private invalidateWorkspaceCache() {
     this.cachedAt = 0;
     this.cachedFilePaths = [];
@@ -759,6 +852,7 @@ export class CodeGraphPanel {
     reason: string,
     filePaths: readonly string[] = [],
   ) {
+    this.analysisCacheEpoch++;
     const normalizedFilePaths = filePaths.filter((filePath) => filePath.trim());
     const analysisEntries = this.analysisResultCache.size;
 
@@ -865,12 +959,17 @@ export class CodeGraphPanel {
     });
   }
 
+  private postAnalysisLifecycle(requestId: string, state: "running" | "completed" | "cancelled" | "failed" | "superseded", sequence?: number) {
+    void this.panel.webview.postMessage({ type: "analysisLifecycle", requestId, state, sequence } satisfies ExtToWebviewMessage);
+  }
+
   private postNotice(
     scope: UINotice["scope"],
     severity: UINotice["severity"],
     message: string,
     detail?: string,
     source?: string,
+    requestId?: string,
   ) {
     this.panel.webview.postMessage({
       type: "uiNotice",
@@ -881,19 +980,21 @@ export class CodeGraphPanel {
         message,
         detail,
         source,
+        requestId,
       },
     } satisfies ExtToWebviewMessage);
   }
 
-  private handleRequestError(action: WebviewToExtMessage["type"], error: unknown) {
+  private handleRequestError(action: WebviewToExtMessage["type"], error: unknown, requestId?: string) {
     const detail = getErrorMessage(error);
 
     if (
       action === "analyzeActiveFile" ||
       action === "analyzeWorkspace" ||
+      action === "selectWorkspaceFile" ||
       action === "expandNode"
     ) {
-      this.postNotice("canvas", "error", "Analysis failed", detail, action);
+      this.postNotice("canvas", "error", "Analysis failed", detail, action, requestId);
       return;
     }
 
@@ -1056,7 +1157,9 @@ export class CodeGraphPanel {
   ) {
     const debugEpoch = this.debugEpoch;
     const request = this.beginActiveAnalysis(reason);
-    if (pipelineProfileEnabled() && profileRequestId) {request.requestId = profileRequestId;}
+    if (profileRequestId) {request.requestId = profileRequestId;}
+    this.activeRequestId = request.requestId;
+    this.postAnalysisLifecycle(request.requestId, "running", request.sequence);
     pipelineProfile("request.begin", request.requestId, { reason, generation: request.generation, sequence: request.sequence });
     pushPanelDebugEvent("analysis.active.begin", {
       requestId: request.requestId,
@@ -1078,94 +1181,125 @@ export class CodeGraphPanel {
         payload: null,
         request,
       } satisfies ExtToWebviewMessage);
+      this.postAnalysisLifecycle(request.requestId, "completed");
+      if (this.activeRequestId === request.requestId) {this.activeRequestId = undefined;}
       return;
     }
 
     const doc = editor.document;
     const text = doc.getText();
-
-    let result: DepthAnalysisResult;
-    try {
-      result = await this.analyzeWorkspaceWithDepth({
-        code: text,
-        fileName: doc.fileName,
-        languageId: doc.languageId,
-        traceMode,
-        graphDepth: this.graphDepth,
-        traceScope,
-        profileRequestId: request.requestId,
-      });
-    } catch (error) {
-      pipelineProfile("request.failed", request.requestId);
-      throw error;
+    const activationKey = this.getActivationKey(doc, traceMode, traceScope);
+    if (reason === "manual" || reason === "select-file") {
+      this.explicitAnalysis = { sequence: request.sequence, fileName: doc.fileName, requestId: request.requestId };
     }
-    const payloadStart = performance.now();
-    const singleFileTrace = traceMode && (
-      traceScope === "single-file" || this.graphDepth <= 0
-    );
-    const traceScopedGraph =
-      singleFileTrace && result.graph ? pruneGraphToFile(result.graph, doc.fileName) : result.graph;
-    const traceScopedTrace = traceMode
-      ? pruneTraceToGraph(result.trace, traceScopedGraph)
-      : result.trace;
+    try {
+      const isCancelled = () => request.sequence !== this.latestActiveAnalysisSequence ||
+        debugEpoch !== this.debugEpoch || (reason === "auto" && Boolean(vscode.debug.activeDebugSession));
 
-    const payload: Extract<
-      ExtToWebviewMessage,
-      { type: "analysisResult" }
-    >["payload"] = {
-      uri: doc.uri.toString(),
-      fileName: path.basename(doc.fileName),
-      languageId: doc.languageId,
-      stats: {
-        chars: text.length,
-        lines: text.split(/\r?\n/).length,
-      },
-      imports: result.imports,
-      exports: result.exports,
-      calls: result.calls,
-      diagnostics: result.diagnostics,
-      graph: traceScopedGraph,
-      trace: traceMode ? traceScopedTrace : undefined,
-      meta: result.meta,
-    };
+      let result: DepthAnalysisResult;
+      try {
+        result = await this.analyzeWorkspaceWithDepth({
+          code: text,
+          fileName: doc.fileName,
+          languageId: doc.languageId,
+          traceMode,
+          graphDepth: this.graphDepth,
+          traceScope,
+          profileRequestId: request.requestId,
+          isCancelled,
+        });
+      } catch (error) {
+        if (error instanceof AnalysisCancelledError) {
+          this.postAnalysisLifecycle(request.requestId, "cancelled");
+          pipelineProfile("request.cancelled", request.requestId, { reason: "superseded-or-debug" });
+          pushPanelDebugEvent("analysis.active.cancelled", { requestId: request.requestId });
+          return;
+        }
+        pipelineProfile("request.failed", request.requestId);
+        throw error;
+      }
+      const payloadStart = performance.now();
+      const singleFileTrace = traceMode && (
+        traceScope === "single-file" || this.graphDepth <= 0
+      );
+      const traceScopedGraph =
+        singleFileTrace && result.graph ? pruneGraphToFile(result.graph, doc.fileName) : result.graph;
+      const traceScopedTrace = traceMode
+        ? pruneTraceToGraph(result.trace, traceScopedGraph)
+        : result.trace;
 
-    if (request.sequence !== this.latestActiveAnalysisSequence ||
-        (reason === "auto" && (debugEpoch !== this.debugEpoch || Boolean(vscode.debug.activeDebugSession)))) {
-      pushPanelDebugEvent("analysis.active.drop.stale", {
+      const payload: Extract<
+        ExtToWebviewMessage,
+        { type: "analysisResult" }
+      >["payload"] = {
+        uri: doc.uri.toString(),
+        fileName: path.basename(doc.fileName),
+        languageId: doc.languageId,
+        stats: {
+          chars: text.length,
+          lines: text.split(/\r?\n/).length,
+        },
+        imports: result.imports,
+        exports: result.exports,
+        calls: result.calls,
+        diagnostics: result.diagnostics,
+        graph: traceScopedGraph,
+        trace: traceMode ? traceScopedTrace : undefined,
+        meta: result.meta,
+      };
+
+      if (isCancelled()) {
+        pushPanelDebugEvent("analysis.active.drop.stale", {
+          requestId: request.requestId,
+          generation: request.generation,
+          sequence: request.sequence,
+          latestActiveSequence: this.latestActiveAnalysisSequence,
+          file: doc.fileName,
+        });
+        pipelineProfile("request.dropped", request.requestId, { reason: "stale" });
+        this.postAnalysisLifecycle(request.requestId, "superseded");
+        return;
+      }
+      pipelineProfile("payload.ready", request.requestId, { durationMs: performance.now() - payloadStart, nodes: traceScopedGraph?.nodes.length ?? 0, edges: traceScopedGraph?.edges.length ?? 0, memory: process.memoryUsage() });
+      pushPanelDebugEvent("analysis.active.post", {
         requestId: request.requestId,
         generation: request.generation,
         sequence: request.sequence,
-        latestActiveSequence: this.latestActiveAnalysisSequence,
-        file: doc.fileName,
+        filePath: doc.fileName,
+        traceEvents: traceMode ? traceScopedTrace?.length ?? 0 : 0,
+        diagnostics: result.diagnostics.length,
+        ...getGraphCounts(traceScopedGraph),
       });
-      pipelineProfile("request.dropped", request.requestId, { reason: "stale" });
-      return;
-    }
-    pipelineProfile("payload.ready", request.requestId, { durationMs: performance.now() - payloadStart, nodes: traceScopedGraph?.nodes.length ?? 0, edges: traceScopedGraph?.edges.length ?? 0, memory: process.memoryUsage() });
-    pushPanelDebugEvent("analysis.active.post", {
-      requestId: request.requestId,
-      generation: request.generation,
-      sequence: request.sequence,
-      filePath: doc.fileName,
-      traceEvents: traceMode ? traceScopedTrace?.length ?? 0 : 0,
-      diagnostics: result.diagnostics.length,
-      ...getGraphCounts(traceScopedGraph),
-    });
 
-    pipelineProfile("postMessage.call", request.requestId);
-    const posted = this.panel.webview.postMessage({
-      type: "analysisResult",
-      payload,
-      request,
-    } satisfies ExtToWebviewMessage);
-    void posted.then(
-      (delivered) => pipelineProfile("postMessage.resolved", request.requestId, { delivered }),
-      () => pipelineProfile("postMessage.failed", request.requestId),
-    );
+      pipelineProfile("postMessage.call", request.requestId);
+      const posted = this.panel.webview.postMessage({
+        type: "analysisResult",
+        payload,
+        request,
+      } satisfies ExtToWebviewMessage);
+      void posted.then(
+        (delivered) => {
+          pipelineProfile("postMessage.resolved", request.requestId, { delivered });
+          if (delivered && activationKey && !isCancelled() &&
+              this.getActivationKey(doc, traceMode, traceScope) === activationKey) {
+            this.deliveredActivation = { key: activationKey, requestId: request.requestId };
+          }
+          this.postAnalysisLifecycle(request.requestId, delivered ? "completed" : "failed");
+        },
+        () => {
+          pipelineProfile("postMessage.failed", request.requestId);
+          this.postAnalysisLifecycle(request.requestId, "failed");
+        },
+      );
+    } finally {
+      if (this.explicitAnalysis?.sequence === request.sequence) {this.explicitAnalysis = undefined;}
+      if (this.activeRequestId === request.requestId) {this.activeRequestId = undefined;}
+    }
   }
 
-  private async postAnalysisForFile(filePath: string, generation?: number) {
+  private async postAnalysisForFile(filePath: string, generation?: number, profileRequestId?: string) {
     if (generation !== undefined && generation !== this.analysisGeneration) {
+      if (profileRequestId) {this.postAnalysisLifecycle(profileRequestId, "superseded");}
       pushPanelDebugEvent("analysis.expand.skip.stale-request", {
         filePath,
         requestGeneration: generation,
@@ -1175,6 +1309,8 @@ export class CodeGraphPanel {
     }
 
     const request = this.beginExpandAnalysis(generation ?? this.analysisGeneration);
+    if (profileRequestId) {request.requestId = profileRequestId;}
+    this.postAnalysisLifecycle(request.requestId, "running", request.sequence);
     pipelineProfile("request.begin", request.requestId, { reason: "expand", generation: request.generation, sequence: request.sequence });
     pushPanelDebugEvent("analysis.expand.begin", {
       requestId: request.requestId,
@@ -1185,18 +1321,35 @@ export class CodeGraphPanel {
     const uri = vscode.Uri.file(filePath);
     const bytes = await vscode.workspace.fs.readFile(uri);
     const code = new TextDecoder("utf-8").decode(bytes);
+    const isCancelled = () => request.generation !== this.analysisGeneration;
+    if (isCancelled()) {
+      this.postAnalysisLifecycle(request.requestId, "cancelled");
+      pipelineProfile("request.cancelled", request.requestId, { reason: "stale-generation" });
+      return;
+    }
 
     const languageId = guessLanguageId(filePath);
 
-    const result = await this.analyzeWorkspaceWithDepth({
-      code,
-      fileName: filePath,
-      languageId,
-      graphDepth: 0,
-      traceMode: false,
-      traceScope: "single-file",
-      profileRequestId: request.requestId,
-    });
+    let result: DepthAnalysisResult;
+    try {
+      result = await this.analyzeWorkspaceWithDepth({
+        code,
+        fileName: filePath,
+        languageId,
+        graphDepth: 0,
+        traceMode: false,
+        traceScope: "single-file",
+        profileRequestId: request.requestId,
+        isCancelled,
+      });
+    } catch (error) {
+      if (error instanceof AnalysisCancelledError) {
+        this.postAnalysisLifecycle(request.requestId, "cancelled");
+        pipelineProfile("request.cancelled", request.requestId, { reason: "stale-generation" });
+        return;
+      }
+      throw error;
+    }
 
     const payload: Extract<
       ExtToWebviewMessage,
@@ -1218,6 +1371,7 @@ export class CodeGraphPanel {
     };
 
     if (request.generation !== this.analysisGeneration) {
+      this.postAnalysisLifecycle(request.requestId, "superseded");
       pipelineProfile("request.dropped", request.requestId, { reason: "stale-generation" });
       pushPanelDebugEvent("analysis.expand.drop.stale", {
         requestId: request.requestId,
@@ -1242,6 +1396,7 @@ export class CodeGraphPanel {
       payload,
       request,
     } satisfies ExtToWebviewMessage);
+    this.postAnalysisLifecycle(request.requestId, "completed");
   }
 
   private getAnalysisCacheKey(args: {
@@ -1330,6 +1485,7 @@ export class CodeGraphPanel {
     traceMode = false,
     traceScope: TraceScope = "single-file",
     profileRequestId?: string,
+    selectionRevision?: number,
   ) {
     if (!filePath) {
       return;
@@ -1337,11 +1493,22 @@ export class CodeGraphPanel {
 
     const uri = vscode.Uri.file(filePath);
     const doc = await vscode.workspace.openTextDocument(uri);
-    const editor = await vscode.window.showTextDocument(doc, {
-      viewColumn: this.getPreferredEditorColumn(),
-      preserveFocus: false,
-      preview: true,
+    const revision = selectionRevision ?? this.selectionOrder.next();
+    const editor = await this.selectionOrder.activate(revision, async () => {
+      this.showingSelectionFile = normalizeComparablePath(filePath);
+      try {
+        return await vscode.window.showTextDocument(doc, {
+          viewColumn: this.getPreferredEditorColumn(),
+          preserveFocus: false,
+          preview: true,
+        });
+      } finally { this.showingSelectionFile = undefined; }
     });
+    if (!editor) {
+      if (profileRequestId) {this.postAnalysisLifecycle(profileRequestId, "superseded");}
+      pipelineProfile("request.cancelled", profileRequestId ?? `selection-${revision}`, { reason: "superseded-selection" });
+      return;
+    }
 
     this.lastTextEditor = editor;
     this.lastSelection = editor.selection;
@@ -1364,11 +1531,13 @@ export class CodeGraphPanel {
     graphDepth: number;
     traceScope: TraceScope;
     profileRequestId?: string;
+    isCancelled?: () => boolean;
   }) {
     const workspaceRoot = this.getWorkspaceRoot();
     const id = args.profileRequestId ?? "untracked";
     let stageStart = performance.now();
     const filePaths = await this.getWorkspaceFilePaths();
+    throwIfAnalysisCancelled(args.isCancelled);
     pipelineProfile("workspace.ready", id, { durationMs: performance.now() - stageStart, files: filePaths.length });
     stageStart = performance.now();
     const cacheEnabled = this.isAnalysisCacheEnabled();
@@ -1380,6 +1549,7 @@ export class CodeGraphPanel {
       const cached = this.getCachedAnalysisResult(cacheKey, args);
       pipelineProfile("cache.lookup", id, { durationMs: performance.now() - stageStart, result: cached ? "hit" : "miss" });
       if (cached) {
+        throwIfAnalysisCancelled(args.isCancelled);
         return cached;
       }
     } else {
@@ -1413,6 +1583,7 @@ export class CodeGraphPanel {
     });
     pipelineProfile("depth.end", id, { durationMs: performance.now() - stageStart });
 
+    throwIfAnalysisCancelled(args.isCancelled);
     if (cacheKey) {
       this.storeAnalysisResult(cacheKey, result);
     }
