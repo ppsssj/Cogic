@@ -1,0 +1,99 @@
+2026-11-24 20:09:22.588 [info] Extension host with pid 12412 started
+2026-11-24 20:09:22.588 [info] Skipping acquiring lock for c:\dev\Cogic-P4-e2e-restored\harness\.e2e-profiles\p12c2-bd11b824561542f78456908b6111eea1\user-data\User\workspaceStorage\7f7f8cbfffbd6a04c0c05b2ea5e5c7c7.
+2026-11-24 20:09:22.644 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2026-11-24 20:09:22.677 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2026-11-24 20:09:22.747 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2026-11-24 20:09:22.758 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2026-11-24 20:09:22.795 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2026-11-24 20:09:22.824 [info] Eager extensions activated
+2026-11-24 20:09:22.824 [info] [node-compile-cache] extension-host: packaged cache enabled (status: enabled, configured: C:\Users\SCH\AppData\Local\Programs\Microsoft VS Code\8a14f0cc1b\resources\app\node-compile-cache\extension-host, active: C:\Users\SCH\AppData\Local\Programs\Microsoft VS Code\8a14f0cc1b\resources\app\node-compile-cache\extension-host\v24.22.1-x64-d4bb394e)
+2026-11-24 20:09:22.844 [info] ExtensionService#_doActivateExtension TypeScriptTeam.jsts-chat-features, startup: false, activationEvent: 'onStartupFinished'
+2026-11-24 20:09:22.858 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2026-11-24 20:09:22.862 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2026-11-24 20:09:23.445 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:typescript'
+2026-11-24 20:09:23.750 [info] ExtensionService#_doActivateExtension vscode.configuration-editing, startup: false, activationEvent: 'onLanguage:jsonc'
+2026-11-24 20:09:23.763 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2026-11-24 20:09:25.913 [info] ExtensionService#_doActivateExtension ppsssj.cogic, startup: false, activationEvent: 'onCommand:codegraph.open'
+2026-11-24 20:09:26.004 [error] Activating extension ppsssj.cogic failed due to an error:
+2026-11-24 20:09:26.004 [error] c:\dev\Cogic-P4-e2e-restored\harness\.e2e-profiles\p12c2-bd11b824561542f78456908b6111eea1\extensions\ppsssj.cogic-0.0.6\out\analyzer\analyze.js:1705
+        const clampText = (s, max = 80) => s.length <= max ? s : `${s.slice(0, max - 1)}??;
+                                                                  ^
+
+SyntaxError: Unexpected identifier '$'
+	at wrapSafe (node:internal/modules/cjs/loader:1868:18)
+	at Module._compile (node:internal/modules/cjs/loader:1910:20)
+	at Object..js (node:internal/modules/cjs/loader:2070:10)
+	at Module.load (node:internal/modules/cjs/loader:1658:32)
+	at node:internal/modules/cjs/loader:1450:12
+	at Module.<anonymous> (node:electron/js2c/node_init:2:18263)
+	at Module.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:479:7736)
+	at Module.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:310:32024)
+	at Module._load (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:302:28125)
+	at wrapModuleLoad (node:internal/modules/cjs/loader:268:19)
+	at Module.require (node:internal/modules/cjs/loader:1681:12)
+	at require (node:internal/modules/helpers:159:16)
+	at Object.<anonymous> (c:\dev\Cogic-P4-e2e-restored\harness\.e2e-profiles\p12c2-bd11b824561542f78456908b6111eea1\extensions\ppsssj.cogic-0.0.6\out\analyzer\index.js:6:19)
+	at Module._compile (node:internal/modules/cjs/loader:1937:14)
+	at Object..js (node:internal/modules/cjs/loader:2070:10)
+	at Module.load (node:internal/modules/cjs/loader:1658:32)
+	at node:internal/modules/cjs/loader:1450:12
+	at Module.<anonymous> (node:electron/js2c/node_init:2:18263)
+	at Module.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:479:7736)
+	at Module.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:310:32024)
+	at Module._load (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:302:28125)
+	at wrapModuleLoad (node:internal/modules/cjs/loader:268:19)
+	at Module.require (node:internal/modules/cjs/loader:1681:12)
+	at require (node:internal/modules/helpers:159:16)
+	at Object.<anonymous> (c:\dev\Cogic-P4-e2e-restored\harness\.e2e-profiles\p12c2-bd11b824561542f78456908b6111eea1\extensions\ppsssj.cogic-0.0.6\out\panel\CodeGraphPanel.js:8:20)
+	at Module._compile (node:internal/modules/cjs/loader:1937:14)
+	at Object..js (node:internal/modules/cjs/loader:2070:10)
+	at Module.load (node:internal/modules/cjs/loader:1658:32)
+	at node:internal/modules/cjs/loader:1450:12
+	at Module.<anonymous> (node:electron/js2c/node_init:2:18263)
+	at Module.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:479:7736)
+	at Module.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:310:32024)
+	at Module._load (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:302:28125)
+	at wrapModuleLoad (node:internal/modules/cjs/loader:268:19)
+	at Module.require (node:internal/modules/cjs/loader:1681:12)
+	at require (node:internal/modules/helpers:159:16)
+	at Object.<anonymous> (c:\dev\Cogic-P4-e2e-restored\harness\.e2e-profiles\p12c2-bd11b824561542f78456908b6111eea1\extensions\ppsssj.cogic-0.0.6\out\extension.js:5:26)
+	at Module._compile (node:internal/modules/cjs/loader:1937:14)
+	at Object..js (node:internal/modules/cjs/loader:2070:10)
+	at Module.load (node:internal/modules/cjs/loader:1658:32)
+	at node:internal/modules/cjs/loader:1450:12
+	at Module.<anonymous> (node:electron/js2c/node_init:2:18263)
+	at Module.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:479:7736)
+	at Module.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:310:32024)
+	at Module._load (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:302:28125)
+	at wrapModuleLoad (node:internal/modules/cjs/loader:268:19)
+	at Module.require (node:internal/modules/cjs/loader:1681:12)
+	at require (node:internal/modules/helpers:159:16)
+	at eA._doLoadModule (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:313:1487)
+2026-11-24 20:09:55.961 [info] Extension host terminating: received terminate message from renderer
+2026-11-24 20:09:55.966 [error] Canceled: Canceled
+	at new qC (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:32:156412)
+	at r._remoteCall (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:32:162496)
+	at Proxy.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:32:159249)
+	at Me.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:176:26660)
+	at Me.dispose (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:166:87517)
+	at DE (c:\Users\SCH\AppData\Local\Programs\Microsoft VS Code\8a14f0cc1b\resources\app\extensions\typescript-language-features\dist\extension.js:13:21586)
+	at bl.dispose (c:\Users\SCH\AppData\Local\Programs\Microsoft VS Code\8a14f0cc1b\resources\app\extensions\typescript-language-features\dist\extension.js:13:21852)
+	at LC.dispose (c:\Users\SCH\AppData\Local\Programs\Microsoft VS Code\8a14f0cc1b\resources\app\extensions\typescript-language-features\dist\extension.js:23:11363)
+	at ho (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:9:17608)
+	at $A._fn (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:172:18852)
+	at $A.dispose (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:26:577)
+	at eA._deactivate (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:172:15169)
+	at file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:172:12471
+	at Array.map (<anonymous>)
+	at eA._deactivateAll (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:172:12459)
+	at eA.terminate (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:172:12810)
+	at r.terminate (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:174:1076)
+	at pl (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:479:12860)
+	at Qm.value (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:479:11002)
+	at E._deliver (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:28:3606)
+	at E.fire (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:28:3924)
+	at fa.fire (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:30:8627)
+	at MessagePortMain.<anonymous> (file:///c:/Users/SCH/AppData/Local/Programs/Microsoft%20VS%20Code/8a14f0cc1b/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:479:9234)
+	at MessagePortMain.emit (node:events:514:28)
+	at Object.emit (node:electron/js2c/utility_init:2:2929)
+2026-11-24 20:09:55.972 [info] Extension host with pid 12412 exiting with code 0

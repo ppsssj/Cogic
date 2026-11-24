@@ -1,0 +1,10 @@
+{
+  "id": "web-5a5c8381-d1a4-4109-b83d-7798313f37a2",
+  "nodes": 10,
+  "edges": 11,
+  "sha256": "56f6e1fea2c0579ace421c4c358e3fd3b2ae491ce37fad5a13918ec1b38b6af2",
+  "picker": "main.ts",
+  "inspector": "ACTIVE FILE SNAPSHOT main.ts typescript import { finish } from \"./target\"; export class Example { fetch: (value: number) => number = (value) => this.#dispatch(value); request = (value: number) => this.fetch(value); #dispatch(value: number) { return finish(value); } recursive(value: number): number { return value > 0 ? this.recursive(value - 1) : 0; } } export function start(value: number) { return new Example().request(value); } ROOT Clear Root mode file lock file main.ts path c:/dev/Cogic-P4-restored/docs/thesis-experiments/p14-call-ownership-fix/ui-smoke/fixture/src/main.ts behavior Keep the graph anchored to this file even when another file is opened. Runtime SELECTED NODE No node selected. Click a node in the graph. SELECTION 1:1 -> 1:1 PARAM FLOW Example.fetch -> Example.#dispatch value <- value Example.request -> Example.fetch value <- value Example.#dispatch -> finish (target.ts) value <- value Example.recursive -> Example.recursive value <- value - 1 start -> Example.request value <- value ANALYSIS 11 lines · 413 chars DIAGNOSTICS (0) No TypeScript diagnostics detected. GRAPH (10 NODES · 11 EDGES) nodes 10 edges 11 Example class Example.fetch method Example.request method Example.#dispatch method Example.recursive method start function finish (target.ts) external finish function IMPORTS (1) ./target finish EXPORTS (2) CLASS Example FUNCTION start CALLS (TOP 6) Example.#dispatch () 1 main.ts:6:3 Example.fetch () 1 main.ts:4:10 finish () 1 target.ts:1:1 Example.recursive () 1 main.ts:7:3 Example.request () 1 main.ts:5:13 new Example () 1 main.ts:3:1",
+  "before": 2598,
+  "minimum": 1198
+}

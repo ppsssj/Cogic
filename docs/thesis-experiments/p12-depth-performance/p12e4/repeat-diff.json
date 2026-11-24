@@ -1,0 +1,34 @@
+{
+  "before": {
+    "file": "docs/thesis-experiments/p12-depth-performance/p12e3/vite-control-no-ts-1/preparation-graph.normalized.json",
+    "sha256": "1cf5220cac8c97eb7c3d2379889fc45c01b8bb9c4a7d2b03d908b4dd62a2ab74"
+  },
+  "after": {
+    "file": "docs/thesis-experiments/p12-depth-performance/p12e4/vite-no-ts-repeat-2/preparation-graph.normalized.json",
+    "sha256": "1cf5220cac8c97eb7c3d2379889fc45c01b8bb9c4a7d2b03d908b4dd62a2ab74"
+  },
+  "nodes": {
+    "beforeCount": 1072,
+    "afterCount": 1072,
+    "removedCount": 0,
+    "addedCount": 0,
+    "changedCount": 0,
+    "removedByKind": [],
+    "addedByKind": [],
+    "removed": [],
+    "added": [],
+    "changed": []
+  },
+  "edges": {
+    "beforeCount": 3739,
+    "afterCount": 3739,
+    "removedCount": 0,
+    "addedCount": 0,
+    "changedCount": 0,
+    "removedByKind": [],
+    "addedByKind": [],
+    "removed": [],
+    "added": [],
+    "changed": []
+  }
+}
