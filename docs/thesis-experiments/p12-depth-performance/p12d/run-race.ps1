@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$Harness, [Parameter(Mandatory=$true)][string]$Workspace, [Parameter(Mandatory=$true)][string]$Extensions, [Parameter(Mandatory=$true)][string]$CodeExe, [Parameter(Mandatory=$true)][string]$Output, [ValidateSet('open','show','analysis','analysis-generate','failure','replay','debug','interactions','expand','expand-cancel','expand-pending','trace','late-activation','late-activation-off')][string]$Mode)
+param([Parameter(Mandatory=$true)][string]$Harness, [Parameter(Mandatory=$true)][string]$Workspace, [Parameter(Mandatory=$true)][string]$Extensions, [Parameter(Mandatory=$true)][string]$CodeExe, [Parameter(Mandatory=$true)][string]$Output, [ValidateSet('open','show','analysis','analysis-generate','failure','replay','debug','interactions','expand','expand-cancel','expand-pending','trace','late-activation','late-activation-off','third-file','debug-paused')][string]$Mode)
 $ErrorActionPreference = 'Stop'
 if (Test-Path $Output) { throw 'Output already exists' }
 if (Test-Path (Join-Path $Workspace '.debug-dist')) { throw 'P13 helper would remove .debug-dist' }
@@ -8,7 +8,7 @@ $env:STUDY_WORKSPACE = $Workspace
 $env:P4_EXTENSIONS_DIR = $Extensions
 $env:VSCODE_EXE = $CodeExe
 $env:P12D_GATE_DIR = $Output
-$env:P12D_GATE_KIND = if ($Mode -in @('failure','debug','analysis-generate')) { 'analysis' } elseif ($Mode -in @('expand','expand-cancel')) { 'expansion' } elseif ($Mode -eq 'expand-pending') { 'expansion-both' } elseif ($Mode -eq 'late-activation-off') { 'late-activation' } else { $Mode }
+$env:P12D_GATE_KIND = if ($Mode -in @('failure','debug','debug-paused','analysis-generate')) { 'analysis' } elseif ($Mode -in @('expand','expand-cancel')) { 'expansion' } elseif ($Mode -eq 'expand-pending') { 'expansion-both' } elseif ($Mode -eq 'late-activation-off') { 'late-activation' } else { $Mode }
 $env:P12D_FAIL_TARGET = if ($Mode -eq 'failure') { '1' } else { '0' }
 $env:P12D_TEST_MODE = $Mode
 $env:COGIC_PIPELINE_PROFILE = Join-Path $Output 'pipeline.jsonl'

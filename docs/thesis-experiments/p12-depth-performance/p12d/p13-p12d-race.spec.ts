@@ -15,14 +15,14 @@ test("deterministic file-selection race", async () => {
   test.setTimeout(180_000);
   const before = Math.round(os.freemem()/1048576);
   if (before < 800) throw Error(`insufficient memory ${before}`);
-  const cacheEnabled = !["analysis", "analysis-generate", "failure", "debug", "trace", "late-activation-off"].includes(process.env.P12D_TEST_MODE ?? "");
+  const cacheEnabled = !["analysis", "analysis-generate", "failure", "debug", "debug-paused", "trace", "late-activation-off"].includes(process.env.P12D_TEST_MODE ?? "");
   const session = await launchVSCode({ profile: process.env.RUN_ID!, extensions: ["cogic"], extraSettings: { "cogic.analysisCache.enabled": cacheEnabled } });
   let minimum = before, aborted = false;
   const monitor = setInterval(() => { minimum = Math.min(minimum, Math.round(os.freemem()/1048576)); if (minimum < 400 && !aborted) { aborted = true; void session.app.close(); } }, 1000);
   try {
     await quickOpenFile(session.page, "src/main.ts");
     await waitTsReady(session.page, 120_000); await waitTsServerIdle(session.page, 120_000);
-    const frame = await openCogicPanel(session.page);
+    let frame = await openCogicPanel(session.page);
     if (process.env.P12D_TEST_MODE === "failure") {
       await frame.evaluate(() => { window.addEventListener("message", e => { if (e.data?.type === "analysisResult" && e.data.request?.lane === "active") (window as any).__p12dLastResult = e.data; }); });
     }
@@ -41,6 +41,40 @@ test("deterministic file-selection race", async () => {
       console.log(JSON.stringify({ mode: "late-activation", before, minimum, autoBefore, autoAfter, activations }));
       expect(activations.some(a => String(a.file ?? "").toLowerCase().endsWith("main.ts"))).toBe(true);
       expect(autoAfter).toBe(autoBefore);
+      return;
+    }
+    if (process.env.P12D_TEST_MODE === "third-file") {
+      await frame.evaluate(() => { (window as any).__thirdResults = {}; window.addEventListener("message", e => { if (e.data?.type === "analysisResult") (window as any).__thirdResults[e.data.request?.requestId] = e.data.payload?.graph; }); });
+      await frame.locator("button", { hasText: /^\s*Generate\s*$/ }).first().click({ delay: 80 });
+      await waitGraphStable(frame, { minNodes: 1, quietMs: 2000, timeout: 60_000 });
+      await session.page.waitForTimeout(1200);
+      fs.writeFileSync(path.join(gate, "arm"), "arm");
+      await pick(frame, "target.ts");
+      await expect.poll(() => fs.existsSync(path.join(gate, "ready")), { timeout: 30_000 }).toBeTruthy();
+      const b = rows().filter(r => r.event === "pipeline.request.sent" && r.webview?.origin === "topbar.pickFile").at(-1).requestId;
+      fs.writeFileSync(path.join(gate, "activate-third"), "activate");
+      const activationFile = path.join(gate, "activations.jsonl");
+      await expect.poll(() => fs.existsSync(activationFile) && fs.readFileSync(activationFile, "utf8").toLowerCase().includes("third.ts"), { timeout: 30_000 }).toBeTruthy();
+      await session.page.waitForTimeout(1500);
+      await expect(frame.getByText("Loading target.ts...", { exact: true })).toBeVisible();
+      const whilePending = rows().filter(r => r.event === "request.begin" && r.reason === "auto").length;
+      fs.writeFileSync(path.join(gate, "release"), "release");
+      await expect.poll(() => rows().some(r => r.requestId === b && r.event === "pipeline.canvas.twoAnimationFrames"), { timeout: 60_000 }).toBeTruthy();
+      await session.page.waitForTimeout(1500);
+      await expect(frame.locator(".canvasLoading")).toHaveCount(0);
+      expect(await frame.locator(".projectPicker").innerText()).toContain("target.ts");
+      const inspector = await frame.locator(".inspectorBody").innerText();
+      expect(inspector).toContain("target.ts"); expect(inspector).toContain("finish");
+      const events = rows();
+      expect(events.some(r => r.requestId === b && r.event === "postMessage.call")).toBe(true);
+      const afterB = events.slice(events.findIndex(r => r.requestId === b && r.event === "pipeline.request.sent") + 1);
+      const autos = afterB.filter(r => r.event === "request.begin" && r.reason === "auto");
+      expect(whilePending).toBe(0);
+      const results = await frame.evaluate(() => (window as any).__thirdResults);
+      for (const auto of autos) {
+        if (results[auto.requestId]) expect(results[auto.requestId]).toEqual(results[b]);
+      }
+      console.log(JSON.stringify({mode: "third-file", b, before, minimum, whilePending, autos, autoResultsCompared: autos.filter(r => results[r.requestId]).length, activations: fs.readFileSync(activationFile, "utf8").trim().split(/\r?\n/).map(s => JSON.parse(s)), inspector: inspector.replace(/\s+/g, " ").slice(0, 600)}));
       return;
     }
     if (process.env.P12D_TEST_MODE === "trace") {
@@ -154,7 +188,7 @@ test("deterministic file-selection race", async () => {
       console.log(JSON.stringify({ mode: "replay", prior, before, minimum, inspector: text.replace(/\s+/g, " ").slice(0, 800) }));
       return;
     }
-    if (["analysis", "analysis-generate", "failure", "debug"].includes(process.env.P12D_TEST_MODE ?? "")) {
+    if (["analysis", "analysis-generate", "failure", "debug", "debug-paused"].includes(process.env.P12D_TEST_MODE ?? "")) {
       await frame.locator('select[aria-label="Graph depth"]').selectOption("2");
     }
     await session.page.waitForTimeout(2000);
@@ -162,8 +196,8 @@ test("deterministic file-selection race", async () => {
       await expect.poll(() => frame.evaluate(() => Boolean((window as any).__p12dLastResult)), { timeout: 30_000 }).toBeTruthy();
     }
     fs.writeFileSync(path.join(gate, "arm"), "arm");
-    if (process.env.P12D_TEST_MODE === "debug") {
-      await frame.evaluate(() => { (window as any).__p12dRuntime = []; window.addEventListener("message", e => { if (e.data?.type === "runtimeDebug") (window as any).__p12dRuntime.push(e.data.payload?.state); }); });
+    if (["debug", "debug-paused"].includes(process.env.P12D_TEST_MODE ?? "")) {
+      await frame.evaluate(() => { (window as any).__p12dRuntime = []; window.addEventListener("message", e => { if (e.data?.type === "runtimeDebug") (window as any).__p12dRuntime.push(e.data.payload); }); });
       await frame.locator("button", { hasText: /^\s*Generate\s*$/ }).first().click({ delay: 80 });
       await expect.poll(() => fs.existsSync(path.join(gate, "ready")), { timeout: 30_000 }).toBeTruthy();
       await expect(frame.getByText("Rendering graph...", { exact: true })).toBeVisible();
@@ -171,14 +205,21 @@ test("deterministic file-selection race", async () => {
       const id = sent[sent.length-1].requestId;
       await session.page.keyboard.press("F5");
       await expect(session.page.getByRole("tab", { name: /Run and Debug.*1 active session/ })).toBeVisible({ timeout: 60_000 });
-      await expect.poll(() => frame.evaluate(() => (window as any).__p12dRuntime.some((state: string) => state === "running" || state === "paused")), { timeout: 60_000 }).toBeTruthy();
+      await expect.poll(() => frame.evaluate(() => (window as any).__p12dRuntime.some((payload: any) => payload.state === "running" || payload.state === "paused")), { timeout: 60_000 }).toBeTruthy();
+      if (process.env.P12D_TEST_MODE === "debug-paused") {
+        await expect.poll(() => frame.evaluate(() => (window as any).__p12dRuntime.some((p: any) => p.state === "paused" && p.frame && p.variables?.some((v: any) => v.name === "p12dLocal"))), { timeout: 60_000 }).toBeTruthy();
+        const paused = await frame.evaluate(() => (window as any).__p12dRuntime.find((p: any) => p.state === "paused" && p.frame && p.variables?.some((v: any) => v.name === "p12dLocal")));
+        fs.writeFileSync(path.join(gate, "paused.json"), JSON.stringify(paused, null, 2));
+        expect(paused.frame.filePath.toLowerCase()).toContain("server.js");
+        expect(paused.variables.find((v: any) => v.name === "p12dLocal").value).toContain("42");
+      }
       await expect(frame.getByText("Rendering graph...", { exact: true })).toHaveCount(0, { timeout: 60_000 });
       fs.writeFileSync(path.join(gate, "release"), "release");
       await expect.poll(() => rows().some(r => r.requestId === id && r.event === "request.cancelled"), { timeout: 60_000 }).toBeTruthy();
       expect(rows().some(r => r.requestId === id && r.event === "postMessage.call")).toBe(false);
       await session.page.keyboard.press("Shift+F5");
       await expect(session.page.getByRole("tab", { name: /Run and Debug.*1 active session/ })).toHaveCount(0, { timeout: 60_000 });
-      await expect.poll(() => frame.evaluate(() => (window as any).__p12dRuntime.at(-1)), { timeout: 60_000 }).toBe("inactive");
+      await expect.poll(() => frame.evaluate(() => (window as any).__p12dRuntime.at(-1)?.state), { timeout: 60_000 }).toBe("inactive");
       await frame.locator("button", { hasText: /^\s*Generate\s*$/ }).first().click({ delay: 80 });
       await expect.poll(() => rows().filter(r => r.event === "pipeline.request.sent" && String(r.webview?.origin).includes("generate")).length, { timeout: 30_000 }).toBeGreaterThan(sent.length);
       const latest = rows().filter(r => r.event === "pipeline.request.sent" && String(r.webview?.origin).includes("generate")).at(-1).requestId;

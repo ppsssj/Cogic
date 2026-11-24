@@ -1,0 +1,9 @@
+{
+  "mode": "trace",
+  "sha256": "148c94df9fb956f5575f1248c17604dbd4485c0a6481d75ca59c421698e52f3b",
+  "nodes": 7,
+  "edges": 9,
+  "traceEvents": 16,
+  "before": 2851,
+  "minimum": 1280
+}

@@ -33,3 +33,5 @@ Raw results: [baseline.json](baseline.json), [cancel.json](cancel.json). One run
 ## Final stabilization update
 
 The original MVP observations above are historical. See [final E2E investigation](final-e2e.md) for the later activation deduplication fix, actual VS Code regression results, graph comparison, and remaining limitations.
+
+Final merge-decision follow-up: [final verdict evidence](final-verdict.md).
