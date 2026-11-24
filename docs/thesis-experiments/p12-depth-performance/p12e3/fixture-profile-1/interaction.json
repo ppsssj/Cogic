@@ -1,0 +1,2161 @@
+{
+  "setup": {
+    "support": [
+      "element",
+      "event",
+      "first-input",
+      "largest-contentful-paint",
+      "layout-shift",
+      "long-animation-frame",
+      "longtask",
+      "mark",
+      "measure",
+      "navigation",
+      "paint",
+      "resource",
+      "visibility-state"
+    ],
+    "visibility": "visible",
+    "dpr": 1
+  },
+  "variant": "baseline",
+  "animationState": {
+    "pathCount": 9,
+    "names": {
+      "none": 6,
+      "dashdraw": 3
+    }
+  },
+  "graph": {
+    "id": "web-da6d3898-f58c-4ada-ab7c-e7b6d92182c9",
+    "nodes": 10,
+    "edges": 11,
+    "sha256": "56f6e1fea2c0579ace421c4c358e3fd3b2ae491ce37fad5a13918ec1b38b6af2",
+    "picker": "main.ts",
+    "inspector": "ACTIVE FILE SNAPSHOT main.ts typescript import { finish } from \"./target\"; export class Example { fetch: (value: number) => number = (value) => this.#dispatch(value); request = (value: number) => this.fetch(value); #dispatch(value: number) { return finish(value); } recursive(value: number): number { return value > 0 ? this.recursive(value - 1) : 0; } } export function start(value: number) { return new Example().request(value); } ROOT Clear Root mode file lock file main.ts path c:/dev/Cogic-P4-restored/docs/thesis-experiments/p14-call-ownership-fix/ui-smoke/fixture/src/main.ts behavior Keep the graph anchored to this file even when another file is opened. Runtime SELECTED NODE No node selected. Click a node in the graph. SELECTION 1:1 -> 1:1 PARAM FLOW Example.fetch -> Example.#dispatch value <- value Example.request -> Example.fetch value <- value Example.#dispatch -> finish (target.ts) value <- value Example.recursive -> Example.recursive value <- value - 1 start -> Example.request value <- value ANALYSIS 11 lines · 413 chars DIAGNOSTICS (0) No TypeScript diagnostics detected. GRAPH (10 NODES · 11 EDGES) nodes 10 edges 11 Example class Example.fetch method Example.request method Example.#dispatch method Example.recursive method start function finish (target.ts) external finish function IMPORTS (1) ./target finish EXPORTS (2) CLASS Example FUNCTION start CALLS (TOP 6) Example.#dispatch () 1 main.ts:6:3 Example.fetch () 1 main.ts:4:10 finish () 1 target.ts:1:1 Example.recursive () 1 main.ts:7:3 Example.request () 1 main.ts:5:13 new Example () 1 main.ts:3:1",
+    "before": 2513,
+    "minimum": 1142
+  },
+  "phases": [
+    {
+      "phase": "selection-0",
+      "start": 4161.300000011921,
+      "end": 5024.900000035763,
+      "frames": [
+        4161.6,
+        4169.9,
+        4178.3,
+        4186.5,
+        4195,
+        4203.2,
+        4211.6,
+        4220,
+        4228.5,
+        4236.5,
+        4244.9,
+        4253.2,
+        4261.6,
+        4270,
+        4278.2,
+        4286.7,
+        4311.5,
+        4319.9,
+        4328.2,
+        4361.7,
+        4369.9,
+        4378.2,
+        4411.5,
+        4419.9,
+        4494.8,
+        4528.2,
+        4611.5,
+        4636.5,
+        4678.2,
+        4719.8,
+        4745,
+        4811.6,
+        4886.7,
+        4894.8,
+        4903.3,
+        4936.5,
+        4944.8,
+        4953.2,
+        4961.5,
+        4969.9,
+        4978.3,
+        4986.7,
+        4994.9,
+        5003.2,
+        5011.5,
+        5019.8
+      ],
+      "longtasks": [],
+      "loaf": [],
+      "pointer": [],
+      "domNodes": 3,
+      "domEdges": 9,
+      "viewport": "transform: translate(-433.1px, -503.562px) scale(1.2);",
+      "automationClickStart": 4165.100000023842
+    },
+    {
+      "phase": "selection-1",
+      "start": 5040.400000035763,
+      "end": 5841.300000011921,
+      "frames": [
+        5044.9,
+        5053.2,
+        5061.6,
+        5069.9,
+        5078.2,
+        5086.6,
+        5094.9,
+        5103.4,
+        5111.7,
+        5119.8,
+        5128.1,
+        5136.5,
+        5144.8,
+        5153.1,
+        5161.7,
+        5169.8,
+        5178.2,
+        5186.5,
+        5194.8,
+        5203.1,
+        5211.5,
+        5219.8,
+        5228.2,
+        5236.6,
+        5244.8,
+        5261.5,
+        5269.9,
+        5278.1,
+        5286.6,
+        5303.2,
+        5320,
+        5328.2,
+        5336.6,
+        5345,
+        5353.4,
+        5361.7,
+        5369.9,
+        5378.2,
+        5386.5,
+        5394.9,
+        5403.3,
+        5411.5,
+        5419.7,
+        5428.2,
+        5444.9,
+        5453.3,
+        5461.5,
+        5469.8,
+        5478.1,
+        5486.5,
+        5495,
+        5503.2,
+        5511.5,
+        5519.7,
+        5528.1,
+        5536.5,
+        5544.7,
+        5553.1,
+        5561.5,
+        5569.7,
+        5578.1,
+        5586.4,
+        5595,
+        5603.3,
+        5619.8,
+        5628.2,
+        5644.7,
+        5653.3,
+        5661.5,
+        5669.8,
+        5678.1,
+        5686.4,
+        5694.8,
+        5703.1,
+        5711.4,
+        5719.9,
+        5728.2,
+        5736.5,
+        5745,
+        5753.1,
+        5761.5,
+        5769.8,
+        5778.3,
+        5786.5,
+        5794.8,
+        5803,
+        5811.4,
+        5819.8,
+        5828.2,
+        5836.5
+      ],
+      "longtasks": [],
+      "loaf": [],
+      "pointer": [],
+      "domNodes": 3,
+      "domEdges": 9,
+      "viewport": "transform: translate(-433.1px, -547.369px) scale(1.2);",
+      "automationClickStart": 5043.900000035763
+    },
+    {
+      "phase": "selection-2",
+      "start": 5877,
+      "end": 6730.400000035763,
+      "frames": [
+        5878.1,
+        5886.6,
+        5894.9,
+        5903.1,
+        5911.3,
+        5919.8,
+        5928.1,
+        5936.6,
+        5944.7,
+        5953.3,
+        5961.5,
+        5969.8,
+        5978.2,
+        5986.5,
+        5994.8,
+        6003.2,
+        6011.5,
+        6019.7,
+        6028,
+        6036.5,
+        6044.9,
+        6053.1,
+        6086.5,
+        6094.9,
+        6103.1,
+        6119.7,
+        6128,
+        6136.4,
+        6144.6,
+        6153.2,
+        6169.8,
+        6186.5,
+        6194.9,
+        6203.1,
+        6211.4,
+        6219.7,
+        6228.1,
+        6236.4,
+        6244.7,
+        6253,
+        6261.4,
+        6269.7,
+        6278.1,
+        6286.4,
+        6294.7,
+        6303.1,
+        6311.4,
+        6319.8,
+        6328.1,
+        6336.4,
+        6344.8,
+        6353.1,
+        6361.4,
+        6369.7,
+        6378.4,
+        6386.4,
+        6394.7,
+        6403,
+        6411.3,
+        6419.7,
+        6428.1,
+        6436.4,
+        6444.7,
+        6453,
+        6461.4,
+        6469.8,
+        6478,
+        6486.4,
+        6494.7,
+        6503.1,
+        6511.4,
+        6519.7,
+        6528,
+        6536.3,
+        6545,
+        6553.3,
+        6561.7,
+        6570,
+        6578.2,
+        6586.5,
+        6594.8,
+        6603.2,
+        6611.6,
+        6619.7,
+        6628.1,
+        6636.4,
+        6644.7,
+        6653.1,
+        6661.5,
+        6669.8,
+        6678.1,
+        6686.5,
+        6694.9,
+        6703.2,
+        6711.6,
+        6719.8
+      ],
+      "longtasks": [],
+      "loaf": [],
+      "pointer": [],
+      "domNodes": 3,
+      "domEdges": 9,
+      "viewport": "transform: translate(-433.1px, -640.16px) scale(1.2);",
+      "automationClickStart": 5878.800000011921
+    }
+  ],
+  "reactProfile": {
+    "commits": [
+      {
+        "id": "CanvasPane",
+        "phase": "mount",
+        "actualDuration": 2.699999988079071,
+        "baseDuration": 2.600000023841858,
+        "startTime": 241.10000002384186,
+        "commitTime": 251.60000002384186
+      },
+      {
+        "id": "Inspector",
+        "phase": "mount",
+        "actualDuration": 7,
+        "baseDuration": 3.199999988079071,
+        "startTime": 243.9000000357628,
+        "commitTime": 251.60000002384186
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 0.30000001192092896,
+        "startTime": 342.4000000357628,
+        "commitTime": 343.7000000476837
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 0.7999999523162842,
+        "baseDuration": 0.6999999284744263,
+        "startTime": 342.7000000476837,
+        "commitTime": 343.7000000476837
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 0.30000001192092896,
+        "startTime": 346.30000001192093,
+        "commitTime": 347.4000000357628
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 0.3999999761581421,
+        "startTime": 346.60000002384186,
+        "commitTime": 347.4000000357628
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 0.2999999523162842,
+        "startTime": 348.7000000476837,
+        "commitTime": 350.2000000476837
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 1.2000000476837158,
+        "baseDuration": 0.5000000596046448,
+        "startTime": 349,
+        "commitTime": 350.2000000476837
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 0.5,
+        "startTime": 565.5,
+        "commitTime": 566.9000000357628
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 0.7000000476837158,
+        "baseDuration": 0.7000000476837158,
+        "startTime": 566.1000000238419,
+        "commitTime": 566.9000000357628
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 0.20000004768371582,
+        "startTime": 627,
+        "commitTime": 627.8000000119209
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 0.5,
+        "startTime": 627.2000000476837,
+        "commitTime": 627.8000000119209
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 0.19999998807907104,
+        "startTime": 629.8000000119209,
+        "commitTime": 630.5
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 0.3999999761581421,
+        "startTime": 630,
+        "commitTime": 630.5
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.10000002384185791,
+        "baseDuration": 0.10000002384185791,
+        "startTime": 639.5,
+        "commitTime": 640.1000000238419
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 0.3999999761581421,
+        "startTime": 639.7000000476837,
+        "commitTime": 640.1000000238419
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.10000002384185791,
+        "baseDuration": 0.10000002384185791,
+        "startTime": 641.5,
+        "commitTime": 642.2000000476837
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 0.3999999761581421,
+        "startTime": 641.6000000238419,
+        "commitTime": 642.2000000476837
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "mount",
+        "actualDuration": 10.100000023841858,
+        "baseDuration": 6.700000047683716,
+        "startTime": 1670.800000011921,
+        "commitTime": 1684.800000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 23.5,
+        "baseDuration": 20.100000023841858,
+        "startTime": 1657.4000000357628,
+        "commitTime": 1684.800000011921
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 3.6000000834465027,
+        "baseDuration": 2.5000001192092896,
+        "startTime": 1680.9000000357628,
+        "commitTime": 1684.800000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 7.899999976158142,
+        "baseDuration": 7.3999998569488525,
+        "startTime": 1719.1000000238419,
+        "commitTime": 1727.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 7.899999976158142,
+        "baseDuration": 20.799999833106995,
+        "startTime": 1719.1000000238419,
+        "commitTime": 1727.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 4.799999952316284,
+        "baseDuration": 7.399999797344208,
+        "startTime": 1748.7000000476837,
+        "commitTime": 1753.5
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 4.799999952316284,
+        "baseDuration": 20.79999977350235,
+        "startTime": 1748.7000000476837,
+        "commitTime": 1753.5
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 5.999999761581421,
+        "startTime": 1759.4000000357628,
+        "commitTime": 1759.9000000357628
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 19.399999737739563,
+        "startTime": 1759.300000011921,
+        "commitTime": 1759.9000000357628
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 5.8999998569488525,
+        "startTime": 1774.5,
+        "commitTime": 1775.5
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 19.299999833106995,
+        "startTime": 1774.5,
+        "commitTime": 1775.5
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 5.599999845027924,
+        "startTime": 2104.900000035763,
+        "commitTime": 2105.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 18.999999821186066,
+        "startTime": 2104.900000035763,
+        "commitTime": 2105.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 5.599999904632568,
+        "startTime": 4286.300000011921,
+        "commitTime": 4286.700000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 18.99999988079071,
+        "startTime": 4286.300000011921,
+        "commitTime": 4286.700000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999992847442627,
+        "baseDuration": 5.3999998569488525,
+        "startTime": 4375.200000047684,
+        "commitTime": 4375.5
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999992847442627,
+        "baseDuration": 18.799999833106995,
+        "startTime": 4375.200000047684,
+        "commitTime": 4375.5
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 2.0000000596046448,
+        "baseDuration": 4.299999892711639,
+        "startTime": 4378.5,
+        "commitTime": 4382.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 2.600000023841858,
+        "baseDuration": 4.8999998569488525,
+        "startTime": 4377.900000035763,
+        "commitTime": 4382.900000035763
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 2.199999988079071,
+        "baseDuration": 1.899999976158142,
+        "startTime": 4380.700000047684,
+        "commitTime": 4382.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "nested-update",
+        "actualDuration": 0.8999999761581421,
+        "baseDuration": 1.8999998569488525,
+        "startTime": 4385.200000047684,
+        "commitTime": 4386.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "nested-update",
+        "actualDuration": 0.8999999761581421,
+        "baseDuration": 2.4999998211860657,
+        "startTime": 4385.200000047684,
+        "commitTime": 4386.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 3.100000023841858,
+        "baseDuration": 3.399999976158142,
+        "startTime": 4405,
+        "commitTime": 4408.100000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 3.100000023841858,
+        "baseDuration": 3.9999999403953552,
+        "startTime": 4405,
+        "commitTime": 4408.100000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 1.4000000357627869,
+        "baseDuration": 3.099999964237213,
+        "startTime": 4456.5,
+        "commitTime": 4459.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 1.5,
+        "baseDuration": 3.1999999284744263,
+        "startTime": 4456.400000035763,
+        "commitTime": 4459.300000011921
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 1.399999976158142,
+        "baseDuration": 1.0999999046325684,
+        "startTime": 4457.900000035763,
+        "commitTime": 4459.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 1.0999999642372131,
+        "baseDuration": 2.8999999165534973,
+        "startTime": 4460.900000035763,
+        "commitTime": 4463.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 1.199999988079071,
+        "baseDuration": 2.9999999403953552,
+        "startTime": 4460.800000011921,
+        "commitTime": 4463.300000011921
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 1.0999999642372131,
+        "baseDuration": 1.0999999642372131,
+        "startTime": 4462.100000023842,
+        "commitTime": 4463.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5000000596046448,
+        "baseDuration": 3.300000011920929,
+        "startTime": 4615,
+        "commitTime": 4615.700000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5000000596046448,
+        "baseDuration": 3.400000035762787,
+        "startTime": 4615,
+        "commitTime": 4615.700000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000007152557373,
+        "baseDuration": 3.100000023841858,
+        "startTime": 4638.5,
+        "commitTime": 4639.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000007152557373,
+        "baseDuration": 3.200000047683716,
+        "startTime": 4638.5,
+        "commitTime": 4639.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 3,
+        "startTime": 4686,
+        "commitTime": 4686.400000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 3.100000023841858,
+        "startTime": 4686,
+        "commitTime": 4686.400000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.09999996423721313,
+        "baseDuration": 2.6999999284744263,
+        "startTime": 4722.700000047684,
+        "commitTime": 4723
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.09999996423721313,
+        "baseDuration": 2.799999952316284,
+        "startTime": 4722.700000047684,
+        "commitTime": 4723
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 1.100000023841858,
+        "baseDuration": 3.600000023841858,
+        "startTime": 4750.5,
+        "commitTime": 4752
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 1.100000023841858,
+        "baseDuration": 3.700000047683716,
+        "startTime": 4750.5,
+        "commitTime": 4752
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.8999999761581421,
+        "baseDuration": 3.4999999403953552,
+        "startTime": 4818,
+        "commitTime": 4819.400000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.8999999761581421,
+        "baseDuration": 3.599999964237213,
+        "startTime": 4818,
+        "commitTime": 4819.400000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 2.9999999403953552,
+        "startTime": 5125.400000035763,
+        "commitTime": 5125.800000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 3.099999964237213,
+        "startTime": 5125.400000035763,
+        "commitTime": 5125.800000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 3.1999999284744263,
+        "startTime": 5214.700000047684,
+        "commitTime": 5215.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 3.299999952316284,
+        "startTime": 5214.700000047684,
+        "commitTime": 5215.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.699999988079071,
+        "baseDuration": 2.799999952316284,
+        "startTime": 5217.100000023842,
+        "commitTime": 5218.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 1.5,
+        "baseDuration": 3.599999964237213,
+        "startTime": 5216.300000011921,
+        "commitTime": 5218.900000035763
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 1,
+        "baseDuration": 0.6000000238418579,
+        "startTime": 5217.800000011921,
+        "commitTime": 5218.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "nested-update",
+        "actualDuration": 1,
+        "baseDuration": 1.3999998569488525,
+        "startTime": 5219.900000035763,
+        "commitTime": 5221
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "nested-update",
+        "actualDuration": 1,
+        "baseDuration": 2.1999998688697815,
+        "startTime": 5219.900000035763,
+        "commitTime": 5221
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 1.4000000357627869,
+        "baseDuration": 1.999999761581421,
+        "startTime": 5226.5,
+        "commitTime": 5228
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 1.4000000357627869,
+        "baseDuration": 2.79999977350235,
+        "startTime": 5226.5,
+        "commitTime": 5228
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 2.199999749660492,
+        "startTime": 5372.200000047684,
+        "commitTime": 5373.100000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 2.999999761581421,
+        "startTime": 5372.200000047684,
+        "commitTime": 5373.100000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.699999988079071,
+        "baseDuration": 2.299999713897705,
+        "startTime": 5380.400000035763,
+        "commitTime": 5381.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.699999988079071,
+        "baseDuration": 3.099999725818634,
+        "startTime": 5380.300000011921,
+        "commitTime": 5381.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 1.8999996781349182,
+        "startTime": 5388.300000011921,
+        "commitTime": 5388.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 2.699999690055847,
+        "startTime": 5388.300000011921,
+        "commitTime": 5388.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 1.8999996781349182,
+        "startTime": 5396.5,
+        "commitTime": 5397.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 2.699999690055847,
+        "startTime": 5396.5,
+        "commitTime": 5397.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 2.099999725818634,
+        "startTime": 5405.600000023842,
+        "commitTime": 5406.100000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 2.899999737739563,
+        "startTime": 5405.600000023842,
+        "commitTime": 5406.100000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 1.899999737739563,
+        "startTime": 5413,
+        "commitTime": 5413.400000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 2.699999749660492,
+        "startTime": 5413,
+        "commitTime": 5413.400000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 1.9999997019767761,
+        "startTime": 5421.100000023842,
+        "commitTime": 5421.600000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 2.799999713897705,
+        "startTime": 5421.100000023842,
+        "commitTime": 5421.600000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 1.100000023841858,
+        "baseDuration": 2.599999725818634,
+        "startTime": 5430.900000035763,
+        "commitTime": 5432.400000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 1.100000023841858,
+        "baseDuration": 3.399999737739563,
+        "startTime": 5430.900000035763,
+        "commitTime": 5432.400000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 1.0999999642372131,
+        "baseDuration": 2.699999690055847,
+        "startTime": 5448.200000047684,
+        "commitTime": 5449.800000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 1.0999999642372131,
+        "baseDuration": 3.499999701976776,
+        "startTime": 5448.200000047684,
+        "commitTime": 5449.800000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 2.199999749660492,
+        "startTime": 5458.300000011921,
+        "commitTime": 5460.100000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 2.999999761581421,
+        "startTime": 5458.300000011921,
+        "commitTime": 5460.100000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.4999999403953552,
+        "baseDuration": 2.0999996662139893,
+        "startTime": 5465.800000011921,
+        "commitTime": 5466.5
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.4999999403953552,
+        "baseDuration": 2.899999678134918,
+        "startTime": 5465.800000011921,
+        "commitTime": 5466.5
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 1.899999737739563,
+        "startTime": 5471.300000011921,
+        "commitTime": 5471.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 2.699999749660492,
+        "startTime": 5471.300000011921,
+        "commitTime": 5471.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.7000000476837158,
+        "baseDuration": 2.29999977350235,
+        "startTime": 5479.5,
+        "commitTime": 5480.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.7000000476837158,
+        "baseDuration": 3.099999785423279,
+        "startTime": 5479.5,
+        "commitTime": 5480.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 1.9999997019767761,
+        "startTime": 5490.200000047684,
+        "commitTime": 5490.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 2.799999713897705,
+        "startTime": 5490.200000047684,
+        "commitTime": 5490.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 2.099999725818634,
+        "startTime": 5497.5,
+        "commitTime": 5498
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 2.899999737739563,
+        "startTime": 5497.5,
+        "commitTime": 5498
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5999999642372131,
+        "baseDuration": 2.099999725818634,
+        "startTime": 5505.200000047684,
+        "commitTime": 5505.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5999999642372131,
+        "baseDuration": 2.899999737739563,
+        "startTime": 5505.200000047684,
+        "commitTime": 5505.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 1.899999737739563,
+        "startTime": 5513.400000035763,
+        "commitTime": 5513.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 2.699999749660492,
+        "startTime": 5513.400000035763,
+        "commitTime": 5513.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 1.899999737739563,
+        "startTime": 5521.100000023842,
+        "commitTime": 5521.5
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 2.699999749660492,
+        "startTime": 5521.100000023842,
+        "commitTime": 5521.5
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 2.099999725818634,
+        "startTime": 5529.600000023842,
+        "commitTime": 5530.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 2.899999737739563,
+        "startTime": 5529.600000023842,
+        "commitTime": 5530.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 1.8999996781349182,
+        "startTime": 5538.700000047684,
+        "commitTime": 5539.100000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 2.699999690055847,
+        "startTime": 5538.700000047684,
+        "commitTime": 5539.100000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 1.899999737739563,
+        "startTime": 5546.800000011921,
+        "commitTime": 5547.400000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 2.699999749660492,
+        "startTime": 5546.800000011921,
+        "commitTime": 5547.400000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000007152557373,
+        "baseDuration": 1.8999997973442078,
+        "startTime": 5555,
+        "commitTime": 5555.400000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000007152557373,
+        "baseDuration": 2.6999998092651367,
+        "startTime": 5555,
+        "commitTime": 5555.400000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 1.799999713897705,
+        "startTime": 5563.400000035763,
+        "commitTime": 5563.800000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 2.599999725818634,
+        "startTime": 5563.400000035763,
+        "commitTime": 5563.800000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 2.099999725818634,
+        "startTime": 5572.100000023842,
+        "commitTime": 5572.800000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 2.899999737739563,
+        "startTime": 5572.100000023842,
+        "commitTime": 5572.800000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 1.899999737739563,
+        "startTime": 5580.700000047684,
+        "commitTime": 5581.100000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 2.699999749660492,
+        "startTime": 5580.700000047684,
+        "commitTime": 5581.100000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 1.899999737739563,
+        "startTime": 5588.900000035763,
+        "commitTime": 5589.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 2.699999749660492,
+        "startTime": 5588.900000035763,
+        "commitTime": 5589.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 2.199999988079071,
+        "baseDuration": 3.799999713897705,
+        "startTime": 5599.400000035763,
+        "commitTime": 5602.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 2.199999988079071,
+        "baseDuration": 4.599999725818634,
+        "startTime": 5599.400000035763,
+        "commitTime": 5602.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.9999999403953552,
+        "baseDuration": 2.5999996662139893,
+        "startTime": 5611.900000035763,
+        "commitTime": 5613.600000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.9999999403953552,
+        "baseDuration": 3.399999678134918,
+        "startTime": 5611.900000035763,
+        "commitTime": 5613.600000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 1.8999996781349182,
+        "startTime": 5622.100000023842,
+        "commitTime": 5622.600000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 2.699999690055847,
+        "startTime": 5622.100000023842,
+        "commitTime": 5622.600000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 1.899999737739563,
+        "startTime": 5633.600000023842,
+        "commitTime": 5634.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 2.699999749660492,
+        "startTime": 5633.600000023842,
+        "commitTime": 5634.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 1.7999997735023499,
+        "startTime": 5949.400000035763,
+        "commitTime": 5949.700000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 2.599999785423279,
+        "startTime": 5949.400000035763,
+        "commitTime": 5949.700000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.8999999761581421,
+        "baseDuration": 2.399999737739563,
+        "startTime": 6051.100000023842,
+        "commitTime": 6052.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.8999999761581421,
+        "baseDuration": 3.199999749660492,
+        "startTime": 6051,
+        "commitTime": 6052.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 3.3000000715255737,
+        "baseDuration": 3.9999998211860657,
+        "startTime": 6059.200000047684,
+        "commitTime": 6066.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 5.300000071525574,
+        "baseDuration": 5.999999821186066,
+        "startTime": 6057.200000047684,
+        "commitTime": 6066.200000047684
+      },
+      {
+        "id": "Inspector",
+        "phase": "update",
+        "actualDuration": 2.9999999403953552,
+        "baseDuration": 2.099999964237213,
+        "startTime": 6062.900000035763,
+        "commitTime": 6066.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "nested-update",
+        "actualDuration": 3.699999988079071,
+        "baseDuration": 5.099999845027924,
+        "startTime": 6070.600000023842,
+        "commitTime": 6074.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "nested-update",
+        "actualDuration": 3.699999988079071,
+        "baseDuration": 7.099999845027924,
+        "startTime": 6070.600000023842,
+        "commitTime": 6074.900000035763
+      },
+      {
+        "id": "Inspector",
+        "phase": "nested-update",
+        "actualDuration": 0,
+        "baseDuration": 2.099999964237213,
+        "startTime": 6074.5,
+        "commitTime": 6074.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 1.5999999642372131,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6084.700000047684,
+        "commitTime": 6086.600000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 1.5999999642372131,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6084.700000047684,
+        "commitTime": 6086.600000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5000000596046448,
+        "baseDuration": 3.600000023841858,
+        "startTime": 6230.300000011921,
+        "commitTime": 6231.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5000000596046448,
+        "baseDuration": 5.600000023841858,
+        "startTime": 6230.300000011921,
+        "commitTime": 6231.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 3.399999976158142,
+        "startTime": 6237.600000023842,
+        "commitTime": 6238.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 5.399999976158142,
+        "startTime": 6237.600000023842,
+        "commitTime": 6238.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 3.3999999165534973,
+        "startTime": 6246.200000047684,
+        "commitTime": 6246.600000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 5.399999916553497,
+        "startTime": 6246.200000047684,
+        "commitTime": 6246.600000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 3.399999976158142,
+        "startTime": 6254.300000011921,
+        "commitTime": 6254.600000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 5.399999976158142,
+        "startTime": 6254.300000011921,
+        "commitTime": 6254.600000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 3.599999964237213,
+        "startTime": 6263.5,
+        "commitTime": 6264.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.6000000238418579,
+        "baseDuration": 5.599999964237213,
+        "startTime": 6263.5,
+        "commitTime": 6264.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6271.700000047684,
+        "commitTime": 6272.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6271.700000047684,
+        "commitTime": 6272.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 3.300000011920929,
+        "startTime": 6279.300000011921,
+        "commitTime": 6279.600000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 5.300000011920929,
+        "startTime": 6279.300000011921,
+        "commitTime": 6279.600000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.10000002384185791,
+        "baseDuration": 3.199999988079071,
+        "startTime": 6287.800000011921,
+        "commitTime": 6288.100000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.10000002384185791,
+        "baseDuration": 5.199999988079071,
+        "startTime": 6287.800000011921,
+        "commitTime": 6288.100000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 3.399999976158142,
+        "startTime": 6296.900000035763,
+        "commitTime": 6297.400000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 5.399999976158142,
+        "startTime": 6296.900000035763,
+        "commitTime": 6297.400000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.09999996423721313,
+        "baseDuration": 3.1999999284744263,
+        "startTime": 6304.900000035763,
+        "commitTime": 6305.5
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.09999996423721313,
+        "baseDuration": 5.199999928474426,
+        "startTime": 6304.900000035763,
+        "commitTime": 6305.5
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.09999996423721313,
+        "baseDuration": 3.1999999284744263,
+        "startTime": 6312.700000047684,
+        "commitTime": 6312.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.09999996423721313,
+        "baseDuration": 5.199999928474426,
+        "startTime": 6312.700000047684,
+        "commitTime": 6312.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6320.900000035763,
+        "commitTime": 6321.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6320.900000035763,
+        "commitTime": 6321.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 3.3999999165534973,
+        "startTime": 6329.400000035763,
+        "commitTime": 6329.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.2999999523162842,
+        "baseDuration": 5.399999916553497,
+        "startTime": 6329.400000035763,
+        "commitTime": 6329.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6338.400000035763,
+        "commitTime": 6338.900000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6338.400000035763,
+        "commitTime": 6338.900000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6346.700000047684,
+        "commitTime": 6347.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000001192092896,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6346.700000047684,
+        "commitTime": 6347.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6355.200000047684,
+        "commitTime": 6355.700000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6355.200000047684,
+        "commitTime": 6355.700000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6363.900000035763,
+        "commitTime": 6364.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6363.900000035763,
+        "commitTime": 6364.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 3.5,
+        "startTime": 6371.800000011921,
+        "commitTime": 6372.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 5.5,
+        "startTime": 6371.800000011921,
+        "commitTime": 6372.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 3.300000011920929,
+        "startTime": 6381.800000011921,
+        "commitTime": 6382.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 5.300000011920929,
+        "startTime": 6381.800000011921,
+        "commitTime": 6382.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.30000007152557373,
+        "baseDuration": 3.300000011920929,
+        "startTime": 6388.5,
+        "commitTime": 6389
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.30000007152557373,
+        "baseDuration": 5.300000011920929,
+        "startTime": 6388.5,
+        "commitTime": 6389
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 3.300000011920929,
+        "startTime": 6396.400000035763,
+        "commitTime": 6396.700000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 5.300000011920929,
+        "startTime": 6396.400000035763,
+        "commitTime": 6396.700000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6404.300000011921,
+        "commitTime": 6404.600000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6404.300000011921,
+        "commitTime": 6404.600000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 3.399999976158142,
+        "startTime": 6412.700000047684,
+        "commitTime": 6413.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 5.399999976158142,
+        "startTime": 6412.700000047684,
+        "commitTime": 6413.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 3.599999964237213,
+        "startTime": 6421.100000023842,
+        "commitTime": 6421.600000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 5.599999964237213,
+        "startTime": 6421.100000023842,
+        "commitTime": 6421.600000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.699999988079071,
+        "baseDuration": 3.799999952316284,
+        "startTime": 6430.100000023842,
+        "commitTime": 6431.100000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.699999988079071,
+        "baseDuration": 5.799999952316284,
+        "startTime": 6430.100000023842,
+        "commitTime": 6431.100000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 3.399999976158142,
+        "startTime": 6439,
+        "commitTime": 6439.400000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.40000003576278687,
+        "baseDuration": 5.399999976158142,
+        "startTime": 6439,
+        "commitTime": 6439.400000035763
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 3.300000011920929,
+        "startTime": 6446.5,
+        "commitTime": 6446.800000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.20000004768371582,
+        "baseDuration": 5.300000011920929,
+        "startTime": 6446.5,
+        "commitTime": 6446.800000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6454.5,
+        "commitTime": 6454.800000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6454.5,
+        "commitTime": 6454.800000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 3.4999999403953552,
+        "startTime": 6463.600000023842,
+        "commitTime": 6464.100000023842
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 5.499999940395355,
+        "startTime": 6463.5,
+        "commitTime": 6464.100000023842
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 3.4999999403953552,
+        "startTime": 6471.600000023842,
+        "commitTime": 6472.300000011921
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.5,
+        "baseDuration": 5.499999940395355,
+        "startTime": 6471.600000023842,
+        "commitTime": 6472.300000011921
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 3.4999999403953552,
+        "startTime": 6479.700000047684,
+        "commitTime": 6480.200000047684
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.3999999761581421,
+        "baseDuration": 5.499999940395355,
+        "startTime": 6479.700000047684,
+        "commitTime": 6480.200000047684
+      },
+      {
+        "id": "ReactFlow",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 3.299999952316284,
+        "startTime": 6487.900000035763,
+        "commitTime": 6488.400000035763
+      },
+      {
+        "id": "CanvasPane",
+        "phase": "update",
+        "actualDuration": 0.19999998807907104,
+        "baseDuration": 5.299999952316284,
+        "startTime": 6487.900000035763,
+        "commitTime": 6488.400000035763
+      }
+    ],
+    "conversions": [
+      {
+        "kind": "nodes",
+        "duration": 0.40000003576278687,
+        "time": 243.30000001192093
+      },
+      {
+        "kind": "edges",
+        "duration": 0.09999996423721313,
+        "time": 243.5
+      },
+      {
+        "kind": "nodes",
+        "duration": 0,
+        "time": 342.5
+      },
+      {
+        "kind": "nodes",
+        "duration": 0,
+        "time": 346.5
+      },
+      {
+        "kind": "edges",
+        "duration": 0,
+        "time": 346.5
+      },
+      {
+        "kind": "nodes",
+        "duration": 0,
+        "time": 349
+      },
+      {
+        "kind": "edges",
+        "duration": 0,
+        "time": 349
+      },
+      {
+        "kind": "nodes",
+        "duration": 0,
+        "time": 565.6000000238419
+      },
+      {
+        "kind": "edges",
+        "duration": 0,
+        "time": 565.6000000238419
+      },
+      {
+        "kind": "nodes",
+        "duration": 0.10000002384185791,
+        "time": 627.1000000238419
+      },
+      {
+        "kind": "nodes",
+        "duration": 0,
+        "time": 629.9000000357628
+      },
+      {
+        "kind": "nodes",
+        "duration": 0,
+        "time": 639.6000000238419
+      },
+      {
+        "kind": "nodes",
+        "duration": 0,
+        "time": 641.5
+      },
+      {
+        "kind": "nodes",
+        "duration": 1.699999988079071,
+        "time": 1669.4000000357628
+      },
+      {
+        "kind": "edges",
+        "duration": 0.5999999642372131,
+        "time": 1670
+      },
+      {
+        "kind": "nodes",
+        "duration": 0.10000002384185791,
+        "time": 4378.200000047684
+      },
+      {
+        "kind": "edges",
+        "duration": 0.2999999523162842,
+        "time": 4378.5
+      },
+      {
+        "kind": "nodes",
+        "duration": 0.30000001192092896,
+        "time": 5216.600000023842
+      },
+      {
+        "kind": "edges",
+        "duration": 0.3999999761581421,
+        "time": 5217
+      },
+      {
+        "kind": "nodes",
+        "duration": 0.8999999761581421,
+        "time": 6058.300000011921
+      },
+      {
+        "kind": "edges",
+        "duration": 0.6000000238418579,
+        "time": 6058.900000035763
+      }
+    ],
+    "state": [
+      {
+        "event": "selected-ids-effect",
+        "time": 333.30000001192093,
+        "count": 0
+      },
+      {
+        "event": "selected-ids-effect",
+        "time": 568.7000000476837,
+        "count": 0
+      },
+      {
+        "event": "selected-ids-effect",
+        "time": 1718.9000000357628,
+        "count": 0
+      },
+      {
+        "event": "selection-handler",
+        "time": 4377.5,
+        "nodeId": "method:c:/dev/Cogic-P4-restored/docs/thesis-experiments/p14-call-ownership-fix/ui-smoke/fixture/src/main.ts:99"
+      },
+      {
+        "event": "selection-handler-return",
+        "time": 4377.600000023842,
+        "nodeId": "method:c:/dev/Cogic-P4-restored/docs/thesis-experiments/p14-call-ownership-fix/ui-smoke/fixture/src/main.ts:99"
+      },
+      {
+        "event": "selected-ids-effect",
+        "time": 4385.200000047684,
+        "count": 1
+      },
+      {
+        "event": "selection-handler",
+        "time": 5215.900000035763,
+        "nodeId": "method:c:/dev/Cogic-P4-restored/docs/thesis-experiments/p14-call-ownership-fix/ui-smoke/fixture/src/main.ts:146"
+      },
+      {
+        "event": "selection-handler-return",
+        "time": 5216,
+        "nodeId": "method:c:/dev/Cogic-P4-restored/docs/thesis-experiments/p14-call-ownership-fix/ui-smoke/fixture/src/main.ts:146"
+      },
+      {
+        "event": "selected-ids-effect",
+        "time": 5219.900000035763,
+        "count": 1
+      },
+      {
+        "event": "selection-handler",
+        "time": 6054.5,
+        "nodeId": "method:c:/dev/Cogic-P4-restored/docs/thesis-experiments/p14-call-ownership-fix/ui-smoke/fixture/src/main.ts:187"
+      },
+      {
+        "event": "selection-handler-return",
+        "time": 6054.600000023842,
+        "nodeId": "method:c:/dev/Cogic-P4-restored/docs/thesis-experiments/p14-call-ownership-fix/ui-smoke/fixture/src/main.ts:187"
+      },
+      {
+        "event": "selected-ids-effect",
+        "time": 6069.600000023842,
+        "count": 1
+      }
+    ],
+    "selections": [
+      {
+        "click": 4376.600000023842,
+        "inspector": 4387.800000011921,
+        "deltaMs": 11.199999988079071
+      },
+      {
+        "click": 5215.300000011921,
+        "inspector": 5222,
+        "deltaMs": 6.699999988079071
+      },
+      {
+        "click": 6052.700000047684,
+        "inspector": 6075.900000035763,
+        "deltaMs": 23.19999998807907
+      }
+    ]
+  }
+}
