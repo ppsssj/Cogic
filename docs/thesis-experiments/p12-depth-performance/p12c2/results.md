@@ -1,5 +1,7 @@
 # Results
 
+**Update:** the initial abort below was followed by completed Vite runs; see [resumed results](resumed-results.md). This page preserves the original attempt.
+
 ## Vite Depth 2: incomplete
 
 | Metric | Result |

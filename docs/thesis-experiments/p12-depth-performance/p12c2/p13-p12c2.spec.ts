@@ -30,6 +30,19 @@ test("P12-C2 real VS Code Depth 2", async () => {
     console.log(JSON.stringify({phase: "preparation", preparation, before}));
     await expect.poll(() => { check(); return rows().some(r => r.requestId === preparation && ["postMessage.call", "request.cancelled", "request.failed", "request.dropped"].includes(r.event)); }, { timeout: 900_000, intervals: [1000] }).toBeTruthy();
     if (aborted) throw Error("memory guard fired during preparation");
+    if (!rows().some(r => r.requestId === preparation && r.event === "postMessage.call")) throw Error("Depth 2 request did not complete");
+    await expect.poll(() => { check(); return rows().some(r => r.requestId === preparation && r.event === "pipeline.canvas.twoAnimationFrames"); }, { timeout: 900_000, intervals: [1000] }).toBeTruthy();
+    const prepGraph = await frame.evaluate(key => (window as any).__p12c2Results[key], preparation);
+    if (!prepGraph) throw Error("Depth 2 result graph missing");
+    const prepRoot = process.env.STUDY_WORKSPACE!.replace(/\\/g, "/").toLowerCase();
+    const prepRx = new RegExp(prepRoot.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+    const prepNorm = (v: any): any => typeof v === "string" ? v.replace(/\\/g, "/").replace(prepRx, "<fixture>") : Array.isArray(v) ? v.map(prepNorm) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k,x]) => [k,prepNorm(x)])) : v;
+    const prepNormalized = JSON.stringify(prepNorm(prepGraph));
+    fs.writeFileSync(path.join(out, "preparation-graph.normalized.json"), prepNormalized);
+    const prepInspector = (await frame.locator(".inspectorBody").innerText()).replace(/\s+/g, " ").slice(0, 1600);
+    const prepSummary = {id: preparation, nodes: prepGraph.nodes.length, edges: prepGraph.edges.length, sha256: crypto.createHash("sha256").update(prepNormalized).digest("hex"), picker: await frame.locator(".projectPicker").innerText(), inspector: prepInspector, before, minimum};
+    fs.writeFileSync(path.join(out, "preparation-summary.json"), JSON.stringify(prepSummary, null, 2));
+    console.log(JSON.stringify({phase: "preparation-complete", ...prepSummary}));
     await sleep(3000);
     const old = rows().filter(r => r.event === "pipeline.request.sent" && String(r.webview?.origin).includes("generate")).length;
     const start = performance.now();
@@ -52,6 +65,34 @@ test("P12-C2 real VS Code Depth 2", async () => {
     fs.writeFileSync(path.join(out, "summary.json"), JSON.stringify(result, null, 2));
     console.log(JSON.stringify(result));
     await waitGraphStable(frame, {minNodes: 1, quietMs: 1000, timeout: 60_000});
+    const viewport = frame.locator(".react-flow__viewport");
+    const pane = frame.locator(".react-flow__pane");
+    const box = await pane.boundingBox();
+    if (!box) throw Error("React Flow pane missing");
+    const localPoint = await pane.evaluate((el) => {
+      const rect = el.getBoundingClientRect();
+      for (let y = 25; y < rect.height - 25; y += 25) for (let x = 25; x < rect.width - 25; x += 25) {
+        if (document.elementFromPoint(rect.left + x, rect.top + y) === el && document.elementFromPoint(rect.left + x + 80, rect.top + y + 55) === el) return {x,y};
+      }
+      return null;
+    });
+    if (!localPoint) throw Error("No unobstructed pan start/end on the pane");
+    const point = {x: box.x + localPoint.x, y: box.y + localPoint.y};
+    const beforePan = await viewport.getAttribute("style");
+    await session.page.mouse.move(point.x, point.y); await session.page.mouse.down(); await session.page.mouse.move(point.x + 80, point.y + 55, {steps: 8}); await session.page.mouse.up();
+    await sleep(500); const afterPan = await viewport.getAttribute("style");
+    await session.page.mouse.move(point.x, point.y); await session.page.mouse.wheel(0, -250); await sleep(700);
+    const afterZoom = await viewport.getAttribute("style");
+    fs.writeFileSync(path.join(out, "pan-zoom.json"), JSON.stringify({beforePan,afterPan,afterZoom,panChanged: beforePan !== afterPan, zoomChanged: afterPan !== afterZoom}, null, 2));
+    const visibleNode = frame.locator(".cgChildNode--interactive:visible").first();
+    await visibleNode.click({delay: 80, timeout: 10_000});
+    const selected = (await frame.locator(".inspectorBody").innerText()).replace(/\s+/g, " ");
+    const selectedSection = selected.split("SELECTED NODE")[1]?.split("SELECTION")[0]?.trim() ?? "";
+    await frame.locator('button[title="Fit Graph"]').first().click({delay:80}); await sleep(500);
+    const interactions = {beforePan, afterPan, afterZoom, panChanged: beforePan !== afterPan, zoomChanged: afterPan !== afterZoom, selectedNodeClicked: true, selectedInspectorExcerpt: selectedSection.slice(0, 800), fitGraphClicked: true};
+    fs.writeFileSync(path.join(out, "interactions.json"), JSON.stringify(interactions,null,2));
+    expect(interactions.panChanged).toBe(true); expect(interactions.zoomChanged).toBe(true);
+    expect(selectedSection).not.toContain("No node selected"); expect(selectedSection.length).toBeGreaterThan(0);
     expect(aborted).toBe(false);
   } finally {
     clearInterval(monitor); fs.writeFileSync(path.join(out, "memory-summary.json"), JSON.stringify({before,minimum,aborted}, null, 2));

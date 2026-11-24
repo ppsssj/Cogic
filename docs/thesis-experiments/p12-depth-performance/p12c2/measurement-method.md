@@ -30,3 +30,7 @@ Use a separate machine with at least 16 GB RAM and sufficient available memory; 
 ```
 
 Run a small fixture first. Examine `process-memory.jsonl`, `pipeline.jsonl`, `memory-summary.json`, and `harness.log`; an abort is not a successful sample. Then repeat with fresh profiles, cache ON/OFF, and record conditions and repetitions. `graph.normalized.json` replaces the case-insensitive workspace path with `<fixture>`, normalizes backslashes to slashes and preserves object/array order; compare hashes only against an identically normalized result from the same project/dependencies/settings. The script stores fixture paths, request IDs and results locally. Basic pan/zoom, node selection, folder expansion and Fit Graph need explicit UI assertions beyond the current collection script. The present script records Inspector text but does not assert every Vite interaction. No cold/warm distribution or instrumentation-on/off overhead was collected for Vite.
+
+## Resumed measurement
+
+The harness now records the first Depth-change result and two-frame observation before warm Generate, saves its normalized graph, and records a basic UI interaction attempt. The first request has a fresh extension host and a result-cache MISS, but Windows filesystem caches were not flushed between runs. The process cleanup, per-run readings, individual UI successes and failed combined assertions are in [resumed results](resumed-results.md). The latest adjustment moving the wheel to the original blank pane coordinate has not been rerun.

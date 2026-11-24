@@ -1,0 +1,35 @@
+{
+  "id": "web-6b6d8538-a424-4c37-b411-da2c8e7d05f8",
+  "preparation": "web-438462fc-2531-4b40-9a83-56e8a0753e0e",
+  "observedGenerateToTwoFramesMs": 1373.2453999999998,
+  "nodes": 1078,
+  "edges": 3755,
+  "sha256": "baf0b1c591a5ad4af4f0fb5c1a947b3124d220acd1fded6e50d00e6ee9117049",
+  "picker": "index.ts",
+  "inspector": "ACTIVE FILE SNAPSHOT index.ts typescript import { execSync } from 'node:child_process' import fs from 'node:fs' import { get as httpGet } from 'node:http' import type * as http from 'node:http' import type { Http2SecureServer } from 'node:http2' import { get as httpsGet } from 'node:https' import type * as net from 'node:net' import path from 'node:path' import { performance } from 'node:perf_hooks' import { disableCache, ignoreInput } from '@voidzero-dev/vite-task-client' import chokidar from 'chokidar' import connect from 'connect' import corsMiddleware from 'cors' import launchEditorMiddleware from 'launch-editor-middleware' import colors from 'picocolors' import type { SourceMap } from 'rolldown' import { detectAgent } from 'std-env' import type { ModuleRunner } from 'vite/module-runner' import type { FSWatcher } from '#dep-types/chokidar' import type { Connect } from '#dep-types/connect' import type { ForwardConsoleOptions, ResolvedForwardConsoleOptions, } from '../../shared/forwardConsole' import type { InlineConfig, ResolvedConfig } from '../config' import { isResolvedConfig, resolveConfig } from '../config' import { CLIENT_DIR, DEFAULT_DEV_PORT, defaultAllowedOrigins, } from '../constants' import { warnFutureDeprecation } from '../deprecations' import { getEnvFilesForMode } from '../env' import type { CommonServerOptions } from '../http' import { httpServerStart, resolveHttpServer, resolveHttpsConfig, setClientErrorHandler, } from '../http' import type { Logger } from '../logger' import { printServerUrls } from '../logger' import type { MinimalPluginContextWithoutEn",
+  "before": 3459,
+  "minimum": 885,
+  "aborted": false,
+  "requests": [
+    {
+      "source": "extension",
+      "event": "request.begin",
+      "requestId": "web-438462fc-2531-4b40-9a83-56e8a0753e0e",
+      "monotonicMs": 8037.7353,
+      "wallTime": "2026-11-24T06:23:04.307Z",
+      "reason": "select-file",
+      "generation": 2,
+      "sequence": 2
+    },
+    {
+      "source": "extension",
+      "event": "request.begin",
+      "requestId": "web-6b6d8538-a424-4c37-b411-da2c8e7d05f8",
+      "monotonicMs": 25198.8059,
+      "wallTime": "2026-11-24T06:23:21.468Z",
+      "reason": "select-file",
+      "generation": 4,
+      "sequence": 4
+    }
+  ]
+}
