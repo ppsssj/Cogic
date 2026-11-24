@@ -1,0 +1,1403 @@
+{
+  "setup": {
+    "support": [
+      "element",
+      "event",
+      "first-input",
+      "largest-contentful-paint",
+      "layout-shift",
+      "long-animation-frame",
+      "longtask",
+      "mark",
+      "measure",
+      "navigation",
+      "paint",
+      "resource",
+      "visibility-state"
+    ],
+    "visibility": "visible",
+    "dpr": 1
+  },
+  "graph": {
+    "id": "web-ffbc9b91-16f0-4943-ac7b-62aa9b3b58d7",
+    "nodes": 1078,
+    "edges": 3755,
+    "sha256": "baf0b1c591a5ad4af4f0fb5c1a947b3124d220acd1fded6e50d00e6ee9117049",
+    "picker": "index.ts",
+    "inspector": "ACTIVE FILE SNAPSHOT index.ts typescript import { execSync } from 'node:child_process' import fs from 'node:fs' import { get as httpGet } from 'node:http' import type * as http from 'node:http' import type { Http2SecureServer } from 'node:http2' import { get as httpsGet } from 'node:https' import type * as net from 'node:net' import path from 'node:path' import { performance } from 'node:perf_hooks' import { disableCache, ignoreInput } from '@voidzero-dev/vite-task-client' import chokidar from 'chokidar' import connect from 'connect' import corsMiddleware from 'cors' import launchEditorMiddleware from 'launch-editor-middleware' import colors from 'picocolors' import type { SourceMap } from 'rolldown' import { detectAgent } from 'std-env' import type { ModuleRunner } from 'vite/module-runner' import type { FSWatcher } from '#dep-types/chokidar' import type { Connect } from '#dep-types/connect' import type { ForwardConsoleOptions, ResolvedForwardConsoleOptions, } from '../../shared/forwardConsole' import type { InlineConfig, ResolvedConfig } from '../config' import { isResolvedConfig, resolveConfig } from '../config' import { CLIENT_DIR, DEFAULT_DEV_PORT, defaultAllowedOrigins, } from '../constants' import { warnFutureDeprecation } from '../deprecations' import { getEnvFilesForMode } from '../env' import type { CommonServerOptions } from '../http' import { httpServerStart, resolveHttpServer, resolveHttpsConfig, setClientErrorHandler, } from '../http' import type { Logger } from '../logger' import { printServerUrls } from '../logger' import type { MinimalPluginContextWithoutEn",
+    "before": 3192,
+    "minimum": 1028
+  },
+  "phases": [
+    {
+      "phase": "pan",
+      "start": 16075.800000011921,
+      "end": 21282.600000023842,
+      "frames": [
+        16082.3,
+        16107.3,
+        16132.3,
+        16157.3,
+        16282.3,
+        16332.4,
+        16349,
+        16382.3,
+        16415.6,
+        16440.6,
+        16490.6,
+        16498.9,
+        16507.3,
+        16915.5,
+        16948.9,
+        16957.3,
+        16974,
+        16990.6,
+        17007.4,
+        17024,
+        17040.5,
+        17048.9,
+        17073.9,
+        17082.3,
+        17098.9,
+        17124.1,
+        17132.3,
+        17165.6,
+        17182.2,
+        17199,
+        17215.6,
+        17232.3,
+        17249,
+        17265.6,
+        17282.4,
+        17298.9,
+        17315.6,
+        17332.3,
+        17348.9,
+        17365.6,
+        17398.9,
+        17415.5,
+        17432.2,
+        17448.9,
+        17465.5,
+        17482.3,
+        17507.2,
+        17523.8,
+        17548.8,
+        17573.9,
+        17598.9,
+        17623.9,
+        17657.1,
+        17690.6,
+        17723.9,
+        17773.9,
+        17798.8,
+        17882.1,
+        17907.2,
+        17932.1,
+        17957.2,
+        17982.2,
+        18173.8,
+        18198.8,
+        18223.8,
+        18265.5,
+        18298.8,
+        18332.1,
+        18365.5,
+        18390.5,
+        18423.8,
+        18448.8,
+        18482.1,
+        18507.1,
+        18540.5,
+        18565.5,
+        18590.4,
+        18615.4,
+        18632.1,
+        18657.1,
+        18682.1,
+        18707.1,
+        18723.9,
+        18748.8,
+        18773.8,
+        18798.9,
+        18823.9,
+        18848.8,
+        18873.8,
+        18898.8,
+        18923.8,
+        18948.8,
+        18965.4,
+        18990.4,
+        19015.4,
+        19040.5,
+        19065.6,
+        19090.5,
+        19107.1,
+        19132.2,
+        19140.4,
+        19157.1,
+        19173.8,
+        19182.2,
+        19198.7,
+        19215.4,
+        19223.8,
+        19240.5,
+        19248.8,
+        19265.4,
+        19282.1,
+        19290.5,
+        19315.4,
+        19332.1,
+        19340.4,
+        19357.1,
+        19365.4,
+        19382.1,
+        19398.7,
+        19407.1,
+        19423.8,
+        19432.2,
+        19448.8,
+        19465.4,
+        19482.1,
+        19490.5,
+        19507.2,
+        19523.7,
+        19540.4,
+        19557.1,
+        19582.1,
+        19607.1,
+        19623.8,
+        19648.8,
+        19673.8,
+        19682.1,
+        19707.1,
+        19732.1,
+        19748.8,
+        19782.1,
+        19807.1,
+        19832,
+        19848.7,
+        19873.7,
+        19898.8,
+        19915.4,
+        19940.4,
+        19965.5,
+        19982.1,
+        20007,
+        20032.1,
+        20057,
+        20081.9,
+        20107.1,
+        20132,
+        20157,
+        20173.8,
+        20198.7,
+        20232.1,
+        20257,
+        20273.8,
+        20298.7,
+        20323.7,
+        20348.7,
+        20373.7,
+        20398.6,
+        20415.4,
+        20440.3,
+        20465.4,
+        20490.3,
+        20515.4,
+        20532,
+        20557.1,
+        20582,
+        20606.9,
+        20623.7,
+        20648.6,
+        20673.7,
+        20698.7,
+        20723.7,
+        20748.6,
+        20765.3,
+        20790.2,
+        20815.4,
+        20840.4,
+        20865.3,
+        20890.3,
+        20915.3,
+        20940.3,
+        20956.9,
+        20982,
+        21006.9,
+        21031.9,
+        21056.9,
+        21073.6,
+        21098.6,
+        21123.6,
+        21140.3,
+        21165.3,
+        21190.3,
+        21207,
+        21231.9,
+        21256.9,
+        21273.6
+      ],
+      "longtasks": [
+        {
+          "start": 16255.900000035763,
+          "duration": 67
+        },
+        {
+          "start": 16446.100000023842,
+          "duration": 51
+        },
+        {
+          "start": 16611.80000001192,
+          "duration": 50
+        }
+      ],
+      "loaf": [],
+      "pointer": [
+        {
+          "x": 465,
+          "y": 109,
+          "t": 16088.300000011921
+        },
+        {
+          "x": 477.5,
+          "y": 117.59375,
+          "t": 16114.400000035763
+        },
+        {
+          "x": 489.71875,
+          "y": 125.984375,
+          "t": 16324
+        },
+        {
+          "x": 501.3125,
+          "y": 133.96875,
+          "t": 16390.30000001192
+        },
+        {
+          "x": 512.015625,
+          "y": 141.328125,
+          "t": 16446.600000023842
+        },
+        {
+          "x": 521.5625,
+          "y": 147.890625,
+          "t": 16935
+        },
+        {
+          "x": 529.71875,
+          "y": 153.484375,
+          "t": 17009.5
+        },
+        {
+          "x": 536.265625,
+          "y": 158,
+          "t": 17057
+        },
+        {
+          "x": 541.078125,
+          "y": 161.296875,
+          "t": 17106.600000023842
+        },
+        {
+          "x": 544,
+          "y": 163.3125,
+          "t": 17167.5
+        },
+        {
+          "x": 545,
+          "y": 164,
+          "t": 17219.400000035763
+        },
+        {
+          "x": 544,
+          "y": 163.3125,
+          "t": 17270.30000001192
+        },
+        {
+          "x": 541.078125,
+          "y": 161.296875,
+          "t": 17323.100000023842
+        },
+        {
+          "x": 536.265625,
+          "y": 158,
+          "t": 17372.5
+        },
+        {
+          "x": 529.71875,
+          "y": 153.484375,
+          "t": 17436.900000035763
+        },
+        {
+          "x": 521.5625,
+          "y": 147.890625,
+          "t": 17470.600000023842
+        },
+        {
+          "x": 512.015625,
+          "y": 141.328125,
+          "t": 17529.100000023842
+        },
+        {
+          "x": 501.3125,
+          "y": 133.96875,
+          "t": 17578.400000035763
+        },
+        {
+          "x": 489.71875,
+          "y": 125.984375,
+          "t": 17628
+        },
+        {
+          "x": 477.5,
+          "y": 117.59375,
+          "t": 17662
+        },
+        {
+          "x": 465,
+          "y": 109,
+          "t": 17726.30000001192
+        },
+        {
+          "x": 452.484375,
+          "y": 100.390625,
+          "t": 17779
+        },
+        {
+          "x": 440.265625,
+          "y": 92,
+          "t": 17888.5
+        },
+        {
+          "x": 428.671875,
+          "y": 84.015625,
+          "t": 17935.19999998808
+        },
+        {
+          "x": 417.96875,
+          "y": 76.65625,
+          "t": 17987.30000001192
+        },
+        {
+          "x": 408.421875,
+          "y": 70.09375,
+          "t": 18182.5
+        },
+        {
+          "x": 400.265625,
+          "y": 64.5,
+          "t": 18232.69999998808
+        },
+        {
+          "x": 393.71875,
+          "y": 59.984375,
+          "t": 18271.5
+        },
+        {
+          "x": 388.90625,
+          "y": 56.6875,
+          "t": 18338.900000035763
+        },
+        {
+          "x": 385.984375,
+          "y": 54.671875,
+          "t": 18399.5
+        },
+        {
+          "x": 385,
+          "y": 54,
+          "t": 18456.80000001192
+        },
+        {
+          "x": 385.984375,
+          "y": 54.671875,
+          "t": 18513.69999998808
+        },
+        {
+          "x": 388.90625,
+          "y": 56.6875,
+          "t": 18567.19999998808
+        },
+        {
+          "x": 393.71875,
+          "y": 59.984375,
+          "t": 18617.19999998808
+        },
+        {
+          "x": 400.265625,
+          "y": 64.5,
+          "t": 18662
+        },
+        {
+          "x": 408.421875,
+          "y": 70.09375,
+          "t": 18708.80000001192
+        },
+        {
+          "x": 417.96875,
+          "y": 76.65625,
+          "t": 18753.69999998808
+        },
+        {
+          "x": 428.671875,
+          "y": 84.015625,
+          "t": 18801.19999998808
+        },
+        {
+          "x": 440.265625,
+          "y": 92,
+          "t": 18851.5
+        },
+        {
+          "x": 452.484375,
+          "y": 100.390625,
+          "t": 18900.80000001192
+        },
+        {
+          "x": 465,
+          "y": 109,
+          "t": 18927.30000001192
+        },
+        {
+          "x": 477.5,
+          "y": 117.59375,
+          "t": 18972.5
+        },
+        {
+          "x": 489.71875,
+          "y": 125.984375,
+          "t": 19021.19999998808
+        },
+        {
+          "x": 501.3125,
+          "y": 133.96875,
+          "t": 19067.900000035763
+        },
+        {
+          "x": 512.015625,
+          "y": 141.328125,
+          "t": 19114.100000023842
+        },
+        {
+          "x": 521.5625,
+          "y": 147.890625,
+          "t": 19162.400000035763
+        },
+        {
+          "x": 529.71875,
+          "y": 153.484375,
+          "t": 19203.600000023842
+        },
+        {
+          "x": 536.265625,
+          "y": 158,
+          "t": 19230.30000001192
+        },
+        {
+          "x": 541.078125,
+          "y": 161.296875,
+          "t": 19270.400000035763
+        },
+        {
+          "x": 544,
+          "y": 163.3125,
+          "t": 19297.5
+        },
+        {
+          "x": 545,
+          "y": 164,
+          "t": 19335.600000023842
+        },
+        {
+          "x": 544,
+          "y": 163.3125,
+          "t": 19374.100000023842
+        },
+        {
+          "x": 541.078125,
+          "y": 161.296875,
+          "t": 19412.80000001192
+        },
+        {
+          "x": 536.265625,
+          "y": 158,
+          "t": 19451.600000023842
+        },
+        {
+          "x": 529.71875,
+          "y": 153.484375,
+          "t": 19497.5
+        },
+        {
+          "x": 521.5625,
+          "y": 147.890625,
+          "t": 19527.30000001192
+        },
+        {
+          "x": 512.015625,
+          "y": 141.328125,
+          "t": 19563.900000035763
+        },
+        {
+          "x": 501.3125,
+          "y": 133.96875,
+          "t": 19629.600000023842
+        },
+        {
+          "x": 489.71875,
+          "y": 125.984375,
+          "t": 19689.900000035763
+        },
+        {
+          "x": 477.5,
+          "y": 117.59375,
+          "t": 19756.80000001192
+        },
+        {
+          "x": 465,
+          "y": 109,
+          "t": 19809.600000023842
+        },
+        {
+          "x": 452.484375,
+          "y": 100.390625,
+          "t": 19877.100000023842
+        },
+        {
+          "x": 440.265625,
+          "y": 92,
+          "t": 19944.30000001192
+        },
+        {
+          "x": 428.671875,
+          "y": 84.015625,
+          "t": 20012.30000001192
+        },
+        {
+          "x": 417.96875,
+          "y": 76.65625,
+          "t": 20058.900000035763
+        },
+        {
+          "x": 408.421875,
+          "y": 70.09375,
+          "t": 20135.80000001192
+        },
+        {
+          "x": 400.265625,
+          "y": 64.5,
+          "t": 20206.19999998808
+        },
+        {
+          "x": 393.71875,
+          "y": 59.984375,
+          "t": 20258.80000001192
+        },
+        {
+          "x": 388.90625,
+          "y": 56.6875,
+          "t": 20329.100000023842
+        },
+        {
+          "x": 385.984375,
+          "y": 54.671875,
+          "t": 20376.400000035763
+        },
+        {
+          "x": 385,
+          "y": 54,
+          "t": 20446.69999998808
+        },
+        {
+          "x": 385.984375,
+          "y": 54.671875,
+          "t": 20493
+        },
+        {
+          "x": 388.90625,
+          "y": 56.6875,
+          "t": 20584.19999998808
+        },
+        {
+          "x": 393.71875,
+          "y": 59.984375,
+          "t": 20631
+        },
+        {
+          "x": 400.265625,
+          "y": 64.5,
+          "t": 20702.100000023842
+        },
+        {
+          "x": 408.421875,
+          "y": 70.09375,
+          "t": 20750.69999998808
+        },
+        {
+          "x": 417.96875,
+          "y": 76.65625,
+          "t": 20820.5
+        },
+        {
+          "x": 428.671875,
+          "y": 84.015625,
+          "t": 20867.600000023842
+        },
+        {
+          "x": 440.265625,
+          "y": 92,
+          "t": 20942
+        },
+        {
+          "x": 452.484375,
+          "y": 100.390625,
+          "t": 21012
+        },
+        {
+          "x": 465,
+          "y": 109,
+          "t": 21058.69999998808
+        }
+      ],
+      "domNodes": 17,
+      "domEdges": 838,
+      "viewport": "transform: translate(184px, -1279px) scale(0.1);",
+      "beforePan": "transform: translate(184px, -1279px) scale(0.1);",
+      "expectedInputPath": "four oscillations; synthetic Playwright mouse"
+    },
+    {
+      "phase": "zoom",
+      "start": 22000.100000023842,
+      "end": 24272.100000023842,
+      "frames": [
+        22015.1,
+        22040.3,
+        22065.2,
+        22090.2,
+        22106.9,
+        22131.8,
+        22156.9,
+        22181.9,
+        22198.5,
+        22223.5,
+        22231.9,
+        22248.5,
+        22265.2,
+        22273.5,
+        22290.2,
+        22298.5,
+        22315.2,
+        22331.9,
+        22340.2,
+        22356.9,
+        22373.6,
+        22381.9,
+        22398.5,
+        22406.9,
+        22423.5,
+        22440.2,
+        22448.5,
+        22465.2,
+        22490.2,
+        22506.8,
+        22581.8,
+        22606.8,
+        22631.8,
+        22656.8,
+        22681.9,
+        22706.8,
+        22731.8,
+        22756.7,
+        22765.2,
+        22781.8,
+        22790.2,
+        22806.8,
+        22823.5,
+        22831.9,
+        22848.4,
+        22873.7,
+        22890.2,
+        22906.8,
+        22923.5,
+        22931.8,
+        22948.5,
+        22965.2,
+        22973.4,
+        22990.1,
+        22998.4,
+        23023.4,
+        23048.4,
+        23065.1,
+        23090.2,
+        23115.1,
+        23140.1,
+        23156.8,
+        23181.9,
+        23206.7,
+        23231.7,
+        23248.4,
+        23273.4,
+        23281.7,
+        23298.4,
+        23306.8,
+        23323.4,
+        23340.1,
+        23348.5,
+        23365.1,
+        23381.7,
+        23390.1,
+        23406.7,
+        23423.5,
+        23431.8,
+        23448.5,
+        23456.8,
+        23473.4,
+        23498.5,
+        23515.1,
+        23540.1,
+        23565.1,
+        23590.1,
+        23615.1,
+        23640,
+        23673.4,
+        23698.4,
+        23715,
+        23740,
+        23765.1,
+        23790.1,
+        23798.4,
+        23815.1,
+        23831.7,
+        23840.1,
+        23856.7,
+        23873.4,
+        23881.7,
+        23898.4,
+        23915,
+        23923.4,
+        23940,
+        23948.4,
+        23965,
+        23981.8,
+        23998.4,
+        24006.7,
+        24031.7,
+        24056.6,
+        24081.7,
+        24098.4,
+        24123.4,
+        24148.3,
+        24173.3,
+        24190,
+        24215,
+        24240,
+        24265.1
+      ],
+      "longtasks": [],
+      "loaf": [],
+      "pointer": [],
+      "domNodes": 17,
+      "domEdges": 838,
+      "viewport": "transform: translate(184px, -1279px) scale(0.1);"
+    },
+    {
+      "phase": "selection-0",
+      "start": 24997.80000001192,
+      "end": 26054,
+      "frames": [
+        24998.4,
+        25023.3,
+        25040,
+        25064.9,
+        25090,
+        25114.9,
+        25164.9,
+        25189.9,
+        25214.9,
+        25423.3,
+        25431.5,
+        25889.9,
+        25964.8,
+        25973.2
+      ],
+      "longtasks": [
+        {
+          "start": 25195.900000035763,
+          "duration": 128
+        },
+        {
+          "start": 25324.600000023842,
+          "duration": 95
+        }
+      ],
+      "loaf": [],
+      "pointer": [],
+      "domNodes": 7,
+      "domEdges": 629,
+      "viewport": "transform: translate(-1004.3px, -18227.1px) scale(1.2);",
+      "name": "onHMRUpdate() FUNCTION function - index.ts:1006",
+      "latencies": [
+        {
+          "click": 25207.400000035763,
+          "inspector": 25324.5,
+          "deltaMs": 117.09999996423721
+        }
+      ]
+    },
+    {
+      "phase": "selection-1",
+      "start": 26075.30000001192,
+      "end": 29604.400000035763,
+      "frames": [
+        28023,
+        28031.4,
+        28698,
+        28714.7,
+        28731.4,
+        28739.7,
+        28748.1,
+        28756.3,
+        28764.7,
+        28773.2,
+        28781.5,
+        28789.8,
+        28798.1,
+        28806.4,
+        28814.7,
+        28981.3,
+        28989.7,
+        28998,
+        29006.3
+      ],
+      "longtasks": [
+        {
+          "start": 28811.19999998808,
+          "duration": 104
+        },
+        {
+          "start": 28915.600000023842,
+          "duration": 69
+        }
+      ],
+      "loaf": [],
+      "pointer": [],
+      "domNodes": 7,
+      "domEdges": 629,
+      "viewport": "transform: translate(-1004.3px, -18227.1px) scale(1.2);",
+      "name": "onFileAddUnlink() FUNCTION function - index.ts:1015",
+      "latencies": [
+        {
+          "click": 25207.400000035763,
+          "inspector": 25324.5,
+          "deltaMs": 117.09999996423721
+        },
+        {
+          "click": 28819.80000001192,
+          "inspector": 28915.5,
+          "deltaMs": 95.69999998807907
+        }
+      ]
+    },
+    {
+      "phase": "selection-2",
+      "start": 29617,
+      "end": 32337.30000001192,
+      "frames": [
+        30797.8,
+        30806.1,
+        31431.5,
+        31439.5,
+        31447.8,
+        31456.2,
+        31464.5,
+        31472.8,
+        31481.1,
+        31489.4,
+        31497.7,
+        31506.1,
+        31514.4,
+        31522.8,
+        31531.2,
+        31539.6,
+        31714.5,
+        31722.7
+      ],
+      "longtasks": [
+        {
+          "start": 31542,
+          "duration": 101
+        },
+        {
+          "start": 31643.19999998808,
+          "duration": 67
+        }
+      ],
+      "loaf": [],
+      "pointer": [],
+      "domNodes": 7,
+      "domEdges": 629,
+      "viewport": "transform: translate(-1004.3px, -18294.9px) scale(1.2);",
+      "name": "onFileChange() FUNCTION function - index.ts:1053",
+      "latencies": [
+        {
+          "click": 25207.400000035763,
+          "inspector": 25324.5,
+          "deltaMs": 117.09999996423721
+        },
+        {
+          "click": 28819.80000001192,
+          "inspector": 28915.5,
+          "deltaMs": 95.69999998807907
+        },
+        {
+          "click": 31550.5,
+          "inspector": 31643.100000023842,
+          "deltaMs": 92.60000002384186
+        }
+      ]
+    },
+    {
+      "phase": "file-collapse",
+      "unavailable": "no header within pane"
+    },
+    {
+      "phase": "folder-collapse",
+      "unavailable": "no header within pane"
+    },
+    {
+      "phase": "fit",
+      "start": 32933.30000001192,
+      "end": 39326.30000001192,
+      "frames": [
+        33097.7,
+        33464.3,
+        34056,
+        34064.2,
+        34539.2,
+        34580.9,
+        34597.6
+      ],
+      "longtasks": [],
+      "loaf": [],
+      "pointer": [],
+      "domNodes": 17,
+      "domEdges": 838,
+      "viewport": "transform: translate(184px, -1279px) scale(0.1);",
+      "fitBefore": "transform: translate(-1004.3px, -18294.9px) scale(1.2);"
+    }
+  ],
+  "panelDebug": [
+    {
+      "seq": 1,
+      "at": "2026-11-24T07:14:55.441Z",
+      "event": "canvas.reactflow.topology-changed",
+      "detail": {
+        "visibleHasData": false,
+        "renderedNodes": 0,
+        "renderedEdges": 0,
+        "recoveryTick": 0,
+        "nodeTopologyKey": "",
+        "edgeTopologyKey": ""
+      }
+    },
+    {
+      "seq": 2,
+      "at": "2026-11-24T07:14:55.441Z",
+      "event": "canvas.visibleHasData.changed",
+      "detail": {
+        "visibleHasData": false,
+        "hasData": false,
+        "renderedNodes": 0,
+        "renderedEdges": 0,
+        "filteredNodes": 0,
+        "filteredEdges": 0,
+        "selectedNodeId": null,
+        "rootTarget": null,
+        "highlightedEdgeId": null,
+        "nodeTopologyKey": "",
+        "edgeTopologyKey": "",
+        "graphNodes": 0,
+        "graphEdges": 0
+      }
+    },
+    {
+      "seq": 3,
+      "at": "2026-11-24T07:14:55.442Z",
+      "event": "app.graphState.changed",
+      "detail": {
+        "hasGraph": false,
+        "nodes": 0,
+        "edges": 0,
+        "traceMode": false
+      }
+    },
+    {
+      "seq": 4,
+      "at": "2026-11-24T07:14:55.442Z",
+      "event": "app.selectedNode.changed",
+      "detail": {
+        "selectedNodeId": null,
+        "selectedNodeIds": []
+      }
+    },
+    {
+      "seq": 5,
+      "at": "2026-11-24T07:14:55.511Z",
+      "event": "webview.postMessage.requestActiveFile",
+      "detail": {
+        "origin": "app.mount"
+      }
+    },
+    {
+      "seq": 6,
+      "at": "2026-11-24T07:14:55.511Z",
+      "event": "webview.postMessage.requestWorkspaceFiles",
+      "detail": {
+        "origin": "app.mount"
+      }
+    },
+    {
+      "seq": 7,
+      "at": "2026-11-24T07:14:55.511Z",
+      "event": "webview.postMessage.requestSelection",
+      "detail": {
+        "origin": "app.mount"
+      }
+    },
+    {
+      "seq": 8,
+      "at": "2026-11-24T07:14:55.511Z",
+      "event": "webview.postMessage.requestHostState",
+      "detail": {
+        "origin": "app.mount"
+      }
+    },
+    {
+      "seq": 9,
+      "at": "2026-11-24T07:14:55.511Z",
+      "event": "webview.postMessage.requestAnalysisCacheState",
+      "detail": {
+        "origin": "app.mount"
+      }
+    },
+    {
+      "seq": 10,
+      "at": "2026-11-24T07:14:55.512Z",
+      "event": "webview.postMessage.setGraphDepth",
+      "detail": {
+        "origin": "app.graphDepth.sync"
+      }
+    },
+    {
+      "seq": 11,
+      "at": "2026-11-24T07:14:55.590Z",
+      "event": "app.resetGraph",
+      "detail": {
+        "hasGraph": false,
+        "nodes": 0,
+        "edges": 0,
+        "activeGeneration": -1
+      }
+    },
+    {
+      "seq": 12,
+      "at": "2026-11-24T07:14:55.590Z",
+      "event": "webview.postMessage.setGraphRoot",
+      "detail": {
+        "origin": "app.graphRoot.sync"
+      }
+    },
+    {
+      "seq": 13,
+      "at": "2026-11-24T07:14:55.590Z",
+      "event": "webview.postMessage.setGraphRoot",
+      "detail": {
+        "origin": "app.graphRoot.sync"
+      }
+    },
+    {
+      "seq": 14,
+      "at": "2026-11-24T07:14:55.590Z",
+      "event": "webview.postMessage.selectWorkspaceFile",
+      "detail": {
+        "origin": "topbar.graphDepth.change.rootFile"
+      }
+    },
+    {
+      "seq": 15,
+      "at": "2026-11-24T07:14:55.593Z",
+      "event": "canvas.reactflow.topology-changed",
+      "detail": {
+        "visibleHasData": false,
+        "renderedNodes": 0,
+        "renderedEdges": 0,
+        "recoveryTick": 0,
+        "nodeTopologyKey": "",
+        "edgeTopologyKey": ""
+      }
+    },
+    {
+      "seq": 16,
+      "at": "2026-11-24T07:14:55.593Z",
+      "event": "app.selectedNode.changed",
+      "detail": {
+        "selectedNodeId": null,
+        "selectedNodeIds": []
+      }
+    },
+    {
+      "seq": 17,
+      "at": "2026-11-24T07:14:55.593Z",
+      "event": "webview.postMessage.setGraphDepth",
+      "detail": {
+        "origin": "app.graphDepth.sync"
+      }
+    },
+    {
+      "seq": 18,
+      "at": "2026-11-24T07:15:07.778Z",
+      "event": "analysisResult.received",
+      "detail": {
+        "lane": "active",
+        "reason": "select-file",
+        "requestId": "web-ffbc9b91-16f0-4943-ac7b-62aa9b3b58d7",
+        "generation": 2,
+        "sequence": 2,
+        "hasPayload": true,
+        "graphNodes": 1078,
+        "graphEdges": 3755,
+        "traceEvents": 0,
+        "diagnostics": 3
+      }
+    },
+    {
+      "seq": 19,
+      "at": "2026-11-24T07:15:07.778Z",
+      "event": "analysisResult.applied.active.graph",
+      "detail": {
+        "requestId": "web-ffbc9b91-16f0-4943-ac7b-62aa9b3b58d7",
+        "generation": 2,
+        "hasGraph": true,
+        "nodes": 1078,
+        "edges": 3755
+      }
+    },
+    {
+      "seq": 20,
+      "at": "2026-11-24T07:15:07.931Z",
+      "event": "canvas.reactflow.topology-changed",
+      "detail": {
+        "visibleHasData": true,
+        "renderedNodes": 106,
+        "renderedEdges": 1627,
+        "recoveryTick": 0,
+        "nodeTopologyKey": "external:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:12493:file:c:/dev/p11/p...(13391)",
+        "edgeTopologyKey": "calls:class:c:/dev/p11/projects/vite/packages/vite/src/node/server/environment.ts:2036->external...(574812)"
+      }
+    },
+    {
+      "seq": 21,
+      "at": "2026-11-24T07:15:07.931Z",
+      "event": "canvas.visibleHasData.changed",
+      "detail": {
+        "visibleHasData": true,
+        "hasData": true,
+        "renderedNodes": 106,
+        "renderedEdges": 1627,
+        "filteredNodes": 1078,
+        "filteredEdges": 3755,
+        "selectedNodeId": null,
+        "rootTarget": {
+          "kind": "file",
+          "path": "c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts"
+        },
+        "highlightedEdgeId": null,
+        "nodeTopologyKey": "external:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:12493:file:c:/dev/p11/p...(13391)",
+        "edgeTopologyKey": "calls:class:c:/dev/p11/projects/vite/packages/vite/src/node/server/environment.ts:2036->external...(574812)",
+        "graphNodes": 1078,
+        "graphEdges": 3755
+      }
+    },
+    {
+      "seq": 22,
+      "at": "2026-11-24T07:15:07.931Z",
+      "event": "app.graphState.changed",
+      "detail": {
+        "hasGraph": true,
+        "nodes": 1078,
+        "edges": 3755,
+        "traceMode": false
+      }
+    },
+    {
+      "seq": 23,
+      "at": "2026-11-24T07:15:07.931Z",
+      "event": "app.selectedNode.changed",
+      "detail": {
+        "selectedNodeId": null,
+        "selectedNodeIds": []
+      }
+    },
+    {
+      "seq": 24,
+      "at": "2026-11-24T07:15:08.129Z",
+      "event": "canvas.reactflow.init",
+      "detail": {
+        "renderedNodes": 106,
+        "renderedEdges": 1627,
+        "visibleHasData": true,
+        "recoveryTick": 0,
+        "autoViewportEffects": true
+      }
+    },
+    {
+      "seq": 25,
+      "at": "2026-11-24T07:15:20.421Z",
+      "event": "canvas.embedded-node.click",
+      "detail": {
+        "nodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:31043",
+        "visibleNodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:30824",
+        "nodeKind": "function",
+        "filePath": "c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts",
+        "isExternal": false,
+        "toggle": false,
+        "focusOffsetY": 76.10162353515625,
+        "graphNodes": 1078,
+        "graphEdges": 3755
+      }
+    },
+    {
+      "seq": 26,
+      "at": "2026-11-24T07:15:20.421Z",
+      "event": "canvas.selection.request",
+      "detail": {
+        "nodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:31043",
+        "toggle": false
+      }
+    },
+    {
+      "seq": 27,
+      "at": "2026-11-24T07:15:20.523Z",
+      "event": "canvas.reactflow.topology-changed",
+      "detail": {
+        "visibleHasData": true,
+        "renderedNodes": 106,
+        "renderedEdges": 1627,
+        "recoveryTick": 0,
+        "nodeTopologyKey": "external:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:12493:file:c:/dev/p11/p...(13391)",
+        "edgeTopologyKey": "calls:class:c:/dev/p11/projects/vite/packages/vite/src/node/server/environment.ts:2036->external...(574812)"
+      }
+    },
+    {
+      "seq": 28,
+      "at": "2026-11-24T07:15:20.523Z",
+      "event": "app.selectedNode.changed",
+      "detail": {
+        "selectedNodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:31043",
+        "selectedNodeIds": [
+          "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:31043"
+        ]
+      }
+    },
+    {
+      "seq": 29,
+      "at": "2026-11-24T07:15:24.032Z",
+      "event": "canvas.embedded-node.click",
+      "detail": {
+        "nodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:31243",
+        "visibleNodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:30824",
+        "nodeKind": "function",
+        "filePath": "c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts",
+        "isExternal": false,
+        "toggle": false,
+        "focusOffsetY": 132.6005859375,
+        "graphNodes": 1078,
+        "graphEdges": 3755
+      }
+    },
+    {
+      "seq": 30,
+      "at": "2026-11-24T07:15:24.032Z",
+      "event": "canvas.selection.request",
+      "detail": {
+        "nodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:31243",
+        "toggle": false
+      }
+    },
+    {
+      "seq": 31,
+      "at": "2026-11-24T07:15:24.113Z",
+      "event": "canvas.reactflow.topology-changed",
+      "detail": {
+        "visibleHasData": true,
+        "renderedNodes": 106,
+        "renderedEdges": 1627,
+        "recoveryTick": 0,
+        "nodeTopologyKey": "external:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:12493:file:c:/dev/p11/p...(13391)",
+        "edgeTopologyKey": "calls:class:c:/dev/p11/projects/vite/packages/vite/src/node/server/environment.ts:2036->external...(574812)"
+      }
+    },
+    {
+      "seq": 32,
+      "at": "2026-11-24T07:15:24.113Z",
+      "event": "app.selectedNode.changed",
+      "detail": {
+        "selectedNodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:31243",
+        "selectedNodeIds": [
+          "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:31243"
+        ]
+      }
+    },
+    {
+      "seq": 33,
+      "at": "2026-11-24T07:15:26.763Z",
+      "event": "canvas.embedded-node.click",
+      "detail": {
+        "nodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:32605",
+        "visibleNodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:30824",
+        "nodeKind": "function",
+        "filePath": "c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts",
+        "isExternal": false,
+        "toggle": false,
+        "focusOffsetY": 210.0419921875,
+        "graphNodes": 1078,
+        "graphEdges": 3755
+      }
+    },
+    {
+      "seq": 34,
+      "at": "2026-11-24T07:15:26.763Z",
+      "event": "canvas.selection.request",
+      "detail": {
+        "nodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:32605",
+        "toggle": false
+      }
+    },
+    {
+      "seq": 35,
+      "at": "2026-11-24T07:15:26.842Z",
+      "event": "canvas.reactflow.topology-changed",
+      "detail": {
+        "visibleHasData": true,
+        "renderedNodes": 106,
+        "renderedEdges": 1627,
+        "recoveryTick": 0,
+        "nodeTopologyKey": "external:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:12493:file:c:/dev/p11/p...(13391)",
+        "edgeTopologyKey": "calls:class:c:/dev/p11/projects/vite/packages/vite/src/node/server/environment.ts:2036->external...(574812)"
+      }
+    },
+    {
+      "seq": 36,
+      "at": "2026-11-24T07:15:26.842Z",
+      "event": "app.selectedNode.changed",
+      "detail": {
+        "selectedNodeId": "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:32605",
+        "selectedNodeIds": [
+          "function:c:/dev/p11/projects/vite/packages/vite/src/node/server/index.ts:32605"
+        ]
+      }
+    }
+  ]
+}

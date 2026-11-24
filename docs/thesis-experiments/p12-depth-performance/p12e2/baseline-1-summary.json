@@ -1,0 +1,265 @@
+﻿{
+  "variant": "baseline",
+  "setup": {
+    "support": [
+      "element",
+      "event",
+      "first-input",
+      "largest-contentful-paint",
+      "layout-shift",
+      "long-animation-frame",
+      "longtask",
+      "mark",
+      "measure",
+      "navigation",
+      "paint",
+      "resource",
+      "visibility-state"
+    ],
+    "visibility": "visible",
+    "dpr": 1
+  },
+  "phases": [
+    {
+      "phase": "pan",
+      "intervalCount": 203,
+      "callbackFps": 39.10388534663765,
+      "p50Ms": 24.900000000001455,
+      "p95Ms": 33.400000000001455,
+      "p99Ms": 83.29999999999927,
+      "maxGapMs": 408.2000000000007,
+      "gapsOver16_7Ms": 149,
+      "longTasks": [
+        {
+          "start": 16255.900000035763,
+          "duration": 67
+        },
+        {
+          "start": 16446.100000023842,
+          "duration": 51
+        },
+        {
+          "start": 16611.80000001192,
+          "duration": 50
+        }
+      ],
+      "pointerEvents": 81,
+      "pointerPathCssPx": 776.6598211416214,
+      "domNodes": 17,
+      "domEdges": 838,
+      "latencies": [],
+      "canvasCommits": [],
+      "unavailable": null
+    },
+    {
+      "phase": "zoom",
+      "intervalCount": 121,
+      "callbackFps": 53.77777777777778,
+      "p50Ms": 16.700000000000728,
+      "p95Ms": 25.100000000002183,
+      "p99Ms": 25.299999999999272,
+      "maxGapMs": 75.0,
+      "gapsOver16_7Ms": 68,
+      "longTasks": [],
+      "pointerEvents": 0,
+      "pointerPathCssPx": 0,
+      "domNodes": 17,
+      "domEdges": 838,
+      "latencies": [],
+      "canvasCommits": [],
+      "unavailable": null
+    },
+    {
+      "phase": "selection-0",
+      "intervalCount": 13,
+      "callbackFps": 13.3360689372179,
+      "p50Ms": 25.0,
+      "p95Ms": 208.39999999999782,
+      "p99Ms": 208.39999999999782,
+      "maxGapMs": 458.40000000000146,
+      "gapsOver16_7Ms": 11,
+      "longTasks": [
+        {
+          "start": 25195.900000035763,
+          "duration": 128
+        },
+        {
+          "start": 25324.600000023842,
+          "duration": 95
+        }
+      ],
+      "pointerEvents": 0,
+      "pointerPathCssPx": 0,
+      "domNodes": 7,
+      "domEdges": 629,
+      "latencies": [
+        {
+          "click": 25207.400000035763,
+          "inspector": 25324.5,
+          "deltaMs": 117.09999996423721
+        }
+      ],
+      "canvasCommits": [
+        {
+          "requestId": "web-ffbc9b91-16f0-4943-ac7b-62aa9b3b58d7",
+          "monotonicMs": 25312.30000001192,
+          "timeOrigin": 1795504495210.8,
+          "wallTime": "2026-11-24T07:15:20.523Z",
+          "nodesMs": 2.300000011920929,
+          "edgesMs": 29.099999964237213,
+          "flowNodes": 106,
+          "flowEdges": 1627,
+          "graphNodes": 1078,
+          "graphEdges": 3755
+        }
+      ],
+      "unavailable": null
+    },
+    {
+      "phase": "selection-1",
+      "intervalCount": 18,
+      "callbackFps": 18.305705278145034,
+      "p50Ms": 8.30000000000291,
+      "p95Ms": 166.59999999999854,
+      "p99Ms": 166.59999999999854,
+      "maxGapMs": 666.5999999999985,
+      "gapsOver16_7Ms": 4,
+      "longTasks": [
+        {
+          "start": 28811.19999998808,
+          "duration": 104
+        },
+        {
+          "start": 28915.600000023842,
+          "duration": 69
+        }
+      ],
+      "pointerEvents": 0,
+      "pointerPathCssPx": 0,
+      "domNodes": 7,
+      "domEdges": 629,
+      "latencies": [
+        {
+          "click": 28819.80000001192,
+          "inspector": 28915.5,
+          "deltaMs": 95.69999998807907
+        }
+      ],
+      "canvasCommits": [
+        {
+          "requestId": "web-ffbc9b91-16f0-4943-ac7b-62aa9b3b58d7",
+          "monotonicMs": 28902.80000001192,
+          "timeOrigin": 1795504495210.8,
+          "wallTime": "2026-11-24T07:15:24.113Z",
+          "nodesMs": 1.9000000357627869,
+          "edgesMs": 26.100000023841858,
+          "flowNodes": 106,
+          "flowEdges": 1627,
+          "graphNodes": 1078,
+          "graphEdges": 3755
+        }
+      ],
+      "unavailable": null
+    },
+    {
+      "phase": "selection-2",
+      "intervalCount": 17,
+      "callbackFps": 18.380365444912936,
+      "p50Ms": 8.30000000000291,
+      "p95Ms": 174.90000000000146,
+      "p99Ms": 174.90000000000146,
+      "maxGapMs": 625.4000000000015,
+      "gapsOver16_7Ms": 2,
+      "longTasks": [
+        {
+          "start": 31542,
+          "duration": 101
+        },
+        {
+          "start": 31643.19999998808,
+          "duration": 67
+        }
+      ],
+      "pointerEvents": 0,
+      "pointerPathCssPx": 0,
+      "domNodes": 7,
+      "domEdges": 629,
+      "latencies": [
+        {
+          "click": 31550.5,
+          "inspector": 31643.100000023842,
+          "deltaMs": 92.60000002384186
+        }
+      ],
+      "canvasCommits": [
+        {
+          "requestId": "web-ffbc9b91-16f0-4943-ac7b-62aa9b3b58d7",
+          "monotonicMs": 31631.30000001192,
+          "timeOrigin": 1795504495210.8,
+          "wallTime": "2026-11-24T07:15:26.842Z",
+          "nodesMs": 2.100000023841858,
+          "edgesMs": 22.600000023841858,
+          "flowNodes": 106,
+          "flowEdges": 1627,
+          "graphNodes": 1078,
+          "graphEdges": 3755
+        }
+      ],
+      "unavailable": null
+    },
+    {
+      "phase": "file-collapse",
+      "intervalCount": 0,
+      "callbackFps": null,
+      "p50Ms": null,
+      "p95Ms": null,
+      "p99Ms": null,
+      "maxGapMs": null,
+      "gapsOver16_7Ms": 0,
+      "longTasks": [],
+      "pointerEvents": 0,
+      "pointerPathCssPx": 0,
+      "domNodes": null,
+      "domEdges": null,
+      "latencies": [],
+      "canvasCommits": [],
+      "unavailable": "no header within pane"
+    },
+    {
+      "phase": "folder-collapse",
+      "intervalCount": 0,
+      "callbackFps": null,
+      "p50Ms": null,
+      "p95Ms": null,
+      "p99Ms": null,
+      "maxGapMs": null,
+      "gapsOver16_7Ms": 0,
+      "longTasks": [],
+      "pointerEvents": 0,
+      "pointerPathCssPx": 0,
+      "domNodes": null,
+      "domEdges": null,
+      "latencies": [],
+      "canvasCommits": [],
+      "unavailable": "no header within pane"
+    },
+    {
+      "phase": "fit",
+      "intervalCount": 6,
+      "callbackFps": 4.000266684445625,
+      "p50Ms": 41.700000000004366,
+      "p95Ms": 475.0,
+      "p99Ms": 475.0,
+      "maxGapMs": 591.6999999999971,
+      "gapsOver16_7Ms": 4,
+      "longTasks": [],
+      "pointerEvents": 0,
+      "pointerPathCssPx": 0,
+      "domNodes": 17,
+      "domEdges": 838,
+      "latencies": [],
+      "canvasCommits": [],
+      "unavailable": null
+    }
+  ]
+}
