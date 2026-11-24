@@ -1,5 +1,7 @@
 # Results
 
+> E5B correction: the original E3/E5 virtualization-OFF build contained unintended Unicode corruption in addition to the virtualization switch. Its graph-only equality remains recorded, but its interaction comparison is invalid and must not support a performance conclusion. E5B rebuilt a clean single-variable OFF copy; see [E5B results](e5b-results.md).
+
 ## Evidence and graph baselines
 
 The two historical Vite graphs remain distinct. The original P12-C2/E2 graph is 1078/3755 with SHA-256 `baf0b1c591a5ad4af4f0fb5c1a947b3124d220acd1fded6e50d00e6ee9117049`; the separately reproduced E3/E4 no-TS graph is 1072/3739 with `1cf5220cac8c97eb7c3d2379889fc45c01b8bb9c4a7d2b03d908b4dd62a2ab74`. E4 found all changed graph nodes in external Node declarations and all changed edges touching them; it did not prove what changed their resolution. The [retrospective Vite manifest](vite-historical-manifest.json) separates historical observations from later inventory and marks unavailable cwd, exact rootNames, file bytes and extension activation evidence as null. A later package hash is not proof of the bytes used in an earlier run. The exact reason the earlier graph referenced Cogic's Node declarations remains unknown. No Vite A/B was run in E5: E4's successful repeat reached 818 MiB available, and there is no larger-memory machine available.

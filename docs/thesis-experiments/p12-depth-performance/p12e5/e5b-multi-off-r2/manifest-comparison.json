@@ -1,0 +1,44 @@
+﻿{
+  "match": true,
+  "comparedFields": [
+    "schema",
+    "workspace",
+    "vscodeVersion",
+    "typescriptLanguageFeatures",
+    "graph.sha256",
+    "graph.nodes",
+    "graph.edges",
+    "analyzer.originalCompiledSha256",
+    "analyzer.instrumentedCompiledSha256",
+    "analyzer.typescript.version",
+    "analyzer.hostCwd",
+    "analyzer.compilerOptions",
+    "analyzer.rootNames",
+    "analyzer.rootFileHashes",
+    "analyzer.resolvedNodeDeclarations",
+    "cacheLookup",
+    "programSession"
+  ],
+  "differences": [],
+  "webviewBundlesBaseline": [
+    {
+      "file": "/assets/index-9cP0SG9g.js",
+      "sha256": "93dd974c35746c73040f09447cb8acdf5cc320152ca27f1a4b5e44b7e3d552cd"
+    },
+    {
+      "file": "/assets/index-D6x8zjDJ.css",
+      "sha256": "3e5bff645e58736633eed8f4a252f8fad83930835cf6b0292cd7b6252ee0881e"
+    }
+  ],
+  "webviewBundlesCandidate": [
+    {
+      "file": "/assets/index-CKu7U-fX.js",
+      "sha256": "beae0b06f68e7c91165c8b9b41367358945abd540ae3071d0804975bbe4f7036"
+    },
+    {
+      "file": "/assets/index-D6x8zjDJ.css",
+      "sha256": "3e5bff645e58736633eed8f4a252f8fad83930835cf6b0292cd7b6252ee0881e"
+    }
+  ],
+  "limitation": "Equal manifests and graph do not establish equal unrecorded environment, dependency bytes, or verify the intended single code change."
+}

@@ -1,0 +1,985 @@
+﻿{
+  "method": "rAF intervals during each interaction window; include scheduling and 250+150 ms waits; not physical presentation or settled latency",
+  "results": [
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-on-r2",
+      "valid": true,
+      "mode": "virtual-on",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-40d91b2e-a999-47a9-bb67-63fe280d377d",
+      "minimumMiB": 1332,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 659,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.599999999999454,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 109,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 24,
+          "p50": 8.300000000001091,
+          "p95": 58.19999999999891,
+          "p99": 60,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 8
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 67,
+          "p50": 8.399999999999636,
+          "p95": 25.100000000000364,
+          "p99": 66.70000000000073,
+          "domNodes": 2,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 47,
+          "p50": 8.300000000001091,
+          "p95": 16.5,
+          "p99": 25,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 90,
+          "p50": 8.300000000001091,
+          "p95": 25,
+          "p99": 33.20000000000073,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 52,
+          "p50": 8.399999999999636,
+          "p95": 16.700000000000728,
+          "p99": 25.100000000000364,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 93,
+          "p50": 8.300000000001091,
+          "p95": 8.600000000000364,
+          "p99": 16.80000000000109,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-off-r2",
+      "valid": true,
+      "mode": "virtual-off",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-7bca99ce-275c-4043-9042-c13f1b674f42",
+      "minimumMiB": 1306,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 658,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 109,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 23,
+          "p50": 8.399999999999636,
+          "p95": 66.60000000000036,
+          "p99": 75.10000000000036,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 11.800000011920929
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 63,
+          "p50": 8.399999999999636,
+          "p95": 16.80000000000109,
+          "p99": 83,
+          "domNodes": 4,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 54,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 16.700000000000728,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 88,
+          "p50": 8.399999999999636,
+          "p95": 24.899999999999636,
+          "p99": 33.29999999999927,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 48,
+          "p50": 8.399999999999636,
+          "p95": 16.700000000000728,
+          "p99": 25.100000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 105,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-on-r3",
+      "valid": true,
+      "mode": "virtual-on",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-906baa69-ec9b-4736-b863-85b6ed2e2ef1",
+      "minimumMiB": 1327,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 660,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 108,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 20,
+          "p50": 8.400000000001455,
+          "p95": 75,
+          "p99": 75,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 8.100000023841858
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 71,
+          "p50": 8.300000000001091,
+          "p95": 25,
+          "p99": 99.90000000000146,
+          "domNodes": 2,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 48,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 25.100000000000364,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 91,
+          "p50": 8.399999999999636,
+          "p95": 16.80000000000109,
+          "p99": 25.799999999999272,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 48,
+          "p50": 8.399999999999636,
+          "p95": 24.899999999999636,
+          "p99": 25.200000000000728,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 100,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 16.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-off-r3",
+      "valid": true,
+      "mode": "virtual-off",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-6e7c2c8d-36e6-404d-bd12-3bc4200ea97e",
+      "minimumMiB": 1316,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 658,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.599999999999454,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 106,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 23,
+          "p50": 8.399999999999636,
+          "p95": 66.60000000000036,
+          "p99": 83.20000000000073,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 11.5
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 71,
+          "p50": 8.300000000001091,
+          "p95": 24.899999999999636,
+          "p99": 74.89999999999964,
+          "domNodes": 4,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 51,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 16.700000000000728,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 85,
+          "p50": 8.399999999999636,
+          "p95": 24.799999999999272,
+          "p99": 25.19999999999891,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 47,
+          "p50": 8.399999999999636,
+          "p95": 16.80000000000109,
+          "p99": 25.19999999999891,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 100,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-on-r4",
+      "valid": true,
+      "mode": "virtual-on",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-5b385b98-1a91-49ca-a4a3-ea875a2064ce",
+      "minimumMiB": 1333,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 659,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 107,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 20,
+          "p50": 8.399999999999636,
+          "p95": 91.70000000000073,
+          "p99": 91.70000000000073,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 8.600000023841858
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 70,
+          "p50": 8.300000000001091,
+          "p95": 16.69999999999891,
+          "p99": 108.20000000000073,
+          "domNodes": 2,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 50,
+          "p50": 8.399999999999636,
+          "p95": 16.600000000000364,
+          "p99": 16.69999999999891,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 93,
+          "p50": 8.300000000001091,
+          "p95": 16.799999999999272,
+          "p99": 33.30000000000109,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 48,
+          "p50": 8.399999999999636,
+          "p95": 16.799999999999272,
+          "p99": 25,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 101,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-off-r4",
+      "valid": true,
+      "mode": "virtual-off",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-8b1850b4-9a1c-4185-9566-faf6e67219ac",
+      "minimumMiB": 1313,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 659,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.599999999999454,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 103,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 21,
+          "p50": 8.5,
+          "p95": 58.5,
+          "p99": 58.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 8.800000011920929
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 72,
+          "p50": 8.300000000001091,
+          "p95": 25,
+          "p99": 83.30000000000109,
+          "domNodes": 4,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 49,
+          "p50": 8.300000000001091,
+          "p95": 16.69999999999891,
+          "p99": 16.700000000000728,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 91,
+          "p50": 8.300000000001091,
+          "p95": 16.899999999999636,
+          "p99": 25.100000000000364,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 49,
+          "p50": 8.399999999999636,
+          "p95": 16.799999999999272,
+          "p99": 25.099999999998545,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 100,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-on-r5",
+      "valid": true,
+      "mode": "virtual-on",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-18de3de9-ef0a-4821-b948-ddb80b555796",
+      "minimumMiB": 1355,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 657,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 110,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 21,
+          "p50": 8.399999999999636,
+          "p95": 66.79999999999927,
+          "p99": 66.79999999999927,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 8.900000035762787
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 67,
+          "p50": 8.300000000001091,
+          "p95": 25,
+          "p99": 83.29999999999927,
+          "domNodes": 2,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 51,
+          "p50": 8.300000000001091,
+          "p95": 9,
+          "p99": 16.69999999999891,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 89,
+          "p50": 8.399999999999636,
+          "p95": 16.80000000000109,
+          "p99": 33.399999999999636,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 49,
+          "p50": 8.399999999999636,
+          "p95": 16.899999999999636,
+          "p99": 25,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 98,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-off-r5",
+      "valid": true,
+      "mode": "virtual-off",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-137ffac1-5e4f-479d-a3be-a7310d61a5f4",
+      "minimumMiB": 1299,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 658,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 110,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 23,
+          "p50": 8.399999999999636,
+          "p95": 58.30000000000109,
+          "p99": 74.79999999999927,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 8.400000035762787
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 62,
+          "p50": 8.399999999999636,
+          "p95": 25.200000000000728,
+          "p99": 99.89999999999964,
+          "domNodes": 4,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 47,
+          "p50": 8.300000000001091,
+          "p95": 16.599999999998545,
+          "p99": 25.100000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 89,
+          "p50": 8.399999999999636,
+          "p95": 16.80000000000109,
+          "p99": 25.100000000000364,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 51,
+          "p50": 8.399999999999636,
+          "p95": 16.799999999999272,
+          "p99": 24.900000000001455,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 103,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-on-r6",
+      "valid": true,
+      "mode": "virtual-on",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-cee79a4e-a902-48b3-b7db-0f928569ab72",
+      "minimumMiB": 1332,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 659,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.599999999999454,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 105,
+          "p50": 8.300000000001091,
+          "p95": 8.400000000001455,
+          "p99": 8.599999999998545,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 23,
+          "p50": 8.399999999999636,
+          "p95": 58.399999999999636,
+          "p99": 66.69999999999891,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 8.599999964237213
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 63,
+          "p50": 8.399999999999636,
+          "p95": 16.700000000000728,
+          "p99": 100,
+          "domNodes": 2,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 50,
+          "p50": 8.299999999999272,
+          "p95": 8.599999999998545,
+          "p99": 16.900000000001455,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 91,
+          "p50": 8.300000000001091,
+          "p95": 16.80000000000109,
+          "p99": 33.30000000000109,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 50,
+          "p50": 8.399999999999636,
+          "p95": 16.69999999999891,
+          "p99": 25,
+          "domNodes": 3,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 95,
+          "p50": 8.300000000001091,
+          "p95": 8.600000000000364,
+          "p99": 16.69999999999891,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5b-multi-off-r6",
+      "valid": true,
+      "mode": "virtual-off",
+      "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+      "requestId": "web-97c72baf-413a-4ab1-a2a8-9262c8e2d547",
+      "minimumMiB": 1343,
+      "phases": [
+        {
+          "phase": "pan",
+          "frames": 656,
+          "p50": 8.300000000000182,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "zoom",
+          "frames": 110,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "selection",
+          "frames": 20,
+          "p50": 8.399999999999636,
+          "p95": 83.20000000000073,
+          "p99": 83.20000000000073,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": 8.199999988079071
+        },
+        {
+          "phase": "file-collapse",
+          "frames": 69,
+          "p50": 8.300000000001091,
+          "p95": 25,
+          "p99": 83.39999999999964,
+          "domNodes": 4,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "file-expand",
+          "frames": 53,
+          "p50": 8.300000000001091,
+          "p95": 8.599999999998545,
+          "p99": 16.69999999999891,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-collapse",
+          "frames": 90,
+          "p50": 8.300000000001091,
+          "p95": 16.700000000000728,
+          "p99": 33.5,
+          "domNodes": 1,
+          "domEdges": 0,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "folder-expand",
+          "frames": 51,
+          "p50": 8.300000000001091,
+          "p95": 16.80000000000109,
+          "p99": 24.899999999999636,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        },
+        {
+          "phase": "fit",
+          "frames": 101,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "domNodes": 5,
+          "domEdges": 4,
+          "longtasks": 0,
+          "selectionMs": null
+        }
+      ]
+    }
+  ]
+}
