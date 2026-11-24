@@ -81,7 +81,7 @@ test("P12-C2 real VS Code Depth 2", async () => {
     const beforePan = await viewport.getAttribute("style");
     await session.page.mouse.move(point.x, point.y); await session.page.mouse.down(); await session.page.mouse.move(point.x + 80, point.y + 55, {steps: 8}); await session.page.mouse.up();
     await sleep(500); const afterPan = await viewport.getAttribute("style");
-    await session.page.mouse.move(point.x, point.y); await session.page.mouse.wheel(0, -250); await sleep(700);
+    await frame.locator('button[title="Zoom in"]').first().click({delay:80}); await sleep(700);
     const afterZoom = await viewport.getAttribute("style");
     fs.writeFileSync(path.join(out, "pan-zoom.json"), JSON.stringify({beforePan,afterPan,afterZoom,panChanged: beforePan !== afterPan, zoomChanged: afterPan !== afterZoom}, null, 2));
     const visibleNode = frame.locator(".cgChildNode--interactive:visible").first();
@@ -89,9 +89,10 @@ test("P12-C2 real VS Code Depth 2", async () => {
     const selected = (await frame.locator(".inspectorBody").innerText()).replace(/\s+/g, " ");
     const selectedSection = selected.split("SELECTED NODE")[1]?.split("SELECTION")[0]?.trim() ?? "";
     await frame.locator('button[title="Fit Graph"]').first().click({delay:80}); await sleep(500);
-    const interactions = {beforePan, afterPan, afterZoom, panChanged: beforePan !== afterPan, zoomChanged: afterPan !== afterZoom, selectedNodeClicked: true, selectedInspectorExcerpt: selectedSection.slice(0, 800), fitGraphClicked: true};
+    const afterFit = await viewport.getAttribute("style");
+    const interactions = {beforePan, afterPan, afterZoom, afterFit, fitChanged: afterFit !== afterZoom, panChanged: beforePan !== afterPan, zoomChanged: afterPan !== afterZoom, selectedNodeClicked: true, selectedInspectorExcerpt: selectedSection.slice(0, 800), fitGraphClicked: true};
     fs.writeFileSync(path.join(out, "interactions.json"), JSON.stringify(interactions,null,2));
-    expect(interactions.panChanged).toBe(true); expect(interactions.zoomChanged).toBe(true);
+    expect(interactions.panChanged).toBe(true); expect(interactions.zoomChanged).toBe(true); expect(interactions.fitChanged).toBe(true);
     expect(selectedSection).not.toContain("No node selected"); expect(selectedSection.length).toBeGreaterThan(0);
     expect(aborted).toBe(false);
   } finally {

@@ -1,0 +1,10 @@
+{
+  "beforePan": "transform: translate(184px, -1279px) scale(0.1);",
+  "afterPan": "transform: translate(264px, -1224px) scale(0.1);",
+  "afterZoom": "transform: translate(258.7px, -1518.2px) scale(0.12);",
+  "panChanged": true,
+  "zoomChanged": true,
+  "selectedNodeClicked": true,
+  "selectedInspectorExcerpt": "kind function name onHMRUpdate file index.ts range 1006:23 -> 1013:4 signature (type: \"create\" | \"delete\" | \"update\", file: string): Promise<void> Analyzer Context mode Workspace language typescript root files 1654 tsconfig fallback How This Node Is Connected These cards show who calls this node, what values flow into it, and what it reads or updates. Calls From This Node handleHMRUpdate (hmr.ts) onHMRUpdate calls handleHMRUpdate (hmr.ts). Arguments Passed From Here handleHMRUpdate (hmr.ts) onHMRUpdate passes an argument into handleHMRUpdate (hmr.ts). Parameter mapping: type <- type Arguments Passed From Here handleHMRUpdate (hmr.ts) onHMRUpdate passes an argument into handleHMRUpdate (hmr.ts). Parameter mapping: file <- file Arguments Passed From Here handleHMRUpdate (hmr.ts) onHMRUpdate ",
+  "fitGraphClicked": true
+}
