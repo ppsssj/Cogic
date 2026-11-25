@@ -1,0 +1,338 @@
+{
+ "cond": "B",
+ "zooms": [
+  {
+   "z": 1,
+   "expect": false,
+   "zoom": 1,
+   "low": false,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "6px, 6px": 2,
+    "8px, 6px": 2
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 0
+  },
+  {
+   "z": 0.3,
+   "expect": false,
+   "zoom": 0.3,
+   "low": false,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "6px, 6px": 2,
+    "8px, 6px": 2
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 0
+  },
+  {
+   "z": 0.22,
+   "expect": false,
+   "zoom": 0.22,
+   "low": false,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "6px, 6px": 2,
+    "8px, 6px": 2
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 0
+  },
+  {
+   "z": 0.2,
+   "expect": true,
+   "zoom": 0.2,
+   "low": true,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "none": 4
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 1
+  },
+  {
+   "z": 0.22,
+   "expect": true,
+   "zoom": 0.22,
+   "low": true,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "none": 4
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 1
+  },
+  {
+   "z": 0.249,
+   "expect": true,
+   "zoom": 0.249,
+   "low": true,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "none": 4
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 1
+  },
+  {
+   "z": 0.25,
+   "expect": false,
+   "zoom": 0.25,
+   "low": false,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "6px, 6px": 2,
+    "8px, 6px": 2
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 2
+  },
+  {
+   "z": 0.22,
+   "expect": false,
+   "zoom": 0.22,
+   "low": false,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "6px, 6px": 2,
+    "8px, 6px": 2
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 2
+  },
+  {
+   "z": 0.201,
+   "expect": false,
+   "zoom": 0.201,
+   "low": false,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "6px, 6px": 2,
+    "8px, 6px": 2
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 2
+  },
+  {
+   "z": 0.1,
+   "expect": true,
+   "zoom": 0.1,
+   "low": true,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "none": 4
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 3
+  },
+  {
+   "z": 0.24,
+   "expect": true,
+   "zoom": 0.24,
+   "low": true,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "none": 4
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 3
+  },
+  {
+   "z": 1,
+   "expect": false,
+   "zoom": 1,
+   "low": false,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "6px, 6px": 2,
+    "8px, 6px": 2
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 4
+  },
+  {
+   "z": 0.1,
+   "expect": true,
+   "zoom": 0.1,
+   "low": true,
+   "paths": 4,
+   "visible": 4,
+   "dash": {
+    "none": 4
+   },
+   "animatedEdges": 0,
+   "marker": 4,
+   "flowNodes": 5,
+   "flowEdges": 4,
+   "toggles": 5
+  }
+ ],
+ "errors": [],
+ "hoverToggles": 0,
+ "wheelOut": {
+  "zoom": 0.1,
+  "low": true,
+  "paths": 4,
+  "visible": 4,
+  "dash": {
+   "none": 4
+  },
+  "animatedEdges": 0,
+  "marker": 4,
+  "flowNodes": 5,
+  "flowEdges": 4,
+  "toggles": 7
+ },
+ "wheelIn": {
+  "zoom": 1.6000000000000028,
+  "low": false,
+  "paths": 4,
+  "visible": 4,
+  "dash": {
+   "6px, 6px": 2,
+   "8px, 6px": 2
+  },
+  "animatedEdges": 0,
+  "marker": 4,
+  "flowNodes": 5,
+  "flowEdges": 4,
+  "toggles": 8
+ },
+ "wheelToggles": 2,
+ "buttonOut": {
+  "zoom": 0.5358367626886156,
+  "low": false,
+  "paths": 4,
+  "visible": 4,
+  "dash": {
+   "6px, 6px": 2,
+   "8px, 6px": 2
+  },
+  "animatedEdges": 0,
+  "marker": 4,
+  "flowNodes": 5,
+  "flowEdges": 4,
+  "toggles": 8
+ },
+ "buttonIn": {
+  "zoom": 1.1111111111111132,
+  "low": false,
+  "paths": 4,
+  "visible": 4,
+  "dash": {
+   "6px, 6px": 2,
+   "8px, 6px": 2
+  },
+  "animatedEdges": 0,
+  "marker": 4,
+  "flowNodes": 5,
+  "flowEdges": 4,
+  "toggles": 8
+ },
+ "fit": {
+  "zoom": 0.34038713910761154,
+  "low": false,
+  "paths": 4,
+  "visible": 4,
+  "dash": {
+   "6px, 6px": 2,
+   "8px, 6px": 2
+  },
+  "animatedEdges": 0,
+  "marker": 4,
+  "flowNodes": 5,
+  "flowEdges": 4,
+  "toggles": 8
+ },
+ "beforeExport": {
+  "zoom": 0.1,
+  "low": true,
+  "paths": 4,
+  "visible": 4,
+  "dash": {
+   "none": 4
+  },
+  "animatedEdges": 0,
+  "marker": 4,
+  "flowNodes": 5,
+  "flowEdges": 4,
+  "toggles": 9
+ },
+ "exportSeen": [],
+ "afterExport": {
+  "zoom": 0.1,
+  "low": true,
+  "paths": 4,
+  "visible": 4,
+  "dash": {
+   "none": 4
+  },
+  "animatedEdges": 0,
+  "marker": 4,
+  "flowNodes": 5,
+  "flowEdges": 4,
+  "toggles": 11
+ },
+ "export": {
+  "bytes": 4115933,
+  "dashed": 4,
+  "d86": 0,
+  "d66": 0,
+  "edgePaths": 4
+ },
+ "memory": {
+  "before": 3087,
+  "minimum": 1712,
+  "aborted": false
+ }
+}
