@@ -1,0 +1,90 @@
+{
+  "schema": "cogic.p12e5.manifest.v1",
+  "mode": "virtual-on-D",
+  "workspace": "C:\\dev\\p13\\p12e5b-multifile",
+  "workspaceGitSha": null,
+  "lockSha256": null,
+  "nodeRuntime": "v24.12.0",
+  "os": {
+    "platform": "win32",
+    "release": "10.0.26100",
+    "totalBytes": 8531333120
+  },
+  "vscodeVersion": "1.147.0",
+  "typescriptLanguageFeatures": "ts-disabled",
+  "otherExtensionsRequested": [
+    "ppsssj.cogic"
+  ],
+  "otherExtensionActivation": "not independently enumerated",
+  "requestId": "web-527841e0-960a-43ec-ae72-73173b1251aa",
+  "graph": {
+    "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+    "nodes": 188,
+    "edges": 360,
+    "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+  },
+  "analyzer": {
+    "originalCompiledSha256": "f169001657fc741e1bb47d805f53e49789f3c440ffe294060939742f593ae668",
+    "instrumentedCompiledSha256": "a2ab4590737b0ebec7a55564e37df8d2ef11bdae70505b59f388ac7bf3c14790",
+    "typescript": {
+      "path": "C:\\dev\\p13\\p12e5h-d-extensions\\ppsssj.cogic-0.0.6\\node_modules\\typescript",
+      "realpath": "C:\\dev\\p13\\p12e5h-d-extensions\\ppsssj.cogic-0.0.6\\node_modules\\typescript",
+      "version": "5.9.3",
+      "packageJsonSha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    "hostCwd": "C:\\Users\\SCH\\AppData\\Local\\Programs\\Microsoft VS Code",
+    "tsCurrentDirectory": "C:\\Users\\SCH\\AppData\\Local\\Programs\\Microsoft VS Code",
+    "hostCurrentDirectory": "C:\\Users\\SCH\\AppData\\Local\\Programs\\Microsoft VS Code",
+    "compilerOptions": {
+      "target": 9,
+      "module": 1,
+      "strict": true,
+      "noEmit": true,
+      "skipLibCheck": true
+    },
+    "rootNames": [
+      "c:/dev/p13/p12e5b-multifile/src/main.ts",
+      "c:/dev/p13/p12e5b-multifile/src/alpha/a.ts",
+      "c:/dev/p13/p12e5b-multifile/src/beta/b.ts",
+      "c:/dev/p13/p12e5b-multifile/src/beta/deep/c.ts"
+    ],
+    "rootFileHashes": [
+      {
+        "file": "c:/dev/p13/p12e5b-multifile/src/main.ts",
+        "sha256": "2285fa28338c143469c83a4bbb31da7de8e3591fbc04ebbc1e841e5a3087f7de"
+      },
+      {
+        "file": "c:/dev/p13/p12e5b-multifile/src/alpha/a.ts",
+        "sha256": "fc3b1a1be584cce92bb52621915926d3ff39eb69eb23f9ebdf28f5a26cf2c27d"
+      },
+      {
+        "file": "c:/dev/p13/p12e5b-multifile/src/beta/b.ts",
+        "sha256": "d80a61ce06881f2195cb520ac0b7b390772891c708c8a7cbe172f45a62a4073d"
+      },
+      {
+        "file": "c:/dev/p13/p12e5b-multifile/src/beta/deep/c.ts",
+        "sha256": "28110530ad003c8bf595675cae26d3eda693800d7839a3af1c440c46ce365adc"
+      }
+    ],
+    "resolvedNodeDeclarations": []
+  },
+  "workspaceTypesNode": null,
+  "workspaceTypescript": null,
+  "webviewBundles": [
+    {
+      "file": "/assets/index-Cw4Yfk1y.js",
+      "sha256": "cee67ad7fd90dcaee79bcf38c0c9a2a0777961ffc458490f918398a0116f0c3f"
+    },
+    {
+      "file": "/assets/index-D6x8zjDJ.css",
+      "sha256": "08dcea1b75f46b4917ae4e21e6c29a241c47a4514bdedd286fa849473157d864"
+    }
+  ],
+  "cacheLookup": "miss",
+  "programSession": true,
+  "memory": {
+    "before": 3470,
+    "minimum": 2178,
+    "aborted": false
+  }
+}

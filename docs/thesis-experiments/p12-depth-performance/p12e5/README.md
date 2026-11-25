@@ -17,3 +17,5 @@ This draft depends on unmerged P12-E4 #38, which depends on #37, #36 and #34. It
 [E5F edge paint isolation](e5f-edge-isolation-results.md): hiding edges does not reduce the Present wait; corrects an E5E inference.
 
 [E5G node isolation and layer mapping](e5g-node-isolation-results.md): layer 15 is the nodes container; the stall depends on its tile set, not on paint alone.
+
+[E5H layer state and will-change isolation](e5h-layer-state-results.md): dropping `will-change` from the viewport chain or recreating the nodes layer removes the stall; closes the isolation series.

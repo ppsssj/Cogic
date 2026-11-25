@@ -1,0 +1,392 @@
+[
+ {
+  "trace": "e5h-b1-A/trace-p1A.json",
+  "panMs": 8838,
+  "presentWallMs": 7899,
+  "presentOver50": 30,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 208,
+   "max": 209
+  },
+  "gpuMiBMaxAnyClient": 209
+ },
+ {
+  "trace": "e5h-b1-B/trace-p1B.json",
+  "panMs": 8696,
+  "presentWallMs": 7510,
+  "presentOver50": 30,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 176,
+   "max": 194
+  },
+  "gpuMiBMaxAnyClient": 194
+ },
+ {
+  "trace": "e5h-b1-C/trace-p1C.json",
+  "panMs": 5014,
+  "presentWallMs": 39,
+  "presentOver50": 0,
+  "tileCountMedian": 31,
+  "tileCountMax": 44,
+  "gpuMiBGraphRenderer": {
+   "median": 15,
+   "max": 15
+  },
+  "gpuMiBMaxAnyClient": 15
+ },
+ {
+  "trace": "e5h-b2-A/trace-p1A.json",
+  "panMs": 9036,
+  "presentWallMs": null,
+  "presentOver50": 30,
+  "tileCountMedian": 752,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 186,
+   "max": 209
+  },
+  "gpuMiBMaxAnyClient": 209
+ },
+ {
+  "trace": "e5h-b2-B/trace-p1B.json",
+  "panMs": 8002,
+  "presentWallMs": 6719,
+  "presentOver50": 29,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 177,
+   "max": 180
+  },
+  "gpuMiBMaxAnyClient": 180
+ },
+ {
+  "trace": "e5h-b2-C/trace-p1C.json",
+  "panMs": 5008,
+  "presentWallMs": 43,
+  "presentOver50": 0,
+  "tileCountMedian": 31,
+  "tileCountMax": 43,
+  "gpuMiBGraphRenderer": {
+   "median": 14,
+   "max": 14
+  },
+  "gpuMiBMaxAnyClient": 14
+ },
+ {
+  "trace": "e5h-b3-A/trace-p1A.json",
+  "panMs": 9157,
+  "presentWallMs": 7898,
+  "presentOver50": 32,
+  "tileCountMedian": 750,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 187,
+   "max": 209
+  },
+  "gpuMiBMaxAnyClient": 209
+ },
+ {
+  "trace": "e5h-b3-B/trace-p1B.json",
+  "panMs": 7918,
+  "presentWallMs": 6871,
+  "presentOver50": 31,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 225,
+   "max": 230
+  },
+  "gpuMiBMaxAnyClient": 230
+ },
+ {
+  "trace": "e5h-b3-C/trace-p1C.json",
+  "panMs": 8121,
+  "presentWallMs": 7010,
+  "presentOver50": 30,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 206,
+   "max": 207
+  },
+  "gpuMiBMaxAnyClient": 207
+ },
+ {
+  "trace": "e5h-b4-A/trace-p1A.json",
+  "panMs": 8326,
+  "presentWallMs": 7252,
+  "presentOver50": 31,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 196,
+   "max": 200
+  },
+  "gpuMiBMaxAnyClient": 200
+ },
+ {
+  "trace": "e5h-b4-B/trace-p1B.json",
+  "panMs": 7886,
+  "presentWallMs": 6651,
+  "presentOver50": 32,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 208,
+   "max": 214
+  },
+  "gpuMiBMaxAnyClient": 214
+ },
+ {
+  "trace": "e5h-b4-C/trace-p1C.json",
+  "panMs": 7897,
+  "presentWallMs": 6710,
+  "presentOver50": 30,
+  "tileCountMedian": 748,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 201,
+   "max": 205
+  },
+  "gpuMiBMaxAnyClient": 205
+ },
+ {
+  "trace": "e5h-b5-A/trace-p1A.json",
+  "panMs": 7926,
+  "presentWallMs": 6631,
+  "presentOver50": 29,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 219,
+   "max": 220
+  },
+  "gpuMiBMaxAnyClient": 220
+ },
+ {
+  "trace": "e5h-b5-B/trace-p1B.json",
+  "panMs": 7965,
+  "presentWallMs": 6671,
+  "presentOver50": 28,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 211,
+   "max": 211
+  },
+  "gpuMiBMaxAnyClient": 211
+ },
+ {
+  "trace": "e5h-b5-C/trace-p1C.json",
+  "panMs": 8647,
+  "presentWallMs": 7744,
+  "presentOver50": 33,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 184,
+   "max": 192
+  },
+  "gpuMiBMaxAnyClient": 192
+ },
+ {
+  "trace": "e5h-d-b1-A/trace-p1A.json",
+  "panMs": 8300,
+  "presentWallMs": 7354,
+  "presentOver50": 31,
+  "tileCountMedian": 748,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 197,
+   "max": 200
+  },
+  "gpuMiBMaxAnyClient": 200
+ },
+ {
+  "trace": "e5h-d-b1-D/trace-p1D.json",
+  "panMs": 5008,
+  "presentWallMs": 42,
+  "presentOver50": 0,
+  "tileCountMedian": 28,
+  "tileCountMax": 44,
+  "gpuMiBGraphRenderer": {
+   "median": 17,
+   "max": 17
+  },
+  "gpuMiBMaxAnyClient": 17
+ },
+ {
+  "trace": "e5h-d-b2-A/trace-p1A.json",
+  "panMs": 8975,
+  "presentWallMs": 7833,
+  "presentOver50": 30,
+  "tileCountMedian": 750,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 172,
+   "max": 178
+  },
+  "gpuMiBMaxAnyClient": 178
+ },
+ {
+  "trace": "e5h-d-b2-C/trace-p1C.json",
+  "panMs": 5020,
+  "presentWallMs": 85,
+  "presentOver50": 0,
+  "tileCountMedian": 31,
+  "tileCountMax": 44,
+  "gpuMiBGraphRenderer": {
+   "median": 15,
+   "max": 15
+  },
+  "gpuMiBMaxAnyClient": 15
+ },
+ {
+  "trace": "e5h-d-b2-D/trace-p1D.json",
+  "panMs": 5022,
+  "presentWallMs": 41,
+  "presentOver50": 0,
+  "tileCountMedian": 27,
+  "tileCountMax": 45,
+  "gpuMiBGraphRenderer": {
+   "median": 17,
+   "max": 17
+  },
+  "gpuMiBMaxAnyClient": 17
+ },
+ {
+  "trace": "e5h-d-b3-A/trace-p1A.json",
+  "panMs": 8535,
+  "presentWallMs": 7539,
+  "presentOver50": 31,
+  "tileCountMedian": 748,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 173,
+   "max": 181
+  },
+  "gpuMiBMaxAnyClient": 181
+ },
+ {
+  "trace": "e5h-d-b3-C/trace-p1C.json",
+  "panMs": 5019,
+  "presentWallMs": 73,
+  "presentOver50": 0,
+  "tileCountMedian": 31,
+  "tileCountMax": 43,
+  "gpuMiBGraphRenderer": {
+   "median": 15,
+   "max": 15
+  },
+  "gpuMiBMaxAnyClient": 15
+ },
+ {
+  "trace": "e5h-d-b3-D/trace-p1D.json",
+  "panMs": 5015,
+  "presentWallMs": 42,
+  "presentOver50": 0,
+  "tileCountMedian": 28,
+  "tileCountMax": 48,
+  "gpuMiBGraphRenderer": {
+   "median": 17,
+   "max": 17
+  },
+  "gpuMiBMaxAnyClient": 17
+ },
+ {
+  "trace": "e5h-d-b4-A/trace-p1A.json",
+  "panMs": 8381,
+  "presentWallMs": 7399,
+  "presentOver50": 30,
+  "tileCountMedian": 748,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 173,
+   "max": 177
+  },
+  "gpuMiBMaxAnyClient": 177
+ },
+ {
+  "trace": "e5h-d-b4-C/trace-p1C.json",
+  "panMs": 5011,
+  "presentWallMs": 40,
+  "presentOver50": 0,
+  "tileCountMedian": 31,
+  "tileCountMax": 44,
+  "gpuMiBGraphRenderer": {
+   "median": 15,
+   "max": 15
+  },
+  "gpuMiBMaxAnyClient": 15
+ },
+ {
+  "trace": "e5h-d-b4-D/trace-p1D.json",
+  "panMs": 5010,
+  "presentWallMs": 43,
+  "presentOver50": 0,
+  "tileCountMedian": 28,
+  "tileCountMax": 44,
+  "gpuMiBGraphRenderer": {
+   "median": 16,
+   "max": 16
+  },
+  "gpuMiBMaxAnyClient": 16
+ },
+ {
+  "trace": "e5h-d-b5-A/trace-p1A.json",
+  "panMs": 8215,
+  "presentWallMs": 7007,
+  "presentOver50": 31,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 169,
+   "max": 178
+  },
+  "gpuMiBMaxAnyClient": 178
+ },
+ {
+  "trace": "e5h-d-b5-C/trace-p1C.json",
+  "panMs": 5019,
+  "presentWallMs": 81,
+  "presentOver50": 0,
+  "tileCountMedian": 31,
+  "tileCountMax": 44,
+  "gpuMiBGraphRenderer": {
+   "median": 14,
+   "max": 14
+  },
+  "gpuMiBMaxAnyClient": 14
+ },
+ {
+  "trace": "e5h-d-b5-D/trace-p1D.json",
+  "panMs": 5014,
+  "presentWallMs": 39,
+  "presentOver50": 0,
+  "tileCountMedian": 28,
+  "tileCountMax": 44,
+  "gpuMiBGraphRenderer": {
+   "median": 17,
+   "max": 17
+  },
+  "gpuMiBMaxAnyClient": 17
+ },
+ {
+  "trace": "e5h-check-b1-A/trace-p1A.json",
+  "panMs": 8348,
+  "presentWallMs": 7211,
+  "presentOver50": 32,
+  "tileCountMedian": 749,
+  "tileCountMax": 776,
+  "gpuMiBGraphRenderer": {
+   "median": 186,
+   "max": 190
+  },
+  "gpuMiBMaxAnyClient": 190
+ }
+]
