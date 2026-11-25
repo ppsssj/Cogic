@@ -32,7 +32,6 @@
 .canvasFlow .react-flow__nodes {
   transform: translateZ(0);
   backface-visibility: hidden;
-  will-change: transform;
 }
 
 .canvasOverlay {
