@@ -1,0 +1,10 @@
+{
+  "id": "web-1faa2457-6ffd-4d54-bb5b-bd283dd85627",
+  "nodes": 188,
+  "edges": 360,
+  "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+  "picker": "main.ts",
+  "inspector": "ACTIVE FILE SNAPSHOT main.ts typescript import { alpha59 } from \"./alpha/a\"; import { beta59 } from \"./beta/b\"; import { gamma59 } from \"./beta/deep/c\"; export function main(x: number): number { return alpha59(x) + beta59(x) + gamma59(x); } ROOT Clear Root mode file lock file main.ts path c:/dev/p13/p12e5b-multifile/src/main.ts behavior Keep the graph anchored to this file even when another file is opened. Runtime SELECTED NODE No node selected. Click a node in the graph. SELECTION 1:1 -> 1:1 PARAM FLOW main -> alpha59 (a.ts) x <- x main -> beta59 (b.ts) x <- x main -> gamma59 (c.ts) x <- x alpha1 -> alpha0 x <- x alpha2 -> alpha1 x <- x alpha3 -> alpha2 x <- x alpha4 -> alpha3 x <- x alpha5 -> alpha4 x <- x alpha6 -> alpha5 x <- x alpha7 -> alpha6 x <- x alpha8 -> alpha7 x <- x alpha9 -> alpha8 x <- x alpha10 -> alpha9 x <- x alpha11 -> alpha10 x <- x alpha12 -> alpha11 x <- x alpha13 -> alpha12 x <- x alpha14 -> alpha13 x <- x alpha15 -> alpha14 x <- x alpha16 -> alpha15 x <- x alpha17 -> alpha16 x <- x ANALYSIS 5 lines · 201 chars DIAGNOSTICS (0) No TypeScript diagnostics detected. GRAPH (188 NODES · 360 EDGES) nodes 188 edges 360 main function alpha59 (a.ts) external beta59 (b.ts) external gamma59 (c.ts) external alpha0 function alpha1 function alpha2 function alpha3 function alpha4 function alpha5 function alpha6 function alpha7 function IMPORTS (3) ./alpha/a alpha59 ./beta/b beta59 ./beta/deep/c gamma59 EXPORTS (1) FUNCTION main CALLS (TOP 3) alpha59 () 1 a.ts:60:1 beta59 () 1 b.ts:60:1 gamma59 () 1 c.ts:60:1",
+  "before": 2557,
+  "minimum": 1431
+}

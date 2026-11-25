@@ -1,0 +1,173 @@
+{
+  "desired": "collapsed",
+  "time": 6355.600000023842,
+  "graphNodes": 188,
+  "graphEdges": 360,
+  "flowNodes": 5,
+  "flowEdges": 4,
+  "domNodes": 5,
+  "domEdges": 4,
+  "pane": {
+    "width": 581,
+    "height": 494
+  },
+  "viewport": {
+    "x": 31.125,
+    "y": 162.24360236220474,
+    "zoom": 0.34038713910761154
+  },
+  "nodes": [
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "type": "folderGroup",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "style": {
+        "width": 1524,
+        "height": 498,
+        "zIndex": 0
+      },
+      "collapsed": false,
+      "count": 4
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+      "type": "folderGroup",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 600,
+        "y": 122
+      },
+      "style": {
+        "width": 360,
+        "height": 174,
+        "zIndex": 0
+      },
+      "collapsed": true,
+      "count": 1
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/beta",
+      "type": "folderGroup",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 1130,
+        "y": 122
+      },
+      "style": {
+        "width": 360,
+        "height": 174,
+        "zIndex": 0
+      },
+      "collapsed": true,
+      "count": 2
+    },
+    {
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0",
+      "type": "fileGroup",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 34,
+        "y": 122
+      },
+      "style": {
+        "width": 396,
+        "height": 342,
+        "zIndex": 1
+      },
+      "collapsed": false,
+      "count": 1
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/main.ts:113",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0",
+      "position": {
+        "x": 28,
+        "y": 124
+      },
+      "style": {
+        "zIndex": 2
+      }
+    }
+  ],
+  "instanceNodes": [
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "positionAbsolute": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 1524,
+      "height": 498
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 600,
+        "y": 122
+      },
+      "positionAbsolute": {
+        "x": 600,
+        "y": 122
+      },
+      "width": 360,
+      "height": 174
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/beta",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 1130,
+        "y": 122
+      },
+      "positionAbsolute": {
+        "x": 1130,
+        "y": 122
+      },
+      "width": 360,
+      "height": 174
+    },
+    {
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 34,
+        "y": 122
+      },
+      "positionAbsolute": {
+        "x": 34,
+        "y": 122
+      },
+      "width": 396,
+      "height": 342
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/main.ts:113",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0",
+      "position": {
+        "x": 28,
+        "y": 124
+      },
+      "positionAbsolute": {
+        "x": 62,
+        "y": 246
+      },
+      "width": 190,
+      "height": 64
+    }
+  ],
+  "flowEdgeIds": [
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033@@x <- x@@arg#0"
+  ]
+}

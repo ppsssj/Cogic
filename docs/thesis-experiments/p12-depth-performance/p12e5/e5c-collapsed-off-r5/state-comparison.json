@@ -1,0 +1,5 @@
+﻿{
+  "match": true,
+  "errors": [],
+  "limitations": "DOM counts may differ by virtualization; graph content and environment require separate manifest checks."
+}
