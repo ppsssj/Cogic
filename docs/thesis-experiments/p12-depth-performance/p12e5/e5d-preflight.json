@@ -1,0 +1,11 @@
+﻿{
+    "utc":  "2026-11-25T04:24:36.5816899Z",
+    "totalMiB":  8136,
+    "availableMiB":  1814,
+    "preflightMinimumMiB":  2200,
+    "guardMinimumMiB":  800,
+    "action":  "no VS Code launch",
+    "reason":  "available memory below preflight",
+    "browser":  "Chrome active conversation preserved",
+    "otherProcesses":  "no user process forcibly stopped"
+}

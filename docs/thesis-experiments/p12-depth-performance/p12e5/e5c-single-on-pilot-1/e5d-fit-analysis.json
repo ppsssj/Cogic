@@ -1,0 +1,40 @@
+{
+  "source": "docs/thesis-experiments/p12-depth-performance/p12e5/e5c-single-on-pilot-1/e5c-before.json",
+  "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+  "world": {
+    "minX": 0,
+    "maxX": 20592,
+    "minY": 0,
+    "maxY": 1720,
+    "width": 20592,
+    "height": 1720
+  },
+  "screen": {
+    "left": -739.1000000000001,
+    "right": 1320.1000000000001,
+    "top": 161,
+    "bottom": 333
+  },
+  "pane": {
+    "width": 581,
+    "height": 494
+  },
+  "viewport": {
+    "x": -739.1000000000001,
+    "y": 161,
+    "zoom": 0.1
+  },
+  "minZoom": 0.1,
+  "maxFullZoomNoPadding": 0.028214840714840716,
+  "fitPadding": 0.12,
+  "requestedFitZoom": "not recorded; maxFullZoomNoPadding is an upper bound, padding would require an equal or smaller scale",
+  "viewportBeforeFit": null,
+  "fitAnimationCompletion": "not observed in E5C snapshot",
+  "layoutStability": "see originating run; position stability does not prove viewport animation completion",
+  "graphNodes": 188,
+  "graphEdges": 360,
+  "flowNodes": 67,
+  "flowEdges": 122,
+  "domNodes": 21,
+  "domEdges": 38
+}
