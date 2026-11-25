@@ -1,0 +1,2296 @@
+﻿{
+  "reference": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-on-pilot-6",
+  "method": "rAF callback interval percentiles; not display FPS, INP or physical paint",
+  "results": [
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-on-pilot-6",
+      "valid": true,
+      "mode": "virtual-on",
+      "requestId": "web-479a3ea7-75a3-4e31-9589-ea11396bdef6",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1534,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 525,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 66.90000000000146,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 60,
+          "unmounts": 60,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 522.1077000000005,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1150.2452000000012,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1766.9141999999993,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2438.1352000000006,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3060.3096000000005,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3648.3676000000014,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4283.5664,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4916.8927,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 66,
+          "p50": 8.399999999997817,
+          "p95": 33.29999999999927,
+          "p99": 100.09999999999854,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 42,
+          "p50": 8.30000000000291,
+          "p95": 25.099999999998545,
+          "p99": 41.69999999999709,
+          "longtasks": 0,
+          "domNodes": 10,
+          "domEdges": 16,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 21.899999976158142,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 183,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 58.39999999999782,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 798.6993999999977,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 239,
+          "p50": 8.30000000000291,
+          "p95": 24.900000000001455,
+          "p99": 58.20000000000073,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 6,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1470.8594999999987,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 174,
+          "p50": 8.299999999999272,
+          "p95": 8.599999999998545,
+          "p99": 91.89999999999782,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 782.4702999999936,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 212,
+          "p50": 8.30000000000291,
+          "p95": 25,
+          "p99": 108.40000000000146,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1451.916799999999,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 11,
+          "p50": 58.299999999995634,
+          "p95": 166.70000000000437,
+          "p99": 166.70000000000437,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-off-pilot-2",
+      "valid": true,
+      "mode": "virtual-off",
+      "requestId": "web-3ab0e2a0-6e7a-44e8-81cf-a93afe52cfac",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1528,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 656,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 528.1474000000017,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1158.076100000002,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1766.4661000000015,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2414.3102,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3049.922300000002,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3644.541799999999,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4273.512300000002,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4902.577300000001,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 104,
+          "p50": 8.299999999999272,
+          "p95": 8.400000000001455,
+          "p99": 8.5,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 40,
+          "p50": 8.30000000000291,
+          "p95": 58.29999999999927,
+          "p99": 158.40000000000146,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 22.80000001192093,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 200,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 33.20000000000073,
+          "longtasks": 1,
+          "domNodes": 6,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 806.1713999999993,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 245,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 49.900000000001455,
+          "longtasks": 1,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1459.280700000003,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 179,
+          "p50": 8.299999999999272,
+          "p95": 8.5,
+          "p99": 91.60000000000218,
+          "longtasks": 0,
+          "domNodes": 5,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 799.5302999999985,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 224,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 108.20000000000073,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1418.8890000000029,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 16,
+          "p50": 8.400000000001455,
+          "p95": 108.29999999999563,
+          "p99": 108.29999999999563,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-on-r2",
+      "valid": true,
+      "mode": "virtual-on",
+      "requestId": "web-a44c9956-05eb-43bb-ae40-872407262523",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1448,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 504,
+          "p50": 8.30000000000291,
+          "p95": 16.599999999998545,
+          "p99": 91.70000000000073,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 60,
+          "unmounts": 60,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 520.9468000000015,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1160.5864000000001,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1766.4384000000027,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2436.701100000002,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3112.6751000000004,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3657.2098000000005,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4280.2755,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4991.320900000002,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 73,
+          "p50": 8.399999999997817,
+          "p95": 24.69999999999709,
+          "p99": 66.69999999999709,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 41,
+          "p50": 8.30000000000291,
+          "p95": 25,
+          "p99": 41.599999999998545,
+          "longtasks": 0,
+          "domNodes": 12,
+          "domEdges": 20,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 18.799999952316284,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 221,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 16.700000000000728,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 797.3794999999955,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 218,
+          "p50": 8.30000000000291,
+          "p95": 24.900000000001455,
+          "p99": 75,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 6,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1443.745400000007,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 169,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 91.59999999999854,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 794.005600000004,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 183,
+          "p50": 8.30000000000291,
+          "p95": 25,
+          "p99": 216.6999999999971,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1435.315999999999,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 12,
+          "p50": 33.30000000000291,
+          "p95": 74.90000000000146,
+          "p99": 74.90000000000146,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-off-r2",
+      "valid": true,
+      "mode": "virtual-off",
+      "requestId": "web-2f17564a-cfca-40d0-b5f8-0969bef21d07",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1538,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 656,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 523.2709000000032,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1144.8190000000031,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1771.4105000000018,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2404.082000000002,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3019.105300000003,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3651.3399000000027,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4269.029600000002,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4898.530300000002,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 104,
+          "p50": 8.299999999999272,
+          "p95": 8.5,
+          "p99": 8.5,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 42,
+          "p50": 8.30000000000291,
+          "p95": 16.700000000000728,
+          "p99": 150,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 22.100000023841858,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 2,
+          "p50": 1008.3999999999978,
+          "p95": 1008.3999999999978,
+          "p99": 1008.3999999999978,
+          "longtasks": 0,
+          "domNodes": 6,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1565.3234000000011,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 140,
+          "p50": 8.30000000000291,
+          "p95": 25.099999999998545,
+          "p99": 91.60000000000218,
+          "longtasks": 1,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 871.4037000000026,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 173,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 83.19999999999709,
+          "longtasks": 0,
+          "domNodes": 5,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 792.7568000000028,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 227,
+          "p50": 8.30000000000291,
+          "p95": 8.69999999999709,
+          "p99": 116.59999999999854,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1445.2161999999953,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 14,
+          "p50": 49.900000000001455,
+          "p95": 258.3000000000029,
+          "p99": 258.3000000000029,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-on-r3",
+      "valid": true,
+      "mode": "virtual-on",
+      "requestId": "web-5408c147-1568-4556-ac70-7c8e5063ad36",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1454,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 518,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 66.90000000000146,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 60,
+          "unmounts": 60,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 522.5521000000008,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1146.7757999999994,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1767.5676999999996,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2416.517,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3122.1827999999987,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3648.067600000002,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4274.138200000001,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4901.677,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 71,
+          "p50": 8.299999999999272,
+          "p95": 16.700000000000728,
+          "p99": 100,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 41,
+          "p50": 8.30000000000291,
+          "p95": 24.80000000000291,
+          "p99": 41.70000000000073,
+          "longtasks": 0,
+          "domNodes": 13,
+          "domEdges": 22,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 20.5,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 229,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 16.5,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 783.8154000000068,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 240,
+          "p50": 8.30000000000291,
+          "p95": 16.600000000002183,
+          "p99": 58.5,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 6,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1460.825499999999,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 174,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 83.30000000000291,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 778.6180999999997,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 223,
+          "p50": 8.30000000000291,
+          "p95": 16.599999999998545,
+          "p99": 91.5,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1448.3827999999994,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 13,
+          "p50": 58.099999999998545,
+          "p95": 83.20000000000437,
+          "p99": 83.20000000000437,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-off-r3",
+      "valid": true,
+      "mode": "virtual-off",
+      "requestId": "web-45afa820-dfa6-44b3-9366-e76c31b3135c",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1458,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 656,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.5,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 528.2146999999968,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1150.9730999999992,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1768.7303999999967,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2414.4930999999997,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3027.0062999999973,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3650.9231,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4276.259999999998,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4911.8233999999975,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 105,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 8.5,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 42,
+          "p50": 8.30000000000291,
+          "p95": 16.69999999999709,
+          "p99": 133.40000000000146,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 18.30000001192093,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 194,
+          "p50": 8.299999999999272,
+          "p95": 8.599999999998545,
+          "p99": 25.099999999998545,
+          "longtasks": 1,
+          "domNodes": 6,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 789.1857999999993,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 253,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 58.5,
+          "longtasks": 1,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1470.7431999999972,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 174,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 91.59999999999854,
+          "longtasks": 0,
+          "domNodes": 5,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 792.8125,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 233,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 50,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1415.4655000000057,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 17,
+          "p50": 25,
+          "p95": 516.5999999999985,
+          "p99": 516.5999999999985,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-on-r4",
+      "valid": true,
+      "mode": "virtual-on",
+      "requestId": "web-827c76b8-d527-4315-9fd3-e9ca94423024",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1473,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 532,
+          "p50": 8.30000000000291,
+          "p95": 8.600000000002183,
+          "p99": 58.29999999999927,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 60,
+          "unmounts": 60,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 527.8237000000008,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1154.8027000000002,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1772.3064999999988,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2440.429,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3024.0210000000006,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3651.019400000001,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4269.4162,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4925.822,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 70,
+          "p50": 8.30000000000291,
+          "p95": 33.30000000000291,
+          "p99": 83.20000000000073,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 44,
+          "p50": 8.30000000000291,
+          "p95": 16.600000000002183,
+          "p99": 41.70000000000073,
+          "longtasks": 0,
+          "domNodes": 14,
+          "domEdges": 24,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 21.399999976158142,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 225,
+          "p50": 8.299999999999272,
+          "p95": 8.5,
+          "p99": 8.700000000000728,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 798.2482000000018,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 218,
+          "p50": 8.30000000000291,
+          "p95": 24.899999999997817,
+          "p99": 58.19999999999709,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 6,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1445.3057999999946,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 171,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 91.69999999999709,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 794.460699999996,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 223,
+          "p50": 8.30000000000291,
+          "p95": 16.799999999995634,
+          "p99": 133.1999999999971,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1472.9429999999993,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 12,
+          "p50": 49.799999999995634,
+          "p95": 199.90000000000146,
+          "p99": 199.90000000000146,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-off-r4",
+      "valid": true,
+      "mode": "virtual-off",
+      "requestId": "web-f03dd44e-f29f-4714-a115-376916e3e421",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1489,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 655,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.599999999998545,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 531.5316000000021,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1146.964100000001,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1771.0663999999997,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2394.8892000000014,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3024.844200000003,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3655.3248999999996,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4264.195900000002,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4899.803900000003,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 105,
+          "p50": 8.299999999999272,
+          "p95": 8.400000000001455,
+          "p99": 8.5,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 42,
+          "p50": 8.399999999997817,
+          "p95": 24.700000000000728,
+          "p99": 58.39999999999782,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 20.400000035762787,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 223,
+          "p50": 8.299999999999272,
+          "p95": 8.5,
+          "p99": 24.900000000001455,
+          "longtasks": 1,
+          "domNodes": 6,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 791.0069000000003,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 241,
+          "p50": 8.30000000000291,
+          "p95": 8.599999999998545,
+          "p99": 66.69999999999709,
+          "longtasks": 1,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1472.423999999999,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 176,
+          "p50": 8.299999999999272,
+          "p95": 8.5,
+          "p99": 83.20000000000073,
+          "longtasks": 0,
+          "domNodes": 5,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 800.5201000000015,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 243,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 91.60000000000582,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1449.0848000000042,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 13,
+          "p50": 16.69999999999709,
+          "p95": 108.29999999999563,
+          "p99": 108.29999999999563,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-on-r5",
+      "valid": true,
+      "mode": "virtual-on",
+      "requestId": "web-905f0590-ac54-4d20-8074-3a7946ddec16",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1460,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 477,
+          "p50": 8.30000000000291,
+          "p95": 16.600000000002183,
+          "p99": 108.5,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 60,
+          "unmounts": 60,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 528.4233999999997,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1159.0602,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1766.3394000000008,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2430.6044,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3026.7572,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3666.9439999999995,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4273.013200000001,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4930.7477,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 79,
+          "p50": 8.30000000000291,
+          "p95": 24.899999999997817,
+          "p99": 74.90000000000146,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 39,
+          "p50": 8.30000000000291,
+          "p95": 24.900000000001455,
+          "p99": 58.400000000001455,
+          "longtasks": 0,
+          "domNodes": 10,
+          "domEdges": 16,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 23.80000001192093,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 179,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 58.39999999999782,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 785.0680999999968,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 264,
+          "p50": 8.30000000000291,
+          "p95": 24.899999999997817,
+          "p99": 58.400000000001455,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 6,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1719.7512999999963,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 175,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 91.70000000000073,
+          "longtasks": 0,
+          "domNodes": 0,
+          "domEdges": 0,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 793.0399000000034,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 198,
+          "p50": 8.30000000000291,
+          "p95": 25,
+          "p99": 191.59999999999854,
+          "longtasks": 0,
+          "domNodes": 4,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1440.0653999999995,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 14,
+          "p50": 41.60000000000582,
+          "p95": 183.29999999999563,
+          "p99": 183.29999999999563,
+          "longtasks": 0,
+          "domNodes": 21,
+          "domEdges": 38,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    },
+    {
+      "dir": "docs/thesis-experiments/p12-depth-performance/p12e5/e5d-single-off-r5",
+      "valid": true,
+      "mode": "virtual-off",
+      "requestId": "web-7bf21d7a-18c2-429d-b4f9-674fcbac88fa",
+      "graph": {
+        "sha256": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+        "nodes": 188,
+        "edges": 360,
+        "normalization": "replace workspace root case-insensitively with <fixture>, normalize separators, JSON.stringify; see harness"
+      },
+      "minimumMiB": 1489,
+      "fit": {
+        "before": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM",
+          "maxFullZoom": 0.028214840714840716
+        },
+        "after": {
+          "valid": false,
+          "screen": {
+            "left": -739.1000000000001,
+            "right": 1320.1000000000001,
+            "top": 161,
+            "bottom": 333
+          },
+          "world": {
+            "minX": 0,
+            "maxX": 20592,
+            "minY": 0,
+            "maxY": 1720
+          },
+          "pane": {
+            "width": 581,
+            "height": 494
+          },
+          "viewport": {
+            "x": -739.1000000000001,
+            "y": 161,
+            "zoom": 0.1
+          },
+          "classification": "FIT_CLAMPED_BY_MIN_ZOOM"
+        }
+      },
+      "metrics": [
+        {
+          "phase": "pan",
+          "intervals": 655,
+          "p50": 8.300000000001091,
+          "p95": 8.5,
+          "p99": 8.600000000000364,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": [
+            {
+              "step": 5,
+              "elapsed": 526.3931000000011,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 10,
+              "elapsed": 1146.5160000000033,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 15,
+              "elapsed": 1764.0382000000027,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 20,
+              "elapsed": 2395.8027,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 25,
+              "elapsed": 3021.222800000003,
+              "style": "transform: translate(-459.1px, 216px) scale(0.1);"
+            },
+            {
+              "step": 30,
+              "elapsed": 3645.6870000000017,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            },
+            {
+              "step": 35,
+              "elapsed": 4272.433700000001,
+              "style": "transform: translate(-966.1px, 116px) scale(0.1);"
+            },
+            {
+              "step": 40,
+              "elapsed": 4907.870600000002,
+              "style": "transform: translate(-739.1px, 161px) scale(0.1);"
+            }
+          ]
+        },
+        {
+          "phase": "zoom",
+          "intervals": 106,
+          "p50": 8.299999999999272,
+          "p95": 8.5,
+          "p99": 8.599999999998545,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "selection",
+          "intervals": 42,
+          "p50": 8.299999999999272,
+          "p95": 16.599999999998545,
+          "p99": 58.5,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": 23.100000023841858,
+          "stabilityMs": null,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-collapse",
+          "intervals": 181,
+          "p50": 8.30000000000291,
+          "p95": 10.200000000000728,
+          "p99": 50,
+          "longtasks": 0,
+          "domNodes": 6,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 799.2259000000049,
+          "viewportSamples": null
+        },
+        {
+          "phase": "file-expand",
+          "intervals": 248,
+          "p50": 8.30000000000291,
+          "p95": 8.600000000002183,
+          "p99": 66.5,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1470.1078999999954,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-collapse",
+          "intervals": 175,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 83.29999999999927,
+          "longtasks": 0,
+          "domNodes": 5,
+          "domEdges": 4,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 789.3315000000002,
+          "viewportSamples": null
+        },
+        {
+          "phase": "folder-expand",
+          "intervals": 241,
+          "p50": 8.30000000000291,
+          "p95": 8.5,
+          "p99": 116.59999999999854,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": 1457.4162999999971,
+          "viewportSamples": null
+        },
+        {
+          "phase": "fit",
+          "intervals": 15,
+          "p50": 24.89999999999418,
+          "p95": 83.30000000000291,
+          "p99": 83.30000000000291,
+          "longtasks": 0,
+          "domNodes": 67,
+          "domEdges": 122,
+          "mounts": 0,
+          "unmounts": 0,
+          "selectionMs": null,
+          "stabilityMs": null,
+          "viewportSamples": null
+        }
+      ]
+    }
+  ]
+}

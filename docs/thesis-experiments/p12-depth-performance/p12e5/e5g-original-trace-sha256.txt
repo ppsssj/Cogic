@@ -1,0 +1,12 @@
+6e86212ce499b764ccace5213edbaa28325119a185a9a89bd0178b6c1958be46 *e5g-off-abba-trace-p1A.json
+27d0f0c42b12b7804d46e76026257872d20858f469a92df90e2897499ed7140e *e5g-off-abba-trace-p2B.json
+008954d627a643ce58d3113a2c0d0228cba00a088bed387ab4cc8f6e01bae83d *e5g-off-abba-trace-p3B.json
+7baa1f567ade211371fd281d3a94a69fd701c7a80b0a3c0940f9d72802304258 *e5g-off-abba-trace-p4A.json
+8e2ca0f808f5e25fa072e3af034eaf33c94b07fd1d0b471b66964b9c69060472 *e5g-on-abba-trace-p1A.json
+9eaa278fcde38b0708072ca0485aa876d9f2a1cc25732f94aeb349e393ec6905 *e5g-on-abba-trace-p2B.json
+dff16c64b7d51b4a24f16f571ab80caa10d4e49d1a3b8ad69c39cdfe60700e7f *e5g-on-abba-trace-p3B.json
+f96f8c1d4a02b8409750cd80c7b2a416d5232848037fec98af18b40b37a94e49 *e5g-on-abba-trace-p4A.json
+c3545a4cbd5f4d5014f1913ae01335282737c48fa6f52ef9e5770bb1c9bfedf0 *e5g-on-baab-trace-p1B.json
+94d54d1ef6e34a1bd756976dd72956a03aee96c0403e1f82a7da0825c0d1826f *e5g-on-baab-trace-p2A.json
+fd5f189846c8e59a1205c46ebeff14af9d2209e8fbf6c48b39c32b9216eec0e7 *e5g-on-baab-trace-p3A.json
+a6ea1ca8da3d3304f63c45d167376f97bbd73ddf911e2f5709d2f409cb2cf031 *e5g-on-baab-trace-p4B.json

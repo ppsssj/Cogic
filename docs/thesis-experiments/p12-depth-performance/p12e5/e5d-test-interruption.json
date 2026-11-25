@@ -1,0 +1,13 @@
+﻿{
+    "utc":  "2026-11-25T04:26:03.7693387Z",
+    "command":  "npm test",
+    "outcome":  "interrupted before completion",
+    "lowestObservedKiB":  724588,
+    "thresholdMiB":  800,
+    "action":  "Ctrl-C sent to owned test session",
+    "freeAfterKiB":  2343140,
+    "remainingTestProcesses":  "none observed under workspace .vscode-test",
+    "userProcessesStopped":  [
+
+                             ]
+}

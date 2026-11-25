@@ -1,0 +1,886 @@
+{
+ "runs": {
+  "e5g-on-abba": {
+   "functional": true,
+   "errors": [],
+   "order": [
+    "A",
+    "B",
+    "B",
+    "A"
+   ],
+   "pathPoint": {
+    "x": 292,
+    "y": 70,
+    "cx": 312,
+    "cy": 154,
+    "d": 1.5,
+    "innerWidth": 621,
+    "innerHeight": 864
+   },
+   "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+   "memory": {
+    "before": 3358,
+    "minimum": 2003,
+    "aborted": false
+   },
+   "sameStartDom": true,
+   "pans": [
+    {
+     "label": "p1A",
+     "cond": "A",
+     "inputLoopMs": 12268.1,
+     "latenessEndMs": 7335.3,
+     "delivered": 40,
+     "gaps": 31,
+     "gapMs": 11616.2,
+     "rafP99": 1024.8,
+     "rafMax": 1541.5,
+     "presentN": 47,
+     "presentWall": 11015.3,
+     "presentCpu": 214.3,
+     "presentOver50": 30,
+     "presentInGaps": 10938.3,
+     "gapTotal": 11744.2,
+     "gpuRaster": 1071,
+     "gpuRasterMs": 1059.6999999999998,
+     "graphRaster": 1120,
+     "rasterByDom": {
+      "react-flow": 80,
+      "react-flow__nodes": 821,
+      "canvasControls(overlap)": 9,
+      "rootBanner(overlap)": 11,
+      "react-flow__edges": 83,
+      "created-during-pan/unmapped": 112,
+      "react-flow__edge-path(overlap)": 4
+     },
+     "nodesLayer": {
+      "layerId": "15",
+      "parent": "1",
+      "w": 20694,
+      "h": 2690,
+      "drawsContent": true,
+      "paintCount": 1,
+      "node": {
+       "name": "DIV",
+       "class": "react-flow__nodes",
+       "id": null,
+       "dataId": null
+      },
+      "reasons": [
+       "Trivial3DTransform",
+       "WillChangeTransform"
+      ]
+     },
+     "layersAtStart": 21,
+     "presentMax": 1531.3,
+     "layers": 77,
+     "paintEdges": 64,
+     "paintNodes": 256,
+     "mainWall": 670.5,
+     "gpuWall": 12408.4,
+     "gpuCpu": 1439.2,
+     "eventToHandler": {
+      "n": 40,
+      "median": 182.3,
+      "p95": 975.5,
+      "max": 1507.6
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 12.8,
+     "free": [
+      2357,
+      2354
+     ]
+    },
+    {
+     "label": "p2B",
+     "cond": "B",
+     "inputLoopMs": 5015,
+     "latenessEndMs": -0.9,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 8.6,
+     "rafMax": 25,
+     "presentN": 305,
+     "presentWall": 41.6,
+     "presentCpu": 40.5,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 548,
+     "gpuRasterMs": 258.4,
+     "graphRaster": 547,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 6,
+      "rootBanner(overlap)": 144,
+      "react-flow__edges": 84,
+      "created-during-pan/unmapped": 229,
+      "react-flow__edge-path(overlap)": 4
+     },
+     "layersAtStart": 19,
+     "presentMax": 1.4,
+     "layers": 72,
+     "paintEdges": 64,
+     "paintNodes": 0,
+     "mainWall": 1067,
+     "gpuWall": 492,
+     "gpuCpu": 469,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5,
+      "p95": 10.5,
+      "max": 11.7
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 20.5,
+     "free": [
+      2290,
+      2515
+     ]
+    },
+    {
+     "label": "p3B",
+     "cond": "B",
+     "inputLoopMs": 5000.6,
+     "latenessEndMs": 1.2,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 8.5,
+     "rafMax": 16.6,
+     "presentN": 304,
+     "presentWall": 34.8,
+     "presentCpu": 34.7,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 549,
+     "gpuRasterMs": 265.79999999999995,
+     "graphRaster": 548,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 6,
+      "rootBanner(overlap)": 143,
+      "react-flow__edges": 84,
+      "created-during-pan/unmapped": 231,
+      "react-flow__edge-path(overlap)": 4
+     },
+     "layersAtStart": 19,
+     "presentMax": 0.3,
+     "layers": 72,
+     "paintEdges": 64,
+     "paintNodes": 0,
+     "mainWall": 1031.3,
+     "gpuWall": 488.2,
+     "gpuCpu": 473.4,
+     "eventToHandler": {
+      "n": 40,
+      "median": 4.3,
+      "p95": 8.8,
+      "max": 9.4
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 21.9,
+     "free": [
+      2520,
+      2551
+     ]
+    },
+    {
+     "label": "p4A",
+     "cond": "A",
+     "inputLoopMs": 5006.6,
+     "latenessEndMs": 5.9,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 16.6,
+     "rafMax": 25,
+     "presentN": 305,
+     "presentWall": 40.6,
+     "presentCpu": 40,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 637,
+     "gpuRasterMs": 561.0999999999999,
+     "graphRaster": 635,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 8,
+      "rootBanner(overlap)": 148,
+      "react-flow__edges": 84,
+      "react-flow__nodes": 84,
+      "created-during-pan/unmapped": 227,
+      "react-flow__edge-path(overlap)": 4
+     },
+     "nodesLayer": {
+      "layerId": "451",
+      "parent": "1",
+      "w": 20694,
+      "h": 2690,
+      "drawsContent": true,
+      "paintCount": 1,
+      "node": {
+       "name": "DIV",
+       "class": "react-flow__nodes",
+       "id": null,
+       "dataId": null
+      },
+      "reasons": [
+       "Trivial3DTransform",
+       "WillChangeTransform"
+      ]
+     },
+     "layersAtStart": 21,
+     "presentMax": 0.3,
+     "layers": 75,
+     "paintEdges": 64,
+     "paintNodes": 276,
+     "mainWall": 1058.9,
+     "gpuWall": 784.6,
+     "gpuCpu": 761.2,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5.2,
+      "p95": 8,
+      "max": 11.2
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 21.6,
+     "free": [
+      2572,
+      2563
+     ]
+    }
+   ]
+  },
+  "e5g-on-baab": {
+   "functional": true,
+   "errors": [],
+   "order": [
+    "B",
+    "A",
+    "A",
+    "B"
+   ],
+   "pathPoint": {
+    "x": 292,
+    "y": 70,
+    "cx": 312,
+    "cy": 154,
+    "d": 1.5,
+    "innerWidth": 621,
+    "innerHeight": 864
+   },
+   "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+   "memory": {
+    "before": 3431,
+    "minimum": 2045,
+    "aborted": false
+   },
+   "sameStartDom": true,
+   "pans": [
+    {
+     "label": "p1B",
+     "cond": "B",
+     "inputLoopMs": 5005,
+     "latenessEndMs": 4.7,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 8.5,
+     "rafMax": 16.6,
+     "presentN": 305,
+     "presentWall": 33.6,
+     "presentCpu": 32.8,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 549,
+     "gpuRasterMs": 246.1,
+     "graphRaster": 549,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 6,
+      "rootBanner(overlap)": 144,
+      "react-flow__edges": 83,
+      "created-during-pan/unmapped": 232,
+      "react-flow__edge-path(overlap)": 4
+     },
+     "layersAtStart": 19,
+     "presentMax": 0.3,
+     "layers": 72,
+     "paintEdges": 64,
+     "paintNodes": 0,
+     "mainWall": 970.5,
+     "gpuWall": 453.2,
+     "gpuCpu": 434.1,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5,
+      "p95": 7.8,
+      "max": 10.9
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 18.4,
+     "free": [
+      2405,
+      2602
+     ]
+    },
+    {
+     "label": "p2A",
+     "cond": "A",
+     "inputLoopMs": 4999.2,
+     "latenessEndMs": -1.2,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 16.7,
+     "rafMax": 24.9,
+     "presentN": 303,
+     "presentWall": 74.2,
+     "presentCpu": 61.4,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 633,
+     "gpuRasterMs": 553.0999999999999,
+     "graphRaster": 631,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 6,
+      "rootBanner(overlap)": 144,
+      "react-flow__edges": 84,
+      "react-flow__nodes": 84,
+      "created-during-pan/unmapped": 229,
+      "react-flow__edge-path(overlap)": 4
+     },
+     "nodesLayer": {
+      "layerId": "312",
+      "parent": "1",
+      "w": 20694,
+      "h": 2690,
+      "drawsContent": true,
+      "paintCount": 1,
+      "node": {
+       "name": "DIV",
+       "class": "react-flow__nodes",
+       "id": null,
+       "dataId": null
+      },
+      "reasons": [
+       "Trivial3DTransform",
+       "WillChangeTransform"
+      ]
+     },
+     "layersAtStart": 21,
+     "presentMax": 13.3,
+     "layers": 73,
+     "paintEdges": 64,
+     "paintNodes": 276,
+     "mainWall": 1119,
+     "gpuWall": 813.8,
+     "gpuCpu": 775.6,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5.3,
+      "p95": 9,
+      "max": 10.1
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 20.8,
+     "free": [
+      2598,
+      2551
+     ]
+    },
+    {
+     "label": "p3A",
+     "cond": "A",
+     "inputLoopMs": 5011.6,
+     "latenessEndMs": 4.6,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 16.6,
+     "rafMax": 25,
+     "presentN": 301,
+     "presentWall": 71.1,
+     "presentCpu": 55.9,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 633,
+     "gpuRasterMs": 561.7,
+     "graphRaster": 631,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 6,
+      "rootBanner(overlap)": 144,
+      "react-flow__edges": 84,
+      "react-flow__nodes": 84,
+      "created-during-pan/unmapped": 229,
+      "react-flow__edge-path(overlap)": 4
+     },
+     "nodesLayer": {
+      "layerId": "312",
+      "parent": "1",
+      "w": 20694,
+      "h": 2690,
+      "drawsContent": true,
+      "paintCount": 1,
+      "node": {
+       "name": "DIV",
+       "class": "react-flow__nodes",
+       "id": null,
+       "dataId": null
+      },
+      "reasons": [
+       "Trivial3DTransform",
+       "WillChangeTransform"
+      ]
+     },
+     "layersAtStart": 21,
+     "presentMax": 19,
+     "layers": 73,
+     "paintEdges": 64,
+     "paintNodes": 256,
+     "mainWall": 1106.1,
+     "gpuWall": 820.2,
+     "gpuCpu": 779,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5.1,
+      "p95": 9.3,
+      "max": 9.4
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 20.2,
+     "free": [
+      2548,
+      2535
+     ]
+    },
+    {
+     "label": "p4B",
+     "cond": "B",
+     "inputLoopMs": 4999.8,
+     "latenessEndMs": 8.1,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 16.6,
+     "rafMax": 25,
+     "presentN": 300,
+     "presentWall": 36.2,
+     "presentCpu": 36.3,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 546,
+     "gpuRasterMs": 252.60000000000002,
+     "graphRaster": 545,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 8,
+      "rootBanner(overlap)": 140,
+      "react-flow__edges": 84,
+      "created-during-pan/unmapped": 229,
+      "react-flow__edge-path(overlap)": 4
+     },
+     "layersAtStart": 19,
+     "presentMax": 0.2,
+     "layers": 74,
+     "paintEdges": 64,
+     "paintNodes": 0,
+     "mainWall": 1047.6,
+     "gpuWall": 461.2,
+     "gpuCpu": 442.6,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5,
+      "p95": 8.2,
+      "max": 9.8
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 18.6,
+     "free": [
+      2501,
+      2518
+     ]
+    }
+   ]
+  },
+  "e5g-off-abba": {
+   "functional": true,
+   "errors": [],
+   "order": [
+    "A",
+    "B",
+    "B",
+    "A"
+   ],
+   "pathPoint": {
+    "x": 292,
+    "y": 70,
+    "cx": 312,
+    "cy": 154,
+    "d": 1.5,
+    "innerWidth": 621,
+    "innerHeight": 864
+   },
+   "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+   "memory": {
+    "before": 3461,
+    "minimum": 2078,
+    "aborted": false
+   },
+   "sameStartDom": true,
+   "pans": [
+    {
+     "label": "p1A",
+     "cond": "A",
+     "inputLoopMs": 6969.4,
+     "latenessEndMs": 2077.3,
+     "delivered": 40,
+     "gaps": 11,
+     "gapMs": 5883.2,
+     "rafP99": 1008.3,
+     "rafMax": 1941.5,
+     "presentN": 61,
+     "presentWall": 5645.1,
+     "presentCpu": 110.6,
+     "presentOver50": 10,
+     "presentInGaps": 5616.1,
+     "gapTotal": 5983.5,
+     "gpuRaster": 552,
+     "gpuRasterMs": 494.3,
+     "graphRaster": 551,
+     "rasterByDom": {
+      "react-flow": 80,
+      "react-flow__nodes": 418,
+      "canvasControls(overlap)": 10,
+      "rootBanner(overlap)": 20,
+      "react-flow__edges": 5,
+      "react-flow__edge-path(overlap)": 8,
+      "created-during-pan/unmapped": 10
+     },
+     "nodesLayer": {
+      "layerId": "15",
+      "parent": "1",
+      "w": 20694,
+      "h": 2690,
+      "drawsContent": true,
+      "paintCount": 1,
+      "node": {
+       "name": "DIV",
+       "class": "react-flow__nodes",
+       "id": null,
+       "dataId": null
+      },
+      "reasons": [
+       "Trivial3DTransform",
+       "WillChangeTransform"
+      ]
+     },
+     "layersAtStart": 27,
+     "presentMax": 0,
+     "layers": 15,
+     "paintEdges": 0,
+     "paintNodes": 0,
+     "mainWall": 588.5,
+     "gpuWall": 6307.4,
+     "gpuCpu": 738.9,
+     "eventToHandler": {
+      "n": 40,
+      "median": 6.6,
+      "p95": 989.7,
+      "max": 1894.6
+     },
+     "dom": {
+      "batches": 0,
+      "nodeAttach": 0,
+      "nodeDetach": 0,
+      "edgeAttach": 0,
+      "edgeDetach": 0
+     },
+     "startVp": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "7231/130",
+     "vpHash": 11,
+     "busy": 14.8,
+     "free": [
+      2462,
+      2490
+     ]
+    },
+    {
+     "label": "p2B",
+     "cond": "B",
+     "inputLoopMs": 4999,
+     "latenessEndMs": -1.1,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 8.5,
+     "rafMax": 8.5,
+     "presentN": 307,
+     "presentWall": 36.5,
+     "presentCpu": 35.3,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 362,
+     "gpuRasterMs": 146.3,
+     "graphRaster": 361,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 6,
+      "rootBanner(overlap)": 144,
+      "react-flow__edges": 2,
+      "react-flow__edge-path(overlap)": 6,
+      "created-during-pan/unmapped": 123
+     },
+     "layersAtStart": 24,
+     "presentMax": 0,
+     "layers": 10,
+     "paintEdges": 0,
+     "paintNodes": 0,
+     "mainWall": 850.9,
+     "gpuWall": 360.6,
+     "gpuCpu": 338.4,
+     "eventToHandler": {
+      "n": 40,
+      "median": 4.9,
+      "p95": 8.9,
+      "max": 9.1
+     },
+     "dom": {
+      "batches": 0,
+      "nodeAttach": 0,
+      "nodeDetach": 0,
+      "edgeAttach": 0,
+      "edgeDetach": 0
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "7231/130",
+     "vpHash": 11,
+     "busy": 19.8,
+     "free": [
+      2489,
+      2544
+     ]
+    },
+    {
+     "label": "p3B",
+     "cond": "B",
+     "inputLoopMs": 5000.7,
+     "latenessEndMs": 0.7,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 8.5,
+     "rafMax": 16.7,
+     "presentN": 313,
+     "presentWall": 38.3,
+     "presentCpu": 38.1,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 369,
+     "gpuRasterMs": 137.5,
+     "graphRaster": 368,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 6,
+      "rootBanner(overlap)": 151,
+      "react-flow__edges": 2,
+      "react-flow__edge-path(overlap)": 6,
+      "created-during-pan/unmapped": 123
+     },
+     "layersAtStart": 24,
+     "presentMax": 0,
+     "layers": 10,
+     "paintEdges": 0,
+     "paintNodes": 0,
+     "mainWall": 864.8,
+     "gpuWall": 346,
+     "gpuCpu": 325.6,
+     "eventToHandler": {
+      "n": 40,
+      "median": 4.4,
+      "p95": 8.2,
+      "max": 8.7
+     },
+     "dom": {
+      "batches": 0,
+      "nodeAttach": 0,
+      "nodeDetach": 0,
+      "edgeAttach": 0,
+      "edgeDetach": 0
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "7231/130",
+     "vpHash": 11,
+     "busy": 20.2,
+     "free": [
+      2586,
+      2583
+     ]
+    },
+    {
+     "label": "p4A",
+     "cond": "A",
+     "inputLoopMs": 5000.9,
+     "latenessEndMs": 0.9,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 8.5,
+     "rafMax": 16.6,
+     "presentN": 309,
+     "presentWall": 55.8,
+     "presentCpu": 55.1,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 376,
+     "gpuRasterMs": 187.5,
+     "graphRaster": 374,
+     "rasterByDom": {
+      "react-flow": 80,
+      "canvasControls(overlap)": 6,
+      "rootBanner(overlap)": 147,
+      "react-flow__edges": 3,
+      "react-flow__edge-path(overlap)": 8,
+      "react-flow__nodes": 8,
+      "created-during-pan/unmapped": 122
+     },
+     "nodesLayer": {
+      "layerId": "397",
+      "parent": "1",
+      "w": 20694,
+      "h": 2690,
+      "drawsContent": true,
+      "paintCount": 1,
+      "node": {
+       "name": "DIV",
+       "class": "react-flow__nodes",
+       "id": null,
+       "dataId": null
+      },
+      "reasons": [
+       "Trivial3DTransform",
+       "WillChangeTransform"
+      ]
+     },
+     "layersAtStart": 27,
+     "presentMax": 0,
+     "layers": 11,
+     "paintEdges": 0,
+     "paintNodes": 0,
+     "mainWall": 1077.7,
+     "gpuWall": 426.7,
+     "gpuCpu": 411.7,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5.6,
+      "p95": 10,
+      "max": 10.5
+     },
+     "dom": {
+      "batches": 0,
+      "nodeAttach": 0,
+      "nodeDetach": 0,
+      "edgeAttach": 0,
+      "edgeDetach": 0
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "7231/130",
+     "vpHash": 11,
+     "busy": 21.4,
+     "free": [
+      2581,
+      2539
+     ]
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,868 @@
+{
+ "runs": {
+  "e5f-on-abba": {
+   "functional": true,
+   "errors": [],
+   "order": [
+    "A",
+    "B",
+    "B",
+    "A"
+   ],
+   "pathPoint": {
+    "x": 292,
+    "y": 70,
+    "cx": 312,
+    "cy": 154,
+    "d": 1.5,
+    "innerWidth": 621,
+    "innerHeight": 864
+   },
+   "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+   "memory": {
+    "before": 3301,
+    "minimum": 2039,
+    "aborted": false
+   },
+   "sameStartDom": true,
+   "pans": [
+    {
+     "label": "p1A",
+     "cond": "A",
+     "inputLoopMs": 9424.4,
+     "latenessEndMs": 4368.8,
+     "delivered": 40,
+     "gaps": 32,
+     "gapMs": 8907.9,
+     "rafP99": 866.7,
+     "rafMax": 891.6,
+     "presentN": 55,
+     "presentWall": 8537.6,
+     "presentCpu": 202.4,
+     "presentOver50": 31,
+     "presentInGaps": 8254,
+     "gapTotal": 8982,
+     "gpuRaster": 826,
+     "gpuRasterMs": 892.3,
+     "graphRaster": 917,
+     "rasterTopLayers": [
+      [
+       "15",
+       613
+      ],
+      [
+       "136",
+       83
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "18",
+       15
+      ]
+     ],
+     "layers": 77,
+     "paintEdges": 64,
+     "paintNodes": 256,
+     "mainWall": 628.3,
+     "gpuWall": 9592.5,
+     "gpuCpu": 1228.6,
+     "eventToHandler": {
+      "n": 40,
+      "median": 141.2,
+      "p95": 617.6,
+      "max": 865.8
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 13.9,
+     "free": [
+      2328,
+      2273
+     ]
+    },
+    {
+     "label": "p2B",
+     "cond": "B",
+     "inputLoopMs": 8139.4,
+     "latenessEndMs": 3231.8,
+     "delivered": 40,
+     "gaps": 30,
+     "gapMs": 7425,
+     "rafP99": 633.5,
+     "rafMax": 675,
+     "presentN": 57,
+     "presentWall": 7117.7,
+     "presentCpu": 203.3,
+     "presentOver50": 30,
+     "presentInGaps": 7066,
+     "gapTotal": 7555.2,
+     "gpuRaster": 600,
+     "gpuRasterMs": 699.8,
+     "graphRaster": 624,
+     "rasterTopLayers": [
+      [
+       "15",
+       504
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "18",
+       20
+      ],
+      [
+       "17",
+       9
+      ]
+     ],
+     "layers": 12,
+     "paintEdges": 0,
+     "paintNodes": 256,
+     "mainWall": 670.7,
+     "gpuWall": 7948.3,
+     "gpuCpu": 1011.6,
+     "eventToHandler": {
+      "n": 40,
+      "median": 126.8,
+      "p95": 507.1,
+      "max": 668.3
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 14.9,
+     "free": [
+      2314,
+      2296
+     ]
+    },
+    {
+     "label": "p3B",
+     "cond": "B",
+     "inputLoopMs": 8370.7,
+     "latenessEndMs": 3334.7,
+     "delivered": 40,
+     "gaps": 32,
+     "gapMs": 7833.7,
+     "rafP99": 633.2,
+     "rafMax": 683.5,
+     "presentN": 52,
+     "presentWall": 7416.7,
+     "presentCpu": 189.7,
+     "presentOver50": 31,
+     "presentInGaps": 7393.6,
+     "gapTotal": 7913,
+     "gpuRaster": 591,
+     "gpuRasterMs": 683,
+     "graphRaster": 647,
+     "rasterTopLayers": [
+      [
+       "15",
+       534
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "18",
+       14
+      ],
+      [
+       "17",
+       9
+      ]
+     ],
+     "layers": 12,
+     "paintEdges": 0,
+     "paintNodes": 256,
+     "mainWall": 627.3,
+     "gpuWall": 8231.1,
+     "gpuCpu": 983.3,
+     "eventToHandler": {
+      "n": 40,
+      "median": 112.6,
+      "p95": 452,
+      "max": 662.6
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 12.3,
+     "free": [
+      2305,
+      2298
+     ]
+    },
+    {
+     "label": "p4A",
+     "cond": "A",
+     "inputLoopMs": 8646,
+     "latenessEndMs": 3612.6,
+     "delivered": 40,
+     "gaps": 31,
+     "gapMs": 8016.4,
+     "rafP99": 558.4,
+     "rafMax": 641.7,
+     "presentN": 53,
+     "presentWall": 7632.5,
+     "presentCpu": 204.5,
+     "presentOver50": 31,
+     "presentInGaps": 7593.9,
+     "gapTotal": 8157.6,
+     "gpuRaster": 787,
+     "gpuRasterMs": 796.9,
+     "graphRaster": 845,
+     "rasterTopLayers": [
+      [
+       "15",
+       540
+      ],
+      [
+       "333",
+       84
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "18",
+       17
+      ]
+     ],
+     "layers": 77,
+     "paintEdges": 64,
+     "paintNodes": 256,
+     "mainWall": 621.4,
+     "gpuWall": 8590,
+     "gpuCpu": 1143.9,
+     "eventToHandler": {
+      "n": 40,
+      "median": 137.3,
+      "p95": 503.9,
+      "max": 616.3
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 14,
+     "free": [
+      2305,
+      2314
+     ]
+    }
+   ]
+  },
+  "e5f-on-baab": {
+   "functional": true,
+   "errors": [],
+   "order": [
+    "B",
+    "A",
+    "A",
+    "B"
+   ],
+   "pathPoint": {
+    "x": 292,
+    "y": 70,
+    "cx": 312,
+    "cy": 154,
+    "d": 1.5,
+    "innerWidth": 621,
+    "innerHeight": 864
+   },
+   "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+   "memory": {
+    "before": 3348,
+    "minimum": 2023,
+    "aborted": false
+   },
+   "sameStartDom": true,
+   "pans": [
+    {
+     "label": "p1B",
+     "cond": "B",
+     "inputLoopMs": 8626.9,
+     "latenessEndMs": 3576,
+     "delivered": 40,
+     "gaps": 31,
+     "gapMs": 8083.2,
+     "rafP99": 483.3,
+     "rafMax": 524.9,
+     "presentN": 54,
+     "presentWall": 7643.3,
+     "presentCpu": 196.5,
+     "presentOver50": 31,
+     "presentInGaps": 7589.6,
+     "gapTotal": 8159.2,
+     "gpuRaster": 614,
+     "gpuRasterMs": 752.2,
+     "graphRaster": 654,
+     "rasterTopLayers": [
+      [
+       "15",
+       542
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "21",
+       12
+      ],
+      [
+       "20",
+       10
+      ]
+     ],
+     "layers": 12,
+     "paintEdges": 0,
+     "paintNodes": 256,
+     "mainWall": 635.7,
+     "gpuWall": 8542.8,
+     "gpuCpu": 1065,
+     "eventToHandler": {
+      "n": 40,
+      "median": 139.5,
+      "p95": 452.3,
+      "max": 498.9
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 16.1,
+     "free": [
+      2520,
+      2481
+     ]
+    },
+    {
+     "label": "p2A",
+     "cond": "A",
+     "inputLoopMs": 8531.3,
+     "latenessEndMs": 3626.7,
+     "delivered": 40,
+     "gaps": 31,
+     "gapMs": 7850.2,
+     "rafP99": 558.3,
+     "rafMax": 633.1,
+     "presentN": 56,
+     "presentWall": 7459.5,
+     "presentCpu": 200.2,
+     "presentOver50": 31,
+     "presentInGaps": 7409.2,
+     "gapTotal": 8029.3,
+     "gpuRaster": 791,
+     "gpuRasterMs": 822.5,
+     "graphRaster": 836,
+     "rasterTopLayers": [
+      [
+       "15",
+       540
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "253",
+       76
+      ],
+      [
+       "21",
+       16
+      ]
+     ],
+     "layers": 77,
+     "paintEdges": 64,
+     "paintNodes": 256,
+     "mainWall": 623.1,
+     "gpuWall": 8428.1,
+     "gpuCpu": 1142.1,
+     "eventToHandler": {
+      "n": 40,
+      "median": 138.6,
+      "p95": 500,
+      "max": 607.2
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 12.2,
+     "free": [
+      2482,
+      2445
+     ]
+    },
+    {
+     "label": "p3A",
+     "cond": "A",
+     "inputLoopMs": 8475,
+     "latenessEndMs": 3442.2,
+     "delivered": 40,
+     "gaps": 30,
+     "gapMs": 7891.8,
+     "rafP99": 533.4,
+     "rafMax": 633.2,
+     "presentN": 51,
+     "presentWall": 7417.1,
+     "presentCpu": 201.4,
+     "presentOver50": 30,
+     "presentInGaps": 7392.5,
+     "gapTotal": 7980.3,
+     "gpuRaster": 774,
+     "gpuRasterMs": 805.0999999999999,
+     "graphRaster": 817,
+     "rasterTopLayers": [
+      [
+       "15",
+       525
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "253",
+       76
+      ],
+      [
+       "21",
+       12
+      ]
+     ],
+     "layers": 77,
+     "paintEdges": 64,
+     "paintNodes": 256,
+     "mainWall": 606.1,
+     "gpuWall": 8379.9,
+     "gpuCpu": 1135.6,
+     "eventToHandler": {
+      "n": 40,
+      "median": 131.6,
+      "p95": 460.4,
+      "max": 605.9
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 14.9,
+     "free": [
+      2454,
+      2568
+     ]
+    },
+    {
+     "label": "p4B",
+     "cond": "B",
+     "inputLoopMs": 8648.4,
+     "latenessEndMs": 3607,
+     "delivered": 40,
+     "gaps": 33,
+     "gapMs": 8200,
+     "rafP99": 475,
+     "rafMax": 616.7,
+     "presentN": 49,
+     "presentWall": 7709.6,
+     "presentCpu": 169.9,
+     "presentOver50": 33,
+     "presentInGaps": 7657.9,
+     "gapTotal": 8269.2,
+     "gpuRaster": 594,
+     "gpuRasterMs": 721.5999999999999,
+     "graphRaster": 651,
+     "rasterTopLayers": [
+      [
+       "15",
+       540
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "21",
+       13
+      ],
+      [
+       "20",
+       9
+      ]
+     ],
+     "layers": 12,
+     "paintEdges": 0,
+     "paintNodes": 256,
+     "mainWall": 599.6,
+     "gpuWall": 8559.7,
+     "gpuCpu": 995.6,
+     "eventToHandler": {
+      "n": 40,
+      "median": 146.6,
+      "p95": 450.5,
+      "max": 599.6
+     },
+     "dom": {
+      "batches": 32,
+      "nodeAttach": 128,
+      "nodeDetach": 128,
+      "edgeAttach": 256,
+      "edgeDetach": 256
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "2260/41",
+     "vpHash": 11,
+     "busy": 15,
+     "free": [
+      2596,
+      2671
+     ]
+    }
+   ]
+  },
+  "e5f-off-abba": {
+   "functional": true,
+   "errors": [],
+   "order": [
+    "A",
+    "B",
+    "B",
+    "A"
+   ],
+   "pathPoint": {
+    "x": 292,
+    "y": 70,
+    "cx": 312,
+    "cy": 154,
+    "d": 1.5,
+    "innerWidth": 621,
+    "innerHeight": 864
+   },
+   "graph": "09b3c6b2d578b41353645055476c967e4868c8354b7495708ea6ae7b998b33bc",
+   "memory": {
+    "before": 3416,
+    "minimum": 2011,
+    "aborted": false
+   },
+   "sameStartDom": true,
+   "pans": [
+    {
+     "label": "p1A",
+     "cond": "A",
+     "inputLoopMs": 5004.4,
+     "latenessEndMs": 4.1,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 8.5,
+     "rafMax": 24.8,
+     "presentN": 301,
+     "presentWall": 38.1,
+     "presentCpu": 38.2,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 348,
+     "gpuRasterMs": 150.2,
+     "graphRaster": 348,
+     "rasterTopLayers": [
+      [
+       "18",
+       144
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "414",
+       60
+      ],
+      [
+       "416",
+       57
+      ]
+     ],
+     "layers": 7,
+     "paintEdges": 0,
+     "paintNodes": 0,
+     "mainWall": 1097.5,
+     "gpuWall": 402.9,
+     "gpuCpu": 385.4,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5.5,
+      "p95": 10.1,
+      "max": 10.6
+     },
+     "dom": {
+      "batches": 0,
+      "nodeAttach": 0,
+      "nodeDetach": 0,
+      "edgeAttach": 0,
+      "edgeDetach": 0
+     },
+     "startVp": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "7231/130",
+     "vpHash": 11,
+     "busy": 19.5,
+     "free": [
+      2463,
+      2483
+     ]
+    },
+    {
+     "label": "p2B",
+     "cond": "B",
+     "inputLoopMs": 5004.4,
+     "latenessEndMs": 4.3,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 8.5,
+     "rafMax": 24.9,
+     "presentN": 301,
+     "presentWall": 38.7,
+     "presentCpu": 38.5,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 350,
+     "gpuRasterMs": 145.1,
+     "graphRaster": 349,
+     "rasterTopLayers": [
+      [
+       "18",
+       144
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "420",
+       60
+      ],
+      [
+       "418",
+       57
+      ]
+     ],
+     "layers": 7,
+     "paintEdges": 0,
+     "paintNodes": 0,
+     "mainWall": 1119.4,
+     "gpuWall": 397.7,
+     "gpuCpu": 380.4,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5.5,
+      "p95": 9.9,
+      "max": 10.8
+     },
+     "dom": {
+      "batches": 0,
+      "nodeAttach": 0,
+      "nodeDetach": 0,
+      "edgeAttach": 0,
+      "edgeDetach": 0
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "7231/130",
+     "vpHash": 11,
+     "busy": 24,
+     "free": [
+      2524,
+      2500
+     ]
+    },
+    {
+     "label": "p3B",
+     "cond": "B",
+     "inputLoopMs": 5007.4,
+     "latenessEndMs": -0.7,
+     "delivered": 40,
+     "gaps": 2,
+     "gapMs": 241.7,
+     "rafP99": 8.5,
+     "rafMax": 175.2,
+     "presentN": 302,
+     "presentWall": 284.1,
+     "presentCpu": 51.8,
+     "presentOver50": 2,
+     "presentInGaps": 246.2,
+     "gapTotal": 251.8,
+     "gpuRaster": 364,
+     "gpuRasterMs": 170.29999999999998,
+     "graphRaster": 363,
+     "rasterTopLayers": [
+      [
+       "18",
+       143
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "431",
+       60
+      ],
+      [
+       "435",
+       31
+      ]
+     ],
+     "layers": 10,
+     "paintEdges": 0,
+     "paintNodes": 0,
+     "mainWall": 1044.4,
+     "gpuWall": 663.5,
+     "gpuCpu": 413.4,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5.7,
+      "p95": 11.5,
+      "max": 66.7
+     },
+     "dom": {
+      "batches": 0,
+      "nodeAttach": 0,
+      "nodeDetach": 0,
+      "edgeAttach": 0,
+      "edgeDetach": 0
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "7231/130",
+     "vpHash": 11,
+     "busy": 20.5,
+     "free": [
+      2494,
+      2544
+     ]
+    },
+    {
+     "label": "p4A",
+     "cond": "A",
+     "inputLoopMs": 5006.3,
+     "latenessEndMs": 6.2,
+     "delivered": 40,
+     "gaps": 0,
+     "gapMs": 0,
+     "rafP99": 8.5,
+     "rafMax": 16.7,
+     "presentN": 303,
+     "presentWall": 35.1,
+     "presentCpu": 35,
+     "presentOver50": 0,
+     "presentInGaps": 0,
+     "gapTotal": 0,
+     "gpuRaster": 364,
+     "gpuRasterMs": 165.2,
+     "graphRaster": 363,
+     "rasterTopLayers": [
+      [
+       "18",
+       144
+      ],
+      [
+       "12",
+       80
+      ],
+      [
+       "446",
+       61
+      ],
+      [
+       "448",
+       28
+      ]
+     ],
+     "layers": 12,
+     "paintEdges": 0,
+     "paintNodes": 0,
+     "mainWall": 1133.8,
+     "gpuWall": 416.7,
+     "gpuCpu": 398.8,
+     "eventToHandler": {
+      "n": 40,
+      "median": 5.3,
+      "p95": 9.8,
+      "max": 11.7
+     },
+     "dom": {
+      "batches": 0,
+      "nodeAttach": 0,
+      "nodeDetach": 0,
+      "edgeAttach": 0,
+      "edgeDetach": 0
+     },
+     "startVp": "{\"x\":-739.0999999999999,\"y\":117.6,\"zoom\":0.1}",
+     "startDom": "7231/130",
+     "vpHash": 11,
+     "busy": 20.6,
+     "free": [
+      2520,
+      2479
+     ]
+    }
+   ]
+  }
+ }
+}

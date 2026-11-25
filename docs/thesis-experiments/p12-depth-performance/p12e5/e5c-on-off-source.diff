@@ -1,0 +1,13 @@
+﻿diff --git a/C:/dev/p13/p12e5c-on-src/webview-ui/src/components/CanvasPane.tsx b/C:/dev/p13/p12e5b-off-src/webview-ui/src/components/CanvasPane.tsx
+index ecc8d58..6377c96 100644
+--- a/C:/dev/p13/p12e5c-on-src/webview-ui/src/components/CanvasPane.tsx
++++ b/C:/dev/p13/p12e5b-off-src/webview-ui/src/components/CanvasPane.tsx
+@@ -3441,7 +3441,7 @@ export const CanvasPane = memo(function CanvasPane({
+               onNodeContextMenu={handleNodeContextMenu}
+               onPaneClick={onClearSelection}
+               fitView
+-              onlyRenderVisibleElements={!renderAllForExport}
++              onlyRenderVisibleElements={false && !renderAllForExport}
+               minZoom={0.1}
+               maxZoom={2.2}
+               proOptions={{ hideAttribution: true }}

@@ -1,0 +1,2194 @@
+{
+ "dir": "e5f-on-baab",
+ "variant": "virtualization-on",
+ "panMs": 8540,
+ "clock": {
+  "marks": 30,
+  "webToTraceSpreadMs": 0.1,
+  "nodeUncertaintyMs": 0.9,
+  "nodeDriftMs": 0
+ },
+ "traced": {
+  "processes": [
+   {
+    "pid": 3440,
+    "name": "Renderer",
+    "threads": [
+     "Compositor",
+     "CrRendererMain",
+     "PerfettoTrace",
+     "ServiceWorker thread",
+     "Chrome_ChildIOThread",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolServiceThread"
+    ]
+   },
+   {
+    "pid": 4024,
+    "name": "Utility",
+    "threads": [
+     "PerfettoTrace",
+     "Chrome_ChildIOThread",
+     "node.CrUtilityMain"
+    ]
+   },
+   {
+    "pid": 6376,
+    "name": "Browser",
+    "threads": [
+     "PerfettoTrace",
+     "CrBrowserMain",
+     "Chrome_IOThread",
+     "ThreadPoolServiceThread",
+     "ThreadPoolForegroundWorker",
+     "Chrome_DevToolsHandlerThread"
+    ]
+   },
+   {
+    "pid": 7924,
+    "name": "Service: network.mojom.NetworkService",
+    "threads": [
+     "Chrome_ChildIOThread",
+     "PerfettoTrace",
+     "network.CrUtilityMain"
+    ]
+   },
+   {
+    "pid": 15300,
+    "name": "Utility",
+    "threads": [
+     "Chrome_ChildIOThread",
+     "PerfettoTrace",
+     "node.CrUtilityMain"
+    ]
+   },
+   {
+    "pid": 15676,
+    "name": "Service: tracing.mojom.TracingService",
+    "threads": [
+     "PerfettoTrace",
+     "tracing.CrUtilityMain",
+     "Chrome_ChildIOThread",
+     "ThreadPoolForegroundWorker"
+    ]
+   },
+   {
+    "pid": 16320,
+    "name": "Renderer",
+    "threads": [
+     "Compositor",
+     "DedicatedWorker thread",
+     "CrRendererMain",
+     "Chrome_ChildIOThread",
+     "PerfettoTrace",
+     "DedicatedWorker thread",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolServiceThread"
+    ]
+   },
+   {
+    "pid": 17544,
+    "name": "Utility",
+    "threads": [
+     "Chrome_ChildIOThread",
+     "PerfettoTrace",
+     "node.CrUtilityMain"
+    ]
+   },
+   {
+    "pid": 25644,
+    "name": "GPU Process",
+    "threads": [
+     "Chrome_ChildIOThread",
+     "PerfettoTrace",
+     "GpuVSyncThread",
+     "VizCompositorThread",
+     "CrGpuMain"
+    ]
+   }
+  ],
+  "graphWebview": {
+   "pid": 3440,
+   "thread": "CrRendererMain"
+  },
+  "bufferUsage": 0.0374167375266552,
+  "events": 260427,
+  "bytes": 59046568
+ },
+ "cond": "A",
+ "index": 2,
+ "checks": {
+  "viewportRestored": true,
+  "topologySame": true,
+  "topologyIsStart": true,
+  "startViewport": {
+   "x": -739.0999999999999,
+   "y": 117.6,
+   "zoom": 0.1
+  },
+  "allDelivered": true,
+  "suppressed": false,
+  "nodesVisible": true,
+  "edgeVisibleAfterRestore": 152,
+  "edgesBefore": {
+   "style": false,
+   "svgs": 2,
+   "groups": 76,
+   "visiblePaths": 152,
+   "edgeLabels": 0,
+   "domNodes": 41,
+   "nodesHidden": 0
+  },
+  "domNodesSame": true
+ },
+ "free": [
+  2482,
+  2445
+ ],
+ "raf": {
+  "inputLoopMs": 8531.3,
+  "callSumMs": 7852.3,
+  "callMaxMs": 617.4,
+  "gaps": 31,
+  "gapMs": 7850.2,
+  "p99": 558.3,
+  "max": 633.1,
+  "systemBusy": 12.2
+ },
+ "latenessEndMs": 3626.7,
+ "threads": {
+  "rendererMain": {
+   "tasks": 1174,
+   "wallMs": 623.1,
+   "cpuMs": 567,
+   "maxMs": 25.8
+  },
+  "rendererCompositor": {
+   "tasks": 1046,
+   "wallMs": 153.8,
+   "cpuMs": 125.2,
+   "maxMs": 3.2
+  },
+  "gpuMain": {
+   "tasks": 840,
+   "wallMs": 8428.1,
+   "cpuMs": 1142.1,
+   "maxMs": 603.2
+  },
+  "vizCompositor": {
+   "tasks": 1394,
+   "wallMs": 121.1,
+   "cpuMs": 112.5,
+   "maxMs": 3.2
+  }
+ },
+ "rendererMainEvents": {
+  "EventDispatch": {
+   "n": 289,
+   "ms": 176.6,
+   "max": 8.9
+  },
+  "FunctionCall": {
+   "n": 1338,
+   "ms": 268,
+   "max": 6.1
+  },
+  "FireAnimationFrame": {
+   "n": 198,
+   "ms": 12.1,
+   "max": 0.3
+  },
+  "TimerFire": {
+   "n": 34,
+   "ms": 2.9,
+   "max": 0.2
+  },
+  "UpdateLayoutTree": {
+   "n": 70,
+   "ms": 29.2,
+   "max": 1.9
+  },
+  "Layout": {
+   "n": 40,
+   "ms": 18.5,
+   "max": 1.4
+  },
+  "PrePaint": {
+   "n": 268,
+   "ms": 15.4,
+   "max": 0.6
+  },
+  "Paint": {
+   "n": 441,
+   "ms": 52.3,
+   "max": 1.3
+  },
+  "Layerize": {
+   "n": 79,
+   "ms": 49.9,
+   "max": 2.6
+  },
+  "Commit": {
+   "n": 79,
+   "ms": 21.7,
+   "max": 1.9
+  },
+  "MinorGC": {
+   "n": 4,
+   "ms": 7.9,
+   "max": 2.5
+  }
+ },
+ "gpuEvents": {
+  "RasterDecoderImpl::DoRasterCHROMIUM": {
+   "n": 791,
+   "wallMs": 315.1,
+   "cpuMs": 310.5,
+   "maxMs": 3.1
+  },
+  "RasterDecoderImpl::DoEndRasterCHROMIUM": {
+   "n": 791,
+   "wallMs": 507.4,
+   "cpuMs": 495.6,
+   "maxMs": 4.1
+  },
+  "SkiaOutputSurfaceImplOnGpu::FinishPaintRenderPass": {
+   "n": 151,
+   "wallMs": 51.5,
+   "cpuMs": 51,
+   "maxMs": 1.4
+  },
+  "SkiaOutputSurfaceImplOnGpu::SwapBuffers": {
+   "n": 56,
+   "wallMs": 7470.3,
+   "cpuMs": 209.7,
+   "maxMs": 603
+  },
+  "DXGISwapChainImageBacking::Present": {
+   "n": 56,
+   "wallMs": 7459.7,
+   "cpuMs": 200.4,
+   "maxMs": 602.8
+  }
+ },
+ "rasterTasks": 836,
+ "paintByNodeMs": {
+  "#document": 32.2,
+  "svg class='react-flow__background'": 3.4,
+  "DIV class='cgNode cgNode--function'": 0.1,
+  "DIV class='react-flow__node react-flow__node-code selectable'": 5.8,
+  "svg class='react-flow__edges react-flow__container'": 8.1,
+  "DIV class='canvasControls canvasOverlay'": 0.4,
+  "BUTTON class='iconBtn'": 0,
+  "svg class='lucide lucide-crosshair'": 0,
+  "DIV class='rootBanner canvasOverlay'": 0.3
+ },
+ "domSteps": [
+  [
+   4,
+   6,
+   8,
+   12
+  ],
+  [
+   6,
+   4,
+   12,
+   8
+  ],
+  [
+   2,
+   4,
+   4,
+   8
+  ],
+  [
+   4,
+   2,
+   8,
+   4
+  ],
+  [
+   2,
+   4,
+   4,
+   8
+  ],
+  [
+   4,
+   2,
+   8,
+   4
+  ],
+  [
+   4,
+   6,
+   8,
+   12
+  ],
+  [
+   6,
+   4,
+   12,
+   8
+  ],
+  [
+   4,
+   6,
+   8,
+   12
+  ],
+  [
+   6,
+   4,
+   12,
+   8
+  ],
+  [
+   4,
+   4,
+   8,
+   8
+  ],
+  [
+   2,
+   2,
+   4,
+   4
+  ],
+  [
+   2,
+   2,
+   4,
+   4
+  ],
+  [
+   4,
+   4,
+   8,
+   8
+  ],
+  [
+   4,
+   6,
+   8,
+   12
+  ],
+  [
+   6,
+   4,
+   12,
+   8
+  ],
+  [
+   4,
+   6,
+   8,
+   12
+  ],
+  [
+   6,
+   4,
+   12,
+   8
+  ],
+  [
+   2,
+   4,
+   4,
+   8
+  ],
+  [
+   4,
+   2,
+   8,
+   4
+  ],
+  [
+   2,
+   4,
+   4,
+   8
+  ],
+  [
+   4,
+   2,
+   8,
+   4
+  ],
+  [
+   4,
+   6,
+   8,
+   12
+  ],
+  [
+   6,
+   4,
+   12,
+   8
+  ],
+  [
+   4,
+   6,
+   8,
+   12
+  ],
+  [
+   6,
+   4,
+   12,
+   8
+  ],
+  [
+   4,
+   4,
+   8,
+   8
+  ],
+  [
+   2,
+   2,
+   4,
+   4
+  ],
+  [
+   2,
+   2,
+   4,
+   4
+  ],
+  [
+   4,
+   4,
+   8,
+   8
+  ],
+  [
+   4,
+   6,
+   8,
+   12
+  ],
+  [
+   6,
+   4,
+   12,
+   8
+  ]
+ ],
+ "viewports": [
+  "transform: translate(-653.1px, 133.6px) scale(0.1);",
+  "transform: translate(-575.1px, 149.6px) scale(0.1);",
+  "transform: translate(-513.1px, 161.6px) scale(0.1);",
+  "transform: translate(-473.1px, 169.6px) scale(0.1);",
+  "transform: translate(-459.1px, 172.6px) scale(0.1);",
+  "transform: translate(-473.1px, 169.6px) scale(0.1);",
+  "transform: translate(-513.1px, 161.6px) scale(0.1);",
+  "transform: translate(-575.1px, 149.6px) scale(0.1);",
+  "transform: translate(-653.1px, 133.6px) scale(0.1);",
+  "transform: translate(-739.1px, 117.6px) scale(0.1);",
+  "transform: translate(-826.1px, 100.6px) scale(0.1);",
+  "transform: translate(-904.1px, 84.6px) scale(0.1);",
+  "transform: translate(-966.1px, 72.6px) scale(0.1);",
+  "transform: translate(-1006.1px, 64.6px) scale(0.1);",
+  "transform: translate(-1019.1px, 62.6px) scale(0.1);",
+  "transform: translate(-1006.1px, 64.6px) scale(0.1);",
+  "transform: translate(-966.1px, 72.6px) scale(0.1);",
+  "transform: translate(-904.1px, 84.6px) scale(0.1);",
+  "transform: translate(-826.1px, 100.6px) scale(0.1);",
+  "transform: translate(-739.1px, 117.6px) scale(0.1);",
+  "transform: translate(-653.1px, 133.6px) scale(0.1);",
+  "transform: translate(-575.1px, 149.6px) scale(0.1);",
+  "transform: translate(-513.1px, 161.6px) scale(0.1);",
+  "transform: translate(-473.1px, 169.6px) scale(0.1);",
+  "transform: translate(-459.1px, 172.6px) scale(0.1);",
+  "transform: translate(-473.1px, 169.6px) scale(0.1);",
+  "transform: translate(-513.1px, 161.6px) scale(0.1);",
+  "transform: translate(-575.1px, 149.6px) scale(0.1);",
+  "transform: translate(-653.1px, 133.6px) scale(0.1);",
+  "transform: translate(-739.1px, 117.6px) scale(0.1);",
+  "transform: translate(-826.1px, 100.6px) scale(0.1);",
+  "transform: translate(-904.1px, 84.6px) scale(0.1);",
+  "transform: translate(-966.1px, 72.6px) scale(0.1);",
+  "transform: translate(-1006.1px, 64.6px) scale(0.1);",
+  "transform: translate(-1019.1px, 62.6px) scale(0.1);",
+  "transform: translate(-1006.1px, 64.6px) scale(0.1);",
+  "transform: translate(-966.1px, 72.6px) scale(0.1);",
+  "transform: translate(-904.1px, 84.6px) scale(0.1);",
+  "transform: translate(-826.1px, 100.6px) scale(0.1);",
+  "transform: translate(-739.1px, 117.6px) scale(0.1);"
+ ],
+ "rasterTasksByLayer": {
+  "12": 80,
+  "15": 540,
+  "20": 10,
+  "21": 16,
+  "253": 76,
+  "257": 1,
+  "258": 1,
+  "259": 2,
+  "260": 2,
+  "261": 1,
+  "262": 1,
+  "263": 2,
+  "264": 2,
+  "265": 3,
+  "266": 1,
+  "267": 1,
+  "268": 1,
+  "269": 1,
+  "270": 1,
+  "271": 2,
+  "272": 2,
+  "273": 1,
+  "274": 1,
+  "275": 2,
+  "276": 2,
+  "277": 1,
+  "278": 1,
+  "279": 2,
+  "280": 2,
+  "281": 2,
+  "282": 2,
+  "283": 2,
+  "284": 2,
+  "285": 2,
+  "286": 2,
+  "287": 2,
+  "288": 2,
+  "289": 1,
+  "290": 1,
+  "291": 2,
+  "292": 2,
+  "293": 1,
+  "294": 1,
+  "295": 2,
+  "296": 2,
+  "297": 1,
+  "298": 1,
+  "299": 2,
+  "300": 2,
+  "301": 1,
+  "302": 1,
+  "303": 1,
+  "304": 1,
+  "305": 1,
+  "306": 1,
+  "307": 2,
+  "308": 2,
+  "309": 1,
+  "310": 1,
+  "311": 2,
+  "312": 2,
+  "313": 1,
+  "314": 1,
+  "315": 2,
+  "316": 2,
+  "317": 2,
+  "318": 2,
+  "319": 2,
+  "320": 2,
+  "321": 2,
+  "322": 2,
+  "323": 2,
+  "324": 2,
+  "325": 1,
+  "326": 1,
+  "327": 2,
+  "328": 2
+ },
+ "paintByNode": {
+  "#document": 49,
+  "svg class='react-flow__background'": 40,
+  "DIV class='cgNode cgNode--function'": 128,
+  "DIV class='react-flow__node react-flow__node-code selectable'": 128,
+  "svg class='react-flow__edges react-flow__container'": 64,
+  "DIV class='canvasControls canvasOverlay'": 8,
+  "BUTTON class='iconBtn'": 4,
+  "svg class='lucide lucide-crosshair'": 4,
+  "DIV class='rootBanner canvasOverlay'": 16
+ },
+ "gaps": {
+  "count": 32,
+  "totalMs": 8029.3,
+  "overlap": {
+   "main": 408.6,
+   "script": 208.4,
+   "styleLayout": 64.9,
+   "paint": 58.1,
+   "gc": 7.9,
+   "compositor": 98.6,
+   "rasterWorkers": 59.5,
+   "viz": 92.7,
+   "gpuTask": 8005.8,
+   "present": 7409.2,
+   "presentCpu": 203.6,
+   "inputCallInFlight": 7563.2
+  },
+  "rows": [
+   {
+    "startMs": 83.9,
+    "ms": 208.6,
+    "main": 12.6,
+    "script": 7,
+    "styleLayout": 3.2,
+    "paint": 0.4,
+    "gc": 0,
+    "compositor": 1.3,
+    "rasterWorkers": 3.4,
+    "viz": 3.9,
+    "gpuTask": 198.4,
+    "present": 196.4,
+    "presentCpu": 14.4,
+    "inputCallInFlight": 151.7,
+    "gpuRasters": 1,
+    "attachDetach": 10,
+    "presentShare": 94.2
+   },
+   {
+    "startMs": 417.7,
+    "ms": 185.5,
+    "main": 18.5,
+    "script": 11.1,
+    "styleLayout": 3.1,
+    "paint": 1.5,
+    "gc": 0,
+    "compositor": 5.6,
+    "rasterWorkers": 0.1,
+    "viz": 3.8,
+    "gpuTask": 185.5,
+    "present": 167.2,
+    "presentCpu": 12.7,
+    "inputCallInFlight": 97.8,
+    "gpuRasters": 25,
+    "attachDetach": 0,
+    "presentShare": 90.1
+   },
+   {
+    "startMs": 603.2,
+    "ms": 167,
+    "main": 19,
+    "script": 7.5,
+    "styleLayout": 2.3,
+    "paint": 4.2,
+    "gc": 2.5,
+    "compositor": 3.7,
+    "rasterWorkers": 3.2,
+    "viz": 2.3,
+    "gpuTask": 166.9,
+    "present": 158,
+    "presentCpu": 6.9,
+    "inputCallInFlight": 146.9,
+    "gpuRasters": 7,
+    "attachDetach": 0,
+    "presentShare": 94.6
+   },
+   {
+    "startMs": 770.2,
+    "ms": 273.1,
+    "main": 9.5,
+    "script": 3.8,
+    "styleLayout": 2.2,
+    "paint": 1.9,
+    "gc": 0,
+    "compositor": 2.1,
+    "rasterWorkers": 0.2,
+    "viz": 2,
+    "gpuTask": 273,
+    "present": 270.1,
+    "presentCpu": 4.9,
+    "inputCallInFlight": 271.5,
+    "gpuRasters": 4,
+    "attachDetach": 6,
+    "presentShare": 98.9
+   },
+   {
+    "startMs": 1056,
+    "ms": 107.1,
+    "main": 20.1,
+    "script": 9.7,
+    "styleLayout": 5.5,
+    "paint": 2.4,
+    "gc": 0,
+    "compositor": 6.3,
+    "rasterWorkers": 0.5,
+    "viz": 4.7,
+    "gpuTask": 107,
+    "present": 86.1,
+    "presentCpu": 2.1,
+    "inputCallInFlight": 107.1,
+    "gpuRasters": 16,
+    "attachDetach": 12,
+    "presentShare": 80.4
+   },
+   {
+    "startMs": 1209.8,
+    "ms": 121.6,
+    "main": 7.5,
+    "script": 4.3,
+    "styleLayout": 1.9,
+    "paint": 0.5,
+    "gc": 0,
+    "compositor": 0.9,
+    "rasterWorkers": 0.5,
+    "viz": 0.4,
+    "gpuTask": 114.6,
+    "present": 84.4,
+    "presentCpu": 11.3,
+    "inputCallInFlight": 121.6,
+    "gpuRasters": 49,
+    "attachDetach": 20,
+    "presentShare": 69.4
+   },
+   {
+    "startMs": 1357.9,
+    "ms": 81.9,
+    "main": 14.3,
+    "script": 8.2,
+    "styleLayout": 1.9,
+    "paint": 2.5,
+    "gc": 0,
+    "compositor": 2.8,
+    "rasterWorkers": 1.6,
+    "viz": 1.8,
+    "gpuTask": 81.9,
+    "present": 43,
+    "presentCpu": 0.9,
+    "inputCallInFlight": 71.9,
+    "gpuRasters": 44,
+    "attachDetach": 20,
+    "presentShare": 52.5
+   },
+   {
+    "startMs": 1446.6,
+    "ms": 161.4,
+    "main": 9.8,
+    "script": 6,
+    "styleLayout": 1.6,
+    "paint": 0.4,
+    "gc": 0,
+    "compositor": 2.9,
+    "rasterWorkers": 2.3,
+    "viz": 2.7,
+    "gpuTask": 161.3,
+    "present": 129.3,
+    "presentCpu": 2.8,
+    "inputCallInFlight": 96.1,
+    "gpuRasters": 39,
+    "attachDetach": 18,
+    "presentShare": 80.1
+   },
+   {
+    "startMs": 1608,
+    "ms": 482.8,
+    "main": 15.4,
+    "script": 8.5,
+    "styleLayout": 1.4,
+    "paint": 2.3,
+    "gc": 0,
+    "compositor": 5.1,
+    "rasterWorkers": 3.1,
+    "viz": 2.8,
+    "gpuTask": 482.7,
+    "present": 453.7,
+    "presentCpu": 6.2,
+    "inputCallInFlight": 473.5,
+    "gpuRasters": 26,
+    "attachDetach": 12,
+    "presentShare": 94
+   },
+   {
+    "startMs": 2096.5,
+    "ms": 479.3,
+    "main": 14.3,
+    "script": 8.9,
+    "styleLayout": 1.5,
+    "paint": 0.4,
+    "gc": 2,
+    "compositor": 2.9,
+    "rasterWorkers": 2.1,
+    "viz": 5.4,
+    "gpuTask": 479.2,
+    "present": 453.9,
+    "presentCpu": 6.6,
+    "inputCallInFlight": 464.3,
+    "gpuRasters": 24,
+    "attachDetach": 4,
+    "presentShare": 94.7
+   },
+   {
+    "startMs": 2575.8,
+    "ms": 422.4,
+    "main": 8.7,
+    "script": 3.1,
+    "styleLayout": 0.6,
+    "paint": 1.9,
+    "gc": 0,
+    "compositor": 2,
+    "rasterWorkers": 0.3,
+    "viz": 2.2,
+    "gpuTask": 421.2,
+    "present": 405.8,
+    "presentCpu": 9.4,
+    "inputCallInFlight": 410.3,
+    "gpuRasters": 19,
+    "attachDetach": 0,
+    "presentShare": 96.1
+   },
+   {
+    "startMs": 3001.5,
+    "ms": 215.8,
+    "main": 7.7,
+    "script": 3.8,
+    "styleLayout": 1.5,
+    "paint": 0.4,
+    "gc": 0,
+    "compositor": 2.3,
+    "rasterWorkers": 2.9,
+    "viz": 4.5,
+    "gpuTask": 215.6,
+    "present": 209.5,
+    "presentCpu": 7.2,
+    "inputCallInFlight": 195.2,
+    "gpuRasters": 4,
+    "attachDetach": 4,
+    "presentShare": 97.1
+   },
+   {
+    "startMs": 3217.3,
+    "ms": 212.1,
+    "main": 11.8,
+    "script": 6.5,
+    "styleLayout": 1.3,
+    "paint": 2,
+    "gc": 0,
+    "compositor": 2.6,
+    "rasterWorkers": 2.6,
+    "viz": 1.7,
+    "gpuTask": 211.3,
+    "present": 206,
+    "presentCpu": 3.4,
+    "inputCallInFlight": 203.1,
+    "gpuRasters": 8,
+    "attachDetach": 12,
+    "presentShare": 97.1
+   },
+   {
+    "startMs": 3436.2,
+    "ms": 161.2,
+    "main": 8.8,
+    "script": 3.4,
+    "styleLayout": 2.8,
+    "paint": 0.4,
+    "gc": 0,
+    "compositor": 1.9,
+    "rasterWorkers": 1.4,
+    "viz": 4.5,
+    "gpuTask": 161.1,
+    "present": 151.3,
+    "presentCpu": 3.3,
+    "inputCallInFlight": 160.1,
+    "gpuRasters": 16,
+    "attachDetach": 18,
+    "presentShare": 93.9
+   },
+   {
+    "startMs": 3656,
+    "ms": 176.4,
+    "main": 10.8,
+    "script": 4.3,
+    "styleLayout": 2.1,
+    "paint": 2.5,
+    "gc": 0,
+    "compositor": 4,
+    "rasterWorkers": 3.2,
+    "viz": 3.1,
+    "gpuTask": 176.4,
+    "present": 155.1,
+    "presentCpu": 3.2,
+    "inputCallInFlight": 173.8,
+    "gpuRasters": 31,
+    "attachDetach": 20,
+    "presentShare": 87.9
+   },
+   {
+    "startMs": 3832.4,
+    "ms": 425.1,
+    "main": 13.2,
+    "script": 6.5,
+    "styleLayout": 2,
+    "paint": 2.3,
+    "gc": 0,
+    "compositor": 2.4,
+    "rasterWorkers": 1.3,
+    "viz": 1.4,
+    "gpuTask": 425.1,
+    "present": 408.1,
+    "presentCpu": 6.6,
+    "inputCallInFlight": 416.2,
+    "gpuRasters": 23,
+    "attachDetach": 20,
+    "presentShare": 96
+   },
+   {
+    "startMs": 4257.5,
+    "ms": 52.8,
+    "main": 12.5,
+    "script": 6.6,
+    "styleLayout": 1.8,
+    "paint": 2.6,
+    "gc": 0,
+    "compositor": 2.9,
+    "rasterWorkers": 1.4,
+    "viz": 1.7,
+    "gpuTask": 52.8,
+    "present": 46.6,
+    "presentCpu": 1.1,
+    "inputCallInFlight": 36.2,
+    "gpuRasters": 7,
+    "attachDetach": 16,
+    "presentShare": 88.3
+   },
+   {
+    "startMs": 4310.3,
+    "ms": 264.9,
+    "main": 15.9,
+    "script": 8.1,
+    "styleLayout": 2.2,
+    "paint": 3,
+    "gc": 1.8,
+    "compositor": 3.4,
+    "rasterWorkers": 1.9,
+    "viz": 2.1,
+    "gpuTask": 264.8,
+    "present": 215.5,
+    "presentCpu": 2.5,
+    "inputCallInFlight": 251,
+    "gpuRasters": 44,
+    "attachDetach": 12,
+    "presentShare": 81.4
+   },
+   {
+    "startMs": 4575.2,
+    "ms": 222.2,
+    "main": 13.8,
+    "script": 6.9,
+    "styleLayout": 1.6,
+    "paint": 2.8,
+    "gc": 0,
+    "compositor": 3,
+    "rasterWorkers": 1.7,
+    "viz": 1.9,
+    "gpuTask": 222.1,
+    "present": 185.8,
+    "presentCpu": 4,
+    "inputCallInFlight": 207.1,
+    "gpuRasters": 28,
+    "attachDetach": 6,
+    "presentShare": 83.6
+   },
+   {
+    "startMs": 4813.1,
+    "ms": 566.1,
+    "main": 7.6,
+    "script": 2.8,
+    "styleLayout": 1.3,
+    "paint": 0.4,
+    "gc": 0,
+    "compositor": 1.7,
+    "rasterWorkers": 2.8,
+    "viz": 3.1,
+    "gpuTask": 566.1,
+    "present": 544.4,
+    "presentCpu": 16.7,
+    "inputCallInFlight": 564.3,
+    "gpuRasters": 38,
+    "attachDetach": 0,
+    "presentShare": 96.2
+   },
+   {
+    "startMs": 5382.4,
+    "ms": 268.5,
+    "main": 7.8,
+    "script": 3.5,
+    "styleLayout": 1.9,
+    "paint": 0.7,
+    "gc": 0,
+    "compositor": 3.5,
+    "rasterWorkers": 0.1,
+    "viz": 3.9,
+    "gpuTask": 268.4,
+    "present": 260,
+    "presentCpu": 8,
+    "inputCallInFlight": 261.7,
+    "gpuRasters": 14,
+    "attachDetach": 6,
+    "presentShare": 96.8
+   },
+   {
+    "startMs": 5650.9,
+    "ms": 220.6,
+    "main": 16.3,
+    "script": 8.3,
+    "styleLayout": 3.6,
+    "paint": 2.3,
+    "gc": 0,
+    "compositor": 3.2,
+    "rasterWorkers": 0.9,
+    "viz": 1.8,
+    "gpuTask": 220.6,
+    "present": 219.2,
+    "presentCpu": 5.6,
+    "inputCallInFlight": 215.9,
+    "gpuRasters": 5,
+    "attachDetach": 12,
+    "presentShare": 99.4
+   },
+   {
+    "startMs": 5871.5,
+    "ms": 105.7,
+    "main": 17.2,
+    "script": 9.6,
+    "styleLayout": 2.7,
+    "paint": 2.8,
+    "gc": 0,
+    "compositor": 4.6,
+    "rasterWorkers": 1.6,
+    "viz": 4.1,
+    "gpuTask": 105.6,
+    "present": 96.4,
+    "presentCpu": 2.2,
+    "inputCallInFlight": 96.2,
+    "gpuRasters": 8,
+    "attachDetach": 16,
+    "presentShare": 91.2
+   },
+   {
+    "startMs": 5977.2,
+    "ms": 109.6,
+    "main": 15.7,
+    "script": 9.5,
+    "styleLayout": 1.7,
+    "paint": 2.6,
+    "gc": 0,
+    "compositor": 4.4,
+    "rasterWorkers": 3.2,
+    "viz": 2.8,
+    "gpuTask": 109.5,
+    "present": 88.8,
+    "presentCpu": 1.5,
+    "inputCallInFlight": 93.9,
+    "gpuRasters": 21,
+    "attachDetach": 20,
+    "presentShare": 81
+   },
+   {
+    "startMs": 6129.7,
+    "ms": 124.6,
+    "main": 16.6,
+    "script": 8,
+    "styleLayout": 3.2,
+    "paint": 1.2,
+    "gc": 0,
+    "compositor": 3.3,
+    "rasterWorkers": 4.1,
+    "viz": 2.7,
+    "gpuTask": 124.6,
+    "present": 71.3,
+    "presentCpu": 11.1,
+    "inputCallInFlight": 121.2,
+    "gpuRasters": 68,
+    "attachDetach": 20,
+    "presentShare": 57.2
+   },
+   {
+    "startMs": 6254.3,
+    "ms": 262.4,
+    "main": 19,
+    "script": 11.6,
+    "styleLayout": 1.7,
+    "paint": 3.1,
+    "gc": 1.6,
+    "compositor": 2.8,
+    "rasterWorkers": 3,
+    "viz": 1.7,
+    "gpuTask": 262.4,
+    "present": 228.3,
+    "presentCpu": 8.1,
+    "inputCallInFlight": 261.6,
+    "gpuRasters": 39,
+    "attachDetach": 18,
+    "presentShare": 87
+   },
+   {
+    "startMs": 6516.7,
+    "ms": 276.5,
+    "main": 13.8,
+    "script": 6.9,
+    "styleLayout": 1.8,
+    "paint": 2.6,
+    "gc": 0,
+    "compositor": 4,
+    "rasterWorkers": 1.1,
+    "viz": 4.3,
+    "gpuTask": 276.3,
+    "present": 265.7,
+    "presentCpu": 5,
+    "inputCallInFlight": 258.1,
+    "gpuRasters": 10,
+    "attachDetach": 12,
+    "presentShare": 96.1
+   },
+   {
+    "startMs": 6793.2,
+    "ms": 627.3,
+    "main": 12.4,
+    "script": 5.2,
+    "styleLayout": 1,
+    "paint": 2.7,
+    "gc": 0,
+    "compositor": 2.7,
+    "rasterWorkers": 1.3,
+    "viz": 3.5,
+    "gpuTask": 627.3,
+    "present": 602.8,
+    "presentCpu": 7.2,
+    "inputCallInFlight": 620.4,
+    "gpuRasters": 30,
+    "attachDetach": 4,
+    "presentShare": 96.1
+   },
+   {
+    "startMs": 7420.5,
+    "ms": 526,
+    "main": 9.3,
+    "script": 3.2,
+    "styleLayout": 0.6,
+    "paint": 2.4,
+    "gc": 0,
+    "compositor": 2.6,
+    "rasterWorkers": 2,
+    "viz": 2.7,
+    "gpuTask": 526,
+    "present": 509.8,
+    "presentCpu": 6,
+    "inputCallInFlight": 510.6,
+    "gpuRasters": 22,
+    "attachDetach": 0,
+    "presentShare": 96.9
+   },
+   {
+    "startMs": 7960.8,
+    "ms": 203.6,
+    "main": 7.4,
+    "script": 3.5,
+    "styleLayout": 1.6,
+    "paint": 0.5,
+    "gc": 0,
+    "compositor": 1.5,
+    "rasterWorkers": 0,
+    "viz": 4.7,
+    "gpuTask": 203.1,
+    "present": 196.4,
+    "presentCpu": 16.7,
+    "inputCallInFlight": 203,
+    "gpuRasters": 21,
+    "attachDetach": 4,
+    "presentShare": 96.5
+   },
+   {
+    "startMs": 8164.4,
+    "ms": 166.2,
+    "main": 13.6,
+    "script": 8.2,
+    "styleLayout": 1.5,
+    "paint": 2,
+    "gc": 0,
+    "compositor": 4.5,
+    "rasterWorkers": 4.5,
+    "viz": 2.6,
+    "gpuTask": 164,
+    "present": 156.5,
+    "presentCpu": 3.5,
+    "inputCallInFlight": 153.5,
+    "gpuRasters": 8,
+    "attachDetach": 12,
+    "presentShare": 94.2
+   },
+   {
+    "startMs": 8336.9,
+    "ms": 151,
+    "main": 7.7,
+    "script": 3.9,
+    "styleLayout": 1.8,
+    "paint": 0.4,
+    "gc": 0,
+    "compositor": 1.7,
+    "rasterWorkers": 1.2,
+    "viz": 1.9,
+    "gpuTask": 151,
+    "present": 143.8,
+    "presentCpu": 2.5,
+    "inputCallInFlight": 147.4,
+    "gpuRasters": 18,
+    "attachDetach": 18,
+    "presentShare": 95.2
+   }
+  ]
+ },
+ "presents": {
+  "count": 56,
+  "wallMs": 7459.5,
+  "cpuMs": 200.2,
+  "over50": 31,
+  "spearmanWithRasters": 0,
+  "spearmanWithAttachDetach": -0.4,
+  "rows": [
+   {
+    "startMs": 24.8,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 1,
+    "attachDetach": 10,
+    "dirty": "974,63 621x864"
+   },
+   {
+    "startMs": 62.3,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 17,
+    "attachDetach": 10,
+    "dirty": "349,147 1227x494"
+   },
+   {
+    "startMs": 63.7,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 0,
+    "attachDetach": 0,
+    "dirty": "349,475 2x12"
+   },
+   {
+    "startMs": 68,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 0,
+    "attachDetach": 0,
+    "dirty": "349,475 2x12"
+   },
+   {
+    "startMs": 76.5,
+    "ms": 203.2,
+    "cpuMs": 13.9,
+    "rasters": 0,
+    "attachDetach": 0,
+    "dirty": "349,475 2x12"
+   },
+   {
+    "startMs": 283.5,
+    "ms": 0.4,
+    "cpuMs": 0.4,
+    "rasters": 0,
+    "attachDetach": 0,
+    "dirty": "349,475 2x12"
+   },
+   {
+    "startMs": 290.5,
+    "ms": 0.2,
+    "cpuMs": 0.2,
+    "rasters": 0,
+    "attachDetach": 10,
+    "dirty": "349,475 2x12"
+   },
+   {
+    "startMs": 300.6,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 1,
+    "attachDetach": 10,
+    "dirty": "348,30 1247x902"
+   },
+   {
+    "startMs": 331.8,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 24,
+    "attachDetach": 16,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 348.8,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 16,
+    "attachDetach": 6,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 416.5,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 26,
+    "attachDetach": 6,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 419.2,
+    "ms": 167.2,
+    "cpuMs": 12.7,
+    "rasters": 1,
+    "attachDetach": 6,
+    "dirty": "1520,244 36x36"
+   },
+   {
+    "startMs": 609.4,
+    "ms": 151.1,
+    "cpuMs": 3,
+    "rasters": 6,
+    "attachDetach": 0,
+    "dirty": "1520,244 36x36"
+   },
+   {
+    "startMs": 763.4,
+    "ms": 273,
+    "cpuMs": 3.9,
+    "rasters": 1,
+    "attachDetach": 0,
+    "dirty": "1518,242 40x40"
+   },
+   {
+    "startMs": 1039.3,
+    "ms": 15.7,
+    "cpuMs": 1.1,
+    "rasters": 3,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 1059.6,
+    "ms": 86.1,
+    "cpuMs": 2.1,
+    "rasters": 5,
+    "attachDetach": 6,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 1181.1,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 16,
+    "attachDetach": 6,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 1187.5,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 7,
+    "attachDetach": 6,
+    "dirty": "1535,253 18x18"
+   },
+   {
+    "startMs": 1206.2,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 19,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 1239.6,
+    "ms": 84.4,
+    "cpuMs": 11.3,
+    "rasters": 32,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 1389.2,
+    "ms": 43,
+    "cpuMs": 0.9,
+    "rasters": 36,
+    "attachDetach": 20,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 1469.3,
+    "ms": 129.3,
+    "cpuMs": 2.8,
+    "rasters": 32,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 1627.4,
+    "ms": 453.7,
+    "cpuMs": 6.2,
+    "rasters": 21,
+    "attachDetach": 8,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 2109.8,
+    "ms": 453.9,
+    "cpuMs": 6.6,
+    "rasters": 21,
+    "attachDetach": 4,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 2587.9,
+    "ms": 405.5,
+    "cpuMs": 5.5,
+    "rasters": 17,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 2997.9,
+    "ms": 209,
+    "cpuMs": 3.9,
+    "rasters": 2,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 3213.2,
+    "ms": 210.1,
+    "cpuMs": 3.4,
+    "rasters": 2,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 3435,
+    "ms": 152.5,
+    "cpuMs": 3.3,
+    "rasters": 11,
+    "attachDetach": 8,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 3609.4,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 18,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 3638.2,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 31,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 3641.6,
+    "ms": 12.8,
+    "cpuMs": 9.9,
+    "rasters": 4,
+    "attachDetach": 0,
+    "dirty": "1125,172 89x37"
+   },
+   {
+    "startMs": 3668,
+    "ms": 155.1,
+    "cpuMs": 3.2,
+    "rasters": 16,
+    "attachDetach": 10,
+    "dirty": "1125,172 89x37"
+   },
+   {
+    "startMs": 3847.8,
+    "ms": 403.1,
+    "cpuMs": 5.5,
+    "rasters": 22,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 4252.5,
+    "ms": 51.6,
+    "cpuMs": 1.1,
+    "rasters": 1,
+    "attachDetach": 0,
+    "dirty": "1125,172 89x37"
+   },
+   {
+    "startMs": 4352.1,
+    "ms": 215.5,
+    "cpuMs": 2.5,
+    "rasters": 39,
+    "attachDetach": 6,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 4603.9,
+    "ms": 185.8,
+    "cpuMs": 4,
+    "rasters": 24,
+    "attachDetach": 6,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 4812.4,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 19,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 4829.2,
+    "ms": 544.4,
+    "cpuMs": 16.7,
+    "rasters": 17,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 5385.2,
+    "ms": 255.8,
+    "cpuMs": 4.6,
+    "rasters": 9,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 5646.6,
+    "ms": 212.9,
+    "cpuMs": 3.5,
+    "rasters": 5,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 5860.9,
+    "ms": 106.9,
+    "cpuMs": 2.2,
+    "rasters": 0,
+    "attachDetach": 0,
+    "dirty": "1518,242 40x40"
+   },
+   {
+    "startMs": 5987.9,
+    "ms": 88.8,
+    "cpuMs": 1.5,
+    "rasters": 16,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 6105.2,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 24,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 6128.5,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 20,
+    "attachDetach": 20,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 6168.8,
+    "ms": 71.3,
+    "cpuMs": 11.1,
+    "rasters": 45,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 6286.2,
+    "ms": 222.3,
+    "cpuMs": 3.1,
+    "rasters": 38,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 6510.8,
+    "ms": 271.6,
+    "cpuMs": 5,
+    "rasters": 1,
+    "attachDetach": 0,
+    "dirty": "1125,172 89x37"
+   },
+   {
+    "startMs": 6809.2,
+    "ms": 602.8,
+    "cpuMs": 7.2,
+    "rasters": 21,
+    "attachDetach": 4,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 7431.2,
+    "ms": 509.8,
+    "cpuMs": 6,
+    "rasters": 19,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 7960,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 17,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 7962.3,
+    "ms": 193.3,
+    "cpuMs": 13.3,
+    "rasters": 2,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 8161.3,
+    "ms": 159.6,
+    "cpuMs": 3.5,
+    "rasters": 2,
+    "attachDetach": 0,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 8335.7,
+    "ms": 145,
+    "cpuMs": 2.5,
+    "rasters": 11,
+    "attachDetach": 8,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 8501.8,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 21,
+    "attachDetach": 10,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 8531.2,
+    "ms": 0.1,
+    "cpuMs": 0.1,
+    "rasters": 28,
+    "attachDetach": 20,
+    "dirty": "993,147 583x494"
+   },
+   {
+    "startMs": 8537.7,
+    "ms": 10.9,
+    "cpuMs": 10.7,
+    "rasters": 4,
+    "attachDetach": 10,
+    "dirty": "1125,172 89x37"
+   }
+  ]
+ },
+ "input": {
+  "steps": [
+   {
+    "i": 1,
+    "scheduled": 0,
+    "callStart": 0,
+    "callEnd": 21.6,
+    "eventTimeStamp": 2.2,
+    "handlerAt": 8.6,
+    "styleAt": 11.1,
+    "nextRafAt": 13.2,
+    "delivered": true
+   },
+   {
+    "i": 2,
+    "scheduled": 125,
+    "callStart": 139.9,
+    "callEnd": 300.2,
+    "eventTimeStamp": 143.9,
+    "handlerAt": 282.5,
+    "styleAt": 288.8,
+    "nextRafAt": 291.6,
+    "delivered": true
+   },
+   {
+    "i": 3,
+    "scheduled": 250,
+    "callStart": 302,
+    "callEnd": 321.1,
+    "eventTimeStamp": 305.4,
+    "handlerAt": 308.6,
+    "styleAt": 311.1,
+    "nextRafAt": 312.9,
+    "delivered": true
+   },
+   {
+    "i": 4,
+    "scheduled": 375,
+    "callStart": 375,
+    "callEnd": 397.4,
+    "eventTimeStamp": 377.2,
+    "handlerAt": 384,
+    "styleAt": 386.4,
+    "nextRafAt": 388.3,
+    "delivered": true
+   },
+   {
+    "i": 5,
+    "scheduled": 500,
+    "callStart": 504.5,
+    "callEnd": 611.8,
+    "eventTimeStamp": 511.6,
+    "handlerAt": 589.9,
+    "styleAt": 598.6,
+    "nextRafAt": 602.3,
+    "delivered": true
+   },
+   {
+    "i": 6,
+    "scheduled": 625,
+    "callStart": 631.9,
+    "callEnd": 773,
+    "eventTimeStamp": 634.9,
+    "handlerAt": 764.4,
+    "styleAt": 768.4,
+    "nextRafAt": 769.3,
+    "delivered": true
+   },
+   {
+    "i": 7,
+    "scheduled": 750,
+    "callStart": 774.6,
+    "callEnd": 1048.9,
+    "eventTimeStamp": 776.8,
+    "handlerAt": 1037.6,
+    "styleAt": 1040.3,
+    "nextRafAt": 1042.4,
+    "delivered": true
+   },
+   {
+    "i": 8,
+    "scheduled": 875,
+    "callStart": 1055.1,
+    "callEnd": 1174.6,
+    "eventTimeStamp": 1059.7,
+    "handlerAt": 1147.2,
+    "styleAt": 1155.9,
+    "nextRafAt": 1162.2,
+    "delivered": true
+   },
+   {
+    "i": 9,
+    "scheduled": 1000,
+    "callStart": 1183.4,
+    "callEnd": 1203.9,
+    "eventTimeStamp": 1187.2,
+    "handlerAt": 1191.7,
+    "styleAt": 1194.2,
+    "nextRafAt": 1196.4,
+    "delivered": true
+   },
+   {
+    "i": 10,
+    "scheduled": 1125,
+    "callStart": 1206.2,
+    "callEnd": 1340.6,
+    "eventTimeStamp": 1209.9,
+    "handlerAt": 1323.9,
+    "styleAt": 1327.8,
+    "nextRafAt": 1330.5,
+    "delivered": true
+   },
+   {
+    "i": 11,
+    "scheduled": 1250,
+    "callStart": 1343.4,
+    "callEnd": 1365,
+    "eventTimeStamp": 1346.9,
+    "handlerAt": 1351.1,
+    "styleAt": 1354.7,
+    "nextRafAt": 1357,
+    "delivered": true
+   },
+   {
+    "i": 12,
+    "scheduled": 1375,
+    "callStart": 1375,
+    "callEnd": 1447.8,
+    "eventTimeStamp": 1377.8,
+    "handlerAt": 1432.3,
+    "styleAt": 1436.2,
+    "nextRafAt": 1438.9,
+    "delivered": true
+   },
+   {
+    "i": 13,
+    "scheduled": 1500,
+    "callStart": 1513.2,
+    "callEnd": 1615.3,
+    "eventTimeStamp": 1515.8,
+    "handlerAt": 1599.3,
+    "styleAt": 1604.8,
+    "nextRafAt": 1607.1,
+    "delivered": true
+   },
+   {
+    "i": 14,
+    "scheduled": 1625,
+    "callStart": 1624.6,
+    "callEnd": 2099.9,
+    "eventTimeStamp": 1627.5,
+    "handlerAt": 2083.5,
+    "styleAt": 2088.1,
+    "nextRafAt": 2089.9,
+    "delivered": true
+   },
+   {
+    "i": 15,
+    "scheduled": 1750,
+    "callStart": 2114.9,
+    "callEnd": 2578.8,
+    "eventTimeStamp": 2117.5,
+    "handlerAt": 2568.7,
+    "styleAt": 2574,
+    "nextRafAt": 2574.9,
+    "delivered": true
+   },
+   {
+    "i": 16,
+    "scheduled": 1875,
+    "callStart": 2591,
+    "callEnd": 3001.8,
+    "eventTimeStamp": 2593.6,
+    "handlerAt": 2994.2,
+    "styleAt": 2996.3,
+    "nextRafAt": 2997.3,
+    "delivered": true
+   },
+   {
+    "i": 17,
+    "scheduled": 2000,
+    "callStart": 3022.4,
+    "callEnd": 3223.4,
+    "eventTimeStamp": 3024.8,
+    "handlerAt": 3211,
+    "styleAt": 3214.1,
+    "nextRafAt": 3216.4,
+    "delivered": true
+   },
+   {
+    "i": 18,
+    "scheduled": 2125,
+    "callStart": 3232.3,
+    "callEnd": 3436.5,
+    "eventTimeStamp": 3234.9,
+    "handlerAt": 3423.1,
+    "styleAt": 3426.4,
+    "nextRafAt": 3428.5,
+    "delivered": true
+   },
+   {
+    "i": 19,
+    "scheduled": 2250,
+    "callStart": 3437.6,
+    "callEnd": 3604.7,
+    "eventTimeStamp": 3439.8,
+    "handlerAt": 3592,
+    "styleAt": 3594.6,
+    "nextRafAt": 3596.5,
+    "delivered": true
+   },
+   {
+    "i": 20,
+    "scheduled": 2375,
+    "callStart": 3613.7,
+    "callEnd": 3657,
+    "eventTimeStamp": 3617.3,
+    "handlerAt": 3642,
+    "styleAt": 3644.9,
+    "nextRafAt": 3647.1,
+    "delivered": true
+   },
+   {
+    "i": 21,
+    "scheduled": 2500,
+    "callStart": 3659.6,
+    "callEnd": 3839.4,
+    "eventTimeStamp": 3662.6,
+    "handlerAt": 3825.4,
+    "styleAt": 3828.9,
+    "nextRafAt": 3831.5,
+    "delivered": true
+   },
+   {
+    "i": 22,
+    "scheduled": 2625,
+    "callStart": 3848.3,
+    "callEnd": 4264.3,
+    "eventTimeStamp": 3850.8,
+    "handlerAt": 4251.4,
+    "styleAt": 4254.5,
+    "nextRafAt": 4256.6,
+    "delivered": true
+   },
+   {
+    "i": 23,
+    "scheduled": 2750,
+    "callStart": 4280.9,
+    "callEnd": 4318.5,
+    "eventTimeStamp": 4283.2,
+    "handlerAt": 4304.5,
+    "styleAt": 4307.4,
+    "nextRafAt": 4309.4,
+    "delivered": true
+   },
+   {
+    "i": 24,
+    "scheduled": 2875,
+    "callStart": 4332.4,
+    "callEnd": 4583.4,
+    "eventTimeStamp": 4335.1,
+    "handlerAt": 4569.1,
+    "styleAt": 4572,
+    "nextRafAt": 4574.3,
+    "delivered": true
+   },
+   {
+    "i": 25,
+    "scheduled": 3000,
+    "callStart": 4598.5,
+    "callEnd": 4801.1,
+    "eventTimeStamp": 4601.9,
+    "handlerAt": 4792.3,
+    "styleAt": 4794.7,
+    "nextRafAt": 4796.5,
+    "delivered": true
+   },
+   {
+    "i": 26,
+    "scheduled": 3125,
+    "callStart": 4814,
+    "callEnd": 5383,
+    "eventTimeStamp": 4817.5,
+    "handlerAt": 5375,
+    "styleAt": 5377.1,
+    "nextRafAt": 5378.3,
+    "delivered": true
+   },
+   {
+    "i": 27,
+    "scheduled": 3250,
+    "callStart": 5389.8,
+    "callEnd": 5655.7,
+    "eventTimeStamp": 5392.2,
+    "handlerAt": 5645.3,
+    "styleAt": 5648,
+    "nextRafAt": 5650,
+    "delivered": true
+   },
+   {
+    "i": 28,
+    "scheduled": 3375,
+    "callStart": 5660.4,
+    "callEnd": 5880.9,
+    "eventTimeStamp": 5662.5,
+    "handlerAt": 5860.4,
+    "styleAt": 5866.2,
+    "nextRafAt": 5870.6,
+    "delivered": true
+   },
+   {
+    "i": 29,
+    "scheduled": 3500,
+    "callStart": 5890.4,
+    "callEnd": 5983.7,
+    "eventTimeStamp": 5892.9,
+    "handlerAt": 5970.3,
+    "styleAt": 5974,
+    "nextRafAt": 5976.3,
+    "delivered": true
+   },
+   {
+    "i": 30,
+    "scheduled": 3625,
+    "callStart": 5999.5,
+    "callEnd": 6094.4,
+    "eventTimeStamp": 6001.7,
+    "handlerAt": 6077.2,
+    "styleAt": 6083.4,
+    "nextRafAt": 6085.9,
+    "delivered": true
+   },
+   {
+    "i": 31,
+    "scheduled": 3750,
+    "callStart": 6097.1,
+    "callEnd": 6121.2,
+    "eventTimeStamp": 6099.9,
+    "handlerAt": 6108.4,
+    "styleAt": 6111.3,
+    "nextRafAt": 6113.3,
+    "delivered": true
+   },
+   {
+    "i": 32,
+    "scheduled": 3875,
+    "callStart": 6132.2,
+    "callEnd": 6264.6,
+    "eventTimeStamp": 6135.7,
+    "handlerAt": 6242.2,
+    "styleAt": 6249,
+    "nextRafAt": 6253.4,
+    "delivered": true
+   },
+   {
+    "i": 33,
+    "scheduled": 4000,
+    "callStart": 6265.4,
+    "callEnd": 6522.9,
+    "eventTimeStamp": 6268,
+    "handlerAt": 6508.7,
+    "styleAt": 6513.1,
+    "nextRafAt": 6515.8,
+    "delivered": true
+   },
+   {
+    "i": 34,
+    "scheduled": 4125,
+    "callStart": 6541.3,
+    "callEnd": 6800.1,
+    "eventTimeStamp": 6543.6,
+    "handlerAt": 6786.1,
+    "styleAt": 6790.1,
+    "nextRafAt": 6792.3,
+    "delivered": true
+   },
+   {
+    "i": 35,
+    "scheduled": 4250,
+    "callStart": 6807,
+    "callEnd": 7424.4,
+    "eventTimeStamp": 6809.7,
+    "handlerAt": 7416.9,
+    "styleAt": 7418.8,
+    "nextRafAt": 7419.6,
+    "delivered": true
+   },
+   {
+    "i": 36,
+    "scheduled": 4375,
+    "callStart": 7439.8,
+    "callEnd": 7950,
+    "eventTimeStamp": 7442.4,
+    "handlerAt": 7942.4,
+    "styleAt": 7944.6,
+    "nextRafAt": 7945.6,
+    "delivered": true
+   },
+   {
+    "i": 37,
+    "scheduled": 4500,
+    "callStart": 7960.5,
+    "callEnd": 8169.6,
+    "eventTimeStamp": 7963.3,
+    "handlerAt": 8158.4,
+    "styleAt": 8161.6,
+    "nextRafAt": 8163.5,
+    "delivered": true
+   },
+   {
+    "i": 38,
+    "scheduled": 4625,
+    "callStart": 8182.3,
+    "callEnd": 8337.3,
+    "eventTimeStamp": 8184.7,
+    "handlerAt": 8322.1,
+    "styleAt": 8327.6,
+    "nextRafAt": 8329.7,
+    "delivered": true
+   },
+   {
+    "i": 39,
+    "scheduled": 4750,
+    "callStart": 8340.8,
+    "callEnd": 8495,
+    "eventTimeStamp": 8343.2,
+    "handlerAt": 8481.8,
+    "styleAt": 8485,
+    "nextRafAt": 8487,
+    "delivered": true
+   },
+   {
+    "i": 40,
+    "scheduled": 4875,
+    "callStart": 8501.7,
+    "callEnd": 8521.9,
+    "eventTimeStamp": 8505.9,
+    "handlerAt": 8508.3,
+    "styleAt": 8511.3,
+    "nextRafAt": 8514,
+    "delivered": true
+   }
+  ],
+  "delivered": 40,
+  "coalescedMax": 1,
+  "latency": {
+   "callStart_to_eventTimeStamp": {
+    "n": 40,
+    "median": 2.6,
+    "p95": 4.2,
+    "max": 7.1
+   },
+   "eventTimeStamp_to_handler": {
+    "n": 40,
+    "median": 138.6,
+    "p95": 500,
+    "max": 607.2
+   },
+   "handler_to_style": {
+    "n": 40,
+    "median": 3.2,
+    "p95": 6.8,
+    "max": 8.7
+   },
+   "handler_to_nextRaf": {
+    "n": 40,
+    "median": 5.2,
+    "p95": 11.2,
+    "max": 15
+   },
+   "handler_to_callEnd": {
+    "n": 40,
+    "median": 13.4,
+    "p95": 21.9,
+    "max": 27.4
+   },
+   "scheduled_to_callStart": {
+    "n": 40,
+    "median": 1187.6,
+    "p95": 3557.3,
+    "max": 3626.7
+   }
+  },
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  }
+ }
+}

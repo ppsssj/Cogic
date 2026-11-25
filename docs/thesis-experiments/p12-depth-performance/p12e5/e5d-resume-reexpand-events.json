@@ -1,0 +1,260 @@
+[
+  {
+    "run": "e5c-single-on-pilot-1",
+    "phaseErrors": [
+      "file-expand: Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate"
+    ],
+    "events": [
+      {
+        "seq": 37,
+        "at": "2026-11-24T12:21:47.684Z",
+        "event": "canvas.file-group.select",
+        "detail": {
+          "nodeId": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+          "nodeKind": "file",
+          "filePath": "c:/dev/p13/p12e5b-multifile/src/alpha/a.ts",
+          "graphNodes": 188,
+          "graphEdges": 360
+        }
+      },
+      {
+        "seq": 38,
+        "at": "2026-11-24T12:21:47.684Z",
+        "event": "canvas.selection.request",
+        "detail": {
+          "nodeId": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+          "toggle": false
+        }
+      },
+      {
+        "seq": 39,
+        "at": "2026-11-24T12:21:47.692Z",
+        "event": "canvas.reactflow.topology-changed",
+        "detail": {
+          "visibleHasData": true,
+          "renderedNodes": 67,
+          "renderedEdges": 122,
+          "recoveryTick": 0,
+          "nodeTopologyKey": "external:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150:file:c:/dev/p13/p12e5b-multifile/src/al...(6996)",
+          "edgeTopologyKey": "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1026->function:c:/dev/p13/p12e5b-multi...(29941)"
+        }
+      },
+      {
+        "seq": 40,
+        "at": "2026-11-24T12:21:47.692Z",
+        "event": "app.selectedNode.changed",
+        "detail": {
+          "selectedNodeId": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+          "selectedNodeIds": [
+            "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0"
+          ]
+        }
+      },
+      {
+        "seq": 41,
+        "at": "2026-11-24T12:21:47.893Z",
+        "event": "canvas.reactflow.topology-changed",
+        "detail": {
+          "visibleHasData": true,
+          "renderedNodes": 6,
+          "renderedEdges": 4,
+          "recoveryTick": 0,
+          "nodeTopologyKey": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0:folder:c:/dev/p13/p12e5b-multifile/src/alpha|f...(487)",
+          "edgeTopologyKey": "calls:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile...(913)"
+        }
+      },
+      {
+        "seq": 42,
+        "at": "2026-11-24T12:21:48.951Z",
+        "event": "canvas.node.click",
+        "detail": {
+          "nodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "visibleNodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "visibleKind": "folder",
+          "graphNodeKind": null,
+          "filePath": null,
+          "isExternal": false,
+          "toggle": false,
+          "renderedNodes": 6,
+          "renderedEdges": 4,
+          "graphNodes": 188,
+          "graphEdges": 360
+        }
+      },
+      {
+        "seq": 43,
+        "at": "2026-11-24T12:21:48.951Z",
+        "event": "canvas.selection.request",
+        "detail": {
+          "nodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "toggle": false
+        }
+      },
+      {
+        "seq": 44,
+        "at": "2026-11-24T12:21:48.960Z",
+        "event": "canvas.reactflow.topology-changed",
+        "detail": {
+          "visibleHasData": true,
+          "renderedNodes": 6,
+          "renderedEdges": 4,
+          "recoveryTick": 0,
+          "nodeTopologyKey": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0:folder:c:/dev/p13/p12e5b-multifile/src/alpha|f...(487)",
+          "edgeTopologyKey": "calls:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile...(913)"
+        }
+      },
+      {
+        "seq": 45,
+        "at": "2026-11-24T12:21:48.960Z",
+        "event": "app.selectedNode.changed",
+        "detail": {
+          "selectedNodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "selectedNodeIds": [
+            "folder:c:/dev/p13/p12e5b-multifile/src/alpha"
+          ]
+        }
+      },
+      {
+        "seq": 46,
+        "at": "2026-11-24T12:21:54.009Z",
+        "event": "canvas.folder-group.select",
+        "detail": {
+          "nodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "graphNodes": 188,
+          "graphEdges": 360
+        }
+      }
+    ],
+    "limitation": "Events show a parent-folder click after file-group collapse; previous harness did not capture the elementFromPoint at click time."
+  },
+  {
+    "run": "e5c-single-off-diagnostic-1",
+    "phaseErrors": [
+      "initial Fit Graph does not contain all measured node bounds",
+      "file-expand: Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+      "final flow topology did not return to initial state"
+    ],
+    "events": [
+      {
+        "seq": 37,
+        "at": "2026-11-24T12:26:11.862Z",
+        "event": "canvas.file-group.select",
+        "detail": {
+          "nodeId": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+          "nodeKind": "file",
+          "filePath": "c:/dev/p13/p12e5b-multifile/src/alpha/a.ts",
+          "graphNodes": 188,
+          "graphEdges": 360
+        }
+      },
+      {
+        "seq": 38,
+        "at": "2026-11-24T12:26:11.862Z",
+        "event": "canvas.selection.request",
+        "detail": {
+          "nodeId": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+          "toggle": false
+        }
+      },
+      {
+        "seq": 39,
+        "at": "2026-11-24T12:26:11.875Z",
+        "event": "canvas.reactflow.topology-changed",
+        "detail": {
+          "visibleHasData": true,
+          "renderedNodes": 67,
+          "renderedEdges": 122,
+          "recoveryTick": 0,
+          "nodeTopologyKey": "external:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150:file:c:/dev/p13/p12e5b-multifile/src/al...(6996)",
+          "edgeTopologyKey": "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1026->function:c:/dev/p13/p12e5b-multi...(29941)"
+        }
+      },
+      {
+        "seq": 40,
+        "at": "2026-11-24T12:26:11.875Z",
+        "event": "app.selectedNode.changed",
+        "detail": {
+          "selectedNodeId": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+          "selectedNodeIds": [
+            "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0"
+          ]
+        }
+      },
+      {
+        "seq": 41,
+        "at": "2026-11-24T12:26:12.085Z",
+        "event": "canvas.reactflow.topology-changed",
+        "detail": {
+          "visibleHasData": true,
+          "renderedNodes": 6,
+          "renderedEdges": 4,
+          "recoveryTick": 0,
+          "nodeTopologyKey": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0:folder:c:/dev/p13/p12e5b-multifile/src/alpha|f...(487)",
+          "edgeTopologyKey": "calls:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile...(913)"
+        }
+      },
+      {
+        "seq": 42,
+        "at": "2026-11-24T12:26:14.040Z",
+        "event": "canvas.node.click",
+        "detail": {
+          "nodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "visibleNodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "visibleKind": "folder",
+          "graphNodeKind": null,
+          "filePath": null,
+          "isExternal": false,
+          "toggle": false,
+          "renderedNodes": 6,
+          "renderedEdges": 4,
+          "graphNodes": 188,
+          "graphEdges": 360
+        }
+      },
+      {
+        "seq": 43,
+        "at": "2026-11-24T12:26:14.040Z",
+        "event": "canvas.selection.request",
+        "detail": {
+          "nodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "toggle": false
+        }
+      },
+      {
+        "seq": 44,
+        "at": "2026-11-24T12:26:14.053Z",
+        "event": "canvas.reactflow.topology-changed",
+        "detail": {
+          "visibleHasData": true,
+          "renderedNodes": 6,
+          "renderedEdges": 4,
+          "recoveryTick": 0,
+          "nodeTopologyKey": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0:folder:c:/dev/p13/p12e5b-multifile/src/alpha|f...(487)",
+          "edgeTopologyKey": "calls:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile...(913)"
+        }
+      },
+      {
+        "seq": 45,
+        "at": "2026-11-24T12:26:14.054Z",
+        "event": "app.selectedNode.changed",
+        "detail": {
+          "selectedNodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "selectedNodeIds": [
+            "folder:c:/dev/p13/p12e5b-multifile/src/alpha"
+          ]
+        }
+      },
+      {
+        "seq": 46,
+        "at": "2026-11-24T12:26:19.121Z",
+        "event": "canvas.folder-group.select",
+        "detail": {
+          "nodeId": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+          "graphNodes": 188,
+          "graphEdges": 360
+        }
+      }
+    ],
+    "limitation": "Events show a parent-folder click after file-group collapse; previous harness did not capture the elementFromPoint at click time."
+  }
+]

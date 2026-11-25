@@ -1,0 +1,10 @@
+{
+  "id": "web-0dda15aa-6103-4cbc-8ae2-627b5e9cf45e",
+  "nodes": 201,
+  "edges": 398,
+  "sha256": "e603354e5e571db31ad8d1bbb42079d8293fccd148bc21178cedd683bf22d434",
+  "picker": "entry.ts",
+  "inspector": "ACTIVE FILE SNAPSHOT entry.ts typescript // Deterministic synthetic project; no Vite files. export function fn0(x: number): number { return x + 0; } export function fn1(x: number): number { return fn0(x) + 1; } export function fn2(x: number): number { return fn1(x) + 2; } export function fn3(x: number): number { return fn2(x) + 3; } export function fn4(x: number): number { return fn3(x) + 4; } export function fn5(x: number): number { return fn4(x) + 5; } export function fn6(x: number): number { return fn5(x) + 6; } export function fn7(x: number): number { return fn6(x) + 7; } export function fn8(x: number): number { return fn7(x) + 8; } export function fn9(x: number): number { return fn8(x) + 9; } export function fn10(x: number): number { return fn9(x) + 10; } export function fn11(x: number): number { return fn10(x) + 11; } export function fn12(x: number): number { return fn11(x) + 12; } export function fn13(x: number): number { return fn12(x) + 13; } export function fn14(x: number): number { return fn13(x) + 14; } export function fn15(x: number): number { return fn14(x) + 15; } export function fn16(x: number): number { return fn15(x) + 16; } export function fn17(x: number): number { return fn16(x) + 17; } export function fn18(x: number): number { return fn17(x) + 18; } export function fn19(x: number): number { return fn18(x) + 19; } export function fn20(x: number): number { return fn19(x) + 20; } export function fn21(x: number): number { return fn20(x) + 21; } export function fn22(x: number): number { return fn21(x) + 22; } export function fn23(x: number): number { return ",
+  "before": 2405,
+  "minimum": 1368
+}

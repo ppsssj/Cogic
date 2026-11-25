@@ -1,0 +1,9 @@
+﻿{
+    "startUtc":  "2026-11-25T04:46:10.2604080Z",
+    "endUtc":  "2026-11-25T04:46:25.0414303Z",
+    "rootPid":  6268,
+    "minimumMiB":  1414.9,
+    "thresholdMiB":  800,
+    "aborted":  false,
+    "samplingMs":  250
+}

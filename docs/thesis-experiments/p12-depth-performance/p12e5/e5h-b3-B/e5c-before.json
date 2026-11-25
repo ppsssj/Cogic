@@ -1,0 +1,3673 @@
+{
+  "desired": "multiple",
+  "time": 17996.69999998808,
+  "graphNodes": 188,
+  "graphEdges": 360,
+  "flowNodes": 130,
+  "flowEdges": 242,
+  "domNodes": 41,
+  "domEdges": 76,
+  "pane": {
+    "width": 581,
+    "height": 494
+  },
+  "viewport": {
+    "x": -739.1000000000001,
+    "y": 117.6,
+    "zoom": 0.1
+  },
+  "nodes": [
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "type": "folderGroup",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "style": {
+        "width": 20592,
+        "height": 2588,
+        "zIndex": 0
+      },
+      "collapsed": false,
+      "count": 4
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+      "type": "folderGroup",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 34,
+        "y": 644
+      },
+      "style": {
+        "width": 20524,
+        "height": 688,
+        "zIndex": 0
+      },
+      "collapsed": false,
+      "count": 1
+    },
+    {
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "type": "fileGroup",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+      "position": {
+        "x": 34,
+        "y": 122
+      },
+      "style": {
+        "width": 20456,
+        "height": 532,
+        "zIndex": 1
+      },
+      "collapsed": false,
+      "count": 61
+    },
+    {
+      "id": "external:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 93,
+        "y": 373
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 20153,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:60",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 19813,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:128",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 19473,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:196",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 19133,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:264",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 18793,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:332",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 18453,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:400",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 18113,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:468",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 17773,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:536",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 17433,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:604",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 17093,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:672",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 16753,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:742",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 16413,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:813",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 16073,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:884",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 15733,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:955",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 15393,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1026",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 15053,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1097",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 14713,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1168",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 14373,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1239",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 14033,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1310",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 13693,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1381",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 13353,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1452",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 13013,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1523",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 12673,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1594",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 12333,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1665",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 11993,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1736",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 11653,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1807",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 11313,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1878",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 10973,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1949",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 10633,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2020",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 10293,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2091",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 9953,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2162",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 9613,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2233",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 9273,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2304",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 8933,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2375",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 8593,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2446",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 8253,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2517",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 7913,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2588",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 7573,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2659",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 7233,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2730",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 6893,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2801",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 6553,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2872",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 6213,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2943",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 5873,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3014",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 5533,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3085",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 5193,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3156",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 4853,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3227",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 4513,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3298",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 4173,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3369",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 3833,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3440",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 3493,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3511",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 3153,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3582",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 2813,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3653",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 2473,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3724",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 2133,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3795",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 1793,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3866",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 1453,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3937",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 1113,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4008",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 773,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4079",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 433,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 93,
+        "y": 183
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/beta",
+      "type": "folderGroup",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 34,
+        "y": 1512
+      },
+      "style": {
+        "width": 20524,
+        "height": 1042,
+        "zIndex": 0
+      },
+      "collapsed": false,
+      "count": 2
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/beta/deep",
+      "type": "folderGroup",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src/beta",
+      "position": {
+        "x": 34,
+        "y": 834
+      },
+      "style": {
+        "width": 360,
+        "height": 174,
+        "zIndex": 0
+      },
+      "collapsed": true,
+      "count": 1
+    },
+    {
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "type": "fileGroup",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src/beta",
+      "position": {
+        "x": 34,
+        "y": 122
+      },
+      "style": {
+        "width": 20456,
+        "height": 532,
+        "zIndex": 1
+      },
+      "collapsed": false,
+      "count": 61
+    },
+    {
+      "id": "external:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 93,
+        "y": 373
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 20153,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:59",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 19813,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:125",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 19473,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:191",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 19133,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:257",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 18793,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:323",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 18453,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:389",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 18113,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:455",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 17773,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:521",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 17433,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:587",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 17093,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:653",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 16753,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:721",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 16413,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:790",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 16073,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:859",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 15733,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:928",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 15393,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:997",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 15053,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1066",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 14713,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1135",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 14373,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1204",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 14033,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1273",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 13693,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1342",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 13353,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1411",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 13013,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1480",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 12673,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1549",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 12333,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1618",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 11993,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1687",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 11653,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1756",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 11313,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1825",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 10973,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1894",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 10633,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1963",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 10293,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2032",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 9953,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2101",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 9613,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2170",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 9273,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2239",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 8933,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2308",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 8593,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2377",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 8253,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2446",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 7913,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2515",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 7573,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2584",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 7233,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2653",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 6893,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2722",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 6553,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2791",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 6213,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2860",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 5873,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2929",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 5533,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2998",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 5193,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3067",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 4853,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3136",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 4513,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3205",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 4173,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3274",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 3833,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3343",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 3493,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3412",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 3153,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3481",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 2813,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3550",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 2473,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3619",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 2133,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3688",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 1793,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3757",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 1453,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3826",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 1113,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3895",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 773,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3964",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 433,
+        "y": 278
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 93,
+        "y": 183
+      },
+      "style": {
+        "zIndex": 2
+      }
+    },
+    {
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0",
+      "type": "fileGroup",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 34,
+        "y": 122
+      },
+      "style": {
+        "width": 396,
+        "height": 342,
+        "zIndex": 1
+      },
+      "collapsed": false,
+      "count": 1
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/main.ts:113",
+      "type": "code",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0",
+      "position": {
+        "x": 28,
+        "y": 124
+      },
+      "style": {
+        "zIndex": 2
+      }
+    }
+  ],
+  "instanceNodes": [
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "positionAbsolute": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 20592,
+      "height": 2588
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 34,
+        "y": 644
+      },
+      "positionAbsolute": {
+        "x": 34,
+        "y": 644
+      },
+      "width": 20524,
+      "height": 688
+    },
+    {
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+      "position": {
+        "x": 34,
+        "y": 122
+      },
+      "positionAbsolute": {
+        "x": 68,
+        "y": 766
+      },
+      "width": 20456,
+      "height": 532
+    },
+    {
+      "id": "external:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 93,
+        "y": 373
+      },
+      "positionAbsolute": {
+        "x": 161,
+        "y": 1139
+      },
+      "width": 190,
+      "height": 68
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 20153,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 20221,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:60",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 19813,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 19881,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:128",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 19473,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 19541,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:196",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 19133,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 19201,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:264",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 18793,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 18861,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:332",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 18453,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 18521,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:400",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 18113,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 18181,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:468",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 17773,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 17841,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:536",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 17433,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 17501,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:604",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 17093,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 17161,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:672",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 16753,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 16821,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:742",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 16413,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 16481,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:813",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 16073,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 16141,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:884",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 15733,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 15801,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:955",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 15393,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 15461,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1026",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 15053,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 15121,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1097",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 14713,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 14781,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1168",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 14373,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 14441,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1239",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 14033,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 14101,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1310",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 13693,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 13761,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1381",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 13353,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 13421,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1452",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 13013,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 13081,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1523",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 12673,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 12741,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1594",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 12333,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 12401,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1665",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 11993,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 12061,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1736",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 11653,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 11721,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1807",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 11313,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 11381,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1878",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 10973,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 11041,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1949",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 10633,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 10701,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2020",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 10293,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 10361,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2091",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 9953,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 10021,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2162",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 9613,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 9681,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2233",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 9273,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 9341,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2304",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 8933,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 9001,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2375",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 8593,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 8661,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2446",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 8253,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 8321,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2517",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 7913,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 7981,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2588",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 7573,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 7641,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2659",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 7233,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 7301,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2730",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 6893,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 6961,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2801",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 6553,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 6621,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2872",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 6213,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 6281,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2943",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 5873,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 5941,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3014",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 5533,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 5601,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3085",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 5193,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 5261,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3156",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 4853,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 4921,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3227",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 4513,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 4581,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3298",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 4173,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 4241,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3369",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 3833,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 3901,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3440",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 3493,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 3561,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3511",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 3153,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 3221,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3582",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 2813,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 2881,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3653",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 2473,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 2541,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3724",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 2133,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 2201,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3795",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 1793,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 1861,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3866",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 1453,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 1521,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3937",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 1113,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 1181,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4008",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 773,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 841,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4079",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 433,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 501,
+        "y": 1044
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0",
+      "position": {
+        "x": 93,
+        "y": 183
+      },
+      "positionAbsolute": {
+        "x": 161,
+        "y": 949
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/beta",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 34,
+        "y": 1512
+      },
+      "positionAbsolute": {
+        "x": 34,
+        "y": 1512
+      },
+      "width": 20524,
+      "height": 1042
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/beta/deep",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src/beta",
+      "position": {
+        "x": 34,
+        "y": 834
+      },
+      "positionAbsolute": {
+        "x": 68,
+        "y": 2346
+      },
+      "width": 360,
+      "height": 174
+    },
+    {
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src/beta",
+      "position": {
+        "x": 34,
+        "y": 122
+      },
+      "positionAbsolute": {
+        "x": 68,
+        "y": 1634
+      },
+      "width": 20456,
+      "height": 532
+    },
+    {
+      "id": "external:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 93,
+        "y": 373
+      },
+      "positionAbsolute": {
+        "x": 161,
+        "y": 2007
+      },
+      "width": 190,
+      "height": 68
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 20153,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 20221,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:59",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 19813,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 19881,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:125",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 19473,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 19541,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:191",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 19133,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 19201,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:257",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 18793,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 18861,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:323",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 18453,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 18521,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:389",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 18113,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 18181,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:455",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 17773,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 17841,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:521",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 17433,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 17501,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:587",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 17093,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 17161,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:653",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 16753,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 16821,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:721",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 16413,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 16481,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:790",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 16073,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 16141,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:859",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 15733,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 15801,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:928",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 15393,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 15461,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:997",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 15053,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 15121,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1066",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 14713,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 14781,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1135",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 14373,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 14441,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1204",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 14033,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 14101,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1273",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 13693,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 13761,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1342",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 13353,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 13421,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1411",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 13013,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 13081,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1480",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 12673,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 12741,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1549",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 12333,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 12401,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1618",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 11993,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 12061,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1687",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 11653,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 11721,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1756",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 11313,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 11381,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1825",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 10973,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 11041,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1894",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 10633,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 10701,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1963",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 10293,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 10361,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2032",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 9953,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 10021,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2101",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 9613,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 9681,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2170",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 9273,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 9341,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2239",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 8933,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 9001,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2308",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 8593,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 8661,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2377",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 8253,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 8321,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2446",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 7913,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 7981,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2515",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 7573,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 7641,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2584",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 7233,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 7301,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2653",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 6893,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 6961,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2722",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 6553,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 6621,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2791",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 6213,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 6281,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2860",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 5873,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 5941,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2929",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 5533,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 5601,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2998",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 5193,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 5261,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3067",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 4853,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 4921,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3136",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 4513,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 4581,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3205",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 4173,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 4241,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3274",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 3833,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 3901,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3343",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 3493,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 3561,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3412",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 3153,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 3221,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3481",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 2813,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 2881,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3550",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 2473,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 2541,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3619",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 2133,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 2201,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3688",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 1793,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 1861,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3757",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 1453,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 1521,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3826",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 1113,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 1181,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3895",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 773,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 841,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3964",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 433,
+        "y": 278
+      },
+      "positionAbsolute": {
+        "x": 501,
+        "y": 1912
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0",
+      "position": {
+        "x": 93,
+        "y": 183
+      },
+      "positionAbsolute": {
+        "x": 161,
+        "y": 1817
+      },
+      "width": 190,
+      "height": 64
+    },
+    {
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0",
+      "parentNode": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "position": {
+        "x": 34,
+        "y": 122
+      },
+      "positionAbsolute": {
+        "x": 34,
+        "y": 122
+      },
+      "width": 396,
+      "height": 342
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/main.ts:113",
+      "parentNode": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0",
+      "position": {
+        "x": 28,
+        "y": 124
+      },
+      "positionAbsolute": {
+        "x": 62,
+        "y": 246
+      },
+      "width": 190,
+      "height": 64
+    }
+  ],
+  "flowEdgeIds": [
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/beta/deep/c.ts:4150@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/main.ts:113->external:c:/dev/p13/p12e5b-multifile/src/beta/deep/c.ts:4150@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:60->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:60->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:0@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:128->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:60@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:128->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:60@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:196->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:128@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:196->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:128@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:264->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:196@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:264->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:196@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:332->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:264@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:332->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:264@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:400->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:332@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:400->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:332@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:468->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:400@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:468->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:400@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:536->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:468@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:536->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:468@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:604->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:536@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:604->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:536@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:672->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:604@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:672->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:604@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:742->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:672@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:742->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:672@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:813->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:742@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:813->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:742@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:884->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:813@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:884->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:813@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:955->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:884@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:955->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:884@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1026->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:955@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1026->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:955@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1097->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1026@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1097->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1026@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1168->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1097@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1168->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1097@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1239->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1168@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1239->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1168@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1310->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1239@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1310->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1239@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1381->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1310@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1381->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1310@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1452->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1381@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1452->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1381@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1523->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1452@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1523->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1452@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1594->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1523@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1594->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1523@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1665->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1594@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1665->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1594@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1736->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1665@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1736->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1665@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1807->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1736@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1807->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1736@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1878->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1807@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1878->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1807@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1949->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1878@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1949->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1878@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2020->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1949@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2020->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:1949@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2091->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2020@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2091->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2020@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2162->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2091@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2162->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2091@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2233->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2162@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2233->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2162@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2304->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2233@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2304->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2233@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2375->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2304@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2375->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2304@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2446->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2375@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2446->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2375@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2517->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2446@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2517->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2446@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2588->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2517@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2588->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2517@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2659->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2588@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2659->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2588@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2730->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2659@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2730->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2659@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2801->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2730@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2801->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2730@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2872->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2801@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2872->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2801@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2943->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2872@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2943->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2872@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3014->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2943@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3014->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:2943@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3085->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3014@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3085->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3014@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3156->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3085@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3156->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3085@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3227->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3156@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3227->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3156@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3298->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3227@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3298->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3227@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3369->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3298@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3369->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3298@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3440->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3369@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3440->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3369@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3511->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3440@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3511->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3440@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3582->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3511@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3582->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3511@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3653->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3582@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3653->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3582@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3724->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3653@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3724->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3653@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3795->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3724@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3795->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3724@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3866->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3795@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3866->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3795@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3937->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3866@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3937->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3866@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4008->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3937@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4008->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:3937@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4079->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4008@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4079->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4008@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4079@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4150->function:c:/dev/p13/p12e5b-multifile/src/alpha/a.ts:4079@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:59->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:59->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:0@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:125->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:59@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:125->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:59@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:191->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:125@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:191->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:125@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:257->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:191@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:257->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:191@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:323->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:257@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:323->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:257@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:389->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:323@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:389->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:323@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:455->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:389@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:455->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:389@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:521->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:455@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:521->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:455@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:587->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:521@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:587->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:521@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:653->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:587@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:653->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:587@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:721->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:653@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:721->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:653@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:790->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:721@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:790->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:721@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:859->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:790@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:859->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:790@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:928->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:859@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:928->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:859@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:997->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:928@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:997->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:928@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1066->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:997@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1066->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:997@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1135->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1066@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1135->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1066@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1204->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1135@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1204->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1135@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1273->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1204@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1273->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1204@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1342->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1273@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1342->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1273@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1411->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1342@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1411->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1342@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1480->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1411@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1480->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1411@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1549->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1480@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1549->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1480@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1618->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1549@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1618->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1549@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1687->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1618@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1687->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1618@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1756->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1687@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1756->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1687@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1825->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1756@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1825->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1756@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1894->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1825@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1894->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1825@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1963->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1894@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1963->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1894@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2032->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1963@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2032->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:1963@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2101->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2032@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2101->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2032@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2170->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2101@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2170->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2101@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2239->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2170@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2239->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2170@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2308->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2239@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2308->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2239@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2377->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2308@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2377->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2308@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2446->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2377@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2446->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2377@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2515->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2446@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2515->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2446@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2584->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2515@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2584->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2515@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2653->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2584@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2653->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2584@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2722->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2653@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2722->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2653@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2791->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2722@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2791->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2722@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2860->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2791@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2860->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2791@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2929->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2860@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2929->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2860@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2998->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2929@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2998->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2929@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3067->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2998@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3067->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:2998@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3136->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3067@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3136->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3067@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3205->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3136@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3205->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3136@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3274->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3205@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3274->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3205@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3343->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3274@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3343->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3274@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3412->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3343@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3412->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3343@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3481->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3412@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3481->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3412@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3550->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3481@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3550->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3481@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3619->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3550@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3619->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3550@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3688->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3619@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3688->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3619@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3757->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3688@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3757->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3688@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3826->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3757@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3826->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3757@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3895->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3826@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3895->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3826@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3964->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3895@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3964->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3895@@x <- x@@arg#0",
+    "calls:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3964@@@@",
+    "dataflow:function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:4033->function:c:/dev/p13/p12e5b-multifile/src/beta/b.ts:3964@@x <- x@@arg#0"
+  ]
+}

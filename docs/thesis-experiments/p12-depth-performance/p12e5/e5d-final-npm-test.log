@@ -1,0 +1,420 @@
+
+> cogic@0.0.6 pretest
+> npm run compile && npm run lint:all
+
+
+> cogic@0.0.6 compile
+> tsc -p ./
+
+
+> cogic@0.0.6 lint:all
+> npm run lint && npm run lint:webview
+
+
+> cogic@0.0.6 lint
+> eslint src
+
+
+> cogic@0.0.6 lint:webview
+> cd webview-ui && npm run lint
+
+
+> webview-ui@0.0.0 lint
+> eslint .
+
+
+> cogic@0.0.6 test
+> node ./scripts/run-vscode-tests.mjs
+
+- Resolving version...
+✔ Validated version: 1.147.0
+✔ Found existing install in C:\dev\Cogic-P4-restored\.vscode-test\vscode-win32-x64-archive-1.147.0
+(node:11344) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+[main 2026-11-25T06:20:22.920Z] [node-compile-cache] main: packaged cache enabled (status: enabled, configured: C:\dev\Cogic-P4-restored\.vscode-test\vscode-win32-x64-archive-1.147.0\8a14f0cc1b\resources\app\node-compile-cache\main, active: C:\dev\Cogic-P4-restored\.vscode-test\vscode-win32-x64-archive-1.147.0\8a14f0cc1b\resources\app\node-compile-cache\main\v24.22.1-x64-d4bb394e)
+[main 2026-11-25T06:20:22.973Z] StorageMainService: creating application shared storage
+[main 2026-11-25T06:20:23.090Z] [shared storage] Creating shared storage database at ':memory:' (wasCreated: true)
+[main 2026-11-25T06:20:23.091Z] [shared storage] Initializing fallback application storage (path: in-memory)
+[main 2026-11-25T06:20:23.145Z] [shared storage] Fallback application storage initialized with 3 items
+[main 2026-11-25T06:20:23.146Z] update#setState disabled
+[main 2026-11-25T06:20:23.146Z] update#ctor - updates are disabled by the environment
+Via 'product.json#extensionEnabledApiProposals' extension 'ms-vscode.remote-repositories' wants API proposal 'timeline' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+Via 'product.json#extensionEnabledApiProposals' extension 'github.vscode-pull-request-github' wants API proposal 'agentsWindowActivation' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+Via 'product.json#extensionEnabledApiProposals' extension 'github.remotehub' wants API proposal 'timeline' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+[RemoteAgentHost] Reconciling: desired=[], current=[]
+[AgentHost:renderer] Acquiring MessagePort to agent host...
+[main 2026-11-25T06:20:24.135Z] AgentHostProcessManager: agent host started
+[ChatModelSelection] event=no-model-at-toolbar-build surface="workbench" sessionKey=undefined conversationKey=undefined modelTarget=undefined storageKey="chat.currentLanguageModel.panel" widgetViewKind="view"
+[AgentHost:renderer] MessagePort acquired, creating client...
+[AgentPluginRepositoryService] Both old and new agent-plugins directories exist; skipping directory migration
+Started local extension host with pid 22680.
+Loading development extension at c:\dev\Cogic-P4-restored
+Extension 'github.copilot-chat' appears in product.json but enables LESS API proposals than the extension wants.
+package.json (LOSES): agentSessionsWorkspace
+speech
+structuralDiff
+agentsWindowConfiguration
+chatDebug
+chatHooks
+envIsConnectionMetered
+extensionsAny
+newSymbolNamesProvider
+interactive
+codeActionAI
+activeComment
+commentReveal
+contribCommentThreadAdditionalMenu
+contribCommentsViewThreadMenus
+contribChatEditorInlineGutterMenu
+documentFiltersExclusive
+embeddings
+findTextInFiles
+findTextInFiles2
+languageModelToolSupportsModel
+findFiles2
+textSearchProvider
+terminalDataWriteEvent
+terminalExecuteCommandEvent
+terminalSelection
+terminalQuickFixProvider
+mappedEditsProvider
+aiRelatedInformation
+aiSettingsSearch
+chatParticipantAdditions
+defaultChatParticipant
+contribSourceControlInputBoxMenu
+authLearnMore
+authIssuers
+testObserver
+aiTextSearchProvider
+chatParticipantPrivate
+chatProvider
+contribDebugCreateConfiguration
+chatReferenceDiagnostic
+textSearchProvider2
+chatReferenceBinaryData
+languageModelSystem
+languageModelCapabilities
+languageModelPricing
+languageModelRateLimit
+inlineCompletionsAdditions
+chatStatusItem
+chatInputNotification
+taskProblemMatcherStatus
+contribLanguageModelToolSets
+textDocumentChangeReason
+resolvers
+taskExecutionTerminal
+dataChannels
+languageModelThinkingPart
+chatSessionsProvider
+devDeviceId
+contribEditorContentMenu
+chatPromptFiles
+mcpServerDefinitions
+tabInputMultiDiff
+workspaceTrust
+environmentPower
+terminalTitle
+toolInvocationApproveCombination
+chatSessionCustomizationProvider
+product.json (WINS): agentSessionsWorkspace
+agentsWindowConfiguration
+interactive
+terminalDataWriteEvent
+terminalExecuteCommandEvent
+terminalSelection
+terminalQuickFixProvider
+chatParticipantAdditions
+defaultChatParticipant
+embeddings
+chatProvider
+mappedEditsProvider
+aiRelatedInformation
+aiSettingsSearch
+codeActionAI
+findTextInFiles
+findTextInFiles2
+textSearchProvider
+textSearchProvider2
+activeComment
+commentReveal
+contribSourceControlInputBoxMenu
+contribCommentEditorActionsMenu
+contribCommentThreadAdditionalMenu
+contribCommentsViewThreadMenus
+contribChatEditorInlineGutterMenu
+extensionAffinity
+newSymbolNamesProvider
+findFiles2
+chatReferenceDiagnostic
+extensionsAny
+authLearnMore
+authIssuers
+testObserver
+aiTextSearchProvider
+documentFiltersExclusive
+chatParticipantPrivate
+contribDebugCreateConfiguration
+inlineCompletionsAdditions
+chatReferenceBinaryData
+languageModelSystem
+languageModelCapabilities
+languageModelThinkingPart
+languageModelToolSupportsModel
+chatStatusItem
+taskProblemMatcherStatus
+contribLanguageModelToolSets
+textDocumentChangeReason
+resolvers
+taskExecutionTerminal
+dataChannels
+chatSessionsProvider
+chatSessionCustomizationProvider
+devDeviceId
+contribEditorContentMenu
+tokenInformation
+toolInvocationApproveCombination
+chatPromptFiles
+mcpServerDefinitions
+tabInputMultiDiff
+workspaceTrust
+chatHooks
+chatDebug
+envIsConnectionMetered
+environmentPower
+terminalTitle
+languageModelPricing
+languageModelRateLimit
+chatInputNotification
+speech
+DELTA: structuralDiff
+Proceeding with EXTRA proposals (structuralDiff) because extension is in development mode. Still, this EXTENSION WILL BE BROKEN unless product.json is updated.
+[AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+[RemoteAgentHost] Reconciling: desired=[], current=[]
+[ChatModelSelection] event=no-model-at-toolbar-build surface="workbench" sessionKey=undefined conversationKey=undefined modelTarget=undefined storageKey="chat.currentLanguageModel.panel" widgetViewKind="view"
+Settings Sync: Account status changed from uninitialized to unavailable
+[CloudSandboxApi] No 'github' session with scopes [read:user, user:email, repo, workflow]
+[RemoteAgentHostProtocol] Sending initialize: address=local clientId=062702db-98ca-42fe-87f5-6125fa7850d9 requestId=1
+[RemoteAgentHostProtocol] Initialized: address=local clientId=062702db-98ca-42fe-87f5-6125fa7850d9 durationMs=5824
+[AgentHost:renderer] Protocol connection established; clientId=062702db-98ca-42fe-87f5-6125fa7850d9
+[AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+[0m[0m
+[0m  Analyzer Test Suite[0m
+[AgentHostProvisional] Initial session configuration timed out; continuing without prepared pickers
+[ChatModelSelection] event=no-model-at-toolbar-build surface="workbench" sessionKey="agent-host-copilotcli" conversationKey="agent-host-copilotcli:/untitled-824a2051-ab90-4588-a213-b6b3228cb5cb" modelTarget="agent-host-copilotcli" storageKey="chat.currentLanguageModel.panel.agent-host-copilotcli" widgetViewKind="view"
+[ChatModelSelection] event=no-model-at-toolbar-build surface="workbench" sessionKey="agent-host-copilotcli" conversationKey="agent-host-copilotcli:/untitled-824a2051-ab90-4588-a213-b6b3228cb5cb" modelTarget="agent-host-copilotcli" storageKey="chat.currentLanguageModel.panel.agent-host-copilotcli" widgetViewKind="view"
+(node:22680) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `Code --trace-deprecation ...` to show where the warning was created)
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[main 2026-11-25T06:20:31.524Z] [AgentHost:stderr] Unknown channel: agentHostManagement
+
+[main 2026-11-25T06:20:31.570Z] [AgentHost:stderr] Unknown channel: agentHostManagement
+
+[CopilotCliAgentPluginDiscovery] Failed to read runtime plugin inventory { name: 'Unknown channel' }
+[main 2026-11-25T06:20:31.984Z] [AgentHost:stderr] (node:11916) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `Code --trace-deprecation ...` to show where the warning was created)
+
+[main 2026-11-25T06:20:32.296Z] [AgentHost:stderr] Unknown channel: agentHostManagement
+
+Channel name 'agentHostManagement' timed out after 1000ms
+[main 2026-11-25T06:20:32.299Z] [AgentHost:stderr] Unknown channel: agentHostManagement
+
+[CustomizationMarketplace] Unable to load provider-owned installations { name: 'Unknown channel' }
+[main 2026-11-25T06:20:32.302Z] [AgentHost:stderr] Unknown channel: agentHostManagement
+
+[main 2026-11-25T06:20:32.303Z] [AgentHost:stderr] Unknown channel: agentHostManagement
+
+[main 2026-11-25T06:20:32.612Z] [AgentHost:stderr] Unknown channel: agentHostManagement
+
+[main 2026-11-25T06:20:32.613Z] [AgentHost:stderr] Unknown channel: agentHostManagement
+
+[CustomizationMarketplace] Unable to load provider-owned installations { name: 'Unknown channel' }
+[main 2026-11-25T06:20:33.621Z] [AgentHost:stderr] Unknown channel: agentHostManagement
+
+[CopilotCliAgentPluginDiscovery] Failed to read runtime plugin inventory { name: 'Unknown channel' }
+  [32m  ✔[0m[90m caches disk SourceFiles without mixing active unsaved text[0m[31m (1754ms)[0m
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHostCustomizationMarketplace] Unable to load session-bound SDK installation receipts { name: 'Error' }
+[AgentHostCustomizationMarketplace] Unable to load session-bound SDK installation receipts { name: 'Error' }
+[AgentHostCustomizationMarketplace] Unable to load session-bound SDK installation receipts { name: 'Error' }
+[AgentHostCustomizationMarketplace] Unable to load session-bound SDK installation receipts { name: 'Error' }
+[AgentHostCustomizationMarketplace] Unable to load session-bound SDK installation receipts { name: 'Error' }
+[AgentHostCustomizationMarketplace] Unable to load session-bound SDK installation receipts { name: 'Error' }
+[AgentHostCustomizationMarketplace] Unable to load session-bound SDK installation receipts { name: 'Error' }
+[AgentHostCustomizationMarketplace] Unable to load session-bound SDK installation receipts { name: 'Error' }
+[AgentHostCustomizationMarketplace] Unable to load session-bound SDK installation receipts { name: 'Error' }
+  [32m  ✔[0m[90m captures default export declarations as default[0m[31m (906ms)[0m
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+  [32m  ✔[0m[90m tracks mixed imports and re-exports from a barrel-style file[0m[31m (86ms)[0m
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+[AgentHost] No signed-in session resolved for resource: https://api.github.com/repos
+  [32m  ✔[0m[90m promotes object literal methods into graph owners[0m[31m (88ms)[0m
+  [32m  ✔[0m[90m resolves calls through barrel re-exports[0m[31m (99ms)[0m
+  [32m  ✔[0m[90m resolves tsconfig path alias imports[0m[31m (595ms)[0m
+  [32m  ✔[0m[90m adds reference edges for local arrow function values[0m[31m (498ms)[0m
+  [32m  ✔[0m[90m adds reference edges for local member access without invocation[0m[33m (65ms)[0m
+  [32m  ✔[0m[90m resolves dynamic import calls into module files[0m[31m (78ms)[0m
+  [32m  ✔[0m[90m treats local JSX component usage as a call edge[0m[33m (63ms)[0m
+  [32m  ✔[0m[90m resolves imported JSX components across workspace files[0m[33m (69ms)[0m
+  [32m  ✔[0m[90m promotes React hook callbacks into separate graph owners[0m[33m (69ms)[0m
+  [32m  ✔[0m[90m connects useState and useReducer updates back to hook sources[0m[33m (69ms)[0m
+  [32m  ✔[0m[90m recognizes aliased React hooks via symbol resolution[0m[33m (66ms)[0m
+  [32m  ✔[0m[90m promotes Vue composition callbacks into separate graph owners[0m[33m (59ms)[0m
+  [32m  ✔[0m[90m recognizes aliased and namespace Vue composition callbacks[0m[33m (64ms)[0m
+  [32m  ✔[0m[90m creates Vue state source nodes and tracks watch callbacks[0m[33m (66ms)[0m
+  [32m  ✔[0m[90m promotes Express route callbacks into separate graph owners[0m[33m (60ms)[0m
+  [32m  ✔[0m[90m connects Express named handlers and middleware to route owners[0m[33m (58ms)[0m
+  [32m  ✔[0m[90m promotes Nest controller methods into route owners[0m[33m (63ms)[0m
+  [32m  ✔[0m[90m resolves workspace calls across sibling files[0m[31m (76ms)[0m
+  [32m  ✔[0m[90m typed React (untyped): setter and dispatch calls are updates to their hook sources[0m[31m (250ms)[0m
+  [32m  ✔[0m[90m typed React (tuple-one-line): setter and dispatch calls are updates to their hook sources[0m[31m (243ms)[0m
+  [32m  ✔[0m[90m typed React (alias-split): setter and dispatch calls are updates to their hook sources[0m[31m (252ms)[0m
+  [32m  ✔[0m[90m typed React: functions that only look like setters stay ordinary calls[0m[31m (222ms)[0m
+  [32m  ✔[0m[90m typed React: calling the state value is not turned into an update[0m[31m (223ms)[0m
+  [32m  ✔[0m[90m shorthand: plain functions and arrow-function values are referenced; plain locals and self are not[0m[31m (271ms)[0m
+  [32m  ✔[0m[90m shorthand (tuple-one-line): React useState / useReducer values reference their state sources[0m[31m (267ms)[0m
+  [32m  ✔[0m[90m shorthand (alias-split): React useState / useReducer values reference their state sources[0m[31m (222ms)[0m
+  [32m  ✔[0m[90m shorthand: Vue ref and reactive values reference their state sources, mixed with functions[0m[31m (224ms)[0m
+  [32m  ✔[0m[90m shorthand: same names in other scopes, key: value, destructuring and imports are not misattributed[0m[31m (225ms)[0m
+  [32m  ✔[0m[90m constructors: local explicit, implicit and nested constructors target the class line[0m[31m (234ms)[0m
+  [32m  ✔[0m[90m constructors: imported explicit, implicit and inherited constructors target the class declaration[0m[31m (220ms)[0m
+  [32m  ✔[0m[90m constructors: overloads, generics, optional/default and rest parameters use the selected signature[0m[31m (212ms)[0m
+  [32m  ✔[0m[90m constructors: negatives, indirect constructor variables and built-ins create no constructs[0m[31m (248ms)[0m
+  [32m  ✔[0m[90m owner: constructor body relations belong to the class, parameters and methods keep theirs[0m[31m (245ms)[0m
+  [32m  ✔[0m[90m owner: instance field initializers belong to the class; static and function-valued fields do not[0m[31m (211ms)[0m
+[0m  Codegen Test Suite[0m
+  [32m  ✔[0m[90m buildPatchPreview creates new file scaffolds[0m
+  [32m  ✔[0m[90m buildPatchPreview appends into existing file when filePath is explicit[0m
+  [32m  ✔[0m[90m buildPatchPreview rejects duplicate declarations in an existing file[0m
+[0m  Extension Test Suite[0m
+  [32m  ✔[0m[90m Sample test[0m
+[0m  P12-B Program session (no tsconfig)[0m
+  [32m  ✔[0m[90m Depth 2 with a session builds the same graph as without one, and reuses Program structure[0m[31m (1302ms)[0m
+  [32m  ✔[0m[90m cross-file calls, arguments and class member ownership survive the session[0m[31m (535ms)[0m
+  [32m  ✔[0m[90m an unsaved active buffer is analyzed, and the session result equals the non-session result[0m[31m (831ms)[0m
+  [32m  ✔[0m[90m Depth 0 and 1 do not create a session[0m[31m (677ms)[0m
+Extension host (LocalProcess pid: 22680) is unresponsive.
+  [32m  ✔[0m[90m the analysis cache setting off disables the session[0m[31m (4110ms)[0m
+Extension host (LocalProcess pid: 22680) is responsive.
+  [32m  ✔[0m[90m an unreadable expansion target is skipped the same way with and without a session[0m[31m (848ms)[0m
+  [32m  ✔[0m[90m a same-size edit that keeps the mtime is not reused once the file is invalidated[0m[31m (1004ms)[0m
+  [32m  ✔[0m[90m a size change is detected without an invalidation event[0m[31m (1039ms)[0m
+  [32m  ✔[0m[90m a created source file stops structure reuse for the rest of the session[0m[31m (1105ms)[0m
+  [32m  ✔[0m[90m changed root names or compiler options are never reused[0m[31m (1159ms)[0m
+  [32m  ✔[0m[90m clearAnalyzerCaches and dispose end reuse; a disposed session falls back safely[0m[31m (1614ms)[0m
+  [32m  ✔[0m[90m switching to another project inside one session does not reuse the other Program[0m[31m (1061ms)[0m
+[0m  P12-B Program session (tsconfig)[0m
+  [32m  ✔[0m[90m Depth 2 with a session builds the same graph as without one, and reuses Program structure[0m[31m (1315ms)[0m
+  [32m  ✔[0m[90m cross-file calls, arguments and class member ownership survive the session[0m[31m (572ms)[0m
+  [32m  ✔[0m[90m an unsaved active buffer is analyzed, and the session result equals the non-session result[0m[31m (845ms)[0m
+  [32m  ✔[0m[90m Depth 0 and 1 do not create a session[0m[31m (686ms)[0m
+Extension host (LocalProcess pid: 22680) is unresponsive.
+  [32m  ✔[0m[90m the analysis cache setting off disables the session[0m[31m (4044ms)[0m
+Extension host (LocalProcess pid: 22680) is responsive.
+  [32m  ✔[0m[90m an unreadable expansion target is skipped the same way with and without a session[0m[31m (803ms)[0m
+  [32m  ✔[0m[90m a same-size edit that keeps the mtime is not reused once the file is invalidated[0m[31m (1035ms)[0m
+  [32m  ✔[0m[90m a size change is detected without an invalidation event[0m[31m (1029ms)[0m
+  [32m  ✔[0m[90m a created source file stops structure reuse for the rest of the session[0m[31m (1062ms)[0m
+  [32m  ✔[0m[90m changed root names or compiler options are never reused[0m[31m (1062ms)[0m
+  [32m  ✔[0m[90m clearAnalyzerCaches and dispose end reuse; a disposed session falls back safely[0m[31m (1737ms)[0m
+  [32m  ✔[0m[90m switching to another project inside one session does not reuse the other Program[0m[31m (1078ms)[0m
+[0m  P12-C pipeline diagnostics[0m
+  [32m  ✔[0m[90m keeps request IDs, clock domains, incomplete, duplicate and dropped requests distinct[0m
+  [32m  ✔[0m[90m disabled output and diagnostic write failures do not throw[0m
+  [32m  ✔[0m[90m JSONL events preserve order and request IDs[0m
+  [32m  ✔[0m[90m depth profiling preserves the complete result and records frontier order[0m[31m (1010ms)[0m
+[0m  P12-D cooperative cancellation[0m
+  [32m  ✔[0m[90m explicit work suppresses only duplicate activation, never edits or a different file[0m
+  [32m  ✔[0m[90m activation identity changes when content, scope, root or invalidation changes[0m
+  [32m  ✔[0m[90m superseded analysis stops after a pending read and a later analysis remains correct[0m[31m (1077ms)[0m
+  [32m  ✔[0m[90m pre-cancelled trace and debug requests stop before building a Program[0m
+[0m  P12-D request ownership[0m
+  [32m  ✔[0m[90m A cannot release B or replace B, including after B fails[0m
+  [32m  ✔[0m[90m automatic results do not replace pending user work and unrelated terminals do not clear it[0m
+  [32m  ✔[0m[90m delayed A completion cannot release or apply over B after B fails[0m
+  [32m  ✔[0m[90m completion or cancellation only releases its own current request[0m
+[0m  P12-D selection ordering[0m
+  [32m  ✔[0m[90m older slow document open cannot activate after newer selection[0m
+  [32m  ✔[0m[90m newer selection activates after an in-flight older show[0m
+[0m  P14 call ownership[0m
+  [32m  ✔[0m[90m resolves typed fields and distinct private owners without inventing reference calls[0m[31m (517ms)[0m
+  [32m  ✔[0m[90m keeps selected parameter names, indices and excludes uncertain spread positions[0m[31m (489ms)[0m
+  [32m  ✔[0m[90m preserves ordinary methods, super calls, overloads and rejects non-function fields[0m[31m (500ms)[0m
+  [32m  ✔[0m[90m workspace imports remain external and cache on/off graphs match[0m[31m (1171ms)[0m
+[0m  Analyzer SourceFile cache policy[0m
+  [32m  ✔[0m[90m a working set larger than 800 files is reused on the next edit (no LRU thrash)[0m[31m (2077ms)[0m
+  [32m  ✔[0m[90m cached analysis produces the same graph as uncached analysis[0m[31m (3208ms)[0m
+  [32m  ✔[0m[90m a changed file on disk is not served from the cache[0m[31m (2093ms)[0m
+[0m  Disk SourceFile ScriptKind[0m
+  [32m  ✔[0m[90m matches the kind TypeScript infers from the file name[0m
+  [32m  ✔[0m[90m cache on and off give the same analysis for a JSON module, .mjs and .cjs[0m[31m (1074ms)[0m
+[0m  Exploration workflow policy[0m
+  [32m  ✔[0m[90m keeps the graph when a debug session opens a file[0m
+  [32m  ✔[0m[90m keeps normal editor navigation automatic when root allows it[0m
+[92m [0m[32m 90 passing[0m[90m (54s)[0m
+[main 2026-11-25T06:21:25.341Z] Extension host with pid 22680 exited with code: 0, signal: unknown.
+[main 2026-11-25T06:21:26.348Z] AgentHostStarter: cannot create window connection: Agent Host process manager is shutting down.
+Exit code:   0

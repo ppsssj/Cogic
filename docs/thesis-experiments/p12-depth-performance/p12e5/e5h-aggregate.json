@@ -1,0 +1,3571 @@
+[
+ {
+  "order": 0,
+  "dir": "e5h-b1-A",
+  "cond": "A",
+  "block": "1",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 8267,
+   "gaps": 29
+  },
+  "loop": 8831.9,
+  "late": 3904.6,
+  "delivered": 40,
+  "gaps": 30,
+  "gapMs": 8167.5,
+  "p99": 600.1,
+  "max": 683.4,
+  "presentN": 53,
+  "presentWall": 7899.2,
+  "presentCpu": 200.5,
+  "present50": 30,
+  "gpuRaster": 841,
+  "graphRaster": 860,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 675,
+   "canvasControls": 9,
+   "rootBanner": 13,
+   "react-flow__edges": 83
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 562,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "320",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 134.8,
+   "p95": 484.6,
+   "max": 686.4
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 208,
+   "max": 209
+  },
+  "minFree": 2019,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 1,
+  "dir": "e5h-b1-B",
+  "cond": "B",
+  "block": "1",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "ea0ecbd7",
+  "legacyPan": {
+   "ms": 8753,
+   "gaps": 28
+  },
+  "loop": 8688.1,
+  "late": 3657.8,
+  "delivered": 40,
+  "gaps": 30,
+  "gapMs": 7966.8,
+  "p99": 533.5,
+  "max": 1008.3,
+  "presentN": 56,
+  "presentWall": 7509.4,
+  "presentCpu": 205.2,
+  "present50": 30,
+  "gpuRaster": 812,
+  "graphRaster": 865,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 681,
+   "canvasControls": 10,
+   "rootBanner": 15,
+   "react-flow__edges": 79
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 565,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "317",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 130.5,
+   "p95": 483.4,
+   "max": 986.9
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 176,
+   "max": 194
+  },
+  "minFree": 2023,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 2,
+  "dir": "e5h-b1-C",
+  "cond": "C",
+  "block": "1",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 4922,
+   "gaps": 0
+  },
+  "loop": 5003.5,
+  "late": 3.7,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.6,
+  "max": 24.9,
+  "presentN": 308,
+  "presentWall": 39,
+  "presentCpu": 38.8,
+  "present50": 0,
+  "gpuRaster": 634,
+  "graphRaster": 633,
+  "rasterByDom": {
+   "react-flow": 80,
+   "canvasControls": 6,
+   "rootBanner": 152,
+   "react-flow__edges": 83,
+   "unmapped": 312
+  },
+  "topLayer": {
+   "id": "21",
+   "n": 152,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "320",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 5.2,
+   "p95": 8.2,
+   "max": 10
+  },
+  "tiles": 31,
+  "gpuMiB": {
+   "median": 15,
+   "max": 15
+  },
+  "minFree": 2094,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 3,
+  "dir": "e5h-b2-C",
+  "cond": "C",
+  "block": "2",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 4920,
+   "gaps": 0
+  },
+  "loop": 5000.6,
+  "late": 3.6,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.7,
+  "max": 25,
+  "presentN": 296,
+  "presentWall": 46.2,
+  "presentCpu": 47.6,
+  "present50": 0,
+  "gpuRaster": 614,
+  "graphRaster": 613,
+  "rasterByDom": {
+   "react-flow": 80,
+   "canvasControls": 6,
+   "rootBanner": 138,
+   "react-flow__edges": 76,
+   "unmapped": 313
+  },
+  "topLayer": {
+   "id": "18",
+   "n": 138,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "314",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 5.6,
+   "p95": 10,
+   "max": 11.7
+  },
+  "tiles": 31,
+  "gpuMiB": {
+   "median": 14,
+   "max": 14
+  },
+  "minFree": 2060,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 4,
+  "dir": "e5h-b2-B",
+  "cond": "B",
+  "block": "2",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "ea0ecbd7",
+  "legacyPan": {
+   "ms": 7813,
+   "gaps": 29
+  },
+  "loop": 7994.5,
+  "late": 2962.1,
+  "delivered": 40,
+  "gaps": 29,
+  "gapMs": 7150.4,
+  "p99": 575,
+  "max": 608.3,
+  "presentN": 53,
+  "presentWall": 6719.4,
+  "presentCpu": 186.7,
+  "present50": 29,
+  "gpuRaster": 762,
+  "graphRaster": 810,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 629,
+   "canvasControls": 9,
+   "rootBanner": 13,
+   "react-flow__edges": 79
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 513,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "321",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 121.6,
+   "p95": 469.1,
+   "max": 584.8
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 177,
+   "max": 180
+  },
+  "minFree": 2112,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 5,
+  "dir": "e5h-b2-A",
+  "cond": "A",
+  "block": "2",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 8229,
+   "gaps": 29
+  },
+  "loop": 9029.1,
+  "late": 3903.5,
+  "delivered": 40,
+  "gaps": 30,
+  "gapMs": 8425.7,
+  "p99": 558.1,
+  "max": 841.8,
+  "presentN": 53,
+  "presentWall": 7871.4,
+  "presentCpu": 200.6,
+  "present50": 30,
+  "gpuRaster": 836,
+  "graphRaster": 918,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 734,
+   "canvasControls": 10,
+   "rootBanner": 15,
+   "react-flow__edges": 79
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 620,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "321",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 182.9,
+   "p95": 436.3,
+   "max": 833.4
+  },
+  "tiles": 752,
+  "gpuMiB": {
+   "median": 186,
+   "max": 209
+  },
+  "minFree": 2037,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 6,
+  "dir": "e5h-b3-B",
+  "cond": "B",
+  "block": "3",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 50",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "ea0ecbd7",
+  "legacyPan": {
+   "ms": 8298,
+   "gaps": 28
+  },
+  "loop": 7909.5,
+  "late": 2875.4,
+  "delivered": 40,
+  "gaps": 31,
+  "gapMs": 7334.3,
+  "p99": 458.4,
+  "max": 458.6,
+  "presentN": 54,
+  "presentWall": 6871,
+  "presentCpu": 166.4,
+  "present50": 31,
+  "gpuRaster": 761,
+  "graphRaster": 828,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 642,
+   "canvasControls": 10,
+   "rootBanner": 13,
+   "react-flow__edges": 83
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 525,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "322",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 125.3,
+   "p95": 430.9,
+   "max": 434.5
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 225,
+   "max": 230
+  },
+  "minFree": 2046,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 7,
+  "dir": "e5h-b3-A",
+  "cond": "A",
+  "block": "3",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 9016,
+   "gaps": 28
+  },
+  "loop": 9149.7,
+  "late": 4118.3,
+  "delivered": 40,
+  "gaps": 33,
+  "gapMs": 8467.2,
+  "p99": 558.1,
+  "max": 1041.7,
+  "presentN": 54,
+  "presentWall": 7898.2,
+  "presentCpu": 185.5,
+  "present50": 32,
+  "gpuRaster": 841,
+  "graphRaster": 894,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 714,
+   "canvasControls": 10,
+   "rootBanner": 14,
+   "react-flow__edges": 76
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 598,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "319",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 132.5,
+   "p95": 386.3,
+   "max": 1008.3
+  },
+  "tiles": 750,
+  "gpuMiB": {
+   "median": 187,
+   "max": 209
+  },
+  "minFree": 2021,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 8,
+  "dir": "e5h-b3-C",
+  "cond": "C",
+  "block": "3",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 7899,
+   "gaps": 27
+  },
+  "loop": 8106.8,
+  "late": 3059,
+  "delivered": 40,
+  "gaps": 31,
+  "gapMs": 7525.6,
+  "p99": 458.3,
+  "max": 808.2,
+  "presentN": 56,
+  "presentWall": 7010.3,
+  "presentCpu": 196.1,
+  "present50": 30,
+  "gpuRaster": 770,
+  "graphRaster": 838,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 650,
+   "canvasControls": 9,
+   "rootBanner": 16,
+   "react-flow__edges": 83
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 532,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "323",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 134.1,
+   "p95": 383.7,
+   "max": 782.7
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 206,
+   "max": 207
+  },
+  "minFree": 2015,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 9,
+  "dir": "e5h-b4-C",
+  "cond": "C",
+  "block": "4",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 8925,
+   "gaps": 30
+  },
+  "loop": 7889.5,
+  "late": 2867.7,
+  "delivered": 40,
+  "gaps": 32,
+  "gapMs": 7150.5,
+  "p99": 458.3,
+  "max": 633.4,
+  "presentN": 57,
+  "presentWall": 6710.3,
+  "presentCpu": 175.8,
+  "present50": 30,
+  "gpuRaster": 758,
+  "graphRaster": 810,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 627,
+   "canvasControls": 10,
+   "rootBanner": 17,
+   "react-flow__edges": 76
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 510,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "327",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 124.8,
+   "p95": 383,
+   "max": 634.5
+  },
+  "tiles": 748,
+  "gpuMiB": {
+   "median": 201,
+   "max": 205
+  },
+  "minFree": 2173,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 10,
+  "dir": "e5h-b4-A",
+  "cond": "A",
+  "block": "4",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 9496,
+   "gaps": 27
+  },
+  "loop": 8317.4,
+  "late": 3284.7,
+  "delivered": 40,
+  "gaps": 31,
+  "gapMs": 7792.2,
+  "p99": 458.3,
+  "max": 641.6,
+  "presentN": 51,
+  "presentWall": 7251.9,
+  "presentCpu": 180.4,
+  "present50": 31,
+  "gpuRaster": 782,
+  "graphRaster": 846,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 662,
+   "canvasControls": 9,
+   "rootBanner": 12,
+   "react-flow__edges": 83
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 547,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "320",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 134.5,
+   "p95": 397.4,
+   "max": 639.2
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 196,
+   "max": 200
+  },
+  "minFree": 2099,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 11,
+  "dir": "e5h-b4-B",
+  "cond": "B",
+  "block": "4",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "before differs: viewport",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "ea0ecbd7",
+  "legacyPan": {
+   "ms": 8154,
+   "gaps": 29
+  },
+  "loop": 7878.1,
+  "late": 2845.1,
+  "delivered": 40,
+  "gaps": 32,
+  "gapMs": 7134.2,
+  "p99": 458.1,
+  "max": 458.4,
+  "presentN": 54,
+  "presentWall": 6650.4,
+  "presentCpu": 183.3,
+  "present50": 32,
+  "gpuRaster": 756,
+  "graphRaster": 814,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 626,
+   "canvasControls": 10,
+   "rootBanner": 15,
+   "react-flow__edges": 83
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 510,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "322",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 126.7,
+   "p95": 384.5,
+   "max": 432.8
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 208,
+   "max": 214
+  },
+  "minFree": 2062,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 12,
+  "dir": "e5h-b5-B",
+  "cond": "B",
+  "block": "5",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 50",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "ea0ecbd7",
+  "legacyPan": {
+   "ms": 8561,
+   "gaps": 28
+  },
+  "loop": 7956.7,
+  "late": 3045.7,
+  "delivered": 40,
+  "gaps": 29,
+  "gapMs": 6983.7,
+  "p99": 525.2,
+  "max": 549.9,
+  "presentN": 58,
+  "presentWall": 6670.4,
+  "presentCpu": 199.7,
+  "present50": 28,
+  "gpuRaster": 798,
+  "graphRaster": 845,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 658,
+   "canvasControls": 10,
+   "rootBanner": 18,
+   "react-flow__edges": 79
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 537,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "319",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 106,
+   "p95": 500.1,
+   "max": 533.5
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 211,
+   "max": 211
+  },
+  "minFree": 2106,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 13,
+  "dir": "e5h-b5-C",
+  "cond": "C",
+  "block": "5",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 8891,
+   "gaps": 28
+  },
+  "loop": 8639.3,
+  "late": 3723.1,
+  "delivered": 40,
+  "gaps": 32,
+  "gapMs": 8058.9,
+  "p99": 550,
+  "max": 633.4,
+  "presentN": 54,
+  "presentWall": 7743.9,
+  "presentCpu": 223.8,
+  "present50": 33,
+  "gpuRaster": 838,
+  "graphRaster": 881,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 701,
+   "canvasControls": 9,
+   "rootBanner": 15,
+   "react-flow__edges": 76
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 584,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "320",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 130.8,
+   "p95": 433.9,
+   "max": 634.7
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 184,
+   "max": 192
+  },
+  "minFree": 2068,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 14,
+  "dir": "e5h-b5-A",
+  "cond": "A",
+  "block": "5",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 8608,
+   "gaps": 29
+  },
+  "loop": 7914,
+  "late": 3011.9,
+  "delivered": 40,
+  "gaps": 30,
+  "gapMs": 6975.5,
+  "p99": 499.7,
+  "max": 558.3,
+  "presentN": 56,
+  "presentWall": 6630.1,
+  "presentCpu": 211,
+  "present50": 29,
+  "gpuRaster": 785,
+  "graphRaster": 820,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 632,
+   "canvasControls": 10,
+   "rootBanner": 15,
+   "react-flow__edges": 83
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 513,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "319",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 113.5,
+   "p95": 483.4,
+   "max": 532.8
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 219,
+   "max": 220
+  },
+  "minFree": 2014,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 15,
+  "dir": "e5h-d-b1-A",
+  "cond": "A",
+  "block": "1",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 50",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 9147,
+   "gaps": 30
+  },
+  "loop": 8292.8,
+  "late": 3372.6,
+  "delivered": 40,
+  "gaps": 31,
+  "gapMs": 7642.6,
+  "p99": 600.1,
+  "max": 633.3,
+  "presentN": 59,
+  "presentWall": 7353.9,
+  "presentCpu": 209.5,
+  "present50": 31,
+  "gpuRaster": 810,
+  "graphRaster": 853,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 670,
+   "canvasControls": 10,
+   "rootBanner": 17,
+   "react-flow__edges": 76
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 555,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "322",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 129.5,
+   "p95": 535.8,
+   "max": 634.8
+  },
+  "tiles": 748,
+  "gpuMiB": {
+   "median": 197,
+   "max": 200
+  },
+  "minFree": 1984,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 16,
+  "dir": "e5h-d-b1-D",
+  "cond": "D",
+  "block": "1",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "auto",
+   "viewport": "auto",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "08dcea1b",
+  "legacyPan": {
+   "ms": 4926,
+   "gaps": 0
+  },
+  "loop": 5000.5,
+  "late": 0.5,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.7,
+  "max": 25,
+  "presentN": 290,
+  "presentWall": 44.2,
+  "presentCpu": 44.1,
+  "present50": 0,
+  "gpuRaster": 662,
+  "graphRaster": 661,
+  "rasterByDom": {
+   "react-flow": 80,
+   "react-flow__nodes": 124,
+   "canvasControls": 6,
+   "rootBanner": 138,
+   "react-flow__edges": 83,
+   "unmapped": 230
+  },
+  "topLayer": {
+   "id": "17",
+   "n": 138,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "14",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": true,
+  "paintNodes": 128,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 5.6,
+   "p95": 9.1,
+   "max": 11.6
+  },
+  "tiles": 28,
+  "gpuMiB": {
+   "median": 17,
+   "max": 17
+  },
+  "minFree": 2158,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 1621,
+   "2-500": 1621,
+   "2-2000": 1621
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-500": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-2000": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "2-100": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-500": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-2000": {
+    "pct": 2.71,
+    "max": 135
+   }
+  }
+ },
+ {
+  "dir": "e5h-d-b1-C",
+  "missing": true
+ },
+ {
+  "order": 18,
+  "dir": "e5h-d-b2-C",
+  "cond": "C",
+  "block": "2",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": {
+   "hideMs": 3000,
+   "tenRafMs": 8489.800000011921,
+   "hidden": true,
+   "tenRafAfterMs": 83.60000002384186
+  },
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 4900,
+   "gaps": 0
+  },
+  "loop": 5013.5,
+  "late": 3.8,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.7,
+  "max": 24.9,
+  "presentN": 312,
+  "presentWall": 83.3,
+  "presentCpu": 81.9,
+  "present50": 0,
+  "gpuRaster": 637,
+  "graphRaster": 636,
+  "rasterByDom": {
+   "react-flow": 80,
+   "canvasControls": 7,
+   "rootBanner": 149,
+   "react-flow__edges": 83,
+   "unmapped": 317
+  },
+  "topLayer": {
+   "id": "18",
+   "n": 149,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "321",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 5.2,
+   "p95": 7.5,
+   "max": 9.4
+  },
+  "tiles": 31,
+  "gpuMiB": {
+   "median": 15,
+   "max": 15
+  },
+  "minFree": 2046,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 19,
+  "dir": "e5h-d-b2-D",
+  "cond": "D",
+  "block": "2",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "auto",
+   "viewport": "auto",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "08dcea1b",
+  "legacyPan": {
+   "ms": 4911,
+   "gaps": 0
+  },
+  "loop": 5013.6,
+  "late": 3.5,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.7,
+  "max": 25,
+  "presentN": 300,
+  "presentWall": 42.7,
+  "presentCpu": 41.9,
+  "present50": 0,
+  "gpuRaster": 672,
+  "graphRaster": 671,
+  "rasterByDom": {
+   "react-flow": 80,
+   "react-flow__nodes": 126,
+   "canvasControls": 5,
+   "rootBanner": 147,
+   "react-flow__edges": 83,
+   "unmapped": 230
+  },
+  "topLayer": {
+   "id": "17",
+   "n": 147,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "14",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": true,
+  "paintNodes": 128,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 5.3,
+   "p95": 9.8,
+   "max": 10.5
+  },
+  "tiles": 27,
+  "gpuMiB": {
+   "median": 17,
+   "max": 17
+  },
+  "minFree": 2178,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 1621,
+   "2-500": 1621,
+   "2-2000": 1621
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-500": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-2000": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "2-100": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-500": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-2000": {
+    "pct": 2.71,
+    "max": 135
+   }
+  }
+ },
+ {
+  "order": 20,
+  "dir": "e5h-d-b2-A",
+  "cond": "A",
+  "block": "2",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 7915,
+   "gaps": 28
+  },
+  "loop": 8966.7,
+  "late": 3925.5,
+  "delivered": 40,
+  "gaps": 31,
+  "gapMs": 8425.7,
+  "p99": 708.1,
+  "max": 866.7,
+  "presentN": 55,
+  "presentWall": 7833.4,
+  "presentCpu": 182.4,
+  "present50": 30,
+  "gpuRaster": 829,
+  "graphRaster": 893,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 712,
+   "canvasControls": 9,
+   "rootBanner": 13,
+   "react-flow__edges": 79
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 594,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "319",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 149.7,
+   "p95": 440.2,
+   "max": 833.1
+  },
+  "tiles": 750,
+  "gpuMiB": {
+   "median": 172,
+   "max": 178
+  },
+  "minFree": 2061,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 21,
+  "dir": "e5h-d-b3-D",
+  "cond": "D",
+  "block": "3",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "auto",
+   "viewport": "auto",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "08dcea1b",
+  "legacyPan": {
+   "ms": 4901,
+   "gaps": 0
+  },
+  "loop": 5006.2,
+  "late": 0.3,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.7,
+  "max": 25,
+  "presentN": 294,
+  "presentWall": 45.1,
+  "presentCpu": 45.1,
+  "present50": 0,
+  "gpuRaster": 673,
+  "graphRaster": 672,
+  "rasterByDom": {
+   "react-flow": 80,
+   "react-flow__nodes": 128,
+   "canvasControls": 8,
+   "rootBanner": 144,
+   "react-flow__edges": 83,
+   "unmapped": 229
+  },
+  "topLayer": {
+   "id": "20",
+   "n": 144,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "14",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": true,
+  "paintNodes": 128,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 4.7,
+   "p95": 9.4,
+   "max": 9.7
+  },
+  "tiles": 28,
+  "gpuMiB": {
+   "median": 17,
+   "max": 17
+  },
+  "minFree": 2179,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 1621,
+   "2-500": 1621,
+   "2-2000": 1621
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-500": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-2000": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "2-100": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-500": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-2000": {
+    "pct": 2.71,
+    "max": 135
+   }
+  }
+ },
+ {
+  "order": 22,
+  "dir": "e5h-d-b3-C",
+  "cond": "C",
+  "block": "3",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "before differs: viewport; pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": {
+   "hideMs": 3000,
+   "tenRafMs": 8349.899999976158,
+   "hidden": true,
+   "tenRafAfterMs": 82.5
+  },
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 4918,
+   "gaps": 0
+  },
+  "loop": 5010.9,
+  "late": 5.4,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.6,
+  "max": 24.9,
+  "presentN": 302,
+  "presentWall": 72.8,
+  "presentCpu": 66.5,
+  "present50": 0,
+  "gpuRaster": 619,
+  "graphRaster": 618,
+  "rasterByDom": {
+   "react-flow": 80,
+   "canvasControls": 9,
+   "rootBanner": 143,
+   "react-flow__edges": 76,
+   "unmapped": 310
+  },
+  "topLayer": {
+   "id": "21",
+   "n": 143,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "323",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 4.8,
+   "p95": 9.9,
+   "max": 10
+  },
+  "tiles": 31,
+  "gpuMiB": {
+   "median": 15,
+   "max": 15
+  },
+  "minFree": 2070,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 23,
+  "dir": "e5h-d-b3-A",
+  "cond": "A",
+  "block": "3",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 50",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 8023,
+   "gaps": 27
+  },
+  "loop": 8524.1,
+  "late": 3581,
+  "delivered": 40,
+  "gaps": 31,
+  "gapMs": 7751,
+  "p99": 533.4,
+  "max": 608.4,
+  "presentN": 59,
+  "presentWall": 7538.5,
+  "presentCpu": 211.3,
+  "present50": 31,
+  "gpuRaster": 834,
+  "graphRaster": 877,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 687,
+   "canvasControls": 9,
+   "rootBanner": 18,
+   "react-flow__edges": 83
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 571,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "321",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 130,
+   "p95": 490.5,
+   "max": 583.9
+  },
+  "tiles": 748,
+  "gpuMiB": {
+   "median": 173,
+   "max": 181
+  },
+  "minFree": 2053,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 24,
+  "dir": "e5h-d-b4-A",
+  "cond": "A",
+  "block": "4",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 8364,
+   "gaps": 29
+  },
+  "loop": 8374.7,
+  "late": 3450.7,
+  "delivered": 40,
+  "gaps": 30,
+  "gapMs": 7617.9,
+  "p99": 508.5,
+  "max": 550,
+  "presentN": 56,
+  "presentWall": 7399.4,
+  "presentCpu": 187.1,
+  "present50": 30,
+  "gpuRaster": 818,
+  "graphRaster": 849,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 669,
+   "canvasControls": 10,
+   "rootBanner": 14,
+   "react-flow__edges": 76
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 552,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "318",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 129.7,
+   "p95": 442.9,
+   "max": 519
+  },
+  "tiles": 748,
+  "gpuMiB": {
+   "median": 173,
+   "max": 177
+  },
+  "minFree": 2074,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 25,
+  "dir": "e5h-d-b4-C",
+  "cond": "C",
+  "block": "4",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": {
+   "hideMs": 3000,
+   "tenRafMs": 7751.099999964237,
+   "hidden": true,
+   "tenRafAfterMs": 82.79999995231628
+  },
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 4929,
+   "gaps": 0
+  },
+  "loop": 5003.9,
+  "late": 3.8,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.6,
+  "max": 33.1,
+  "presentN": 304,
+  "presentWall": 39.9,
+  "presentCpu": 39,
+  "present50": 0,
+  "gpuRaster": 631,
+  "graphRaster": 630,
+  "rasterByDom": {
+   "react-flow": 80,
+   "canvasControls": 5,
+   "rootBanner": 147,
+   "react-flow__edges": 83,
+   "unmapped": 315
+  },
+  "topLayer": {
+   "id": "21",
+   "n": 147,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "317",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 5.4,
+   "p95": 9.4,
+   "max": 10
+  },
+  "tiles": 31,
+  "gpuMiB": {
+   "median": 15,
+   "max": 15
+  },
+  "minFree": 2087,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 26,
+  "dir": "e5h-d-b4-D",
+  "cond": "D",
+  "block": "4",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "auto",
+   "viewport": "auto",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "08dcea1b",
+  "legacyPan": {
+   "ms": 4900,
+   "gaps": 0
+  },
+  "loop": 5000.5,
+  "late": 6.3,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.7,
+  "max": 25.1,
+  "presentN": 291,
+  "presentWall": 45.1,
+  "presentCpu": 45,
+  "present50": 0,
+  "gpuRaster": 661,
+  "graphRaster": 660,
+  "rasterByDom": {
+   "react-flow": 80,
+   "react-flow__nodes": 126,
+   "canvasControls": 5,
+   "rootBanner": 138,
+   "react-flow__edges": 83,
+   "unmapped": 228
+  },
+  "topLayer": {
+   "id": "20",
+   "n": 138,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "14",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": true,
+  "paintNodes": 128,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 5.6,
+   "p95": 10.5,
+   "max": 11.7
+  },
+  "tiles": 28,
+  "gpuMiB": {
+   "median": 16,
+   "max": 16
+  },
+  "minFree": 2160,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 1621,
+   "2-500": 1621,
+   "2-2000": 1621
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-500": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-2000": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "2-100": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-500": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-2000": {
+    "pct": 2.71,
+    "max": 135
+   }
+  }
+ },
+ {
+  "order": 27,
+  "dir": "e5h-d-b5-C",
+  "cond": "C",
+  "block": "5",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": {
+   "hideMs": 3000,
+   "tenRafMs": 5428.399999976158,
+   "hidden": true,
+   "tenRafAfterMs": 77.80000001192093
+  },
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 4901,
+   "gaps": 0
+  },
+  "loop": 5008.9,
+  "late": -0.7,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 16.7,
+  "max": 24.9,
+  "presentN": 302,
+  "presentWall": 80.2,
+  "presentCpu": 79.7,
+  "present50": 0,
+  "gpuRaster": 626,
+  "graphRaster": 625,
+  "rasterByDom": {
+   "react-flow": 80,
+   "canvasControls": 5,
+   "rootBanner": 148,
+   "react-flow__edges": 83,
+   "unmapped": 309
+  },
+  "topLayer": {
+   "id": "18",
+   "n": 148,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "318",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 5.5,
+   "p95": 10,
+   "max": 10.6
+  },
+  "tiles": 31,
+  "gpuMiB": {
+   "median": 14,
+   "max": 14
+  },
+  "minFree": 2089,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 28,
+  "dir": "e5h-d-b5-A",
+  "cond": "A",
+  "block": "5",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 8133,
+   "gaps": 28
+  },
+  "loop": 8208.3,
+  "late": 3173.8,
+  "delivered": 40,
+  "gaps": 31,
+  "gapMs": 7417.5,
+  "p99": 508.3,
+  "max": 633.4,
+  "presentN": 59,
+  "presentWall": 7007,
+  "presentCpu": 190.2,
+  "present50": 31,
+  "gpuRaster": 786,
+  "graphRaster": 831,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 648,
+   "canvasControls": 10,
+   "rootBanner": 17,
+   "react-flow__edges": 76
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 532,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "322",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 126.8,
+   "p95": 476.2,
+   "max": 631.9
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 169,
+   "max": 178
+  },
+  "minFree": 2129,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ },
+ {
+  "order": 29,
+  "dir": "e5h-d-b5-D",
+  "cond": "D",
+  "block": "5",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "pan speed differs at 20; pan durations differ by more than 20%",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "auto",
+   "viewport": "auto",
+   "edges": "auto",
+   "nodes": "auto"
+  },
+  "earlyMounted": false,
+  "css": "08dcea1b",
+  "legacyPan": {
+   "ms": 4917,
+   "gaps": 0
+  },
+  "loop": 5005.5,
+  "late": 7.3,
+  "delivered": 40,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 24.9,
+  "max": 25,
+  "presentN": 296,
+  "presentWall": 39.7,
+  "presentCpu": 39.4,
+  "present50": 0,
+  "gpuRaster": 668,
+  "graphRaster": 667,
+  "rasterByDom": {
+   "react-flow": 80,
+   "react-flow__nodes": 126,
+   "canvasControls": 6,
+   "rootBanner": 146,
+   "react-flow__edges": 83,
+   "unmapped": 226
+  },
+  "topLayer": {
+   "id": "20",
+   "n": 146,
+   "dom": "rootBanner"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "14",
+    "w": 20694,
+    "h": 2690,
+    "reasons": []
+   }
+  ],
+  "nodesRasterIdReused": true,
+  "paintNodes": 128,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 5.6,
+   "p95": 9.3,
+   "max": 10.2
+  },
+  "tiles": 28,
+  "gpuMiB": {
+   "median": 17,
+   "max": 17
+  },
+  "minFree": 2209,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 1621,
+   "2-500": 1621,
+   "2-2000": 1621
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-500": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "1-2000": {
+    "pct": 0.04,
+    "max": 50
+   },
+   "2-100": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-500": {
+    "pct": 2.71,
+    "max": 135
+   },
+   "2-2000": {
+    "pct": 2.71,
+    "max": 135
+   }
+  }
+ },
+ {
+  "order": 30,
+  "dir": "e5h-check-b1-A",
+  "cond": "A",
+  "block": "1",
+  "functional": true,
+  "errors": [],
+  "manifest": true,
+  "state": "match",
+  "graph": "09b3c6b2d578",
+  "startViewport": "{\"x\":-739.1,\"y\":117.6,\"zoom\":0.1}",
+  "hide": null,
+  "startDom": "7c03bf",
+  "willChange": {
+   "renderer": "transform",
+   "viewport": "transform",
+   "edges": "transform",
+   "nodes": "transform"
+  },
+  "earlyMounted": false,
+  "css": "3e5bff64",
+  "legacyPan": {
+   "ms": 9033,
+   "gaps": 30
+  },
+  "loop": 8341.1,
+  "late": 3306.3,
+  "delivered": 40,
+  "gaps": 32,
+  "gapMs": 7733.6,
+  "p99": 483.3,
+  "max": 533.2,
+  "presentN": 55,
+  "presentWall": 7210.4,
+  "presentCpu": 178,
+  "present50": 32,
+  "gpuRaster": 769,
+  "graphRaster": 837,
+  "rasterByDom": {
+   "react-flow": 80,
+   "unmapped": 649,
+   "canvasControls": 10,
+   "rootBanner": 15,
+   "react-flow__edges": 83
+  },
+  "topLayer": {
+   "id": "15",
+   "n": 533,
+   "dom": "unmapped"
+  },
+  "nodesLayersPost": [
+   {
+    "id": "318",
+    "w": 20694,
+    "h": 2690,
+    "reasons": [
+     "Trivial3DTransform",
+     "WillChangeTransform"
+    ]
+   }
+  ],
+  "nodesRasterIdReused": false,
+  "paintNodes": 256,
+  "paintEdges": 64,
+  "dom": {
+   "batches": 32,
+   "nodeAttach": 128,
+   "nodeDetach": 128,
+   "edgeAttach": 256,
+   "edgeDetach": 256
+  },
+  "e2h": {
+   "n": 40,
+   "median": 136.9,
+   "p95": 408.9,
+   "max": 510.9
+  },
+  "tiles": 749,
+  "gpuMiB": {
+   "median": 186,
+   "max": 190
+  },
+  "minFree": 2014,
+  "aborted": false,
+  "sharp": {
+   "1-100": 4445,
+   "1-500": 4445,
+   "1-2000": 4445,
+   "2-100": 295,
+   "2-500": 295,
+   "2-2000": 295
+  },
+  "diffVsRefA": {
+   "1-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "1-2000": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-100": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-500": {
+    "pct": 0,
+    "max": 0
+   },
+   "2-2000": {
+    "pct": 0,
+    "max": 0
+   }
+  }
+ }
+]

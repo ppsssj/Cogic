@@ -1,0 +1,4 @@
+const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),cp=require('node:child_process'),assert=require('node:assert/strict');
+const base=path.join(__dirname,'e5c-collapsed-on-1','interaction.json'), off=path.join(__dirname,'e5c-collapsed-off-1','interaction.json'),check=path.join(__dirname,'compare-e5c.cjs');
+const run=(a,b)=>cp.spawnSync(process.execPath,[check,a,b],{encoding:'utf8'}).status;assert.equal(run(base,off),0);
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'p12e5c-'));try{const f=path.join(dir,'case.json'),original=JSON.parse(fs.readFileSync(off,'utf8'));for(const mutate of [x=>x.e5c.fitBefore.valid=false,x=>x.e5c.before.viewport.x+=1,x=>{x.e5c.final.nodes.find(n=>n.type==='folderGroup').collapsed=true;}]){const x=structuredClone(original);mutate(x);fs.writeFileSync(f,JSON.stringify(x));assert.equal(run(base,f),1);}}finally{fs.rmSync(dir,{recursive:true,force:true});}console.log('4 E5C state-gate checks passed');
