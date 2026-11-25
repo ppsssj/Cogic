@@ -1177,6 +1177,9 @@ function toReactFlowEdges(
         ((highlightedEdgeId && !isFocusedFlow) ||
           (!highlightedEdgeId && selectedNodeIdSet.size > 0 && !isSelectedFlow)),
     );
+    const showDataflowLabel = Boolean(
+      isFocusedFlow || (selectedNodeIdSet.size > 0 && isSelectedFlow),
+    );
     const isSelectedAggregate = e.aggregated && e.id === selectedAggregateId;
     const aggregate: AggregateEdgeData | undefined =
       e.aggregated && onSelectAggregate
@@ -1190,13 +1193,13 @@ function toReactFlowEdges(
             targetName: nameOf(e.target),
             selected: isSelectedAggregate,
             muted,
-            focusedLabel: focusedMember?.label,
+            // While expanded, all members have the same label.
+            focusedLabel:
+              focusedMember?.label ??
+              (isDataflow && !isCollapsedBridge && showDataflowLabel ? e.label : undefined),
             onSelect: onSelectAggregate,
           }
         : undefined;
-    const showDataflowLabel = Boolean(
-      isFocusedFlow || (selectedNodeIdSet.size > 0 && isSelectedFlow),
-    );
 
     let lane = 0;
     if (isDataflow) {

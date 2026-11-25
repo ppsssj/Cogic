@@ -25,7 +25,7 @@ export type EdgeMember = {
 
 export type DrawnEdge = VisualEdge & {
   members: EdgeMember[];
-  /** Set only when two or more relations are drawn as one collapsed connection. */
+  /** Set when one drawn edge stands for two or more relations, collapsed or not. */
   aggregated: boolean;
 };
 
@@ -34,7 +34,8 @@ export type DrawnEdge = VisualEdge & {
  * where a file or folder is collapsed. Every relation stays in `members`; the label is not
  * part of the collapsed key because each member keeps its own.
  *
- * Elsewhere, only relations with equal labels share an edge (the long-standing rule).
+ * Elsewhere, only relations with equal labels share an edge (the long-standing rule). Such an
+ * edge is an aggregate too, so that every relation behind it can be opened.
  *
  * The count is the number of distinct relation IDs from the analyzer, not a number of
  * runtime calls. A repeated ID counts once.
@@ -61,7 +62,7 @@ export function aggregateEdges(edges: readonly VisualEdge[]): DrawnEdge[] {
 
   return [...groups].map(([key, { first, members }]) => {
     const list = [...members.values()];
-    const aggregated = first.collapsedBridge && list.length > 1;
+    const aggregated = list.length > 1;
     return {
       ...first,
       // Built from what the edge connects, so it does not depend on input order.
