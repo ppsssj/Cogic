@@ -40,6 +40,7 @@ import type {
   UINotice,
 } from "../lib/vscode";
 import { nextLowDetailEdges } from "../lib/edgeDetail";
+import { aggregateEdges, type DrawnEdge, type EdgeMember } from "../../../src/shared/edgeAggregation";
 import {
   dumpWebviewDebugBuffer,
   pushWebviewDebugEvent,
@@ -863,7 +864,11 @@ type DataflowEdgeData = {
   muted?: boolean;
   lane?: number;
   collapsedBridge?: boolean;
+  /** Every relation behind an aggregated edge. */
+  members?: EdgeMember[];
 };
+
+const AGGREGATE_LABEL_OFFSET = 26;
 
 function DataflowEdge({
   id,
@@ -894,6 +899,9 @@ function DataflowEdge({
     offset: laneOffset,
   });
 
+  // Call and dataflow aggregates between the same groups meet at the same midpoint.
+  const labelOffsetY = data?.members ? -AGGREGATE_LABEL_OFFSET : 0;
+
   return (
     <>
       <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} style={style} />
@@ -902,8 +910,8 @@ function DataflowEdge({
           <div
             className="cgEdgeLabel"
             style={{
-              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
-              opacity: data.muted ? 0.28 : data?.collapsedBridge ? 0.55 : 1,
+              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY + labelOffsetY}px)`,
+              opacity: data.muted ? 0.28 : data.collapsedBridge && !data.members ? 0.55 : 1,
               borderColor: data.highlighted ? "rgba(56,189,248,0.75)" : undefined,
               zIndex: 7001,
             }}
@@ -977,16 +985,21 @@ function buildFileGroupIdByFile(graph?: GraphPayload) {
   return map;
 }
 
-function toReactFlowEdges(
+const AGGREGATE_LABEL_STYLE = {
+  labelStyle: { fill: "var(--textSoft)", fontSize: 10, fontWeight: 800 },
+  labelBgStyle: { fill: "var(--surfaceCanvas)", fillOpacity: 0.88 },
+  labelBgPadding: [6, 3] as [number, number],
+  labelBgBorderRadius: 8,
+};
+
+/** Maps relations to what is drawn. Depends only on the graph and the collapse state. */
+function buildDrawnEdges(
   graph?: GraphPayload,
-  selectedNodeIds?: string[],
-  highlightedEdgeId?: string | null,
   collapsedFilePaths?: Set<string>,
   collapsedFolderPaths?: Set<string>,
   workspaceRoot?: string | null,
-): Array<Edge<DataflowEdgeData>> {
+): DrawnEdge[] {
   if (!graph) return [];
-  const selectedNodeIdSet = new Set(selectedNodeIds ?? []);
   const collapsedFiles = collapsedFilePaths ?? new Set<string>();
   const collapsedFolders = collapsedFolderPaths ?? new Set<string>();
 
@@ -1105,13 +1118,7 @@ function toReactFlowEdges(
       Boolean(e.sourceHandleId?.startsWith("out-child-") && e.targetHandleId?.startsWith("in-child-"))
     ));
 
-  const dedupedEdges = new Map<string, (typeof remappedEdges)[number]>();
-  for (const edge of remappedEdges) {
-    const key = `${edge.kind}:${edge.source}:${edge.target}:${edge.sourceHandleId ?? ""}:${edge.targetHandleId ?? ""}:${edge.label ?? ""}`;
-    if (!dedupedEdges.has(key)) dedupedEdges.set(key, edge);
-  }
-
-  const visibleEdges = [...dedupedEdges.values()].filter((e) => {
+  return aggregateEdges(remappedEdges).filter((e) => {
     const srcKind = visibleNodeKindById.get(e.source);
     const tgtKind = visibleNodeKindById.get(e.target);
     if (!srcKind || !tgtKind) return false;
@@ -1120,6 +1127,14 @@ function toReactFlowEdges(
     if (collapsedNodeIds.has(e.source) || collapsedNodeIds.has(e.target)) return false;
     return true;
   });
+}
+
+function toReactFlowEdges(
+  visibleEdges: DrawnEdge[],
+  selectedNodeIds?: string[],
+  highlightedEdgeId?: string | null,
+): Array<Edge<DataflowEdgeData>> {
+  const selectedNodeIdSet = new Set(selectedNodeIds ?? []);
 
   const dataflowCountByPair = new Map<string, number>();
   for (const e of visibleEdges) {
@@ -1132,13 +1147,19 @@ function toReactFlowEdges(
   return visibleEdges.map((e) => {
     const label = e.label ?? e.kind;
     const isDataflow = e.kind === "dataflow";
+    const countLabel = e.aggregated ? `${e.kind} ×${e.members.length}` : undefined;
+    const focusedMember = highlightedEdgeId
+      ? e.members.find((member) => member.id === highlightedEdgeId)
+      : undefined;
 
     const isSelectedFlow = Boolean(
       selectedNodeIdSet.size > 0 &&
-        (selectedNodeIdSet.has(e.originalSource) ||
-          selectedNodeIdSet.has(e.originalTarget)),
+        e.members.some(
+          (member) =>
+            selectedNodeIdSet.has(member.source) || selectedNodeIdSet.has(member.target),
+        ),
     );
-    const isFocusedFlow = Boolean(highlightedEdgeId && e.id === highlightedEdgeId);
+    const isFocusedFlow = Boolean(focusedMember);
     const isCollapsedBridge = Boolean(e.collapsedBridge);
     const muted = Boolean(
       isDataflow &&
@@ -1200,14 +1221,25 @@ function toReactFlowEdges(
       animated: isDataflow && !muted && !isCollapsedBridge,
       data: isDataflow
         ? {
-            label: showDataflowLabel ? label : undefined,
+            label: countLabel
+              ? focusedMember?.label
+                ? `${focusedMember.label} · ${countLabel}`
+                : countLabel
+              : showDataflowLabel
+                ? label
+                : undefined,
             highlighted: isFocusedFlow || isSelectedFlow,
             muted,
             lane,
             collapsedBridge: isCollapsedBridge,
+            members: e.aggregated ? e.members : undefined,
           }
-        : undefined, // ✅ dataflow 라벨은 data.label로
-      label: undefined, // keep non-dataflow labels hidden to prevent clutter
+        : e.aggregated
+          ? { members: e.members, collapsedBridge: isCollapsedBridge }
+          : undefined, // ✅ dataflow 라벨은 data.label로
+      // Other non-dataflow labels stay hidden to prevent clutter.
+      label: isDataflow ? undefined : countLabel,
+      ...(countLabel && !isDataflow ? AGGREGATE_LABEL_STYLE : {}),
     };
   });
 }
@@ -2085,7 +2117,7 @@ export const CanvasPane = memo(function CanvasPane({
   onRegisterSnapshotExporter,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
-  const profileTimes = useRef({ nodesMs: 0, edgesMs: 0 });
+  const profileTimes = useRef({ nodesMs: 0, drawnEdgesMs: 0, edgesMs: 0 });
   const explorationViewportRef = useRef<{ x: number; y: number; zoom: number } | null>(null);
   const canvasFlowRef = useRef<HTMLDivElement | null>(null);
   const lastVisibleHasDataRef = useRef<boolean | null>(null);
@@ -2711,24 +2743,23 @@ export const CanvasPane = memo(function CanvasPane({
     [nodes],
   );
 
-  const edges = useMemo<Array<Edge<DataflowEdgeData>>>(
+  const drawnEdges = useMemo(
     () =>
-      measureProfile(() => toReactFlowEdges(
+      measureProfile(() => buildDrawnEdges(
         filteredGraph,
-        selectedNodeIds,
-        highlightedEdgeId,
         collapsedFilePathSet,
         collapsedFolderPathSet,
         workspaceRoot,
-      ), (duration) => { profileTimes.current.edgesMs = duration; }),
-    [
-      collapsedFilePathSet,
-      collapsedFolderPathSet,
-      filteredGraph,
-      highlightedEdgeId,
-      selectedNodeIds,
-      workspaceRoot,
-    ],
+      ), (duration) => { profileTimes.current.drawnEdgesMs = duration; }),
+    [collapsedFilePathSet, collapsedFolderPathSet, filteredGraph, workspaceRoot],
+  );
+  const edges = useMemo<Array<Edge<DataflowEdgeData>>>(
+    () =>
+      measureProfile(
+        () => toReactFlowEdges(drawnEdges, selectedNodeIds, highlightedEdgeId),
+        (duration) => { profileTimes.current.edgesMs = duration; },
+      ),
+    [drawnEdges, highlightedEdgeId, selectedNodeIds],
   );
   const edgeTopologyKey = useMemo(
     () =>
@@ -3134,7 +3165,7 @@ export const CanvasPane = memo(function CanvasPane({
   useEffect(() => {
     if (!pipelineEnabled || !profileRequestId || !graph) return;
     profileWebview("canvas.commit", profileRequestId, {
-      nodesMs: profileTimes.current.nodesMs, edgesMs: profileTimes.current.edgesMs,
+      nodesMs: profileTimes.current.nodesMs, drawnEdgesMs: profileTimes.current.drawnEdgesMs, edgesMs: profileTimes.current.edgesMs,
       flowNodes: nodes.length, flowEdges: edges.length,
       graphNodes: graph.nodes.length, graphEdges: graph.edges.length,
     });
