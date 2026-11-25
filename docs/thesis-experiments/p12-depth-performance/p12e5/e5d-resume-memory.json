@@ -1,0 +1,30 @@
+﻿{
+    "timeUtc":  "2026-11-25T04:35:20.1060523Z",
+    "beforeMiB":  1978,
+    "afterMiB":  1968.6,
+    "normalCloseAttempts":  [
+                                {
+                                    "pid":  26084,
+                                    "name":  "Notion",
+                                    "mainWindow":  0,
+                                    "closeRequested":  false
+                                },
+                                {
+                                    "pid":  13432,
+                                    "name":  "msedge",
+                                    "mainWindow":  0,
+                                    "closeRequested":  false
+                                }
+                            ],
+    "terminated":  [
+
+                   ],
+    "protected":  [
+                      "Chrome: active conversation",
+                      "Codex and parent processes",
+                      "remote access",
+                      "Windows/security services"
+                  ],
+    "computerUseError":  "native pipe unavailable after retry and reset",
+    "backgroundPreview":  "SpatialFlex preview has no attachable console; force termination not authorized"
+}

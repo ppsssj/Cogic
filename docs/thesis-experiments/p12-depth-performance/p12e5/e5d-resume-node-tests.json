@@ -1,0 +1,11 @@
+﻿{
+    "utc":  "2026-11-25T04:38:55.1843032Z",
+    "command":  "node_modules/.bin/mocha.cmd --ui tdd --timeout 20000 \u003call out/test/*.test.js except extension.test.js\u003e",
+    "result":  "passed",
+    "passing":  89,
+    "excluded":  "extension.test.js requires VS Code API",
+    "notEquivalentTo":  "npm test",
+    "lowestManuallySampledKiB":  1038796,
+    "postRunFreeKiB":  2220836,
+    "sampling":  "manual, not continuous minimum"
+}
