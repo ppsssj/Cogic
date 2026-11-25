@@ -1,0 +1,1874 @@
+[
+ {
+  "label": "s1-A",
+  "cond": "A",
+  "valid": true,
+  "errors": [],
+  "graph": "1cf5220cac8c",
+  "startViewport": {
+   "x": 283,
+   "y": -3958.1000000000004,
+   "zoom": 0.1
+  },
+  "nodes": "8a1cdb9bd0",
+  "flow": [
+   288,
+   1922
+  ],
+  "dom": [
+   16,
+   861
+  ],
+  "flowEdgeIds": "595402f5d0",
+  "pathPoint": {
+   "x": 280,
+   "y": 94,
+   "cx": 300,
+   "cy": 178,
+   "d": 10.5,
+   "innerWidth": 621,
+   "innerHeight": 864
+  },
+  "inputPath": "0ac6d07ca0",
+  "delivered": 40,
+  "edge": {
+   "before": 1722,
+   "end": 1722,
+   "restored": 1722,
+   "groups": [
+    861,
+    861,
+    861
+   ]
+  },
+  "dash": {
+   "orig": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 99227620,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "before": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 99227620,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "end": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 1586060121,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "restored": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 1586060121,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   }
+  },
+  "layersDuring": [
+   [
+    1227,
+    82366,
+    "react-flow__edges react-flow__container",
+    ""
+   ],
+   [
+    308,
+    71042,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    2016,
+    86480,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1198,
+    75619,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    450,
+    72063,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1044,
+    74317,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1756,
+    76889,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1602,
+    80947,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1496,
+    82854,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    128,
+    61456,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1760,
+    87132,
+    "react-flow__edge-path",
+    "Overlap"
+   ]
+  ],
+  "panMs": 16631.6,
+  "stepsLate50": 37,
+  "maxLate": 11722.1,
+  "raf": 106,
+  "gaps": 25,
+  "gapMs": 15648.4,
+  "gapMax": 883.3,
+  "domAttach": {
+   "an": 36,
+   "rn": 36,
+   "ae": 868,
+   "re": 868
+  },
+  "gpuTask": {
+   "n": 131,
+   "ms": 15958.8,
+   "max": 750.3
+  },
+  "doRaster": {
+   "n": 322,
+   "ms": 8509.4,
+   "max": 123.8
+  },
+  "endRasterFlush": {
+   "n": 319,
+   "ms": 7419.4,
+   "max": 109.3
+  },
+  "present": {
+   "n": 59,
+   "ms": 8.5,
+   "max": 0.5
+  },
+  "rasterTasks": {
+   "n": 319,
+   "ms": 102.5,
+   "max": 2.2
+  },
+  "paintTotal": {
+   "n": 192,
+   "ms": 103.9,
+   "max": 3.8
+  },
+  "paint": {
+   "#document": {
+    "n": 40,
+    "ms": 58
+   },
+   "svg class='react-flow__background'": {
+    "n": 40,
+    "ms": 3.7
+   },
+   "DIV class='react-flow__node react-flow__node-code selectable": {
+    "n": 36,
+    "ms": 3
+   },
+   "svg class='react-flow__edges react-flow__container'": {
+    "n": 64,
+    "ms": 39.1
+   },
+   "DIV class='canvasControls canvasOverlay'": {
+    "n": 4,
+    "ms": 0.2
+   },
+   "BUTTON class='iconBtn'": {
+    "n": 6,
+    "ms": 0
+   }
+  },
+  "rasterTasksByLayer": {
+   "13": 80,
+   "17": 44,
+   "64": 8,
+   "228": 14,
+   "260": 2,
+   "261": 2,
+   "262": 4,
+   "264": 6,
+   "266": 4,
+   "269": 4,
+   "270": 6,
+   "271": 2,
+   "272": 10,
+   "273": 9,
+   "274": 10,
+   "275": 2,
+   "276": 21,
+   "277": 1,
+   "278": 13,
+   "279": 2,
+   "280": 2,
+   "281": 9,
+   "282": 1,
+   "283": 6,
+   "284": 1,
+   "285": 7,
+   "286": 7,
+   "287": 6,
+   "288": 2,
+   "289": 13,
+   "290": 1,
+   "291": 9,
+   "292": 2,
+   "293": 2,
+   "294": 5,
+   "295": 1
+  },
+  "prePanRaster": {
+   "n": 1,
+   "ms": 0.1
+  },
+  "layers": [
+   [
+    0,
+    0,
+    null,
+    0
+   ],
+   [
+    621,
+    864,
+    "#document",
+    1
+   ],
+   [
+    581,
+    15,
+    null,
+    0
+   ],
+   [
+    15,
+    74,
+    null,
+    0
+   ],
+   [
+    222,
+    15,
+    null,
+    0
+   ],
+   [
+    15,
+    115,
+    null,
+    0
+   ],
+   [
+    15,
+    75,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    581,
+    494,
+    "react-flow",
+    1
+   ],
+   [
+    2232,
+    84106,
+    "react-flow__node react-flow__node-folderGroup selectable parent",
+    1
+   ],
+   [
+    1227,
+    82366,
+    "react-flow__edges react-flow__container",
+    1
+   ],
+   [
+    308,
+    71042,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    2016,
+    86480,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1198,
+    75619,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    450,
+    72063,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1044,
+    74317,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1756,
+    76889,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1602,
+    80947,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1496,
+    82854,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    128,
+    61456,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1760,
+    87132,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    358,
+    134,
+    "cgEdgeLabel",
+    1
+   ],
+   [
+    34,
+    160,
+    "canvasControls canvasOverlay",
+    1
+   ],
+   [
+    464,
+    144,
+    "rootBanner canvasOverlay",
+    1
+   ],
+   [
+    176,
+    37,
+    "selectionBanner canvasOverlay",
+    1
+   ]
+  ],
+  "cpuBusy": 29.2,
+  "bufferUsage": {
+   "percentage": 0.039316195994615555,
+   "value": 0
+  },
+  "memory": {
+   "before": 3067,
+   "minimum": 1288,
+   "aborted": false
+  }
+ },
+ {
+  "label": "s1-B",
+  "cond": "B",
+  "valid": true,
+  "errors": [],
+  "graph": "1cf5220cac8c",
+  "startViewport": {
+   "x": 283,
+   "y": -3958.1000000000004,
+   "zoom": 0.1
+  },
+  "nodes": "8a1cdb9bd0",
+  "flow": [
+   288,
+   1922
+  ],
+  "dom": [
+   16,
+   861
+  ],
+  "flowEdgeIds": "595402f5d0",
+  "pathPoint": {
+   "x": 280,
+   "y": 94,
+   "cx": 300,
+   "cy": 178,
+   "d": 10.5,
+   "innerWidth": 621,
+   "innerHeight": 864
+  },
+  "inputPath": "0ac6d07ca0",
+  "delivered": 40,
+  "edge": {
+   "before": 1722,
+   "end": 1722,
+   "restored": 1722,
+   "groups": [
+    861,
+    861,
+    861
+   ]
+  },
+  "dash": {
+   "orig": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 1241816941,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "before": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 861
+    },
+    "dashed": 0,
+    "otherDashed": 0,
+    "geometry": 1241816941,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "end": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 861
+    },
+    "dashed": 0,
+    "otherDashed": 0,
+    "geometry": 1099166683,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "restored": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 1099166683,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   }
+  },
+  "layersDuring": [
+   [
+    1227,
+    82366,
+    "react-flow__edges react-flow__container",
+    ""
+   ],
+   [
+    308,
+    71042,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    2016,
+    86480,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1198,
+    75619,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    450,
+    72063,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1044,
+    74317,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1756,
+    76889,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1602,
+    80947,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1496,
+    82854,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    128,
+    61456,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1760,
+    87132,
+    "react-flow__edge-path",
+    "Overlap"
+   ]
+  ],
+  "panMs": 5004.9,
+  "stepsLate50": 0,
+  "maxLate": 13.9,
+  "raf": 444,
+  "gaps": 9,
+  "gapMs": 558.1,
+  "gapMax": 74.9,
+  "domAttach": {
+   "an": 36,
+   "rn": 36,
+   "ae": 868,
+   "re": 868
+  },
+  "gpuTask": {
+   "n": 166,
+   "ms": 1339.7,
+   "max": 68.5
+  },
+  "doRaster": {
+   "n": 361,
+   "ms": 370.8,
+   "max": 6.2
+  },
+  "endRasterFlush": {
+   "n": 359,
+   "ms": 939.4,
+   "max": 17.4
+  },
+  "present": {
+   "n": 99,
+   "ms": 63,
+   "max": 19.4
+  },
+  "rasterTasks": {
+   "n": 359,
+   "ms": 91.3,
+   "max": 2.1
+  },
+  "paintTotal": {
+   "n": 254,
+   "ms": 116.4,
+   "max": 3.5
+  },
+  "paint": {
+   "#document": {
+    "n": 71,
+    "ms": 70.2
+   },
+   "svg class='react-flow__background'": {
+    "n": 40,
+    "ms": 3.5
+   },
+   "DIV class='react-flow__node react-flow__node-code selectable": {
+    "n": 36,
+    "ms": 2.8
+   },
+   "svg class='react-flow__edges react-flow__container'": {
+    "n": 64,
+    "ms": 38.7
+   },
+   "DIV class='canvasControls canvasOverlay'": {
+    "n": 4,
+    "ms": 0.2
+   },
+   "BUTTON class='iconBtn'": {
+    "n": 18,
+    "ms": 0.4
+   },
+   "svg class='lucide lucide-network'": {
+    "n": 19,
+    "ms": 0.6
+   }
+  },
+  "rasterTasksByLayer": {
+   "13": 80,
+   "17": 44,
+   "64": 8,
+   "211": 12,
+   "245": 2,
+   "246": 2,
+   "247": 5,
+   "249": 6,
+   "251": 4,
+   "252": 1,
+   "253": 1,
+   "254": 4,
+   "255": 6,
+   "256": 12,
+   "257": 10,
+   "258": 10,
+   "259": 10,
+   "260": 2,
+   "261": 21,
+   "262": 1,
+   "263": 14,
+   "264": 2,
+   "265": 2,
+   "266": 9,
+   "267": 7,
+   "268": 6,
+   "269": 11,
+   "270": 7,
+   "271": 8,
+   "272": 6,
+   "273": 2,
+   "274": 14,
+   "275": 1,
+   "276": 10,
+   "277": 2,
+   "278": 2,
+   "279": 5,
+   "280": 9
+  },
+  "prePanRaster": {
+   "n": 1,
+   "ms": 0
+  },
+  "layers": [
+   [
+    0,
+    0,
+    null,
+    0
+   ],
+   [
+    621,
+    864,
+    "#document",
+    1
+   ],
+   [
+    581,
+    15,
+    null,
+    0
+   ],
+   [
+    15,
+    74,
+    null,
+    0
+   ],
+   [
+    222,
+    15,
+    null,
+    0
+   ],
+   [
+    15,
+    115,
+    null,
+    0
+   ],
+   [
+    15,
+    75,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    581,
+    494,
+    "react-flow",
+    1
+   ],
+   [
+    2232,
+    84106,
+    "react-flow__node react-flow__node-folderGroup selectable parent",
+    1
+   ],
+   [
+    1227,
+    82366,
+    "react-flow__edges react-flow__container",
+    1
+   ],
+   [
+    308,
+    71042,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    2016,
+    86480,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1198,
+    75619,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    450,
+    72063,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1044,
+    74317,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1756,
+    76889,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1602,
+    80947,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1496,
+    82854,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    128,
+    61456,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1760,
+    87132,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    358,
+    134,
+    "cgEdgeLabel",
+    1
+   ],
+   [
+    34,
+    160,
+    "canvasControls canvasOverlay",
+    1
+   ],
+   [
+    464,
+    144,
+    "rootBanner canvasOverlay",
+    1
+   ],
+   [
+    176,
+    37,
+    "selectionBanner canvasOverlay",
+    1
+   ]
+  ],
+  "cpuBusy": 28.2,
+  "bufferUsage": {
+   "percentage": 0.05003642663359642,
+   "value": 0
+  },
+  "memory": {
+   "before": 3060,
+   "minimum": 1260,
+   "aborted": false
+  }
+ },
+ {
+  "label": "s2-B",
+  "cond": "B",
+  "valid": true,
+  "errors": [],
+  "graph": "1cf5220cac8c",
+  "startViewport": {
+   "x": 283,
+   "y": -3958.1000000000004,
+   "zoom": 0.1
+  },
+  "nodes": "8a1cdb9bd0",
+  "flow": [
+   288,
+   1922
+  ],
+  "dom": [
+   16,
+   861
+  ],
+  "flowEdgeIds": "595402f5d0",
+  "pathPoint": {
+   "x": 280,
+   "y": 94,
+   "cx": 300,
+   "cy": 178,
+   "d": 10.5,
+   "innerWidth": 621,
+   "innerHeight": 864
+  },
+  "inputPath": "0ac6d07ca0",
+  "delivered": 40,
+  "edge": {
+   "before": 1722,
+   "end": 1722,
+   "restored": 1722,
+   "groups": [
+    861,
+    861,
+    861
+   ]
+  },
+  "dash": {
+   "orig": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 1241816941,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "before": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 861
+    },
+    "dashed": 0,
+    "otherDashed": 0,
+    "geometry": 1241816941,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "end": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 861
+    },
+    "dashed": 0,
+    "otherDashed": 0,
+    "geometry": 1099166683,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "restored": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 1099166683,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   }
+  },
+  "layersDuring": [
+   [
+    1227,
+    82366,
+    "react-flow__edges react-flow__container",
+    ""
+   ],
+   [
+    308,
+    71042,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    2016,
+    86480,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1198,
+    75619,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    450,
+    72063,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1044,
+    74317,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1756,
+    76889,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1602,
+    80947,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1496,
+    82854,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    128,
+    61456,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1760,
+    87132,
+    "react-flow__edge-path",
+    "Overlap"
+   ]
+  ],
+  "panMs": 5000.6,
+  "stepsLate50": 0,
+  "maxLate": 17.7,
+  "raf": 449,
+  "gaps": 8,
+  "gapMs": 499.8,
+  "gapMax": 75,
+  "domAttach": {
+   "an": 36,
+   "rn": 36,
+   "ae": 868,
+   "re": 868
+  },
+  "gpuTask": {
+   "n": 159,
+   "ms": 1344.9,
+   "max": 72.1
+  },
+  "doRaster": {
+   "n": 361,
+   "ms": 374.2,
+   "max": 6.8
+  },
+  "endRasterFlush": {
+   "n": 359,
+   "ms": 941.6,
+   "max": 15.8
+  },
+  "present": {
+   "n": 103,
+   "ms": 76.6,
+   "max": 19.4
+  },
+  "rasterTasks": {
+   "n": 359,
+   "ms": 103.6,
+   "max": 3.5
+  },
+  "paintTotal": {
+   "n": 258,
+   "ms": 111.2,
+   "max": 3.4
+  },
+  "paint": {
+   "#document": {
+    "n": 73,
+    "ms": 66.4
+   },
+   "svg class='react-flow__background'": {
+    "n": 40,
+    "ms": 3.6
+   },
+   "DIV class='react-flow__node react-flow__node-code selectable": {
+    "n": 36,
+    "ms": 2.8
+   },
+   "svg class='react-flow__edges react-flow__container'": {
+    "n": 64,
+    "ms": 37.5
+   },
+   "DIV class='canvasControls canvasOverlay'": {
+    "n": 4,
+    "ms": 0.1
+   },
+   "BUTTON class='iconBtn'": {
+    "n": 32,
+    "ms": 0.8
+   },
+   "svg class='lucide lucide-network'": {
+    "n": 7,
+    "ms": 0
+   }
+  },
+  "rasterTasksByLayer": {
+   "13": 80,
+   "17": 44,
+   "64": 8,
+   "228": 12,
+   "262": 2,
+   "263": 2,
+   "264": 5,
+   "266": 6,
+   "268": 4,
+   "269": 1,
+   "270": 1,
+   "271": 4,
+   "272": 6,
+   "273": 8,
+   "274": 10,
+   "275": 10,
+   "276": 10,
+   "277": 2,
+   "278": 21,
+   "279": 1,
+   "280": 14,
+   "281": 2,
+   "282": 2,
+   "283": 9,
+   "284": 9,
+   "285": 6,
+   "286": 13,
+   "287": 7,
+   "288": 8,
+   "289": 6,
+   "290": 2,
+   "291": 14,
+   "292": 1,
+   "293": 10,
+   "294": 2,
+   "295": 2,
+   "296": 5,
+   "297": 9
+  },
+  "prePanRaster": {
+   "n": 1,
+   "ms": 0.1
+  },
+  "layers": [
+   [
+    0,
+    0,
+    null,
+    0
+   ],
+   [
+    621,
+    864,
+    "#document",
+    1
+   ],
+   [
+    581,
+    15,
+    null,
+    0
+   ],
+   [
+    15,
+    74,
+    null,
+    0
+   ],
+   [
+    222,
+    15,
+    null,
+    0
+   ],
+   [
+    15,
+    115,
+    null,
+    0
+   ],
+   [
+    15,
+    75,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    581,
+    494,
+    "react-flow",
+    1
+   ],
+   [
+    2232,
+    84106,
+    "react-flow__node react-flow__node-folderGroup selectable parent",
+    1
+   ],
+   [
+    1227,
+    82366,
+    "react-flow__edges react-flow__container",
+    1
+   ],
+   [
+    308,
+    71042,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    2016,
+    86480,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1198,
+    75619,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    450,
+    72063,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1044,
+    74317,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1756,
+    76889,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1602,
+    80947,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1496,
+    82854,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    128,
+    61456,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1760,
+    87132,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    358,
+    134,
+    "cgEdgeLabel",
+    1
+   ],
+   [
+    34,
+    160,
+    "canvasControls canvasOverlay",
+    1
+   ],
+   [
+    464,
+    144,
+    "rootBanner canvasOverlay",
+    1
+   ],
+   [
+    176,
+    37,
+    "selectionBanner canvasOverlay",
+    1
+   ]
+  ],
+  "cpuBusy": 28,
+  "bufferUsage": {
+   "percentage": 0.04919077828526497,
+   "value": 0
+  },
+  "memory": {
+   "before": 2977,
+   "minimum": 1219,
+   "aborted": false
+  }
+ },
+ {
+  "label": "s2-A",
+  "cond": "A",
+  "valid": true,
+  "errors": [],
+  "graph": "1cf5220cac8c",
+  "startViewport": {
+   "x": 283,
+   "y": -3958.1000000000004,
+   "zoom": 0.1
+  },
+  "nodes": "8a1cdb9bd0",
+  "flow": [
+   288,
+   1922
+  ],
+  "dom": [
+   16,
+   861
+  ],
+  "flowEdgeIds": "595402f5d0",
+  "pathPoint": {
+   "x": 280,
+   "y": 94,
+   "cx": 300,
+   "cy": 178,
+   "d": 10.5,
+   "innerWidth": 621,
+   "innerHeight": 864
+  },
+  "inputPath": "0ac6d07ca0",
+  "delivered": 40,
+  "edge": {
+   "before": 1722,
+   "end": 1722,
+   "restored": 1722,
+   "groups": [
+    861,
+    861,
+    861
+   ]
+  },
+  "dash": {
+   "orig": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 99227620,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "before": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 99227620,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "end": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 1586060121,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   },
+   "restored": {
+    "paths": 861,
+    "visible": 861,
+    "dash": {
+     "none": 22,
+     "6px, 6px": 194,
+     "8px, 6px": 645
+    },
+    "dashed": 839,
+    "otherDashed": 0,
+    "geometry": 1586060121,
+    "look": 1069484818,
+    "edgeIds": 1492969674,
+    "groups": 861,
+    "elements": 2593,
+    "runningAnimations": 0
+   }
+  },
+  "layersDuring": [
+   [
+    1227,
+    82366,
+    "react-flow__edges react-flow__container",
+    ""
+   ],
+   [
+    308,
+    71042,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    2016,
+    86480,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1198,
+    75619,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    450,
+    72063,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1044,
+    74317,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1756,
+    76889,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1602,
+    80947,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1496,
+    82854,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    128,
+    61456,
+    "react-flow__edge-path",
+    "Overlap"
+   ],
+   [
+    1760,
+    87132,
+    "react-flow__edge-path",
+    "Overlap"
+   ]
+  ],
+  "panMs": 16409.2,
+  "stepsLate50": 37,
+  "maxLate": 11491.7,
+  "raf": 107,
+  "gaps": 25,
+  "gapMs": 15390.3,
+  "gapMax": 883.3,
+  "domAttach": {
+   "an": 36,
+   "rn": 36,
+   "ae": 868,
+   "re": 868
+  },
+  "gpuTask": {
+   "n": 141,
+   "ms": 15704.1,
+   "max": 749.3
+  },
+  "doRaster": {
+   "n": 325,
+   "ms": 8362.3,
+   "max": 124.2
+  },
+  "endRasterFlush": {
+   "n": 322,
+   "ms": 7312.5,
+   "max": 113
+  },
+  "present": {
+   "n": 61,
+   "ms": 9.1,
+   "max": 0.3
+  },
+  "rasterTasks": {
+   "n": 322,
+   "ms": 97.2,
+   "max": 3.4
+  },
+  "paintTotal": {
+   "n": 196,
+   "ms": 102.8,
+   "max": 3.4
+  },
+  "paint": {
+   "#document": {
+    "n": 42,
+    "ms": 57.9
+   },
+   "svg class='react-flow__background'": {
+    "n": 40,
+    "ms": 3.6
+   },
+   "DIV class='react-flow__node react-flow__node-code selectable": {
+    "n": 36,
+    "ms": 2.9
+   },
+   "svg class='react-flow__edges react-flow__container'": {
+    "n": 64,
+    "ms": 37.9
+   },
+   "DIV class='canvasControls canvasOverlay'": {
+    "n": 4,
+    "ms": 0.2
+   },
+   "BUTTON class='iconBtn'": {
+    "n": 7,
+    "ms": 0.1
+   },
+   "svg class='lucide lucide-network'": {
+    "n": 1,
+    "ms": 0
+   }
+  },
+  "rasterTasksByLayer": {
+   "13": 80,
+   "17": 45,
+   "64": 8,
+   "228": 14,
+   "260": 2,
+   "261": 2,
+   "262": 4,
+   "264": 6,
+   "266": 4,
+   "269": 4,
+   "270": 6,
+   "271": 2,
+   "272": 11,
+   "273": 9,
+   "274": 10,
+   "275": 2,
+   "276": 20,
+   "277": 2,
+   "278": 13,
+   "279": 2,
+   "280": 2,
+   "281": 9,
+   "282": 1,
+   "283": 6,
+   "284": 2,
+   "285": 7,
+   "286": 7,
+   "287": 6,
+   "288": 2,
+   "289": 13,
+   "290": 1,
+   "291": 9,
+   "292": 2,
+   "293": 2,
+   "294": 5,
+   "295": 1
+  },
+  "prePanRaster": {
+   "n": 1,
+   "ms": 0.1
+  },
+  "layers": [
+   [
+    0,
+    0,
+    null,
+    0
+   ],
+   [
+    621,
+    864,
+    "#document",
+    1
+   ],
+   [
+    581,
+    15,
+    null,
+    0
+   ],
+   [
+    15,
+    74,
+    null,
+    0
+   ],
+   [
+    222,
+    15,
+    null,
+    0
+   ],
+   [
+    15,
+    115,
+    null,
+    0
+   ],
+   [
+    15,
+    75,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    15,
+    84,
+    null,
+    0
+   ],
+   [
+    581,
+    494,
+    "react-flow",
+    1
+   ],
+   [
+    2232,
+    84106,
+    "react-flow__node react-flow__node-folderGroup selectable parent",
+    1
+   ],
+   [
+    1227,
+    82366,
+    "react-flow__edges react-flow__container",
+    1
+   ],
+   [
+    308,
+    71042,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    2016,
+    86480,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1198,
+    75619,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    450,
+    72063,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1044,
+    74317,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1756,
+    76889,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1602,
+    80947,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1496,
+    82854,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    128,
+    61456,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    1760,
+    87132,
+    "react-flow__edge-path",
+    1
+   ],
+   [
+    358,
+    134,
+    "cgEdgeLabel",
+    1
+   ],
+   [
+    34,
+    160,
+    "canvasControls canvasOverlay",
+    1
+   ],
+   [
+    464,
+    144,
+    "rootBanner canvasOverlay",
+    1
+   ],
+   [
+    176,
+    37,
+    "selectionBanner canvasOverlay",
+    1
+   ]
+  ],
+  "cpuBusy": 27.1,
+  "bufferUsage": {
+   "percentage": 0.03918609395623207,
+   "value": 0
+  },
+  "memory": {
+   "before": 3024,
+   "minimum": 1248,
+   "aborted": false
+  }
+ }
+]
