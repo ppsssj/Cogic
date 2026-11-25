@@ -11,3 +11,5 @@ This draft depends on unmerged P12-E4 #38, which depends on #37, #36 and #34. It
 [E5D memory-recovery continuation](e5d-resume-results.md) records process safety checks, 89 Node-only tests, the preflight rejection and remaining live work.
 
 [E5D Single/Multiple A/B results](e5d-ab-results.md) reports the completed live ON/OFF series; it supersedes the unverified live items above.
+
+[E5E Chromium trace](e5e-trace-results.md) locates the ON pan stalls in GPU-process Present waits.
