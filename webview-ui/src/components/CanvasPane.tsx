@@ -10,6 +10,7 @@ import {
   useRef,
   useState,
   type MouseEvent as ReactMouseEvent,
+  type RefObject,
   type MouseEvent as ReactDomMouseEvent,
 } from "react";
 import ReactFlow, {
@@ -22,6 +23,7 @@ import ReactFlow, {
   BaseEdge,
   getSmoothStepPath,
   getNodesBounds,
+  useStoreApi,
   type EdgeProps,
   type Edge,
   type Node,
@@ -37,6 +39,7 @@ import type {
   GraphTraceEvent,
   UINotice,
 } from "../lib/vscode";
+import { nextLowDetailEdges } from "../lib/edgeDetail";
 import {
   dumpWebviewDebugBuffer,
   pushWebviewDebugEvent,
@@ -914,6 +917,45 @@ function DataflowEdge({
 }
 
 const edgeTypes = { dataflow: DataflowEdge };
+
+const LOW_DETAIL_EDGES_CLASS = "canvasFlow--lowDetailEdges";
+
+/**
+ * Toggles the low-detail edge class from React Flow's own zoom. It subscribes to the
+ * store directly, so panning and zooming never set React state.
+ */
+function LowDetailEdges({
+  containerRef,
+  suspended,
+}: {
+  containerRef: RefObject<HTMLDivElement | null>;
+  suspended: boolean;
+}) {
+  const store = useStoreApi();
+
+  useEffect(() => {
+    const container = containerRef.current;
+    // Export copies computed styles, so it must see the original strokes.
+    if (!container || suspended) return;
+
+    let low = false;
+    const apply = (zoom: number) => {
+      const next = nextLowDetailEdges(low, zoom);
+      if (next === low) return;
+      low = next;
+      container.classList.toggle(LOW_DETAIL_EDGES_CLASS, low);
+    };
+
+    apply(store.getState().transform[2]);
+    const unsubscribe = store.subscribe((state) => apply(state.transform[2]));
+    return () => {
+      unsubscribe();
+      container.classList.remove(LOW_DETAIL_EDGES_CLASS);
+    };
+  }, [containerRef, store, suspended]);
+
+  return null;
+}
 
 function buildFileGroupIdByFile(graph?: GraphPayload) {
   const map = new Map<string, string>();
@@ -3459,6 +3501,7 @@ export const CanvasPane = memo(function CanvasPane({
                 }
               }}
             >
+              <LowDetailEdges containerRef={canvasFlowRef} suspended={renderAllForExport} />
               <Background gap={24} size={1} />
 
               <div className="canvasControls canvasOverlay">

@@ -34,6 +34,11 @@
   backface-visibility: hidden;
 }
 
+/* Zoomed out: solid strokes only. !important overrides React Flow's inline edge style. */
+.canvasFlow--lowDetailEdges .react-flow__edges .react-flow__edge-path {
+  stroke-dasharray: none !important;
+}
+
 .canvasOverlay {
   z-index: 5000 !important;
 }
