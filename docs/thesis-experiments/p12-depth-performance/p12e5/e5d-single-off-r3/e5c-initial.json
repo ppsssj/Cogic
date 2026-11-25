@@ -1,0 +1,51 @@
+{
+  "nodes": [
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src",
+      "text": "srcsrc4 files",
+      "html": "<div class=\"react-flow__node react-flow__node-folderGroup selectable parent\" data-id=\"folder:c:/dev/p13/p12e5b-multifile/src\" data-testid=\"rf__node-folder:c:/dev/p13/p12e5b-multifile/src\" tabindex=\"0\" role=\"button\" aria-describedby=\"react-flow__node-desc-1\" style=\"z-index: 0; transform: translate(0px, 0px); pointer-events: all; visibility: visible; width: 1524px; height: 498px;\"><div class=\"cgFolder   \"><div data-handleid=\"in-control\" data-nodeid=\"folder:c:/dev/p13/p12e5b-multifile/src\" data-han"
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/alpha",
+      "text": "alphasrc/alpha1 files hidden",
+      "html": "<div class=\"react-flow__node react-flow__node-folderGroup selectable\" data-id=\"folder:c:/dev/p13/p12e5b-multifile/src/alpha\" data-testid=\"rf__node-folder:c:/dev/p13/p12e5b-multifile/src/alpha\" tabindex=\"0\" role=\"button\" aria-describedby=\"react-flow__node-desc-1\" style=\"z-index: 0; transform: translate(600px, 122px); pointer-events: all; visibility: visible; width: 360px; height: 174px;\"><div class=\"cgFolder  cgFolder--collapsed \"><div data-handleid=\"in-control\" data-nodeid=\"folder:c:/dev/p13/p12"
+    },
+    {
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/beta",
+      "text": "betasrc/beta2 files hidden",
+      "html": "<div class=\"react-flow__node react-flow__node-folderGroup selectable\" data-id=\"folder:c:/dev/p13/p12e5b-multifile/src/beta\" data-testid=\"rf__node-folder:c:/dev/p13/p12e5b-multifile/src/beta\" tabindex=\"0\" role=\"button\" aria-describedby=\"react-flow__node-desc-1\" style=\"z-index: 0; transform: translate(1130px, 122px); pointer-events: all; visibility: visible; width: 360px; height: 174px;\"><div class=\"cgFolder  cgFolder--collapsed \"><div data-handleid=\"in-control\" data-nodeid=\"folder:c:/dev/p13/p12e"
+    },
+    {
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0",
+      "text": "main.tssrc1 nodes",
+      "html": "<div class=\"react-flow__node react-flow__node-fileGroup selectable parent\" data-id=\"file:c:/dev/p13/p12e5b-multifile/src/main.ts:0\" data-testid=\"rf__node-file:c:/dev/p13/p12e5b-multifile/src/main.ts:0\" tabindex=\"0\" role=\"button\" aria-describedby=\"react-flow__node-desc-1\" style=\"z-index: 1; transform: translate(34px, 122px); pointer-events: all; visibility: visible; width: 396px; height: 342px;\"><div class=\"cgGroup   \"><div data-handleid=\"in-control\" data-nodeid=\"file:c:/dev/p13/p12e5b-multifile/"
+    },
+    {
+      "id": "function:c:/dev/p13/p12e5b-multifile/src/main.ts:113",
+      "text": "main()function - main.ts:4",
+      "html": "<div class=\"react-flow__node react-flow__node-code selectable\" data-id=\"function:c:/dev/p13/p12e5b-multifile/src/main.ts:113\" data-testid=\"rf__node-function:c:/dev/p13/p12e5b-multifile/src/main.ts:113\" tabindex=\"0\" role=\"button\" aria-describedby=\"react-flow__node-desc-1\" style=\"z-index: 2; transform: translate(62px, 246px); pointer-events: all; visibility: visible;\"><div class=\"cgNode cgNode--function    \"><div data-handleid=\"in-control\" data-nodeid=\"function:c:/dev/p13/p12e5b-multifile/src/main"
+    }
+  ],
+  "buttons": [
+    {
+      "title": "Collapse folder group",
+      "text": "srcsrc4 files",
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src"
+    },
+    {
+      "title": "Expand folder group",
+      "text": "alphasrc/alpha1 files hidden",
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/alpha"
+    },
+    {
+      "title": "Expand folder group",
+      "text": "betasrc/beta2 files hidden",
+      "id": "folder:c:/dev/p13/p12e5b-multifile/src/beta"
+    },
+    {
+      "title": "Select and collapse file group",
+      "text": "main.tssrc1 nodes",
+      "id": "file:c:/dev/p13/p12e5b-multifile/src/main.ts:0"
+    }
+  ]
+}

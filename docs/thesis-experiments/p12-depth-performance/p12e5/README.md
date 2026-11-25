@@ -9,3 +9,5 @@ This draft depends on unmerged P12-E4 #38, which depends on #37, #36 and #34. It
 [E5D Fit and interaction-gate investigation](e5d-results.md) classifies the recorded Fit clamp and records why live expanded A/B remains unverified.
 
 [E5D memory-recovery continuation](e5d-resume-results.md) records process safety checks, 89 Node-only tests, the preflight rejection and remaining live work.
+
+[E5D Single/Multiple A/B results](e5d-ab-results.md) reports the completed live ON/OFF series; it supersedes the unverified live items above.

@@ -1,4 +1,4 @@
-﻿param([Parameter(Mandatory=$true)][int]$Run, [Parameter(Mandatory=$true)][string]$Workspace, [Parameter(Mandatory=$true)][string]$Harness, [Parameter(Mandatory=$true)][string]$OnExtensions, [Parameter(Mandatory=$true)][string]$OffExtensions, [Parameter(Mandatory=$true)][string]$OriginalAnalyzer, [Parameter(Mandatory=$true)][string]$CodeExe, [Parameter(Mandatory=$true)][string]$OutputRoot, [Parameter(Mandatory=$true)][string]$ExpectedHash, [Parameter(Mandatory=$true)][string]$RootFile, [Parameter(Mandatory=$true)][string]$Picker)
+﻿param([Parameter(Mandatory=$true)][int]$Run, [Parameter(Mandatory=$true)][string]$Workspace, [Parameter(Mandatory=$true)][string]$Harness, [Parameter(Mandatory=$true)][string]$OnExtensions, [Parameter(Mandatory=$true)][string]$OffExtensions, [Parameter(Mandatory=$true)][string]$OriginalAnalyzer, [Parameter(Mandatory=$true)][string]$CodeExe, [Parameter(Mandatory=$true)][string]$OutputRoot, [Parameter(Mandatory=$true)][string]$ExpectedHash, [Parameter(Mandatory=$true)][string]$RootFile, [Parameter(Mandatory=$true)][string]$Picker, [string]$ReferenceRun = "e5d-single-on-r1")
 $ErrorActionPreference='Stop'
 $env:P12E2_NO_TS='1'; $env:P12E2_FIXTURE='0'; $env:P12E5_PICKER=$Picker; $env:P12E5_EXPECT_SHA256=$ExpectedHash; $env:P12E5_VSCODE_VERSION='1.147.0'; $env:P12E5C_STATE='single'
 Remove-Item Env:P12E4_GRAPH_ONLY,Env:P12E2_REACT_ONLY -ErrorAction SilentlyContinue
@@ -12,8 +12,8 @@ foreach($arm in $order){
  if($LASTEXITCODE -ne 0){Write-Host "INVALID $arm $Run (exit $LASTEXITCODE); pair stopped"; $invalid++; break}
  node (Join-Path $PSScriptRoot 'manifest.cjs') $output $Workspace (Join-Path $ext 'ppsssj.cogic-0.0.6') $OriginalAnalyzer ('virtual-'+$arm) 'ts-disabled'
  if($LASTEXITCODE -ne 0){Write-Host "INVALID manifest $arm $Run"; $invalid++; break}
- if($Run -eq 1 -and $arm -eq 'on'){Write-Host 'REFERENCE on 1'; continue}
- $base=Join-Path $OutputRoot 'e5d-single-on-r1'
+ if($Run -eq 1 -and $arm -eq 'on' -and $ReferenceRun -eq 'e5d-single-on-r1'){Write-Host 'REFERENCE on 1'; continue}
+ $base=Join-Path $OutputRoot $ReferenceRun
  if(!(Test-Path -LiteralPath (Join-Path $base 'manifest.json'))){throw 'Run 1 ON reference must exist and be valid'}
  node (Join-Path $PSScriptRoot 'compare-manifests.cjs') (Join-Path $base 'manifest.json') (Join-Path $output 'manifest.json') | Set-Content -Encoding UTF8 (Join-Path $output 'manifest-comparison.json')
  if($LASTEXITCODE -ne 0){Write-Host "INVALID manifest comparison $arm $Run"; $invalid++; break}

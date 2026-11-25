@@ -1,0 +1,26 @@
+{
+    "utc":  "2026-11-25T05:47:29.4129348Z",
+    "beforeMiB":  2805.8,
+    "afterMiB":  3424.6,
+    "remaining":  [
+
+                  ],
+    "actions":  [
+                    {
+                        "process":  "Notion",
+                        "pid":  26084,
+                        "path":  "C:\\Users\\SCH\\AppData\\Local\\Programs\\Notion\\Notion.exe",
+                        "normalCloseTried":  true,
+                        "forced":  true,
+                        "stillRunning":  false
+                    },
+                    {
+                        "process":  "msedge",
+                        "pid":  13432,
+                        "path":  "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+                        "normalCloseTried":  true,
+                        "forced":  true,
+                        "stillRunning":  false
+                    }
+                ]
+}

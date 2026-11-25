@@ -1,0 +1,6 @@
+﻿{
+  "match": true,
+  "errors": [],
+  "fitCorrectnessSeparate": true,
+  "limitation": "Manifest, graph hashes, actual single-variable build, user interactions and memory must be independently verified."
+}

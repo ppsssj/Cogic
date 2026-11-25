@@ -1,0 +1,10 @@
+﻿{
+    "utc":  "2026-11-25T04:44:51.6252770Z",
+    "beforeMiB":  1830.5,
+    "afterMiB":  3126.1,
+    "process":  "Chrome",
+    "pid":  10384,
+    "path":  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "closeRequested":  true,
+    "stillRunning":  false
+}

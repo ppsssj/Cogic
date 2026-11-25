@@ -1,0 +1,9 @@
+﻿{
+  "match": false,
+  "errors": [
+    "pan speed differs at 10",
+    "pan durations differ by more than 20%"
+  ],
+  "fitCorrectnessSeparate": true,
+  "limitation": "Manifest, graph hashes, actual single-variable build, user interactions and memory must be independently verified."
+}
