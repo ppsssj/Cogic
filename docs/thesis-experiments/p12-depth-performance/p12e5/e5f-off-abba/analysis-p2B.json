@@ -1,0 +1,875 @@
+{
+ "dir": "e5f-off-abba",
+ "variant": "virtualization-off",
+ "panMs": 5012,
+ "clock": {
+  "marks": 30,
+  "webToTraceSpreadMs": 0.1,
+  "nodeUncertaintyMs": 0.9,
+  "nodeDriftMs": 0.2
+ },
+ "traced": {
+  "processes": [
+   {
+    "pid": 3424,
+    "name": "Renderer",
+    "threads": [
+     "Compositor",
+     "ServiceWorker thread",
+     "PerfettoTrace",
+     "CrRendererMain",
+     "Chrome_ChildIOThread",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolServiceThread",
+     "ThreadPoolSingleThreadSharedForegroundBlocking"
+    ]
+   },
+   {
+    "pid": 11456,
+    "name": "GPU Process",
+    "threads": [
+     "Chrome_ChildIOThread",
+     "PerfettoTrace",
+     "GpuVSyncThread",
+     "VizCompositorThread",
+     "GpuWatchdog",
+     "CrGpuMain"
+    ]
+   },
+   {
+    "pid": 16288,
+    "name": "Utility",
+    "threads": [
+     "PerfettoTrace",
+     "Chrome_ChildIOThread",
+     "node.CrUtilityMain"
+    ]
+   },
+   {
+    "pid": 17144,
+    "name": "Service: tracing.mojom.TracingService",
+    "threads": [
+     "PerfettoTrace",
+     "tracing.CrUtilityMain",
+     "Chrome_ChildIOThread",
+     "ThreadPoolForegroundWorker"
+    ]
+   },
+   {
+    "pid": 20272,
+    "name": "Service: network.mojom.NetworkService",
+    "threads": [
+     "Chrome_ChildIOThread",
+     "PerfettoTrace",
+     "network.CrUtilityMain",
+     "CacheThread_BlockFile"
+    ]
+   },
+   {
+    "pid": 23608,
+    "name": "Utility",
+    "threads": [
+     "Chrome_ChildIOThread",
+     "PerfettoTrace",
+     "node.CrUtilityMain"
+    ]
+   },
+   {
+    "pid": 23852,
+    "name": "Renderer",
+    "threads": [
+     "Compositor",
+     "PerfettoTrace",
+     "DedicatedWorker thread",
+     "DedicatedWorker thread",
+     "CrRendererMain",
+     "Chrome_ChildIOThread",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolServiceThread"
+    ]
+   },
+   {
+    "pid": 24564,
+    "name": "Browser",
+    "threads": [
+     "PerfettoTrace",
+     "CrBrowserMain",
+     "Chrome_IOThread",
+     "ThreadPoolForegroundWorker",
+     "ThreadPoolServiceThread",
+     "CacheThread_BlockFile",
+     "Chrome_DevToolsHandlerThread"
+    ]
+   },
+   {
+    "pid": 24696,
+    "name": "Utility",
+    "threads": [
+     "PerfettoTrace",
+     "Chrome_ChildIOThread",
+     "node.CrUtilityMain"
+    ]
+   }
+  ],
+  "graphWebview": {
+   "pid": 3424,
+   "thread": "CrRendererMain"
+  },
+  "bufferUsage": 0.0675738975405693,
+  "events": 460671,
+  "bytes": 116584853
+ },
+ "cond": "B",
+ "index": 2,
+ "checks": {
+  "viewportRestored": true,
+  "topologySame": true,
+  "topologyIsStart": true,
+  "startViewport": {
+   "x": -739.0999999999999,
+   "y": 117.6,
+   "zoom": 0.1
+  },
+  "allDelivered": true,
+  "suppressed": true,
+  "nodesVisible": true,
+  "edgeVisibleAfterRestore": 484,
+  "edgesBefore": {
+   "style": true,
+   "svgs": 3,
+   "groups": 242,
+   "visiblePaths": 0,
+   "edgeLabels": 0,
+   "domNodes": 130,
+   "nodesHidden": 0
+  },
+  "domNodesSame": true
+ },
+ "free": [
+  2524,
+  2500
+ ],
+ "raf": {
+  "inputLoopMs": 5004.4,
+  "callSumMs": 916.4,
+  "callMaxMs": 43.6,
+  "gaps": 0,
+  "gapMs": 0,
+  "p99": 8.5,
+  "max": 24.9,
+  "systemBusy": 24
+ },
+ "latenessEndMs": 4.3,
+ "threads": {
+  "rendererMain": {
+   "tasks": 3586,
+   "wallMs": 1119.4,
+   "cpuMs": 1068.1,
+   "maxMs": 25.7
+  },
+  "rendererCompositor": {
+   "tasks": 4609,
+   "wallMs": 512.5,
+   "cpuMs": 420.5,
+   "maxMs": 2.9
+  },
+  "gpuMain": {
+   "tasks": 2188,
+   "wallMs": 397.7,
+   "cpuMs": 380.4,
+   "maxMs": 3.2
+  },
+  "vizCompositor": {
+   "tasks": 2192,
+   "wallMs": 325.2,
+   "cpuMs": 311.7,
+   "maxMs": 1.5
+  }
+ },
+ "rendererMainEvents": {
+  "EventDispatch": {
+   "n": 327,
+   "ms": 143.8,
+   "max": 9.5
+  },
+  "FunctionCall": {
+   "n": 2271,
+   "ms": 178.3,
+   "max": 4.9
+  },
+  "FireAnimationFrame": {
+   "n": 1230,
+   "ms": 75,
+   "max": 0.6
+  },
+  "TimerFire": {
+   "n": 20,
+   "ms": 1.1,
+   "max": 0.1
+  },
+  "UpdateLayoutTree": {
+   "n": 310,
+   "ms": 50.3,
+   "max": 0.8
+  },
+  "Layout": {
+   "n": 4,
+   "ms": 1.4,
+   "max": 0.5
+  },
+  "PrePaint": {
+   "n": 721,
+   "ms": 43.5,
+   "max": 0.3
+  },
+  "Paint": {
+   "n": 589,
+   "ms": 122,
+   "max": 0.9
+  },
+  "Layerize": {
+   "n": 595,
+   "ms": 154.8,
+   "max": 6.7
+  },
+  "Commit": {
+   "n": 595,
+   "ms": 79.8,
+   "max": 1.6
+  },
+  "MinorGC": {
+   "n": 11,
+   "ms": 7.1,
+   "max": 1.2
+  },
+  "MajorGC": {
+   "n": 3,
+   "ms": 6.6,
+   "max": 2.3
+  }
+ },
+ "gpuEvents": {
+  "RasterDecoderImpl::DoRasterCHROMIUM": {
+   "n": 350,
+   "wallMs": 36.1,
+   "cpuMs": 35.4,
+   "maxMs": 0.2
+  },
+  "RasterDecoderImpl::DoEndRasterCHROMIUM": {
+   "n": 350,
+   "wallMs": 109,
+   "cpuMs": 106.4,
+   "maxMs": 2.9
+  },
+  "SkiaOutputSurfaceImplOnGpu::FinishPaintRenderPass": {
+   "n": 630,
+   "wallMs": 104.2,
+   "cpuMs": 103,
+   "maxMs": 1.8
+  },
+  "SkiaOutputSurfaceImplOnGpu::SwapBuffers": {
+   "n": 301,
+   "wallMs": 68,
+   "cpuMs": 67.3,
+   "maxMs": 0.6
+  },
+  "DXGISwapChainImageBacking::Present": {
+   "n": 301,
+   "wallMs": 41.1,
+   "cpuMs": 40.9,
+   "maxMs": 0.4
+  }
+ },
+ "rasterTasks": 349,
+ "paintByNodeMs": {
+  "#document": 106.1,
+  "svg class='react-flow__background'": 2.9,
+  "DIV class='canvasControls canvasOverlay'": 0.2,
+  "BUTTON class='iconBtn'": 0.2,
+  "svg class='lucide lucide-crosshair'": 0.3,
+  "DIV class='rootBanner canvasOverlay'": 8.7
+ },
+ "domSteps": [],
+ "viewports": [
+  "transform: translate(-653.1px, 133.6px) scale(0.1);",
+  "transform: translate(-575.1px, 149.6px) scale(0.1);",
+  "transform: translate(-513.1px, 161.6px) scale(0.1);",
+  "transform: translate(-473.1px, 169.6px) scale(0.1);",
+  "transform: translate(-459.1px, 172.6px) scale(0.1);",
+  "transform: translate(-473.1px, 169.6px) scale(0.1);",
+  "transform: translate(-513.1px, 161.6px) scale(0.1);",
+  "transform: translate(-575.1px, 149.6px) scale(0.1);",
+  "transform: translate(-653.1px, 133.6px) scale(0.1);",
+  "transform: translate(-739.1px, 117.6px) scale(0.1);",
+  "transform: translate(-826.1px, 100.6px) scale(0.1);",
+  "transform: translate(-904.1px, 84.6px) scale(0.1);",
+  "transform: translate(-966.1px, 72.6px) scale(0.1);",
+  "transform: translate(-1006.1px, 64.6px) scale(0.1);",
+  "transform: translate(-1019.1px, 62.6px) scale(0.1);",
+  "transform: translate(-1006.1px, 64.6px) scale(0.1);",
+  "transform: translate(-966.1px, 72.6px) scale(0.1);",
+  "transform: translate(-904.1px, 84.6px) scale(0.1);",
+  "transform: translate(-826.1px, 100.6px) scale(0.1);",
+  "transform: translate(-739.1px, 117.6px) scale(0.1);",
+  "transform: translate(-653.1px, 133.6px) scale(0.1);",
+  "transform: translate(-575.1px, 149.6px) scale(0.1);",
+  "transform: translate(-513.1px, 161.6px) scale(0.1);",
+  "transform: translate(-473.1px, 169.6px) scale(0.1);",
+  "transform: translate(-459.1px, 172.6px) scale(0.1);",
+  "transform: translate(-473.1px, 169.6px) scale(0.1);",
+  "transform: translate(-513.1px, 161.6px) scale(0.1);",
+  "transform: translate(-575.1px, 149.6px) scale(0.1);",
+  "transform: translate(-653.1px, 133.6px) scale(0.1);",
+  "transform: translate(-739.1px, 117.6px) scale(0.1);",
+  "transform: translate(-826.1px, 100.6px) scale(0.1);",
+  "transform: translate(-904.1px, 84.6px) scale(0.1);",
+  "transform: translate(-966.1px, 72.6px) scale(0.1);",
+  "transform: translate(-1006.1px, 64.6px) scale(0.1);",
+  "transform: translate(-1019.1px, 62.6px) scale(0.1);",
+  "transform: translate(-1006.1px, 64.6px) scale(0.1);",
+  "transform: translate(-966.1px, 72.6px) scale(0.1);",
+  "transform: translate(-904.1px, 84.6px) scale(0.1);",
+  "transform: translate(-826.1px, 100.6px) scale(0.1);",
+  "transform: translate(-739.1px, 117.6px) scale(0.1);"
+ ],
+ "rasterTasksByLayer": {
+  "12": 80,
+  "17": 6,
+  "18": 144,
+  "418": 57,
+  "419": 1,
+  "420": 60,
+  "421": 1
+ },
+ "paintByNode": {
+  "#document": 283,
+  "svg class='react-flow__background'": 40,
+  "DIV class='canvasControls canvasOverlay'": 4,
+  "BUTTON class='iconBtn'": 8,
+  "svg class='lucide lucide-crosshair'": 110,
+  "DIV class='rootBanner canvasOverlay'": 144
+ },
+ "gaps": {
+  "count": 0,
+  "totalMs": 0,
+  "overlap": {
+   "main": 0,
+   "script": 0,
+   "styleLayout": 0,
+   "paint": 0,
+   "gc": 0,
+   "compositor": 0,
+   "rasterWorkers": 0,
+   "viz": 0,
+   "gpuTask": 0,
+   "present": 0,
+   "presentCpu": 0,
+   "inputCallInFlight": 0
+  },
+  "rows": []
+ },
+ "presents": {
+  "count": 301,
+  "wallMs": 38.7,
+  "cpuMs": 38.5,
+  "over50": 0,
+  "spearmanWithRasters": 0,
+  "spearmanWithAttachDetach": null
+ },
+ "input": {
+  "steps": [
+   {
+    "i": 1,
+    "scheduled": 0,
+    "callStart": 0,
+    "callEnd": 16.5,
+    "eventTimeStamp": 2.3,
+    "handlerAt": 5.2,
+    "styleAt": 7.4,
+    "nextRafAt": 8.7,
+    "delivered": true
+   },
+   {
+    "i": 2,
+    "scheduled": 125,
+    "callStart": 139.3,
+    "callEnd": 156.6,
+    "eventTimeStamp": 141.6,
+    "handlerAt": 147,
+    "styleAt": 149.4,
+    "nextRafAt": 150.6,
+    "delivered": true
+   },
+   {
+    "i": 3,
+    "scheduled": 250,
+    "callStart": 254.7,
+    "callEnd": 289.3,
+    "eventTimeStamp": 261.7,
+    "handlerAt": 265.4,
+    "styleAt": 270.7,
+    "nextRafAt": 273.8,
+    "delivered": true
+   },
+   {
+    "i": 4,
+    "scheduled": 375,
+    "callStart": 380,
+    "callEnd": 405.4,
+    "eventTimeStamp": 390,
+    "handlerAt": 397,
+    "styleAt": 398.9,
+    "nextRafAt": 400.2,
+    "delivered": true
+   },
+   {
+    "i": 5,
+    "scheduled": 500,
+    "callStart": 505.4,
+    "callEnd": 525.3,
+    "eventTimeStamp": 508.3,
+    "handlerAt": 514.1,
+    "styleAt": 516.8,
+    "nextRafAt": 518.2,
+    "delivered": true
+   },
+   {
+    "i": 6,
+    "scheduled": 625,
+    "callStart": 630.3,
+    "callEnd": 649.8,
+    "eventTimeStamp": 633.5,
+    "handlerAt": 638.8,
+    "styleAt": 640.9,
+    "nextRafAt": 642.6,
+    "delivered": true
+   },
+   {
+    "i": 7,
+    "scheduled": 750,
+    "callStart": 755.3,
+    "callEnd": 794.8,
+    "eventTimeStamp": 758.2,
+    "handlerAt": 768.1,
+    "styleAt": 777.6,
+    "nextRafAt": 781.8,
+    "delivered": true
+   },
+   {
+    "i": 8,
+    "scheduled": 875,
+    "callStart": 880.4,
+    "callEnd": 910.1,
+    "eventTimeStamp": 883.7,
+    "handlerAt": 888.8,
+    "styleAt": 890.7,
+    "nextRafAt": 892,
+    "delivered": true
+   },
+   {
+    "i": 9,
+    "scheduled": 1000,
+    "callStart": 1004.4,
+    "callEnd": 1023.5,
+    "eventTimeStamp": 1007.9,
+    "handlerAt": 1013.6,
+    "styleAt": 1016,
+    "nextRafAt": 1017.5,
+    "delivered": true
+   },
+   {
+    "i": 10,
+    "scheduled": 1125,
+    "callStart": 1130.1,
+    "callEnd": 1149.4,
+    "eventTimeStamp": 1135,
+    "handlerAt": 1138,
+    "styleAt": 1140.7,
+    "nextRafAt": 1142.5,
+    "delivered": true
+   },
+   {
+    "i": 11,
+    "scheduled": 1250,
+    "callStart": 1254.9,
+    "callEnd": 1293.1,
+    "eventTimeStamp": 1264.5,
+    "handlerAt": 1275.3,
+    "styleAt": 1282.7,
+    "nextRafAt": 1285.8,
+    "delivered": true
+   },
+   {
+    "i": 12,
+    "scheduled": 1375,
+    "callStart": 1380.3,
+    "callEnd": 1396.9,
+    "eventTimeStamp": 1383.1,
+    "handlerAt": 1387.9,
+    "styleAt": 1390.6,
+    "nextRafAt": 1391.9,
+    "delivered": true
+   },
+   {
+    "i": 13,
+    "scheduled": 1500,
+    "callStart": 1505.8,
+    "callEnd": 1520.6,
+    "eventTimeStamp": 1508.7,
+    "handlerAt": 1512.6,
+    "styleAt": 1514.8,
+    "nextRafAt": 1516.1,
+    "delivered": true
+   },
+   {
+    "i": 14,
+    "scheduled": 1625,
+    "callStart": 1629.4,
+    "callEnd": 1653.5,
+    "eventTimeStamp": 1633.9,
+    "handlerAt": 1638.1,
+    "styleAt": 1641.7,
+    "nextRafAt": 1644,
+    "delivered": true
+   },
+   {
+    "i": 15,
+    "scheduled": 1750,
+    "callStart": 1756.1,
+    "callEnd": 1781.5,
+    "eventTimeStamp": 1762.7,
+    "handlerAt": 1772,
+    "styleAt": 1774.2,
+    "nextRafAt": 1775.9,
+    "delivered": true
+   },
+   {
+    "i": 16,
+    "scheduled": 1875,
+    "callStart": 1880,
+    "callEnd": 1920,
+    "eventTimeStamp": 1890.1,
+    "handlerAt": 1898.8,
+    "styleAt": 1906.3,
+    "nextRafAt": 1909.4,
+    "delivered": true
+   },
+   {
+    "i": 17,
+    "scheduled": 2000,
+    "callStart": 2004.6,
+    "callEnd": 2024.6,
+    "eventTimeStamp": 2009.6,
+    "handlerAt": 2012.9,
+    "styleAt": 2016.5,
+    "nextRafAt": 2018.3,
+    "delivered": true
+   },
+   {
+    "i": 18,
+    "scheduled": 2125,
+    "callStart": 2129.4,
+    "callEnd": 2151,
+    "eventTimeStamp": 2133.4,
+    "handlerAt": 2137.9,
+    "styleAt": 2140.9,
+    "nextRafAt": 2142.9,
+    "delivered": true
+   },
+   {
+    "i": 19,
+    "scheduled": 2250,
+    "callStart": 2254.3,
+    "callEnd": 2272.2,
+    "eventTimeStamp": 2256.9,
+    "handlerAt": 2263.2,
+    "styleAt": 2265.2,
+    "nextRafAt": 2266.5,
+    "delivered": true
+   },
+   {
+    "i": 20,
+    "scheduled": 2375,
+    "callStart": 2380.4,
+    "callEnd": 2400,
+    "eventTimeStamp": 2383.4,
+    "handlerAt": 2389,
+    "styleAt": 2391.7,
+    "nextRafAt": 2393,
+    "delivered": true
+   },
+   {
+    "i": 21,
+    "scheduled": 2500,
+    "callStart": 2505.5,
+    "callEnd": 2522.2,
+    "eventTimeStamp": 2508.2,
+    "handlerAt": 2513.7,
+    "styleAt": 2515.5,
+    "nextRafAt": 2516.7,
+    "delivered": true
+   },
+   {
+    "i": 22,
+    "scheduled": 2625,
+    "callStart": 2629.2,
+    "callEnd": 2650.2,
+    "eventTimeStamp": 2632.2,
+    "handlerAt": 2638.8,
+    "styleAt": 2641.5,
+    "nextRafAt": 2643.1,
+    "delivered": true
+   },
+   {
+    "i": 23,
+    "scheduled": 2750,
+    "callStart": 2754.9,
+    "callEnd": 2785,
+    "eventTimeStamp": 2765,
+    "handlerAt": 2774.6,
+    "styleAt": 2777.4,
+    "nextRafAt": 2778.9,
+    "delivered": true
+   },
+   {
+    "i": 24,
+    "scheduled": 2875,
+    "callStart": 2887.2,
+    "callEnd": 2907.4,
+    "eventTimeStamp": 2892.1,
+    "handlerAt": 2897.9,
+    "styleAt": 2899.8,
+    "nextRafAt": 2901.1,
+    "delivered": true
+   },
+   {
+    "i": 25,
+    "scheduled": 3000,
+    "callStart": 3005.2,
+    "callEnd": 3024.7,
+    "eventTimeStamp": 3008.1,
+    "handlerAt": 3013.9,
+    "styleAt": 3016.1,
+    "nextRafAt": 3017.7,
+    "delivered": true
+   },
+   {
+    "i": 26,
+    "scheduled": 3125,
+    "callStart": 3130.1,
+    "callEnd": 3149.6,
+    "eventTimeStamp": 3133.5,
+    "handlerAt": 3138.6,
+    "styleAt": 3140.7,
+    "nextRafAt": 3142.3,
+    "delivered": true
+   },
+   {
+    "i": 27,
+    "scheduled": 3250,
+    "callStart": 3255.6,
+    "callEnd": 3275,
+    "eventTimeStamp": 3258.9,
+    "handlerAt": 3264.1,
+    "styleAt": 3266.3,
+    "nextRafAt": 3267.8,
+    "delivered": true
+   },
+   {
+    "i": 28,
+    "scheduled": 3375,
+    "callStart": 3380.3,
+    "callEnd": 3397.5,
+    "eventTimeStamp": 3383.1,
+    "handlerAt": 3388.6,
+    "styleAt": 3390.6,
+    "nextRafAt": 3391.8,
+    "delivered": true
+   },
+   {
+    "i": 29,
+    "scheduled": 3500,
+    "callStart": 3504.3,
+    "callEnd": 3533.3,
+    "eventTimeStamp": 3510.1,
+    "handlerAt": 3514.5,
+    "styleAt": 3519,
+    "nextRafAt": 3521.6,
+    "delivered": true
+   },
+   {
+    "i": 30,
+    "scheduled": 3625,
+    "callStart": 3629.9,
+    "callEnd": 3645.4,
+    "eventTimeStamp": 3636.6,
+    "handlerAt": 3637.5,
+    "styleAt": 3639.3,
+    "nextRafAt": 3640.4,
+    "delivered": true
+   },
+   {
+    "i": 31,
+    "scheduled": 3750,
+    "callStart": 3754.1,
+    "callEnd": 3771.3,
+    "eventTimeStamp": 3756.8,
+    "handlerAt": 3763,
+    "styleAt": 3764.6,
+    "nextRafAt": 3765.8,
+    "delivered": true
+   },
+   {
+    "i": 32,
+    "scheduled": 3875,
+    "callStart": 3879.3,
+    "callEnd": 3896,
+    "eventTimeStamp": 3882.9,
+    "handlerAt": 3887.8,
+    "styleAt": 3890.1,
+    "nextRafAt": 3891.5,
+    "delivered": true
+   },
+   {
+    "i": 33,
+    "scheduled": 4000,
+    "callStart": 4004.5,
+    "callEnd": 4029,
+    "eventTimeStamp": 4013.7,
+    "handlerAt": 4021,
+    "styleAt": 4023.1,
+    "nextRafAt": 4024.3,
+    "delivered": true
+   },
+   {
+    "i": 34,
+    "scheduled": 4125,
+    "callStart": 4129.4,
+    "callEnd": 4149.6,
+    "eventTimeStamp": 4133.2,
+    "handlerAt": 4137.7,
+    "styleAt": 4140.6,
+    "nextRafAt": 4142.3,
+    "delivered": true
+   },
+   {
+    "i": 35,
+    "scheduled": 4250,
+    "callStart": 4254.1,
+    "callEnd": 4271.2,
+    "eventTimeStamp": 4256.5,
+    "handlerAt": 4263.4,
+    "styleAt": 4265.3,
+    "nextRafAt": 4266.4,
+    "delivered": true
+   },
+   {
+    "i": 36,
+    "scheduled": 4375,
+    "callStart": 4379.2,
+    "callEnd": 4398.9,
+    "eventTimeStamp": 4383.1,
+    "handlerAt": 4388.5,
+    "styleAt": 4392.2,
+    "nextRafAt": 4393.9,
+    "delivered": true
+   },
+   {
+    "i": 37,
+    "scheduled": 4500,
+    "callStart": 4504.7,
+    "callEnd": 4528.3,
+    "eventTimeStamp": 4512,
+    "handlerAt": 4520.8,
+    "styleAt": 4522.6,
+    "nextRafAt": 4523.7,
+    "delivered": true
+   },
+   {
+    "i": 38,
+    "scheduled": 4625,
+    "callStart": 4629.8,
+    "callEnd": 4654.7,
+    "eventTimeStamp": 4641.8,
+    "handlerAt": 4645.9,
+    "styleAt": 4648,
+    "nextRafAt": 4649.2,
+    "delivered": true
+   },
+   {
+    "i": 39,
+    "scheduled": 4750,
+    "callStart": 4755.1,
+    "callEnd": 4798.7,
+    "eventTimeStamp": 4763.7,
+    "handlerAt": 4773.6,
+    "styleAt": 4779.7,
+    "nextRafAt": 4783.5,
+    "delivered": true
+   },
+   {
+    "i": 40,
+    "scheduled": 4875,
+    "callStart": 4879.3,
+    "callEnd": 4901.1,
+    "eventTimeStamp": 4882.9,
+    "handlerAt": 4889.2,
+    "styleAt": 4891.4,
+    "nextRafAt": 4893.3,
+    "delivered": true
+   }
+  ],
+  "delivered": 40,
+  "coalescedMax": 1,
+  "latency": {
+   "callStart_to_eventTimeStamp": {
+    "n": 40,
+    "median": 3.6,
+    "p95": 10.1,
+    "max": 12
+   },
+   "eventTimeStamp_to_handler": {
+    "n": 40,
+    "median": 5.5,
+    "p95": 9.9,
+    "max": 10.8
+   },
+   "handler_to_style": {
+    "n": 40,
+    "median": 2.2,
+    "p95": 7.4,
+    "max": 9.5
+   },
+   "handler_to_nextRaf": {
+    "n": 40,
+    "median": 3.8,
+    "p95": 10.5,
+    "max": 13.7
+   },
+   "handler_to_callEnd": {
+    "n": 40,
+    "median": 10.8,
+    "p95": 23.9,
+    "max": 26.7
+   },
+   "scheduled_to_callStart": {
+    "n": 40,
+    "median": 4.9,
+    "p95": 6.1,
+    "max": 14.3
+   }
+  },
+  "dom": {
+   "batches": 0,
+   "nodeAttach": 0,
+   "nodeDetach": 0,
+   "edgeAttach": 0,
+   "edgeDetach": 0
+  }
+ }
+}

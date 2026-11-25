@@ -13,3 +13,5 @@ This draft depends on unmerged P12-E4 #38, which depends on #37, #36 and #34. It
 [E5D Single/Multiple A/B results](e5d-ab-results.md) reports the completed live ON/OFF series; it supersedes the unverified live items above.
 
 [E5E Chromium trace](e5e-trace-results.md) locates the ON pan stalls in GPU-process Present waits.
+
+[E5F edge paint isolation](e5f-edge-isolation-results.md): hiding edges does not reduce the Present wait; corrects an E5E inference.

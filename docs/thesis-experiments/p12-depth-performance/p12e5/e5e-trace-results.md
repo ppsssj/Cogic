@@ -2,6 +2,8 @@
 
 Diagnostic pair only (one ON, one OFF run, Multiple expanded, 125 ms steps). It locates where time is spent; it is not a repeated benchmark. Product code, GraphPayload and virtualization defaults are unchanged.
 
+> **Correction (E5F):** the inference below that layer 15 is the edges SVG, and therefore the "best single target", was refuted: hiding edges leaves layer 15 and the Present wait unchanged. See [E5F](e5f-edge-isolation-results.md). Measurements are unchanged.
+
 ## Conclusion
 
 **VERIFIED (this pair):** during ON's long rAF gaps the GPU process main thread (`CrGpuMain`) is blocked inside `DXGISwapChainImageBacking::Present`. 28 gaps total 7132 ms; Present covers 6544 ms (**92%**), with 153 ms CPU time inside it, so the thread is waiting, not computing. The renderer main thread covers 312 ms (4%).
