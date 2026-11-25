@@ -10,6 +10,8 @@ The hypothesis "re-raster of the edges SVG is an important contributor to the GP
 
 E5E inferred that layer 15 (496 of 720 raster tasks) is the edges SVG and named it the best single target. **That inference is wrong.** With edges hidden, layer 15 still has 504-542 raster tasks. What disappears is one layer with 76-84 tasks and about 65 one- or two-tile layers. Layer 15 is therefore not the edges SVG; it is probably the nodes container (`.react-flow__nodes` is a promoted layer and nodes repaint only in ON), which stays INFERRED. E5E's measurements, including the location of the wait, stand.
 
+> **Follow-up (E5G):** layer 15 is verified as `.react-flow__nodes`. See [E5G](e5g-node-isolation-results.md).
+
 ## Method
 
 - [p13-p12e5f-edges.spec.ts](p13-p12e5f-edges.spec.ts), [run-e5f-edges.ps1](run-e5f-edges.ps1), [analyze-e5f-pan.cjs](analyze-e5f-pan.cjs), [aggregate-e5f.cjs](aggregate-e5f.cjs) -> [e5f-aggregate.json](e5f-aggregate.json). E5D/E5E scripts and data are unchanged.
