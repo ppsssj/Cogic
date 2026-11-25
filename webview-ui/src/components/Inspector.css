@@ -546,6 +546,76 @@
   outline-offset: 2px;
 }
 
+.panel--aggregate .panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.aggregateList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aggregateItem {
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.aggregateItem--active {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface1));
+}
+
+.aggregateEnds {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.aggregateEndBtn {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  padding: 4px 6px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.aggregateEndBtn:disabled {
+  cursor: default;
+}
+
+.aggregateEndBtn:hover:not(:disabled),
+.aggregateEndBtn:focus-visible {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.aggregateEndBtn span,
+.aggregateId {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aggregateLabel {
+  margin-top: 4px;
+}
+
+.aggregateId {
+  font-size: 10px;
+}
+
 /* collapsed */
 .inspector--collapsed {
   min-width: 28px;

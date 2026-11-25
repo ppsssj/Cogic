@@ -11,6 +11,9 @@ import { Topbar } from "./components/Topbar";
 import { FiltersBar, type ChipKey } from "./components/FiltersBar";
 import { CanvasPane } from "./components/CanvasPane";
 import { Inspector } from "./components/Inspector";
+import type { AggregateSelection } from "./components/AggregateEdge";
+import type { AggregateMemberEnd } from "./components/AggregatePanel";
+import type { EdgeMember } from "../../src/shared/edgeAggregation";
 import { ScaffoldLab } from "./components/ScaffoldLab";
 import {
   getVSCodeApi,
@@ -609,6 +612,14 @@ type FocusedFlowState = {
   sourceId: string;
   targetId: string;
 };
+/** The context is kept so a selection from another graph, filter, root or trace mode is ignored. */
+type AggregateState = {
+  selection: AggregateSelection;
+  graph: GraphPayload | undefined;
+  filter: ChipKey[];
+  rootTarget: GraphRootTarget;
+  traceMode: boolean;
+};
 type SnapshotFormat = "jpg" | "svg";
 type SnapshotExporter = (format: SnapshotFormat) => Promise<string>;
 type FlowPreviewState = FocusedFlowState & {
@@ -700,6 +711,7 @@ export default function App() {
   const [inspectorSelectionOrigin, setInspectorSelectionOrigin] =
     useState<InspectorSelectionOrigin>("graph");
   const [focusedFlow, setFocusedFlow] = useState<FocusedFlowState | null>(null);
+  const [aggregateState, setAggregateState] = useState<AggregateState | null>(null);
   const [inspectorFocusRequest, setInspectorFocusRequest] =
     useState<InspectorFocusRequest | null>(null);
   const [runtimeDebug, setRuntimeDebug] = useState<RuntimeDebugState | null>(null);
@@ -892,6 +904,7 @@ export default function App() {
   const clearSelectedNodes = useCallback(() => {
     setSelectedNodeId(null);
     setSelectedNodeIds([]);
+    setAggregateState(null);
   }, []);
 
   const syncGraphRoot = useCallback((nextRoot: GraphRootTarget) => {
@@ -1735,9 +1748,11 @@ export default function App() {
   const replaceSelectedNodes = useCallback((nodeId: string | null) => {
     setSelectedNodeId(nodeId);
     setSelectedNodeIds(nodeId ? [nodeId] : []);
+    setAggregateState(null);
   }, []);
 
   const toggleSelectedNode = useCallback((nodeId: string) => {
+    setAggregateState(null);
     setSelectedNodeIds((current) => {
       if (current.includes(nodeId)) {
         const next = current.filter((id) => id !== nodeId);
@@ -2167,6 +2182,41 @@ export default function App() {
     });
     replaceSelectedNodes(nodeId);
     setInspectorSelectionOrigin(origin);
+  };
+
+  const selectAggregate = useCallback(
+    (selection: AggregateSelection) => {
+      pushWebviewDebugEvent("canvas.aggregate.select", {
+        aggregateId: selection.id,
+        members: selection.members.length,
+      });
+      setFocusedFlow(null);
+      clearSelectedNodes();
+      setAggregateState({ selection, graph, filter: activeChip, rootTarget, traceMode });
+      setInspectorOpen(true);
+    },
+    [activeChip, clearSelectedNodes, graph, rootTarget, traceMode],
+  );
+  const clearAggregate = useCallback(() => setAggregateState(null), []);
+  const selectedAggregate =
+    aggregateState &&
+    aggregateState.graph === graph &&
+    aggregateState.filter === activeChip &&
+    aggregateState.rootTarget === rootTarget &&
+    aggregateState.traceMode === traceMode
+      ? aggregateState.selection
+      : null;
+
+  // Opens one end of an original relation. The aggregate stays selected, and collapsed groups
+  // stay collapsed. A trace flow still takes precedence over the manual highlight.
+  const openAggregateMember = (member: EdgeMember, end: AggregateMemberEnd) => {
+    const nodeId = end === "source" ? member.source : member.target;
+    activateGraphNode(nodeId, "graph");
+    setAggregateState(aggregateState);
+    if (selectedAggregate?.kind === "dataflow") {
+      setInspectorFocusRequest(null);
+      focusParamFlow({ edgeId: member.id, sourceId: member.source, targetId: member.target });
+    }
   };
 
   const focusParamFlow = (flow: FocusedFlowState) => {
@@ -2650,6 +2700,9 @@ export default function App() {
           onTracePrev={stepTracePrev}
           onTraceNext={stepTraceNext}
           onTraceFinish={finishTraceMode}
+          selectedAggregate={selectedAggregate}
+          onSelectAggregate={selectAggregate}
+          onClearAggregate={clearAggregate}
           loadingState={analysisLoading}
           autoLayoutTick={autoLayoutTick}
           workspaceRoot={workspaceRoot}
@@ -2723,6 +2776,9 @@ export default function App() {
           inspectorSelectionOrigin={inspectorSelectionOrigin}
           onFocusParamFlow={focusParamFlow}
           activeFlowPreview={effectiveFocusedFlow}
+          selectedAggregate={selectedAggregate}
+          onOpenAggregateMember={openAggregateMember}
+          onCloseAggregate={clearAggregate}
           onRefreshActive={() =>
             postMessage("inspector.refreshActive", { type: "requestActiveFile" })
           }
