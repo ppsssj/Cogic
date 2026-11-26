@@ -9,6 +9,7 @@ import {
 } from "reactflow";
 import type { GraphEdgeKind } from "../../../src/shared/protocol";
 import type { EdgeMember } from "../../../src/shared/edgeAggregation";
+import { countRender } from "../lib/semanticZoomExperiment";
 
 /** What the canvas hands to the Inspector when an aggregated edge is selected. */
 export type AggregateSelection = {
@@ -158,6 +159,7 @@ export function AggregateEdge({
   style,
   data,
 }: EdgeProps<{ aggregate?: AggregateEdgeData }>) {
+  countRender("customEdge");
   const [path, labelX, labelY] = getBezierPath({
     sourceX,
     sourceY,

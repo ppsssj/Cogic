@@ -1105,3 +1105,43 @@
     transform: scale(1);
   }
 }
+
+/* P15-Z0 experiment: the local-detail overlay. Fixed size, outside React Flow, no pointer events. */
+.cgExpDetail {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  width: 360px;
+  max-height: 240px;
+  overflow: hidden;
+  z-index: 5000;
+  pointer-events: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--fg) 25%, transparent);
+  background: color-mix(in srgb, var(--surfaceCanvas) 94%, transparent);
+  color: var(--fg);
+  font-size: 12px;
+}
+
+.cgExpDetailTitle {
+  font-weight: 700;
+}
+
+.cgExpDetailKind,
+.cgExpDetailLoc {
+  opacity: 0.7;
+}
+
+.cgExpDetailSig {
+  margin-top: 4px;
+  font-family: var(--vscode-editor-font-family, monospace);
+}
+
+.cgExpDetailCode {
+  margin: 6px 0 0;
+  max-height: 150px;
+  overflow: hidden;
+  font-size: 11px;
+  white-space: pre;
+}
