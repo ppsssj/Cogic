@@ -1145,3 +1145,12 @@
   font-size: 11px;
   white-space: pre;
 }
+
+/* P15-Z0A experiment: edge styles set by the harness (off unless a class is added). */
+.canvasFlow.cgExp--staticEdges .react-flow__edge.animated path {
+  animation: none !important;
+}
+
+.canvasFlow.cgExp--solidEdges .react-flow__edges .react-flow__edge-path {
+  stroke-dasharray: none !important;
+}
