@@ -49,6 +49,7 @@ import type {
 } from "../lib/vscode";
 import { nextLowDetailEdges } from "../lib/edgeDetail";
 import { withTemporaryStyles } from "../../../src/shared/temporaryStyles";
+import { classifyTraceStep } from "../../../src/shared/traceSteps";
 import {
   classifyFocusEdge,
   computeFocusNeighborhood,
@@ -2219,6 +2220,11 @@ export const CanvasPane = memo(function CanvasPane({
     () => filterGraph(graph, activeFilter),
     [graph, activeFilter],
   );
+  // Tells an intended empty trace step (before the first event, or only the file so far) apart
+  // from a filter that hides the step and from a real rendering problem.
+  const traceStepView = traceVisible
+    ? classifyTraceStep(traceTotal, traceCursor, graph, filteredGraph)
+    : "none";
   const visibleFilePathSet = useMemo(() => {
     if (!filteredGraph) return new Set<string>();
     return new Set(filteredGraph.nodes.map((node) => normalizePath(node.file)));
@@ -3513,43 +3519,91 @@ export const CanvasPane = memo(function CanvasPane({
   }, [groupFollowRequest, nodeTopologyKey]);
 
   const isTraceAtEnd = traceCursor >= traceTotal;
-  const renderEmptyState = (mode: "no-graph" | "no-visible") => (
-    <div className={["emptyState", mode === "no-visible" ? "emptyState--overlay" : ""].join(" ")}>
-      {notice && mode === "no-graph" ? (
-        <div
-          className={[
-            "canvasNotice",
-            "canvasNotice--inline",
-            `canvasNotice--${notice.severity}`,
-          ].join(" ")}
-        >
-          <div className="canvasNoticeTitle">{notice.message}</div>
-          {notice.detail ? (
-            <div className="canvasNoticeDetail">{notice.detail}</div>
-          ) : null}
+  const renderTraceEmptyState = (mode: "no-graph" | "no-visible") => {
+    const step = `${traceCursor} / ${traceTotal}`;
+    const fileNames = (graph?.nodes ?? [])
+      .filter((node) => node.kind === "file")
+      .map((node) => node.name)
+      .join(", ");
+    const text =
+      traceStepView === "ready"
+        ? {
+            title: "Trace ready",
+            sub: "Press -> (Next) to show the first analyzed step.",
+          }
+        : traceStepView === "file-only"
+          ? {
+              title: `Trace step ${step}: ${fileNames || "file"} added`,
+              sub: "The trace adds the file first. Its declarations appear from the next step.",
+            }
+          : {
+              title: `Trace step ${step} is hidden by the filter`,
+              sub: "The nodes of this step do not match the current filter. Choose All to see them.",
+            };
+    return (
+      <div
+        className={["emptyState", mode === "no-visible" ? "emptyState--overlay" : ""].join(" ")}
+        data-trace-state={traceStepView}
+      >
+        {notice && mode === "no-graph" ? (
+          <div
+            className={["canvasNotice", "canvasNotice--inline", `canvasNotice--${notice.severity}`].join(" ")}
+          >
+            <div className="canvasNoticeTitle">{notice.message}</div>
+            {notice.detail ? <div className="canvasNoticeDetail">{notice.detail}</div> : null}
+          </div>
+        ) : null}
+        <div className="emptyIcon">
+          <Sigma size={20} />
         </div>
-      ) : null}
-      <div className="emptyIcon">
-        <Sigma size={20} />
-      </div>
-      <div className="emptyTitle">
-        {mode === "no-visible" ? "No visible nodes" : "No graph yet"}
-      </div>
-      <div className="emptySub">
-        {mode === "no-visible"
-          ? "Graph data exists, but the current render pass found no visible nodes."
-          : "Open a TypeScript/JavaScript file, then click Generate."}
-      </div>
-      <div className="emptyActions">
-        <button className="btnPrimary" onClick={onGenerateFromActive}>
-          Generate from active file
-        </button>
-      </div>
-      {traceVisible ? (
+        <div className="emptyTitle">{text.title}</div>
+        <div className="emptySub">{text.sub}</div>
         <div style={{ marginTop: 8 }}>{renderTraceControls()}</div>
-      ) : null}
-    </div>
-  );
+      </div>
+    );
+  };
+
+  const renderEmptyState = (mode: "no-graph" | "no-visible") =>
+    traceStepView === "ready" || traceStepView === "file-only" || traceStepView === "filtered" ? (
+      renderTraceEmptyState(mode)
+    ) : (
+      <div className={["emptyState", mode === "no-visible" ? "emptyState--overlay" : ""].join(" ")}>
+        {notice && mode === "no-graph" ? (
+          <div
+            className={[
+              "canvasNotice",
+              "canvasNotice--inline",
+              `canvasNotice--${notice.severity}`,
+            ].join(" ")}
+          >
+            <div className="canvasNoticeTitle">{notice.message}</div>
+            {notice.detail ? (
+              <div className="canvasNoticeDetail">{notice.detail}</div>
+            ) : null}
+          </div>
+        ) : null}
+        <div className="emptyIcon">
+          <Sigma size={20} />
+        </div>
+        <div className="emptyTitle">
+          {mode === "no-visible" ? "No visible nodes" : "No graph yet"}
+        </div>
+        <div className="emptySub">
+          {mode === "no-visible"
+            ? "Graph data exists, but the current render pass found no visible nodes."
+            : "Open a TypeScript/JavaScript file, then click Generate."}
+        </div>
+        <div className="emptyActions">
+          <button className="btnPrimary" onClick={onGenerateFromActive}>
+            Generate from active file
+          </button>
+        </div>
+        {traceVisible ? (
+          <div style={{ marginTop: 8 }}>{renderTraceControls()}</div>
+        ) : null}
+      </div>
+    );
+
   const renderTraceControls = () => (
     <div
       style={{
