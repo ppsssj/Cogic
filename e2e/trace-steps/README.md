@@ -32,12 +32,11 @@ Checks per trace:
 - every later step draws code nodes in view;
 - an edge step adds no node and a node step adds one;
 - Prev back to 0 and Next again show the same graph at each cursor;
-- after the trace ends, the canvas still draws a graph;
+- after the trace ends, the normal graph from before it is back;
 - a restarted trace is ready at 0 with the same total.
 
 Same limits as the other end-to-end runs: a new output folder per run, at least 2200 MiB free
 to start, and a stop below 800 MiB.
 
-Ending a trace keeps the last step's graph and starts no new analysis. This is existing
-behaviour, also before this change. The run records the counts after the trace and the normal
-counts, but does not expect them to match.
+After the trace from `main.ts` ends, the normal graph from before it must come back with the same
+node and edge IDs. Leaving a trace in other situations is covered by `e2e/trace-exit`.

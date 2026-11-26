@@ -472,15 +472,16 @@ try {
   result.normal = normal;
   mark("start");
   judge("main.ts", await walk("main"));
-  // Ending a trace keeps the last step's graph and starts no new analysis (existing behaviour,
-  // also before this change); the normal graph returns with the next analysis.
+  // Ending a trace brings back the normal graph from before it (P15-S3).
   await traceButton.click();
-  await sleep(3000);
+  await until("normal graph back", async () => {
+    const now = await record();
+    return now.label === null && sig(now) === sig(normal);
+  }, 30_000).catch(() => {});
   await fit();
   const back = await record();
   result.afterMain = back;
-  check("trace end: the canvas keeps a drawn graph, no trace or error empty state", back.domNodes > 0 && !back.emptyState && !back.empty && back.label === null, [back.domNodes, back.domEdges, back.empty, back.label]);
-  result.afterMainVsNormal = { after: [back.domNodes, back.domEdges], normal: [normal.domNodes, normal.domEdges] };
+  check("trace end: the normal graph from before the trace comes back (same node and edge IDs)", sig(back) === sig(normal) && back.label === null && !back.emptyState, [back.domNodes, normal.domNodes, back.domEdges, normal.domEdges, back.label]);
 
   // a.ts: a longer trace with classes and members
   const pick = async (file) => {
