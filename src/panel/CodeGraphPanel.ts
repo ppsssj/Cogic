@@ -32,6 +32,7 @@ import { RuntimeDebugBridge } from "./runtimeDebug";
 import { activationFingerprint, shouldAutoAnalyzeEditorChange, shouldRetainPendingChange, shouldSuppressActivationAnalysis, shouldSuppressPendingSelectionActivation, shouldSuppressDeliveredActivation } from "./workflowPolicy";
 import { pipelineProfile, pipelineProfileEnabled } from "./pipelineProfile";
 import { SelectionOrder } from "./selectionOrder";
+import { DATAFLOW_MOTION_SETTING, parseDataflowMotionPolicy } from "../shared/dataflowMotion";
 
 type AnalysisCacheEntry = {
   result: DepthAnalysisResult;
@@ -66,6 +67,13 @@ function getDefaultAnalysisCacheEnabled() {
   return vscode.workspace
     .getConfiguration(CONFIG_SECTION)
     .get<boolean>(ANALYSIS_CACHE_ENABLED_SETTING, true);
+}
+
+/** Not declared in package.json on purpose: an opt-in for verification, absent from the UI. */
+function getDataflowMotionPolicy() {
+  return parseDataflowMotionPolicy(
+    vscode.workspace.getConfiguration(CONFIG_SECTION).get<unknown>(DATAFLOW_MOTION_SETTING),
+  );
 }
 
 function clampGraphDepth(depth: number | undefined) {
@@ -343,6 +351,7 @@ export class CodeGraphPanel {
             return this.postHostState();
           }
           if (msg.type === "requestAnalysisCacheState") {
+            this.postDataflowMotion();
             return this.postAnalysisCacheState();
           }
           if (msg.type === "switchHost") {
@@ -494,6 +503,7 @@ export class CodeGraphPanel {
     void this.postWorkspaceFiles();
     this.postSelection();
     this.postAnalysisCacheState();
+    this.postDataflowMotion();
     const runtimePayload = this.runtimeDebugBridge?.getLastPayload();
     if (runtimePayload) {
       this.panel.webview.postMessage({
@@ -664,6 +674,9 @@ export class CodeGraphPanel {
     });
 
     const subConfig = vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration(`${CONFIG_SECTION}.${DATAFLOW_MOTION_SETTING}`)) {
+        this.postDataflowMotion();
+      }
       if (!e.affectsConfiguration("cogic.analysisCache.enabled")) {
         return;
       }
@@ -761,6 +774,13 @@ export class CodeGraphPanel {
     this.panel.webview.postMessage({
       type: "hostState",
       payload,
+    } satisfies ExtToWebviewMessage);
+  }
+
+  private postDataflowMotion() {
+    this.panel.webview.postMessage({
+      type: "dataflowMotion",
+      payload: { policy: getDataflowMotionPolicy() },
     } satisfies ExtToWebviewMessage);
   }
 
