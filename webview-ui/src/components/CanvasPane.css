@@ -537,6 +537,34 @@
   display: none;
 }
 
+.canvasFlow--lowDetailEdges .cgAggregateBadgeFocus {
+  display: none;
+}
+
+/*
+ * Focus + Context (1-hop). Initial UX values, not tuned by measurement. Context stays drawn,
+ * selectable and in place; only its opacity changes. The low-detail rule above still applies.
+ */
+.react-flow__node.cgFocus--context {
+  opacity: 0.25;
+}
+
+.react-flow__edge.cgFocus--context .react-flow__edge-path {
+  opacity: 0.12 !important;
+}
+
+.cgChildNode--focusContext {
+  opacity: 0.35;
+}
+
+.cgAggregateBadge--focusContext {
+  opacity: 0.3 !important;
+}
+
+.cgAggregateBadgeFocus {
+  color: var(--accentStrong, var(--accent));
+}
+
 /* Controls */
 .canvasControls {
   position: absolute;
