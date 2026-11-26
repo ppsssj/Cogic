@@ -35,6 +35,7 @@ import {
 } from "./lib/debugLog";
 import { configurePipelineProfile, newProfileRequestId, pipelineEnabled, profileWebview } from "./lib/pipelineProfile";
 import { mayApplyActiveResult, ownsLoading } from "../../src/shared/requestOwnership";
+import { buildGraphFromTrace } from "../../src/shared/traceSteps";
 import "./styles/index.css";
 
 const vscode = getVSCodeApi();
@@ -190,24 +191,6 @@ function mergeGraph(
   for (const e of next.edges) edgeById.set(e.id, e);
 
   return { nodes: [...nodeById.values()], edges: [...edgeById.values()] };
-}
-
-function graphFromTraceEvent(e: GraphTraceEvent): GraphPayload {
-  if (e.type === "node") return { nodes: [e.node], edges: [] };
-  return { nodes: [], edges: [e.edge] };
-}
-
-function buildGraphFromTrace(
-  events: GraphTraceEvent[],
-  steps: number,
-): GraphPayload | undefined {
-  if (!events.length || steps <= 0) return undefined;
-  const clamped = Math.min(events.length, Math.max(0, steps));
-  let g: GraphPayload | undefined = undefined;
-  for (let i = 0; i < clamped; i++) {
-    g = mergeGraph(g, graphFromTraceEvent(events[i]));
-  }
-  return g;
 }
 
 type Pos = { line: number; character: number };
@@ -1830,8 +1813,18 @@ export default function App() {
   const stepTraceTo = useCallback((nextCursor: number) => {
     if (!traceEvents || traceEvents.length === 0) return;
     const c = Math.max(0, Math.min(traceEvents.length, nextCursor));
+    const stepGraph = buildGraphFromTrace(traceEvents, c);
+    const event = c > 0 ? traceEvents[c - 1] : null;
+    pushWebviewDebugEvent("trace.step", {
+      cursor: c,
+      total: traceEvents.length,
+      eventType: event?.type ?? null,
+      nodeKind: event?.type === "node" ? event.node.kind : null,
+      edgeKind: event?.type === "edge" ? event.edge.kind : null,
+      ...getGraphCounts(stepGraph),
+    });
     setTraceCursor(c);
-    setGraphState(buildGraphFromTrace(traceEvents, c));
+    setGraphState(stepGraph);
   }, [traceEvents]);
 
   const stepTracePrev = useCallback(() => stepTraceTo(traceCursor - 1), [stepTraceTo, traceCursor]);
