@@ -24,6 +24,11 @@ export type AggregateEdgeData = AggregateSelection & {
   targetName: string;
   selected: boolean;
   muted?: boolean;
+  /**
+   * Set while Focus is on: the members with the focus center at one end. The badge still
+   * counts and opens every member.
+   */
+  focusRelatedIds?: string[];
   /** Label of the focused member, when one is focused. */
   focusedLabel?: string;
   onSelect: (selection: AggregateSelection) => void;
@@ -50,6 +55,9 @@ export function AggregateBadge({
   const { setCenter, getZoom } = useReactFlow();
   const { id, kind, source, target, members, onSelect } = data;
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const focusRelated = data.focusRelatedIds?.length;
+  const focusText =
+    focusRelated === undefined ? "" : ` ${focusRelated} of ${members.length} touch the focus.`;
 
   useEffect(() => {
     if (keyboardActivation?.id !== id) return;
@@ -95,6 +103,11 @@ export function AggregateBadge({
           "cgAggregateBadge",
           `cgAggregateBadge--${kind}`,
           data.selected ? "cgAggregateBadge--selected" : "",
+          focusRelated === undefined
+            ? ""
+            : focusRelated > 0
+              ? "cgAggregateBadge--focusRelated"
+              : "cgAggregateBadge--focusContext",
           "nokey",
         ].join(" ")}
         style={{
@@ -103,9 +116,11 @@ export function AggregateBadge({
           opacity: data.muted && !data.selected ? 0.45 : 1,
         }}
         data-count={members.length}
+        data-focus-related={focusRelated}
         aria-pressed={data.selected}
-        aria-label={`${kind}: ${members.length} relations from ${data.sourceName} to ${data.targetName}. Show in Inspector.`}
-        title={`${data.sourceName} -> ${data.targetName}`}
+        aria-label={`${kind}: ${members.length} relations from ${data.sourceName} to ${data.targetName}.${focusText} Show in Inspector.`}
+        title={`${data.sourceName} -> ${data.targetName}${focusText ? `
+${focusText.trim()}` : ""}`}
         onFocus={handleFocus}
         onClick={(event) => {
           event.stopPropagation();
@@ -119,6 +134,12 @@ export function AggregateBadge({
           {kind}{" "}
         </span>
         ×{members.length}
+        {focusRelated ? (
+          <span className="cgAggregateBadgeFocus" aria-hidden="true">
+            {" "}
+            · {focusRelated} in focus
+          </span>
+        ) : null}
       </button>
     </EdgeLabelRenderer>
   );

@@ -31,7 +31,15 @@ import ReactFlow, {
   type ReactFlowInstance,
 } from "reactflow";
 
-import { Crosshair, Loader2, Network, Sigma, ZoomIn, ZoomOut } from "lucide-react";
+import {
+  Crosshair,
+  Focus as FocusIcon,
+  Loader2,
+  Network,
+  Sigma,
+  ZoomIn,
+  ZoomOut,
+} from "lucide-react";
 import type {
   CodeDiagnostic,
   GraphNode,
@@ -40,6 +48,13 @@ import type {
   UINotice,
 } from "../lib/vscode";
 import { nextLowDetailEdges } from "../lib/edgeDetail";
+import {
+  classifyFocusEdge,
+  computeFocusNeighborhood,
+  getFocusUiState,
+  isFocusPaused,
+  type FocusNeighborhood,
+} from "../../../src/shared/focusNeighborhood";
 import { aggregateEdges, type DrawnEdge } from "../../../src/shared/edgeAggregation";
 import {
   AggregateBadge,
@@ -81,6 +96,8 @@ type CodeNodeData = {
     title: string;
     subtitle: string;
     selected?: boolean;
+    /** Focus is on and this member is not one hop from the center. */
+    focusContext?: boolean;
     focusPulseToken?: number;
     diagnosticSeverity?: "error" | "warning";
     diagnosticCount?: number;
@@ -673,6 +690,7 @@ function CodeNode({
               className={[
                 "cgChildNode",
                 child.selected ? "cgChildNode--selected" : "",
+                child.focusContext ? "cgChildNode--focusContext" : "",
                 child.onClick || child.onDoubleClick ? "cgChildNode--interactive" : "",
               ].join(" ")}
               onClick={handleChildClick(child.onClick)}
@@ -1140,6 +1158,7 @@ function toReactFlowEdges(
   selectedAggregateId?: string | null,
   nodeNameById?: Map<string, string>,
   onSelectAggregate?: (selection: AggregateSelection) => void,
+  focus?: FocusNeighborhood | null,
 ): Array<Edge<DataflowEdgeData>> {
   const selectedNodeIdSet = new Set(selectedNodeIds ?? []);
   const nameOf = (id: string) => {
@@ -1181,6 +1200,9 @@ function toReactFlowEdges(
       isFocusedFlow || (selectedNodeIdSet.size > 0 && isSelectedFlow),
     );
     const isSelectedAggregate = e.aggregated && e.id === selectedAggregateId;
+    // Style only: the edge, its members and its count stay as they are.
+    const focusState = classifyFocusEdge(e.members, focus ?? null);
+    const focusContext = Boolean(focusState && !focusState.related);
     const aggregate: AggregateEdgeData | undefined =
       e.aggregated && onSelectAggregate
         ? {
@@ -1193,6 +1215,7 @@ function toReactFlowEdges(
             targetName: nameOf(e.target),
             selected: isSelectedAggregate,
             muted,
+            focusRelatedIds: focusState?.relatedIds,
             // While expanded, all members have the same label.
             focusedLabel:
               focusedMember?.label ??
@@ -1220,6 +1243,11 @@ function toReactFlowEdges(
       id: e.id,
       source: e.source,
       target: e.target,
+      className: focusState
+        ? focusState.related
+          ? "cgFocus--related"
+          : "cgFocus--context"
+        : undefined,
       type: isDataflow ? "dataflow" : aggregate ? "aggregate" : undefined,
       zIndex: isDataflow ? 3000 : isCollapsedBridge ? 1200 : 1,
       sourceHandle:
@@ -1249,7 +1277,7 @@ function toReactFlowEdges(
               opacity: isSelectedAggregate ? 0.92 : 0.28,
             }
           : undefined,
-      animated: isDataflow && !muted && !isCollapsedBridge,
+      animated: isDataflow && !muted && !isCollapsedBridge && !focusContext,
       data: isDataflow
         ? {
             label: showDataflowLabel ? label : undefined,
@@ -2150,6 +2178,8 @@ export const CanvasPane = memo(function CanvasPane({
   const lastRecoveryAtRef = useRef(0);
   const snapshotTimersRef = useRef<number[]>([]);
   const [renderAllForExport, setRenderAllForExport] = useState(false);
+  // Focus + Context is a style over the graph: nothing is added, removed or moved.
+  const [focusMode, setFocusMode] = useState(false);
   const [recoveryTick, setRecoveryTick] = useState(0);
   const [topologyFitSuppressedUntil, setTopologyFitSuppressedUntil] = useState(0);
   const [canvasFocusRequest, setCanvasFocusRequest] = useState<{
@@ -2663,6 +2693,29 @@ export const CanvasPane = memo(function CanvasPane({
     [focusPulseRequest, inspectorPulseRequest, runtimePulseRequest, tracePulseRequest],
   );
 
+  const singleSelectedId =
+    selectedNodeIds.length === 1 && selectedNodeIds[0] === selectedNodeId ? selectedNodeId : null;
+  const canFocusSelection = useMemo(() => {
+    if (!singleSelectedId) return false;
+    const node = filteredGraph?.nodes.find((candidate) => candidate.id === singleSelectedId);
+    return Boolean(node && node.kind !== "file");
+  }, [filteredGraph, singleSelectedId]);
+  const focusCenterId = focusMode && canFocusSelection ? singleSelectedId : null;
+  // Computed from the filtered graph, only when the center, the graph or the filter changes.
+  const focusNeighborhood = useMemo(
+    () => computeFocusNeighborhood(filteredGraph, focusCenterId),
+    [filteredGraph, focusCenterId],
+  );
+  const focusPaused = isFocusPaused({
+    traceVisible,
+    runtimeSessionActive,
+    runtimeActiveNodeId,
+    flowHighlightId: highlightedEdgeId,
+    exporting: renderAllForExport,
+  });
+  const activeFocus = focusPaused ? null : focusNeighborhood;
+  const focusUiState = getFocusUiState(focusMode, Boolean(focusNeighborhood), focusPaused);
+
   const nodes = useMemo<Array<Node<CanvasNodeData>>>(
     () =>
       measureProfile(() => toReactFlowNodes(
@@ -2760,6 +2813,40 @@ export const CanvasPane = memo(function CanvasPane({
       workspaceRoot,
     ],
   );
+  // Sets a class on each drawn node. Collapsed groups and class cards stand for the members
+  // they hide, and the groups around a kept node stay readable.
+  const displayNodes = useMemo(() => {
+    if (!activeFocus) return nodes;
+    const parentById = new Map(nodes.map((node) => [node.id, node.parentNode]));
+    const centerVisibleId = resolveVisibleNodeId(activeFocus.centerId);
+    const kept = new Set<string>();
+    for (const id of activeFocus.nodeIds) {
+      for (
+        let visibleId = resolveVisibleNodeId(id) ?? undefined;
+        visibleId && !kept.has(visibleId);
+        visibleId = parentById.get(visibleId)
+      ) {
+        kept.add(visibleId);
+      }
+    }
+    return nodes.map((node) => {
+      const state =
+        node.id === centerVisibleId ? "center" : kept.has(node.id) ? "connected" : "context";
+      const data = node.data as CodeNodeData;
+      const childItems =
+        node.type === "code" && data.childItems?.length && node.id !== activeFocus.centerId
+          ? data.childItems.map((child) => ({
+              ...child,
+              focusContext: !activeFocus.nodeIds.has(child.id),
+            }))
+          : undefined;
+      return {
+        ...node,
+        className: `cgFocus--${state}`,
+        data: childItems ? ({ ...data, childItems } as CanvasNodeData) : node.data,
+      };
+    });
+  }, [activeFocus, nodes, resolveVisibleNodeId]);
   const nodeTopologyKey = useMemo(
     () =>
       nodes
@@ -2794,10 +2881,12 @@ export const CanvasPane = memo(function CanvasPane({
             selectedAggregate?.id,
             nodeNameById,
             onSelectAggregate,
+            activeFocus,
           ),
         (duration) => { profileTimes.current.edgesMs = duration; },
       ),
     [
+      activeFocus,
       drawnEdges,
       highlightedEdgeId,
       nodeNameById,
@@ -3553,7 +3642,7 @@ export const CanvasPane = memo(function CanvasPane({
           <ReactFlowProvider key={`provider:recovery:${recoveryTick}`}>
             <ReactFlow
               key={`flow:recovery:${recoveryTick}`}
-              nodes={nodes}
+              nodes={displayNodes}
               edges={edges}
               nodeTypes={nodeTypes}
               edgeTypes={edgeTypes}
@@ -3610,6 +3699,26 @@ export const CanvasPane = memo(function CanvasPane({
                   disabled={!selectedNodeId}
                 >
                   <Crosshair size={16} />
+                </button>
+                <button
+                  className={["iconBtn", focusMode ? "iconBtn--active" : ""].join(" ")}
+                  onClick={() => setFocusMode((current) => !current)}
+                  aria-pressed={focusMode}
+                  data-focus-state={focusUiState}
+                  disabled={!focusMode && !canFocusSelection}
+                  title={
+                    focusUiState === "active"
+                      ? "Focus 1-hop: on (click to turn off)"
+                      : focusUiState === "paused"
+                        ? "Focus 1-hop: paused while a trace, debug session or flow highlight is shown"
+                        : focusUiState === "idle"
+                          ? "Focus 1-hop: on, select one code node"
+                          : canFocusSelection
+                            ? "Focus 1-hop: highlight what the selection connects to directly"
+                            : "Focus 1-hop (select one code node first)"
+                  }
+                >
+                  <FocusIcon size={16} />
                 </button>
                 <button
                   className="iconBtn"
