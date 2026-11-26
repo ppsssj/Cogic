@@ -23,7 +23,6 @@ zoom, zoom 0.1, Param Flow and trace precedence, collapsed folders and files, ag
 with some related members, the Inspector after a badge, root change, SVG and JPG export, and the
 toggle time inside the webview.
 
-Two behaviours seen here exist before this change as well (checked on `b87fe45`): the first trace
-steps can show an empty canvas, and export leaves the canvas at its export viewport
-(`translate(96px, 96px) scale(1)`) until the view moves. The run steps through the trace to a step
-with code, and compares graph layout without the viewport after export.
+Seen here and present before this change (checked on `b87fe45`): the first trace steps can show
+an empty canvas, so the run steps through the trace to a step with code. The viewport after export
+is checked by `e2e/export-viewport`.
