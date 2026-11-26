@@ -10,8 +10,11 @@ How to run it: see `e2e/semantic-zoom/README.md`.
 
 | File | Content |
 |---|---|
-| `bench2-result.json`, `bench2.log`, `bench2-summary.txt` | The valid run: 5 repetitions x 2 zooms x 5 conditions x (idle, pan, wheel zoom) = 150 runs, with every rAF gap. |
-| `bench1-result.json`, `bench1.log` | An earlier run, kept as a raw record. Its "A0 at zoom 0.15" cells in repetitions 1-4 are invalid. The harness looked for the selection in the canvas DOM, so a selected node outside the view (virtualized) went unnoticed, and those runs had a selection. bench2 reads the selection from the Inspector and stops if a run's selection state is wrong. |
+| `bench2-result.json`, `bench2-summary.txt` | The valid run: 5 repetitions x 2 zooms x 5 conditions x (idle, pan, wheel zoom) = 150 runs, with every rAF gap. |
+| `bench1-result.json` | An earlier run, kept as a raw record. Its "A0 at zoom 0.15" cells in repetitions 1-4 are invalid. The harness looked for the selection in the canvas DOM, so a selected node outside the view (virtualized) went unnoticed, and those runs had a selection. bench2 reads the selection from the Inspector and stops if a run's selection state is wrong. |
+
+The console logs of both runs are not in the repository (`.gitignore` excludes `*.log`). Every
+value they print is in the result files.
 
 ## Current rendering path (as studied)
 
