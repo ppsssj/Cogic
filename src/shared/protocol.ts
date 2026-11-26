@@ -18,6 +18,8 @@ export type WebviewToExtMessage =
       payload: {
         traceMode: boolean;
         traceScope?: TraceScope;
+        /** Echoed in traceStateApplied, so each acknowledgement belongs to one request. */
+        requestId?: string;
       };
     }
   | {
@@ -322,7 +324,7 @@ export type AnalysisRequestMeta = {
 export type ExtToWebviewMessage =
   | { type: "analysisLifecycle"; requestId: string; state: "running" | "completed" | "cancelled" | "failed" | "superseded"; sequence?: number }
   /** Sent after a setTraceState is applied, with the graph generation the extension is at then. */
-  | { type: "traceStateApplied"; payload: { traceMode: boolean; generation: number } }
+  | { type: "traceStateApplied"; payload: { traceMode: boolean; generation: number; requestId?: string } }
   | {
       type: "hostState";
       payload: {

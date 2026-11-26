@@ -25,7 +25,7 @@ on and a panned and zoomed view. Then:
 | Edit | The active file is edited during the trace | The old graph is not reused: it is analyzed again (the edit is undone afterwards) |
 | Folder root, file inside | Root `/src`, `main.ts` active, edit during the trace | Analyzed again under the same folder root; the same graph (counts from the product's log, because collapse state is not kept through a new analysis) |
 | Folder root, file outside | Root `/src/app`, `main.ts` active, edit during the trace | No file is picked: the root stays (read from the product's log, since the root banner is part of the canvas) and the normal "No graph yet" state shows |
-| Generation | An external node selected, trace, leave (restore), then Expand External | The extension confirms the restored generation (`trace.exit.verify` is `confirmed`, same generation), and the expansion is merged, not dropped as stale |
+| Generation | An external node selected, trace, leave (restore), then Expand External | The extension confirms the restored generation in the acknowledgement of the exit's own `setTraceState` request (`trace.exit.verify` is `confirmed`, with its request ID and the same generation), and the expansion is merged, not dropped as stale |
 
 The project picker is not available while a trace runs, so E changes the target through the
 editor.

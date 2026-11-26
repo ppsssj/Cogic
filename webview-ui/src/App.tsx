@@ -922,15 +922,18 @@ export default function App() {
     setAnalysisLoading(null);
   }, []);
 
-  const syncTraceState = useCallback((nextTraceMode: boolean, nextTraceScope: TraceScope) => {
+  const traceStateRequestRef = useRef(0);
+  const nextTraceStateRequestId = useCallback(() => `trace-state-${++traceStateRequestRef.current}`, []);
+  const syncTraceState = useCallback((nextTraceMode: boolean, nextTraceScope: TraceScope, requestId?: string) => {
     postMessage("trace.state.sync", {
       type: "setTraceState",
       payload: {
         traceMode: nextTraceMode,
         traceScope: nextTraceScope,
+        requestId: requestId ?? nextTraceStateRequestId(),
       },
     });
-  }, [postMessage]);
+  }, [nextTraceStateRequestId, postMessage]);
 
   const noticeSeverityToToastKind = (severity: NoticeSeverity): ToastKind => {
     if (severity === "warning") return "warning";
@@ -1239,6 +1242,7 @@ export default function App() {
         if (settled.outcome === "none") return;
         pushWebviewDebugEvent("trace.exit.verify", {
           outcome: settled.outcome,
+          requestId: msg.payload.requestId ?? null,
           restoredGeneration: restoreCheckRef.current?.generation ?? null,
           extensionGeneration: msg.payload.generation,
           queued: restoreCheckRef.current?.queued.length ?? 0,
@@ -2010,9 +2014,10 @@ export default function App() {
     setTraceEvents(null);
     setTraceCursor(0);
     setTraceAnchorFilePath(null);
-    syncTraceState(false, traceScope);
     setFocusedFlow(null);
     setInspectorFocusRequest(null);
+    // setTraceState(false) goes out only once the check waiting for its acknowledgement is set.
+    const exitRequestId = nextTraceStateRequestId();
 
     const snapshot = preTraceSnapshotRef.current;
     preTraceSnapshotRef.current = null;
@@ -2060,13 +2065,18 @@ export default function App() {
     restoreFallbackRef.current = null;
 
     if (action === "restore" && snapshot?.graph) {
-      restoreCheckRef.current = { generation: activeGraphGenerationRef.current, queued: [] };
+      restoreCheckRef.current = {
+        requestId: exitRequestId,
+        generation: activeGraphGenerationRef.current,
+        queued: [],
+      };
       restoreFallbackRef.current = target
         ? reanalyze
         : () => {
             setGraphState(undefined);
             clearSelectedNodes();
           };
+      syncTraceState(false, traceScope, exitRequestId);
       // The analysis result from before the trace, as it was. The generation stays the one of
       // the last trace result, which is the extension's current one, so expanding still works.
       const graph = snapshot.graph;
@@ -2086,6 +2096,7 @@ export default function App() {
       return;
     }
 
+    syncTraceState(false, traceScope, exitRequestId);
     activeGraphGenerationRef.current = -1;
     setGraphState(undefined);
     expandedFilesRef.current.clear();
@@ -2100,6 +2111,7 @@ export default function App() {
     cancelPendingTrace,
     clearSelectedNodes,
     graphDepth,
+    nextTraceStateRequestId,
     postMessage,
     rootTarget,
     syncGraphRoot,

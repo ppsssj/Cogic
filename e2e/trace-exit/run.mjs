@@ -659,7 +659,7 @@ try {
   await until("restore confirmed", async () => (await verifies()).length > 0, 20_000).catch(() => {});
   const v = (await verifies()).at(-1) ?? null;
   result.generation = { exit: await lastExit(), verify: v };
-  check("generation: the restore is confirmed by the extension (same generation)", (await lastExit()) === "restore" && v?.outcome === "confirmed" && v.restoredGeneration === v.extensionGeneration, result.generation);
+  check("generation: the restore is confirmed by the acknowledgement of its own request (same generation)", (await lastExit()) === "restore" && v?.outcome === "confirmed" && v.restoredGeneration === v.extensionGeneration && /^trace-state-\d+$/.test(v.requestId ?? ""), result.generation);
   const expand = frame.locator("button", { hasText: "Expand External" }).first();
   await expand.waitFor({ timeout: 20_000 });
   const expandSeen = (await expandLog()).length;

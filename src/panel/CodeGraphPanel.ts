@@ -361,7 +361,11 @@ export class CodeGraphPanel {
             // generation (any analysis started in the meantime moved it on).
             this.panel.webview.postMessage({
               type: "traceStateApplied",
-              payload: { traceMode: this.traceModeActive, generation: this.analysisGeneration },
+              payload: {
+                traceMode: this.traceModeActive,
+                generation: this.analysisGeneration,
+                requestId: msg.payload.requestId,
+              },
             } satisfies ExtToWebviewMessage);
             return;
           }

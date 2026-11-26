@@ -151,7 +151,12 @@ export function gateActiveResult(
  * expanding with the old one would be refused. So the restore is confirmed by the generation the
  * extension reports when it leaves trace mode; until then expansions wait.
  */
-export type RestoreCheck = { generation: number; queued: string[] };
+export type RestoreCheck = {
+  /** The setTraceState request whose acknowledgement settles this check. */
+  requestId: string;
+  generation: number;
+  queued: string[];
+};
 
 export function queueExpandDuringCheck(
   check: RestoreCheck | null,
@@ -160,14 +165,19 @@ export function queueExpandDuringCheck(
   if (!check) {
     return { check, send: true };
   }
+  if (check.queued.includes(filePath)) {
+    return { check, send: false };
+  }
   return { check: { ...check, queued: [...check.queued, filePath] }, send: false };
 }
 
 export function settleRestoreCheck(
   check: RestoreCheck | null,
-  reported: { traceMode: boolean; generation: number },
+  reported: { traceMode: boolean; generation: number; requestId?: string },
 ): { outcome: "none" | "confirmed" | "reanalyze"; expand: string[] } {
-  if (!check || reported.traceMode) {
+  // Only the acknowledgement of this exit's own request counts; others (an earlier exit, a scope
+  // change, a repeat after the check was used up) change nothing.
+  if (!check || reported.traceMode || reported.requestId !== check.requestId) {
     return { outcome: "none", expand: [] };
   }
   if (reported.generation === check.generation) {

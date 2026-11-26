@@ -308,8 +308,9 @@ class Extension {
   expand(generation: number | undefined) {
     return generation === undefined || generation === this.generation ? "expanded" : "refused as stale";
   }
-  traceStateApplied(traceMode: boolean) {
-    return { traceMode, generation: this.generation };
+  /** Echoes the request ID of the setTraceState it answers. */
+  traceStateApplied(traceMode: boolean, requestId: string) {
+    return { traceMode, generation: this.generation, requestId };
   }
 }
 
@@ -317,7 +318,7 @@ class Extension {
 function restoreSession(ext: Extension) {
   const a = ext.startActive(); // trace result A, applied
   let activeGeneration = a;
-  let check: RestoreCheck | null = { generation: activeGeneration, queued: [] }; // exit: restore
+  let check: RestoreCheck | null = { requestId: "exit-1", generation: activeGeneration, queued: [] }; // exit: restore
   const sent: Array<[string, string]> = [];
   return {
     expand(file: string) {
@@ -354,7 +355,7 @@ suite("Trace exit: race B (generation)", () => {
     ext.startActive(); // B, its messages still on the way
     w.expand("b.ts"); // the user expands on the restored graph before the extension answers
     assert.deepStrictEqual(w.sent, [], "nothing sent with a generation that may be old");
-    assert.strictEqual(w.report(ext.traceStateApplied(false)), "reanalyze");
+    assert.strictEqual(w.report(ext.traceStateApplied(false, "exit-1")), "reanalyze");
     assert.deepStrictEqual(w.sent, []);
   });
 
@@ -362,7 +363,7 @@ suite("Trace exit: race B (generation)", () => {
     const ext = new Extension();
     const w = restoreSession(ext);
     w.expand("b.ts");
-    assert.strictEqual(w.report(ext.traceStateApplied(false)), "confirmed");
+    assert.strictEqual(w.report(ext.traceStateApplied(false, "exit-1")), "confirmed");
     assert.deepStrictEqual(w.sent, [["b.ts", "expanded"]]);
     w.expand("c.ts");
     assert.deepStrictEqual(w.sent, [["b.ts", "expanded"], ["c.ts", "expanded"]]);
@@ -376,8 +377,80 @@ suite("Trace exit: race B (generation)", () => {
   });
 
   test("a report from trace mode, or with no restore waiting, changes nothing", () => {
-    assert.deepStrictEqual(settleRestoreCheck(null, { traceMode: false, generation: 3 }), { outcome: "none", expand: [] });
-    assert.deepStrictEqual(settleRestoreCheck({ generation: 3, queued: ["x"] }, { traceMode: true, generation: 3 }), { outcome: "none", expand: [] });
+    assert.deepStrictEqual(settleRestoreCheck(null, { traceMode: false, generation: 3, requestId: "r" }), { outcome: "none", expand: [] });
+    assert.deepStrictEqual(settleRestoreCheck({ requestId: "r", generation: 3, queued: ["x"] }, { traceMode: true, generation: 3, requestId: "r" }), { outcome: "none", expand: [] });
     assert.deepStrictEqual(queueExpandDuringCheck(null, "x"), { check: null, send: true });
+  });
+});
+
+/**
+ * Acknowledgements of setTraceState, replayed in orders the reducer must survive. Each exit has its
+ * own request ID; an acknowledgement for another request, or one already used, changes nothing.
+ */
+suite("Trace exit: acknowledgement correlation", () => {
+  const ack = (requestId: string, generation: number) => ({ requestId, traceMode: false, generation });
+  const checkFor = (requestId: string, generation: number, queued: string[] = []) =>
+    ({ requestId, generation, queued }) as RestoreCheck;
+
+  test("A: an earlier session's acknowledgement does not settle the current check", () => {
+    const b = checkFor("exit-b", 15, ["b.ts"]);
+    const late = settleRestoreCheck(b, ack("exit-a", 15)); // same generation, other request
+    assert.strictEqual(late.outcome, "none");
+    assert.deepStrictEqual(late.expand, []);
+    const own = settleRestoreCheck(b, ack("exit-b", 15));
+    assert.deepStrictEqual(own, { outcome: "confirmed", expand: ["b.ts"] });
+  });
+
+  test("C: an old acknowledgement with another generation does not throw the restore away", () => {
+    const b = checkFor("exit-b", 15);
+    assert.strictEqual(settleRestoreCheck(b, ack("exit-a", 12)).outcome, "none");
+    assert.strictEqual(settleRestoreCheck(b, ack("exit-b", 15)).outcome, "confirmed");
+  });
+
+  test("D: the current request's acknowledgement with a newer generation analyzes again", () => {
+    const b = checkFor("exit-b", 15, ["b.ts"]);
+    assert.deepStrictEqual(settleRestoreCheck(b, ack("exit-b", 16)), { outcome: "reanalyze", expand: [] });
+  });
+
+  test("B: a repeated acknowledgement acts once (the check is used up)", () => {
+    let check: RestoreCheck | null = checkFor("exit-b", 15, ["b.ts"]);
+    const runs: string[] = [];
+    for (const reported of [ack("exit-b", 15), ack("exit-b", 15)]) {
+      const settled = settleRestoreCheck(check, reported);
+      if (settled.outcome !== "none") {
+        check = null;
+        runs.push(settled.outcome, ...settled.expand);
+      }
+    }
+    assert.deepStrictEqual(runs, ["confirmed", "b.ts"]);
+  });
+
+  test("the same file asked twice while waiting is expanded once", () => {
+    let check: RestoreCheck | null = checkFor("exit-b", 15);
+    for (const file of ["b.ts", "b.ts", "c.ts"]) {
+      check = queueExpandDuringCheck(check, file).check;
+    }
+    assert.deepStrictEqual(settleRestoreCheck(check, ack("exit-b", 15)).expand, ["b.ts", "c.ts"]);
+  });
+
+  test("A -> B -> C: each exit is settled only by its own acknowledgement", () => {
+    const seen: string[] = [];
+    let check: RestoreCheck | null = null;
+    const settle = (reported: ReturnType<typeof ack>) => {
+      const s = settleRestoreCheck(check, reported);
+      if (s.outcome !== "none") {
+        seen.push(`${reported.requestId}:${s.outcome}`);
+        check = null;
+      }
+    };
+    check = checkFor("exit-a", 10);
+    check = null; // trace B starts before A's acknowledgement is handled
+    check = checkFor("exit-b", 12);
+    check = null; // trace C starts
+    check = checkFor("exit-c", 14, ["c.ts"]);
+    settle(ack("exit-a", 10));
+    settle(ack("exit-b", 12));
+    settle(ack("exit-c", 14));
+    assert.deepStrictEqual(seen, ["exit-c:confirmed"]);
   });
 });
