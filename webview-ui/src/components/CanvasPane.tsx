@@ -29,6 +29,7 @@ import ReactFlow, {
   type Node,
   // type NodeMouseHandler,
   type ReactFlowInstance,
+  type Viewport,
 } from "reactflow";
 
 import {
@@ -2182,6 +2183,10 @@ export const CanvasPane = memo(function CanvasPane({
   const lastRecoveryAtRef = useRef(0);
   const snapshotTimersRef = useRef<number[]>([]);
   const [renderAllForExport, setRenderAllForExport] = useState(false);
+  // The view of the normal graph (not of a trace step), by graph signature.
+  const normalViewportRef = useRef<{ signature: string; viewport: Viewport } | null>(null);
+  const traceExitViewportRef = useRef<{ signature: string; viewport: Viewport } | null>(null);
+  const wasTraceVisibleRef = useRef(traceVisible);
   // Focus + Context is a style over the graph: nothing is added, removed or moved.
   const [focusMode, setFocusMode] = useState(false);
   const [recoveryTick, setRecoveryTick] = useState(0);
@@ -3321,12 +3326,30 @@ export const CanvasPane = memo(function CanvasPane({
     };
   }, [clearSnapshotTimers]);
 
+  // When a trace ends and the same graph as before it comes back, the view goes back to where it
+  // was instead of being fitted again. Any other graph is fitted as usual.
+  useEffect(() => {
+    if (wasTraceVisibleRef.current && !traceVisible) {
+      traceExitViewportRef.current = normalViewportRef.current;
+    } else if (traceVisible) {
+      traceExitViewportRef.current = null;
+    }
+    wasTraceVisibleRef.current = traceVisible;
+  }, [traceVisible]);
+
   useEffect(() => {
     if (!ENABLE_AUTO_VIEWPORT_EFFECTS) return;
     if (!visibleHasData) return;
     if (topologyFitSuppressedUntil > Date.now()) return;
 
     const rafId = window.requestAnimationFrame(() => {
+      const saved = traceExitViewportRef.current;
+      traceExitViewportRef.current = null;
+      if (saved && saved.signature === filteredGraphSignature && rfRef.current) {
+        // Also stops the fit that React Flow's mount may have started.
+        void rfRef.current.setViewport(saved.viewport);
+        return;
+      }
       fitGraphView(rfRef.current, 160);
     });
 
@@ -3694,6 +3717,11 @@ export const CanvasPane = memo(function CanvasPane({
               onNodeDoubleClick={handleNodeDoubleClick}
               onNodeContextMenu={handleNodeContextMenu}
               onPaneClick={onClearSelection}
+              onMoveEnd={(_, viewport) => {
+                if (!traceVisible) {
+                  normalViewportRef.current = { signature: filteredGraphSignature, viewport };
+                }
+              }}
               fitView
               onlyRenderVisibleElements={!renderAllForExport}
               minZoom={0.1}
