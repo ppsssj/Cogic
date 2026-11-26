@@ -48,7 +48,7 @@ import type {
   GraphTraceEvent,
   UINotice,
 } from "../lib/vscode";
-import { nextLowDetailEdges } from "../lib/edgeDetail";
+import { createLowDetailMode } from "../../../src/shared/edgeDetail";
 import { withTemporaryStyles } from "../../../src/shared/temporaryStyles";
 import { classifyTraceStep } from "../../../src/shared/traceSteps";
 import {
@@ -974,18 +974,22 @@ function LowDetailEdges({
   suspended: boolean;
 }) {
   const store = useStoreApi();
+  // Survives the pause for export, so the hysteresis goes on from the mode the view had.
+  const modeRef = useRef<ReturnType<typeof createLowDetailMode> | null>(null);
+  modeRef.current ??= createLowDetailMode();
 
   useEffect(() => {
     const container = containerRef.current;
+    const mode = modeRef.current;
     // Export copies computed styles, so it must see the original strokes.
-    if (!container || suspended) return;
+    if (!container || !mode || suspended) return;
 
-    let low = false;
+    // Put back the mode from before the pause, then follow the zoom from there.
+    if (mode.low) container.classList.add(LOW_DETAIL_EDGES_CLASS);
     const apply = (zoom: number) => {
-      const next = nextLowDetailEdges(low, zoom);
-      if (next === low) return;
-      low = next;
-      container.classList.toggle(LOW_DETAIL_EDGES_CLASS, low);
+      const next = mode.update(zoom);
+      if (next === null) return;
+      container.classList.toggle(LOW_DETAIL_EDGES_CLASS, next);
     };
 
     apply(store.getState().transform[2]);
