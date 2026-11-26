@@ -11,6 +11,7 @@ import type { Viewport } from "reactflow";
  * - local: one fixed overlay with the selected function's details.
  */
 export type SemanticZoomMode = "baseline" | "overview" | "local";
+export type EdgeStyle = "default" | "static-dash" | "static-solid";
 
 type Counters = {
   canvas: number;
@@ -31,6 +32,12 @@ type ExperimentApi = {
   setViewport?: (viewport: Viewport) => void;
   /** Registered by the canvas: expands every file and folder (the baseline's heavy state). */
   expandAll?: () => void;
+  /**
+   * P15-Z0A: edge stroke style, as classes on the canvas container only (no React render):
+   * "default" as shipped, "static-dash" stops the dash animation, "static-solid" also draws
+   * solid strokes. React Flow's `animated` flag and every node and edge stay as they are.
+   */
+  setEdgeStyle: (style: EdgeStyle) => EdgeStyle | null;
 };
 
 declare global {
@@ -53,6 +60,13 @@ export const experiment: ExperimentApi = {
   counters: zero(),
   resetCounters: () => {
     experiment.counters = zero();
+  },
+  setEdgeStyle: (style) => {
+    const canvas = document.querySelector<HTMLElement>(".canvasFlow");
+    if (!canvas) return null;
+    canvas.classList.toggle("cgExp--staticEdges", style !== "default");
+    canvas.classList.toggle("cgExp--solidEdges", style === "static-solid");
+    return style;
   },
 };
 window.__cgSemanticZoomExperiment = experiment;
