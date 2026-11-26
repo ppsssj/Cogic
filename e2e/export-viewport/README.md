@@ -21,8 +21,8 @@ node e2e/export-viewport/run.mjs [output-folder]
 ```
 
 The run covers a panned and zoomed view, zoom 0.1 (SVG and JPG), Focus on, a selected aggregate,
-and SVG -> JPG -> SVG. Every file is kept in the output folder. SVG files must contain dashed
-strokes and every badge count, and JPG files must be complete JPEGs.
+SVG -> JPG -> SVG, and the low-detail band below. Every file is kept in the output folder. SVG
+files must contain dashed strokes and every badge count, and JPG files must be complete JPEGs.
 
 Limits are the same as the other end-to-end runs: a new output folder per run, at least 2200 MiB
 of free memory to start, and a stop below 800 MiB. Export sizes the canvas to the whole graph and
@@ -33,6 +33,12 @@ The failure paths (a conversion that throws, a failure halfway through the style
 covered by `src/test/temporaryStyles.test.ts`. Nothing in the product can be made to fail from
 here without a test hook.
 
-Seen here and not changed: after an export at a zoom between 0.2 and 0.25, the canvas comes back
-without the low-detail class. `LowDetailEdges` starts again from "not low", and that band is its
-hysteresis. The run keeps its user view above 0.26.
+The low-detail hysteresis band (0.20-0.25) is covered too:
+- zoom to 0.19 or below (low detail), then into the band: still low;
+- SVG, JPG and SVG -> JPG -> SVG there: the mode is the same after each export, and every file
+  keeps its original dashes;
+- a drag afterwards lands exactly;
+- out to 0.26 (normal), back into the band (still normal), and SVG and JPG there: still normal;
+- down to 0.19: low again.
+
+Before P15-S4, an export in the band came back in normal detail.

@@ -577,6 +577,55 @@ try {
   check("series: both SVG files hold the whole graph, the JPG is valid", c[0].svg.paths === c[2].svg.paths && c[0].svg.paths >= result.total.edges && c[1].jpg === true, [c[0].svg, c[2].svg, c[1].jpg]);
   const p5 = await storeMatchesDom();
   check("series: store and DOM agree at the end", p5.ok, p5);
+  // ---- the low-detail hysteresis band (0.20-0.25): export must not reset the mode
+  const lowState = async () => {
+    const v = await view();
+    return { zoom: Math.round(v.zoom * 10000) / 10000, low: v.low, dashes: v.dashes.join("|") };
+  };
+  /** Small wheel steps (about 3 % each) until the zoom meets the condition. */
+  const zoomUntil = async (name, done, dy) => {
+    const pane = await frame.locator(".react-flow__pane").boundingBox();
+    await page.mouse.move(pane.x + pane.width * 0.4, pane.y + pane.height * 0.5);
+    for (let i = 0; i < 300 && !done((await view()).zoom); i++) {
+      await page.mouse.wheel(0, dy);
+      await sleep(50);
+    }
+    await sleep(800);
+    const s = await lowState();
+    if (!done(s.zoom)) throw new Error(`zoom not reached: ${name} ${s.zoom}`);
+    return s;
+  };
+  const band = [];
+  const step = async (name, done, dy, wantLow) => {
+    const s = await zoomUntil(name, done, dy);
+    band.push({ name, ...s });
+    check(`band: ${name} -> ${wantLow ? "low detail" : "normal detail"}`, s.low === wantLow && (wantLow ? s.dashes === "none" : s.dashes !== "none"), s);
+    return s;
+  };
+  const exportBand = async (name, item, wantLow) => {
+    const r = await exportAndCompare(name, item);
+    const after = await lowState();
+    band.push({ name, export: item, before: r.before.zoom, ...after });
+    check(`band: ${name}: mode kept after export (${wantLow ? "low" : "normal"})`, after.low === wantLow && r.diffs.length === 0, [after, r.diffs]);
+    if (item.startsWith("SVG")) check(`band: ${name}: the file has the original dashed strokes`, r.svg.dashed > 0, r.svg);
+    else check(`band: ${name}: valid JPG`, r.jpg === true);
+  };
+  await fit();
+  await step("zoom <= 0.19", (z) => z <= 0.19, 40, true);
+  await step("0.19 -> 0.22 (band)", (z) => z > 0.205 && z < 0.245, -20, true);
+  await exportBand("band-low-svg", "SVG snapshot", true);
+  await exportBand("band-low-jpg", "JPG snapshot", true);
+  for (const [i, item] of ["SVG snapshot", "JPG snapshot", "SVG snapshot"].entries()) await exportBand(`band-low-series-${i + 1}`, item, true);
+  const p6 = await storeMatchesDom();
+  check("band: after the exports a drag lands exactly (store and DOM agree)", p6.ok, p6);
+  check("band: the drag did not change the mode", (await lowState()).low === true, await lowState());
+  await step("0.22 -> 0.26", (z) => z > 0.255, -20, false);
+  await step("0.26 -> 0.22 (band)", (z) => z > 0.205 && z < 0.245, 20, false);
+  await exportBand("band-normal-svg", "SVG snapshot", false);
+  await exportBand("band-normal-jpg", "JPG snapshot", false);
+  await step("0.22 -> 0.19", (z) => z <= 0.2, 20, true);
+  result.band = band;
+
   mark("end");
 } catch (error) {
   check("no exception", false, String(error?.stack ?? error).slice(0, 800));
