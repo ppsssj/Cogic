@@ -321,6 +321,8 @@ export type AnalysisRequestMeta = {
 
 export type ExtToWebviewMessage =
   | { type: "analysisLifecycle"; requestId: string; state: "running" | "completed" | "cancelled" | "failed" | "superseded"; sequence?: number }
+  /** Sent after a setTraceState is applied, with the graph generation the extension is at then. */
+  | { type: "traceStateApplied"; payload: { traceMode: boolean; generation: number } }
   | {
       type: "hostState";
       payload: {

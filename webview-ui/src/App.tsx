@@ -39,7 +39,10 @@ import { buildGraphFromTrace } from "../../src/shared/traceSteps";
 import {
   decideTraceExit,
   gateActiveResult,
+  queueExpandDuringCheck,
+  settleRestoreCheck,
   traceExitAnalysisTarget,
+  type RestoreCheck,
   type PreTraceTarget,
 } from "../../src/shared/traceExit";
 import "./styles/index.css";
@@ -1114,6 +1117,10 @@ export default function App() {
   // trace ended: results of requests started up to then belong to that trace session.
   const maxStartedSequenceRef = useRef(0);
   const traceExitBoundaryRef = useRef<number | null>(null);
+  // A restored graph waits for the extension to confirm its generation (see settleRestoreCheck).
+  const restoreCheckRef = useRef<RestoreCheck | null>(null);
+  const restoreFallbackRef = useRef<(() => void) | null>(null);
+  const sendExpandRef = useRef<(filePath: string) => void>(() => {});
 
   useEffect(() => {
     graphRef.current = graphState;
@@ -1227,6 +1234,29 @@ export default function App() {
         return;
       }
 
+      if (msg.type === "traceStateApplied") {
+        const settled = settleRestoreCheck(restoreCheckRef.current, msg.payload);
+        if (settled.outcome === "none") return;
+        pushWebviewDebugEvent("trace.exit.verify", {
+          outcome: settled.outcome,
+          restoredGeneration: restoreCheckRef.current?.generation ?? null,
+          extensionGeneration: msg.payload.generation,
+          queued: restoreCheckRef.current?.queued.length ?? 0,
+        });
+        const fallback = restoreFallbackRef.current;
+        restoreCheckRef.current = null;
+        restoreFallbackRef.current = null;
+        if (settled.outcome === "confirmed") {
+          for (const filePath of settled.expand) sendExpandRef.current(filePath);
+          return;
+        }
+        // An analysis started in the meantime moved the extension on: the restored graph can no
+        // longer be expanded, so it is analyzed again.
+        activeGraphGenerationRef.current = -1;
+        fallback?.();
+        return;
+      }
+
       if (msg.type === "analysisLifecycle") {
         if (msg.state === "running" && latestUserActiveRef.current === msg.requestId) userSequenceRef.current = msg.sequence;
         if (msg.state === "running" && msg.sequence !== undefined) {
@@ -1263,7 +1293,12 @@ export default function App() {
 
         if (request.lane === "active") {
           const verdict = gateActiveResult(
-            { requestId: request.requestId, sequence: request.sequence, hasTrace: Boolean(payload?.trace?.length) },
+            {
+              requestId: request.requestId,
+              sequence: request.sequence,
+              hasTrace: Boolean(payload?.trace?.length),
+              traceRequest: request.reason === "trace",
+            },
             {
               latestUserId: latestUserActiveRef.current,
               userPending: activePendingRef.current,
@@ -1911,6 +1946,8 @@ export default function App() {
       selectedNodeIds,
     };
     traceModeRef.current = true;
+    restoreCheckRef.current = null;
+    restoreFallbackRef.current = null;
     traceSourceChangedRef.current = false;
     traceResultAppliedRef.current = false;
     traceTextByUriRef.current = new Map(activeFile ? [[activeFile.uri, activeFile.text]] : []);
@@ -2002,7 +2039,34 @@ export default function App() {
     });
     traceTextByUriRef.current = new Map();
 
+    const reanalyze = () => {
+      beginAnalysisLoading(
+        "Rendering graph...",
+        `Analyzing ${shortBaseName(rootFile ?? activeFilePath ?? "the active file")} with ${describeDepth(graphDepth)}.`,
+      );
+      if (rootFile) {
+        postMessage("trace.exit.reanalyze.root", {
+          type: "selectWorkspaceFile",
+          payload: { filePath: rootFile, graphDepth },
+        });
+      } else {
+        postMessage("trace.exit.reanalyze.active", {
+          type: "analyzeActiveFile",
+          payload: { traceMode: false, graphDepth },
+        });
+      }
+    };
+    restoreCheckRef.current = null;
+    restoreFallbackRef.current = null;
+
     if (action === "restore" && snapshot?.graph) {
+      restoreCheckRef.current = { generation: activeGraphGenerationRef.current, queued: [] };
+      restoreFallbackRef.current = target
+        ? reanalyze
+        : () => {
+            setGraphState(undefined);
+            clearSelectedNodes();
+          };
       // The analysis result from before the trace, as it was. The generation stays the one of
       // the last trace result, which is the extension's current one, so expanding still works.
       const graph = snapshot.graph;
@@ -2028,21 +2092,7 @@ export default function App() {
     clearSelectedNodes();
     syncGraphRoot(targetRoot);
     if (action === "empty") return;
-    beginAnalysisLoading(
-      "Rendering graph...",
-      `Analyzing ${shortBaseName(rootFile ?? activeFilePath ?? "the active file")} with ${describeDepth(graphDepth)}.`,
-    );
-    if (rootFile) {
-      postMessage("trace.exit.reanalyze.root", {
-        type: "selectWorkspaceFile",
-        payload: { filePath: rootFile, graphDepth },
-      });
-    } else {
-      postMessage("trace.exit.reanalyze.active", {
-        type: "analyzeActiveFile",
-        payload: { traceMode: false, graphDepth },
-      });
-    }
+    reanalyze();
   }, [
     activeFile?.uri,
     activeFilePath,
@@ -2087,6 +2137,18 @@ export default function App() {
       });
       return;
     }
+    const queued = queueExpandDuringCheck(restoreCheckRef.current, filePath);
+    if (!queued.send) {
+      // Never sent with a generation that may be old; sent once the restore is confirmed.
+      restoreCheckRef.current = queued.check;
+      pushWebviewDebugEvent("expandNode.waiting.restore-check", { filePath });
+      return;
+    }
+    sendExpandRef.current(filePath);
+  }, [showToast, traceMode, traceScope]);
+
+  sendExpandRef.current = (filePath: string) => {
+    if (expandedFilesRef.current.has(filePath)) return;
     expandedFilesRef.current.add(filePath);
     beginAnalysisLoading(
       `Expanding ${shortBaseName(filePath)}...`,
@@ -2102,7 +2164,7 @@ export default function App() {
             : undefined,
       },
     });
-  }, [beginAnalysisLoading, postMessage, showToast, traceMode, traceScope]);
+  };
 
   const openDiagnostic = (diagnostic: CodeDiagnostic) => {
     if (!diagnostic.filePath) return;

@@ -119,7 +119,13 @@ export type ActiveResultVerdict =
  * origin and payload (trace, normal or empty), and a trace payload never applies outside a trace.
  */
 export function gateActiveResult(
-  result: { requestId: string; sequence: number; hasTrace: boolean },
+  result: {
+    requestId: string;
+    sequence: number;
+    hasTrace: boolean;
+    /** Requested in trace mode (request reason "trace"), whatever the payload. */
+    traceRequest: boolean;
+  },
   state: ActiveResultState,
 ): ActiveResultVerdict {
   if (!mayApplyActiveResult(result.requestId, state.latestUserId, state.userPending, result.sequence, state.userSequence)) {
@@ -131,8 +137,41 @@ export function gateActiveResult(
   if (state.traceExitBoundary !== null && result.sequence <= state.traceExitBoundary) {
     return "from-ended-trace";
   }
-  if (result.hasTrace && !state.traceModeActive) {
+  // The request reason tells a trace analysis apart even when its payload is empty or has no
+  // trace, and when its start was reported only after the exit.
+  if ((result.hasTrace || result.traceRequest) && !state.traceModeActive) {
     return "trace-after-exit";
   }
   return "apply";
+}
+
+/**
+ * A restored graph keeps the generation of the last applied trace result. A request the extension
+ * started after it (its messages may still be on the way) moved the extension to a newer one, and
+ * expanding with the old one would be refused. So the restore is confirmed by the generation the
+ * extension reports when it leaves trace mode; until then expansions wait.
+ */
+export type RestoreCheck = { generation: number; queued: string[] };
+
+export function queueExpandDuringCheck(
+  check: RestoreCheck | null,
+  filePath: string,
+): { check: RestoreCheck | null; send: boolean } {
+  if (!check) {
+    return { check, send: true };
+  }
+  return { check: { ...check, queued: [...check.queued, filePath] }, send: false };
+}
+
+export function settleRestoreCheck(
+  check: RestoreCheck | null,
+  reported: { traceMode: boolean; generation: number },
+): { outcome: "none" | "confirmed" | "reanalyze"; expand: string[] } {
+  if (!check || reported.traceMode) {
+    return { outcome: "none", expand: [] };
+  }
+  if (reported.generation === check.generation) {
+    return { outcome: "confirmed", expand: check.queued };
+  }
+  return { outcome: "reanalyze", expand: [] };
 }

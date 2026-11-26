@@ -2,7 +2,10 @@ import * as assert from "assert";
 import {
   decideTraceExit,
   gateActiveResult,
+  queueExpandDuringCheck,
+  settleRestoreCheck,
   traceExitAnalysisTarget,
+  type RestoreCheck,
   type ActiveResultVerdict,
   type PreTraceTarget,
   type TraceExitState,
@@ -137,9 +140,15 @@ class Webview {
     }
     this.shown = "restored graph";
   }
-  result(id: string, sequence: number, payload: "trace" | "normal" | "empty"): ActiveResultVerdict {
+  /** `reason` is the request reason the extension put on the result; trace payloads come from trace requests. */
+  result(
+    id: string,
+    sequence: number,
+    payload: "trace" | "normal" | "empty",
+    reason: "trace" | "auto" | "manual" = payload === "trace" ? "trace" : "auto",
+  ): ActiveResultVerdict {
     const verdict = gateActiveResult(
-      { requestId: id, sequence, hasTrace: payload === "trace" },
+      { requestId: id, sequence, hasTrace: payload === "trace", traceRequest: reason === "trace" },
       {
         latestUserId: this.latestUserId,
         userPending: this.userPending,
@@ -241,5 +250,134 @@ suite("Trace exit: late responses", () => {
     w.running("web-1", 3);
     assert.strictEqual(w.result("web-1", 3, "normal"), "apply");
     assert.strictEqual(w.result("auto-2", 2, "normal"), "not-owner");
+  });
+});
+
+suite("Trace exit: race A (start reported after the exit)", () => {
+  test("a trace-session analysis whose start arrives after the exit cannot replace the restored graph", () => {
+    const w = new Webview();
+    w.enterTrace("web-1");
+    w.running("web-1", 5);
+    assert.strictEqual(w.result("web-1", 5, "trace"), "apply"); // A
+    // B (an automatic analysis in trace mode) started in the extension, its "running" still on the way
+    w.exitTrace(); // restore
+    w.running("auto-6", 6);
+    // an empty result, or one without a trace array, of a trace request
+    assert.strictEqual(w.result("auto-6", 6, "empty", "trace"), "trace-after-exit");
+    assert.strictEqual(w.result("auto-6", 6, "normal", "trace"), "trace-after-exit");
+    assert.strictEqual(w.shown, "restored graph");
+  });
+
+  test("after it, a new normal analysis applies", () => {
+    const w = new Webview();
+    w.enterTrace("web-1");
+    w.running("web-1", 5);
+    w.result("web-1", 5, "trace");
+    w.exitTrace();
+    w.running("auto-6", 6);
+    w.result("auto-6", 6, "empty", "trace");
+    w.send("web-2");
+    w.running("web-2", 7);
+    assert.strictEqual(w.result("web-2", 7, "normal", "manual"), "apply");
+    assert.strictEqual(w.shown, "normal from web-2");
+  });
+
+  test("a new trace session gets its own results, not the old session's late one", () => {
+    const w = new Webview();
+    w.enterTrace("web-1");
+    w.running("web-1", 5);
+    w.result("web-1", 5, "trace");
+    w.exitTrace();
+    w.enterTrace("web-3");
+    w.running("auto-6", 6); // the old session's start arrives now
+    w.running("web-3", 8);
+    assert.strictEqual(w.result("auto-6", 6, "empty", "trace"), "not-owner");
+    assert.strictEqual(w.result("web-3", 8, "trace"), "apply");
+    assert.strictEqual(w.result("auto-6", 6, "normal", "trace"), "not-owner");
+    assert.strictEqual(w.shown, "trace from web-3");
+  });
+});
+
+/** The extension side of generations (CodeGraphPanel): every active analysis moves it on. */
+class Extension {
+  generation = 0;
+  startActive() {
+    return ++this.generation;
+  }
+  /** postAnalysisForFile refuses a request generation that is not the current one. */
+  expand(generation: number | undefined) {
+    return generation === undefined || generation === this.generation ? "expanded" : "refused as stale";
+  }
+  traceStateApplied(traceMode: boolean) {
+    return { traceMode, generation: this.generation };
+  }
+}
+
+/** The webview side: the restored generation, the check, and the expansions it sends. */
+function restoreSession(ext: Extension) {
+  const a = ext.startActive(); // trace result A, applied
+  let activeGeneration = a;
+  let check: RestoreCheck | null = { generation: activeGeneration, queued: [] }; // exit: restore
+  const sent: Array<[string, string]> = [];
+  return {
+    expand(file: string) {
+      const q = queueExpandDuringCheck(check, file);
+      check = q.check;
+      if (q.send) {
+        sent.push([file, ext.expand(activeGeneration)]);
+      }
+    },
+    report(reported: { traceMode: boolean; generation: number }) {
+      const settled = settleRestoreCheck(check, reported);
+      check = null;
+      if (settled.outcome === "confirmed") {
+        for (const file of settled.expand) {
+          sent.push([file, ext.expand(activeGeneration)]);
+        }
+      }
+      if (settled.outcome === "reanalyze") {
+        activeGeneration = -1;
+      }
+      return settled.outcome;
+    },
+    sent,
+    get generation() {
+      return activeGeneration;
+    },
+  };
+}
+
+suite("Trace exit: race B (generation)", () => {
+  test("an analysis started after A moves the extension on: the restore is not kept, nothing is expanded with A's generation", () => {
+    const ext = new Extension();
+    const w = restoreSession(ext);
+    ext.startActive(); // B, its messages still on the way
+    w.expand("b.ts"); // the user expands on the restored graph before the extension answers
+    assert.deepStrictEqual(w.sent, [], "nothing sent with a generation that may be old");
+    assert.strictEqual(w.report(ext.traceStateApplied(false)), "reanalyze");
+    assert.deepStrictEqual(w.sent, []);
+  });
+
+  test("without such an analysis the restore is confirmed and waiting expansions go out", () => {
+    const ext = new Extension();
+    const w = restoreSession(ext);
+    w.expand("b.ts");
+    assert.strictEqual(w.report(ext.traceStateApplied(false)), "confirmed");
+    assert.deepStrictEqual(w.sent, [["b.ts", "expanded"]]);
+    w.expand("c.ts");
+    assert.deepStrictEqual(w.sent, [["b.ts", "expanded"], ["c.ts", "expanded"]]);
+  });
+
+  test("what the old rule did: A's generation is refused once B started", () => {
+    const ext = new Extension();
+    const a = ext.startActive();
+    ext.startActive(); // B
+    assert.strictEqual(ext.expand(a), "refused as stale");
+  });
+
+  test("a report from trace mode, or with no restore waiting, changes nothing", () => {
+    assert.deepStrictEqual(settleRestoreCheck(null, { traceMode: false, generation: 3 }), { outcome: "none", expand: [] });
+    assert.deepStrictEqual(settleRestoreCheck({ generation: 3, queued: ["x"] }, { traceMode: true, generation: 3 }), { outcome: "none", expand: [] });
+    assert.deepStrictEqual(queueExpandDuringCheck(null, "x"), { check: null, send: true });
   });
 });

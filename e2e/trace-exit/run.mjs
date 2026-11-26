@@ -634,6 +634,40 @@ try {
   await undoEdit();
   await clearRoot();
 
+  // ---- generation after a restore: the extension confirms it, and expanding works
+  const verifies = () => frame.evaluate(() => (window.__CODEGRAPH_WEBVIEW_DEBUG__?.entries ?? []).filter((e) => e.event === "trace.exit.verify").map((e) => e.detail));
+  const expandLog = () => frame.evaluate(() => (window.__CODEGRAPH_WEBVIEW_DEBUG__?.entries ?? []).filter((e) => /^analysisResult\.(applied|dropped)\.expand/.test(e.event) || e.event === "expandNode.waiting.restore-check").map((e) => e.event));
+  await openInEditor("src/main.ts", "main.ts");
+  if ((await state()).nodeIds.length === 0) {
+    await frame.locator("button", { hasText: "Generate from active file" }).first().click();
+  }
+  await until("graph for main.ts", async () => (await state()).nodeIds.length > 0, 60_000);
+  await sleep(3000);
+  for (let pass = 0; pass < 8; pass++) {
+    const next = (await groups()).find((g) => g.collapsed);
+    if (!next) break;
+    await toggle(next.id.replace(/:0$/, ""), false);
+  }
+  await fit();
+  const external = frame.locator('.react-flow__node-code[data-id^="external:"]').first();
+  result.externalPicked = await external.getAttribute("data-id");
+  await external.locator(".cgNodeTitle").click({ delay: 40 });
+  await sleep(1200);
+  await startTrace();
+  await steps(2);
+  await exitTrace("toggle");
+  await until("restore confirmed", async () => (await verifies()).length > 0, 20_000).catch(() => {});
+  const v = (await verifies()).at(-1) ?? null;
+  result.generation = { exit: await lastExit(), verify: v };
+  check("generation: the restore is confirmed by the extension (same generation)", (await lastExit()) === "restore" && v?.outcome === "confirmed" && v.restoredGeneration === v.extensionGeneration, result.generation);
+  const expand = frame.locator("button", { hasText: "Expand External" }).first();
+  await expand.waitFor({ timeout: 20_000 });
+  const expandSeen = (await expandLog()).length;
+  await expand.click();
+  await until("expand answered", async () => (await expandLog()).length > expandSeen, 30_000).catch(() => {});
+  result.generation.expand = (await expandLog()).slice(expandSeen);
+  check("generation: expanding a file on the restored graph is accepted, not dropped as stale", result.generation.expand.includes("analysisResult.applied.expand.merge") && !result.generation.expand.some((e) => /dropped/.test(e)), result.generation);
+
   mark("end");
 } catch (error) {
   check("no exception", false, String(error?.stack ?? error).slice(0, 800));

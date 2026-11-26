@@ -357,6 +357,12 @@ export class CodeGraphPanel {
             if (!this.traceModeActive) {
               this.traceAnchorFilePath = null;
             }
+            // Lets the webview check that a graph restored after a trace still has the current
+            // generation (any analysis started in the meantime moved it on).
+            this.panel.webview.postMessage({
+              type: "traceStateApplied",
+              payload: { traceMode: this.traceModeActive, generation: this.analysisGeneration },
+            } satisfies ExtToWebviewMessage);
             return;
           }
           if (msg.type === "analyzeActiveFile") {
