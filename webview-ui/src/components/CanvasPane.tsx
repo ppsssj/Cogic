@@ -51,6 +51,8 @@ import { nextLowDetailEdges } from "../lib/edgeDetail";
 import {
   classifyFocusEdge,
   computeFocusNeighborhood,
+  getFocusUiState,
+  isFocusPaused,
   type FocusNeighborhood,
 } from "../../../src/shared/focusNeighborhood";
 import { aggregateEdges, type DrawnEdge } from "../../../src/shared/edgeAggregation";
@@ -2704,19 +2706,15 @@ export const CanvasPane = memo(function CanvasPane({
     () => computeFocusNeighborhood(filteredGraph, focusCenterId),
     [filteredGraph, focusCenterId],
   );
-  // A trace, a runtime session and an explicit flow highlight take precedence. Export draws
-  // the original styles.
-  const focusPaused = Boolean(
-    traceVisible || runtimeActiveNodeId || highlightedEdgeId || renderAllForExport,
-  );
+  const focusPaused = isFocusPaused({
+    traceVisible,
+    runtimeSessionActive,
+    runtimeActiveNodeId,
+    flowHighlightId: highlightedEdgeId,
+    exporting: renderAllForExport,
+  });
   const activeFocus = focusPaused ? null : focusNeighborhood;
-  const focusUiState = !focusMode
-    ? "off"
-    : !focusNeighborhood
-      ? "idle"
-      : focusPaused
-        ? "paused"
-        : "active";
+  const focusUiState = getFocusUiState(focusMode, Boolean(focusNeighborhood), focusPaused);
 
   const nodes = useMemo<Array<Node<CanvasNodeData>>>(
     () =>
@@ -3712,7 +3710,7 @@ export const CanvasPane = memo(function CanvasPane({
                     focusUiState === "active"
                       ? "Focus 1-hop: on (click to turn off)"
                       : focusUiState === "paused"
-                        ? "Focus 1-hop: paused while a trace or flow highlight is shown"
+                        ? "Focus 1-hop: paused while a trace, debug session or flow highlight is shown"
                         : focusUiState === "idle"
                           ? "Focus 1-hop: on, select one code node"
                           : canFocusSelection

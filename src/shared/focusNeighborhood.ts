@@ -59,3 +59,43 @@ export function classifyFocusEdge(
   const relatedIds = members.filter((member) => focus.edgeIds.has(member.id)).map((m) => m.id);
   return { related: relatedIds.length > 0, relatedIds };
 }
+
+export type FocusPrecedenceInput = {
+  traceVisible?: boolean;
+  /** A debug session is running, whether or not its frame matches a graph node. */
+  runtimeSessionActive?: boolean;
+  runtimeActiveNodeId?: string | null;
+  /** An explicit Param Flow (or trace flow) highlight. */
+  flowHighlightId?: string | null;
+  exporting?: boolean;
+};
+
+/**
+ * A trace, a runtime session, an explicit flow highlight and export take precedence over Focus.
+ * Pausing never turns Focus off, so it comes back when they end.
+ */
+export function isFocusPaused(input: FocusPrecedenceInput): boolean {
+  return Boolean(
+    input.traceVisible ||
+      input.runtimeSessionActive ||
+      input.runtimeActiveNodeId ||
+      input.flowHighlightId ||
+      input.exporting,
+  );
+}
+
+export type FocusUiState = "off" | "idle" | "paused" | "active";
+
+export function getFocusUiState(
+  focusMode: boolean,
+  hasCenter: boolean,
+  paused: boolean,
+): FocusUiState {
+  if (!focusMode) {
+    return "off";
+  }
+  if (!hasCenter) {
+    return "idle";
+  }
+  return paused ? "paused" : "active";
+}

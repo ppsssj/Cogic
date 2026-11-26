@@ -1,6 +1,11 @@
 import * as assert from "assert";
 import { aggregateEdges, type VisualEdge } from "../shared/edgeAggregation";
-import { classifyFocusEdge, computeFocusNeighborhood } from "../shared/focusNeighborhood";
+import {
+  classifyFocusEdge,
+  computeFocusNeighborhood,
+  getFocusUiState,
+  isFocusPaused,
+} from "../shared/focusNeighborhood";
 import type { GraphEdge, GraphEdgeKind, GraphNode, GraphPayload } from "../shared/protocol";
 
 function node(id: string, kind: GraphNode["kind"] = "function", file = "a.ts"): GraphNode {
@@ -142,5 +147,41 @@ suite("Focus + Context 1-hop neighborhood", () => {
     const focus = computeFocusNeighborhood(graph, "B")!;
     classifyFocusEdge(graph.edges, focus);
     assert.strictEqual(JSON.stringify(graph), before);
+  });
+});
+
+suite("Focus precedence", () => {
+  // The center exists and Focus is on; only the precedence inputs change.
+  const ui = (input: Parameters<typeof isFocusPaused>[0]) =>
+    getFocusUiState(true, true, isFocusPaused(input));
+
+  test("no runtime session and no matching node: active", () => {
+    assert.strictEqual(ui({ runtimeSessionActive: false, runtimeActiveNodeId: null }), "active");
+    assert.strictEqual(ui({}), "active");
+  });
+
+  test("runtime session without a matching node: paused", () => {
+    assert.strictEqual(ui({ runtimeSessionActive: true, runtimeActiveNodeId: null }), "paused");
+  });
+
+  test("runtime session with a matching node: paused", () => {
+    assert.strictEqual(ui({ runtimeSessionActive: true, runtimeActiveNodeId: "function:a.ts:1" }), "paused");
+  });
+
+  test("the session ending brings Focus back", () => {
+    const states = [
+      { runtimeSessionActive: true, runtimeActiveNodeId: "function:a.ts:1" },
+      { runtimeSessionActive: true, runtimeActiveNodeId: null },
+      { runtimeSessionActive: false, runtimeActiveNodeId: null },
+    ].map(ui);
+    assert.deepStrictEqual(states, ["paused", "paused", "active"]);
+  });
+
+  test("trace, Param Flow and export also pause; pausing never turns Focus off", () => {
+    assert.strictEqual(ui({ traceVisible: true }), "paused");
+    assert.strictEqual(ui({ flowHighlightId: "dataflow:a->b@@x" }), "paused");
+    assert.strictEqual(ui({ exporting: true }), "paused");
+    assert.strictEqual(getFocusUiState(false, true, true), "off");
+    assert.strictEqual(getFocusUiState(true, false, true), "idle");
   });
 });
