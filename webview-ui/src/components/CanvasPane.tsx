@@ -40,7 +40,14 @@ import type {
   UINotice,
 } from "../lib/vscode";
 import { nextLowDetailEdges } from "../lib/edgeDetail";
-import { aggregateEdges, type DrawnEdge, type EdgeMember } from "../../../src/shared/edgeAggregation";
+import { aggregateEdges, type DrawnEdge } from "../../../src/shared/edgeAggregation";
+import {
+  AggregateBadge,
+  AggregateBadgeScale,
+  AggregateEdge,
+  type AggregateEdgeData,
+  type AggregateSelection,
+} from "./AggregateEdge";
 import {
   dumpWebviewDebugBuffer,
   pushWebviewDebugEvent,
@@ -864,10 +871,10 @@ type DataflowEdgeData = {
   muted?: boolean;
   lane?: number;
   collapsedBridge?: boolean;
-  /** Every relation behind an aggregated edge. */
-  members?: EdgeMember[];
+  aggregate?: AggregateEdgeData;
 };
 
+// Call and dataflow aggregates between the same groups meet at the same midpoint.
 const AGGREGATE_LABEL_OFFSET = 26;
 
 function DataflowEdge({
@@ -899,19 +906,23 @@ function DataflowEdge({
     offset: laneOffset,
   });
 
-  // Call and dataflow aggregates between the same groups meet at the same midpoint.
-  const labelOffsetY = data?.members ? -AGGREGATE_LABEL_OFFSET : 0;
-
   return (
     <>
       <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} style={style} />
-      {data?.label ? (
+      {data?.aggregate ? (
+        <AggregateBadge
+          data={data.aggregate}
+          x={labelX}
+          y={labelY}
+          offsetY={-AGGREGATE_LABEL_OFFSET}
+        />
+      ) : data?.label ? (
         <EdgeLabelRenderer>
           <div
             className="cgEdgeLabel"
             style={{
-              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY + labelOffsetY}px)`,
-              opacity: data.muted ? 0.28 : data.collapsedBridge && !data.members ? 0.55 : 1,
+              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
+              opacity: data.muted ? 0.28 : data.collapsedBridge ? 0.55 : 1,
               borderColor: data.highlighted ? "rgba(56,189,248,0.75)" : undefined,
               zIndex: 7001,
             }}
@@ -924,7 +935,7 @@ function DataflowEdge({
   );
 }
 
-const edgeTypes = { dataflow: DataflowEdge };
+const edgeTypes = { dataflow: DataflowEdge, aggregate: AggregateEdge };
 
 const LOW_DETAIL_EDGES_CLASS = "canvasFlow--lowDetailEdges";
 
@@ -984,13 +995,6 @@ function buildFileGroupIdByFile(graph?: GraphPayload) {
 
   return map;
 }
-
-const AGGREGATE_LABEL_STYLE = {
-  labelStyle: { fill: "var(--textSoft)", fontSize: 10, fontWeight: 800 },
-  labelBgStyle: { fill: "var(--surfaceCanvas)", fillOpacity: 0.88 },
-  labelBgPadding: [6, 3] as [number, number],
-  labelBgBorderRadius: 8,
-};
 
 /** Maps relations to what is drawn. Depends only on the graph and the collapse state. */
 function buildDrawnEdges(
@@ -1133,8 +1137,16 @@ function toReactFlowEdges(
   visibleEdges: DrawnEdge[],
   selectedNodeIds?: string[],
   highlightedEdgeId?: string | null,
+  selectedAggregateId?: string | null,
+  nodeNameById?: Map<string, string>,
+  onSelectAggregate?: (selection: AggregateSelection) => void,
 ): Array<Edge<DataflowEdgeData>> {
   const selectedNodeIdSet = new Set(selectedNodeIds ?? []);
+  const nameOf = (id: string) => {
+    const name = nodeNameById?.get(id);
+    if (name) return name;
+    return id.replace(/:\d+$/, "").split("/").pop() ?? id;
+  };
 
   const dataflowCountByPair = new Map<string, number>();
   for (const e of visibleEdges) {
@@ -1147,7 +1159,6 @@ function toReactFlowEdges(
   return visibleEdges.map((e) => {
     const label = e.label ?? e.kind;
     const isDataflow = e.kind === "dataflow";
-    const countLabel = e.aggregated ? `${e.kind} ×${e.members.length}` : undefined;
     const focusedMember = highlightedEdgeId
       ? e.members.find((member) => member.id === highlightedEdgeId)
       : undefined;
@@ -1169,6 +1180,26 @@ function toReactFlowEdges(
     const showDataflowLabel = Boolean(
       isFocusedFlow || (selectedNodeIdSet.size > 0 && isSelectedFlow),
     );
+    const isSelectedAggregate = e.aggregated && e.id === selectedAggregateId;
+    const aggregate: AggregateEdgeData | undefined =
+      e.aggregated && onSelectAggregate
+        ? {
+            id: e.id,
+            kind: e.kind,
+            source: e.source,
+            target: e.target,
+            members: e.members,
+            sourceName: nameOf(e.source),
+            targetName: nameOf(e.target),
+            selected: isSelectedAggregate,
+            muted,
+            // While expanded, all members have the same label.
+            focusedLabel:
+              focusedMember?.label ??
+              (isDataflow && !isCollapsedBridge && showDataflowLabel ? e.label : undefined),
+            onSelect: onSelectAggregate,
+          }
+        : undefined;
 
     let lane = 0;
     if (isDataflow) {
@@ -1189,7 +1220,7 @@ function toReactFlowEdges(
       id: e.id,
       source: e.source,
       target: e.target,
-      type: isDataflow ? "dataflow" : undefined, // ✅ dataflow만 커스텀 엣지 사용
+      type: isDataflow ? "dataflow" : aggregate ? "aggregate" : undefined,
       zIndex: isDataflow ? 3000 : isCollapsedBridge ? 1200 : 1,
       sourceHandle:
         e.sourceHandleId ?? (isDataflow ? "out-dataflow" : "out-control"),
@@ -1208,38 +1239,30 @@ function toReactFlowEdges(
             stroke: isFocusedFlow || isSelectedFlow ? "#38bdf8" : "#60a5fa",
             strokeWidth: isFocusedFlow || isSelectedFlow ? 2.8 : 1.8,
             strokeDasharray: "8 6",
-            opacity: muted ? 0.16 : isCollapsedBridge ? 0.26 : 0.92,
+            opacity: isSelectedAggregate ? 0.92 : muted ? 0.16 : isCollapsedBridge ? 0.26 : 0.92,
           }
         : isCollapsedBridge
           ? {
               stroke: "rgba(226, 232, 240, 0.58)",
               strokeWidth: 1.7,
               strokeDasharray: "6 6",
-              opacity: 0.28,
+              opacity: isSelectedAggregate ? 0.92 : 0.28,
             }
           : undefined,
       animated: isDataflow && !muted && !isCollapsedBridge,
       data: isDataflow
         ? {
-            label: countLabel
-              ? focusedMember?.label
-                ? `${focusedMember.label} · ${countLabel}`
-                : countLabel
-              : showDataflowLabel
-                ? label
-                : undefined,
+            label: showDataflowLabel ? label : undefined,
             highlighted: isFocusedFlow || isSelectedFlow,
             muted,
             lane,
             collapsedBridge: isCollapsedBridge,
-            members: e.aggregated ? e.members : undefined,
+            aggregate,
           }
-        : e.aggregated
-          ? { members: e.members, collapsedBridge: isCollapsedBridge }
+        : aggregate
+          ? { aggregate, collapsedBridge: isCollapsedBridge }
           : undefined, // ✅ dataflow 라벨은 data.label로
-      // Other non-dataflow labels stay hidden to prevent clutter.
-      label: isDataflow ? undefined : countLabel,
-      ...(countLabel && !isDataflow ? AGGREGATE_LABEL_STYLE : {}),
+      label: undefined, // keep non-dataflow labels hidden to prevent clutter
     };
   });
 }
@@ -2115,6 +2138,9 @@ export const CanvasPane = memo(function CanvasPane({
   workspaceRoot,
   onOpenScaffoldModal,
   onRegisterSnapshotExporter,
+  selectedAggregate,
+  onSelectAggregate,
+  onClearAggregate,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
   const profileTimes = useRef({ nodesMs: 0, drawnEdgesMs: 0, edgesMs: 0 });
@@ -2743,6 +2769,10 @@ export const CanvasPane = memo(function CanvasPane({
     [nodes],
   );
 
+  const nodeNameById = useMemo(
+    () => new Map((graph?.nodes ?? []).map((node) => [node.id, node.name])),
+    [graph],
+  );
   const drawnEdges = useMemo(
     () =>
       measureProfile(() => buildDrawnEdges(
@@ -2756,11 +2786,35 @@ export const CanvasPane = memo(function CanvasPane({
   const edges = useMemo<Array<Edge<DataflowEdgeData>>>(
     () =>
       measureProfile(
-        () => toReactFlowEdges(drawnEdges, selectedNodeIds, highlightedEdgeId),
+        () =>
+          toReactFlowEdges(
+            drawnEdges,
+            selectedNodeIds,
+            highlightedEdgeId,
+            selectedAggregate?.id,
+            nodeNameById,
+            onSelectAggregate,
+          ),
         (duration) => { profileTimes.current.edgesMs = duration; },
       ),
-    [drawnEdges, highlightedEdgeId, selectedNodeIds],
+    [
+      drawnEdges,
+      highlightedEdgeId,
+      nodeNameById,
+      onSelectAggregate,
+      selectedAggregate?.id,
+      selectedNodeIds,
+    ],
   );
+  // The selected aggregate can disappear (group expanded, filter, search) or change members.
+  useEffect(() => {
+    if (!selectedAggregate) return;
+    const current = drawnEdges.find((edge) => edge.id === selectedAggregate.id);
+    const unchanged =
+      current?.members.length === selectedAggregate.members.length &&
+      current.members.every((member, index) => member.id === selectedAggregate.members[index].id);
+    if (!unchanged) onClearAggregate();
+  }, [drawnEdges, onClearAggregate, selectedAggregate]);
   const edgeTopologyKey = useMemo(
     () =>
       edges
@@ -3533,6 +3587,7 @@ export const CanvasPane = memo(function CanvasPane({
               }}
             >
               <LowDetailEdges containerRef={canvasFlowRef} suspended={renderAllForExport} />
+              <AggregateBadgeScale containerRef={canvasFlowRef} suspended={renderAllForExport} />
               <Background gap={24} size={1} />
 
               <div className="canvasControls canvasOverlay">
@@ -3703,5 +3758,8 @@ type Props = {
     targetFilePath?: string | null;
     targetFolderPath?: string | null;
   }) => void;
+  selectedAggregate: AggregateSelection | null;
+  onSelectAggregate: (selection: AggregateSelection) => void;
+  onClearAggregate: () => void;
   onRegisterSnapshotExporter?: (exporter: ((format: SnapshotFormat) => Promise<string>) | null) => void;
 };

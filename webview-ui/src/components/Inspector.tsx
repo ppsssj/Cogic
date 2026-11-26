@@ -20,6 +20,9 @@ import type {
 } from "../lib/vscode";
 import { ActiveFileSnapshot } from "./ActiveFileSnapshot";
 import { AnalysisPanel } from "./AnalysisPanel";
+import { AggregatePanel, type AggregateMemberEnd } from "./AggregatePanel";
+import type { AggregateSelection } from "./AggregateEdge";
+import type { EdgeMember } from "../../../src/shared/edgeAggregation";
 import "./Inspector.css";
 
 type ActiveFilePayload = Extract<
@@ -114,6 +117,9 @@ type Props = {
     targetId: string;
     origin: "manual" | "trace";
   } | null;
+  selectedAggregate: AggregateSelection | null;
+  onOpenAggregateMember: (member: EdgeMember, end: AggregateMemberEnd) => void;
+  onCloseAggregate: () => void;
   onRefreshActive: () => void;
   onResetGraph: () => void;
   onExpandExternal: (filePath: string) => void;
@@ -472,6 +478,9 @@ export function Inspector({
   inspectorSelectionOrigin = "graph",
   onFocusParamFlow,
   activeFlowPreview = null,
+  selectedAggregate,
+  onOpenAggregateMember,
+  onCloseAggregate,
   onRefreshActive,
   onResetGraph,
   onExpandExternal,
@@ -1427,6 +1436,16 @@ export function Inspector({
 
       <div className="inspectorBody">
         <div className="inspectorPad">
+          {selectedAggregate && !settingsMode ? (
+            <AggregatePanel
+              key={selectedAggregate.id}
+              selection={selectedAggregate}
+              graph={graph}
+              activeEdgeId={activeFlowPreview?.edgeId ?? null}
+              onOpenMember={onOpenAggregateMember}
+              onClose={onCloseAggregate}
+            />
+          ) : null}
           {settingsMode ? (
             <div className="inspectorSettingsView">
               <section className="inspectorSettingsCard">

@@ -50,13 +50,19 @@ suite("Semantic edge aggregation", () => {
     assert.ok(drawn.every((e) => !e.aggregated));
   });
 
-  test("expanded relations with equal labels share an edge without a count", () => {
+  test("expanded relations with equal labels share one edge that keeps every original", () => {
     const base = { collapsedBridge: false, source: "fn:x", target: "fn:y", label: "x <- x", kind: "dataflow" as const };
     const drawn = aggregateEdges([edge("arg0", base), edge("arg1", base)]);
     assert.strictEqual(drawn.length, 1);
-    assert.strictEqual(drawn[0].aggregated, false);
-    assert.strictEqual(drawn[0].id, "arg0");
+    assert.strictEqual(drawn[0].aggregated, true);
+    assert.strictEqual(drawn[0].label, "x <- x");
     assert.deepStrictEqual(ids(drawn), ["arg0", "arg1"]);
+  });
+
+  test("expanded relations with different labels are never merged", () => {
+    const base = { collapsedBridge: false, source: "fn:x", target: "fn:y", kind: "dataflow" as const };
+    const drawn = aggregateEdges([edge("one", { ...base, label: "a <- x" }), edge("two", { ...base, label: "b <- x" })]);
+    assert.deepStrictEqual(drawn.map((e) => [e.id, e.aggregated]), [["one", false], ["two", false]]);
   });
 
   test("kind, direction and handles are never merged", () => {
