@@ -49,6 +49,12 @@ import type {
   UINotice,
 } from "../lib/vscode";
 import { createLowDetailMode } from "../../../src/shared/edgeDetail";
+import { overviewCollapse } from "../../../src/shared/semanticOverview";
+import {
+  countRender,
+  experiment,
+  useSemanticZoomMode,
+} from "../lib/semanticZoomExperiment";
 import { withTemporaryStyles } from "../../../src/shared/temporaryStyles";
 import { classifyTraceStep } from "../../../src/shared/traceSteps";
 import {
@@ -603,6 +609,7 @@ function CodeNode({
   data: CodeNodeData;
   selected?: boolean;
 }) {
+  countRender("codeNode");
   const isSelected = Boolean(selected || data.selected);
   const badge =
     data.kind === "interface"
@@ -762,6 +769,7 @@ function FileGroupNode({
   data: FileGroupData;
   selected?: boolean;
 }) {
+  countRender("fileGroup");
   return (
     <div
       className={[
@@ -826,6 +834,7 @@ function FolderGroupNode({
   data: FolderGroupData;
   selected?: boolean;
 }) {
+  countRender("folderGroup");
   return (
     <div
       className={[
@@ -912,6 +921,7 @@ function DataflowEdge({
   style,
   data,
 }: EdgeProps<DataflowEdgeData>) {
+  countRender("customEdge");
   const lane = data?.lane ?? 0;
   const laneOffset = 30 + Math.abs(lane) * 22;
   const laneShiftY = lane * 18;
@@ -2178,8 +2188,11 @@ export const CanvasPane = memo(function CanvasPane({
   selectedAggregate,
   onSelectAggregate,
   onClearAggregate,
+  experimentSource,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
+  const semanticZoomMode = useSemanticZoomMode();
+  countRender("canvas");
   const profileTimes = useRef({ nodesMs: 0, drawnEdgesMs: 0, edgesMs: 0 });
   const explorationViewportRef = useRef<{ x: number; y: number; zoom: number } | null>(null);
   const canvasFlowRef = useRef<HTMLDivElement | null>(null);
@@ -2308,6 +2321,19 @@ export const CanvasPane = memo(function CanvasPane({
     },
     [defaultLayoutState, layoutStateKey],
   );
+  // P15-Z0 experiment helper: the benchmark's baseline is every group expanded.
+  useEffect(() => {
+    experiment.expandAll = () =>
+      updateLayoutState((current) => ({
+        ...current,
+        collapsedFilePaths: [],
+        collapsingFilePaths: [],
+        expandingFilePaths: [],
+        collapsedFolderPaths: [],
+        collapsingFolderPaths: [],
+        expandingFolderPaths: [],
+      }));
+  }, [updateLayoutState]);
   const effectiveLayoutState = useMemo(() => {
     if (!graph || !traceVisible || traceCursor <= 0 || !traceActiveNodeId) {
       return baseLayoutState;
@@ -2379,14 +2405,21 @@ export const CanvasPane = memo(function CanvasPane({
     collapsingFolderPaths,
     expandingFolderPaths,
   } = effectiveLayoutState;
+  // P15-Z0 experiment: the overview is the existing collapse with every leaf folder and file
+  // collapsed. Only the mode switch recomputes it, never pan or zoom.
+  const overview = useMemo(
+    () => (semanticZoomMode === "overview" ? overviewCollapse(visibleFolderPaths, visibleFilePaths) : null),
+    [semanticZoomMode, visibleFilePaths, visibleFolderPaths],
+  );
   const collapsedFilePathSet = useMemo(() => {
     if (!filteredGraph) return new Set<string>();
+    if (overview) return overview.files;
     return new Set(
       collapsedFilePaths
         .map((filePath) => normalizePath(filePath))
         .filter((filePath) => visibleFilePathSet.has(filePath)),
     );
-  }, [collapsedFilePaths, filteredGraph, visibleFilePathSet]);
+  }, [collapsedFilePaths, filteredGraph, overview, visibleFilePathSet]);
   const collapsingFilePathSet = useMemo(
     () =>
       new Set(
@@ -2407,10 +2440,11 @@ export const CanvasPane = memo(function CanvasPane({
   );
   const collapsedFolderPathSet = useMemo(() => {
     if (!filteredGraph) return new Set<string>();
+    if (overview) return overview.folders;
     return new Set(
       collapsedFolderPaths.filter((folderPath) => visibleFolderPathSet.has(folderPath)),
     );
-  }, [collapsedFolderPaths, filteredGraph, visibleFolderPathSet]);
+  }, [collapsedFolderPaths, filteredGraph, overview, visibleFolderPathSet]);
   const collapsingFolderPathSet = useMemo(
     () =>
       new Set(
@@ -2710,6 +2744,28 @@ export const CanvasPane = memo(function CanvasPane({
       ),
     [focusPulseRequest, inspectorPulseRequest, runtimePulseRequest, tracePulseRequest],
   );
+
+  // P15-Z0 experiment (local detail): one fixed overlay for the selected function. The code
+  // preview comes only from the real source of the active file; otherwise it is left out.
+  const localDetail = useMemo(() => {
+    if (semanticZoomMode !== "local" || !selectedNodeId || selectedNodeIds.length !== 1) return null;
+    const node = graph?.nodes.find((candidate) => candidate.id === selectedNodeId);
+    if (!node || node.kind === "file") return null;
+    const sameFile =
+      experimentSource &&
+      normalizePath(experimentSource.filePath).toLowerCase() === normalizePath(node.file).toLowerCase();
+    const lines = sameFile ? experimentSource.text.split(/\r?\n/) : null;
+    const start = node.range.start.line;
+    const end = Math.min(node.range.end.line, start + 7);
+    return {
+      id: node.id,
+      name: node.name,
+      kind: node.kind,
+      signature: node.signature ?? null,
+      location: `${baseName(node.file)}:${start + 1}`,
+      preview: lines ? lines.slice(start, end + 1).join("\n") : null,
+    };
+  }, [experimentSource, graph, selectedNodeId, selectedNodeIds.length, semanticZoomMode]);
 
   const singleSelectedId =
     selectedNodeIds.length === 1 && selectedNodeIds[0] === selectedNodeId ? selectedNodeId : null;
@@ -3733,6 +3789,7 @@ export const CanvasPane = memo(function CanvasPane({
               proOptions={{ hideAttribution: true }}
               onInit={(inst) => {
                 rfRef.current = inst;
+                experiment.setViewport = (viewport) => void inst.setViewport(viewport);
                 pushWebviewDebugEvent("canvas.reactflow.init", {
                   renderedNodes: nodes.length,
                   renderedEdges: edges.length,
@@ -3876,11 +3933,35 @@ export const CanvasPane = memo(function CanvasPane({
             </ReactFlow>
           </ReactFlowProvider>
           {!visibleHasData ? renderEmptyState("no-visible") : null}
+          {localDetail ? <LocalDetailOverlay detail={localDetail} /> : null}
         </div>
       )}
     </section>
   );
 });
+
+type LocalDetail = {
+  id: string;
+  name: string;
+  kind: string;
+  signature: string | null;
+  location: string;
+  preview: string | null;
+};
+
+function LocalDetailOverlay({ detail }: { detail: LocalDetail }) {
+  countRender("overlay");
+  return (
+    <div className="cgExpDetail" data-node-id={detail.id} aria-hidden="true">
+      <div className="cgExpDetailTitle">
+        {detail.name} <span className="cgExpDetailKind">{detail.kind}</span>
+      </div>
+      {detail.signature ? <div className="cgExpDetailSig">{detail.signature}</div> : null}
+      <div className="cgExpDetailLoc">{detail.location}</div>
+      {detail.preview ? <pre className="cgExpDetailCode">{detail.preview}</pre> : null}
+    </div>
+  );
+}
 
 type Props = {
   profileRequestId: string | null;
@@ -3942,5 +4023,7 @@ type Props = {
   selectedAggregate: AggregateSelection | null;
   onSelectAggregate: (selection: AggregateSelection) => void;
   onClearAggregate: () => void;
+  /** P15-Z0 experiment: the active file's text, for the local-detail code preview. */
+  experimentSource?: { filePath: string; text: string } | null;
   onRegisterSnapshotExporter?: (exporter: ((format: SnapshotFormat) => Promise<string>) | null) => void;
 };

@@ -2934,6 +2934,7 @@ export default function App() {
           selectedAggregate={selectedAggregate}
           onSelectAggregate={selectAggregate}
           onClearAggregate={clearAggregate}
+          experimentSource={activeFile ? { filePath: uriToFsPath(activeFile.uri), text: activeFile.text } : null}
           loadingState={analysisLoading}
           autoLayoutTick={autoLayoutTick}
           workspaceRoot={workspaceRoot}
