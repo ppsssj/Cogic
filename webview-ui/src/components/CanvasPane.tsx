@@ -48,6 +48,7 @@ import type {
   UINotice,
 } from "../lib/vscode";
 import { nextLowDetailEdges } from "../lib/edgeDetail";
+import { withTemporaryStyles } from "../../../src/shared/temporaryStyles";
 import {
   classifyFocusEdge,
   computeFocusNeighborhood,
@@ -166,6 +167,8 @@ type NodeWithAbsolutePosition = Node<CanvasNodeData> & {
 type SnapshotFormat = "jpg" | "svg";
 
 const EXPORT_PADDING = 96;
+/** Inline style properties export changes on the canvas elements and the viewport. */
+const EXPORT_STYLE_PROPERTIES = ["width", "height", "overflow", "background", "transform"];
 const EXPORT_BACKGROUND = "#081226";
 
 function getNodeAbsolutePosition(node: Node<CanvasNodeData>) {
@@ -3204,74 +3207,57 @@ export const CanvasPane = memo(function CanvasPane({
           ),
         ),
       ];
-      const previousStyles = new Map<
-        HTMLElement,
-        {
-          width: string;
-          height: string;
-          overflow: string;
-          background: string;
-          transform: string;
-        }
-      >();
-
-      resizeTargets.forEach((element) => {
-        previousStyles.set(element, {
-          width: element.style.width,
-          height: element.style.height,
-          overflow: element.style.overflow,
-          background: element.style.background,
-          transform: element.style.transform,
-        });
-      });
-
-      Object.assign(reactFlowRoot.style, {
-        width: `${exportWidth}px`,
-        height: `${exportHeight}px`,
-        overflow: "hidden",
-        background: EXPORT_BACKGROUND,
-      });
-
-      resizeTargets.slice(1).forEach((element) => {
-        element.style.width = `${exportWidth}px`;
-        element.style.height = `${exportHeight}px`;
-      });
-
-      exportViewport.style.transform = `translate(${Math.round(EXPORT_PADDING - bounds.x)}px, ${Math.round(EXPORT_PADDING - bounds.y)}px) scale(1)`;
-      await waitForAnimationFrames(2);
-
+      // The viewport is restored too: React Flow writes its transform only when the view moves,
+      // so an export transform left behind would stay on screen. Every change below happens
+      // inside withTemporaryStyles, so every exit path puts the inline styles back.
       try {
-        if (format === "svg") {
-          return await toSvg(reactFlowRoot, {
-            cacheBust: true,
-            backgroundColor: EXPORT_BACKGROUND,
-            width: exportWidth,
-            height: exportHeight,
-            filter: exportNodeFilter,
-          });
-        }
+        return await withTemporaryStyles(
+          [...resizeTargets, exportViewport],
+          EXPORT_STYLE_PROPERTIES,
+          async () => {
+            Object.assign(reactFlowRoot.style, {
+              width: `${exportWidth}px`,
+              height: `${exportHeight}px`,
+              overflow: "hidden",
+              background: EXPORT_BACKGROUND,
+            });
 
-        return await toJpeg(reactFlowRoot, {
-          cacheBust: true,
-          pixelRatio: 2,
-          quality: 0.94,
-          backgroundColor: EXPORT_BACKGROUND,
-          width: exportWidth,
-          height: exportHeight,
-          canvasWidth: exportWidth,
-          canvasHeight: exportHeight,
-          filter: exportNodeFilter,
-        });
+            resizeTargets.slice(1).forEach((element) => {
+              element.style.width = `${exportWidth}px`;
+              element.style.height = `${exportHeight}px`;
+            });
+
+            exportViewport.style.transform = `translate(${Math.round(EXPORT_PADDING - bounds.x)}px, ${Math.round(EXPORT_PADDING - bounds.y)}px) scale(1)`;
+            await waitForAnimationFrames(2);
+
+            if (format === "svg") {
+              return await toSvg(reactFlowRoot, {
+                cacheBust: true,
+                backgroundColor: EXPORT_BACKGROUND,
+                width: exportWidth,
+                height: exportHeight,
+                filter: exportNodeFilter,
+              });
+            }
+
+            return await toJpeg(reactFlowRoot, {
+              cacheBust: true,
+              pixelRatio: 2,
+              quality: 0.94,
+              backgroundColor: EXPORT_BACKGROUND,
+              width: exportWidth,
+              height: exportHeight,
+              canvasWidth: exportWidth,
+              canvasHeight: exportHeight,
+              filter: exportNodeFilter,
+            });
+          },
+        );
       } finally {
-        resizeTargets.forEach((element) => {
-          const previous = previousStyles.get(element);
-          if (!previous) return;
-          element.style.width = previous.width;
-          element.style.height = previous.height;
-          element.style.overflow = previous.overflow;
-          element.style.background = previous.background;
-          element.style.transform = previous.transform;
-        });
+        // The store is the truth: if the view moved during the export, the restored inline value
+        // is stale. Same format as React Flow's own viewport, so its next render agrees.
+        const { x, y, zoom } = inst.getViewport();
+        exportViewport.style.transform = `translate(${x}px,${y}px) scale(${zoom})`;
       }
     } finally {
       setRenderAllForExport(false);

@@ -638,7 +638,7 @@ try {
   result.export = { svgBytes: svg.length, low: svgOpacities.filter((o) => o === 0.12 || o === 0.25).length };
   check("export SVG: no focus classes in the file", !/cgFocus--|focusContext/.test(svg));
   check("export SVG: no context opacity in the file", result.export.low === 0, result.export);
-  // Nodes and edges only: export leaves its own viewport transform behind (see below).
+  // Nodes and edges here; e2e/export-viewport checks the viewport.
   const graphLayout = (x) => JSON.stringify(JSON.parse(layoutOf(x)).slice(0, 2));
   const afterSvg = await snap();
   check("export SVG: Focus restored as before", afterSvg.state === "active" && styleOf(afterSvg) === styleOf(beforeExport) && sameLayout(graphLayout(afterSvg), graphLayout(beforeExport)), afterSvg.state);
