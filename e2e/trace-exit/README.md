@@ -23,9 +23,16 @@ on and a panned and zoomed view. Then:
 | F | Start and leave immediately | The trace never comes back. The graph is restored if the trace result had arrived, or analyzed again if not; the action taken is recorded |
 | E | Another file opened in the editor during the trace | The old graph is not restored: the new file is analyzed, and its graph equals the same file analyzed without a trace |
 | Edit | The active file is edited during the trace | The old graph is not reused: it is analyzed again (the edit is undone afterwards) |
+| Folder root, file inside | Root `/src`, `main.ts` active, edit during the trace | Analyzed again under the same folder root; the same graph (counts from the product's log, because collapse state is not kept through a new analysis) |
+| Folder root, file outside | Root `/src/app`, `main.ts` active, edit during the trace | No file is picked: the root stays (read from the product's log, since the root banner is part of the canvas) and the normal "No graph yet" state shows |
 
 The project picker is not available while a trace runs, so E changes the target through the
 editor.
+
+Late responses (a trace result, an empty result or a normal result of an ended trace session, and
+a new trace right after an exit) are replayed in a fixed order by `src/test/traceExit.test.ts`. In
+this fixture the trace result always arrives before an immediate exit, so a late response does
+not happen here.
 
 Same limits as the other end-to-end runs: a new output folder per run, at least 2200 MiB free to
 start, and a stop below 800 MiB.

@@ -34,9 +34,14 @@ import {
   pushWebviewDebugEvent,
 } from "./lib/debugLog";
 import { configurePipelineProfile, newProfileRequestId, pipelineEnabled, profileWebview } from "./lib/pipelineProfile";
-import { mayApplyActiveResult, ownsLoading } from "../../src/shared/requestOwnership";
+import { ownsLoading } from "../../src/shared/requestOwnership";
 import { buildGraphFromTrace } from "../../src/shared/traceSteps";
-import { decideTraceExit, type PreTraceTarget } from "../../src/shared/traceExit";
+import {
+  decideTraceExit,
+  gateActiveResult,
+  traceExitAnalysisTarget,
+  type PreTraceTarget,
+} from "../../src/shared/traceExit";
 import "./styles/index.css";
 
 const vscode = getVSCodeApi();
@@ -1105,6 +1110,10 @@ export default function App() {
   const traceSourceChangedRef = useRef(false);
   const traceTextByUriRef = useRef(new Map<string, string>());
   const traceResultAppliedRef = useRef(false);
+  // The highest request sequence the extension reported as started, and its value when the last
+  // trace ended: results of requests started up to then belong to that trace session.
+  const maxStartedSequenceRef = useRef(0);
+  const traceExitBoundaryRef = useRef<number | null>(null);
 
   useEffect(() => {
     graphRef.current = graphState;
@@ -1220,6 +1229,9 @@ export default function App() {
 
       if (msg.type === "analysisLifecycle") {
         if (msg.state === "running" && latestUserActiveRef.current === msg.requestId) userSequenceRef.current = msg.sequence;
+        if (msg.state === "running" && msg.sequence !== undefined) {
+          maxStartedSequenceRef.current = Math.max(maxStartedSequenceRef.current, msg.sequence);
+        }
         if (["completed", "cancelled", "failed", "superseded"].includes(msg.state)) {
           if (msg.state === "failed" && ownsLoading(loadingOwnerRef.current, msg.requestId)) {
             setCanvasNotice({ id: msg.requestId, scope: "canvas", severity: "error", message: "Analysis failed" });
@@ -1250,8 +1262,19 @@ export default function App() {
         });
 
         if (request.lane === "active") {
-          if (!mayApplyActiveResult(request.requestId, latestUserActiveRef.current, activePendingRef.current, request.sequence, userSequenceRef.current)) return;
-          if (request.sequence < latestActiveSequenceRef.current) {
+          const verdict = gateActiveResult(
+            { requestId: request.requestId, sequence: request.sequence, hasTrace: Boolean(payload?.trace?.length) },
+            {
+              latestUserId: latestUserActiveRef.current,
+              userPending: activePendingRef.current,
+              userSequence: userSequenceRef.current,
+              latestAppliedSequence: latestActiveSequenceRef.current,
+              traceModeActive: traceModeRef.current,
+              traceExitBoundary: traceExitBoundaryRef.current,
+            },
+          );
+          if (verdict === "not-owner") return;
+          if (verdict === "stale") {
             profileWebview("result.dropped", request.requestId, { reason: "stale-sequence" });
             pushWebviewDebugEvent("analysisResult.dropped.active.stale", {
               requestId: request.requestId,
@@ -1261,12 +1284,14 @@ export default function App() {
             });
             return;
           }
-
-          // A trace result that arrives after the trace ended must not bring the trace back.
-          if (payload?.trace?.length && !traceModeRef.current) {
-            pushWebviewDebugEvent("analysisResult.dropped.trace.after-exit", {
+          // A request of a trace session that ended, or a trace payload outside a trace, must not
+          // replace the graph shown after the trace.
+          if (verdict !== "apply") {
+            pushWebviewDebugEvent(`analysisResult.dropped.${verdict}`, {
               requestId: request.requestId,
               generation: request.generation,
+              sequence: request.sequence,
+              boundary: traceExitBoundaryRef.current,
             });
             finishAnalysisLoading(request.requestId);
             return;
@@ -1942,6 +1967,7 @@ export default function App() {
   const exitTraceMode = useCallback(() => {
     if (!traceModeRef.current) return;
     traceModeRef.current = false;
+    traceExitBoundaryRef.current = maxStartedSequenceRef.current;
     cancelPendingTrace();
     setTraceMode(false);
     setTraceEvents(null);
@@ -1956,7 +1982,8 @@ export default function App() {
     // Starting the trace cleared the root: a root now was chosen during the trace, otherwise the
     // target is still the one from before it.
     const targetRoot = rootTarget ?? snapshot?.root ?? null;
-    const rootFile = targetRoot?.kind === "file" ? targetRoot.path : null;
+    const target = traceExitAnalysisTarget(targetRoot, activeFilePath);
+    const rootFile = target?.kind === "root-file" ? target.path : null;
     const action = decideTraceExit(snapshot, {
       root: rootTarget,
       graphDepth,
@@ -1964,7 +1991,7 @@ export default function App() {
       activeFileUri: activeFile?.uri ?? null,
       sourceChanged: traceSourceChangedRef.current,
       generationKnown: traceResultAppliedRef.current,
-      hasTarget: Boolean(rootFile ?? activeFilePath),
+      hasTarget: target !== null,
     });
     pushWebviewDebugEvent("trace.exit", {
       action,

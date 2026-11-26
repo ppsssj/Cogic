@@ -554,6 +554,86 @@ try {
   await editor.click();
   for (let i = 0; i < 4; i++) await page.keyboard.press("Control+Z");
   await sleep(1500);
+  // ---- folder roots: an edit during the trace forces a new analysis, which must follow the
+  // folder root rule (the active file directly in the folder, or nothing)
+  const openInEditor = async (rel, name) => {
+    await page.locator(".monaco-editor .view-lines").first().click();
+    await quick("Control+P", rel, name);
+    await sleep(2500);
+  };
+  const clearRoot = async () => {
+    if (await frame.locator(".rootBanner .btnGhost").count()) {
+      await frame.locator(".rootBanner .btnGhost").click();
+      await until("no root", async () => (await state()).root === null, 20_000);
+      await sleep(2500);
+    }
+  };
+  const folderRoot = async (suffix) => {
+    await fit();
+    const id = (await groups()).find((g) => g.id.endsWith(suffix))?.id;
+    if (!id) throw new Error(`no folder ${suffix}`);
+    await frame.locator(`.react-flow__node[data-id="${id}"] .cgFolderHeader`).first().click();
+    await sleep(1200);
+    await frame.locator(".selectionBanner .btnGhost").click();
+    await until("folder root", async () => /^Root folder:/.test((await state()).root ?? ""), 20_000);
+    await sleep(4000);
+  };
+  // The root banner lives inside the canvas and is not drawn without a graph; the product's own
+  // log has the root and the graph counts.
+  const logged = () => frame.evaluate(() => {
+    const log = [...(window.__CODEGRAPH_WEBVIEW_DEBUG__?.entries ?? [])].reverse();
+    const root = log.find((e) => e.event === "canvas.visibleHasData.changed")?.detail?.rootTarget ?? null;
+    const graph = log.find((e) => e.event === "app.graphState.changed")?.detail ?? null;
+    return { root: root ? `${root.kind}:${root.path.split("/").pop()}` : null, graph: graph ? [graph.nodes, graph.edges] : null };
+  });
+  const editDuringTrace = async () => {
+    await page.locator(".monaco-editor .view-lines").first().click();
+    await page.keyboard.press("Control+End");
+    await page.keyboard.type("\n// edited during the trace\n");
+    await sleep(1500);
+  };
+  const undoEdit = async () => {
+    await page.locator(".monaco-editor .view-lines").first().click();
+    for (let i = 0; i < 4; i++) await page.keyboard.press("Control+Z");
+    await sleep(1500);
+  };
+
+  await openInEditor("src/main.ts", "main.ts");
+  await clearRoot();
+  await settleGraph();
+  // inside: root /src, the active main.ts is directly in it
+  await folderRoot("/src");
+  const fin = await settleGraph();
+  const finLog = await logged();
+  result.folderInsideBefore = { root: fin.root, nodes: fin.nodeIds.length, logged: finLog };
+  await startTrace();
+  await steps(2);
+  await editDuringTrace();
+  await exitTrace("toggle");
+  const fi = await settleGraph(fin);
+  const fiLog = await logged();
+  result.folderInside = { exit: await lastExit(), root: fi.root, nodes: fi.nodeIds.length, trace: fi.trace, logged: fiLog };
+  // Collapse state is not kept through a new analysis, so the graph is compared by its counts.
+  check("folder root, active file inside: analyzed again under the same folder root, same graph", (await lastExit()) === "reanalyze" && fi.root === fin.root && JSON.stringify(fiLog) === JSON.stringify(finLog) && fi.trace === null, [result.folderInsideBefore, result.folderInside]);
+  await undoEdit();
+  await clearRoot();
+  await settleGraph();
+  // outside: root /src/app, the active main.ts is not in it, so nothing is analyzed
+  await folderRoot("/src/app");
+  const fout = await state();
+  result.folderOutsideBefore = { root: fout.root, nodes: fout.nodeIds.length, logged: await logged() };
+  await startTrace();
+  await steps(2);
+  await editDuringTrace();
+  await exitTrace("toggle");
+  await sleep(3000);
+  const fo = await state();
+  const foLog = await logged();
+  result.folderOutside = { exit: await lastExit(), nodes: fo.nodeIds.length, empty: fo.empty, trace: fo.trace, logged: foLog };
+  check("folder root, active file outside: no file is picked; the root stays and the normal empty state shows", (await lastExit()) === "empty" && foLog.root === "folder:app" && foLog.graph?.[0] === 0 && fo.nodeIds.length === 0 && fo.empty === "No graph yet" && fo.trace === null, [result.folderOutsideBefore, result.folderOutside]);
+  await undoEdit();
+  await clearRoot();
+
   mark("end");
 } catch (error) {
   check("no exception", false, String(error?.stack ?? error).slice(0, 800));
