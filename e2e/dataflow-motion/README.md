@@ -4,7 +4,13 @@ Checks and benchmarks `src/shared/dataflowMotion.ts` in a real VS Code. The poli
 setting `cogic.experimental.dataflowMotion`:
 
 - `"focused"`: only an explicitly highlighted relation moves;
-- anything else: `legacy`, the shipped behaviour.
+- anything else: `legacy`, the shipped behaviour (until P15-RC).
+
+> **Since P15-RC the default is `safe`:** nothing set, or any value that is not one of the four names,
+> means no dash moves. `legacy` is chosen by name. `run.mjs` and the earlier `release.mjs` phases set
+> the policy explicitly, so they are not affected; `run.mjs` now starts with `legacy` set by name
+> instead of nothing set. The pans of `run.mjs` (P15-R1) and of the P15-R2 phases did not move the view
+> (see P15-R3).
 
 The setting is not declared in `package.json`, so it does not appear in the Settings UI. The run
 writes it to the profile's `settings.json`, and the extension forwards changes live with no new
@@ -29,7 +35,7 @@ node e2e/dataflow-motion/summarize.mjs <output folder>/result.json
 
 ## Checks
 
-- Nothing set means legacy.
+- Legacy set by name animates every eligible dataflow edge (until P15-RC this was the "nothing set" check).
 - Switching the policy needs no new analysis and leaves nodes, positions and edge IDs unchanged.
 - Focused:
   - with nothing highlighted, or only a node selected, no edge animation runs (computed
@@ -147,3 +153,35 @@ dashes, arrows and the highlight color, and does not contain the marker.
 **The pan:** it starts on empty pane and is sized to the pane. The earlier start point, used by
 P15-R2 and `run.mjs`, lay outside the 515 px wide pane, on the Inspector, and did not pan. See
 `docs/thesis-experiments/p15-semantic-zoom/r3`.
+
+## Safe by default (P15-RC): the `default*` phases of `release.mjs`
+
+These phases start VS Code with **no** `cogic.experimental.dataflowMotion` in `settings.json`, as
+for a user who never set it. Each phase is a fresh extension start on its own workspace.
+
+**`default`** (the `e2e/aggregate-inspector` fixture, depth 2):
+- first open: no running dash animation (the `animated` class, the computed `animation-name` and
+  the Web Animations list); dataflow edges dashed with arrows; calls solid;
+- idle and a real pan (more than 100 viewport transforms), and wheel zoom;
+- `legacy` by name moves the dashes again, and draws every edge with the same stroke, width,
+  dashes, opacity and arrow as the default;
+- live switches: `safe`, the key removed, the invalid values `"Safe"`, `"LEGACY"`, `42` and `""`
+  all mean no motion;
+- `Developer: Reload Webviews` under `legacy` and with nothing set;
+- a Param Flow highlighted with nothing set: static highlight and label;
+- SVG and JPG export with the highlight: static dashes, arrows and the highlight color in the
+  file, no `dashdraw`; the viewport, selection and highlight kept;
+- a trace under `focused` (the reference look), then with nothing set: each step looks the same,
+  without dash motion; the graph comes back after the trace.
+
+**`default-runtime`:** F5 on a small program, with nothing set, then `legacy`, then nothing set:
+the same node is marked; no relation moves unless `legacy` is chosen.
+
+**`default-large`:** the expanded 650-node fixture at zoom 0.6, nothing set against `legacy`,
+`R2_REPS` rotated repetitions of 2 s idle and a 5 s real pan; then wheel zoom, low detail at 0.15,
+and the 0.20-0.25 band reached from below and from above.
+
+```
+set R2_PHASE=default
+node e2e/dataflow-motion/release.mjs <new output folder>
+```

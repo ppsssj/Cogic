@@ -1,5 +1,13 @@
 # P15-R1: focused dataflow animation policy (product, opt-in)
 
+> **Correction (P15-RC, 2026-11-27): the "Pan" columns below are not pans.** This harness pressed
+> the mouse at `0.55 × width + 240`, outside the 515 px wide canvas pane, on the Inspector (found in
+> P15-R3; see `../r3/README.md`). The view did not move, so "Pan" here is idle with mouse moves. That
+> the R1 pan did not move is inferred from the shared start point, not re-measured. The idle columns
+> and the running-animation counts stand. Do not cite these pan numbers; real-pan numbers are in
+> P15-R3, P15-P0, P15-P1 and P15-RC (`../../p15-rc/README.md`). The raw records are kept unchanged.
+
+
 Branch `perf/focused-dataflow-animation`, from `main` `ba10e93`. It does not depend on PR #52 or
 #53. Only the fixture generator was copied from them.
 
