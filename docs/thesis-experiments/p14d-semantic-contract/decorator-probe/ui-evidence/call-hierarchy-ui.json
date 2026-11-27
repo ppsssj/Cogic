@@ -1,0 +1,139 @@
+{
+ "vscode": "1.147.0",
+ "fixture": "legacy",
+ "callHierarchy": {
+  "incoming Method (method decorator factory)": [
+   {
+    "level": "title",
+    "text": "References: Callers Of | "
+   },
+   {
+    "level": "1",
+    "text": "Method"
+   },
+   {
+    "level": "2",
+    "text": "methodSample"
+   },
+   {
+    "level": "2",
+    "text": "goInner"
+   }
+  ],
+  "incoming ClassDeco (class decorator factory)": [
+   {
+    "level": "title",
+    "text": "References: Callers Of | "
+   },
+   {
+    "level": "1",
+    "text": "ClassDeco"
+   },
+   {
+    "level": "2",
+    "text": "Sample"
+   }
+  ],
+  "incoming Param (parameter decorator factory)": [
+   {
+    "level": "title",
+    "text": "References: Callers Of | "
+   },
+   {
+    "level": "1",
+    "text": "Param"
+   },
+   {
+    "level": "2",
+    "text": "Sample"
+   },
+   {
+    "level": "2",
+    "text": "methodSample"
+   }
+  ],
+  "incoming Prop (property decorator factory)": [
+   {
+    "level": "title",
+    "text": "References: Callers Of | "
+   },
+   {
+    "level": "1",
+    "text": "Prop"
+   },
+   {
+    "level": "2",
+    "text": "Sample"
+   }
+  ],
+  "incoming PlainMethod (plain method decorator)": [
+   {
+    "level": "title",
+    "text": "References: Callers Of | "
+   },
+   {
+    "level": "1",
+    "text": "PlainMethod"
+   },
+   {
+    "level": "2",
+    "text": "methodSample"
+   }
+  ],
+  "outgoing Sample.method": [
+   {
+    "level": "title",
+    "text": "References: Calls From | "
+   },
+   {
+    "level": "1",
+    "text": "methodSample"
+   },
+   {
+    "level": "2",
+    "text": "helper"
+   }
+  ],
+  "outgoing class Sample": [
+   {
+    "level": "title",
+    "text": "References: Calls From | "
+   },
+   {
+    "level": "1",
+    "text": "Sample"
+   },
+   {
+    "level": "2",
+    "text": "ClassDeco"
+   },
+   {
+    "level": "2",
+    "text": "PlainClass"
+   },
+   {
+    "level": "2",
+    "text": "Prop"
+   },
+   {
+    "level": "2",
+    "text": "helper"
+   },
+   {
+    "level": "2",
+    "text": "Method"
+   },
+   {
+    "level": "2",
+    "text": "PlainMethod"
+   }
+  ]
+ },
+ "errors": [
+  {
+   "label": "class Sample",
+   "error": "no outgoing toggle found"
+  }
+ ],
+ "note": "the class Sample query found the view already on Calls From (the toggle offered Incoming); the view title confirms outgoing"
+}

@@ -164,21 +164,21 @@ function writeFile(root, rel, buf, manifest) {
   manifest.push({ path: rel, sha256: sha256(lf(buf)), bytes: buf.length });
 }
 
-export function buildPacket({ out, corpusACommit = DEFAULTS.corpusACommit, corpusBCommit = DEFAULTS.corpusBCommit, seed = DEFAULTS.seed, templates = path.join(here, "..", "human-review", "packet-template") }) {
+export function buildPacket({ out, corpusACommit = DEFAULTS.corpusACommit, corpusBCommit = DEFAULTS.corpusBCommit, seed = DEFAULTS.seed, templates = path.join(here, "..", "human-review", "packet-template"), only = ["A", "B"], extraTemplates = [], skipTemplates = [] }) {
   if (fs.existsSync(out)) throw new Error(`output exists: ${out} (use a new folder)`);
   const rel = path.relative(REPO, path.resolve(out));
   if (!rel.startsWith("..") && !path.isAbsolute(rel)) throw new Error("build the packet outside the repository: reviewers must not get the repository, which holds the GT");
   const packet = path.join(out, "packet");
   const researcher = path.join(out, "researcher");
   const manifest = [];
-  const report = { generator: GENERATOR, inputs: { corpusACommit, corpusBCommit, guideCommit: DEFAULTS.guideCommit, seed }, trees: {}, excludedPerCase: [...NEVER_COPY.map(String), "catalog.csv", "upstream.json: caseId, importEdges, thirdPartyModules"], guideRemovals: [], cases: [] };
+  const report = { generator: GENERATOR, inputs: { corpusACommit, corpusBCommit, guideCommit: DEFAULTS.guideCommit, seed, ...(only.length === 2 ? {} : { only }) }, trees: {}, excludedPerCase: [...NEVER_COPY.map(String), "catalog.csv", "upstream.json: caseId, importEdges, thirdPartyModules"], guideRemovals: [], cases: [] };
   report.trees.corpusA = gitText(["rev-parse", `${corpusACommit}:${DEFAULTS.corpusAPath}`]).trim();
   report.trees.corpusB = gitText(["rev-parse", `${corpusBCommit}:${DEFAULTS.corpusBPath}`]).trim();
 
   const corpora = [
     { label: "A", commit: corpusACommit, root: DEFAULTS.corpusAPath },
     { label: "B", commit: corpusBCommit, root: DEFAULTS.corpusBPath },
-  ];
+  ].filter((c) => only.includes(c.label));
   const originalCaseIds = [];
   const patternIds = new Set();
   for (const c of corpora) {
@@ -217,9 +217,15 @@ export function buildPacket({ out, corpusACommit = DEFAULTS.corpusACommit, corpu
   const guide = blindGuide(show(DEFAULTS.guideCommit, DEFAULTS.guidePath).toString("utf8"));
   report.guideRemovals = guide.applied;
   writeFile(packet, "RELATION_DEFINITIONS.md", Buffer.from(guide.text), manifest);
-  for (const f of fs.readdirSync(templates, { recursive: true })) {
-    const src = path.join(templates, f);
-    if (fs.statSync(src).isFile()) writeFile(packet, f.split(path.sep).join("/"), fs.readFileSync(src), manifest);
+  // P14-D: a corpus subset (only), extra template folders (for example the AI review prompt), and
+  // template files to leave out. Defaults keep the P14-C packet unchanged.
+  for (const dir of [templates, ...extraTemplates]) {
+    for (const f of fs.readdirSync(dir, { recursive: true })) {
+      const src = path.join(dir, f);
+      const relName = f.split(path.sep).join("/");
+      if (dir === templates && skipTemplates.includes(relName)) continue; // skips apply to the base templates only
+      if (fs.statSync(src).isFile()) writeFile(packet, relName, fs.readFileSync(src), manifest);
+    }
   }
   const leaks = scanForLeaks(packet, leakPatterns({ originalCaseIds, patternIds: [...patternIds] }));
   report.leakCheck = { patterns: leakPatterns({ originalCaseIds, patternIds: [...patternIds] }).length, hits: leaks };

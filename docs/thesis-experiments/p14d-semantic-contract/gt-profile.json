@@ -1,0 +1,59 @@
+{
+ "A": {
+  "cases": 44,
+  "relations": 659,
+  "negatives": 49,
+  "byKind": {
+   "calls": 177,
+   "dataflow": 189,
+   "constructs": 39,
+   "references": 163,
+   "owner": 55,
+   "updates": 36
+  },
+  "byDeterminacy": {
+   "determinate": 651,
+   "indeterminate": 8
+  },
+  "byEvidenceClass": {
+   "local-syntax": 274,
+   "cross-file": 180,
+   "type-resolution": 11,
+   "ts-lib": 17,
+   "dynamic/indeterminate": 6,
+   "framework-semantics": 151,
+   "decorator": 20
+  },
+  "decoratorPatterns": {
+   "CALL-DECORATOR-CLASS": 5,
+   "CALL-DECORATOR-METHOD": 8,
+   "DF-DECORATOR-METHOD": 7
+  }
+ },
+ "B": {
+  "cases": 20,
+  "relations": 210,
+  "negatives": 2,
+  "byKind": {
+   "calls": 59,
+   "dataflow": 44,
+   "references": 82,
+   "owner": 17,
+   "constructs": 6,
+   "updates": 2
+  },
+  "byDeterminacy": {
+   "determinate": 196,
+   "indeterminate": 14
+  },
+  "byEvidenceClass": {
+   "cross-file": 96,
+   "framework-semantics": 30,
+   "dynamic/indeterminate": 13,
+   "type-resolution": 4,
+   "ts-lib": 52,
+   "local-syntax": 15
+  },
+  "decoratorPatterns": {}
+ }
+}

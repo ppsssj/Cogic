@@ -1,0 +1,905 @@
+{
+ "tool": "p14d-decorator-probe/1",
+ "typescript": "5.9.3",
+ "fixtures": {
+  "legacy": {
+   "fixture": "fixtures/legacy/main.ts",
+   "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "ES2022"
+   },
+   "diagnostics": [],
+   "emit": [
+    {
+     "name": "helper",
+     "emittedLine": 43,
+     "form": "called",
+     "scope": {
+      "kind": "MethodDeclaration",
+      "name": "method"
+     },
+     "text": "return helper() + y;"
+    },
+    {
+     "name": "Prop",
+     "emittedLine": 47,
+     "form": "called",
+     "scope": {
+      "kind": "SourceFile",
+      "name": "<module top level>"
+     },
+     "text": "Prop(helper())"
+    },
+    {
+     "name": "helper",
+     "emittedLine": 47,
+     "form": "called",
+     "scope": {
+      "kind": "SourceFile",
+      "name": "<module top level>"
+     },
+     "text": "Prop(helper())"
+    },
+    {
+     "name": "Method",
+     "emittedLine": 50,
+     "form": "called",
+     "scope": {
+      "kind": "SourceFile",
+      "name": "<module top level>"
+     },
+     "text": "Method(\"m\"),"
+    },
+    {
+     "name": "PlainMethod",
+     "emittedLine": 51,
+     "form": "referenced",
+     "scope": {
+      "kind": "SourceFile",
+      "name": "<module top level>"
+     },
+     "text": "PlainMethod,"
+    },
+    {
+     "name": "Param",
+     "emittedLine": 52,
+     "form": "called",
+     "scope": {
+      "kind": "SourceFile",
+      "name": "<module top level>"
+     },
+     "text": "__param(0, Param(\"y\"))"
+    },
+    {
+     "name": "ClassDeco",
+     "emittedLine": 55,
+     "form": "called",
+     "scope": {
+      "kind": "SourceFile",
+      "name": "<module top level>"
+     },
+     "text": "ClassDeco(\"c\"),"
+    },
+    {
+     "name": "PlainClass",
+     "emittedLine": 56,
+     "form": "referenced",
+     "scope": {
+      "kind": "SourceFile",
+      "name": "<module top level>"
+     },
+     "text": "PlainClass,"
+    },
+    {
+     "name": "Param",
+     "emittedLine": 57,
+     "form": "called",
+     "scope": {
+      "kind": "SourceFile",
+      "name": "<module top level>"
+     },
+     "text": "__param(0, Param(\"x\"))"
+    },
+    {
+     "name": "Method",
+     "emittedLine": 66,
+     "form": "called",
+     "scope": {
+      "kind": "MethodDeclaration",
+      "name": "run"
+     },
+     "text": "Method(\"inner\")"
+    }
+   ],
+   "languageService": {
+    "incoming": {
+     "ClassDeco": [
+      {
+       "from": {
+        "name": "Sample",
+        "kind": "class",
+        "containerName": null,
+        "line": 35
+       },
+       "fromSpans": [
+        {
+         "line": 33,
+         "text": "ClassDeco"
+        }
+       ]
+      }
+     ],
+     "PlainClass": [
+      {
+       "from": {
+        "name": "Sample",
+        "kind": "class",
+        "containerName": null,
+        "line": 35
+       },
+       "fromSpans": [
+        {
+         "line": 34,
+         "text": "PlainClass"
+        }
+       ]
+      }
+     ],
+     "Method": [
+      {
+       "from": {
+        "name": "method",
+        "kind": "method",
+        "containerName": "Sample",
+        "line": 45
+       },
+       "fromSpans": [
+        {
+         "line": 43,
+         "text": "Method"
+        }
+       ]
+      },
+      {
+       "from": {
+        "name": "go",
+        "kind": "method",
+        "containerName": "Inner",
+        "line": 54
+       },
+       "fromSpans": [
+        {
+         "line": 53,
+         "text": "Method"
+        }
+       ]
+      }
+     ],
+     "PlainMethod": [
+      {
+       "from": {
+        "name": "method",
+        "kind": "method",
+        "containerName": "Sample",
+        "line": 45
+       },
+       "fromSpans": [
+        {
+         "line": 44,
+         "text": "PlainMethod"
+        }
+       ]
+      }
+     ],
+     "Prop": [
+      {
+       "from": {
+        "name": "Sample",
+        "kind": "class",
+        "containerName": null,
+        "line": 35
+       },
+       "fromSpans": [
+        {
+         "line": 36,
+         "text": "Prop"
+        }
+       ]
+      }
+     ],
+     "Param": [
+      {
+       "from": {
+        "name": "Sample",
+        "kind": "class",
+        "containerName": null,
+        "line": 35
+       },
+       "fromSpans": [
+        {
+         "line": 39,
+         "text": "Param"
+        }
+       ]
+      },
+      {
+       "from": {
+        "name": "method",
+        "kind": "method",
+        "containerName": "Sample",
+        "line": 45
+       },
+       "fromSpans": [
+        {
+         "line": 45,
+         "text": "Param"
+        }
+       ]
+      }
+     ],
+     "helper": [
+      {
+       "from": {
+        "name": "Sample",
+        "kind": "class",
+        "containerName": null,
+        "line": 35
+       },
+       "fromSpans": [
+        {
+         "line": 36,
+         "text": "helper"
+        }
+       ]
+      },
+      {
+       "from": {
+        "name": "method",
+        "kind": "method",
+        "containerName": "Sample",
+        "line": 45
+       },
+       "fromSpans": [
+        {
+         "line": 46,
+         "text": "helper"
+        }
+       ]
+      }
+     ]
+    },
+    "outgoing": {
+     "class Sample": [
+      {
+       "to": {
+        "name": "ClassDeco",
+        "kind": "function",
+        "containerName": null,
+        "line": 1
+       },
+       "fromSpans": [
+        33
+       ]
+      },
+      {
+       "to": {
+        "name": "PlainClass",
+        "kind": "function",
+        "containerName": null,
+        "line": 6
+       },
+       "fromSpans": [
+        34
+       ]
+      },
+      {
+       "to": {
+        "name": "Prop",
+        "kind": "function",
+        "containerName": null,
+        "line": 19
+       },
+       "fromSpans": [
+        36
+       ]
+      },
+      {
+       "to": {
+        "name": "helper",
+        "kind": "function",
+        "containerName": null,
+        "line": 29
+       },
+       "fromSpans": [
+        36
+       ]
+      },
+      {
+       "to": {
+        "name": "Method",
+        "kind": "function",
+        "containerName": null,
+        "line": 10
+       },
+       "fromSpans": [
+        43
+       ]
+      },
+      {
+       "to": {
+        "name": "PlainMethod",
+        "kind": "function",
+        "containerName": null,
+        "line": 15
+       },
+       "fromSpans": [
+        44
+       ]
+      }
+     ],
+     "Sample.method": [
+      {
+       "to": {
+        "name": "helper",
+        "kind": "function",
+        "containerName": null,
+        "line": 29
+       },
+       "fromSpans": [
+        46
+       ]
+      }
+     ],
+     "Sample.constructor": [
+      {
+       "to": {
+        "name": "ClassDeco",
+        "kind": "function",
+        "containerName": null,
+        "line": 1
+       },
+       "fromSpans": [
+        33
+       ]
+      },
+      {
+       "to": {
+        "name": "PlainClass",
+        "kind": "function",
+        "containerName": null,
+        "line": 6
+       },
+       "fromSpans": [
+        34
+       ]
+      },
+      {
+       "to": {
+        "name": "Prop",
+        "kind": "function",
+        "containerName": null,
+        "line": 19
+       },
+       "fromSpans": [
+        36
+       ]
+      },
+      {
+       "to": {
+        "name": "helper",
+        "kind": "function",
+        "containerName": null,
+        "line": 29
+       },
+       "fromSpans": [
+        36
+       ]
+      },
+      {
+       "to": {
+        "name": "Method",
+        "kind": "function",
+        "containerName": null,
+        "line": 10
+       },
+       "fromSpans": [
+        43
+       ]
+      },
+      {
+       "to": {
+        "name": "PlainMethod",
+        "kind": "function",
+        "containerName": null,
+        "line": 15
+       },
+       "fromSpans": [
+        44
+       ]
+      }
+     ]
+    },
+    "references": {
+     "ClassDeco": [
+      1,
+      33
+     ],
+     "PlainClass": [
+      6,
+      34
+     ],
+     "Method": [
+      10,
+      43,
+      53
+     ],
+     "PlainMethod": [
+      15,
+      44
+     ],
+     "Prop": [
+      19,
+      36
+     ],
+     "Param": [
+      24,
+      39,
+      45
+     ],
+     "helper": [
+      29,
+      36,
+      46
+     ]
+    }
+   },
+   "cogic": {
+    "nodes": [
+     "file:main.ts@1",
+     "function:ClassDeco@1",
+     "function:PlainClass@6",
+     "function:Method@10",
+     "function:PlainMethod@15",
+     "function:Prop@19",
+     "function:Param@24",
+     "function:helper@29",
+     "class:Sample@33",
+     "method:Sample.method@43",
+     "class:Nested@50",
+     "method:Nested.run@51",
+     "class:Inner@52",
+     "method:Inner.go@53"
+    ],
+    "edges": [
+     {
+      "kind": "references",
+      "source": "class:Sample@33",
+      "target": "function:PlainClass@6",
+      "label": null
+     },
+     {
+      "kind": "references",
+      "source": "method:Sample.method@43",
+      "target": "function:PlainMethod@15",
+      "label": null
+     },
+     {
+      "kind": "calls",
+      "source": "file:main.ts@1",
+      "target": "function:ClassDeco@1",
+      "label": null
+     },
+     {
+      "kind": "dataflow",
+      "source": "file:main.ts@1",
+      "target": "function:ClassDeco@1",
+      "label": "name <- \"c\""
+     },
+     {
+      "kind": "calls",
+      "source": "file:main.ts@1",
+      "target": "function:Prop@19",
+      "label": null
+     },
+     {
+      "kind": "dataflow",
+      "source": "file:main.ts@1",
+      "target": "function:Prop@19",
+      "label": "name <- helper()"
+     },
+     {
+      "kind": "calls",
+      "source": "file:main.ts@1",
+      "target": "function:helper@29",
+      "label": null
+     },
+     {
+      "kind": "calls",
+      "source": "file:main.ts@1",
+      "target": "function:Param@24",
+      "label": null
+     },
+     {
+      "kind": "dataflow",
+      "source": "file:main.ts@1",
+      "target": "function:Param@24",
+      "label": "name <- \"x\""
+     },
+     {
+      "kind": "calls",
+      "source": "method:Sample.method@43",
+      "target": "function:helper@29",
+      "label": null
+     }
+    ]
+   }
+  },
+  "standard": {
+   "fixture": "fixtures/standard/main.ts",
+   "compilerOptions": {
+    "experimentalDecorators": false,
+    "target": "ES2022"
+   },
+   "diagnostics": [],
+   "emit": [
+    {
+     "name": "ClassDeco",
+     "emittedLine": 68,
+     "form": "called",
+     "scope": {
+      "kind": "ArrowFunction",
+      "name": "<anonymous function>"
+     },
+     "text": "let _classDecorators = [ClassDeco(\"c\"), PlainClass];"
+    },
+    {
+     "name": "PlainClass",
+     "emittedLine": 68,
+     "form": "referenced",
+     "scope": {
+      "kind": "ArrowFunction",
+      "name": "<anonymous function>"
+     },
+     "text": "let _classDecorators = [ClassDeco(\"c\"), PlainClass];"
+    },
+    {
+     "name": "Field",
+     "emittedLine": 81,
+     "form": "called",
+     "scope": {
+      "kind": "ClassStaticBlock",
+      "name": "static {}"
+     },
+     "text": "_field_decorators = [Field(helper())];"
+    },
+    {
+     "name": "helper",
+     "emittedLine": 81,
+     "form": "called",
+     "scope": {
+      "kind": "ClassStaticBlock",
+      "name": "static {}"
+     },
+     "text": "_field_decorators = [Field(helper())];"
+    },
+    {
+     "name": "Method",
+     "emittedLine": 82,
+     "form": "called",
+     "scope": {
+      "kind": "ClassStaticBlock",
+      "name": "static {}"
+     },
+     "text": "_method_decorators = [Method(\"m\"), PlainMethod];"
+    },
+    {
+     "name": "PlainMethod",
+     "emittedLine": 82,
+     "form": "referenced",
+     "scope": {
+      "kind": "ClassStaticBlock",
+      "name": "static {}"
+     },
+     "text": "_method_decorators = [Method(\"m\"), PlainMethod];"
+    },
+    {
+     "name": "helper",
+     "emittedLine": 92,
+     "form": "called",
+     "scope": {
+      "kind": "MethodDeclaration",
+      "name": "method"
+     },
+     "text": "return helper() + y;"
+    }
+   ],
+   "languageService": {
+    "incoming": {
+     "ClassDeco": [
+      {
+       "from": {
+        "name": "Sample",
+        "kind": "class",
+        "containerName": null,
+        "line": 36
+       },
+       "fromSpans": [
+        {
+         "line": 34,
+         "text": "ClassDeco"
+        }
+       ]
+      }
+     ],
+     "PlainClass": [
+      {
+       "from": {
+        "name": "Sample",
+        "kind": "class",
+        "containerName": null,
+        "line": 36
+       },
+       "fromSpans": [
+        {
+         "line": 35,
+         "text": "PlainClass"
+        }
+       ]
+      }
+     ],
+     "Method": [
+      {
+       "from": {
+        "name": "method",
+        "kind": "method",
+        "containerName": "Sample",
+        "line": 42
+       },
+       "fromSpans": [
+        {
+         "line": 40,
+         "text": "Method"
+        }
+       ]
+      }
+     ],
+     "PlainMethod": [
+      {
+       "from": {
+        "name": "method",
+        "kind": "method",
+        "containerName": "Sample",
+        "line": 42
+       },
+       "fromSpans": [
+        {
+         "line": 41,
+         "text": "PlainMethod"
+        }
+       ]
+      }
+     ],
+     "Field": [
+      {
+       "from": {
+        "name": "Sample",
+        "kind": "class",
+        "containerName": null,
+        "line": 36
+       },
+       "fromSpans": [
+        {
+         "line": 37,
+         "text": "Field"
+        }
+       ]
+      }
+     ],
+     "helper": [
+      {
+       "from": {
+        "name": "Sample",
+        "kind": "class",
+        "containerName": null,
+        "line": 36
+       },
+       "fromSpans": [
+        {
+         "line": 37,
+         "text": "helper"
+        }
+       ]
+      },
+      {
+       "from": {
+        "name": "method",
+        "kind": "method",
+        "containerName": "Sample",
+        "line": 42
+       },
+       "fromSpans": [
+        {
+         "line": 43,
+         "text": "helper"
+        }
+       ]
+      }
+     ]
+    },
+    "outgoing": {
+     "class Sample": [
+      {
+       "to": {
+        "name": "ClassDeco",
+        "kind": "function",
+        "containerName": null,
+        "line": 1
+       },
+       "fromSpans": [
+        34
+       ]
+      },
+      {
+       "to": {
+        "name": "PlainClass",
+        "kind": "function",
+        "containerName": null,
+        "line": 8
+       },
+       "fromSpans": [
+        35
+       ]
+      },
+      {
+       "to": {
+        "name": "Field",
+        "kind": "function",
+        "containerName": null,
+        "line": 23
+       },
+       "fromSpans": [
+        37
+       ]
+      },
+      {
+       "to": {
+        "name": "helper",
+        "kind": "function",
+        "containerName": null,
+        "line": 30
+       },
+       "fromSpans": [
+        37
+       ]
+      },
+      {
+       "to": {
+        "name": "Method",
+        "kind": "function",
+        "containerName": null,
+        "line": 12
+       },
+       "fromSpans": [
+        40
+       ]
+      },
+      {
+       "to": {
+        "name": "PlainMethod",
+        "kind": "function",
+        "containerName": null,
+        "line": 19
+       },
+       "fromSpans": [
+        41
+       ]
+      }
+     ],
+     "Sample.method": [
+      {
+       "to": {
+        "name": "helper",
+        "kind": "function",
+        "containerName": null,
+        "line": 30
+       },
+       "fromSpans": [
+        43
+       ]
+      }
+     ]
+    },
+    "references": {
+     "ClassDeco": [
+      1,
+      34
+     ],
+     "PlainClass": [
+      8,
+      35
+     ],
+     "Method": [
+      12,
+      40
+     ],
+     "PlainMethod": [
+      19,
+      41
+     ],
+     "Field": [
+      23,
+      37
+     ],
+     "helper": [
+      30,
+      37,
+      43
+     ]
+    }
+   },
+   "cogic": {
+    "nodes": [
+     "file:main.ts@1",
+     "function:ClassDeco@1",
+     "function:PlainClass@8",
+     "function:Method@12",
+     "function:PlainMethod@19",
+     "function:Field@23",
+     "function:helper@30",
+     "class:Sample@34",
+     "method:Sample.method@40"
+    ],
+    "edges": [
+     {
+      "kind": "references",
+      "source": "class:Sample@34",
+      "target": "function:PlainClass@8",
+      "label": null
+     },
+     {
+      "kind": "references",
+      "source": "method:Sample.method@40",
+      "target": "function:PlainMethod@19",
+      "label": null
+     },
+     {
+      "kind": "calls",
+      "source": "file:main.ts@1",
+      "target": "function:ClassDeco@1",
+      "label": null
+     },
+     {
+      "kind": "dataflow",
+      "source": "file:main.ts@1",
+      "target": "function:ClassDeco@1",
+      "label": "name <- \"c\""
+     },
+     {
+      "kind": "calls",
+      "source": "file:main.ts@1",
+      "target": "function:Field@23",
+      "label": null
+     },
+     {
+      "kind": "dataflow",
+      "source": "file:main.ts@1",
+      "target": "function:Field@23",
+      "label": "name <- helper()"
+     },
+     {
+      "kind": "calls",
+      "source": "file:main.ts@1",
+      "target": "function:helper@30",
+      "label": null
+     },
+     {
+      "kind": "calls",
+      "source": "method:Sample.method@40",
+      "target": "function:helper@30",
+      "label": null
+     }
+    ]
+   }
+  }
+ }
+}
