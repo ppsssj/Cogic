@@ -28,7 +28,7 @@
       "open": "D-2 (Corpus B on main or pinned)"
     },
     { "id": 3, "name": "Scorer policy fixed and tested", "status": "OPEN", "open": "D-1 (lenient L1-L4); strict unaffected by every candidate" },
-    { "id": 4, "name": "Independent human review complete", "status": "NOT_STARTED", "packetSha256": "30f0456f94de9af9ca5eb79449f38b76f65a5761634560961f1e231a500058e1", "reviewers": 0, "open": "secure reviewers (D-5)" },
+    { "id": 4, "name": "Independent human review complete", "status": "NOT_STARTED", "packetSha256": "b44d15c167616fc9d0e2db1f3e0588cd6da81022dc84bedec1428a2ab9ff2efd", "packetBuiltFrom": "39471b0", "reviewers": 0, "open": "secure reviewers (D-5)" },
     { "id": 5, "name": "Protocol fixed", "status": "DRAFT", "open": "approve and freeze evaluation-protocol.md" },
     { "id": 6, "name": "Results and raw artifacts preserved", "status": "PROCEDURE_DEFINED", "runs": [] }
   ],
