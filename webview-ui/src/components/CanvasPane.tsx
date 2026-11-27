@@ -49,6 +49,7 @@ import type {
   UINotice,
 } from "../lib/vscode";
 import { createLowDetailMode } from "../../../src/shared/edgeDetail";
+import { shouldAnimateDataflow, type DataflowMotionPolicy } from "../../../src/shared/dataflowMotion";
 import { withTemporaryStyles } from "../../../src/shared/temporaryStyles";
 import { classifyTraceStep } from "../../../src/shared/traceSteps";
 import {
@@ -1168,6 +1169,7 @@ function toReactFlowEdges(
   nodeNameById?: Map<string, string>,
   onSelectAggregate?: (selection: AggregateSelection) => void,
   focus?: FocusNeighborhood | null,
+  motionPolicy: DataflowMotionPolicy = "legacy",
 ): Array<Edge<DataflowEdgeData>> {
   const selectedNodeIdSet = new Set(selectedNodeIds ?? []);
   const nameOf = (id: string) => {
@@ -1286,7 +1288,16 @@ function toReactFlowEdges(
               opacity: isSelectedAggregate ? 0.92 : 0.28,
             }
           : undefined,
-      animated: isDataflow && !muted && !isCollapsedBridge && !focusContext,
+      animated: shouldAnimateDataflow({
+        policy: motionPolicy,
+        isDataflow,
+        muted,
+        collapsedBridge: isCollapsedBridge,
+        focusContext,
+        // A relation highlighted on purpose (Inspector Param Flow, an aggregate member, the
+        // trace's current flow), not a node selection.
+        explicitlyHighlighted: isFocusedFlow,
+      }),
       data: isDataflow
         ? {
             label: showDataflowLabel ? label : undefined,
@@ -2178,6 +2189,7 @@ export const CanvasPane = memo(function CanvasPane({
   selectedAggregate,
   onSelectAggregate,
   onClearAggregate,
+  dataflowMotion = "legacy",
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
   const profileTimes = useRef({ nodesMs: 0, drawnEdgesMs: 0, edgesMs: 0 });
@@ -2900,11 +2912,13 @@ export const CanvasPane = memo(function CanvasPane({
             nodeNameById,
             onSelectAggregate,
             activeFocus,
+            dataflowMotion,
           ),
         (duration) => { profileTimes.current.edgesMs = duration; },
       ),
     [
       activeFocus,
+      dataflowMotion,
       drawnEdges,
       highlightedEdgeId,
       nodeNameById,
@@ -3942,5 +3956,7 @@ type Props = {
   selectedAggregate: AggregateSelection | null;
   onSelectAggregate: (selection: AggregateSelection) => void;
   onClearAggregate: () => void;
+  /** Which dataflow edges move (P15-R1); legacy by default. */
+  dataflowMotion?: DataflowMotionPolicy;
   onRegisterSnapshotExporter?: (exporter: ((format: SnapshotFormat) => Promise<string>) | null) => void;
 };

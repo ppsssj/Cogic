@@ -36,6 +36,7 @@ import {
 import { configurePipelineProfile, newProfileRequestId, pipelineEnabled, profileWebview } from "./lib/pipelineProfile";
 import { ownsLoading } from "../../src/shared/requestOwnership";
 import { buildGraphFromTrace } from "../../src/shared/traceSteps";
+import { parseDataflowMotionPolicy, type DataflowMotionPolicy } from "../../src/shared/dataflowMotion";
 import {
   decideTraceExit,
   gateActiveResult,
@@ -682,6 +683,8 @@ export default function App() {
     useState<WorkspaceFilesPayload | null>(null);
   const [selection, setSelection] = useState<SelectionPayload>(null);
   const [analysis, setAnalysis] = useState<AnalysisPayload>(null);
+  // P15-R1 opt-in (hidden setting cogic.experimental.dataflowMotion); legacy until told otherwise.
+  const [dataflowMotion, setDataflowMotion] = useState<DataflowMotionPolicy>("legacy");
   const [profileRequestId, setProfileRequestId] = useState<string | null>(null);
 
   const [graphState, setGraphState] = useState<GraphPayload | undefined>(
@@ -1183,6 +1186,11 @@ export default function App() {
       if (msg.type === "hostState") {
         const payload: HostStatePayload = msg.payload;
         setHostState(payload);
+        return;
+      }
+
+      if (msg.type === "dataflowMotion") {
+        setDataflowMotion(parseDataflowMotionPolicy(msg.payload.policy));
         return;
       }
 
@@ -2934,6 +2942,7 @@ export default function App() {
           selectedAggregate={selectedAggregate}
           onSelectAggregate={selectAggregate}
           onClearAggregate={clearAggregate}
+          dataflowMotion={dataflowMotion}
           loadingState={analysisLoading}
           autoLayoutTick={autoLayoutTick}
           workspaceRoot={workspaceRoot}
