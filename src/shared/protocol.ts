@@ -1,3 +1,5 @@
+import type { PanEdgeDetailPolicy } from "./panEdgeDetail";
+
 export type TraceScope = "single-file" | "current-depth";
 
 export type WebviewToExtMessage =
@@ -332,6 +334,8 @@ export type ExtToWebviewMessage =
         sidebarLocation: "left" | "right";
       };
     }
+  /** The hidden setting cogic.experimental.panSolidEdges (P15-P1, opt-in). */
+  | { type: "panEdgeDetail"; payload: { policy: PanEdgeDetailPolicy } }
   | {
       type: "analysisCacheState";
       payload: {

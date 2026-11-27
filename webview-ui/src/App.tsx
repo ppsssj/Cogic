@@ -14,6 +14,7 @@ import { Inspector } from "./components/Inspector";
 import type { AggregateSelection } from "./components/AggregateEdge";
 import type { AggregateMemberEnd } from "./components/AggregatePanel";
 import type { EdgeMember } from "../../src/shared/edgeAggregation";
+import { parsePanEdgeDetailPolicy, type PanEdgeDetailPolicy } from "../../src/shared/panEdgeDetail";
 import { ScaffoldLab } from "./components/ScaffoldLab";
 import {
   getVSCodeApi,
@@ -675,6 +676,8 @@ export default function App() {
     currentHost: "panel",
     sidebarLocation: "left",
   });
+  // P15-P1 opt-in (hidden setting cogic.experimental.panSolidEdges); off until told otherwise.
+  const [panEdgeDetail, setPanEdgeDetail] = useState<PanEdgeDetailPolicy>("off");
   const [analysisCacheState, setAnalysisCacheState] =
     useState<AnalysisCacheStatePayload>({ enabled: true });
   const [activeFile, setActiveFile] = useState<ActiveFilePayload>(null);
@@ -1188,6 +1191,11 @@ export default function App() {
 
       if (msg.type === "analysisCacheState") {
         setAnalysisCacheState(msg.payload);
+        return;
+      }
+
+      if (msg.type === "panEdgeDetail") {
+        setPanEdgeDetail(parsePanEdgeDetailPolicy(msg.payload.policy));
         return;
       }
 
@@ -2900,6 +2908,7 @@ export default function App() {
       >
         <CanvasPane
           profileRequestId={profileRequestId}
+          panEdgeDetail={panEdgeDetail}
           graph={graph}
           hasData={hasGraphData}
           activeFilePath={graphFilePath}

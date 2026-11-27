@@ -1105,3 +1105,9 @@
     transform: scale(1);
   }
 }
+
+/* While the user drags the canvas (opt-in, P15-P1): solid strokes. Same override as the low-detail
+   mode; the two are independent and both only remove the dashes. */
+.canvasFlow--panningSolidEdges .react-flow__edges .react-flow__edge-path {
+  stroke-dasharray: none !important;
+}

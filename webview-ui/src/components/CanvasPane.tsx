@@ -49,6 +49,10 @@ import type {
   UINotice,
 } from "../lib/vscode";
 import { createLowDetailMode } from "../../../src/shared/edgeDetail";
+import {
+  createPanSolidController,
+  type PanEdgeDetailPolicy,
+} from "../../../src/shared/panEdgeDetail";
 import { withTemporaryStyles } from "../../../src/shared/temporaryStyles";
 import { classifyTraceStep } from "../../../src/shared/traceSteps";
 import {
@@ -999,6 +1003,72 @@ function LowDetailEdges({
       container.classList.remove(LOW_DETAIL_EDGES_CLASS);
     };
   }, [containerRef, store, suspended]);
+
+  return null;
+}
+
+const PAN_SOLID_EDGES_CLASS = "canvasFlow--panningSolidEdges";
+
+/**
+ * Draws edges solid while the user drags the canvas (P15-P1, opt-in). It listens to React Flow's
+ * own d3-zoom under its own event namespace and toggles one class on the container: no React state,
+ * no change to edges, nodes or layout. Only a pointer drag switches; wheel zoom and programmatic
+ * moves do not.
+ */
+function PanSolidEdges({
+  containerRef,
+  suspended,
+  policy,
+}: {
+  containerRef: RefObject<HTMLDivElement | null>;
+  suspended: boolean;
+  policy: PanEdgeDetailPolicy;
+}) {
+  const store = useStoreApi();
+
+  useEffect(() => {
+    const container = containerRef.current;
+    // Export copies computed styles, so it must see the original strokes.
+    if (!container || suspended || policy === "off") return;
+
+    const controller = createPanSolidController({
+      policy,
+      apply: (solid) => container.classList.toggle(PAN_SOLID_EDGES_CLASS, solid),
+      schedule: (fn, ms) => window.setTimeout(fn, ms),
+      cancelSchedule: (handle) => window.clearTimeout(handle as number),
+    });
+    type Zoom = NonNullable<ReturnType<typeof store.getState>["d3Zoom"]>;
+    let attached: Zoom | null = null;
+    const detach = () => {
+      attached?.on("zoom.cogicPanSolid", null);
+      attached?.on("end.cogicPanSolid", null);
+      attached = null;
+    };
+    const attach = () => {
+      const zoom = store.getState().d3Zoom;
+      if (!zoom || zoom === attached) return;
+      detach();
+      zoom.on("zoom.cogicPanSolid", (event: { sourceEvent?: { type?: string } | null }) => controller.move(event.sourceEvent));
+      zoom.on("end.cogicPanSolid", () => controller.end());
+      attached = zoom;
+    };
+    attach();
+    // React Flow creates its d3-zoom once per mount; follow it if it is (re)created.
+    const unsubscribe = store.subscribe((state, previous) => {
+      if (state.d3Zoom !== previous.d3Zoom) attach();
+    });
+    const cancel = () => controller.cancel();
+    window.addEventListener("blur", cancel);
+    window.addEventListener("pointercancel", cancel);
+    return () => {
+      unsubscribe();
+      detach();
+      window.removeEventListener("blur", cancel);
+      window.removeEventListener("pointercancel", cancel);
+      controller.cancel();
+      container.classList.remove(PAN_SOLID_EDGES_CLASS);
+    };
+  }, [containerRef, store, suspended, policy]);
 
   return null;
 }
@@ -2175,6 +2245,7 @@ export const CanvasPane = memo(function CanvasPane({
   workspaceRoot,
   onOpenScaffoldModal,
   onRegisterSnapshotExporter,
+  panEdgeDetail = "off",
   selectedAggregate,
   onSelectAggregate,
   onClearAggregate,
@@ -3748,6 +3819,11 @@ export const CanvasPane = memo(function CanvasPane({
               }}
             >
               <LowDetailEdges containerRef={canvasFlowRef} suspended={renderAllForExport} />
+              <PanSolidEdges
+                containerRef={canvasFlowRef}
+                suspended={renderAllForExport}
+                policy={panEdgeDetail}
+              />
               <AggregateBadgeScale containerRef={canvasFlowRef} suspended={renderAllForExport} />
               <Background gap={24} size={1} />
 
@@ -3943,4 +4019,6 @@ type Props = {
   onSelectAggregate: (selection: AggregateSelection) => void;
   onClearAggregate: () => void;
   onRegisterSnapshotExporter?: (exporter: ((format: SnapshotFormat) => Promise<string>) | null) => void;
+  /** P15-P1 opt-in: solid edges while the user drags the canvas. */
+  panEdgeDetail?: PanEdgeDetailPolicy;
 };

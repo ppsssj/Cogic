@@ -1,0 +1,374 @@
+{
+ "shape": "large",
+ "reps": 0,
+ "conditions": {
+  "D0": "dashed strokes as today (policy off)",
+  "S1": "solid while dragging, dashes back at the mouse up",
+  "S2": "solid while dragging, dashes back 150 ms after the mouse up"
+ },
+ "env": {
+  "node": "v24.12.0",
+  "platform": "win32 10.0.26100",
+  "cpus": "Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz",
+  "memMiB": 8136,
+  "electron": "43.8.9",
+  "chrome": "150.0.7871.250",
+  "gpu": {
+   "2d_canvas": "enabled",
+   "GPU0": "VENDOR= 0x10de, DEVICE=0x128b [NVIDIA GeForce GT 710], DRIVER_VENDOR=NVIDIA, DRIVER_VERSION=27.21.14.5671 *ACTIVE*",
+   "GPU1": "VENDOR= 0x1414, DEVICE=0x008c [Microsoft Basic Render Driver], DRIVER_VERSION=10.0.26100.9711",
+   "Machine model name": "",
+   "Machine model version": "",
+   "direct_rendering_display_compositor": "disabled_off_ok",
+   "gpu_compositing": "enabled",
+   "multiple_raster_threads": "enabled_on",
+   "opengl": "enabled_on",
+   "rasterization": "enabled",
+   "raw_draw": "disabled_off_ok",
+   "skia_graphite": "unavailable_off",
+   "trees_in_viz": "disabled_off",
+   "video_decode": "enabled",
+   "video_encode": "enabled",
+   "webgl": "enabled",
+   "webgpu": "enabled",
+   "webnn": "disabled_off"
+  }
+ },
+ "checks": [
+  {
+   "name": "every group expanded; no animation runs",
+   "pass": true,
+   "detail": {
+    "graphNodes": {
+     "hasGraph": true,
+     "nodes": 650,
+     "edges": 1266,
+     "traceMode": false
+    },
+    "collapsed": 0,
+    "running": 0,
+    "layerStyles": {
+     ".react-flow": {
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "willChange": "auto",
+      "backface": "hidden"
+     },
+     ".react-flow__renderer": {
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "willChange": "auto",
+      "backface": "hidden"
+     },
+     ".react-flow__viewport": {
+      "transform": "matrix(0.1, 0, 0, 0.1, 168.6, -235.8)",
+      "willChange": "auto",
+      "backface": "hidden"
+     },
+     ".react-flow__edges": {
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "willChange": "auto",
+      "backface": "hidden"
+     },
+     ".react-flow__nodes": {
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "willChange": "auto",
+      "backface": "hidden"
+     }
+    }
+   }
+  },
+  {
+   "name": "a straight drag moves the view by the mouse delta (within 1 px)",
+   "pass": true,
+   "detail": {
+    "from": {
+     "x": 342.1,
+     "y": -3564.8,
+     "zoom": 0.6
+    },
+    "to": {
+     "x": 222.1,
+     "y": -3504.8,
+     "zoom": 0.6
+    },
+    "expected": [
+     -120,
+     60
+    ]
+   }
+  },
+  {
+   "name": "wheel zoom does not switch",
+   "pass": true,
+   "detail": []
+  },
+  {
+   "name": "zoom and fit buttons (programmatic moves) do not switch",
+   "pass": true,
+   "detail": []
+  },
+  {
+   "name": "a click on the pane without movement does not switch",
+   "pass": true,
+   "detail": []
+  },
+  {
+   "name": "immediate: solid during the drag, dashed right after the mouse up",
+   "pass": true,
+   "detail": {
+    "during": {
+     "solid": true,
+     "dash": "none"
+    },
+    "after": {
+     "solid": false,
+     "dash": "6px, 6px",
+     "flips": [
+      true,
+      false
+     ]
+    }
+   }
+  },
+  {
+   "name": "window blur and pointer cancel put the dashes back at once",
+   "pass": true,
+   "detail": {
+    "beforeBlur": true,
+    "afterBlur": false,
+    "beforeCancel": true,
+    "afterCancel": false,
+    "endState": false
+   }
+  },
+  {
+   "name": "zoom 0.15: low detail stays on through a pan; strokes stay solid",
+   "pass": true,
+   "detail": {
+    "lowBefore": true,
+    "lowAfter": true,
+    "solidAfter": false,
+    "dash": "none"
+   }
+  },
+  {
+   "name": "hysteresis band 0.20-0.25 (zoom 0.22): a pan leaves the low-detail mode as it was",
+   "pass": true,
+   "detail": {
+    "fromAbove": false,
+    "fromAboveAfter": {
+     "low": false,
+     "dash": "6px, 6px"
+    },
+    "fromBelow": true,
+    "fromBelowAfter": {
+     "low": true,
+     "dash": "none"
+    }
+   }
+  },
+  {
+   "name": "delayed: still solid 40 ms after the mouse up, dashed by 440 ms",
+   "pass": true,
+   "detail": {
+    "at40": true,
+    "at440": false,
+    "flips": [
+     true,
+     false
+    ]
+   }
+  },
+  {
+   "name": "delayed: two drags 60 ms apart switch once each way (no flicker between them)",
+   "pass": true,
+   "detail": {
+    "flips": [
+     true,
+     false
+    ],
+    "gapMs": 418
+   }
+  },
+  {
+   "name": "graph, edge IDs, layout and the React Flow mount unchanged by all of it",
+   "pass": true,
+   "detail": {
+    "before": {
+     "mount": "first mount",
+     "nodes": 11765,
+     "nodeCount": 149,
+     "edgeIds": 86405,
+     "edgeCount": 512
+    },
+    "after": {
+     "mount": "first mount",
+     "nodes": 11765,
+     "nodeCount": 149,
+     "edgeIds": 86405,
+     "edgeCount": 512
+    }
+   }
+  },
+  {
+   "name": "every measured run passed its gates",
+   "pass": true,
+   "detail": []
+  }
+ ],
+ "runs": [],
+ "memory": {
+  "before": 4045,
+  "minimum": 2227,
+  "aborted": false
+ },
+ "graph": {
+  "graphNodes": {
+   "hasGraph": true,
+   "nodes": 650,
+   "edges": 1266,
+   "traceMode": false
+  },
+  "collapsed": 0,
+  "running": 0,
+  "layerStyles": {
+   ".react-flow": {
+    "transform": "matrix(1, 0, 0, 1, 0, 0)",
+    "willChange": "auto",
+    "backface": "hidden"
+   },
+   ".react-flow__renderer": {
+    "transform": "matrix(1, 0, 0, 1, 0, 0)",
+    "willChange": "auto",
+    "backface": "hidden"
+   },
+   ".react-flow__viewport": {
+    "transform": "matrix(0.1, 0, 0, 0.1, 168.6, -235.8)",
+    "willChange": "auto",
+    "backface": "hidden"
+   },
+   ".react-flow__edges": {
+    "transform": "matrix(1, 0, 0, 1, 0, 0)",
+    "willChange": "auto",
+    "backface": "hidden"
+   },
+   ".react-flow__nodes": {
+    "transform": "matrix(1, 0, 0, 1, 0, 0)",
+    "willChange": "auto",
+    "backface": "hidden"
+   }
+  }
+ },
+ "v0": {
+  "flow": {
+   "x": -140.99999999999994,
+   "y": 6657.999999999999
+  },
+  "offCentre": 1030
+ },
+ "straightDrag": {
+  "from": {
+   "x": 342.1,
+   "y": -3564.8,
+   "zoom": 0.6
+  },
+  "to": {
+   "x": 222.1,
+   "y": -3504.8,
+   "zoom": 0.6
+  },
+  "expected": [
+   -120,
+   60
+  ]
+ },
+ "views": {
+  "V0": {
+   "x": 342.09999999999997,
+   "y": -3564.7999999999993,
+   "zoom": 0.6
+  }
+ },
+ "correctness": {
+  "wheel": [],
+  "buttons": [],
+  "click": [],
+  "immediateDuring": {
+   "solid": true,
+   "dash": "none"
+  },
+  "immediateAfter": {
+   "solid": false,
+   "dash": "6px, 6px",
+   "flips": [
+    true,
+    false
+   ]
+  },
+  "cancel": {
+   "beforeBlur": true,
+   "afterBlur": false,
+   "beforeCancel": true,
+   "afterCancel": false,
+   "endState": false
+  },
+  "lowZoom": {
+   "lowBefore": true,
+   "lowAfter": true,
+   "solidAfter": false,
+   "dash": "none"
+  },
+  "hysteresis": {
+   "fromAbove": false,
+   "fromAboveAfter": {
+    "low": false,
+    "dash": "6px, 6px"
+   },
+   "fromBelow": true,
+   "fromBelowAfter": {
+    "low": true,
+    "dash": "none"
+   }
+  },
+  "delayed": {
+   "at40": true,
+   "at440": false,
+   "flips": [
+    true,
+    false
+   ]
+  },
+  "continuousGapMs": 418,
+  "continuous": [
+   true,
+   false
+  ],
+  "coloursWhileSolid": {
+   "call/other": [
+    "color(srgb 0.74902 0.74902 0.74902 / 0.65) 2.2px none",
+    "rgba(226, 232, 240, 0.58) 1.7px none"
+   ],
+   "aggregate": [
+    "rgba(226, 232, 240, 0.58) 1.7px none"
+   ],
+   "dataflow": [
+    "rgb(96, 165, 250) 1.8px none"
+   ]
+  },
+  "invariant": {
+   "before": {
+    "mount": "first mount",
+    "nodes": 11765,
+    "nodeCount": 149,
+    "edgeIds": 86405,
+    "edgeCount": 512
+   },
+   "after": {
+    "mount": "first mount",
+    "nodes": 11765,
+    "nodeCount": 149,
+    "edgeIds": 86405,
+    "edgeCount": 512
+   }
+  }
+ }
+}

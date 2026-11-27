@@ -73,6 +73,7 @@ export function isExtToWebviewMessage(x: unknown): x is ExtToWebviewMessage {
   return (
     t === "hostState" ||
     t === "analysisCacheState" ||
+    t === "panEdgeDetail" ||
     t === "activeFile" ||
     t === "workspaceFiles" ||
     t === "selection" ||
