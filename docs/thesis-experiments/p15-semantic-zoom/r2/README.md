@@ -1,5 +1,13 @@
 # P15-R2: release validation of the focused dataflow motion policy
 
+> **Correction (P15-RC, 2026-11-27): the "Pan" columns below are not pans.** P15-R3 found that this
+> harness pressed the mouse outside the 515 px wide canvas pane, on the Inspector: 1 distinct
+> viewport transform and 2 React commits in 5 s (see `../r3/README.md`). The "Pan" numbers are idle
+> with mouse moves. The idle numbers, the running/paused comparison and the trace and runtime
+> checks stand. Do not cite these pan numbers; real-pan numbers are in P15-R3, P15-P0, P15-P1 and
+> P15-RC (`../../p15-rc/README.md`). The raw records are kept unchanged.
+
+
 Branch `test/focused-animation-release-validation`, on PR #54 (`73bc065`). It adds no product
 code: only the harness `e2e/dataflow-motion/release.mjs` and these records. How to run it: see
 `e2e/dataflow-motion/README.md` (Release checks).

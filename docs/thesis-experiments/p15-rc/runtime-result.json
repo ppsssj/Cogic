@@ -1,0 +1,218 @@
+{
+ "phase": "default-runtime",
+ "reps": 5,
+ "checks": [
+  {
+   "name": "runtime, nothing set: the paused frame marks a graph node, sets no relation highlight; dataflow edges drawn",
+   "pass": true,
+   "detail": {
+    "frame": {
+     "file": "server.js",
+     "line": 5,
+     "name": "global.compute"
+    },
+    "idle": 0,
+    "paused": {
+     "running": 0,
+     "animated": 0,
+     "selected": [
+      "function:c:/dev/p13/p15rc-data/default-runtime1/workspace/src/server.js:108"
+     ],
+     "selection": [],
+     "dataflowEdges": 7
+    },
+    "ended": 0,
+    "markers": 0,
+    "nodes": [
+     6,
+     6
+    ],
+    "edges": [
+     11,
+     11
+    ]
+   }
+  },
+  {
+   "name": "runtime, nothing set: nothing moves idle, paused or after Shift+F5; the graph is back",
+   "pass": true,
+   "detail": {
+    "frame": {
+     "file": "server.js",
+     "line": 5,
+     "name": "global.compute"
+    },
+    "idle": 0,
+    "paused": {
+     "running": 0,
+     "animated": 0,
+     "selected": [
+      "function:c:/dev/p13/p15rc-data/default-runtime1/workspace/src/server.js:108"
+     ],
+     "selection": [],
+     "dataflowEdges": 7
+    },
+    "ended": 0,
+    "markers": 0,
+    "nodes": [
+     6,
+     6
+    ],
+    "edges": [
+     11,
+     11
+    ]
+   }
+  },
+  {
+   "name": "runtime, legacy by name: flows move as before, also while paused; the same node is marked",
+   "pass": true,
+   "detail": {
+    "frame": {
+     "file": "server.js",
+     "line": 5,
+     "name": "global.compute"
+    },
+    "idle": 7,
+    "paused": {
+     "running": 7,
+     "animated": 7,
+     "selected": [
+      "function:c:/dev/p13/p15rc-data/default-runtime1/workspace/src/server.js:108"
+     ],
+     "selection": [],
+     "dataflowEdges": 7
+    },
+    "ended": 7,
+    "markers": 0,
+    "nodes": [
+     6,
+     6
+    ],
+    "edges": [
+     11,
+     11
+    ]
+   }
+  },
+  {
+   "name": "runtime, back to nothing set: nothing moves; the same node is marked",
+   "pass": true,
+   "detail": {
+    "frame": {
+     "file": "server.js",
+     "line": 5,
+     "name": "global.compute"
+    },
+    "idle": 0,
+    "paused": {
+     "running": 0,
+     "animated": 0,
+     "selected": [
+      "function:c:/dev/p13/p15rc-data/default-runtime1/workspace/src/server.js:108"
+     ],
+     "selection": [],
+     "dataflowEdges": 7
+    },
+    "ended": 0,
+    "markers": 0,
+    "nodes": [
+     6,
+     6
+    ],
+    "edges": [
+     11,
+     11
+    ]
+   }
+  }
+ ],
+ "runs": [],
+ "memory": {
+  "before": 3483,
+  "minimum": 2341,
+  "aborted": false,
+  "timeline": []
+ },
+ "default": {
+  "frame": {
+   "file": "server.js",
+   "line": 5,
+   "name": "global.compute"
+  },
+  "idle": 0,
+  "paused": {
+   "running": 0,
+   "animated": 0,
+   "selected": [
+    "function:c:/dev/p13/p15rc-data/default-runtime1/workspace/src/server.js:108"
+   ],
+   "selection": [],
+   "dataflowEdges": 7
+  },
+  "ended": 0,
+  "markers": 0,
+  "nodes": [
+   6,
+   6
+  ],
+  "edges": [
+   11,
+   11
+  ]
+ },
+ "legacy": {
+  "frame": {
+   "file": "server.js",
+   "line": 5,
+   "name": "global.compute"
+  },
+  "idle": 7,
+  "paused": {
+   "running": 7,
+   "animated": 7,
+   "selected": [
+    "function:c:/dev/p13/p15rc-data/default-runtime1/workspace/src/server.js:108"
+   ],
+   "selection": [],
+   "dataflowEdges": 7
+  },
+  "ended": 7,
+  "markers": 0,
+  "nodes": [
+   6,
+   6
+  ],
+  "edges": [
+   11,
+   11
+  ]
+ },
+ "defaultAgain": {
+  "frame": {
+   "file": "server.js",
+   "line": 5,
+   "name": "global.compute"
+  },
+  "idle": 0,
+  "paused": {
+   "running": 0,
+   "animated": 0,
+   "selected": [
+    "function:c:/dev/p13/p15rc-data/default-runtime1/workspace/src/server.js:108"
+   ],
+   "selection": [],
+   "dataflowEdges": 7
+  },
+  "ended": 0,
+  "markers": 0,
+  "nodes": [
+   6,
+   6
+  ],
+  "edges": [
+   11,
+   11
+  ]
+ }
+}

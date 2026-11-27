@@ -69,7 +69,10 @@ function getDefaultAnalysisCacheEnabled() {
     .get<boolean>(ANALYSIS_CACHE_ENABLED_SETTING, true);
 }
 
-/** Not declared in package.json on purpose: an opt-in for verification, absent from the UI. */
+/**
+ * Not declared in package.json on purpose: an experimental key, absent from the Settings UI. With
+ * nothing set the policy is safe (static dashes); "legacy" brings the moving dashes back (P15-RC).
+ */
 function getDataflowMotionPolicy() {
   return parseDataflowMotionPolicy(
     vscode.workspace.getConfiguration(CONFIG_SECTION).get<unknown>(DATAFLOW_MOTION_SETTING),

@@ -52,6 +52,7 @@ import { createLowDetailMode } from "../../../src/shared/edgeDetail";
 import {
   shouldAnimateDataflow,
   shouldShowFlowMarker,
+  DEFAULT_DATAFLOW_MOTION_POLICY,
   type DataflowMotionPolicy,
 } from "../../../src/shared/dataflowMotion";
 import { withTemporaryStyles } from "../../../src/shared/temporaryStyles";
@@ -1212,7 +1213,7 @@ function toReactFlowEdges(
   nodeNameById?: Map<string, string>,
   onSelectAggregate?: (selection: AggregateSelection) => void,
   focus?: FocusNeighborhood | null,
-  motionPolicy: DataflowMotionPolicy = "legacy",
+  motionPolicy: DataflowMotionPolicy = DEFAULT_DATAFLOW_MOTION_POLICY,
 ): Array<Edge<DataflowEdgeData>> {
   const selectedNodeIdSet = new Set(selectedNodeIds ?? []);
   const nameOf = (id: string) => {
@@ -2235,7 +2236,7 @@ export const CanvasPane = memo(function CanvasPane({
   selectedAggregate,
   onSelectAggregate,
   onClearAggregate,
-  dataflowMotion = "legacy",
+  dataflowMotion = DEFAULT_DATAFLOW_MOTION_POLICY,
 }: Props) {
   const rfRef = useRef<ReactFlowInstance | null>(null);
   const profileTimes = useRef({ nodesMs: 0, drawnEdgesMs: 0, edgesMs: 0 });
@@ -4002,7 +4003,7 @@ type Props = {
   selectedAggregate: AggregateSelection | null;
   onSelectAggregate: (selection: AggregateSelection) => void;
   onClearAggregate: () => void;
-  /** Which dataflow edges move (P15-R1); legacy by default. */
+  /** Which dataflow edges move (P15-R1); safe (none) by default (P15-RC). */
   dataflowMotion?: DataflowMotionPolicy;
   onRegisterSnapshotExporter?: (exporter: ((format: SnapshotFormat) => Promise<string>) | null) => void;
 };

@@ -324,7 +324,7 @@ export type AnalysisRequestMeta = {
 };
 
 export type ExtToWebviewMessage =
-  /** The hidden setting cogic.experimental.dataflowMotion (P15-R1, opt-in). */
+  /** The hidden setting cogic.experimental.dataflowMotion (P15-R1); safe when unset (P15-RC). */
   | { type: "dataflowMotion"; payload: { policy: DataflowMotionPolicy } }
   | { type: "analysisLifecycle"; requestId: string; state: "running" | "completed" | "cancelled" | "failed" | "superseded"; sequence?: number }
   /** Sent after a setTraceState is applied, with the graph generation the extension is at then. */

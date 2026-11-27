@@ -16,6 +16,9 @@
  *   one small marker moves along it, as a compositor-only transform animation.
  *
  * Further reasons to animate (hover, for example) would be extra inputs here.
+ *
+ * The default is safe (P15-RC): with no setting, or a value that is not one of the four names,
+ * no dash moves. legacy stays available by name for anyone who wants the moving dashes back.
  */
 export type DataflowMotionPolicy = "legacy" | "focused" | "safe" | "safe-marker";
 
@@ -23,8 +26,11 @@ const POLICIES: readonly DataflowMotionPolicy[] = ["legacy", "focused", "safe", 
 
 export const DATAFLOW_MOTION_SETTING = "experimental.dataflowMotion";
 
+/** What applies with no setting, an invalid one, and before the extension has said anything. */
+export const DEFAULT_DATAFLOW_MOTION_POLICY: DataflowMotionPolicy = "safe";
+
 export function parseDataflowMotionPolicy(value: unknown): DataflowMotionPolicy {
-  return POLICIES.includes(value as DataflowMotionPolicy) ? (value as DataflowMotionPolicy) : "legacy";
+  return POLICIES.includes(value as DataflowMotionPolicy) ? (value as DataflowMotionPolicy) : DEFAULT_DATAFLOW_MOTION_POLICY;
 }
 
 export type DataflowMotionInput = {

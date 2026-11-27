@@ -106,6 +106,19 @@ Cogic also contributes an Activity Bar container named `Cogic`.
 - Canvas controls: zoom in, zoom out, focus selection, and fit graph
 - Top bar controls: refresh, layout, export, trace mode, depth, and project/file context
 
+### How relations are drawn
+
+- **Dataflow** relations are blue dashed lines with an arrowhead; argument-to-parameter labels show
+  on the highlighted relation. **Calls** are solid gray lines. Lines into a collapsed group are
+  lighter.
+- **The dashes do not move** (since P15-RC). Earlier versions animated every dataflow dash; that
+  repainted the canvas continuously. A relation you highlight (a Param Flow in the Inspector, an
+  aggregate member, the current trace step) is shown by its color, width, arrow and label instead.
+- **To get the moving dashes back,** add `"cogic.experimental.dataflowMotion": "legacy"` to your
+  `settings.json`. The key is experimental and not listed in the Settings UI. Other values:
+  `"safe"` (the default), `"focused"` (only the highlighted relation moves). Any other value means
+  `"safe"`.
+
 ---
 
 ## Root And Scope

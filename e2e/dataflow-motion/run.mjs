@@ -41,7 +41,7 @@ const baseSettings = {
 };
 const writePolicy = (policy) =>
   fs.writeFileSync(settingsFile, JSON.stringify({ ...baseSettings, ...(policy ? { "cogic.experimental.dataflowMotion": policy } : {}) }));
-writePolicy(null); // nothing set: the default must be legacy
+writePolicy("legacy"); // P15-RC: the default is safe, so the R1 baseline sets legacy by name
 
 const result = { shape: SHAPE, reps: REPS, repsLow: REPS_LOW, panMs: PAN_MS, checks: [], runs: [], memory: { before: freeMiB(), minimum: freeMiB(), aborted: false, timeline: [] } };
 const check = (name, pass, detail) => {
@@ -421,7 +421,7 @@ try {
   // ---- correctness, in a real VS Code
   await goTo(VIEW[0.6]);
   const legacyDefault = await state();
-  check("nothing set: legacy (every eligible dataflow edge runs)", legacyDefault.running > 0 && legacyDefault.running === legacyDefault.animated, legacyDefault);
+  check("legacy set by name: every eligible dataflow edge runs", legacyDefault.running > 0 && legacyDefault.running === legacyDefault.animated, legacyDefault);
   const legacyLayout = await layout();
   const reanalysis = await setPolicy("focused");
   await goTo(VIEW[0.6]);
