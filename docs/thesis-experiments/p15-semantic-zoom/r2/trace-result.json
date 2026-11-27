@@ -1,0 +1,702 @@
+{
+ "phase": "trace",
+ "reps": 5,
+ "checks": [
+  {
+   "name": "trace step 1 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 1,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 2 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 2,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 3 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 3,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 4 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 4,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 5 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 5,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 6 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 6,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 7 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 7,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 8 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 8,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 9 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 9,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 10 (node): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 10,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 11 (constructs): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 11,
+    "kind": "constructs",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   }
+  },
+  {
+   "name": "trace step 12 (dataflow): exactly the current relation moves",
+   "pass": true,
+   "detail": {
+    "cursor": 12,
+    "kind": "dataflow",
+    "running": 1,
+    "runningIds": [
+     "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@value <- word@@arg#0"
+    ],
+    "owners": [
+     [
+      "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553",
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306"
+     ]
+    ],
+    "connected": [
+     "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306",
+     "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553"
+    ],
+    "dataflowEdges": 1
+   }
+  },
+  {
+   "name": "trace step 12: the previous relation stopped",
+   "pass": true,
+   "detail": {
+    "previousRunning": [],
+    "now": [
+     "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@value <- word@@arg#0"
+    ]
+   }
+  },
+  {
+   "name": "trace step 13 (dataflow): exactly the current relation moves",
+   "pass": true,
+   "detail": {
+    "cursor": 13,
+    "kind": "dataflow",
+    "running": 1,
+    "runningIds": [
+     "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@key <- 1@@arg#0"
+    ],
+    "owners": [
+     [
+      "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553",
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306"
+     ]
+    ],
+    "connected": [
+     "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306",
+     "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553"
+    ],
+    "dataflowEdges": 2
+   }
+  },
+  {
+   "name": "trace step 13: the previous relation stopped",
+   "pass": true,
+   "detail": {
+    "previousRunning": [
+     "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@value <- word@@arg#0"
+    ],
+    "now": [
+     "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@key <- 1@@arg#0"
+    ]
+   }
+  },
+  {
+   "name": "trace step 14 (dataflow): exactly the current relation moves",
+   "pass": true,
+   "detail": {
+    "cursor": 14,
+    "kind": "dataflow",
+    "running": 1,
+    "runningIds": [
+     "aggregate:[\"dataflow\",\"function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553\",\"class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306\",\"\",\"\",\"value <- word\"]"
+    ],
+    "owners": [
+     [
+      "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553",
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306"
+     ]
+    ],
+    "connected": [
+     "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306",
+     "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553"
+    ],
+    "dataflowEdges": 2
+   }
+  },
+  {
+   "name": "trace step 14: the previous relation stopped",
+   "pass": true,
+   "detail": {
+    "previousRunning": [
+     "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@key <- 1@@arg#0"
+    ],
+    "now": [
+     "aggregate:[\"dataflow\",\"function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553\",\"class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306\",\"\",\"\",\"value <- word\"]"
+    ]
+   }
+  },
+  {
+   "name": "trace step 15 (calls): nothing moves",
+   "pass": true,
+   "detail": {
+    "cursor": 15,
+    "kind": "calls",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 2
+   }
+  },
+  {
+   "name": "trace step 16 (dataflow): exactly the current relation moves",
+   "pass": true,
+   "detail": {
+    "cursor": 16,
+    "kind": "dataflow",
+    "running": 1,
+    "runningIds": [
+     "dataflow:method:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:703->method:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:782@@v <- v@@arg#0"
+    ],
+    "owners": [
+     [
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:680",
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:680"
+     ]
+    ],
+    "connected": [
+     "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:680"
+    ],
+    "dataflowEdges": 3
+   }
+  },
+  {
+   "name": "trace step 16: the previous relation stopped",
+   "pass": true,
+   "detail": {
+    "previousRunning": [],
+    "now": [
+     "dataflow:method:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:703->method:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:782@@v <- v@@arg#0"
+    ]
+   }
+  },
+  {
+   "name": "trace exit: the graph is back and nothing moves (focused, nothing selected)",
+   "pass": true,
+   "detail": {
+    "total": 16,
+    "steps": [
+     {
+      "cursor": 1,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 2,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 3,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 4,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 5,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 6,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 7,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 8,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 9,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 10,
+      "kind": "node",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 11,
+      "kind": "constructs",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 0
+     },
+     {
+      "cursor": 12,
+      "kind": "dataflow",
+      "running": 1,
+      "runningIds": [
+       "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@value <- word@@arg#0"
+      ],
+      "owners": [
+       [
+        "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553",
+        "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306"
+       ]
+      ],
+      "connected": [
+       "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306",
+       "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553"
+      ],
+      "dataflowEdges": 1
+     },
+     {
+      "cursor": 13,
+      "kind": "dataflow",
+      "running": 1,
+      "runningIds": [
+       "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@key <- 1@@arg#0"
+      ],
+      "owners": [
+       [
+        "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553",
+        "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306"
+       ]
+      ],
+      "connected": [
+       "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306",
+       "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553"
+      ],
+      "dataflowEdges": 2
+     },
+     {
+      "cursor": 14,
+      "kind": "dataflow",
+      "running": 1,
+      "runningIds": [
+       "aggregate:[\"dataflow\",\"function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553\",\"class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306\",\"\",\"\",\"value <- word\"]"
+      ],
+      "owners": [
+       [
+        "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553",
+        "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306"
+       ]
+      ],
+      "connected": [
+       "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306",
+       "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553"
+      ],
+      "dataflowEdges": 2
+     },
+     {
+      "cursor": 15,
+      "kind": "calls",
+      "running": 0,
+      "runningIds": [],
+      "owners": [],
+      "connected": [],
+      "dataflowEdges": 2
+     },
+     {
+      "cursor": 16,
+      "kind": "dataflow",
+      "running": 1,
+      "runningIds": [
+       "dataflow:method:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:703->method:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:782@@v <- v@@arg#0"
+      ],
+      "owners": [
+       [
+        "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:680",
+        "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:680"
+       ]
+      ],
+      "connected": [
+       "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:680"
+      ],
+      "dataflowEdges": 3
+     }
+    ],
+    "before": {
+     "nodes": 12,
+     "edges": 18
+    },
+    "after": {
+     "nodes": 12,
+     "edges": 18,
+     "running": 0
+    }
+   }
+  }
+ ],
+ "runs": [],
+ "memory": {
+  "before": 3130,
+  "minimum": 1995,
+  "aborted": false,
+  "timeline": []
+ },
+ "trace": {
+  "total": 16,
+  "steps": [
+   {
+    "cursor": 1,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 2,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 3,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 4,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 5,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 6,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 7,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 8,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 9,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 10,
+    "kind": "node",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 11,
+    "kind": "constructs",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 0
+   },
+   {
+    "cursor": 12,
+    "kind": "dataflow",
+    "running": 1,
+    "runningIds": [
+     "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@value <- word@@arg#0"
+    ],
+    "owners": [
+     [
+      "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553",
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306"
+     ]
+    ],
+    "connected": [
+     "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306",
+     "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553"
+    ],
+    "dataflowEdges": 1
+   },
+   {
+    "cursor": 13,
+    "kind": "dataflow",
+    "running": 1,
+    "runningIds": [
+     "dataflow:function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553->class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306@@key <- 1@@arg#0"
+    ],
+    "owners": [
+     [
+      "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553",
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306"
+     ]
+    ],
+    "connected": [
+     "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306",
+     "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553"
+    ],
+    "dataflowEdges": 2
+   },
+   {
+    "cursor": 14,
+    "kind": "dataflow",
+    "running": 1,
+    "runningIds": [
+     "aggregate:[\"dataflow\",\"function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553\",\"class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306\",\"\",\"\",\"value <- word\"]"
+    ],
+    "owners": [
+     [
+      "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553",
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306"
+     ]
+    ],
+    "connected": [
+     "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:306",
+     "function:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:553"
+    ],
+    "dataflowEdges": 2
+   },
+   {
+    "cursor": 15,
+    "kind": "calls",
+    "running": 0,
+    "runningIds": [],
+    "owners": [],
+    "connected": [],
+    "dataflowEdges": 2
+   },
+   {
+    "cursor": 16,
+    "kind": "dataflow",
+    "running": 1,
+    "runningIds": [
+     "dataflow:method:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:703->method:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:782@@v <- v@@arg#0"
+    ],
+    "owners": [
+     [
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:680",
+      "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:680"
+     ]
+    ],
+    "connected": [
+     "class:c:/dev/p13/p15r2-data/trace3/workspace/src/app/a.ts:680"
+    ],
+    "dataflowEdges": 3
+   }
+  ],
+  "before": {
+   "nodes": 12,
+   "edges": 18
+  },
+  "after": {
+   "nodes": 12,
+   "edges": 18,
+   "running": 0
+  }
+ }
+}

@@ -1,0 +1,107 @@
+{
+ "phase": "runtime",
+ "reps": 5,
+ "checks": [
+  {
+   "name": "runtime (focused): the paused frame marks a graph node",
+   "pass": true,
+   "detail": {
+    "frame": {
+     "file": "server.js",
+     "line": 5,
+     "name": "global.compute"
+    },
+    "idle": 0,
+    "paused": {
+     "running": 0,
+     "selected": [
+      "function:c:/dev/p13/p15r2-data/runtime1/workspace/src/server.js:108"
+     ],
+     "selection": [],
+     "dataflowEdges": 7
+    },
+    "ended": 0
+   }
+  },
+  {
+   "name": "runtime (focused): no relation moves while paused; dataflow edges are drawn",
+   "pass": true,
+   "detail": {
+    "frame": {
+     "file": "server.js",
+     "line": 5,
+     "name": "global.compute"
+    },
+    "idle": 0,
+    "paused": {
+     "running": 0,
+     "selected": [
+      "function:c:/dev/p13/p15r2-data/runtime1/workspace/src/server.js:108"
+     ],
+     "selection": [],
+     "dataflowEdges": 7
+    },
+    "ended": 0
+   }
+  },
+  {
+   "name": "runtime (focused): nothing moves after the session ends",
+   "pass": true,
+   "detail": {
+    "frame": {
+     "file": "server.js",
+     "line": 5,
+     "name": "global.compute"
+    },
+    "idle": 0,
+    "paused": {
+     "running": 0,
+     "selected": [
+      "function:c:/dev/p13/p15r2-data/runtime1/workspace/src/server.js:108"
+     ],
+     "selection": [],
+     "dataflowEdges": 7
+    },
+    "ended": 0
+   }
+  },
+  {
+   "name": "runtime (legacy, for comparison): flows move as before, also while paused",
+   "pass": true,
+   "detail": {
+    "idle": 7,
+    "paused": 7,
+    "ended": 7
+   }
+  }
+ ],
+ "runs": [],
+ "memory": {
+  "before": 3079,
+  "minimum": 1994,
+  "aborted": false,
+  "timeline": []
+ },
+ "focused": {
+  "frame": {
+   "file": "server.js",
+   "line": 5,
+   "name": "global.compute"
+  },
+  "idle": 0,
+  "paused": {
+   "running": 0,
+   "selected": [
+    "function:c:/dev/p13/p15r2-data/runtime1/workspace/src/server.js:108"
+   ],
+   "selection": [],
+   "dataflowEdges": 7
+  },
+  "ended": 0
+ },
+ "legacy": {
+  "idle": 7,
+  "paused": 7,
+  "ended": 7
+ }
+}

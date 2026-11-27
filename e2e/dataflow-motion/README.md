@@ -68,3 +68,41 @@ the renderer working set. GPU time is not measured.
 Memory: at least 2200 MiB free to start, stop below 800 MiB.
 
 `R1_REPS` and `R1_REPS_LOW` set the repetitions.
+
+## Release checks (P15-R2): `release.mjs`
+
+`R2_PHASE` selects the phase. Each phase starts its own VS Code under the focused policy. The
+harness may add a style to the page to pause an animation; it adds nothing to the product.
+
+**`long`**: one highlighted dataflow edge at a time, from short to screen-crossing.
+- On the P15-R1 fixture with every group expanded, dataflow path lengths are measured with
+  `getTotalLength()` in a few overviews.
+- Four edges are picked: about the 5th percentile, the median, the 90th percentile, and the
+  longest.
+- For each edge, the harness finds the Inspector Param Flow row of its source node that highlights
+  it.
+- Each condition is measured at zoom 0.6, centred on the edge, with 2 s idle and a 5 s pan:
+
+  | Condition | State |
+  |---|---|
+  | A | nothing highlighted (static dashes) |
+  | B | that relation highlighted (it runs) |
+  | C | that relation highlighted, with the animation paused by a style on the page |
+
+  Repetitions rotate the order. Each run checks the running count and the running edge's ID.
+
+**`trace`**: a trace on `e2e/aggregate-inspector/fixture/src/app/a.ts`.
+- At a dataflow step, exactly one dataflow edge runs, and both its drawn ends (aggregate keys and
+  class members resolved to their card) are the nodes highlighted for the flow.
+- At any other step, nothing runs.
+- After the trace ends, the graph is back and nothing runs.
+
+**`runtime`**: a small JS program with a `debugger` statement, started with F5.
+- Runtime Debug marks the paused frame's node; it sets no relation highlight.
+- Under focused nothing runs while paused or after Shift+F5.
+- Under legacy, flows run as before.
+
+```
+set R2_PHASE=long
+node e2e/dataflow-motion/release.mjs <new output folder>
+```
