@@ -1,0 +1,38 @@
+{
+  "schema": "p14c-execution-gates/1",
+  "recordedAt": "2026-11-27",
+  "officialAccuracyVerdict": "BLOCKED",
+  "protocol": "evaluation-protocol.md (DRAFT-0)",
+  "protocolFreezeCommit": null,
+  "gates": [
+    {
+      "id": 1,
+      "name": "Analyzer SHA and build fixed",
+      "status": "CANDIDATE_RECORDED",
+      "candidate": {
+        "commit": "6ee778418e189d02ba11089de7550231c75292ac",
+        "srcAnalyzerTree": "175409dffcdc9875d2b91a7f4af5f9d976fab3a7",
+        "srcSharedTree": "5698ec4ebaf7c13656cacee60571dfaef22d1532",
+        "analyzerBuildHash": "697dcdd30804404cdeca70e5853b85af53cf17a9f7abba4c8ba65ec8b00cefc4",
+        "typescript": "5.9.3",
+        "node": "24.12.0"
+      },
+      "open": "fix at protocol freeze; runner 1.3 identity gate (D-3)"
+    },
+    {
+      "id": 2,
+      "name": "Corpus integrity",
+      "status": "VERIFIED_FOR_PINNED_COMMITS",
+      "corpusA": { "fixturesTree": "08f74c59d786fe41d5095db844513fa620d6f8bf", "check": "runner 1.2 preflight passed on 6ee7784" },
+      "corpusB": { "commit": "4c5a3e234f930057b15e3f0a608939839c0dc62a", "fixturesTree": "1a76222db20c4528f8b9dcdb89b854464db99a02", "manifestBlob": "4a3fcfb6808619703bd7eea47f7fa2c11f0887d3", "check": "tree identical at b4a5ff5 and 4c5a3e2; manifest.mjs --check OK (601 files) in a clean 4c5a3e2 worktree" },
+      "open": "D-2 (Corpus B on main or pinned)"
+    },
+    { "id": 3, "name": "Scorer policy fixed and tested", "status": "OPEN", "open": "D-1 (lenient L1-L4); strict unaffected by every candidate" },
+    { "id": 4, "name": "Independent human review complete", "status": "NOT_STARTED", "packetSha256": "30f0456f94de9af9ca5eb79449f38b76f65a5761634560961f1e231a500058e1", "reviewers": 0, "open": "secure reviewers (D-5)" },
+    { "id": 5, "name": "Protocol fixed", "status": "DRAFT", "open": "approve and freeze evaluation-protocol.md" },
+    { "id": 6, "name": "Results and raw artifacts preserved", "status": "PROCEDURE_DEFINED", "runs": [] }
+  ],
+  "exploratoryRuns": [
+    { "runId": "p14c-smoke-6ee7784", "runner": "exp01-runner/1.2", "bootstrap": 0, "status": "completed, scoring COMPLETE, technical gate NOT PASSED (ANALYZER_NOT_IDENTICAL_TO_BASELINE, BOOTSTRAP_NOT_PREREGISTERED)", "numbersReported": false, "storedOutsideRepository": true }
+  ]
+}

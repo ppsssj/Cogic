@@ -3,7 +3,7 @@
 - 기준: `main` `6ee778418e189d02ba11089de7550231c75292ac`, 브랜치 `research/p14c-accuracy-protocol`
 - **판정: BLOCKED.** 공식 정확도 결과는 독립 사람 검토(게이트 4)가 끝나기 전까지 산출·보고하지 않는다.
 - 이 단계에서 바꾸지 않은 것: 제품 코드, GT v1, scorer 1.2(`tools/exp01/lib.mjs`), runner 1.2, 과거 run·raw data.
-- 미완성(사용 한도로 중단): 프로토콜 상세 문서의 분리 작성, 게이트 JSON, 연구자용 adjudication 양식 템플릿. 아래 §3–§6의 내용이 현재의 초안이다.
+- 문서: [평가 프로토콜 초안](evaluation-protocol.md) · [실행 게이트](execution-gates.json) · [사람 검토 절차](human-review/README.md) · [조정 양식](human-review/adjudication/) · 검토자용 [패킷 템플릿](human-review/packet-template/)
 
 ## 1. 버전과 무결성 (VERIFIED)
 
@@ -13,7 +13,7 @@
 | P14-B(`cdc3196`) 이후 analyzer 변경 | #31 Program 재사용, #32 계측, #33 Depth 요청 수명주기(`analyze.ts`, `depth.ts`, `index.ts`, +518줄). 출력 동일성은 검증되지 않았다 |
 | 과거 기준 | ORIGINAL `43ace0f`(tree `33f97d7`), IMPROVED `bbe4cbf`(`a2202f4`), P14-A `fdaecd4`(`5e89665`) |
 | Corpus A | fixtures tree `08f74c5`(P1-A-R1 이후 변경 없음). runner preflight의 GT manifest·평가 manifest r2 검사 통과 |
-| Corpus B | main에 없다. PR #15(`b4a5ff5`)와 #19(`4c5a3e2`)에만 있으며 두 커밋의 fixtures tree `1a76222`, MANIFEST blob `4a3fcfb`가 같다. #16–#18은 #15 브랜치로 병합되었다 |
+| Corpus B | main에 없다. PR #15(`b4a5ff5`)와 #19(`4c5a3e2`)에만 있으며 두 커밋의 fixtures tree `1a76222`, MANIFEST blob `4a3fcfb`가 같다. #16–#18은 #15 브랜치로 병합되었다. clean `4c5a3e2` worktree에서 `manifest.mjs --check` OK(601파일) |
 
 **진단 smoke run**(`exp01-run.mjs --bootstrap 0`, 결과는 저장소 밖 보관): 44/44 실행, 결정성·OFF/ON 일치, warm hit 경로 VERIFIED, scorer `COMPLETE`. 기술 게이트는 `ANALYZER_NOT_IDENTICAL_TO_BASELINE`과 `BOOTSTRAP_NOT_PREREGISTERED`로 불합격이다(예상대로). **정확도 수치는 보고하지 않는다.**
 
@@ -31,7 +31,7 @@ runner의 `analyzerIdentity.note`는 고정 문구("Same analyzer implementation
    - Corpus B의 P1-K3 패킷에는 지원 분류 열(`catalog.blind.csv`)과 패턴 선택 규칙이 들어 있다.
 6. Corpus B 결과(P1-L)는 과거 두 analyzer의 결과이며 main에 병합되지 않았다.
 
-## 3. 평가 프로토콜 초안 (DRAFT, 미고정)
+## 3. 평가 프로토콜 초안 (DRAFT, 미고정) — 전문은 [evaluation-protocol.md](evaluation-protocol.md)
 
 - **대상:** 평가 시점에 고정한 analyzer SHA와 빌드 해시 한 개. 과거 baseline과의 동일성이 아니라 이 고정값과의 동일성을 게이트로 쓴다(새 runner 설정 또는 runner 1.3이 필요하며, 승인 대상이다).
 - **Corpus·GT:** Corpus A tree `08f74c5`와 GT v1, Corpus B tree `1a76222`와 GT v1. 사람 검토 후 정정이 필요하면 `expected.v2.json`을 따로 만들고 v1은 보존한다. v1과 v2를 모두 채점해 함께 보고한다.
@@ -92,7 +92,7 @@ runner의 `analyzerIdentity.note`는 고정 문구("Same analyzer implementation
 | 게이트 | 상태 |
 |---|---|
 | 1. Analyzer SHA·빌드 고정 | 후보값 기록(§1). 평가 시점에 고정 필요 |
-| 2. Corpus 무결성 | Corpus A 검증. Corpus B는 브랜치 커밋 고정 확인, main 통합은 미결정 |
+| 2. Corpus 무결성 | 고정 커밋 기준 A·B 모두 검증. Corpus B의 main 통합은 미결정(D-2) |
 | 3. Scorer 정책 고정·테스트 | **미결정**(§4 L1–L4 승인 필요) |
 | 4. 독립 사람 검토 | **미시작**: 검토자 미확보 |
 | 5. 프로토콜 고정 | 초안(§3). 승인·고정 커밋 필요 |
@@ -102,4 +102,5 @@ runner의 `analyzerIdentity.note`는 고정 문구("Same analyzer implementation
 
 - `node --test docs/thesis-experiments/p14c-protocol/tools/test/*.test.mjs`: 16/16 통과.
 - runner smoke 1회: 위 §1 결과.
+- Corpus B `manifest.mjs --check`(clean `4c5a3e2` worktree): OK, 601파일.
 - 제품 테스트(`npm test`)는 이번 변경이 문서·연구 도구뿐이어서 다시 돌리지 않았다.
