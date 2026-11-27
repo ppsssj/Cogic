@@ -1,0 +1,7 @@
+{
+  "beforePan": "transform: translate(184px, -1279px) scale(0.1);",
+  "afterPan": "transform: translate(184px, -1279px) scale(0.1);",
+  "afterZoom": "transform: translate(208.439px, -1850.2px) scale(0.141421);",
+  "panChanged": false,
+  "zoomChanged": true
+}
