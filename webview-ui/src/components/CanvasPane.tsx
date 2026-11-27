@@ -193,6 +193,13 @@ function waitForAnimationFrames(count = 1) {
   });
 }
 
+/**
+ * Research only (P15-P0): a build made with VITE_COGIC_EXPERIMENT_RENDER_ALL=1 turns React Flow's
+ * virtualization off, to compare ON/OFF on a small fixture. Normal builds leave it undefined, so
+ * this is a constant false and nothing changes.
+ */
+const EXPERIMENT_RENDER_ALL = import.meta.env.VITE_COGIC_EXPERIMENT_RENDER_ALL === "1";
+
 function exportNodeFilter(node: globalThis.Node) {
   if (!(node instanceof HTMLElement)) return true;
   return !(
@@ -3727,7 +3734,7 @@ export const CanvasPane = memo(function CanvasPane({
                 }
               }}
               fitView
-              onlyRenderVisibleElements={!renderAllForExport}
+              onlyRenderVisibleElements={!renderAllForExport && !EXPERIMENT_RENDER_ALL}
               minZoom={0.1}
               maxZoom={2.2}
               proOptions={{ hideAttribution: true }}
