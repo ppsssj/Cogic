@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { PAN_EDGE_DETAIL_SETTING, parsePanEdgeDetailPolicy } from "../shared/panEdgeDetail";
 import * as path from "path";
 import * as crypto from "crypto";
 import { getWebviewHtml } from "../webview/html";
@@ -66,6 +67,10 @@ function getDefaultAnalysisCacheEnabled() {
   return vscode.workspace
     .getConfiguration(CONFIG_SECTION)
     .get<boolean>(ANALYSIS_CACHE_ENABLED_SETTING, true);
+}
+
+function getPanEdgeDetailPolicy() {
+  return parsePanEdgeDetailPolicy(vscode.workspace.getConfiguration(CONFIG_SECTION).get(PAN_EDGE_DETAIL_SETTING));
 }
 
 function clampGraphDepth(depth: number | undefined) {
@@ -343,6 +348,7 @@ export class CodeGraphPanel {
             return this.postHostState();
           }
           if (msg.type === "requestAnalysisCacheState") {
+            this.postPanEdgeDetail();
             return this.postAnalysisCacheState();
           }
           if (msg.type === "switchHost") {
@@ -494,6 +500,7 @@ export class CodeGraphPanel {
     void this.postWorkspaceFiles();
     this.postSelection();
     this.postAnalysisCacheState();
+    this.postPanEdgeDetail();
     const runtimePayload = this.runtimeDebugBridge?.getLastPayload();
     if (runtimePayload) {
       this.panel.webview.postMessage({
@@ -664,6 +671,9 @@ export class CodeGraphPanel {
     });
 
     const subConfig = vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration(`${CONFIG_SECTION}.${PAN_EDGE_DETAIL_SETTING}`)) {
+        this.postPanEdgeDetail();
+      }
       if (!e.affectsConfiguration("cogic.analysisCache.enabled")) {
         return;
       }
@@ -761,6 +771,13 @@ export class CodeGraphPanel {
     this.panel.webview.postMessage({
       type: "hostState",
       payload,
+    } satisfies ExtToWebviewMessage);
+  }
+
+  private postPanEdgeDetail() {
+    this.panel.webview.postMessage({
+      type: "panEdgeDetail",
+      payload: { policy: getPanEdgeDetailPolicy() },
     } satisfies ExtToWebviewMessage);
   }
 
