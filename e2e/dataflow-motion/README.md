@@ -106,3 +106,44 @@ harness may add a style to the page to pause an animation; it adds nothing to th
 set R2_PHASE=long
 node e2e/dataflow-motion/release.mjs <new output folder>
 ```
+
+## Safe motion (P15-R3): more `release.mjs` phases
+
+The policies `safe` (no dash motion, the highlight kept) and `safe-marker` (as safe, plus one
+compositor-only dot moving along the highlighted relation) are opt-in values of the same setting.
+
+**`safe`:** the four `long` edges.
+- Each edge stays highlighted while the policy changes live:
+
+  | Condition | Policy | Highlight |
+  |---|---|---|
+  | A | focused | that relation |
+  | B | safe | that relation |
+  | C | safe-marker | that relation |
+  | D (control) | safe | nothing highlighted |
+
+- Each run records the running animations, markers and React commits. The harness counts commits
+  by wrapping the root's `current` field.
+- Checks:
+  - the highlight's color, width, dashes and arrow;
+  - the path right across each switch;
+  - no re-analysis or remount;
+  - at most one marker;
+  - that every pan moved the view;
+  - no commit while idle.
+
+**`trace`:** the trace runs under focused, then safe, then safe-marker.
+- Every step must show the same edge styles and labels as under focused.
+- No dash moves.
+- Under safe-marker, one marker exactly where focused moved an edge.
+
+**`runtime`:** safe and safe-marker sessions: the same node is marked, and nothing moves.
+
+**`export`:** SVG and JPG with a relation highlighted under safe and safe-marker. The SVG keeps
+dashes, arrows and the highlight color, and does not contain the marker.
+
+**`probe`:** checks that the pan moves the view and that the commit counter sees commits.
+
+**The pan:** it starts on empty pane and is sized to the pane. The earlier start point, used by
+P15-R2 and `run.mjs`, lay outside the 515 px wide pane, on the Inspector, and did not pan. See
+`docs/thesis-experiments/p15-semantic-zoom/r3`.

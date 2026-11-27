@@ -2,6 +2,9 @@
 //   R2_PHASE=long     one highlighted dataflow edge, short to screen-crossing: running vs paused
 //   R2_PHASE=trace    trace steps under focused: only the current dataflow relation moves
 //   R2_PHASE=runtime  a paused debug session under focused and legacy
+//   R2_PHASE=safe     P15-R3: the same four edges highlighted under focused, safe and safe-marker
+//   R2_PHASE=export   P15-R3: SVG and JPG export with a relation highlighted, under safe and safe-marker
+//   R2_PHASE=probe    P15-R3: the pan moves the view and the React commit counter sees commits
 // The harness may add a style to the page (to pause an animation) and reads the DOM and the
 // product's own debug log; it adds nothing to the product.
 import fs from "node:fs";
@@ -29,9 +32,9 @@ const workspace = path.join(OUT, "workspace");
 if (fs.existsSync(userData) || fs.existsSync(workspace)) throw new Error("Use a new output folder");
 fs.mkdirSync(path.join(userData, "User"), { recursive: true });
 let entry = "src/main.ts";
-if (PHASE === "long") {
+if (PHASE === "long" || PHASE === "safe") {
   makeFixture(workspace);
-} else if (PHASE === "trace") {
+} else if (PHASE === "trace" || PHASE === "probe" || PHASE === "export") {
   fs.cpSync(path.join(REPO, "e2e", "aggregate-inspector", "fixture"), workspace, { recursive: true });
   entry = "src/app/a.ts";
 } else {
@@ -165,6 +168,7 @@ try {
       dom: document.querySelector(".canvasFlow")?.querySelectorAll("*").length ?? 0,
       animated: edges.filter((e) => e.classList.contains("animated")).length,
       running: runningEdges.length,
+      markers: document.querySelectorAll(".cgFlowMarker").length,
       runningIds: runningEdges.map((e) => e.getAttribute("data-testid").replace(/^rf__edge-/, "")),
       runningNotDataflow: runningEdges.filter((e) => !e.classList.contains("react-flow__edge-dataflow")).length,
       // The drawn node at each end of a running edge: a plain relation ID or an aggregate key, and
@@ -261,8 +265,11 @@ try {
     await exp(() => {
       const rec = { gaps: [], long: [], last: performance.now(), on: true };
       window.__r2rec = rec;
+      const vp = document.querySelector(".react-flow__viewport");
+      rec.views = new Set();
       const tick = (t) => {
         if (!rec.on) return;
+        rec.views.add(vp?.style.transform);
         rec.gaps.push(t - rec.last);
         rec.last = t;
         requestAnimationFrame(tick);
@@ -279,13 +286,14 @@ try {
       }
     });
     await sleep(100);
+    lastPan = null;
     await act();
     await sleep(150);
     const stats = await exp(() => {
       const rec = window.__r2rec;
       rec.on = false;
       rec.observer?.disconnect();
-      return { gaps: rec.gaps.slice(1), long: rec.long };
+      return { gaps: rec.gaps.slice(1), long: rec.long, views: rec.views.size };
     });
     const metrics = await app.evaluate(({ app: a }) => a.getAppMetrics().map((m) => ({ type: m.type, ws: m.memory.workingSetSize })));
     const pctl = (arr, p) => {
@@ -300,24 +308,51 @@ try {
       over50: stats.gaps.filter((g) => g > 50).length,
       over100: stats.gaps.filter((g) => g > 100).length,
       longTasks: stats.long.length,
+      // distinct viewport transforms seen: 1 means the view did not move
+      views: stats.views,
       rendererMB: Math.round(metrics.filter((m) => m.type === "Tab" || m.type === "Renderer").reduce((s, m) => s + m.ws, 0) / 1024),
       gaps: stats.gaps.map((g) => Math.round(g * 10) / 10),
+      ...(lastPan ? { pan: lastPan } : {}),
     };
   };
+  // A 5 s drag along an ellipse, sized to the pane (at most 240 x 140 px, at most a quarter of the
+  // pane) and started on empty pane. P15-R3 found that the earlier fixed start point
+  // (0.55 * width + 240) lay outside this 515 px wide pane, on the Inspector, so it never panned.
+  let lastPan = null;
   const pan = async () => {
     const pane = await paneBox();
-    const c = { x: pane.x + pane.width * 0.55, y: pane.y + pane.height * 0.5 };
-    await page.mouse.move(c.x + 240, c.y);
+    const legacyStart = { x: pane.width * 0.55 + 240, y: pane.height * 0.5 };
+    const spot = await exp(([legacy]) => {
+      const r = document.querySelector(".react-flow__pane").getBoundingClientRect();
+      const under = (x, y) => document.elementFromPoint(r.left + x, r.top + y);
+      const cls = (el) => (el?.closest(".react-flow__node") ? "node" : el?.closest(".react-flow__edge") ? "edge" : el?.classList.contains("react-flow__pane") ? "pane" : el?.className?.baseVal ?? el?.className ?? null);
+      const oldStart = legacy.x >= r.width || legacy.y >= r.height ? `outside the pane: ${cls(under(legacy.x, legacy.y))}` : cls(under(legacy.x, legacy.y));
+      const rx = Math.min(240, Math.floor(r.width / 4));
+      const ry = Math.min(140, Math.floor(r.height / 4));
+      // the start is the ellipse's right end: centre = start - (rx, 0); only the press must be on
+      // empty pane, the drag may cross nodes
+      let best = null;
+      for (let y = ry + 20; y <= r.height - ry - 20; y += 6)
+        for (let x = 2 * rx + 20; x <= r.width - 20; x += 6) {
+          if (!under(x, y)?.classList.contains("react-flow__pane")) continue;
+          const d = Math.hypot(x - rx - r.width / 2, y - r.height / 2);
+          if (!best || d < best.d) best = { x, y, d };
+        }
+      return best ? { x: best.x, y: best.y, rx, ry, oldStart } : { x: r.width / 2 + rx, y: r.height / 2, rx, ry, oldStart, noEmptySpot: true };
+    }, [legacyStart]);
+    const c = { x: pane.x + spot.x - spot.rx, y: pane.y + spot.y };
+    await page.mouse.move(c.x + spot.rx, c.y);
     await page.mouse.down();
     const steps = Math.round(PAN_MS / 16);
     const start = Date.now();
     for (let i = 1; i <= steps; i++) {
       const a = (2 * Math.PI * i) / steps;
-      await page.mouse.move(c.x + 240 * Math.cos(a), c.y + 140 * Math.sin(a));
+      await page.mouse.move(c.x + spot.rx * Math.cos(a), c.y + spot.ry * Math.sin(a));
       const wait = start + i * 16 - Date.now();
       if (wait > 0) await sleep(wait);
     }
     await page.mouse.up();
+    lastPan = { rx: spot.rx, ry: spot.ry, oldStart: spot.oldStart, noEmptySpot: Boolean(spot.noEmptySpot) };
   };
   const setPause = (on) => exp((enable) => {
     let style = document.getElementById("r2-pause");
@@ -331,7 +366,156 @@ try {
     if (!enable && style) style.remove();
   }, on);
 
-  if (PHASE === "long") {
+  // React commits: React assigns the root's `current` fiber once per commit. The harness wraps
+  // that field of the existing root; nothing in the product changes. Returns what it found.
+  const installCommitCounter = () => exp(() => {
+    const hosts = [...document.querySelectorAll("*")].filter((el) => Object.keys(el).some((k) => k.startsWith("__reactContainer$")));
+    const info = hosts.map((el) => {
+      const key = Object.keys(el).find((k) => k.startsWith("__reactContainer$"));
+      const fiber = el[key];
+      return { tag: el.tagName, id: el.id, fiberTag: fiber?.tag, hasRoot: Boolean(fiber?.stateNode), sameCurrent: fiber?.stateNode?.current === fiber };
+    });
+    if (window.__r3commits != null) return info;
+    window.__r3commits = 0;
+    for (const el of hosts) {
+      const fiberRoot = el[Object.keys(el).find((k) => k.startsWith("__reactContainer$"))]?.stateNode;
+      if (!fiberRoot || fiberRoot.__r3wrapped) continue;
+      fiberRoot.__r3wrapped = true;
+      let current = fiberRoot.current;
+      Object.defineProperty(fiberRoot, "current", {
+        configurable: true,
+        get: () => current,
+        set: (value) => {
+          current = value;
+          window.__r3commits += 1;
+        },
+      });
+    }
+    return info;
+  });
+
+  if (PHASE === "export") {
+    // ---- a relation highlighted from the Inspector, then SVG and JPG, under safe and safe-marker
+    await frame.locator('select[aria-label="Graph depth"]').selectOption("2");
+    await until("graph", async () => (await motion()).edges > 3, 60_000);
+    await sleep(3000);
+    const exportTo = async (item, file) => {
+      await app.evaluate(({ dialog }, target) => {
+        dialog.showSaveDialog = async () => ({ canceled: false, filePath: target });
+      }, file);
+      await frame.locator('button[title="Export graph"]').click();
+      await frame.locator(".exportMenuItemTitle", { hasText: item }).click();
+      const input = page.locator(".quick-input-widget input.input").first();
+      const how = await until("save dialog or file", async () =>
+        fs.existsSync(file) ? "native" : (await input.isVisible().catch(() => false)) ? "simple" : null, 30_000);
+      if (how === "simple") {
+        await input.fill(file);
+        await sleep(300);
+        await page.keyboard.press("Enter");
+      }
+      await until(`${file} written`, async () => fs.existsSync(file) && fs.statSync(file).size > 0, 30_000);
+      await sleep(1500);
+    };
+    const jpgOk = (file) => {
+      const b = fs.readFileSync(file);
+      return b.length > 1000 && b[0] === 0xff && b[1] === 0xd8 && b[b.length - 2] === 0xff && b[b.length - 1] === 0xd9;
+    };
+    result.exports = [];
+    for (const policy of ["safe", "safe-marker"]) {
+      writePolicy(policy);
+      await sleep(2500);
+      await fit();
+      // the first drawn node that has a Param Flow
+      const ids = await exp(() => [...document.querySelectorAll(".react-flow__node")].filter((n) => n.querySelector(".cgNodeTitle")).map((n) => n.dataset.id));
+      // a Param Flow whose relation is drawn as a normal dataflow edge (opacity 0.92), not a bridge
+      // to a collapsed group, which never moves under any policy
+      const normalHighlighted = () => exp(() => [...document.querySelectorAll(".react-flow__edge-dataflow .react-flow__edge-path")]
+        .filter((p) => (p.style.stroke === "#38bdf8" || p.style.stroke === "rgb(56, 189, 248)") && p.style.opacity === "0.92").length);
+      let found = false;
+      for (const id of ids) {
+        if (found) break;
+        await fit();
+        const title = frame.locator(`.react-flow__node[data-id="${id}"] .cgNodeTitle`).first();
+        if (!(await title.count())) continue;
+        await title.click({ delay: 40 });
+        await sleep(900);
+        const rows = await frame.locator(".inspectorFlowRow").count();
+        for (let i = 0; i < rows && !found; i++) {
+          await frame.locator(".inspectorFlowRow").nth(i).click();
+          await sleep(1000);
+          found = (await normalHighlighted()) === 1;
+        }
+      }
+      const live = await exp(() => {
+        const paths = [...document.querySelectorAll(".react-flow__edge-dataflow .react-flow__edge-path")];
+        return {
+          highlighted: paths.filter((p) => (p.style.stroke === "#38bdf8" || p.style.stroke === "rgb(56, 189, 248)") && p.style.opacity !== "0.16").length,
+          animated: document.querySelectorAll(".react-flow__edge.animated").length,
+          markers: document.querySelectorAll(".cgFlowMarker").length,
+        };
+      });
+      check(`export (${policy}): a relation is highlighted, static${policy === "safe-marker" ? ", with one marker" : ""}`, found && live.highlighted >= 1 && live.animated === 0 && live.markers === (policy === "safe-marker" ? 1 : 0), live);
+      const svgFile = path.join(OUT, `${policy}.svg`);
+      const jpgFile = path.join(OUT, `${policy}.jpg`);
+      await exportTo("SVG snapshot", svgFile);
+      await exportTo("JPG snapshot", jpgFile);
+      const svg = fs.readFileSync(svgFile, "utf8");
+      const dashes = [...svg.matchAll(/stroke-dasharray:\s*([^;"]+)/g)].map((m) => m[1].trim()).filter((d) => d !== "none");
+      const record = {
+        policy,
+        live,
+        svgBytes: svg.length,
+        dashed: dashes.length,
+        arrows: (svg.match(/marker-end/g) ?? []).length,
+        highlightStroke: /stroke:\s*(#38bdf8|rgb\(56, 189, 248\))/.test(svg),
+        markerInFile: svg.includes("cgFlowMarker"),
+        jpg: jpgOk(jpgFile),
+        jpgBytes: fs.statSync(jpgFile).size,
+      };
+      result.exports.push(record);
+      check(`export (${policy}): the SVG keeps dashes, arrows and the highlight colour, without the marker; the JPG is an image`, record.dashed > 0 && record.arrows > 0 && record.highlightStroke && !record.markerInFile && record.jpg, record);
+      await clearAll();
+    }
+  }
+
+  if (PHASE === "probe") {
+    await frame.locator('select[aria-label="Graph depth"]').selectOption("2");
+    await until("graph", async () => (await motion()).edges > 3, 60_000);
+    await sleep(3000);
+    result.probe = { hosts: await installCommitCounter() };
+    const c0 = await exp(() => {
+      // distinct viewport transforms seen while panning
+      const seen = new Set();
+      window.__r3seen = seen;
+      const tick = () => {
+        seen.add(getComputedStyle(document.querySelector(".react-flow__viewport")).transform);
+        if (window.__r3seen === seen) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      return window.__r3commits;
+    });
+    await pan();
+    const c1 = await exp(() => window.__r3commits);
+    result.probe.viewportsDuringPan = await exp(() => {
+      const n = window.__r3seen.size;
+      window.__r3seen = null;
+      return n;
+    });
+    result.probe.lastPan = lastPan;
+    const v0 = await viewport();
+    const viaGoTo = await goTo({ x: v0.x + 200, y: v0.y + 100, zoom: v0.zoom });
+    result.probe.goTo = { from: v0, to: viaGoTo };
+    const m = await measure(pan);
+    result.probe.measuredPan = { views: m.views, pan: m.pan, p50: m.p50 };
+    await fit();
+    const c2 = await exp(() => window.__r3commits);
+    Object.assign(result.probe, { pan: c1 - c0, fit: c2 - c1 });
+    console.log(JSON.stringify(result.probe));
+    check("the pan moves the view", result.probe.viewportsDuringPan > 100 && result.probe.measuredPan.views > 100, result.probe);
+    check("commit counter sees React commits (a pan and a fit commit)", c1 - c0 > 0 && c2 - c1 > 0, result.probe);
+  }
+
+  if (PHASE === "long" || PHASE === "safe") {
     // ---- graph: depth 3, all expanded, focused policy, nothing selected
     await frame.locator('select[aria-label="Graph depth"]').selectOption("3");
     await until("graph", async () => (await exp(() => {
@@ -448,7 +632,125 @@ try {
       await frame.locator(".inspectorFlowRow").nth(t.rowIndex).click();
       await sleep(900);
     };
-    for (const t of targets.filter((x) => !x.skipped)) {
+    if (PHASE === "safe") {
+      // ---- P15-R3: the relation stays highlighted; only the policy changes, live, between runs.
+      // D is the control: nothing highlighted, static graph, same view. It is the graph's own cost.
+      const policyOf = { A: "focused", B: "safe", C: "safe-marker", D: "safe" };
+      await exp(() => {
+        document.querySelector(".react-flow").__r3tag = "first mount";
+      });
+      result.commitHosts = await installCommitCounter();
+      check("React commit counter installed", (await exp(() => window.__r3commits)) != null, result.commitHosts);
+      const state = (id) => exp((edgeId) => {
+        const e = document.querySelector(`[data-testid="rf__edge-${CSS.escape(edgeId)}"]`);
+        const p = e?.querySelector(".react-flow__edge-path");
+        const markers = [...document.querySelectorAll(".cgFlowMarker")];
+        const log = window.__CODEGRAPH_WEBVIEW_DEBUG__?.entries ?? [];
+        return {
+          inDom: Boolean(e),
+          animatedClass: Boolean(e?.classList.contains("animated")),
+          dashRunning: Boolean(p?.getAnimations().some((a) => a.playState === "running")),
+          stroke: p?.style.stroke ?? null,
+          width: p?.style.strokeWidth ?? null,
+          dash: p?.style.strokeDasharray ?? null,
+          opacity: p?.style.opacity ?? null,
+          markerEnd: p?.getAttribute("marker-end") ?? null,
+          d: p?.getAttribute("d") ?? null,
+          labels: document.querySelectorAll(".cgEdgeLabel").length,
+          markers: markers.length,
+          markersRunning: markers.filter((m) => m.getAnimations().some((a) => a.playState === "running")).length,
+          animations: document.getAnimations().filter((a) => a.playState === "running").length,
+          mount: document.querySelector(".react-flow")?.__r3tag ?? null,
+          analyses: log.filter((x) => x.event === "analysisResult.received").length,
+          commits: window.__r3commits ?? null,
+        };
+      }, id);
+      const highlightColour = (v) => v === "#38bdf8" || v === "rgb(56, 189, 248)";
+      const expect = (cond, st) => cond === "A"
+        ? st.animatedClass && st.dashRunning && st.markers === 0
+        : cond === "D"
+          ? !st.animatedClass && st.markers === 0 && st.animations === 0 && !highlightColour(st.stroke)
+          : !st.animatedClass && !st.dashRunning && st.markers === (cond === "C" ? 1 : 0) && st.markersRunning === st.markers;
+      const semantics = [];
+      for (const t of targets.filter((x) => !x.skipped)) {
+        writePolicy("focused");
+        await sleep(1500);
+        await highlight(t);
+        let highlighted = true;
+        let base = null;
+        for (let rep = 0; rep < REPS; rep++) {
+          const order = ["A", "B", "C", "D"].map((_, i, a) => a[(i + rep) % 4]);
+          for (const cond of order) {
+            // the path right before the switch: compared with right after it, with no pan between
+            const keepsHighlight = cond !== "D" && highlighted;
+            if (keepsHighlight) {
+              await goTo(viewFor(t.edge));
+              await sleep(800);
+            }
+            const prevD = (await state(t.edge.id)).d;
+            writePolicy(policyOf[cond]);
+            if (cond === "D" && highlighted) {
+              await clearAll();
+              highlighted = false;
+            } else if (cond !== "D" && !highlighted) {
+              await highlight(t);
+              highlighted = true;
+            }
+            await goTo(viewFor(t.edge));
+            const st = await until(`${t.kind} ${cond} state`, async () => {
+              const v = await state(t.edge.id);
+              return expect(cond, v) ? v : null;
+            }, 15_000).catch(async () => {
+              throw new Error(`state wrong for ${t.kind} ${cond}: ${JSON.stringify({ ...(await state(t.edge.id)), d: undefined })}`);
+            });
+            await sleep(800);
+            if (cond !== "D") base ??= st;
+            // what the highlighted relation shows, and that nothing was re-analysed or remounted
+            semantics.push({
+              edge: t.kind, rep, cond,
+              // Chrome normalises inline styles ("8px, 6px"), so compare the numbers.
+              highlight: cond === "D" ? null : highlightColour(st.stroke) && parseFloat(st.width) === 2.8 && (st.dash ?? "").match(/[\d.]+/g)?.join(" ") === "8 6" && Boolean(st.markerEnd),
+              style: { stroke: st.stroke, width: st.width, dash: st.dash, opacity: st.opacity, markerEnd: st.markerEnd },
+              // only a policy switch in between (the highlight stayed): the path must be identical
+              sameGeometry: !keepsHighlight || st.d === prevD,
+              // against the first state, after pans (virtualisation re-measures handles): largest
+              // coordinate difference in px, for information
+              driftFromFirst: base ? Math.max(0, ...(st.d.match(/-?[\d.]+/g) ?? []).map((v, k) => Math.abs(Number(v) - Number((base.d.match(/-?[\d.]+/g) ?? [])[k] ?? v)))) : 0,
+              sameLabels: cond === "D" || !base || st.labels === base.labels,
+              noReanalysis: st.analyses === base.analyses,
+              sameMount: st.mount === "first mount",
+              markers: st.markers,
+            });
+            const m = await motion();
+            const c0 = (await state(t.edge.id)).commits;
+            const idle = await measure(() => sleep(2000));
+            const c1 = (await state(t.edge.id)).commits;
+            const p = await measure(pan);
+            const c2 = (await state(t.edge.id)).commits;
+            const drawn = { nodes: m.nodes, edges: m.edges, dom: m.dom, running: m.running, animated: m.animated, animations: st.animations, markers: st.markers };
+            result.runs.push(
+              { edge: t.kind, length: t.edge.length, rep, cond, policy: policyOf[cond], kind: "idle", drawn, commits: c0 == null ? null : c1 - c0, ...idle },
+              { edge: t.kind, length: t.edge.length, rep, cond, policy: policyOf[cond], kind: "pan", drawn, commits: c1 == null ? null : c2 - c1, ...p },
+            );
+            console.log(`${t.kind} (${t.edge.length} px) rep ${rep} ${cond} ${policyOf[cond]} (dash ${m.running}, markers ${st.markers}, animations ${st.animations}): idle ${idle.p50}/${idle.p95} max ${idle.max} >50 ${idle.over50} | pan ${p.p50}/${p.p95} max ${p.max} >50 ${p.over50} | commits ${c0 == null ? "n/a" : `${c1 - c0}/${c2 - c1}`} | free ${freeMiB()} MiB`);
+          }
+        }
+        writePolicy("focused");
+        await clearAll();
+        mark(t.kind);
+      }
+      result.semantics = semantics;
+      check("the same four edges as P15-R2", JSON.stringify(result.targets.map((x) => x.length)) === JSON.stringify([778, 4054, 8994, 8994]), result.targets);
+      check("safe and safe-marker: the highlighted relation keeps its colour, width, dashes and arrow", semantics.filter((x) => x.cond === "B" || x.cond === "C").every((x) => x.highlight), semantics.filter((x) => (x.cond === "B" || x.cond === "C") && !x.highlight));
+      check("focused: the same look (comparison)", semantics.filter((x) => x.cond === "A").every((x) => x.highlight), null);
+      check("switching the policy keeps the path, the labels and the React Flow mount, with no new analysis", semantics.every((x) => x.sameGeometry && x.sameLabels && x.noReanalysis && x.sameMount), semantics.filter((x) => !(x.sameGeometry && x.sameLabels && x.noReanalysis && x.sameMount)));
+      check("at most one marker, and only under safe-marker", semantics.every((x) => x.markers === (x.cond === "C" ? 1 : 0)), null);
+      const pans = result.runs.filter((x) => x.kind === "pan");
+      check("every pan moved the view (distinct viewport transforms > 100)", pans.every((x) => x.views > 100), pans.filter((x) => !(x.views > 100)).map((x) => [x.edge, x.cond, x.rep, x.views]));
+      check("idle under safe and safe-marker: no React commit", result.runs.filter((x) => x.kind === "idle" && x.cond !== "A").every((x) => x.commits === 0), null);
+    }
+
+    if (PHASE === "long") for (const t of targets.filter((x) => !x.skipped)) {
       let highlighted = false;
       for (let rep = 0; rep < REPS; rep++) {
         const order = ["A", "B", "C"].map((_, i, a) => a[(i + rep) % 3]);
@@ -488,42 +790,74 @@ try {
     const traceButton = frame.locator('button[title^="Trace mode"]');
     const label = () => exp(() => [...document.querySelectorAll(".mono")].map((e) => e.textContent).find((t) => /^\d+ \/ \d+$/.test(t)) ?? null);
     const next = frame.locator("button").filter({ hasText: /^->$/ }).first();
-    const before = await motion();
-    await traceButton.click();
-    await until("trace ready", async () => /^0 \/ \d+$/.test((await label()) ?? ""), 60_000);
-    await sleep(1500);
-    const total = Number((await label()).split(" / ")[1]);
-    const steps = [];
-    let previousRunning = [];
-    for (let i = 0; i < total; i++) {
-      await next.click();
-      await sleep(900);
+    // Every drawn edge's look, and the labels and markers: what the trace shows, apart from motion.
+    const looks = () => exp(() => ({
+      edges: Object.fromEntries([...document.querySelectorAll(".react-flow__edge")].map((e) => {
+        const p = e.querySelector(".react-flow__edge-path");
+        return [e.getAttribute("data-testid"), [p?.style.stroke, p?.style.strokeWidth, p?.style.opacity, p?.style.strokeDasharray, p?.getAttribute("marker-end")].join("|")];
+      })),
+      labels: [...document.querySelectorAll(".cgEdgeLabel")].map((l) => l.textContent).sort(),
+      markers: document.querySelectorAll(".cgFlowMarker").length,
+      markersRunning: [...document.querySelectorAll(".cgFlowMarker")].filter((m) => m.getAnimations().some((x) => x.playState === "running")).length,
+    }));
+    const runTrace = async (policy, reference) => {
+      writePolicy(policy);
+      await sleep(2500);
       await fit();
-      const m = await motion();
-      const kind = m.traceStep?.eventType === "edge" ? m.traceStep.edgeKind : m.traceStep?.eventType;
-      steps.push({ cursor: i + 1, kind, running: m.running, runningIds: m.runningIds, owners: m.runningOwners, connected: m.connected, dataflowEdges: m.dataflowEdges });
-      if (kind === "dataflow") {
-        // drawn: one dataflow edge runs, and its ends are the highlighted (connected) nodes
-        // Both ends of the running edge are drawn nodes highlighted for the trace flow.
-        const endsHighlighted =
-          m.runningOwners.length > 0 &&
-          m.runningOwners.every((pair) => Array.isArray(pair) && pair.every((n) => n && m.connected.includes(n)));
-        check(`trace step ${i + 1} (dataflow): exactly the current relation moves`, m.running === 1 && m.runningNotDataflow === 0 && endsHighlighted, steps.at(-1));
-        check(`trace step ${i + 1}: the previous relation stopped`, previousRunning.every((id) => !m.runningIds.includes(id) || m.runningIds.length === 1), { previousRunning, now: m.runningIds });
-      } else {
-        check(`trace step ${i + 1} (${kind}): nothing moves`, m.running === 0, steps.at(-1));
+      const before = await motion();
+      await traceButton.click();
+      await until("trace ready", async () => /^0 \/ \d+$/.test((await label()) ?? ""), 60_000);
+      await sleep(1500);
+      const total = Number((await label()).split(" / ")[1]);
+      const steps = [];
+      let previousRunning = [];
+      for (let i = 0; i < total; i++) {
+        await next.click();
+        await sleep(900);
+        await fit();
+        const m = await motion();
+        const look = await looks();
+        const kind = m.traceStep?.eventType === "edge" ? m.traceStep.edgeKind : m.traceStep?.eventType;
+        steps.push({ cursor: i + 1, kind, running: m.running, runningIds: m.runningIds, owners: m.runningOwners, connected: m.connected, dataflowEdges: m.dataflowEdges, look });
+        if (policy === "focused") {
+          if (kind === "dataflow") {
+            // Both ends of the running edge are drawn nodes highlighted for the trace flow.
+            const endsHighlighted =
+              m.runningOwners.length > 0 &&
+              m.runningOwners.every((pair) => Array.isArray(pair) && pair.every((n) => n && m.connected.includes(n)));
+            check(`trace step ${i + 1} (dataflow): exactly the current relation moves`, m.running === 1 && m.runningNotDataflow === 0 && endsHighlighted, { ...steps.at(-1), look: undefined });
+            check(`trace step ${i + 1}: the previous relation stopped`, previousRunning.every((id) => !m.runningIds.includes(id) || m.runningIds.length === 1), { previousRunning, now: m.runningIds });
+          } else {
+            check(`trace step ${i + 1} (${kind}): nothing moves`, m.running === 0, { ...steps.at(-1), look: undefined });
+          }
+        } else {
+          // The same step under focused: the same edges, colours, widths, opacities, dashes,
+          // arrows and labels; no dash moves; the marker exactly where focused moved an edge.
+          const ref = reference.steps[i];
+          const sameLook = ref && ref.kind === kind && JSON.stringify(ref.look.edges) === JSON.stringify(look.edges) && JSON.stringify(ref.look.labels) === JSON.stringify(look.labels);
+          const wantMarkers = policy === "safe-marker" ? ref?.running ?? 0 : 0;
+          check(`trace (${policy}) step ${i + 1} (${kind}): shows what focused shows, without dash motion${wantMarkers ? ", one marker" : ""}`,
+            sameLook && m.running === 0 && look.markers === wantMarkers && look.markersRunning === wantMarkers,
+            { kind, refKind: ref?.kind, running: m.running, markers: look.markers, sameLook, diff: ref ? Object.keys(look.edges).filter((k) => ref.look.edges[k] !== look.edges[k]).slice(0, 4) : null });
+        }
+        previousRunning = m.runningIds;
       }
-      previousRunning = m.runningIds;
+      await traceButton.click();
+      await until("trace gone", async () => (await label()) === null, 20_000);
+      await sleep(3000);
+      await fit();
+      const after = await motion();
+      const afterLook = await looks();
+      const out = { policy, total, steps, before: { nodes: before.nodes, edges: before.edges }, after: { nodes: after.nodes, edges: after.edges, running: after.running, markers: afterLook.markers } };
+      check(`trace exit (${policy}): the graph is back and nothing moves (nothing selected)`, after.running === 0 && afterLook.markers === 0 && after.nodes === before.nodes && after.edges === before.edges && (!reference || total === reference.total), out.after);
+      return out;
+    };
+    const focusedTrace = await runTrace("focused", null);
+    result.trace = focusedTrace;
+    if (process.env.R2_TRACE_FOCUSED_ONLY !== "1") {
+      result.traceSafe = await runTrace("safe", focusedTrace);
+      result.traceSafeMarker = await runTrace("safe-marker", focusedTrace);
     }
-    result.trace = { total, steps };
-    await traceButton.click();
-    await until("trace gone", async () => (await label()) === null, 20_000);
-    await sleep(3000);
-    await fit();
-    const after = await motion();
-    result.trace.before = { nodes: before.nodes, edges: before.edges };
-    result.trace.after = { nodes: after.nodes, edges: after.edges, running: after.running };
-    check("trace exit: the graph is back and nothing moves (focused, nothing selected)", after.running === 0 && after.nodes === before.nodes && after.edges === before.edges, result.trace);
   }
 
   if (PHASE === "runtime") {
@@ -569,6 +903,12 @@ try {
     check("runtime (focused): the paused frame marks a graph node", f.frame && f.paused.selectedNodes.length > 0 && f.paused.selection.length === 0, result.focused);
     check("runtime (focused): no relation moves while paused; dataflow edges are drawn", f.paused.running === 0 && f.paused.dataflowEdges > 0, result.focused);
     check("runtime (focused): nothing moves after the session ends", f.ended.running === 0 && f.ended.nodes === f.idle.nodes && f.ended.edges === f.idle.edges, result.focused);
+    for (const policy of ["safe", "safe-marker"]) {
+      const sv = await runSession(policy);
+      const markers = sv.idle.markers + sv.paused.markers + sv.ended.markers;
+      result[policy] = { frame: sv.frame, idle: sv.idle.running, paused: { running: sv.paused.running, selected: sv.paused.selectedNodes, selection: sv.paused.selection }, ended: sv.ended.running, markersAfter: markers };
+      check(`runtime (${policy}): the paused frame marks the same node; nothing moves; no marker`, sv.frame?.name === f.frame?.name && JSON.stringify(sv.paused.selectedNodes) === JSON.stringify(f.paused.selectedNodes) && sv.paused.selection.length === 0 && sv.idle.running + sv.paused.running + sv.ended.running === 0 && markers === 0, result[policy]);
+    }
     const l = await runSession("legacy");
     result.legacy = { idle: l.idle.running, paused: l.paused.running, ended: l.ended.running };
     check("runtime (legacy, for comparison): flows move as before, also while paused", l.idle.running > 0 && l.paused.running > 0 && l.ended.running > 0, result.legacy);

@@ -49,7 +49,11 @@ import type {
   UINotice,
 } from "../lib/vscode";
 import { createLowDetailMode } from "../../../src/shared/edgeDetail";
-import { shouldAnimateDataflow, type DataflowMotionPolicy } from "../../../src/shared/dataflowMotion";
+import {
+  shouldAnimateDataflow,
+  shouldShowFlowMarker,
+  type DataflowMotionPolicy,
+} from "../../../src/shared/dataflowMotion";
 import { withTemporaryStyles } from "../../../src/shared/temporaryStyles";
 import { classifyTraceStep } from "../../../src/shared/traceSteps";
 import {
@@ -202,7 +206,8 @@ function exportNodeFilter(node: globalThis.Node) {
     node.classList.contains("rootBanner") ||
     node.classList.contains("canvasNotice") ||
     node.classList.contains("canvasLoading") ||
-    node.classList.contains("canvasOverlay")
+    node.classList.contains("canvasOverlay") ||
+    node.classList.contains("cgFlowMarker")
   );
 }
 
@@ -896,7 +901,40 @@ type DataflowEdgeData = {
   lane?: number;
   collapsedBridge?: boolean;
   aggregate?: AggregateEdgeData;
+  /** safe-marker (experimental): the highlighted relation carries one moving marker. */
+  marker?: boolean;
 };
+
+/**
+ * One small dot moving along a static dataflow path (safe-marker, P15-R3). It is an HTML element in
+ * React Flow's edge label layer, animated by a transform keyframe list sampled from the path once
+ * per path change: a compositor-only animation, with no React state per frame and no change to the
+ * edge itself.
+ */
+function FlowMarker({ path }: { path: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const sampler = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    sampler.setAttribute("d", path);
+    const length = sampler.getTotalLength();
+    if (!(length > 0)) return;
+    const steps = Math.min(240, Math.max(8, Math.ceil(length / 40)));
+    const frames: Keyframe[] = [];
+    for (let i = 0; i <= steps; i++) {
+      const p = sampler.getPointAtLength((length * i) / steps);
+      frames.push({ transform: `translate(${p.x}px, ${p.y}px) translate(-50%, -50%)` });
+    }
+    const animation = el.animate(frames, {
+      duration: Math.min(6000, Math.max(1200, length * 2.5)),
+      iterations: Infinity,
+      easing: "linear",
+    });
+    return () => animation.cancel();
+  }, [path]);
+  return <div ref={ref} className="cgFlowMarker" aria-hidden="true" />;
+}
 
 // Call and dataflow aggregates between the same groups meet at the same midpoint.
 const AGGREGATE_LABEL_OFFSET = 26;
@@ -933,6 +971,11 @@ function DataflowEdge({
   return (
     <>
       <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} style={style} />
+      {data?.marker ? (
+        <EdgeLabelRenderer>
+          <FlowMarker path={edgePath} />
+        </EdgeLabelRenderer>
+      ) : null}
       {data?.aggregate ? (
         <AggregateBadge
           data={data.aggregate}
@@ -1235,6 +1278,17 @@ function toReactFlowEdges(
           }
         : undefined;
 
+    const motion = {
+      policy: motionPolicy,
+      isDataflow,
+      muted,
+      collapsedBridge: isCollapsedBridge,
+      focusContext,
+      // A relation highlighted on purpose (Inspector Param Flow, an aggregate member, the
+      // trace's current flow), not a node selection.
+      explicitlyHighlighted: isFocusedFlow,
+    };
+
     let lane = 0;
     if (isDataflow) {
       const key = `${e.source}=>${e.target}`;
@@ -1288,16 +1342,7 @@ function toReactFlowEdges(
               opacity: isSelectedAggregate ? 0.92 : 0.28,
             }
           : undefined,
-      animated: shouldAnimateDataflow({
-        policy: motionPolicy,
-        isDataflow,
-        muted,
-        collapsedBridge: isCollapsedBridge,
-        focusContext,
-        // A relation highlighted on purpose (Inspector Param Flow, an aggregate member, the
-        // trace's current flow), not a node selection.
-        explicitlyHighlighted: isFocusedFlow,
-      }),
+      animated: shouldAnimateDataflow(motion),
       data: isDataflow
         ? {
             label: showDataflowLabel ? label : undefined,
@@ -1306,6 +1351,7 @@ function toReactFlowEdges(
             lane,
             collapsedBridge: isCollapsedBridge,
             aggregate,
+            marker: shouldShowFlowMarker(motion) || undefined,
           }
         : aggregate
           ? { aggregate, collapsedBridge: isCollapsedBridge }
