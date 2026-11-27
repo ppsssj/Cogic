@@ -1,0 +1,101 @@
+{
+ "phase": "export",
+ "reps": 5,
+ "checks": [
+  {
+   "name": "export (safe): a relation is highlighted, static",
+   "pass": true,
+   "detail": {
+    "highlighted": 1,
+    "animated": 0,
+    "markers": 0
+   }
+  },
+  {
+   "name": "export (safe): the SVG keeps dashes, arrows and the highlight colour, without the marker; the JPG is an image",
+   "pass": true,
+   "detail": {
+    "policy": "safe",
+    "live": {
+     "highlighted": 1,
+     "animated": 0,
+     "markers": 0
+    },
+    "svgBytes": 10892970,
+    "dashed": 16,
+    "arrows": 26,
+    "highlightStroke": true,
+    "markerInFile": false,
+    "jpg": true,
+    "jpgBytes": 1023808
+   }
+  },
+  {
+   "name": "export (safe-marker): a relation is highlighted, static, with one marker",
+   "pass": true,
+   "detail": {
+    "highlighted": 1,
+    "animated": 0,
+    "markers": 1
+   }
+  },
+  {
+   "name": "export (safe-marker): the SVG keeps dashes, arrows and the highlight colour, without the marker; the JPG is an image",
+   "pass": true,
+   "detail": {
+    "policy": "safe-marker",
+    "live": {
+     "highlighted": 1,
+     "animated": 0,
+     "markers": 1
+    },
+    "svgBytes": 10893042,
+    "dashed": 16,
+    "arrows": 26,
+    "highlightStroke": true,
+    "markerInFile": false,
+    "jpg": true,
+    "jpgBytes": 1023922
+   }
+  }
+ ],
+ "runs": [],
+ "memory": {
+  "before": 3486,
+  "minimum": 1402,
+  "aborted": false,
+  "timeline": []
+ },
+ "exports": [
+  {
+   "policy": "safe",
+   "live": {
+    "highlighted": 1,
+    "animated": 0,
+    "markers": 0
+   },
+   "svgBytes": 10892970,
+   "dashed": 16,
+   "arrows": 26,
+   "highlightStroke": true,
+   "markerInFile": false,
+   "jpg": true,
+   "jpgBytes": 1023808
+  },
+  {
+   "policy": "safe-marker",
+   "live": {
+    "highlighted": 1,
+    "animated": 0,
+    "markers": 1
+   },
+   "svgBytes": 10893042,
+   "dashed": 16,
+   "arrows": 26,
+   "highlightStroke": true,
+   "markerInFile": false,
+   "jpg": true,
+   "jpgBytes": 1023922
+  }
+ ]
+}

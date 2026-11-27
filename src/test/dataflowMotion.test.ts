@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { parseDataflowMotionPolicy, shouldAnimateDataflow } from "../shared/dataflowMotion";
+import { parseDataflowMotionPolicy, shouldAnimateDataflow, shouldShowFlowMarker } from "../shared/dataflowMotion";
 
 const flags = ["isDataflow", "muted", "collapsedBridge", "focusContext", "explicitlyHighlighted"] as const;
 /** Every combination of the five inputs. */
@@ -38,9 +38,29 @@ suite("Dataflow motion policy", () => {
     }
   });
 
-  test("the setting: only \"focused\" opts in; anything else is legacy", () => {
-    assert.strictEqual(parseDataflowMotionPolicy("focused"), "focused");
-    for (const v of ["legacy", undefined, null, "", "FOCUSED", 1, true]) {
+  test("safe and safe-marker: no dash moves, for all 32 input combinations", () => {
+    for (const policy of ["safe", "safe-marker"] as const) {
+      for (const c of combinations) {
+        assert.strictEqual(shouldAnimateDataflow({ policy, ...c }), false, `${policy} ${JSON.stringify(c)}`);
+      }
+    }
+  });
+
+  test("the marker: only safe-marker, only where focused would animate", () => {
+    for (const c of combinations) {
+      const focused = shouldAnimateDataflow({ policy: "focused", ...c });
+      assert.strictEqual(shouldShowFlowMarker({ policy: "safe-marker", ...c }), focused, JSON.stringify(c));
+      for (const policy of ["legacy", "focused", "safe"] as const) {
+        assert.strictEqual(shouldShowFlowMarker({ policy, ...c }), false, `${policy} ${JSON.stringify(c)}`);
+      }
+    }
+  });
+
+  test("the setting: the four policies opt in by name; anything else is legacy", () => {
+    for (const v of ["focused", "safe", "safe-marker"]) {
+      assert.strictEqual(parseDataflowMotionPolicy(v), v);
+    }
+    for (const v of ["legacy", undefined, null, "", "FOCUSED", "Safe", 1, true]) {
       assert.strictEqual(parseDataflowMotionPolicy(v), "legacy", String(v));
     }
   });

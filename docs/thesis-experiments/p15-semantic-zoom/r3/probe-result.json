@@ -1,0 +1,147 @@
+{
+ "phase": "probe",
+ "reps": 5,
+ "checks": [
+  {
+   "name": "the pan moves the view",
+   "pass": true,
+   "detail": {
+    "hosts": [
+     {
+      "tag": "DIV",
+      "id": "root",
+      "fiberTag": 3,
+      "hasRoot": true,
+      "sameCurrent": true
+     }
+    ],
+    "viewportsDuringPan": 313,
+    "lastPan": {
+     "rx": 128,
+     "ry": 140,
+     "oldStart": "outside the pane: inspectorPad",
+     "noEmptySpot": false
+    },
+    "goTo": {
+     "from": {
+      "x": 27.5893,
+      "y": 66.9313,
+      "zoom": 0.327975
+     },
+     "to": {
+      "x": 227.589,
+      "y": 166.931,
+      "zoom": 0.327975
+     }
+    },
+    "measuredPan": {
+     "views": 313,
+     "pan": {
+      "rx": 128,
+      "ry": 140,
+      "oldStart": "outside the pane: inspectorPad",
+      "noEmptySpot": false
+     },
+     "p50": 9.6
+    },
+    "pan": 320,
+    "fit": 359
+   }
+  },
+  {
+   "name": "commit counter sees React commits (a pan and a fit commit)",
+   "pass": true,
+   "detail": {
+    "hosts": [
+     {
+      "tag": "DIV",
+      "id": "root",
+      "fiberTag": 3,
+      "hasRoot": true,
+      "sameCurrent": true
+     }
+    ],
+    "viewportsDuringPan": 313,
+    "lastPan": {
+     "rx": 128,
+     "ry": 140,
+     "oldStart": "outside the pane: inspectorPad",
+     "noEmptySpot": false
+    },
+    "goTo": {
+     "from": {
+      "x": 27.5893,
+      "y": 66.9313,
+      "zoom": 0.327975
+     },
+     "to": {
+      "x": 227.589,
+      "y": 166.931,
+      "zoom": 0.327975
+     }
+    },
+    "measuredPan": {
+     "views": 313,
+     "pan": {
+      "rx": 128,
+      "ry": 140,
+      "oldStart": "outside the pane: inspectorPad",
+      "noEmptySpot": false
+     },
+     "p50": 9.6
+    },
+    "pan": 320,
+    "fit": 359
+   }
+  }
+ ],
+ "runs": [],
+ "memory": {
+  "before": 3599,
+  "minimum": 2463,
+  "aborted": false,
+  "timeline": []
+ },
+ "probe": {
+  "hosts": [
+   {
+    "tag": "DIV",
+    "id": "root",
+    "fiberTag": 3,
+    "hasRoot": true,
+    "sameCurrent": true
+   }
+  ],
+  "viewportsDuringPan": 313,
+  "lastPan": {
+   "rx": 128,
+   "ry": 140,
+   "oldStart": "outside the pane: inspectorPad",
+   "noEmptySpot": false
+  },
+  "goTo": {
+   "from": {
+    "x": 27.5893,
+    "y": 66.9313,
+    "zoom": 0.327975
+   },
+   "to": {
+    "x": 227.589,
+    "y": 166.931,
+    "zoom": 0.327975
+   }
+  },
+  "measuredPan": {
+   "views": 313,
+   "pan": {
+    "rx": 128,
+    "ry": 140,
+    "oldStart": "outside the pane: inspectorPad",
+    "noEmptySpot": false
+   },
+   "p50": 9.6
+  },
+  "pan": 320,
+  "fit": 359
+ }
+}
