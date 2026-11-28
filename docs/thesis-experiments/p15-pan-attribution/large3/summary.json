@@ -1,0 +1,738 @@
+{
+ "conditions": {
+  "C": {
+   "n": 3,
+   "p50": 9.6,
+   "p95": 19.5,
+   "p95range": [
+    19,
+    20.6
+   ],
+   "max": 248,
+   "over50": 13,
+   "over100": 7,
+   "views": 313,
+   "commits": 321,
+   "mounts": 292,
+   "longTasks": 0,
+   "rendererMB": 663,
+   "gpuMB": 277
+  },
+  "Gedges": {
+   "n": 3,
+   "p50": 9.4,
+   "p95": 10.4,
+   "p95range": [
+    10.3,
+    10.4
+   ],
+   "max": 69.3,
+   "over50": 3,
+   "over100": 0,
+   "views": 313,
+   "commits": 321,
+   "mounts": 292,
+   "longTasks": 0,
+   "rendererMB": 658,
+   "gpuMB": 275
+  },
+  "Gdash": {
+   "n": 3,
+   "p50": 9.6,
+   "p95": 27.7,
+   "p95range": [
+    21.2,
+    28.5
+   ],
+   "max": 99.4,
+   "over50": 8,
+   "over100": 0,
+   "views": 313,
+   "commits": 321,
+   "mounts": 292,
+   "longTasks": 0,
+   "rendererMB": 660,
+   "gpuMB": 315
+  },
+  "Garrows": {
+   "n": 3,
+   "p50": 9.6,
+   "p95": 19.4,
+   "p95range": [
+    19.3,
+    19.8
+   ],
+   "max": 211.1,
+   "over50": 13,
+   "over100": 7,
+   "views": 313,
+   "commits": 321,
+   "mounts": 292,
+   "longTasks": 0,
+   "rendererMB": 660,
+   "gpuMB": 308
+  },
+  "Gbadges": {
+   "n": 3,
+   "p50": 9.7,
+   "p95": 19.2,
+   "p95range": [
+    18.8,
+    19.5
+   ],
+   "max": 240.2,
+   "over50": 13,
+   "over100": 7,
+   "views": 313,
+   "commits": 321,
+   "mounts": 292,
+   "longTasks": 0,
+   "rendererMB": 659,
+   "gpuMB": 295
+  },
+  "Glayers": {
+   "n": 3,
+   "p50": 9.5,
+   "p95": 130.7,
+   "p95range": [
+    129.7,
+    139.3
+   ],
+   "max": 338,
+   "over50": 32,
+   "over100": 30,
+   "views": 313,
+   "commits": 321,
+   "mounts": 292,
+   "longTasks": 0,
+   "rendererMB": 661,
+   "gpuMB": 284
+  },
+  "Gbackface": {
+   "n": 3,
+   "p50": 9.7,
+   "p95": 20,
+   "p95range": [
+    18.5,
+    20.2
+   ],
+   "max": 243.1,
+   "over50": 12,
+   "over100": 7,
+   "views": 313,
+   "commits": 321,
+   "mounts": 292,
+   "longTasks": 0,
+   "rendererMB": 659,
+   "gpuMB": 280
+  }
+ },
+ "lag": {
+  "C": [
+   {
+    "lag": 0,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.026
+   },
+   {
+    "lag": 1,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.026
+   },
+   {
+    "lag": 2,
+    "pLongAfterMut": 0.137,
+    "nAfterMut": 51,
+    "pLongOther": 0.023
+   },
+   {
+    "lag": 3,
+    "pLongAfterMut": 0.216,
+    "nAfterMut": 51,
+    "pLongOther": 0.02
+   },
+   {
+    "lag": 4,
+    "pLongAfterMut": 0.118,
+    "nAfterMut": 51,
+    "pLongOther": 0.024
+   },
+   {
+    "lag": 5,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.026
+   },
+   {
+    "lag": 6,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.026
+   }
+  ],
+  "C:framesSinceMountAtLongFrame": [
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   4,
+   4,
+   4,
+   4,
+   4,
+   5,
+   5,
+   5,
+   6,
+   6,
+   6,
+   9,
+   9,
+   10,
+   10,
+   10,
+   12,
+   14,
+   14,
+   15,
+   16,
+   16
+  ],
+  "Gedges": [
+   {
+    "lag": 0,
+    "pLongAfterMut": 0.02,
+    "nAfterMut": 51,
+    "pLongOther": 0.005
+   },
+   {
+    "lag": 1,
+    "pLongAfterMut": 0,
+    "nAfterMut": 51,
+    "pLongOther": 0.006
+   },
+   {
+    "lag": 2,
+    "pLongAfterMut": 0,
+    "nAfterMut": 51,
+    "pLongOther": 0.006
+   },
+   {
+    "lag": 3,
+    "pLongAfterMut": 0,
+    "nAfterMut": 51,
+    "pLongOther": 0.006
+   },
+   {
+    "lag": 4,
+    "pLongAfterMut": 0,
+    "nAfterMut": 51,
+    "pLongOther": 0.006
+   },
+   {
+    "lag": 5,
+    "pLongAfterMut": 0.02,
+    "nAfterMut": 51,
+    "pLongOther": 0.005
+   },
+   {
+    "lag": 6,
+    "pLongAfterMut": 0,
+    "nAfterMut": 51,
+    "pLongOther": 0.006
+   }
+  ],
+  "Gedges:framesSinceMountAtLongFrame": [
+   5,
+   8,
+   10,
+   10,
+   11,
+   15,
+   17,
+   19,
+   20
+  ],
+  "Gdash": [
+   {
+    "lag": 0,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.017
+   },
+   {
+    "lag": 1,
+    "pLongAfterMut": 0,
+    "nAfterMut": 51,
+    "pLongOther": 0.019
+   },
+   {
+    "lag": 2,
+    "pLongAfterMut": 0,
+    "nAfterMut": 51,
+    "pLongOther": 0.019
+   },
+   {
+    "lag": 3,
+    "pLongAfterMut": 0.118,
+    "nAfterMut": 51,
+    "pLongOther": 0.015
+   },
+   {
+    "lag": 4,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.017
+   },
+   {
+    "lag": 5,
+    "pLongAfterMut": 0.039,
+    "nAfterMut": 51,
+    "pLongOther": 0.018
+   },
+   {
+    "lag": 6,
+    "pLongAfterMut": 0,
+    "nAfterMut": 51,
+    "pLongOther": 0.019
+   }
+  ],
+  "Gdash:framesSinceMountAtLongFrame": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   4,
+   4,
+   4,
+   5,
+   5,
+   7,
+   8,
+   9,
+   9,
+   9,
+   9,
+   10,
+   10,
+   10,
+   10,
+   14,
+   16,
+   17,
+   17
+  ],
+  "Garrows": [
+   {
+    "lag": 0,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.028
+   },
+   {
+    "lag": 1,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.028
+   },
+   {
+    "lag": 2,
+    "pLongAfterMut": 0.176,
+    "nAfterMut": 51,
+    "pLongOther": 0.023
+   },
+   {
+    "lag": 3,
+    "pLongAfterMut": 0.275,
+    "nAfterMut": 51,
+    "pLongOther": 0.02
+   },
+   {
+    "lag": 4,
+    "pLongAfterMut": 0.039,
+    "nAfterMut": 51,
+    "pLongOther": 0.029
+   },
+   {
+    "lag": 5,
+    "pLongAfterMut": 0.098,
+    "nAfterMut": 51,
+    "pLongOther": 0.027
+   },
+   {
+    "lag": 6,
+    "pLongAfterMut": 0.039,
+    "nAfterMut": 51,
+    "pLongOther": 0.029
+   }
+  ],
+  "Garrows:framesSinceMountAtLongFrame": [
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   4,
+   4,
+   5,
+   5,
+   5,
+   5,
+   5,
+   6,
+   6,
+   8,
+   9,
+   9,
+   9,
+   10,
+   10,
+   11,
+   14,
+   16,
+   17,
+   18
+  ],
+  "Gbadges": [
+   {
+    "lag": 0,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.025
+   },
+   {
+    "lag": 1,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.025
+   },
+   {
+    "lag": 2,
+    "pLongAfterMut": 0.137,
+    "nAfterMut": 51,
+    "pLongOther": 0.022
+   },
+   {
+    "lag": 3,
+    "pLongAfterMut": 0.275,
+    "nAfterMut": 51,
+    "pLongOther": 0.017
+   },
+   {
+    "lag": 4,
+    "pLongAfterMut": 0.078,
+    "nAfterMut": 51,
+    "pLongOther": 0.024
+   },
+   {
+    "lag": 5,
+    "pLongAfterMut": 0.118,
+    "nAfterMut": 51,
+    "pLongOther": 0.023
+   },
+   {
+    "lag": 6,
+    "pLongAfterMut": 0,
+    "nAfterMut": 51,
+    "pLongOther": 0.028
+   }
+  ],
+  "Gbadges:framesSinceMountAtLongFrame": [
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   4,
+   4,
+   4,
+   4,
+   5,
+   5,
+   5,
+   5,
+   5,
+   7,
+   9,
+   10,
+   10,
+   10,
+   12,
+   13,
+   16,
+   17
+  ],
+  "Glayers": [
+   {
+    "lag": 0,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.072
+   },
+   {
+    "lag": 1,
+    "pLongAfterMut": 0.059,
+    "nAfterMut": 51,
+    "pLongOther": 0.072
+   },
+   {
+    "lag": 2,
+    "pLongAfterMut": 0.294,
+    "nAfterMut": 51,
+    "pLongOther": 0.063
+   },
+   {
+    "lag": 3,
+    "pLongAfterMut": 0.529,
+    "nAfterMut": 51,
+    "pLongOther": 0.054
+   },
+   {
+    "lag": 4,
+    "pLongAfterMut": 0.294,
+    "nAfterMut": 51,
+    "pLongOther": 0.064
+   },
+   {
+    "lag": 5,
+    "pLongAfterMut": 0.431,
+    "nAfterMut": 51,
+    "pLongOther": 0.058
+   },
+   {
+    "lag": 6,
+    "pLongAfterMut": 0.039,
+    "nAfterMut": 51,
+    "pLongOther": 0.074
+   }
+  ],
+  "Glayers:framesSinceMountAtLongFrame": [
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   6,
+   6,
+   7,
+   7,
+   7,
+   7,
+   7,
+   8,
+   10,
+   11,
+   11,
+   11,
+   11,
+   12,
+   12,
+   13,
+   13,
+   13,
+   13,
+   13,
+   13,
+   13,
+   14,
+   15,
+   15
+  ],
+  "Gbackface": [
+   {
+    "lag": 0,
+    "pLongAfterMut": 0.078,
+    "nAfterMut": 51,
+    "pLongOther": 0.025
+   },
+   {
+    "lag": 1,
+    "pLongAfterMut": 0.039,
+    "nAfterMut": 51,
+    "pLongOther": 0.027
+   },
+   {
+    "lag": 2,
+    "pLongAfterMut": 0.137,
+    "nAfterMut": 51,
+    "pLongOther": 0.023
+   },
+   {
+    "lag": 3,
+    "pLongAfterMut": 0.255,
+    "nAfterMut": 51,
+    "pLongOther": 0.018
+   },
+   {
+    "lag": 4,
+    "pLongAfterMut": 0.078,
+    "nAfterMut": 51,
+    "pLongOther": 0.025
+   },
+   {
+    "lag": 5,
+    "pLongAfterMut": 0.098,
+    "nAfterMut": 51,
+    "pLongOther": 0.025
+   },
+   {
+    "lag": 6,
+    "pLongAfterMut": 0.039,
+    "nAfterMut": 51,
+    "pLongOther": 0.027
+   }
+  ],
+  "Gbackface:framesSinceMountAtLongFrame": [
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   4,
+   4,
+   4,
+   5,
+   5,
+   5,
+   5,
+   6,
+   6,
+   8,
+   9,
+   10,
+   10,
+   10,
+   11,
+   16,
+   17,
+   17
+  ]
+ }
+}

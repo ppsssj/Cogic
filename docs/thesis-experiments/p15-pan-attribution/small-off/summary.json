@@ -1,0 +1,66 @@
+{
+ "conditions": {
+  "A": {
+   "n": 3,
+   "p50": 9.6,
+   "p95": 10.4,
+   "p95range": [
+    10.4,
+    10.4
+   ],
+   "max": 10.9,
+   "over50": 0,
+   "over100": 0,
+   "views": 1,
+   "commits": 0,
+   "mounts": 0,
+   "longTasks": 0,
+   "rendererMB": 648,
+   "gpuMB": 357
+  },
+  "B": {
+   "n": 3,
+   "p50": 9.4,
+   "p95": 10.3,
+   "p95range": [
+    10.3,
+    10.4
+   ],
+   "max": 11.1,
+   "over50": 0,
+   "over100": 0,
+   "views": 1,
+   "commits": 0,
+   "mounts": 0,
+   "longTasks": 0,
+   "rendererMB": 626,
+   "gpuMB": 357
+  },
+  "C": {
+   "n": 3,
+   "p50": 9.8,
+   "p95": 10.3,
+   "p95range": [
+    10.3,
+    10.3
+   ],
+   "max": 76,
+   "over50": 1,
+   "over100": 0,
+   "views": 313,
+   "commits": 315,
+   "mounts": 0,
+   "longTasks": 0,
+   "rendererMB": 652,
+   "gpuMB": 358
+  }
+ },
+ "lag": {
+  "C:framesSinceMountAtLongFrame": [
+   1000000211,
+   1000000223,
+   1000000237,
+   1000000244
+  ]
+ }
+}

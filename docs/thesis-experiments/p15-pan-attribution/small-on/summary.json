@@ -1,0 +1,122 @@
+{
+ "conditions": {
+  "A": {
+   "n": 3,
+   "p50": 9.6,
+   "p95": 10.4,
+   "p95range": [
+    10.4,
+    10.5
+   ],
+   "max": 11.3,
+   "over50": 0,
+   "over100": 0,
+   "views": 1,
+   "commits": 0,
+   "mounts": 0,
+   "longTasks": 0,
+   "rendererMB": 596,
+   "gpuMB": 262
+  },
+  "B": {
+   "n": 3,
+   "p50": 9.5,
+   "p95": 10.4,
+   "p95range": [
+    10.3,
+    10.4
+   ],
+   "max": 11.4,
+   "over50": 0,
+   "over100": 0,
+   "views": 1,
+   "commits": 0,
+   "mounts": 0,
+   "longTasks": 0,
+   "rendererMB": 562,
+   "gpuMB": 271
+  },
+  "C": {
+   "n": 3,
+   "p50": 9.3,
+   "p95": 10.4,
+   "p95range": [
+    10.4,
+    10.4
+   ],
+   "max": 111.6,
+   "over50": 5,
+   "over100": 2,
+   "views": 313,
+   "commits": 318,
+   "mounts": 104,
+   "longTasks": 0,
+   "rendererMB": 569,
+   "gpuMB": 268
+  }
+ },
+ "lag": {
+  "C": [
+   {
+    "lag": 0,
+    "pLongAfterMut": 0,
+    "nAfterMut": 30,
+    "pLongOther": 0.011
+   },
+   {
+    "lag": 1,
+    "pLongAfterMut": 0,
+    "nAfterMut": 30,
+    "pLongOther": 0.011
+   },
+   {
+    "lag": 2,
+    "pLongAfterMut": 0.233,
+    "nAfterMut": 30,
+    "pLongOther": 0.006
+   },
+   {
+    "lag": 3,
+    "pLongAfterMut": 0.167,
+    "nAfterMut": 30,
+    "pLongOther": 0.008
+   },
+   {
+    "lag": 4,
+    "pLongAfterMut": 0.033,
+    "nAfterMut": 30,
+    "pLongOther": 0.011
+   },
+   {
+    "lag": 5,
+    "pLongAfterMut": 0,
+    "nAfterMut": 30,
+    "pLongOther": 0.011
+   },
+   {
+    "lag": 6,
+    "pLongAfterMut": 0.1,
+    "nAfterMut": 30,
+    "pLongOther": 0.009
+   }
+  ],
+  "C:framesSinceMountAtLongFrame": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   3,
+   3,
+   4,
+   6,
+   6,
+   6
+  ]
+ }
+}
