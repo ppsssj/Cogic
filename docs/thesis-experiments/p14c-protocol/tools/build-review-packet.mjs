@@ -164,14 +164,14 @@ function writeFile(root, rel, buf, manifest) {
   manifest.push({ path: rel, sha256: sha256(lf(buf)), bytes: buf.length });
 }
 
-export function buildPacket({ out, corpusACommit = DEFAULTS.corpusACommit, corpusBCommit = DEFAULTS.corpusBCommit, seed = DEFAULTS.seed, templates = path.join(here, "..", "human-review", "packet-template"), only = ["A", "B"], extraTemplates = [], skipTemplates = [] }) {
+export function buildPacket({ out, corpusACommit = DEFAULTS.corpusACommit, corpusBCommit = DEFAULTS.corpusBCommit, seed = DEFAULTS.seed, templates = path.join(here, "..", "human-review", "packet-template"), only = ["A", "B"], extraTemplates = [], skipTemplates = [], blindIds = null }) {
   if (fs.existsSync(out)) throw new Error(`output exists: ${out} (use a new folder)`);
   const rel = path.relative(REPO, path.resolve(out));
   if (!rel.startsWith("..") && !path.isAbsolute(rel)) throw new Error("build the packet outside the repository: reviewers must not get the repository, which holds the GT");
   const packet = path.join(out, "packet");
   const researcher = path.join(out, "researcher");
   const manifest = [];
-  const report = { generator: GENERATOR, inputs: { corpusACommit, corpusBCommit, guideCommit: DEFAULTS.guideCommit, seed, ...(only.length === 2 ? {} : { only }) }, trees: {}, excludedPerCase: [...NEVER_COPY.map(String), "catalog.csv", "upstream.json: caseId, importEdges, thirdPartyModules"], guideRemovals: [], cases: [] };
+  const report = { generator: GENERATOR, inputs: { corpusACommit, corpusBCommit, guideCommit: DEFAULTS.guideCommit, seed, ...(only.length === 2 ? {} : { only }), ...(blindIds ? { blindIds: [...blindIds].sort() } : {}) }, trees: {}, excludedPerCase: [...NEVER_COPY.map(String), "catalog.csv", "upstream.json: caseId, importEdges, thirdPartyModules"], guideRemovals: [], cases: [] };
   report.trees.corpusA = gitText(["rev-parse", `${corpusACommit}:${DEFAULTS.corpusAPath}`]).trim();
   report.trees.corpusB = gitText(["rev-parse", `${corpusBCommit}:${DEFAULTS.corpusBPath}`]).trim();
 
@@ -189,6 +189,9 @@ export function buildPacket({ out, corpusACommit = DEFAULTS.corpusACommit, corpu
     order.forEach((cs, i) => {
       const blindId = `${c.label}${String(i + 1).padStart(2, "0")}`;
       originalCaseIds.push(cs.id);
+      // P14-E: a subset of blind IDs (the pilot). Numbering stays that of the full packet, and every
+      // original case ID still goes into the leak check.
+      if (blindIds && !blindIds.includes(blindId)) return;
       const caseJson = JSON.parse(show(c.commit, `${cs.dir}/case.json`).toString("utf8"));
       const info = { blindId, corpus: c.label, activeFile: caseJson.activeFile, files: [] };
       for (const f of cs.files) {

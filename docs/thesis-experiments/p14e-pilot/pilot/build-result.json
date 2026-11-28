@@ -1,0 +1,50 @@
+{
+  "schema": "p14e-pilot-build/1",
+  "seed": 20261128,
+  "cases": [
+    "B02",
+    "B04",
+    "B06",
+    "B18"
+  ],
+  "ai": {
+    "packetSha256": "9e1400b74d95114efc1f2ab98ceef03dde15b48d8751bf099b1e1834eb4d04d8",
+    "fileCount": 87,
+    "leakHits": 0
+  },
+  "human": {
+    "packetSha256": "9339ba35634280174d41e1f94a6d9d6f6d5e280ffdc0b69567c43ad530b2c46b",
+    "fileCount": 89,
+    "leakHits": 0
+  },
+  "zips": [
+    {
+      "for": "claude",
+      "zip": "p14e-pilot-ai-claude.zip",
+      "sha256": "468c016eded3085b14fa8118891043ae4da720ce30871a24050cc7b607fb0e38",
+      "bytes": 156729,
+      "entries": 87
+    },
+    {
+      "for": "gpt6",
+      "zip": "p14e-pilot-ai-gpt6.zip",
+      "sha256": "468c016eded3085b14fa8118891043ae4da720ce30871a24050cc7b607fb0e38",
+      "bytes": 156729,
+      "entries": 87
+    },
+    {
+      "for": "gemini",
+      "zip": "p14e-pilot-ai-gemini.zip",
+      "sha256": "468c016eded3085b14fa8118891043ae4da720ce30871a24050cc7b607fb0e38",
+      "bytes": 156729,
+      "entries": 87
+    },
+    {
+      "for": "human",
+      "zip": "p14e-pilot-human.zip",
+      "sha256": "b1f71c558d995b20fa71ad93b676be4906039f43fb8d4e44339ea79532b8963c",
+      "bytes": 158022,
+      "entries": 89
+    }
+  ]
+}

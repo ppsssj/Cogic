@@ -1,8 +1,8 @@
 {
   "schema": "p14c-execution-gates/1",
-  "recordedAt": "2026-11-27",
+  "recordedAt": "2026-11-28",
   "officialAccuracyVerdict": "BLOCKED",
-  "protocol": "evaluation-protocol.md (DRAFT-0)",
+  "protocol": "evaluation-protocol.md (DRAFT-1)",
   "protocolFreezeCommit": null,
   "gates": [
     {
@@ -17,22 +17,80 @@
         "typescript": "5.9.3",
         "node": "24.12.0"
       },
-      "open": "fix at protocol freeze; runner 1.3 identity gate (D-3)"
+      "open": "fix at protocol freeze; runner 1.3 approved (D-3), not implemented"
     },
     {
       "id": 2,
       "name": "Corpus integrity",
       "status": "VERIFIED_FOR_PINNED_COMMITS",
-      "corpusA": { "fixturesTree": "08f74c59d786fe41d5095db844513fa620d6f8bf", "check": "runner 1.2 preflight passed on 6ee7784" },
-      "corpusB": { "commit": "4c5a3e234f930057b15e3f0a608939839c0dc62a", "fixturesTree": "1a76222db20c4528f8b9dcdb89b854464db99a02", "manifestBlob": "4a3fcfb6808619703bd7eea47f7fa2c11f0887d3", "check": "tree identical at b4a5ff5 and 4c5a3e2; manifest.mjs --check OK (601 files) in a clean 4c5a3e2 worktree" },
-      "open": "D-2 (Corpus B on main or pinned)"
+      "corpusA": {
+        "fixturesTree": "08f74c59d786fe41d5095db844513fa620d6f8bf",
+        "check": "runner 1.2 preflight passed on 6ee7784"
+      },
+      "corpusB": {
+        "commit": "4c5a3e234f930057b15e3f0a608939839c0dc62a",
+        "fixturesTree": "1a76222db20c4528f8b9dcdb89b854464db99a02",
+        "manifestBlob": "4a3fcfb6808619703bd7eea47f7fa2c11f0887d3",
+        "check": "tree identical at b4a5ff5 and 4c5a3e2; manifest.mjs --check OK (601 files) in a clean 4c5a3e2 worktree"
+      },
+      "open": "D-2 decided: Corpus B stays pinned at 4c5a3e2"
     },
-    { "id": 3, "name": "Scorer policy fixed and tested", "status": "OPEN", "open": "D-1 (lenient L1-L4); strict unaffected by every candidate" },
-    { "id": 4, "name": "Independent human review complete", "status": "NOT_STARTED", "packetSha256": "b44d15c167616fc9d0e2db1f3e0588cd6da81022dc84bedec1428a2ab9ff2efd", "packetBuiltFrom": "39471b0", "reviewers": 0, "open": "secure reviewers (D-5)" },
-    { "id": 5, "name": "Protocol fixed", "status": "DRAFT", "open": "approve and freeze evaluation-protocol.md" },
-    { "id": 6, "name": "Results and raw artifacts preserved", "status": "PROCEDURE_DEFINED", "runs": [] }
+    {
+      "id": 3,
+      "name": "Scorer policy fixed and tested",
+      "status": "STRICT_PRIMARY_DECIDED",
+      "open": "D-1: strict is primary; lenient is not used in the official evaluation until its policy is fixed (L1-L4 kept as audit)"
+    },
+    {
+      "id": 4,
+      "name": "Independent human review complete",
+      "status": "PILOT_PACKET_READY",
+      "packetSha256": "b44d15c167616fc9d0e2db1f3e0588cd6da81022dc84bedec1428a2ab9ff2efd",
+      "packetBuiltFrom": "39471b0",
+      "reviewers": 0,
+      "open": "run the pilot; then fix reviewer count and scope (D-5)",
+      "pilot": {
+        "cases": [
+          "B02",
+          "B04",
+          "B06",
+          "B18"
+        ],
+        "selection": "p14e-pilot/1, seed 20261128",
+        "aiPacketSha256": "9e1400b74d95114efc1f2ab98ceef03dde15b48d8751bf099b1e1834eb4d04d8",
+        "aiZipSha256": "468c016eded3085b14fa8118891043ae4da720ce30871a24050cc7b607fb0e38",
+        "humanPacketSha256": "9339ba35634280174d41e1f94a6d9d6f6d5e280ffdc0b69567c43ad530b2c46b",
+        "humanZipSha256": "b1f71c558d995b20fa71ad93b676be4906039f43fb8d4e44339ea79532b8963c",
+        "aiReviewsReceived": 0,
+        "humanReviewsReceived": 0
+      }
+    },
+    {
+      "id": 5,
+      "name": "Protocol fixed",
+      "status": "DRAFT-1",
+      "open": "approve and freeze evaluation-protocol.md"
+    },
+    {
+      "id": 6,
+      "name": "Results and raw artifacts preserved",
+      "status": "PROCEDURE_DEFINED",
+      "runs": []
+    }
   ],
   "exploratoryRuns": [
-    { "runId": "p14c-smoke-6ee7784", "runner": "exp01-runner/1.2", "bootstrap": 0, "status": "completed, scoring COMPLETE, technical gate NOT PASSED (ANALYZER_NOT_IDENTICAL_TO_BASELINE, BOOTSTRAP_NOT_PREREGISTERED)", "numbersReported": false, "storedOutsideRepository": true }
-  ]
+    {
+      "runId": "p14c-smoke-6ee7784",
+      "runner": "exp01-runner/1.2",
+      "bootstrap": 0,
+      "status": "completed, scoring COMPLETE, technical gate NOT PASSED (ANALYZER_NOT_IDENTICAL_TO_BASELINE, BOOTSTRAP_NOT_PREREGISTERED)",
+      "numbersReported": false,
+      "storedOutsideRepository": true
+    }
+  ],
+  "semanticContract": {
+    "version": "C1",
+    "document": "../p14e-pilot/contract/SEMANTIC_CONTRACT_C1.md",
+    "status": "STATED (approved A-1..A-3); open items OPEN-1..6, C-OPEN-7..8"
+  }
 }

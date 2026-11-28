@@ -1,0 +1,113 @@
+{
+  "rule": "per framework, min sha256(\"p14e-pilot/1|<seed>|<blindId>\")",
+  "seed": 20261128,
+  "perFramework": {
+    "react": {
+      "chosen": "B06",
+      "pool": [
+        {
+          "blindId": "B03",
+          "score": "beec0e7acd4a31712222845352f6673df6318e6ccf466e7ac882e61df71f14c2"
+        },
+        {
+          "blindId": "B06",
+          "score": "37885da3dafe0f8480fcaab69d90f237ab7d4b5747c2d2be9a2d304d272b707c"
+        },
+        {
+          "blindId": "B09",
+          "score": "8121d6f9493d55555ab0d8182840e2f04960658954be8bd9e7e682a835b7fd82"
+        },
+        {
+          "blindId": "B10",
+          "score": "44606bcf7013c2ba58eda269bcde720ef113febb816c6ef670db7795bfbefb78"
+        },
+        {
+          "blindId": "B16",
+          "score": "54a3cd02c2024adc6c957b608a3b375df91a5d8d21209f1843b570c07f831c71"
+        }
+      ]
+    },
+    "vue": {
+      "chosen": "B04",
+      "pool": [
+        {
+          "blindId": "B04",
+          "score": "1f6262ee8f90450548736b4c43f66355b98a63e411a21a16cc3b1a92cf7ec7d3"
+        },
+        {
+          "blindId": "B05",
+          "score": "85ccd8e689afff48b17fa30908a43a25e603b7aa1f37fdcc239b8b8b9d426638"
+        },
+        {
+          "blindId": "B08",
+          "score": "c2c6501fbcecd295c0aead75080a8bcc98a22693beef90af9ad9c341434a781b"
+        },
+        {
+          "blindId": "B14",
+          "score": "4720f98b6fe0ef60e6ea26ad51c49773c5db489176b3dd897aaf7b24560d7d88"
+        },
+        {
+          "blindId": "B20",
+          "score": "a3b658431b027a01535e7d6993694870f18a79dd2e428cf1f65a59b1d3bfa736"
+        }
+      ]
+    },
+    "express": {
+      "chosen": "B02",
+      "pool": [
+        {
+          "blindId": "B02",
+          "score": "6541192b10c37df8c6bf93970acdb44573c72682953346d148f6d0d839ca754d"
+        },
+        {
+          "blindId": "B07",
+          "score": "6ec7ca180e76a20284a971b7831de023c7ea05d2cd80a7bd68b8c547a394d693"
+        },
+        {
+          "blindId": "B11",
+          "score": "700591342531def3008b90ff129b0a8a2001c18ac93e97ea68c17b52a68b5b16"
+        },
+        {
+          "blindId": "B17",
+          "score": "e3e1e55405800ebb5fcf767e874a3ebab654926c8eb711e144eb19f045f35fb2"
+        },
+        {
+          "blindId": "B19",
+          "score": "76e8d76aaec4f5abb17c1b042914391e2842ef789b55e61061de4a218735132a"
+        }
+      ]
+    },
+    "nest": {
+      "chosen": "B18",
+      "pool": [
+        {
+          "blindId": "B01",
+          "score": "744b129f4ac1646454dc28bc5832374613358f9ac8ac4f3c6e2f56c6e2333efc"
+        },
+        {
+          "blindId": "B12",
+          "score": "a3f0ba01926f0df12886804a1a667436c2a7f05876d92c552cbcdfa4e34f0751"
+        },
+        {
+          "blindId": "B13",
+          "score": "c4cc877df30a34b02f89d6d6df33ff9449d146ed4589c79d365c17cde7dfb1a3"
+        },
+        {
+          "blindId": "B15",
+          "score": "6be9a3c509d3e350c6fe610ef0b3ed59e2497708778e51513b234efd25055dac"
+        },
+        {
+          "blindId": "B18",
+          "score": "2c9b60d082c2ed38be8b9377200bc722d8540954f742f44b90c9136ae7419b46"
+        }
+      ]
+    }
+  },
+  "cases": [
+    "B02",
+    "B04",
+    "B06",
+    "B18"
+  ],
+  "fullPacketSha256": "36c0d5d10e5ea3b6ac2364a7e56b423bfa21370a46fdd283ffca4eef7cedc677"
+}
