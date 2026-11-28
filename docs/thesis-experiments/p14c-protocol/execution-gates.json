@@ -48,7 +48,7 @@
       "packetSha256": "b44d15c167616fc9d0e2db1f3e0588cd6da81022dc84bedec1428a2ab9ff2efd",
       "packetBuiltFrom": "39471b0",
       "reviewers": 0,
-      "open": "run the pilot; then fix reviewer count and scope (D-5)",
+      "open": "human pilot review not run; then fix reviewer count and scope (D-5). AI review deviations to resolve: see p14e-pilot/ai-review-results.md section 8",
       "pilot": {
         "cases": [
           "B02",
@@ -61,8 +61,19 @@
         "aiZipSha256": "468c016eded3085b14fa8118891043ae4da720ce30871a24050cc7b607fb0e38",
         "humanPacketSha256": "9339ba35634280174d41e1f94a6d9d6f6d5e280ffdc0b69567c43ad530b2c46b",
         "humanZipSha256": "b1f71c558d995b20fa71ad93b676be4906039f43fb8d4e44339ea79532b8963c",
-        "aiReviewsReceived": 0,
-        "humanReviewsReceived": 0
+        "aiReviewsReceived": 12,
+        "humanReviewsReceived": 0,
+        "aiReviews": {
+          "families": [
+            "claude (self-reported Claude Opus 5.5)",
+            "codex (version unknown; A-5 named GPT-6)",
+            "gemini (self-reported, labels vary)"
+          ],
+          "bundleSha256": "8b89f75240de225bd41f4afa6da2272e8fb4f5285fb89185f98c800f5aeb694b",
+          "provenance": "B18: attached TXT originals; B02/B04/B06: transcriptions, original bytes not established",
+          "results": "p14e-pilot/ai-review-results.md",
+          "note": "AI agreement is not accuracy; no GT change"
+        }
       }
     },
     {

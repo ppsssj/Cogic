@@ -11,7 +11,7 @@
   - P14-D AI 패킷: `f3cfc92c…`
 - **상태:**
   - 파일럿 패킷: **PACKET_READY**
-  - AI 교차 검토: 수행하지 않음
+  - AI 교차 검토: 연구자가 외부 세션에서 진행한 응답 12건을 받아 보존하고 재검증했다([ai-review-results.md](ai-review-results.md)). 모델은 Claude·Codex·Gemini다. 계획의 GPT-6 대신 Codex였다
   - 사람 검토: 수행하지 않음
   - 공식 정확도 판정: **BLOCKED**
 
@@ -23,6 +23,8 @@
 | `pilot/selection.json`, `pilot/build-result.json` | 선정 기록(중립 ID·framework·점수)과 패킷·ZIP 해시 |
 | `templates/` | AI 패킷용 지시문·응답 형식, 사람 패킷용 안내문과 `pilot-feedback.csv` |
 | `tools/pilot.mjs`, `tools/test/p14e.test.mjs` | 선정·패킷·ZIP 생성, 테스트 5개 |
+| [ai-review-results.md](ai-review-results.md) | 받은 AI 응답 12건의 무결성, 절차 준수, 형식 오류와 의미 차이 구분, GT v1 대조, 사람 검토 항목 |
+| `tools/ai-results/` | 형식 파생본(fence 삽입만), 엄격 CSV 검사, 필드·지점 비교. 테스트 `tools/test/p14e-ai-results.test.mjs` 2개 |
 
 ## 1. 승인 사항 반영
 
@@ -118,7 +120,7 @@
   - setter 래퍼 해석
   - 미결 항목 분류
 - **UNVERIFIED:**
-  - 실제 AI 교차 검토(미수행, 응답 0건)
+  - 실제 AI 교차 검토(이 문서 작성 시점에는 미수행, 응답 0건). 이후 받은 응답은 [ai-review-results.md](ai-review-results.md)에 정리했다
   - 사람 검토(미수행)
   - 접근 가능한 모델의 정확한 버전
   - Gemini S037 원문
