@@ -1,0 +1,9 @@
+{
+ "vscode": "1.147.0",
+ "extension": "sudopanda.trace-function-flow-1.1.1",
+ "tff": {
+  "Sample.method": null,
+  "Nested.run": null
+ },
+ "observation": "The Trace Function Flow quick pick listed only the 7 top-level functions (ClassDeco, PlainClass, Method, PlainMethod, Prop, Param, helper); method() and run() were not offered, so no trace could start where decorator calls occur. See tff-function-picker.png."
+}
