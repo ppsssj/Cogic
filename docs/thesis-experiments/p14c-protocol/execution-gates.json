@@ -75,6 +75,14 @@
           "note": "AI agreement is not accuracy; no GT change",
           "decisions": "researcher decisions R-1..R-7 in p14e-pilot/ai-review-results.md section 10; no further GPT-6 review",
           "csvFormatErrorsStrict": 13
+        },
+        "focusedReview": {
+          "status": "DRAFT (not approved; 0 real responses)",
+          "method": "focused adjudication of AI disagreements + graph preference + one AI-agreement spot check; NOT a full independent GT review",
+          "record": "p14e-pilot/WORKBENCH_METHOD_CHANGE.md",
+          "studyHash": "63502191240f9830c7bd963c3f40188ecb9ae94411ed75e783f943412ad06a5d",
+          "tutorialHash": "26035851914d112ccf2a0a99cc30fad261601d8f2a941fcdf517c970bc7a6b4d",
+          "workbenchCommit": "db5259b (local repository outside this repo; not deployed)"
         }
       }
     },

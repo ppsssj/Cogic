@@ -12,7 +12,7 @@
 - **상태:**
   - 파일럿 패킷: **PACKET_READY**
   - AI 교차 검토: 연구자가 외부 세션에서 진행한 응답 12건을 받아 보존하고 재검증했다([ai-review-results.md](ai-review-results.md)). 모델은 Claude·Codex·Gemini다. 계획의 GPT-6 대신 Codex였다
-  - 사람 검토: 수행하지 않음
+  - 사람 검토: 수행하지 않음. 일반 검토자용 방식은 웹 Focused Review로 바뀌었다(DRAFT, [WORKBENCH_METHOD_CHANGE.md](WORKBENCH_METHOD_CHANGE.md))
   - 공식 정확도 판정: **BLOCKED**
 
 | 문서 | 내용 |
@@ -20,6 +20,7 @@
 | [contract/SEMANTIC_CONTRACT_C1.md](contract/SEMANTIC_CONTRACT_C1.md) | 계약 C1. 검토 패킷에 그대로 들어간다(링크는 패킷 안의 파일 기준) |
 | [c1-provenance.md](c1-provenance.md) | 조항별 출처, GT v1 정합성 확인, 미결 항목, 계약 변경 후보, 지원 분류 분리 규칙(D-4) |
 | [RESEARCHER_STEPS.md](RESEARCHER_STEPS.md) | 패킷 전달, 원문 보존, 형식 검증, 비교 절차 |
+| [WORKBENCH_METHOD_CHANGE.md](WORKBENCH_METHOD_CHANGE.md) | 사람 검토를 웹 Focused Review(불일치 판정·그래프 선호·합의 표본)로 바꾼 기록. 문제 구성, 무결성, 제한, 승인 항목(DRAFT) |
 | [HUMAN_REVIEW_HANDOFF.md](HUMAN_REVIEW_HANDOFF.md) | 사람 파일럿 전달: 패킷 상태·해시, 검토자 안내문, 질문 응답 규칙, 제출 뒤 조정 절차(연구자용) |
 | `pilot/selection.json`, `pilot/build-result.json` | 선정 기록(중립 ID·framework·점수)과 패킷·ZIP 해시 |
 | `templates/` | AI 패킷용 지시문·응답 형식, 사람 패킷용 안내문과 `pilot-feedback.csv` |
