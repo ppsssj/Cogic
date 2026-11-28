@@ -20,6 +20,7 @@
 | [contract/SEMANTIC_CONTRACT_C1.md](contract/SEMANTIC_CONTRACT_C1.md) | 계약 C1. 검토 패킷에 그대로 들어간다(링크는 패킷 안의 파일 기준) |
 | [c1-provenance.md](c1-provenance.md) | 조항별 출처, GT v1 정합성 확인, 미결 항목, 계약 변경 후보, 지원 분류 분리 규칙(D-4) |
 | [RESEARCHER_STEPS.md](RESEARCHER_STEPS.md) | 패킷 전달, 원문 보존, 형식 검증, 비교 절차 |
+| [HUMAN_REVIEW_HANDOFF.md](HUMAN_REVIEW_HANDOFF.md) | 사람 파일럿 전달: 패킷 상태·해시, 검토자 안내문, 질문 응답 규칙, 제출 뒤 조정 절차(연구자용) |
 | `pilot/selection.json`, `pilot/build-result.json` | 선정 기록(중립 ID·framework·점수)과 패킷·ZIP 해시 |
 | `templates/` | AI 패킷용 지시문·응답 형식, 사람 패킷용 안내문과 `pilot-feedback.csv` |
 | `tools/pilot.mjs`, `tools/test/p14e.test.mjs` | 선정·패킷·ZIP 생성, 테스트 5개 |

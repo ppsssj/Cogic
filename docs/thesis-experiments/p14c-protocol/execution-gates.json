@@ -66,13 +66,15 @@
         "aiReviews": {
           "families": [
             "claude (self-reported Claude Opus 5.5)",
-            "codex (version unknown; A-5 named GPT-6)",
+            "codex (model/version unknown; replaces GPT-6 for this pilot only, researcher-approved; not reported as GPT-6)",
             "gemini (self-reported, labels vary)"
           ],
           "bundleSha256": "8b89f75240de225bd41f4afa6da2272e8fb4f5285fb89185f98c800f5aeb694b",
           "provenance": "B18: attached TXT originals; B02/B04/B06: transcriptions, original bytes not established",
           "results": "p14e-pilot/ai-review-results.md",
-          "note": "AI agreement is not accuracy; no GT change"
+          "note": "AI agreement is not accuracy; no GT change",
+          "decisions": "researcher decisions R-1..R-7 in p14e-pilot/ai-review-results.md section 10; no further GPT-6 review",
+          "csvFormatErrorsStrict": 13
         }
       }
     },
